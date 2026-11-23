@@ -1,0 +1,18 @@
+Style: a clean machine-learning cheat-sheet figure in the manner of the attached reference pictures. White page, thin outlines, a representative few arrows, generous white space, small clear sans-serif labels, real-looking photo tiles with a thin coloured frame. The part the figure is about glows softly in its colour and everything else is faded pale grey. It is a finished, welcoming figure and never a bare wireframe. Copy the look of the references only, and none of their content or words.
+
+Scene: Two lanes. The upper lane runs left to right: noisy picture, two word maps, small judge. The lower lane runs right to left in orange: the judge's error going back to the picture. Colours carry meaning and nothing else: blue #1f5fd0 for inputs (the noisy picture), green #1d7a3e for hidden values (the word maps and the small judge), red #c0262d for outputs (the judge's answer), orange #c86a0a for the backward signal and the push, grey #6b7a88 for what is off, fixed or secondary. Photo content keeps its natural colours.
+
+Cast:
+- Upper left: a square grainy photo tile with a thin blue frame, one fused cat-dog animal barely visible in the noise. Label: "noisy picture".
+- Upper middle, glowing green: two 2 by 2 grids side by side, labelled "cat map" and "dog map". Each has a small bold orange arrow drawn beside it: the cat map's orange arrow points LEFT, the dog map's orange arrow points RIGHT.
+- Upper right: the small judge character in a dark green robe, blindfolded, with a small orange speech mark. Label: "small judge".
+- Lower lane: one thick orange arrow running from under the judge, right to left, with clear space above it, ending under the noisy picture and turning up into its bottom edge. On the arrow, the label "the error, sent back as a push".
+- A small grey tag at the bottom right: "our proposal, not yet run on SDXL".
+
+Flows: Thin blue arrow from picture to the maps, thin green arrow from the maps to the judge, one thick orange return lane under them all. The orange lane touches no map and no label.
+
+Text in the image, spelled exactly and no other words: "noisy picture", "cat map", "dog map", "small judge", "the error, sent back as a push", "our proposal, not yet run on SDXL".
+
+Exclusions: no title banner, no legend box, no paragraphs, no equations, no invented words, no logos, no watermark, no decorative circuitry, no duplicated components, no arrow ending in empty space, no arrow crossing a label or a picture.
+
+Aspect ratio: landscape 3:2.

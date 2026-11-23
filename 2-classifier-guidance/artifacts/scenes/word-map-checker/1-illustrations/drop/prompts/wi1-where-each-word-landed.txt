@@ -1,0 +1,17 @@
+Style: a clean machine-learning cheat-sheet figure in the manner of the attached reference pictures. White page, thin outlines, a representative few arrows, generous white space, small clear sans-serif labels, real-looking photo tiles with a thin coloured frame. The part the figure is about glows softly in its colour and everything else is faded pale grey. It is a finished, welcoming figure and never a bare wireframe. Copy the look of the references only, and none of their content or words.
+
+Scene: Read left to right: one half-drawn picture, then two rows of word maps, one row for the product's two prompts and one for a single joint prompt. Colours carry meaning and nothing else: blue #1f5fd0 for inputs (the noisy picture), green #1d7a3e for hidden values (the word maps and the small judge), red #c0262d for outputs (the judge's answer), orange #c86a0a for the backward signal and the push, grey #6b7a88 for what is off, fixed or secondary. Photo content keeps its natural colours.
+
+Cast:
+- Left: one square photo tile with a thin blue frame, grainy and half-drawn, showing ONE fused animal across the top half of the frame: a single body with a cat's ear and eye on one side of the face and a dog's muzzle and floppy ear on the other. The bottom half is grain. Label under it: "half-drawn picture".
+- Top row, glowing green, in a rounded panel labelled "two prompts: the product": two 2 by 2 grids side by side, labelled "cat" and "dog". In each grid the two top cells are bright green and print "0.98", and the two bottom cells are pale and print "0.12".
+- Bottom row, in a rounded panel labelled "one joint prompt": the same two 2 by 2 grids, labelled "cat" and "dog". In each grid the two top cells are medium green and print "0.50", and the two bottom cells are pale and print "0.11".
+- A small grey tag at the bottom right: "miniature's numbers, layer 1".
+
+Flows: One thin blue arrow from the picture to the top panel and one to the bottom panel, leaving the picture as one line that splits near the panels.
+
+Text in the image, spelled exactly and no other words: "half-drawn picture", "two prompts: the product", "one joint prompt", "cat", "dog", "0.98", "0.12", "0.50", "0.11", "miniature's numbers, layer 1".
+
+Exclusions: no title banner, no legend box, no paragraphs, no equations, no invented words, no logos, no watermark, no decorative circuitry, no duplicated components, no arrow ending in empty space, no arrow crossing a label or a picture.
+
+Aspect ratio: landscape 3:2.

@@ -1,0 +1,1611 @@
+
+=== PAGE 1 ===
+Data-Driven Loss Functions for Inference-Time Optimization in Text-to-Image
+Sapir Esther Yiflach1 Yuval Atzmon2 Gal Chechik1,2
+1
+Bar-Ilan University 2 NVIDIA
+
+arXiv:2509.02295v2 [cs.CV] 2 Feb 2026
+
+Project page: https://learn-to-steer-paper.github.io
+
+Abstract
+
+a)
+above
+
+Text-to-image diffusion models can generate stunning visuals, yet they often fail at tasks children find trivial—like
+placing a dog to the right of a teddy bear rather than to the
+left. When combinations get more unusual—a giraffe above
+an airplane—these failures become even more pronounced.
+Existing methods attempt to fix these spatial reasoning failures through model fine-tuning or test-time optimization
+with handcrafted losses that are suboptimal. Rather than
+imposing our assumptions about spatial encoding, we propose learning these objectives directly from the model’s internal representations.
+We introduce Learn-to-Steer, a novel framework that
+learns data-driven objectives for test-time optimization
+rather than handcrafting them. Our key insight is to train
+a lightweight classifier that decodes spatial relationships
+from the diffusion model’s cross-attention maps, then deploy this classifier as a learned loss function during inference. Training such classifiers poses a surprising challenge: they can take shortcuts by detecting linguistic traces
+in the cross-attention maps, rather than learning true spatial patterns. We solve this by augmenting our training data
+with samples generated using prompts with incorrect relation words, which encourages the classifier to avoid linguistic shortcuts and learn spatial patterns from the attention
+maps. Our method dramatically improves spatial accuracy:
+from 20% to 61% on FLUX.1-dev and from 7% to 54% on
+SD2.1 across standard benchmarks. It also generalizes to
+multiple relations with significantly improved accuracy.
+
+left
+
+right
+
+below
+
+3D animation of a bearded man wearing glasses holding a banana
+(to the left of | above | to the right of | below) his face in the kitchen
+
+b)
+
+a frog above a
+sneakers; and the
+same sneakers below
+a teapot
+
+a robot to the left of a
+teddy bear; and the
+same teddy to the
+right of an umbrella
+
+a teapot above an
+umbrella; and the
+same umbrella to the
+right of a furby
+
+a table below a
+teapot; and the same
+teapot to the left of a
+backpack; and the
+same backpack to the
+right of a vase
+
+a duck to the right of
+a sneakers; and the
+same sneakers below
+a vase; and the same
+vase to the left of a
+teddy bear
+
+c)
+
+a table to the left of a
+teddy bear; and the
+same teddy bear to
+the right of a mug;
+and a duck above a
+chair
+
+1. Introduction
+
+Figure 1. Learn-to-Steer learns how spatial relationships are encoded in attention maps to guide generation. a) Correctly renders
+all four orientations (above/below/left/right) b, c) Handles complex scenes with multiple spatial relationships of up to five objects and three relations. Prompts are for illustration purpose, see
+Sec. 4.3 for actual prompt structure.
+
+Imagine asking a text-to-image model to generate “a dog to
+the right of a teddy bear.” What could be simpler? Yet surprisingly often, you might get a dog to the left, just a teddy
+bear with no dog at all, or perhaps a chimeric hybrid of them
+both. When we venture into more unusual territory like “a
+cow above a boy” the situation only gets worse. Despite significant progress in text-to-image generation, where models
+
+like FLUX.1-dev [28] can create high-quality images from
+1
+
+
+=== PAGE 2 ===
+text descriptions, they still struggle with understanding and
+depicting spatial relationships between objects.
+Current approaches to improving text-image alignment
+generally fall into two camps. Some methods fine-tune the
+generative model [6, 19, 55] or train adapter layers [9, 32],
+risking degradation of the model’s general capabilities. A
+more flexible paradigm is test-time optimization, which
+steers the generation process by optimizing the model’s internal latent codes using a loss function. Current methods
+[1, 7, 18, 31, 36, 44] typically rely on handcrafted loss functions applied to the model’s attention maps. But here’s the
+catch: these loss functions rely on simple heuristics that
+may be suboptimal and address only narrow failure modes,
+like comparing centers of mass between object attention
+maps. This raises a fundamental question: instead of imposing our assumptions about how spatial relations should
+be encoded in attention maps, what if we could learn directly from the model’s own internal representations how to
+steer it toward better alignment?
+Spatial relations represent one type of text-to-image misalignment within a broader family of failures, including incorrect attribute binding, entity neglect, and object counting errors. In this work, we focus specifically on 2D spatial
+relationships (e.g., ”above”, ”below”, ”left of”, ”right of”)
+and propose a novel framework, Learn-to-Steer, that learns
+loss functions for test-time optimization. The core of our
+method is to treat the steering problem as a learning problem. In an offline first step, we train a lightweight classifier
+that learns to decode spatial relationships directly from the
+cross-attention maps produced by the diffusion model. This
+classifier then serves as a data-driven loss function during
+inference, providing gradients to steer the latent code toward faithful representation of spatial relations. By learning rather than hand-crafting these guidance signals, we
+can leverage the complexity of how diffusion models encode spatial relationships across their internal representations, without manually specifying which patterns matter.
+Our approach reveals a surprising challenge we term
+“relation leakage”: when naively trained, classifiers can
+achieve high accuracy by detecting linguistic traces of relation words in attention maps rather than actual spatial
+patterns. This creates a unique paradox: we need to predict “left of” while ignoring textual traces of “left of”–
+essentially learning to extract the visual manifestation of
+spatial concepts while ignoring their linguistic fingerprints.
+We address this through a simple yet effective data augmentation strategy that encourages the classifier to ignore these
+linguistic artifacts.
+Overall, using learned losses for steering generation significantly improves spatial relation accuracy across multiple diffusion models—from 7% to 54% on SD2.1 and from
+20% to 61% on FLUX.1-dev – while requiring no model
+fine-tuning, and avoiding the degradation often seen with
+
+fine-tuning approaches. Moreover, to the best of our knowledge, we are the first to demonstrate support for multiple
+simultaneous spatial relations, directly from input prompts.
+As shown in Fig. 1, it can handle prompts with three relations among five objects. We quantify multiple relations
+generation accuracy using an extended evaluation scheme.
+Our main contributions are: (1) We show how the loss
+function for test-time steering can be learned from data
+rather than be handcrafted. (2) We identify and solve the
+“relation leakage” problem, enabling effective training on
+cross-attention maps. (3) We demonstrate significant improvements over handcrafted losses, on standard benchmarks (GenEval and T2I-CompBench) across four different diffusion models without any model fine-tuning. (4)
+We handle multiple simultaneous spatial relations in a single image, demonstrating generalization beyond training on
+single relations. (5) We introduce an extended evaluation
+scheme for quantifying multiple relation generation.
+
+2. Related Work
+Approaches to improve text-image alignment largely fall
+into two categories: those that modify the generative model
+itself, and those that guide it during inference.
+The first strategy involves fine-tuning the model’s
+weights. Some methods fine-tune the generator, for
+instance by using curriculum-based contrastive learning
+(EVOGEN [19]), injecting token-ordering information with
+a curated spatially-aware dataset (COMPASS [55]), recaptioning datasets with spatial phrases (SPRIGHT [6]),
+or leveraging chain-of-thought with multimodal LLMs
+(Image-Generation CoT [57]). Others optimize prompt embeddings directly (RRNet [53]). A related approach involves training lighter adapter modules that inject new information, such as bounding boxes (GLIGEN [32]), LLMgenerated layouts (Reason-out-Your-Layout [9]), or conditioning maps like Canny edges [5] (ControlNet [56]). Similarly, layout-guided methods [10, 11, 58] use explicit spatial layouts of objects as additional input signals to spatially
+constrain the denoising process. In contrast, our work keeps
+the original pretrained model frozen and operates directly
+on text without requiring explicit layout inputs.
+The second major paradigm our work builds upon, is
+test-time optimization. Here, the latent code is steered during the denoising process using a guidance loss. However,
+the dominant approach is to rely on handcrafted loss functions based on heuristics about how attention maps should
+behave. This includes methods that impose manually designed constraints on self- or cross-attention maps [1, 7, 18,
+31, 36, 44], as well as those using explicit layouts as alignment targets [4, 8, 40, 52]. Some methods optimize only the
+initial noise zT rather than the full trajectory: InitNO [17]
+uses handcrafted attention-based losses, while ReNO [12]
+leverages external reward from human preference models.
+2
+
+
+=== PAGE 3 ===
+NPNet [59] takes a different approach by training a network
+to predict initial noises from a dataset of noise-image pairs
+filtered by human preference models, focusing on overall
+image quality rather than specific compositional aspects like
+spatial relations. Our work presents a fundamental departure: instead of hand-engineering objectives or relying on
+external models, we learn the function to optimize directly
+from the model’s own internal representations, capturing
+the often complex, patterns of spatial encoding.
+Other strategies leverage powerful, external VLMs or
+MLLMs to provide feedback, using their scores to refine
+or rank generated images [29, 30, 50]. In contrast, we use a
+lightweight classifier trained on the generator’s own internal
+signals, avoiding dependence on large, black-box models.
+Multiple Spatial Relations. Generating scenes with multiple spatial relations is a long-standing challenge. Recent benchmarks on simple geometric shapes confirm that
+even state-of-the-art text-to-image models struggle with this
+task [49]. A common strategy is to generate an intermediate layout to guide the process. Early works used GNNs on
+scene graphs to produce the intermediate layout, and were
+often limited to simple synthetic shapes [3, 13, 20, 25].
+More recent layout-guided methods use LLMs to interpret free-form text, yet their focus is typically on object
+counts and attributes rather than multiple explicit spatial relations [27, 48]. While compositional diffusion approaches
+can handle multiple relations, they have primarily been
+demonstrated on simple synthetic shapes [33]. In contrast,
+our method demonstrates this capability directly from a text
+prompt on realistic images, without requiring an explicit intermediate layout.
+
+signal could be used, cross-attention maps have emerged as
+the primary optimization target due to their interpretability
+and direct connection to text-image alignment.
+
+4. Method
+Text-to-image diffusion models excel at generating highquality images, yet they often struggle with accurately representing relationships between objects. While prior work
+has addressed these alignment challenges through handcrafted loss functions, such approaches are inherently limited: they require domain expertise to design, may encode sub-optimal heuristics, and often target narrow failure modes. What if, instead of manually engineering these
+losses, we could learn them directly from the model’s own
+internal representations?
+We propose exactly that: a method that learns to interpret
+and guide diffusion models by understanding how relationships are encoded in their cross-attention maps. Our approach consists of two stages. First, we train a relation classifier that learns to decode spatial relationships from crossattention patterns. Second, we employ this classifier as a
+learned loss function during test-time optimization, steering the generation process toward faithful representation of
+the prompted relationships.
+(1) Image Inversion
+Positive:
+A sandwich to the right of a salad
+Negative:
+A sandwich above a salad
+
+(2) Maps Extraction + Training
+timestep t
+
+Verify
+Reconstruction
+
+3. Preliminaries: Test-time optimization in
+text-to-image models
+
+Asandwich
+
+Relation
+Classifier
+
+Diffusion
+Model
+
+While text-to-image diffusion models produce high-quality
+images, they often struggle with complex prompts or fail
+to represent all specified concepts. Test-time optimization
+addresses these limitations by dynamically steering the generation process toward desired objectives without requiring
+model retraining. The method works by intervening in the
+model’s iterative denoising process, which generates an image by progressively removing noise from an initial random
+latent zT to the final latent representation of the image z0 .
+At each timestep t of this process, the model’s transformer blocks produce a set of cross-attention maps At ∈
+Rh×w×N , where h × w is the spatial resolution and N is the
+number of text tokens. Each map At [:, :, i] indicates how
+token i influences each spatial location, forming a bridge
+between words and image regions.
+Test-time optimization uses these maps to compute a loss
+L(At ) that quantifies alignment with the desired objective
+at selected timesteps t ∈ T , then updates the latent via gradient descent: zt′ = zt − αt ∇zt L. While any differentiable
+
+Asalad
+Denoise ×T
+
+GT label: right
+
+z
+
+𝓛CE
+
+T
+
+Figure 2. Classifier training pipeline. Given a spatially-aligned
+image, we augment the data with both correct and incorrect relation prompts to prevent relation leakage. During denoising, we
+extract relevant attention maps to train our classifier.
+
+4.1. Learning to Decode Relations from Attention
+The foundation of our approach is a classifier C, taking
+cross-attention maps from two objects and predicts their
+spatial relation. Training such a classifier reveals surprising properties of how diffusion models encode information.
+The Relation Leakage Problem. Consider training a classifier on attention maps from inverted images. Given an
+image of “a dog to the left of a cat”, we could invert it using
+3
+
+
+=== PAGE 4 ===
+"A dog to the right of a teddy bear"
+
+...
+
+Optimization
+Step
+
+Diffusion
+Model
+
+Target:
+
+Adog
+
+Diffusion
+Model
+
+Extract crossattention maps
+
+patterns rather than textual artifacts, thereby avoiding relation leakage.
+The training process is illustrated in Fig. 2, while the
+full test-time optimization pipeline is shown in Fig. 3. The
+detailed architecture of our relation classifier is described in
+Appendix C.9.
+Training Data: Real and Synthetic Images. Our training dataset consists of (1) real images from GQA [23] and
+(2) synthetically generated images from Image-GenerationCoT[57]. The real images provide naturalistic complexity
+and diverse spatial configurations but yield noisy attention
+maps when many objects are present. The synthetic images contain simpler scenes with fewer objects, producing
+cleaner attention maps that resemble and better align with
+the images encountered during generation.
+
+...
+
+Relation
+Classifier
+
+𝓛CE
+
+Ateddy bear
+
+timestep t
+
+Figure 3. Test-time optimization pipeline. During inference, we
+extract the relevant cross-attention maps when denoising zt and
+evaluate their relationship using our trained relation classifier. We
+then update the latent noise with backpropagation.
+
+this prompt, extract attention maps, and label them as “left
+of”. However, such classifiers achieved high training accuracy but failed during generation. We discovered the cause:
+instead of analyzing spatial patterns, the classifier detected
+subtle traces of the relation word (“left”) encoded within the
+maps. This relation leakage meant the classifier recognized
+linguistic artifacts rather than visual evidence. For example,
+when we inverted images using incorrect prompts, like describing a dog actually left of a cat as “above” - the classifier
+predicted “above” rather than the true “left of”, confirming
+it was reading the prompted relation from the attention maps
+rather than the actual spatial configuration.
+
+4.2. Test-Time Optimization with Learned Steering
+During generation, the classifier serves as a learned loss
+function. Given a prompt, we parse a single relation triplet
+for subject, relation and object (s, r, o); and at timestep t,
+aggregate corresponding attention maps to obtain As and
+Ao . The classifier predicts p̂ = C(As , Ao , t), where p̂ is the
+predicted probability distribution over relation classes. We
+compute a cross-entropy loss against the desired relation r
+from the prompt: Lt = − log p̂[r], and update the latent
+code with its gradient: zt ← zt − α∇zt Lt . We optimize
+the first 50% of the denoising steps. In FLUX.1-schnell, we
+only optimize the initial noise.
+
+Addressing relation leakage. We aim to make the relation
+classifier learn representations that do not depend on linguistic cues from the relation word. This presents a unique
+challenge: unlike typical invariance learning where we ignore a protected attribute while predicting something else
+[2, 14, 54], here the “protected attribute” (relation word
+traces) and our prediction target (spatial relation) are semantically same. We should predict “left” while ignoring
+linguistic traces of “left” in the attention maps.
+To reduce leakage, we introduce an augmentation strategy to make the classifier ignore the linguistic cues coming from the inversion prompt. For each training image,
+we perform inversion twice: once with a “mismatching”
+prompt that correctly describes the spatial relation (e.g., “A
+dog to the left of a cat”), and once with a prompt containing
+a randomly sampled incorrect relation (e.g., “A dog above
+a cat”). Crucially, both sets of extracted attention maps are
+labeled with the ground-truth relation observed in the image
+(“left of” in this example). This ensures that both prompts
+generate positive training samples for the classifier. See
+Sec. C.7 for potential limitations.
+This augmentation strategy solves the leakage problem:
+since the same spatial configuration now appears with different relation words in the prompts, the classifier cannot
+rely on linguistic shortcuts. It must learn to rely on spatial
+
+4.3. Multiple Spatial Relations
+A key finding is that our loss, despite being trained only on
+single pairs of objects, generalizes effectively to prompts
+that specify multiple spatial relations – ranging from two
+relations among three objects to more complex cases with
+4-5 objects and up to three relations. To accommodate such
+prompts, we alternate the optimization target at each denoising timestep. For each relation in the prompt, we perform
+a dedicated optimization step, updating the latent code for
+one relation before proceeding to the next.
+Prompt phrasing has a noticeable impact on performance. While Fig. 1(b) shows structured prompts like
+“a frog above a sneakers; and the same sneakers below
+a teapot” for illustrative purposes, we found that simpler,
+chained prompts of the form “A relation B relation C” are
+more effective and yield superior results. For example, “a
+frog above a sneakers below a teapot”.
+
+4.4. Implementation Details
+We describe here the main implementation details. Additional details are provided in Appendix C.
+Cross-Validation. All design choices and hyperparameters
+were selected through systematic validation on the downstream generation task. We made a validation set using the
+4
+
+
+=== PAGE 5 ===
+GenEval framework, carefully ensuring no overlap with test
+prompts. This set contains prompts with similar structure
+but different object combinations and spatial relations.
+Data. For Flux-based models, we use 20K real images from
+GQA and 4K synthetic images. For each image we extract
+the attention maps roughly every 5 denoising steps, and including the last (cleanest) step e.g. {5, 10, 15, 20, 25, 49}
+for multi-step models, and in FLUX.1-schnell we use
+{1, 3}. For SD-based models, we use a smaller set of training data, because the input dimension is lower (7× less
+maps in SD) – with a balanced mixture of 4K real and
+4K synthetic images. The GQA dataset is preprocessed
+to reduce ambiguity: we filter out images with multiple
+instances of the same object category and remove hypernym relations using WordNet [37]. We use inversion techniques to extract the attention maps of the training data for
+the denoising steps. For Flux-based models, we use RFInversion [46], for SD we use Fixed-Point Inversion [47],
+with a guidance-scale of 0 for both inversion methods.
+
+G. Pos. ↑
+
+T. Spatial ↑
+
+FLUX.1-schnell
+Vanilla FLUX.1-schnell
+FOR-Spatial† [26]
+Learn-to-Steer (Ours)
+
+0.26
+0.35
+0.52
+
+0.199
+0.238
+0.309
+
+FLUX.1-dev
+Vanilla FLUX.1-dev
+FOR-Spatial† [26]
+COMPASS [55]
+COMPASS∗
+Learn-to-Steer (Ours)
+
+0.20
+0.49
+0.60
+0.59
+0.61
+
+0.177
+0.357
+0.318
+0.392
+
+SD 2.1
+Vanilla SD 2.1
+FOR-Spatial† [26]
+FOR [26]
+STORM† [18]
+RRNet [53]
+COMPASS [55]
+COMPASS∗
+Learn-to-Steer (Ours)
+
+0.07
+0.27
+0.34
+0.19
+0.09
+0.51
+0.51
+0.54
+
+0.089
+0.211
+0.192
+0.111
+0.106
+0.257
+0.365
+
+SD 1.4
+Vanilla SD 1.4
+FOR-Spatial† [26]
+FOR [26]
+STORM† [18]
+InitNO [17]
+COMPASS [55]
+COMPASS∗
+Learn-to-Steer (Ours)
+
+0.05
+0.26
+0.30
+0.18
+0.12
+0.46
+0.43
+0.36
+
+0.057
+0.228
+0.169
+0.101
+0.062
+0.254
+0.278
+
+Method
+
+5. Experiments
+We compare Learn-to-Steer with strong baselines through
+quantitative and qualitative evaluation using two benchmark datasets and across four text-to-image diffusion models: Flux.1-schnell [28], Flux.1-dev [28], SD2.1 [45] and
+SD1.4 [45]. Our method demonstrates significant improvements in spatial relations representation compared to baselines, which often suffer from entity neglect, remaining effective even for atypical scenarios like “A cow above a boy”.
+We then comprehensively evaluate generalization and scalability through out-of-distribution categories, compositional
+scaling to multiple relations, dense prompts, personalized
+models, and diagonal relations. Finally, we study the properties of Learn-to-Steer through an ablation study.
+
+Table 1. Comparison of spatial relation scores from the GenEval
+(G. Pos.) and T2I-CompBench (T. Spatial) benchmarks grouped
+by base diffusion model. All results were evaluated using the
+same test set, except for COMPASS, which is reported from [55].
+COMPASS∗ indicates evaluation using their provided code. † indicates methods that use handcrafted spatial loss functions.
+
+Method
+Vanilla
+COMPASS∗
+Learn-to-Steer (Ours)
+
+5.1. Quantitative Analysis
+
+FLUX.1-dev
+
+SD 2.1
+
+SD 1.4
+
+0.18
+0.58
+0.60
+
+0.15
+0.52
+0.60
+
+0.07
+0.40
+0.47
+
+Table 2.
+Out-of-distribution (OOD) performance showing
+GenEval’s (G. Pos.) scores on categories that are out-ofdistribution for our model and COMPASS.
+
+Baselines: We compare with several methods. (1) COMPASS [55] fine-tunes the model with spatially-aligned data
+and a text token ordering module. (2) RRNet [53] optimizes prompt embeddings using spatially-aligned reference images. (3) FOR [26] employs a two-stage testtime approach: first optimizing latents zt with handcrafted
+losses, then refining initial noise zT using VLM feedback. (4) FOR-Spatial [26] uses only the handcrafted spatial loss component from FOR’s first stage for test-time
+optimization–since FOR only supports SD1.4 and SD2.1,
+we adapt this component for Flux models by aggregating
+cross-attention maps per object (details in Sec. C.1). (5)
+STORM [18] uses handcrafted test-time losses based on
+optimal transport for spatial relations. (6) InitNO [17] uses
+handcrafted attention-based loss functions for test-time optimization, focusing on entity neglect and attribute binding
+failures. We reproduce results for all methods using their
+
+shared code, except COMPASS code was not released–we
+compare with images from their paper in Appendix A.1, and
+in A.2, we further compare to layout-guided methods.
+Benchmarks and Metrics We evaluate spatial alignment
+using two benchmarks, each with its own automated evaluation protocol. (1) GenEval [15] provides 100 prompts
+covering four spatial relations: {”above”, ”below”, ”left
+of”, ”right of”}. We generate four images per prompt and
+report the percentage of spatially-accurate images among
+400 total. Its evaluation metric (G. Pos.) verifies these by
+comparing the centroids of detected bounding boxes. (2)
+T2I-CompBench [22] contains prompts for seven spatial
+relations: {”on side of”, ”next to”, ”near”, ”on the left of”,
+5
+
+
+=== PAGE 6 ===
+Figure 4. Comparison using FLUX.1-dev (left) and SD 2.1 (right) as base models with prompts from the GenEval [15] benchmark. For
+each prompt, the same seed is used for all methods.
+
+”on the right of”, ”on the bottom of”, ”on the top of”}.
+We extract 216 prompts matching our four trained relations, generate ten images each, and report the percentage of
+spatially-accurate images. Its metric (T. Spatial) also uses
+bounding box centers, but applies stricter geometric rules
+involving the dominant axis of separation and low IoU.
+In-distribution categories
+
+to 0.61 and 0.177 to 0.392 respectively. The results highlight two key findings. First, learned objectives consistently
+outperform handcrafted spatial losses: STORM achieves
+0.19 on SD2.1 GenEval while our method reaches 0.54, and
+our approach shows similar advantages over FOR-Spatial
+across all tested models. Second, test-time optimization
+is competitive with state-of-the-art fine-tuning: COMPASS
+achieves 0.60 on FLUX.1-dev GenEval through model retraining, while our approach reaches 0.61 by steering the
+frozen model. Importantly, this pattern holds across architectures—from UNet-based SD models to MMDiT-based
+Flux variants. Notably, while COMPASS improves spatial
+relations, it degrades other capabilities—on SD2.1 color accuracy drops from 0.85 to 0.71 and counting accuracy falls
+from 0.44 to 0.20 (Appendix A.1). Our approach avoids
+these trade-offs by steering only when needed.
+
+OOD categories
+
+Obj.
+
+Rel.
+
+Flux-dev
+
+Ours
+
+COMPASS∗
+
+Flux-dev
+
+Ours
+
+COMPASS∗
+
+3
+4
+4
+5
+
+2
+2
+3
+3
+
+0.05
+0.04
+0.01
+0.01
+
+0.36
+0.36
+0.20
+0.17
+
+0.14
+0.21
+0.07
+0.05
+
+0.02
+0.04
+0.01
+0.01
+
+0.28
+0.22
+0.19
+0.09
+
+0.12
+0.14
+0.05
+0.05
+
+Table 3. Multiple relations accuracy across varying object and
+relation counts for in-distribution and OOD categories.
+
+Quantitative Results: Table 1 reveals how learned objectives compare to handcrafted ones across four different models. On SD2.1, spatial accuracy rises from 0.07
+to 0.54 on GenEval and from 0.089 to 0.365 on T2ICompBench—transforming a model that barely works for
+spatial tasks into one that succeeds more than half the time.
+FLUX.1-dev shows similar patterns, improving from 0.20
+
+Runtime: We analyze the computational costs of our approach. Our method involves an offline training phase followed by test-time optimization during inference. Classifier
+training requires 7 hours on an NVIDIA A100 80GB GPU.
+During inference, test-time optimization introduces com6
+
+
+=== PAGE 7 ===
+A corgi to
+the left
+of a teapot
+
+and diagonal spatial relations.
+Generalization to unseen categories: We test Learnto-Steer on object categories never seen during training. This out-of-distribution (OOD) evaluation uses 200
+prompts across 16 object categories unseen by both our
+method and COMPASS [55]: Only 6 categories from T2ICompBench were external to both methods, and 10 additional categories were proposed by ChatGPT, ensuring no
+training overlap. See Sec. C.5 for a full list. Table 2 shows
+that Learn-to-Steer maintains strong performance on unseen object categories, achieving 0.60 on FLUX.1-dev and
+outperforming COMPASS on SD models (0.60 vs. 0.52 on
+SD2.1).
+Compositional scaling to multiple relations: We evaluate how Learn-to-Steer generalizes to prompts with multiple spatial relations – a scenario never seen during training.
+We created 200 multi-relation prompts, ranging from two
+relations among three objects to complex cases with 4–5
+objects and up to three relations, using both in-distribution
+(from the training set) and OOD categories as described
+above. We extended GenEval to support automatic verification of multiple relations and added open-vocabulary evaluation to recognize our new categories (details in Sec. C.4).
+Results are shown in Table 3. FLUX.1-dev performs
+poorly (accuracy ≤ 0.05); COMPASS, a training-based
+method, degrades severely with multiple relations (accuracy ≤ 0.07 with 3 relations), despite strong single-relation
+performance. This sharp decline reflects the limitations
+of training-based approaches outside their training distribution. In contrast, without any new training, Learn-to-Steer
+achieves substantial gains: for in-distribution categories
+with 2 relations, its accuracy of 0.36 on 3-4 objects matches
+the expected independent probability (0.61)2 = 0.372. Accuracy remains strong for OOD categories. These results
+highlight that our test-time optimization scales better with
+the number of relations, as performance degrades gracefully, even for OOD categories. See Fig. 16 (Appendix)
+for qualitative comparisons.
+Beyond four basic spatial relations: To evaluate generality, we further trained a classifier for diagonal spatial relations (top-left, bottom-left, top-right, bottom-right). Since
+GenEval lacks an automated verifier for these relations,
+we could not use it to generate synthetic data for training
+the classifier, and therefore trained using only GQA data
+(see Sec. C.6). The classifier achieved similar performance
+(38%) to the setting of non-diagonal relations that were
+trained on GQA alone (Tab. 4, “Real images only (GQA)”).
+See qualitative examples in Fig. 11 (Appendix).
+Zero-shot transfer to personalized models: Learn-toSteer works out-of-the-box with personalized LoRA models - establishing the spatial relations jointly with the personalized content. Fig. 6, 12 show two subjects - Eric the
+cat [16], Margot Robbie [42], and a style - Retro Pixel [41].
+
+corgi
+
+teapot
+
+t=T
+
+t=0
+
+Figure 5. Evolution of cross-attention maps across denoising
+steps. Maps shown are after the steering step (See Fig. 3). At
+early steps (t = T ), maps are diffuse and overlapping. During denoising, the corgi localizes on the left and the teapot on the right,
+converging to the intended spatial arrangement by t = 0.
+
+putational overhead that varies by model: FLUX.1-schnell
+increases from 0.5s to 16.5s per image, FLUX.1-dev from
+11s to 6 minutes, SD2.1 from 4.5s to 90s, and SD1.4 from
+4.5s to 80s. While this overhead is substantial, it enables
+significant spatial accuracy improvements without requiring
+model fine-tuning. Finally, we analyzed runtime-accuracy
+tradeoffs for SD 2.1. Performing multiple optimization iterations (15 steps) only during the first 10% of denoising
+steps while reducing to single optimization steps thereafter
+cuts runtime from 90s to 25s, while accuracy merely drops
+from 0.65 to 0.6 on the validation set. Early stages prove
+most critical - extending this regime to the first 20% of steps
+(35s) restores accuracy to nearly 0.65.
+
+5.2. Qualitative Analysis
+Figure 4 (also Suppl Fig. 14) show qualitative examples
+across four base models and several baselines. Compared
+to other methods, our approach consistently generates highquality images that accurately reflect the spatial relations
+in the prompts. It also handles generating atypical and uncommon scenarios well, as can be seen in Fig. 4 with “A
+bus below a toothbrush” and in Fig. 14 with “An elephant
+below a surfboard. In contrast, other baselines tend to neglect entities: in Fig. 4, none depict the vase from “A vase
+above a fire hydrant”, and the zebra or the chair are missing from “A chair to the left of a zebra”. These examples, along with Fig. 13 (Appendix), demonstrate how our
+method overcomes the three main failure modes: incorrect
+object placement, entity neglect, and object fusion.
+Interpretability: Fig. 5 visualizes cross-attention maps
+throughout denoising, showing how the model establishes
+spatial relations of two entities. Initially (t = T ), attention maps are diffuse and overlapping. During denoising,
+they gradually separate - corgi localizing left, teapot right matching the prompt. By t = 0, objects are clearly disentangled with correct spatial alignment.
+
+5.3. Generalization and Scalability
+We evaluate our method’s generalization capabilities across
+multiple dimensions: out-of-distribution categories, compositional complexity, dense prompts, personalized models,
+7
+
+
+=== PAGE 8 ===
+Eric the cat
+
+(a) 2D–3D Spatial
+Ambiguity
+
+"Retro Pixel" Style
+
+A bear above
+a spoon
+
+(b) Multiple Spatial Relations:
+3 Relations
+
+A mouse to the right
+of a robot; and the
+same robot below a
+sneakers; and the
+same sneakers above
+a teapot
+
+A frog to the right of
+a bowl; and the same
+bowl below a vase;
+and the same vase to
+the left of a table
+
+Figure 7. Method Limitations. (a) 2D spatial relations may not
+align with 3D scene geometry—the spoon appears below the bear
+in 2D but is in front of it in 3D. (b) Multiple spatial relationships
+with three relations: When prompted with four objects and three
+spatial relations, our method can generate matching images. However, typical failure cases, like entity neglect still occur.
+
+Figure 6. Zero-shot transfer to personalized subjects and style
+LoRAs from HuggingFace. More results in Fig. 12 (Appendix)
+
+Dense Prompts: Fig. 9 (Appendix) shows that our approach maintains spatial correctness under dense prompts
+enhanced with attributes and scene details.
+In Appendix A.1, qualitative comparisons with COMPASS show we achieve equivalent spatial accuracy while
+maintaining style and aesthetics closer to the base model.
+Additional results in Appendix D include extensive comparisons on both GenEval (Figures 17, 18, 19, and 20) and
+T2I-CompBench (Figures 21, 22, 23, and 24).
+
+6. Limitations
+
+Leakage Handling
+
+w/o leakage handling
+
+0.425
+
+Our method has several limitations. First, we train on 2D
+spatial relations, which can conflict with 3D scene understanding. As shown in Fig. 7(a), a spoon positioned in front
+of a bear in 3D space may appear ”below” it in the 2D projection. Second, handling scenarios with multiple spatial
+relationships becomes more challenging as the number of
+relations grow. Fig. 7(b) shows both successful generations
+and typical failure cases, such as entity neglect.
+Finally, despite substantial improvements, there is still a
+lot of headroom for improvement. Entity neglect and incorrect positioning persist, as shown in the uncurated generation results in Fig. 15 in the Appendix.
+
+Training Data
+
+Real images only (GQA)
+Synthetic images only
+
+0.365
+0.373
+
+7. Conclusions
+
+5.4. Ablation Study
+Component
+
+Variant
+
+Learn-to-Steer (Ours)
+
+G. Pos. ↑
+0.57
+
+We presented Learn-to-Steer, a data-driven alternative to
+handcrafted spatial losses for test-time steering of text-toimage diffusion models. By training a lightweight classifier
+to decode spatial relationships from cross-attention maps
+and using it as a learned loss, we achieve substantial spatial accuracy improvements across multiple models without fine-tuning. A key advantage of our approach is that
+it preserves the model’s full capabilities by applying steering only when needed, avoiding the performance degradation often seen with fine-tuning methods. While test-time
+optimization increases inference time, this selective application ensures that the model’s general generative abilities
+remain intact for prompts without spatial constraints. This
+cost enables applications requiring high spatial accuracy including generation of multiple relations data. Our work
+demonstrates that learning from the model’s internal representations surpasses handcrafted objectives, opening new
+directions for improving text-to-image alignment.
+
+Table 4. Ablation results on FLUX.1-schnell validation set.
+
+We examine the key design choices of our method
+through systematic ablation on FLUX.1-schnell. Results
+are summarized in Table 4. See Appendix B for additional
+ablations.
+Leakage Handling. Our augmentation strategy, using
+mismatched prompts for inversion is crucial for addressing
+relation leakage. Without it, training on positive prompts
+only yields 0.425. The mismatched-prompt strategy eliminates this leakage, enabling our method to reach 0.57.
+Training Data Composition. Real images from GQA
+alone achieve 0.365, while synthetic images alone reach
+0.373. Real images provide naturalistic complexity but
+yield noisy attention maps in cluttered scenes. Synthetic
+images produce cleaner attention patterns that better match
+generation scenarios. Our full method combines both data
+sources, leveraging their complementary strengths.
+8
+
+
+=== PAGE 9 ===
+Acknowledgments
+
+[11] dewei Zhou, Ji Xie, Zongxin Yang, and Yi Yang. 3DIS:
+Depth-driven decoupled image synthesis for universal multiinstance generation. In The Thirteenth International Conference on Learning Representations, 2025. 2, 13
+[12] Luca Eyring, Shyamgopal Karthik, Karsten Roth, Alexey
+Dosovitskiy, and Zeynep Akata. Reno: Enhancing one-step
+text-to-image models through reward-based noise optimization. Advances in Neural Information Processing Systems,
+37:125487–125519, 2024. 2
+[13] Azade Farshad, Yousef Yeganeh, Yu Chi, Chengzhi Shen,
+Björn Ommer, and Nassir Navab. Scenegenie: Scene graph
+guided diffusion models for image synthesis. In Proceedings
+- 2023 IEEE/CVF International Conference on Computer Vision Workshops, ICCVW 2023, 2023. 3
+[14] Yaroslav Ganin, Evgeniya Ustinova, Hana Ajakan, Pascal Germain, Hugo Larochelle, François Laviolette, Mario
+March, and Victor Lempitsky. Domain-adversarial training
+of neural networks. Journal of Machine Learning Research,
+2016. 4
+[15] Dhruba Ghosh, Hannaneh Hajishirzi, and Ludwig Schmidt.
+Geneval: An object-focused framework for evaluating textto-image alignment. Advances in Neural Information Processing Systems, 36:52132–52152, 2023. 5, 6, 18, 19, 20
+[16] ginipick.
+Flux lora eric the cat.
+URL
+https://huggingface.co/ginipick/flux-lora-eric-cat,
+2024.
+7
+[17] Xiefan Guo, Jinlin Liu, Miaomiao Cui, Jiankai Li, Hongyu
+Yang, and Di Huang. Initno: Boosting text-to-image diffusion models via initial noise optimization. In Proceedings of
+the IEEE/CVF Conference on Computer Vision and Pattern
+Recognition, pages 9380–9389, 2024. 2, 5
+[18] Woojung Han, Yeonkyung Lee, Chanyoung Kim,
+Kwanghyun Park, and Seong Jae Hwang. Spatial transport
+optimization by repositioning attention map for training-free
+text-to-image synthesis. In Proceedings of the IEEE/CVF
+Conference on Computer Vision and Pattern Recognition
+(CVPR), 2025. 2, 5
+[19] Xu Han, Linghao Jin, Xiaofeng Liu, and Paul Pu Liang. Progressive compositionality in text-to-image generative models. In The Thirteenth International Conference on Learning
+Representations, 2025. 2
+[20] Roei Herzig, Amir Bar, Huijuan Xu, Gal Chechik, Trevor
+Darrell, and Amir Globerson. Learning canonical representations for scene graph to image generation. In Computer Vision – ECCV 2020 - 16th European Conference, 2020, Proceedings, 2020. 3
+[21] Matthew Honnibal, Ines Montani, Sofie Van Landeghem,
+and Adriane Boyd. spaCy: Industrial-strength Natural Language Processing in Python. 2020. 16
+[22] Kaiyi Huang, Kaiyue Sun, Enze Xie, Zhenguo Li, and
+Xihui Liu. T2i-compbench: A comprehensive benchmark for open-world compositional text-to-image generation. Advances in Neural Information Processing Systems,
+36:78723–78747, 2023. 5
+[23] Drew A Hudson and Christopher D Manning. Gqa: A new
+dataset for real-world visual reasoning and compositional
+question answering. In Proceedings of the IEEE/CVF con-
+
+This study was funded by the Israeli Ministry of Science,
+Israel-Singapore binational grant, and by a grant from the
+National Committee of Budgeting (VATAT). We thank Yoad
+Tewel, Ohad Rahamim, and Ben Fishman for providing
+feedback on an earlier version of this manuscript.
+
+References
+[1] Aishwarya Agarwal, Srikrishna Karanam, KJ Joseph,
+Apoorv Saxena, Koustava Goswami, and Balaji Vasan Srinivasan. A-star: Test-time attention segregation and retention
+for text-to-image synthesis. In Proceedings of the IEEE/CVF
+International Conference on Computer Vision, pages 2283–
+2293, 2023. 2
+[2] Yuval Atzmon, Felix Kreuk, Uri Shalit, and Gal Chechik. A
+causal view of compositional zero-shot recognition. In Advances in Neural Information Processing Systems (NeurIPS),
+2020. 4
+[3] Amir Bar, Roei Herzig, Xiaolong Wang, Anna Rohrbach,
+Gal Chechik, Trevor Darrell, and Amir Globerson. Compositional video synthesis with action graphs. In Proceedings
+of the 38th International Conference on Machine Learning.
+PMLR, 2021. 3
+[4] Lital Binyamin, Yoad Tewel, Hilit Segev, Eran Hirsch, Royi
+Rassin, and Gal Chechik. Make it count: Text-to-image generation with an accurate number of objects. In Proceedings
+of the Computer Vision and Pattern Recognition Conference,
+pages 13242–13251, 2025. 2
+[5] John Canny. A computational approach to edge detection.
+Pattern Analysis and Machine Intelligence, IEEE Transactions on, 1986. 2
+[6] Agneet Chatterjee, Gabriela Ben Melech Stan, Estelle
+Aflalo, Sayak Paul, Dhruba Ghosh, Tejas Gokhale, Ludwig
+Schmidt, Hannaneh Hajishirzi, Vasudev Lal, Chitta Baral,
+et al. Getting it right: Improving spatial consistency in textto-image models. In European Conference on Computer Vision, pages 204–222. Springer, 2024. 2
+[7] Hila Chefer, Yuval Alaluf, Yael Vinker, Lior Wolf, and
+Daniel Cohen-Or. Attend-and-excite: Attention-based semantic guidance for text-to-image diffusion models. ACM
+transactions on Graphics (TOG), 42(4):1–10, 2023. 2
+[8] Minghao Chen, Iro Laina, and Andrea Vedaldi. Training-free
+layout control with cross-attention guidance. In Proceedings
+of the IEEE/CVF winter conference on applications of computer vision, pages 5343–5353, 2024. 2
+[9] Xiaohui Chen, Yongfei Liu, Yingxiang Yang, Jianbo Yuan,
+Quanzeng You, Li-Ping Liu, and Hongxia Yang. Reason
+out your layout: Evoking the layout master from large language models for text-to-image synthesis. arXiv preprint
+arXiv:2311.17126, 2023. 2
+[10] Zhennan Chen, Yajie Li, Haofan Wang, Zhibo Chen,
+Zhengkai Jiang, Jun Li, Qian Wang, Jian Yang, and Ying
+Tai. Ragd: Regional-aware diffusion model for text-to-image
+generation. In Proceedings of the IEEE/CVF International
+Conference on Computer Vision, pages 19331–19341, 2025.
+2, 13
+
+9
+
+
+=== PAGE 10 ===
+[37] George A Miller. Wordnet: a lexical database for english.
+Communications of the ACM, 38(11):39–41, 1995. 5
+[38] OpenAI. Chatgpt. URL https://chat.openai.com, 2025. Large
+language model. 15
+[39] Maxime Oquab, Timothée Darcet, Theo Moutakanni, Huy V.
+Vo, Marc Szafraniec, Vasil Khalidov, Pierre Fernandez,
+Daniel Haziza, Francisco Massa, Alaaeldin El-Nouby, Russell Howes, Po-Yao Huang, Hu Xu, Vasu Sharma, ShangWen Li, Wojciech Galuba, Mike Rabbat, Mido Assran, Nicolas Ballas, Gabriel Synnaeve, Ishan Misra, Herve Jegou,
+Julien Mairal, Patrick Labatut, Armand Joulin, and Piotr Bojanowski. Dinov2: Learning robust visual features without
+supervision, 2023. 12
+[40] Quynh Phung, Songwei Ge, and Jia-Bin Huang. Grounded
+text-to-image synthesis with attention refocusing. In Proceedings of the IEEE/CVF Conference on Computer Vision
+and Pattern Recognition, pages 7932–7942, 2024. 2
+[41] prithivMLmods.
+Retro-pixel-flux-lora.
+URL
+https://huggingface.co/prithivMLmods/Retro-Pixel-FluxLoRA, 2024. 7
+[42] punzel.
+Flux lora - margot robbie.
+URL
+https://huggingface.co/punzel/flux margot robbie,
+2024.
+7
+[43] Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya
+Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry,
+Amanda Askell, Pamela Mishkin, Jack Clark, et al. Learning
+transferable visual models from natural language supervision. In International conference on machine learning, pages
+8748–8763. PmLR, 2021. 12
+[44] Royi Rassin, Eran Hirsch, Daniel Glickman, Shauli Ravfogel, Yoav Goldberg, and Gal Chechik. Linguistic binding in diffusion models: Enhancing attribute correspondence
+through attention map alignment. Advances in Neural Information Processing Systems, 36:3536–3559, 2023. 2
+[45] Robin Rombach, Andreas Blattmann, Dominik Lorenz,
+Patrick Esser, and Björn Ommer. High-resolution image
+synthesis with latent diffusion models. In Proceedings of
+the IEEE/CVF Conference on Computer Vision and Pattern
+Recognition (CVPR), pages 10684–10695, 2022. 5
+[46] L Rout, Y Chen, N Ruiz, C Caramanis, S Shakkottai, and W
+Chu. Semantic image inversion and editing using rectified
+stochastic differential equations. In The Thirteenth International Conference on Learning Representations, 2025. 5
+[47] Dvir Samuel, Barak Meiri, Haggai Maron, Yoad Tewel, Nir
+Darshan, Shai Avidan, Gal Chechik, and Rami Ben-Ari.
+Lightning-fast image inversion and editing for text-to-image
+diffusion models. In The Thirteenth International Conference on Learning Representations, 2025. 5
+[48] Etai Sella, Yanir Kleiman, and Hadar Averbuch-Elor. Instancegen: Image generation with instance-level instructions, 2025. 3
+[49] Shang Hong Sim, Clarence Lee, Alvin Tan, and Cheston Tan.
+Evaluating the generation of spatial relations in text and image generative models, 2024. 3
+[50] Jaskirat Singh and Liang Zheng. Divide, evaluate, and refine: Evaluating and improving text-to-image alignment with
+iterative vqa feedback. Advances in Neural Information Processing Systems, 36:70799–70811, 2023. 3
+
+ference on computer vision and pattern recognition, pages
+6700–6709, 2019. 4
+[24] Hugging
+Face.
+Text-to-image.
+URL
+https://huggingface.co/docs/diffusers/en/usingdiffusers/conditional image generation, 2025. 16
+[25] Maor Ivgi, Yaniv Benny, Avichai Ben-David, Jonathan Berant, and Lior Wolf. Scene graph to image generation with
+contextualized object layout refinement. In 2021 IEEE International Conference on Image Processing (ICIP), pages
+2428–2432. IEEE, 2021. 3
+[26] Amir Mohammad Izadi, Seyed Mohammad Hadi Hosseini,
+Soroush Vafaie Tabar, Ali Abdollahi, Armin Saghafian, and
+Mahdieh Soleymani Baghshah. Fine-grained alignment and
+noise refinement for compositional text-to-image generation.
+arXiv preprint arXiv:2503.06506, 2025. 5, 14
+[27] Zeeshan Khan, Shizhe Chen, and Cordelia Schmid. Composeanything: Composite object priors for text-to-image
+generation, 2025. 3
+[28] Black Forest Labs. Flux. URL https://blackforestlabs.ai/,
+2024. 1, 5, 12, 19, 20
+[29] Baiqi Li, Zhiqiu Lin, Deepak Pathak, Jiayao Li, Yixin Fei,
+Kewen Wu, Xide Xia, Pengchuan Zhang, Graham Neubig, and Deva Ramanan. Evaluating and improving compositional text-to-visual generation. In Proceedings of the
+IEEE/CVF Conference on Computer Vision and Pattern
+Recognition, pages 5290–5301, 2024. 3
+[30] Shufan Li, Konstantinos Kallidromitis, Akash Gokul, Arsh
+Koneru, Yusuke Kato, Kazuki Kozuka, and Aditya Grover.
+Reflect-dit: Inference-time scaling for text-to-image diffusion transformers via in-context reflection. arXiv preprint
+arXiv:2503.12271, 2025. 3
+[31] Yumeng Li, Margret Keuper, Dan Zhang, and Anna Khoreva.
+Divide & bind your attention for improved generative semantic nursing. In 34th British Machine Vision Conference 2023,
+BMVC 2023, 2023. 2
+[32] Yuheng Li, Haotian Liu, Qingyang Wu, Fangzhou Mu, Jianwei Yang, Jianfeng Gao, Chunyuan Li, and Yong Jae Lee.
+Gligen: Open-set grounded text-to-image generation. In Proceedings of the IEEE/CVF conference on computer vision
+and pattern recognition, pages 22511–22521, 2023. 2
+[33] Nan Liu, Shuang Li, Yilun Du, Antonio Torralba, and
+Joshua B Tenenbaum. Compositional visual generation with
+composable diffusion models. In Computer Vision–ECCV
+2022: 17th European Conference, Tel Aviv, Israel, October 23–27, 2022, Proceedings, Part XVII, pages 423–439.
+Springer, 2022. 3
+[34] Ilya Loshchilov and Frank Hutter. Decoupled weight decay regularization. In International Conference on Learning
+Representations, 2019. 16
+[35] Timo Lüddecke and Alexander Ecker. Image segmentation using text and image prompts. In Proceedings of
+the IEEE/CVF Conference on Computer Vision and Pattern
+Recognition (CVPR), pages 7086–7096, 2022. 14
+[36] Tuna Han Salih Meral, Enis Simsar, Federico Tombari, and
+Pinar Yanardag. Conform: Contrast is all you need for highfidelity text-to-image diffusion models. In Proceedings of
+the IEEE/CVF Conference on Computer Vision and Pattern
+Recognition, pages 9005–9014, 2024. 2
+
+10
+
+
+=== PAGE 11 ===
+[51] Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz Kaiser, and Illia
+Polosukhin. Attention is all you need. In Advances in Neural
+Information Processing Systems, 2017. 15
+[52] Qiucheng Wu, Yujian Liu, Handong Zhao, Trung Bui, Zhe
+Lin, Yang Zhang, and Shiyu Chang. Harnessing the spatialtemporal attention of diffusion models for high-fidelity textto-image synthesis. In Proceedings of the IEEE/CVF International Conference on Computer Vision, pages 7766–7776,
+2023. 2
+[53] Yinwei Wu, Xingyi Yang, and Xinchao Wang. Relation rectification in diffusion model. In Proceedings of the IEEE/CVF
+Conference on Computer Vision and Pattern Recognition,
+pages 7685–7694, 2024. 2, 5
+[54] Rich Zemel, Yu Wu, Kevin Swersky, Toni Pitassi, and Cynthia Dwork. Learning fair representations. In Proceedings
+of the 30th International Conference on Machine Learning.
+PMLR, 2013. 4
+[55] Gaoyang Zhang, Bingtao Fu, Qingnan Fan, Qi Zhang, Runxing Liu, Hong Gu, Huaqi Zhang, and Xinguo Liu. Compass:
+Enhancing spatial understanding in text-to-image diffusion
+models. arXiv preprint arXiv:2412.13195, 2024. 2, 5, 7, 12,
+14
+[56] Lvmin Zhang, Anyi Rao, and Maneesh Agrawala. Adding
+conditional control to text-to-image diffusion models. In
+Proceedings of the IEEE/CVF international conference on
+computer vision, pages 3836–3847, 2023. 2
+[57] Renrui Zhang, Chengzhuo Tong, Zhizheng Zhao, Ziyu Guo,
+Haoquan Zhang, Manyuan Zhang, Jiaming Liu, Peng Gao,
+and Hongsheng Li. Let’s verify and reinforce image generation step by step. In Proceedings of the Computer Vision and
+Pattern Recognition Conference, pages 28662–28672, 2025.
+2, 4
+[58] Dewei Zhou, You Li, Fan Ma, Xiaoting Zhang, and Yi Yang.
+Migc: Multi-instance generation controller for text-to-image
+synthesis. In Proceedings of the IEEE/CVF conference on
+computer vision and pattern recognition, pages 6818–6828,
+2024. 2, 13
+[59] Zikai Zhou, Shitong Shao, Lichen Bai, Shufei Zhang,
+Zhiqiang Xu, Bo Han, and Zeke Xie. Golden noise for diffusion models: A learning framework. In International Conference on Computer Vision, 2025. 3
+
+11
+
+
+=== PAGE 12 ===
+Data-Driven Loss Functions for Inference-Time Optimization in Text-to-Image
+Supplementary Material
+A. Comparison with Additional Methods
+
+FLUX.1-dev
+
++ Ours
+
++ COMPASS
+
+A.1. Comparison with COMPASS
+While our method demonstrates strong performance across
+various models and benchmarks, fine-tuning methods like
+COMPASS [55] can achieve higher accuracy in specific indistribution settings, though often at the cost of degrading
+other alignment capabilities. For instance, on the GenEval
+benchmark with SD 1.4, COMPASS achieves a spatial accuracy of 43–46% compared to our 36% (Table 1). We
+attribute this to the nature of fine-tuning, which modifies
+model weights and can lead to specialization on the training
+distribution. A more fine-grained analysis suggests this specialization may be narrow. On T2I-CompBench, which uses
+stricter geometric criteria, our method outperforms COMPASS for all models (e.g., 0.278 vs. 0.254 on SD 1.4); additionally, Table 6 shows that COMPASS’s advantage on SD
+1.4 is largely driven by a significant performance gap on the
+“left of” relation (59.2% vs. 40.8%), while performance on
+other relations is more comparable.
+Importantly, COMPASS’s specialization appears to
+come at a cost to generalization, particularly in complex,
+out-of-distribution scenarios (Tables 2, 3). This is most
+evident when handling prompts with multiple spatial relations—a compositional challenge not seen during training.
+As shown in Table 3, our method’s performance degrades
+gracefully, whereas COMPASS’s accuracy drops sharply.
+For instance, on prompts with three objects and two relations involving OOD categories, our method achieves 28%
+accuracy compared to COMPASS’s 12%. The performance
+gap widens with complexity: for four objects and three relations with OOD categories, our method maintains 19% accuracy, while COMPASS drops to just 5%. This highlights
+the advantage of our test-time optimization in maintaining compositional structure and degrading gracefully under
+complexity.
+This trade-off extends to other capabilities beyond spatial reasoning. Our method better preserves the original aesthetics and style of the base model, as demonstrated in the
+qualitative comparison in Fig. 8. We quantify this observation in Table 5, which shows that images generated with our
+method have a higher visual similarity to the base model’s
+generations using both DINO [39] and CLIP [43] similarities (e.g., on FLUX.1-dev: 0.863 vs. 0.775 for DINO). Furthermore, as shown in Table 7, COMPASS’s improvements
+in spatial control are accompanied by degradation in other
+areas: on SD2.1, color accuracy drops from 0.85 to 0.71,
+and counting accuracy falls from 0.44 to 0.20. In contrast,
+our test-time approach is applied selectively only when spa-
+
+"A bus below
+an elephant"
+
+"A clock above
+an airplane"
+
+"A dog to the
+right of a tie"
+
+"A cow to the
+right of a
+laptop"
+
+"A cake above
+a backpack"
+
+Figure 8. Comparing COMPASS [55] to our method, using
+FLUX.1-dev [28] as the base model.
+
+tial relations are present in the prompt, thereby preserving
+the base model’s performance on these dimensions.
+
+Base Model
+
+Methods
+
+DINO ↑
+
+CLIP ↑
+
+Base vs. COMPASS
+Base vs. Ours
+
+0.7751
+0.8625
+
+0.7721
+0.8767
+
+Base vs. COMPASS
+Base vs. Ours
+
+0.7135
+0.7360
+
+0.7530
+0.8012
+
+Flux-dev
+
+SD 1.4
+
+Table 5. Our approach generates images that are closer to the base
+model. In Figure 8 we see that qualitatively style and aesthetics
+are closer to the base model.
+
+12
+
+
+=== PAGE 13 ===
+Figure 9. Qualitative results with dense prompts. Our method preserves the intended spatial relations even when objects are described
+with attributes and embedded in detailed scene contexts.
+
+FLUX.1-dev
+
+SD 1.4
+
+Relation
+
+Ours
+
+COMPASS
+
+Ours
+
+COMPASS
+
+above
+below
+left of
+right of
+
+61.5%
+67.0%
+60.5%
+54.6%
+
+63.5%
+54.5%
+56.6%
+67.6%
+
+30.8%
+33.9%
+40.8%
+40.7%
+
+39.4%
+38.4%
+59.2%
+40.7%
+
+Method
+3DIS† [11]
+MIGC† [58]
+RAGD† [10]
+Learn-to-Steer (Ours)
+
+Vanilla SD2.1
+COMPASS
+Learn-to-Steer (Ours)
+
+Position ↑
+
+Count ↑
+
+Color ↑
+
+0.07
+0.51
+0.54
+
+0.44
+0.20
+0.44*
+
+0.85
+0.71
+0.85*
+
+0.72
+0.76
+0.80
+0.61
+
+Table 8. Comparison of spatial relation scores from the GenEval
+benchmark (G. Pos.) against layout-guided methods. † results are
+reported from [10]. Note that unlike Learn-to-Steer, these methods
+rely on explicit layout inputs.
+
+Table 6. Per-relation accuracy comparison. While FLUX.1-dev
+results are comparable between methods, in SD 1.4 COMPASS
+shows notably higher accuracy for “left of” (59%) compared to
+other relations.
+Model
+
+G. Pos. ↑
+
+Aggregation Variant
+
+G. Pos. ↑
+
+Full Concatenation (Ours)
+Mean: Per-Layer
+Mean: Global (All layers/heads)
+
+0.7
+0.69
+0.78
+
+Table 9. Ablation results for different attention aggregation strategies on FLUX.1-dev (GenEval validation set).
+
+Table 7. GenEval results comparing fine-tuning (COMPASS) vs.
+test-time optimization (Ours) on SD2.1. COMPASS results are
+from their paper. *Our method preserves the vanilla model’s performance on non-spatial tasks since we only apply steering when
+spatial relations are present in the prompt.
+
+timestep. We analyzed how different aggregation strategies
+for the attention maps affect performance. Specifically, we
+compared three approaches: (1) Mean (Global): Computing the mean across all layers and heads; (2) Mean (PerLayer): Computing the mean across heads within each
+layer, then concatenating the layer outputs; and (3) Full
+Concatenation: Retaining all maps by concatenating all
+layers and heads into a single feature vector.
+While Table 9 demonstrates that the “Mean (Global)”
+strategy achieves the highest alignment score (0.78), we find
+that it comes at a cost to image quality, consistently yielding
+over-constrained results with “dull” or neutral backgrounds
+(See Fig. 10). Similarly, the “Mean (Per-Layer)” strategy,
+which scores slightly lower than our method (0.69 vs. 0.70),
+also exhibits inconsistent visual quality, occasionally suffering from the same background degradation. In contrast, the
+“Full Concatenation” strategy provides the most balanced
+
+A.2. Comparison with Layout-guided Methods
+Table 8 compares Learn-to-Steer with layout-guided approaches, such as RAGD [10], 3DIS [11], and MIGC [58].
+Results for these methods are sourced from RAGD [10],
+where GenEval’s performance was evaluated using MLLMgenerated layouts. Comparisons against MLLM-driven
+pipelines are inequitable due to their massive parameter
+counts and undisclosed training data.
+
+B. Additional Ablation Studies
+The inputs to the relation classifier are the cross-attention
+maps of two objects, alongside the current denoising
+13
+
+
+=== PAGE 14 ===
+C.3. OOD Evaluation Details
+Our out-of-distribution (OOD) evaluation tests generalization on 200 prompts across 16 object categories unseen by
+both our method and COMPASS [55]. We identified 6 categories from T2I-CompBench vocabulary that were out-ofdistribution for both methods, and used ChatGPT to generate 10 additional diverse categories, ensuring no training
+data overlap.
+
+C.4. Extending GenEval to an Open-Set of Categories and Multiple Relations
+The current GenEval benchmark is constrained for only recognizing the 80 COCO categories, and can only verify a single pair of relations. To facilitate an open set of object categories, we replaced the object detector with CLIPSeg [35],
+a zero-shot object segmentation approach. To evaluate multiple relations, we generated metadata files in GenEval’s expected structure, where each prompt is paired with a list of
+required objects along with their pairwise relations, verify
+each relation, and indicate success only when all relations
+are correctly generated in an image. To verify that our automatic evaluation is reliable, we compared its results against
+manual evaluation conducted by one of the authors on a
+mixed set of in-distribution and OOD categories (Table 10).
+The scores align closely across all settings.
+
+Figure 10. Impact of Aggregation on Visual Aesthetics. Comparing our chosen method (Full Concatenation) against the Mean
+Aggregation baselines. While Mean Aggregation forces the objects into position, it frequently results in loss of background detail and vividness. Our method preserves the visual richness of the
+base model.
+
+setup, offering strong adherence to the spatial prompt while
+maintaining high visual aesthetics. Therefore, we decided
+to use this strategy for our final method.
+
+Objects
+
+Relations
+
+Manual Eval.
+
+Automatic Eval.
+
+3
+4
+5
+
+2
+3
+3
+
+0.29
+0.12
+0.07
+
+0.28
+0.12
+0.10
+
+Table 10. Comparison of automatic evaluation vs. manual evaluation of multiple spatial relations.
+
+C. Additional Implementation Details
+C.1. Adapting FOR’s handcrafted spatial loss to
+Flux-based models
+
+C.5. Object Categories for Multi-Relation Evaluation
+
+We adapted FOR’s [26] handcrafted spatial loss as follows: For each pair of objects, we first aggregated all crossattention maps across all layers and heads into a single attention map per object. Subsequently, we applied the manual spatial loss function on the two aggregated maps in exactly the same manner as in the official implementation. To
+ensure a fair comparison, we ran a hyperparameter search
+over the scale factor of the step size used during test-time
+optimization to find the optimal setup.
+
+For the multi-relation evaluation, similar to the singlerelation case, we tested on both in-distribution and out-ofdistribution (OOD) object categories. The specific objects
+used were:
+In-distribution categories (16 objects): backpack,
+bowl, cat, skateboard, bottle, cake, tie, vase, sheep, toothbrush, teddy bear, suitcase, mouse, knife, chair, and umbrella.
+Out-of-distribution categories (16 objects): teapot,
+corgi, furby, robot, turtle, rabbit, butterfly, key, pig, bee,
+tiger, hammer, monkey, razor, snake, and stapler.
+
+C.2. Benchmarks
+To ensure a fair comparison, we normalize all relation
+names to {”above”, ”below”, ”to the left of”, ”to the right
+of”} across benchmarks. All baselines we reproduced use
+this normalized set. We will release normalized test sets for
+both benchmarks.
+
+C.6. Extending Our Method to Diagonal Spatial
+Relations
+Since there is no labeled data for diagonal relations (topleft, top-right, bottom-left, bottom-right) readily available,
+14
+
+
+=== PAGE 15 ===
+we generated training samples by inferring relations directly from GQA bounding boxes. For each image, we examined all object pairs and computed their relative offsets
+and angles. Pairs whose center displacement fell within diagonal sectors were labeled accordingly, while cases with
+large overlaps were discarded.
+Using these labels, we constructed cross-attention training samples following the same procedure as for the four
+basic relations (above, below, left, right). For a given relation (e.g., “top-left”), we inverted the image twice: once
+with the correct relation and once with an incorrect relation sampled uniformly from the remaining options (e.g.,
+“bottom-left”). This shows that our dual-image inversion
+strategy can naturally extend to more complex spatial relations such as diagonals.
+We then trained a diagonal relation classifier in the same
+way as for the four basic relations, with one exception: as
+a quick prototype of the aggregation module, we computed
+the average across all cross-attention maps before forwarding the representation to the classification module.
+Figure 11. Qualitative comparison of diagonal spatial relations.
+The base model often misplaces objects or ignores the diagonal
+specification, while our method better adheres to the intended spatial layout.
+
+C.7. Potential limitations of dual-inversion
+Our dual inversion strategy has an underlying assumption
+that the inversion process succeeds, and generates wellbehaving attention maps even for the incorrect prompt.
+While we did not experiment with inverting very complex
+prompts, inversion it is likely to be less stable in these cases.
+Another limitation arises when inverting images that contain multiple instances of the same object (2 cats and a dog).
+Such images and prompts are known to be less stable.
+
+length L · H with a feature dimension of d, to which we add
+standard positional encodings [51] in Rd that signifies the
+spatial location. A timestep embedding ϕ(t) ∈ Rd is also
+added to all tokens, in the input to every transformer layer,
+allowing the aggregator to adapt to the current denoising
+stage. A four-layer, four-head transformer then processes
+this sequence to exchange information across different layers and heads. To aggregate the transformer output from
+RL·H,d to Rd , we use another four-layer, single-head transformer. For the second transformer, we learn a query vector
+in R1×d , while the key and value are projected from the output of the first transformer (RL·H,d ). Finally, a linear layer
+maps the output in Rd to Rh·w reshaped to an aggregated
+map Aagg ∈ Rh×w . The same aggregator (shared weights)
+processes both subject and object maps.
+In practice, to process SD-based maps we use two-layer,
+two-head transformers instead of four-layer, four-head.
+Classification Module. The two aggregated maps are
+stacked into a two-channel image, flattened, projected to
+d = 256 dimensions, tagged with standard positional encodings and passed through a four-layer eight-head Transformer. Finally, the transformer’s output is concatenated
+with a low-dimension timestep embedding (16-d) and fed
+to an MLP that returns logits over the relation classes. The
+complete architecture is trained jointly end-to-end.
+In practice, to process SD-based maps we use two-layer,
+four-head transformers in the classification module.
+
+C.8. Dense Prompt Construction
+To create dense prompts, we asked ChatGPT [38] to enhance base prompts from the GenEval dataset, and generate an enriched variant. Each variant preserved the original
+spatial relation, added an attribute to every object, placed
+the objects in a realistic location (e.g., kitchen, living room,
+park), and included a vivid description of the location with
+detailed context.
+
+C.9. Architecture Details
+First we process each set of attention maps individually, using a transformer based aggregation module that maps each
+set of maps L × H × h × w to one single h × w map per
+image, where L, H are the number of cross attention layers
+and heads and h, w are the attention map dimensions. Then
+we process these two maps jointly to predict the relation
+class.
+Aggregation Module. For a given object, the aggregator receives all L × H attention maps of size h × w. Each map is
+treated as a separate token in a sequence of length L·H. We
+then project each token from h · w dimensions to a shared
+embedding dimension d = 256. This yields a sequence
+15
+
+
+=== PAGE 16 ===
+C.10. Other details
+Relation Extraction. Relation triplets are extracted from
+the prompt using SpaCy [21] a natural lang. parsing library,
+with some hard-coded exceptions, like ”fire hydrant”.
+Classifier Training. For training the classifier we used a
+batch size of 64, with AdamW optimizer [34], a weight decay of 0.05, and a learning rate of 5 · 10−5 for Flux-based
+models and 0.0001 for SD-based models. We used a ReduceOnPlateu scheduler with a factor of 0.5 and patience
+5. We trained the classifier for a maximum of 200 epochs
+in Flux-based models and 150 for SD-based models, with
+early stopping patience of 10 epochs.
+Test-Time Optimization and Inference. We optimize the
+first 50% of the denoising steps. In FLUX.1-schnell, we
+only optimize the initial noise. The step size α is 5 for
+SD2.1 and Flux-based models, and 7.5 for SD1.4 and number of optimization iterations per step are 15.
+We use the guidance scales suggested by HuggingFace [24], specifically 3.5 for FLUX.1-dev, 0 for FLUX.1schnell, and 7.5 for SD based models.
+Image Resolution. We generate images at different resolutions depending on the base model: 256 × 256 for FLUX.1schnell and 512 × 512 for FLUX.1-dev, SD2.1, and SD1.4.
+Neutral Relation Class. We included a fifth, ”neutral”
+class during training. This class captures non-directional
+relationships (described by ”is”) and acts as a background
+category. We do not use this neutral class during generation.
+
+D. Additional Qualitative Results
+Figure 14 provides comprehensive comparisons across all
+four base models on GenEval prompts, demonstrating consistent improvements in spatial accuracy. Figure 13 (Appendix), demonstrate how our method overcomes the three
+main failure modes: incorrect object placement, entity neglect, and object fusion.
+We perform extensive comparisons on both GenEval
+(Figures 17, 18, 19, and 20) and T2I-CompBench (Figures 21, 22, 23, and 24).
+
+16
+
+
+=== PAGE 17 ===
+Eric the cat
+
+Margot Robbie
+
+"Retro Pixel" Style
+
+Figure 12. More qualitative results of zero-shot transfer to personalized LoRAs of both subject and style.
+
+FLUX dev (👎 spatial)
+
+FLUX dev + Ours
+
+a frog below a bowl
+
+FLUX dev (👎 neglect)
+
+FLUX dev + Ours
+
+a cow above a boy
+
+FLUX sch. (👎 hybrid)
+
+FLUX sch. + Ours
+
+a giraffe above an airplane
+
+Figure 13. Common base model failures. Our method addresses common text-to-image generation failures, including incorrect object
+placement (left), object neglect (middle), and fused, chimeric hybrids (right).
+
+17
+
+
+=== PAGE 18 ===
+Figure 14. Comparisons with all four base models. Prompts were taken from GenEval [15]. Each pair uses the same seed.
+
+18
+
+
+=== PAGE 19 ===
+Figure 15. Uncurated image generation results from FLUX.1-dev [28] with Learn-to-Steer, using validation prompts from GenEval [15].
+Green boxes mark spatially-aligned images (per GenEval), while red boxes mark misaligned ones.
+
+19
+
+
+=== PAGE 20 ===
+Figure 16. Handling Multiple Relations. As opposed to the base
+model, our method is capable of generating complex scene structures that contain multiple relations in a single prompt.
+
+Figure 17. Qualitative comparison using FLUX.1-schnell [28]
+with prompts from the GenEval [15] benchmark. For each prompt,
+the same seed is used for all methods.
+
+20
+
+
+=== PAGE 21 ===
+Figure 18. FLUX.1-dev on the GenEval benchmark
+
+21
+
+
+=== PAGE 22 ===
+Figure 19. SD 2.1 on the GenEval benchmark
+
+22
+
+
+=== PAGE 23 ===
+Figure 20. SD 1.4 on the GenEval benchmark
+
+23
+
+
+=== PAGE 24 ===
+Figure 22. FLUX.1-schnell on the T2I-CompBech benchmark
+Figure 21. FLUX.1-dev on the T2I-CompBech benchmark
+
+24
+
+
+=== PAGE 25 ===
+Figure 23. SD 2.1 on the T2I-CompBech benchmark
+
+25
+
+
+=== PAGE 26 ===
+Figure 24. SD 1.4 on the T2I-CompBech benchmark
+
+26
+

@@ -1,0 +1,17 @@
+Style: a clean machine-learning cheat-sheet figure in the manner of the attached reference pictures. White page, thin outlines, a representative few arrows, generous white space, small clear sans-serif labels, real-looking photo tiles with a thin coloured frame. The part the figure is about glows softly in its colour and everything else is faded pale grey. It is a finished, welcoming figure and never a bare wireframe. Copy the look of the references only, and none of their content or words.
+
+Scene: Two stacked rows, each ending in a horizontal meter of the chance that the judge says left of. Colours carry meaning and nothing else: blue #1f5fd0 for inputs (the noisy picture), green #1d7a3e for hidden values (the word maps and the small judge), red #c0262d for outputs (the judge's answer), orange #c86a0a for the backward signal and the push, grey #6b7a88 for what is off, fixed or secondary. Photo content keeps its natural colours.
+
+Cast:
+- Top row, labelled "one capped push": one short orange arrow, then a horizontal meter from 0 to 1 with a thin outline, filled red up to about a quarter, a grey tick at 0.20 and the fill ending at 0.24. Print "0.20" at the tick and "0.24" at the fill's end.
+- Bottom row, labelled "sixteen big steps": a strip of exactly 16 evenly spaced orange arrows in a line, then the same meter filled red almost to the end, with a grey tick at 0.20 and the fill ending at 0.99. Print "0.20" at the tick and "0.99" at the fill's end.
+- Above the two meters, one small label: "chance of left of".
+- A small grey tag at the bottom right: "miniature's numbers".
+
+Flows: No arrows between the rows.
+
+Text in the image, spelled exactly and no other words: "one capped push", "sixteen big steps", "chance of left of", "0.20", "0.24", "0.99", "miniature's numbers".
+
+Exclusions: no title banner, no legend box, no paragraphs, no equations, no invented words, no logos, no watermark, no decorative circuitry, no duplicated components, no arrow ending in empty space, no arrow crossing a label or a picture.
+
+Aspect ratio: landscape 3:2.

@@ -1,0 +1,42 @@
+Reading prompt from stdin...
+OpenAI Codex v0.171.0-alpha.13
+--------
+workdir: /home/molef/PhD/concept-composition/2-classifier-guidance/artifacts/scenes/word-map-checker/1-illustrations/drop/prompts
+model: gpt-6-astra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: low
+reasoning summaries: none
+session id: 01a208a4-46df-7bb1-944f-a4606b851004
+--------
+user
+Style: a clean machine-learning cheat-sheet figure in the manner of the attached reference pictures. White page, thin outlines, a representative few arrows, generous white space, small clear sans-serif labels, real-looking photo tiles with a thin coloured frame. The part the figure is about glows softly in its colour and everything else is faded pale grey. It is a finished, welcoming figure and never a bare wireframe. Copy the look of the references only, and none of their content or words.
+
+Scene: Read left to right: two separated word maps, an arrow with a question mark, one finished picture that still holds one animal. Colours carry meaning and nothing else: blue #1f5fd0 for inputs (the noisy picture), green #1d7a3e for hidden values (the word maps and the small judge), red #c0262d for outputs (the judge's answer), orange #c86a0a for the backward signal and the push, grey #6b7a88 for what is off, fixed or secondary. Photo content keeps its natural colours.
+
+Cast:
+- Left, glowing green: two 2 by 2 grids side by side, labelled "cat map" (left column bright) and "dog map" (right column bright).
+- Middle: one grey arrow with a small grey question mark above it.
+- Right: one larger, clean, finished photo tile with a thin grey frame, showing ONE single fused animal, with a cat's ear and a dog's muzzle on the same head, sitting in the middle of the frame. Label under it: "still one animal".
+- Top left small grey tag: "the risk, drawn".
+- Bottom, one small caption line in dark grey: "our SDXL push on the maps: two animals on 0 of 8 seeds".
+
+Flows: One grey arrow from the maps to the photo.
+
+Text in the image, spelled exactly and no other words: "cat map", "dog map", "still one animal", "the risk, drawn", "our SDXL push on the maps: two animals on 0 of 8 seeds".
+
+Exclusions: no title banner, no legend box, no paragraphs, no equations, no invented words, no logos, no watermark, no decorative circuitry, no duplicated components, no arrow ending in empty space, no arrow crossing a label or a picture.
+
+Aspect ratio: landscape 3:2.
+
+The attached images are already in your context. Do not open, read or save any file, and do not pass file paths to the image tool: generate the picture directly with your image tool, then reply with one line saying it is done.
+
+codex
+I’ll generate the figure directly, using the imagegen skill’s visual guidance and your specified labels and colours.
+
+codex
+Done.
+tokens used
+4,794
+Done.

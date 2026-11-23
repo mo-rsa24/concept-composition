@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1640 780" width="1640" height="780" role="img" aria-label="A training picture of a dog left of a cat is inverted under the right caption and a wrong one. Both sets of word maps carry the label left of, so the head cannot use the relation word." font-family="IBM Plex Sans, Helvetica, Arial, sans-serif">
+<rect width="1640" height="780" fill="#ffffff"/>
+<defs><filter id="soft-halo" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="9"/></filter></defs>
+<text font-family="DejaVu Sans" x="40.0" y="48.0" font-size="31" fill="#20313c" font-weight="700" text-anchor="start">Why each training picture is inverted twice</text>
+<text font-family="DejaVu Sans" x="40.0" y="84.0" font-size="20" fill="#566472" font-weight="400" text-anchor="start">If every caption states the truth, the head can read the relation word&#x27;s trace in the maps and ignore the layout.</text>
+<rect x="40.0" y="300.0" width="225.0" height="170.0" rx="8" fill="#dbe6fa" stroke="#1f5fd0" stroke-width="1.6"/>
+<text font-family="DejaVu Sans" x="152.5" y="378.4" font-size="20" fill="#20313c" font-weight="600" text-anchor="middle">training picture</text>
+<text font-family="DejaVu Sans" x="152.5" y="405.2" font-size="20" fill="#20313c" font-weight="400" text-anchor="middle">dog left of a cat</text>
+<rect x="345.0" y="150.0" width="355.0" height="130.0" rx="8" fill="#ffffff" stroke="#6b7a88" stroke-width="1.6"/>
+<text font-family="DejaVu Sans" x="522.5" y="208.7" font-size="19" fill="#20313c" font-weight="600" text-anchor="middle">right caption</text>
+<text font-family="DejaVu Sans" x="522.5" y="234.2" font-size="19" fill="#20313c" font-weight="400" text-anchor="middle">&quot;a dog to the left of a cat&quot;</text>
+<line x1="152.5" y1="293.0" x2="152.0" y2="215.0" stroke="#6b7a88" stroke-width="2.2"/>
+<line x1="152.0" y1="215.0" x2="328.0" y2="215.0" stroke="#6b7a88" stroke-width="2.2"/><polygon points="338.0,215.0 328.0,211.0 328.0,219.0" fill="#6b7a88"/>
+<rect x="775.0" y="150.0" width="200.0" height="130.0" rx="8" fill="#eceef1" stroke="#6b7a88" stroke-width="1.6"/>
+<text font-family="DejaVu Sans" x="875.0" y="208.7" font-size="19" fill="#566472" font-weight="600" text-anchor="middle">invert, read</text>
+<text font-family="DejaVu Sans" x="875.0" y="234.2" font-size="19" fill="#566472" font-weight="400" text-anchor="middle">the word maps</text>
+<line x1="707.0" y1="215.0" x2="758.0" y2="215.0" stroke="#6b7a88" stroke-width="2.2"/><polygon points="768.0,215.0 758.0,211.0 758.0,219.0" fill="#6b7a88"/>
+<rect x="1050.0" y="150.0" width="245.0" height="130.0" rx="8" fill="#f6d5d6" stroke="#c0262d" stroke-width="1.6"/>
+<text font-family="DejaVu Sans" x="1172.5" y="208.7" font-size="19" fill="#20313c" font-weight="600" text-anchor="middle">label</text>
+<text font-family="DejaVu Sans" x="1172.5" y="234.2" font-size="19" fill="#20313c" font-weight="400" text-anchor="middle">&quot;left of&quot;</text>
+<line x1="982.0" y1="215.0" x2="1033.0" y2="215.0" stroke="#c0262d" stroke-width="2.2"/><polygon points="1043.0,215.0 1033.0,211.0 1033.0,219.0" fill="#c0262d"/>
+<rect x="345.0" y="470.0" width="355.0" height="130.0" rx="8" fill="#ffffff" stroke="#6b7a88" stroke-width="1.6"/>
+<text font-family="DejaVu Sans" x="522.5" y="528.7" font-size="19" fill="#20313c" font-weight="600" text-anchor="middle">wrong caption</text>
+<text font-family="DejaVu Sans" x="522.5" y="554.2" font-size="19" fill="#20313c" font-weight="400" text-anchor="middle">&quot;a dog above a cat&quot;</text>
+<line x1="152.4" y1="477.0" x2="152.0" y2="535.0" stroke="#6b7a88" stroke-width="2.2"/>
+<line x1="152.0" y1="535.0" x2="328.0" y2="535.0" stroke="#6b7a88" stroke-width="2.2"/><polygon points="338.0,535.0 328.0,531.0 328.0,539.0" fill="#6b7a88"/>
+<rect x="775.0" y="470.0" width="200.0" height="130.0" rx="8" fill="#eceef1" stroke="#6b7a88" stroke-width="1.6"/>
+<text font-family="DejaVu Sans" x="875.0" y="528.7" font-size="19" fill="#566472" font-weight="600" text-anchor="middle">invert, read</text>
+<text font-family="DejaVu Sans" x="875.0" y="554.2" font-size="19" fill="#566472" font-weight="400" text-anchor="middle">the word maps</text>
+<line x1="707.0" y1="535.0" x2="758.0" y2="535.0" stroke="#6b7a88" stroke-width="2.2"/><polygon points="768.0,535.0 758.0,531.0 758.0,539.0" fill="#6b7a88"/>
+<rect x="1050.0" y="470.0" width="245.0" height="130.0" rx="8" fill="#f6d5d6" stroke="#c0262d" stroke-width="1.6"/>
+<text font-family="DejaVu Sans" x="1172.5" y="528.7" font-size="19" fill="#20313c" font-weight="600" text-anchor="middle">label</text>
+<text font-family="DejaVu Sans" x="1172.5" y="554.2" font-size="19" fill="#20313c" font-weight="400" text-anchor="middle">&quot;left of&quot;</text>
+<line x1="982.0" y1="535.0" x2="1033.0" y2="535.0" stroke="#c0262d" stroke-width="2.2"/><polygon points="1043.0,535.0 1033.0,531.0 1033.0,539.0" fill="#c0262d"/>
+<g opacity="0.035"><rect x="1356.0" y="286.0" width="258.0" height="198.0" rx="24" fill="#1d7a3e" stroke="none" stroke-width="0"/></g>
+<g opacity="0.055"><rect x="1361.0" y="291.0" width="248.0" height="188.0" rx="19" fill="#1d7a3e" stroke="none" stroke-width="0"/></g>
+<g opacity="0.08"><rect x="1366.0" y="296.0" width="238.0" height="178.0" rx="14" fill="#1d7a3e" stroke="none" stroke-width="0"/></g>
+<g filter="url(#soft-halo)" opacity="0.35"><rect x="1370.0" y="300.0" width="230.0" height="170.0" rx="10" fill="#1d7a3e" stroke="none" stroke-width="0"/></g>
+<rect x="1370.0" y="300.0" width="230.0" height="170.0" rx="8" fill="#d6eddd" stroke="#1d7a3e" stroke-width="1.6"/>
+<text font-family="DejaVu Sans" x="1485.0" y="367.0" font-size="18" fill="#20313c" font-weight="600" text-anchor="middle">the head</text>
+<text font-family="DejaVu Sans" x="1485.0" y="391.1" font-size="18" fill="#20313c" font-weight="400" text-anchor="middle">cross-entropy</text>
+<text font-family="DejaVu Sans" x="1485.0" y="415.2" font-size="18" fill="#20313c" font-weight="400" text-anchor="middle">against the picture</text>
+<line x1="1302.0" y1="215.0" x2="1332.0" y2="215.0" stroke="#c0262d" stroke-width="2.2"/>
+<line x1="1332.0" y1="215.0" x2="1332.0" y2="385.0" stroke="#c0262d" stroke-width="2.2"/>
+<line x1="1332.0" y1="385.0" x2="1353.0" y2="385.0" stroke="#c0262d" stroke-width="2.2"/><polygon points="1363.0,385.0 1353.0,381.0 1353.0,389.0" fill="#c0262d"/>
+<line x1="1302.0" y1="535.0" x2="1332.0" y2="535.0" stroke="#c0262d" stroke-width="2.2"/>
+<line x1="1332.0" y1="535.0" x2="1332.0" y2="385.0" stroke="#c0262d" stroke-width="2.2"/>
+<line x1="1332.0" y1="385.0" x2="1353.0" y2="385.0" stroke="#c0262d" stroke-width="2.2"/><polygon points="1363.0,385.0 1353.0,381.0 1353.0,389.0" fill="#c0262d"/>
+<text font-family="DejaVu Sans" x="40.0" y="690.0" font-size="22" fill="#20313c" font-weight="700" text-anchor="start">With the wrong caption added, GenEval position rose from 0.425 to 0.57 on FLUX.1-schnell validation (p. 8, Table 4).</text>
+<text font-family="DejaVu Sans" x="40.0" y="728.0" font-size="19" fill="#566472" font-weight="400" text-anchor="start">GenEval position is the fraction of images with the right relation, 0 to 1. The paper reports no direct measure of leakage after the fix.</text>
+</svg>

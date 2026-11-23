@@ -1,0 +1,630 @@
+{
+ "_about": "Every value the miniature's pages and figures print. Written by miniature.py; never edited by hand.",
+ "patches": [
+  "top left",
+  "top right",
+  "bottom left",
+  "bottom right"
+ ],
+ "relations": [
+  "above",
+  "below",
+  "left of",
+  "right of",
+  "neutral"
+ ],
+ "xi": [
+  -1.0,
+  1.0,
+  -1.0,
+  1.0
+ ],
+ "eta": [
+  1.0,
+  1.0,
+  -1.0,
+  -1.0
+ ],
+ "keys": [
+  2.0,
+  1.0
+ ],
+ "pool_weights": [
+  0.75,
+  0.25
+ ],
+ "kappa": 4.0,
+ "kappa_table": {
+  "5": 4.0,
+  "10": 4.0
+ },
+ "prompt": "a cat to the left of a dog",
+ "latent_start": {
+  "cat": [
+   2.0,
+   2.0,
+   -1.0,
+   -1.0
+  ],
+  "dog": [
+   2.0,
+   2.0,
+   -1.0,
+   -1.0
+  ]
+ },
+ "maps": {
+  "cat_layer1": [
+   0.982,
+   0.982,
+   0.1192,
+   0.1192
+  ],
+  "cat_layer2": [
+   0.8808,
+   0.8808,
+   0.2689,
+   0.2689
+  ],
+  "dog_layer1": [
+   0.982,
+   0.982,
+   0.1192,
+   0.1192
+  ],
+  "dog_layer2": [
+   0.8808,
+   0.8808,
+   0.2689,
+   0.2689
+  ],
+  "joint_prompt_cat_layer1": [
+   0.4955,
+   0.4955,
+   0.1065,
+   0.1065
+  ],
+  "joint_prompt_cat_layer2": [
+   0.4683,
+   0.4683,
+   0.2119,
+   0.2119
+  ],
+  "layer1_sum": 2.2024,
+  "layer2_sum": 2.2995,
+  "cat_layer1_renormalised": [
+   0.4459,
+   0.4459,
+   0.0541,
+   0.0541
+  ],
+  "cat_layer2_renormalised": [
+   0.383,
+   0.383,
+   0.117,
+   0.117
+  ]
+ },
+ "forward_fused": {
+  "pooled_cat": [
+   0.4302,
+   0.4302,
+   0.0698,
+   0.0698
+  ],
+  "pooled_dog": [
+   0.4302,
+   0.4302,
+   0.0698,
+   0.0698
+  ],
+  "hx": 0.0,
+  "hy": 0.0,
+  "logits": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "p": [
+   0.2,
+   0.2,
+   0.2,
+   0.2,
+   0.2
+  ],
+  "loss": 1.6094
+ },
+ "gradient_fused": {
+  "d_loss_d_hx_hy": [
+   4.0,
+   0.0
+  ],
+  "d_loss_d_pooled_cat": [
+   -4.0,
+   4.0,
+   -4.0,
+   4.0
+  ],
+  "d_loss_d_pooled_dog": [
+   4.0,
+   -4.0,
+   4.0,
+   -4.0
+  ],
+  "cat": [
+   -0.0938,
+   0.0938,
+   -0.3715,
+   0.3715
+  ],
+  "dog": [
+   0.0938,
+   -0.0938,
+   0.3715,
+   -0.3715
+  ],
+  "norm": 0.7664,
+  "largest_finite_difference_gap": 1.2387402215097154e-10,
+  "slope_of_map_layer1": [
+   0.0353,
+   0.0353,
+   0.21,
+   0.21
+  ],
+  "worked_bottom_left_cat": {
+   "d_loss_d_pooled": -4.0,
+   "terms": [
+    {
+     "pool_weight": 0.75,
+     "slope": 0.209987,
+     "map_sum": 2.202433,
+     "term": 0.071507
+    },
+    {
+     "pool_weight": 0.25,
+     "slope": 0.196612,
+     "map_sum": 2.299477,
+     "term": 0.021376
+    }
+   ]
+  }
+ },
+ "lts_loop": {
+  "alpha": 5.0,
+  "passes_allowed": 16,
+  "rows": [
+   {
+    "i": 0,
+    "loss": 1.6094,
+    "p_left": 0.2,
+    "grad_norm": 0.7664
+   },
+   {
+    "i": 1,
+    "loss": 0.228,
+    "p_left": 0.7961,
+    "grad_norm": 0.0948
+   },
+   {
+    "i": 2,
+    "loss": 0.1884,
+    "p_left": 0.8283,
+    "grad_norm": 0.0785
+   },
+   {
+    "i": 3,
+    "loss": 0.1573,
+    "p_left": 0.8544,
+    "grad_norm": 0.0819
+   },
+   {
+    "i": 4,
+    "loss": 0.1223,
+    "p_left": 0.8849,
+    "grad_norm": 0.0892
+   },
+   {
+    "i": 5,
+    "loss": 0.0824,
+    "p_left": 0.9209,
+    "grad_norm": 0.0872
+   },
+   {
+    "i": 6,
+    "loss": 0.048,
+    "p_left": 0.9531,
+    "grad_norm": 0.0678
+   },
+   {
+    "i": 7,
+    "loss": 0.0287,
+    "p_left": 0.9717,
+    "grad_norm": 0.0462
+   },
+   {
+    "i": 8,
+    "loss": 0.0196,
+    "p_left": 0.9806,
+    "grad_norm": 0.0327
+   },
+   {
+    "i": 9,
+    "loss": 0.0149,
+    "p_left": 0.9852,
+    "grad_norm": 0.0248
+   },
+   {
+    "i": 10,
+    "loss": 0.0122,
+    "p_left": 0.9879,
+    "grad_norm": 0.0198
+   },
+   {
+    "i": 11,
+    "loss": 0.0104,
+    "p_left": 0.9897,
+    "grad_norm": 0.0165
+   },
+   {
+    "i": 12,
+    "loss": 0.0091,
+    "p_left": 0.9909,
+    "grad_norm": 0.0141
+   },
+   {
+    "i": 13,
+    "loss": 0.0082,
+    "p_left": 0.9919,
+    "grad_norm": 0.0123
+   },
+   {
+    "i": 14,
+    "loss": 0.0075,
+    "p_left": 0.9926,
+    "grad_norm": 0.0109
+   },
+   {
+    "i": 15,
+    "loss": 0.0069,
+    "p_left": 0.9931,
+    "grad_norm": 0.0098
+   }
+  ],
+  "updates_made": 16,
+  "final_latent": {
+   "cat": [
+    2.5829,
+    -0.6852,
+    1.5323,
+    -3.02
+   ],
+   "dog": [
+    -0.6852,
+    2.5829,
+    -3.02,
+    1.5323
+   ]
+  },
+  "final_pooled_cat": [
+   0.455,
+   0.1098,
+   0.4289,
+   0.0063
+  ],
+  "final_pooled_dog": [
+   0.1098,
+   0.455,
+   0.0063,
+   0.4289
+  ],
+  "final_p": [
+   0.0021,
+   0.0021,
+   0.9936,
+   0.0,
+   0.0021
+  ],
+  "final_loss": 0.0064,
+  "final_hx": -1.5358,
+  "final_hy": -0.0
+ },
+ "lts_first_update": {
+  "latent": {
+   "cat": [
+    2.4689,
+    1.5311,
+    0.8577,
+    -2.8577
+   ],
+   "dog": [
+    1.5311,
+    2.4689,
+    -2.8577,
+    0.8577
+   ]
+  },
+  "pooled_cat": [
+   0.3582,
+   0.3382,
+   0.2973,
+   0.0063
+  ],
+  "pooled_dog": [
+   0.3382,
+   0.3582,
+   0.0063,
+   0.2973
+  ],
+  "hx": -0.6221,
+  "p_left": 0.7961,
+  "loss": 0.228
+ },
+ "product_step": {
+  "alpha_bar_t": 0.36,
+  "alpha_bar_prev": 0.64,
+  "sigma_t": 0.8,
+  "strength": 2.0,
+  "cap": 0.4,
+  "eps_cat": [
+   0.25,
+   0.25,
+   -0.25,
+   -0.25,
+   0.25,
+   0.25,
+   -0.25,
+   -0.25
+  ],
+  "eps_dog": [
+   0.25,
+   0.25,
+   -0.25,
+   -0.25,
+   0.25,
+   0.25,
+   -0.25,
+   -0.25
+  ],
+  "eps_null": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "eps_product": [
+   0.5,
+   0.5,
+   -0.5,
+   -0.5,
+   0.5,
+   0.5,
+   -0.5,
+   -0.5
+  ],
+  "eps_norm": 1.4142,
+  "raw_push": [
+   0.15,
+   -0.15,
+   0.5945,
+   -0.5945,
+   -0.15,
+   0.15,
+   -0.5945,
+   0.5945
+  ],
+  "raw_norm": 1.2262,
+  "limit": 0.5657,
+  "cap_fired": true,
+  "scale_applied": 0.4613,
+  "push": [
+   0.0692,
+   -0.0692,
+   0.2742,
+   -0.2742,
+   -0.0692,
+   0.0692,
+   -0.2742,
+   0.2742
+  ],
+  "push_norm": 0.5657,
+  "eps_pushed": [
+   0.4308,
+   0.5692,
+   -0.7742,
+   -0.2258,
+   0.5692,
+   0.4308,
+   -0.2258,
+   -0.7742
+  ],
+  "x0_plain": [
+   2.6667,
+   2.6667,
+   -1.0,
+   -1.0,
+   2.6667,
+   2.6667,
+   -1.0,
+   -1.0
+  ],
+  "x_next_plain": [
+   2.4333,
+   2.4333,
+   -1.1,
+   -1.1,
+   2.4333,
+   2.4333,
+   -1.1,
+   -1.1
+  ],
+  "x0_pushed": [
+   2.759,
+   2.5744,
+   -0.6343,
+   -1.3657,
+   2.5744,
+   2.759,
+   -1.3657,
+   -0.6343
+  ],
+  "x_next_pushed": [
+   2.4656,
+   2.401,
+   -0.972,
+   -1.228,
+   2.401,
+   2.4656,
+   -1.228,
+   -0.972
+  ],
+  "plain_after": {
+   "hx": 0.0,
+   "p_left": 0.2,
+   "loss": 1.6094
+  },
+  "pushed_after": {
+   "hx": -0.0436,
+   "p_left": 0.2367,
+   "loss": 1.4411,
+   "pooled_cat": [
+    0.4387,
+    0.4378,
+    0.0722,
+    0.0513
+   ],
+   "pooled_dog": [
+    0.4378,
+    0.4387,
+    0.0513,
+    0.0722
+   ]
+  },
+  "ddim_coefficient_on_eps": -0.4667
+ },
+ "broken_leakage": {
+  "features": "h: the map's spatial reading, tau: the trace of the prompt's relation word (+1 right of, -1 left of)",
+  "training_steps": 400,
+  "learning_rate": 1.0,
+  "captions_only_data": [
+   [
+    0.4,
+    1,
+    1
+   ],
+   [
+    0.2,
+    1,
+    1
+   ],
+   [
+    -0.4,
+    -1,
+    0
+   ],
+   [
+    -0.2,
+    -1,
+    0
+   ]
+  ],
+  "both_prompts_data": [
+   [
+    0.4,
+    1,
+    1
+   ],
+   [
+    0.2,
+    1,
+    1
+   ],
+   [
+    -0.4,
+    -1,
+    0
+   ],
+   [
+    -0.2,
+    -1,
+    0
+   ],
+   [
+    0.4,
+    -1,
+    1
+   ],
+   [
+    0.2,
+    -1,
+    1
+   ],
+   [
+    -0.4,
+    1,
+    0
+   ],
+   [
+    -0.2,
+    1,
+    0
+   ]
+  ],
+  "captions_only_weights": {
+   "a_on_h": 1.6336,
+   "b_on_tau": 5.5886
+  },
+  "both_prompts_weights": {
+   "a_on_h": 11.9015,
+   "b_on_tau": 0.0
+  },
+  "test_truly_left_prompt_says_right": {
+   "h": -0.4,
+   "tau": 1.0,
+   "captions_only_p_right": 0.9929,
+   "both_prompts_p_right": 0.0085
+  }
+ },
+ "broken_correlation": {
+  "correlation_fused": 1.0,
+  "gradient_norm_fused": 0.0,
+  "after_nudge_of_0.1_on_cat_top_left": {
+   "correlation": 0.999991,
+   "gradient_norm": 0.000382
+  },
+  "head_gradient_norm_fused": 0.7664
+ },
+ "broken_no_fused_class": {
+  "p_on_identical_maps": [
+   0.2,
+   0.2,
+   0.2,
+   0.2,
+   0.2
+  ],
+  "note": "identical maps give 0.2 on all five classes, and no class means fused"
+ },
+ "dose": {
+  "one_capped_push_then_ddim": {
+   "p_left": 0.2367,
+   "latent_change_norm": 0.264
+  },
+  "lts_16_passes": {
+   "p_left": 0.9936,
+   "latent_change_norm": 6.0072
+  }
+ },
+ "exercise_equal_keys": {
+  "keys": [
+   1.0,
+   1.0
+  ],
+  "gradient_norm": 0.7754,
+  "p_left_after_16_updates": 0.9875
+ }
+}

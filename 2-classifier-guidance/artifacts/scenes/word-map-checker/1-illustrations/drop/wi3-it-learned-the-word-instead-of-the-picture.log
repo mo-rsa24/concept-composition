@@ -1,0 +1,41 @@
+Reading prompt from stdin...
+OpenAI Codex v0.171.0-alpha.13
+--------
+workdir: /home/molef/PhD/concept-composition/2-classifier-guidance/artifacts/scenes/word-map-checker/1-illustrations/drop/prompts
+model: gpt-6-astra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: low
+reasoning summaries: none
+session id: 01a208a3-62fd-77e2-846d-b14de22bb958
+--------
+user
+Style: a clean machine-learning cheat-sheet figure in the manner of the attached reference pictures. White page, thin outlines, a representative few arrows, generous white space, small clear sans-serif labels, real-looking photo tiles with a thin coloured frame. The part the figure is about glows softly in its colour and everything else is faded pale grey. It is a finished, welcoming figure and never a bare wireframe. Copy the look of the references only, and none of their content or words.
+
+Scene: Read left to right: one photo with a wrong caption, then two judges in two rows, each giving its answer. Colours carry meaning and nothing else: blue #1f5fd0 for inputs (the noisy picture), green #1d7a3e for hidden values (the word maps and the small judge), red #c0262d for outputs (the judge's answer), orange #c86a0a for the backward signal and the push, grey #6b7a88 for what is off, fixed or secondary. Photo content keeps its natural colours.
+
+Cast:
+- Left: one photo tile with a thin blue frame, a brown dog clearly on the LEFT and a grey tabby cat clearly on the RIGHT, side by side on a plain floor. Above the tile a speech-style caption chip with a grey outline: "caption: a dog above a cat". Under the tile: "in the picture: dog left of cat".
+- Top row: a small judge character in a dark green robe beside the label "trained on true captions". It answers with a red chip "says: above", with a small dark ink cross mark beside the chip.
+- Bottom row: the same small judge character beside the label "trained on true and wrong captions". It answers with a red chip "says: left of", with a small dark ink tick mark beside the chip.
+- A small grey tag at the bottom right: "Learn-to-Steer's example, paper p. 4".
+
+Flows: One blue line leaves the photo and splits near the two judges into two arrows, one to each. One red arrow from each judge to its answer chip.
+
+Text in the image, spelled exactly and no other words: "caption: a dog above a cat", "in the picture: dog left of cat", "trained on true captions", "says: above", "trained on true and wrong captions", "says: left of", "Learn-to-Steer's example, paper p. 4".
+
+Exclusions: no title banner, no legend box, no paragraphs, no equations, no invented words, no logos, no watermark, no decorative circuitry, no duplicated components, no arrow ending in empty space, no arrow crossing a label or a picture.
+
+Aspect ratio: landscape 3:2.
+
+The attached images are already in your context. Do not open, read or save any file, and do not pass file paths to the image tool: generate the picture directly with your image tool, then reply with one line saying it is done.
+
+codex
+I’ll generate the figure directly, matching the references’ clean cheat-sheet style.
+
+codex
+Done.
+tokens used
+10,069
+Done.

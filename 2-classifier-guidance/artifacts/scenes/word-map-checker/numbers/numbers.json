@@ -1,0 +1,611 @@
+{
+ "_about": "Full-scale numbers for the word-map checker ladder. The miniature's numbers are in 2-miniature/miniature_answer_key.json. Written by make_numbers.py.",
+ "code": {
+  "repo": "https://github.com/sapir1779/learn-to-steer",
+  "commit": "a2ae42746ec93c5936410964be01c85c0ca2266e",
+  "checkout": "numbers/sources/learn-to-steer",
+  "note": "cloned read-only, never imported or run"
+ },
+ "word_maps": {
+  "sdxl": {
+   "value": {
+    "per_grid": [
+     {
+      "grid": 64,
+      "layers": 10,
+      "heads": 10,
+      "where": [
+       "down_blocks.1: 4",
+       "up_blocks.1: 6"
+      ],
+      "maps_per_word": 100
+     },
+     {
+      "grid": 32,
+      "layers": 60,
+      "heads": 20,
+      "where": [
+       "down_blocks.2: 20",
+       "mid_block: 10",
+       "up_blocks.0: 30"
+      ],
+      "maps_per_word": 1200
+     }
+    ],
+    "layers": 70,
+    "maps_per_word": 1300
+   },
+   "source": "stabilityai/stable-diffusion-xl-base-1.0 unet/config.json",
+   "kind": "counted",
+   "meaning": "SDXL's cross-attention layers and heads, so the maps one word would hand a Learn-to-Steer head. SDXL is our proposal: the paper never ran it."
+  },
+  "sd_1_4": {
+   "value": {
+    "per_grid": [
+     {
+      "grid": 64,
+      "layers": 5,
+      "heads": 8,
+      "where": [
+       "down_blocks.0: 2",
+       "up_blocks.3: 3"
+      ],
+      "maps_per_word": 40
+     },
+     {
+      "grid": 32,
+      "layers": 5,
+      "heads": 8,
+      "where": [
+       "down_blocks.1: 2",
+       "up_blocks.2: 3"
+      ],
+      "maps_per_word": 40
+     },
+     {
+      "grid": 16,
+      "layers": 5,
+      "heads": 8,
+      "where": [
+       "down_blocks.2: 2",
+       "up_blocks.1: 3"
+      ],
+      "maps_per_word": 40
+     },
+     {
+      "grid": 8,
+      "layers": 1,
+      "heads": 8,
+      "where": [
+       "mid_block: 1"
+      ],
+      "maps_per_word": 8
+     }
+    ],
+    "maps_per_word": 128
+   },
+   "source": "CompVis/stable-diffusion-v1-4 unet/config.json",
+   "kind": "counted",
+   "meaning": ""
+  },
+  "sd_2_1": {
+   "value": {
+    "per_grid": [
+     {
+      "grid": 64,
+      "layers": 5,
+      "heads": 5,
+      "maps_per_word": 25
+     },
+     {
+      "grid": 32,
+      "layers": 5,
+      "heads": 10,
+      "maps_per_word": 50
+     },
+     {
+      "grid": 16,
+      "layers": 5,
+      "heads": 20,
+      "maps_per_word": 100
+     },
+     {
+      "grid": 8,
+      "layers": 1,
+      "heads": 20,
+      "maps_per_word": 20
+     }
+    ],
+    "maps_per_word": 195
+   },
+   "source": "SD 2.1-base's config was not reachable (HTTP 401). Head list 5, 10, 20, 20 assumed; 1368 / 195 = 7.0 agrees with the paper's '7x fewer maps' (p. 5).",
+   "kind": "inferred",
+   "meaning": ""
+  },
+  "flux": {
+   "value": {
+    "layers": 57,
+    "heads": 24,
+    "maps_per_word": 1368
+   },
+   "source": "train_relation_classifier/model_utils.py:37 default input_channels, 57 * 24",
+   "kind": "counted",
+   "meaning": ""
+  },
+  "our_attention_push": {
+   "value": {
+    "grid": 32,
+    "layers_averaged": 60,
+    "maps_per_word_after_averaging": 1
+   },
+   "source": "2-classifier-guidance/scripts/rung2/attention_push.py:42-43,77",
+   "kind": "counted",
+   "meaning": "heads averaged per layer, then every 32 x 32 layer averaged into one map"
+  }
+ },
+ "head": {
+  "sd2_config_on_195_maps": {
+   "config": "train_relation_classifier/configs/sd2_config.yaml",
+   "maps_per_word_in": 195,
+   "map_side": 16,
+   "d": 256,
+   "step_table_rows": 50,
+   "aggregator": {
+    "num_layers": 2,
+    "nhead": 2,
+    "dim_feedforward": 128,
+    "layer_attn_nheads": 2
+   },
+   "classifier": {
+    "num_layers": 2,
+    "nhead": 4,
+    "dim_feedforward": 128,
+    "timestep_embedding_dim": 16
+   },
+   "classifier_transformer_tokens": 1,
+   "trained_weights": {
+    "aggregator": 1068032,
+    "classifier": 896549,
+    "total": 1964581
+   },
+   "shapes": {
+    "one_word_in": [
+     195,
+     16,
+     16
+    ],
+    "aggregated": [
+     16,
+     16
+    ],
+    "stacked": [
+     2,
+     16,
+     16
+    ],
+    "flattened": 512,
+    "projected": 256,
+    "logits": 5
+   }
+  },
+  "flux_dev_config_on_1368_maps": {
+   "config": "train_relation_classifier/configs/flux_dev_config.yaml",
+   "maps_per_word_in": 1368,
+   "map_side": 16,
+   "d": 256,
+   "step_table_rows": 50,
+   "aggregator": {
+    "num_layers": 4,
+    "nhead": 4,
+    "dim_feedforward": 512,
+    "layer_attn_nheads": 4
+   },
+   "classifier": {
+    "num_layers": 4,
+    "nhead": 8,
+    "dim_feedforward": 512,
+    "timestep_embedding_dim": 16
+   },
+   "classifier_transformer_tokens": 1,
+   "trained_weights": {
+    "aggregator": 2516224,
+    "classifier": 2344741,
+    "total": 4860965
+   },
+   "shapes": {
+    "one_word_in": [
+     1368,
+     16,
+     16
+    ],
+    "aggregated": [
+     16,
+     16
+    ],
+    "stacked": [
+     2,
+     16,
+     16
+    ],
+    "flattened": 512,
+    "projected": 256,
+    "logits": 5
+   }
+  },
+  "sd2_config_on_sdxl_1300_maps_proposal": {
+   "config": "train_relation_classifier/configs/sd2_config.yaml",
+   "maps_per_word_in": 1300,
+   "map_side": 16,
+   "d": 256,
+   "step_table_rows": 50,
+   "aggregator": {
+    "num_layers": 2,
+    "nhead": 2,
+    "dim_feedforward": 128,
+    "layer_attn_nheads": 2
+   },
+   "classifier": {
+    "num_layers": 2,
+    "nhead": 4,
+    "dim_feedforward": 128,
+    "timestep_embedding_dim": 16
+   },
+   "classifier_transformer_tokens": 1,
+   "trained_weights": {
+    "aggregator": 1068032,
+    "classifier": 896549,
+    "total": 1964581
+   },
+   "shapes": {
+    "one_word_in": [
+     1300,
+     16,
+     16
+    ],
+    "aggregated": [
+     16,
+     16
+    ],
+    "stacked": [
+     2,
+     16,
+     16
+    ],
+    "flattened": 512,
+    "projected": 256,
+    "logits": 5
+   }
+  },
+  "flux_dev_config_on_sdxl_1300_maps_proposal": {
+   "config": "train_relation_classifier/configs/flux_dev_config.yaml",
+   "maps_per_word_in": 1300,
+   "map_side": 16,
+   "d": 256,
+   "step_table_rows": 50,
+   "aggregator": {
+    "num_layers": 4,
+    "nhead": 4,
+    "dim_feedforward": 512,
+    "layer_attn_nheads": 4
+   },
+   "classifier": {
+    "num_layers": 4,
+    "nhead": 8,
+    "dim_feedforward": 512,
+    "timestep_embedding_dim": 16
+   },
+   "classifier_transformer_tokens": 1,
+   "trained_weights": {
+    "aggregator": 2516224,
+    "classifier": 2344741,
+    "total": 4860965
+   },
+   "shapes": {
+    "one_word_in": [
+     1300,
+     16,
+     16
+    ],
+    "aggregated": [
+     16,
+     16
+    ],
+    "stacked": [
+     2,
+     16,
+     16
+    ],
+    "flattened": 512,
+    "projected": 256,
+    "logits": 5
+   }
+  }
+ },
+ "schedule": {
+  "first_16_timesteps": {
+   "value": [
+    981,
+    961,
+    941,
+    921,
+    901,
+    881,
+    861,
+    841,
+    821,
+    801,
+    781,
+    761,
+    741,
+    721,
+    701,
+    681
+   ],
+   "source": "SDXL scheduler_config.json: leading spacing, steps_offset 1, 50 steps",
+   "kind": "counted",
+   "meaning": ""
+  },
+  "pushed_steps_above_t_800": {
+   "value": 10,
+   "source": "counted on first_16_timesteps; the sketch's 10 of 16",
+   "kind": "counted",
+   "meaning": ""
+  },
+  "bucket_rule": {
+   "value": {
+    "steps 0 to 5": 5,
+    "steps 6 to 10": 10,
+    "steps 11 to 15": 15,
+    "steps 16 to 20": 20,
+    "steps 21 to 25": 25,
+    "steps 26 to 49": 49
+   },
+   "source": "pipelines/test_time_optimization.py:59-74, training timesteps from configs",
+   "kind": "counted",
+   "meaning": "the step number the head's time table is asked for"
+  }
+ },
+ "paper": {
+  "models": {
+   "value": [
+    "FLUX.1-schnell",
+    "FLUX.1-dev",
+    "SD 2.1",
+    "SD 1.4"
+   ],
+   "source": "artifacts/notes/progress/abstract-checkers/01-reading/learn-to-steer.md; paper p. 5",
+   "kind": "printed",
+   "meaning": ""
+  },
+  "geneval_position": {
+   "value": {
+    "SD 2.1": {
+     "vanilla": 0.07,
+     "learn_to_steer": 0.54,
+     "best_baseline": "COMPASS 0.51",
+     "storm_handcrafted": 0.19
+    },
+    "FLUX.1-dev": {
+     "vanilla": 0.2,
+     "learn_to_steer": 0.61,
+     "best_baseline": "COMPASS 0.60"
+    },
+    "SD 1.4": {
+     "vanilla": 0.05,
+     "learn_to_steer": 0.36,
+     "best_baseline": "COMPASS 0.46"
+    }
+   },
+   "source": "paper p. 5, Table 1",
+   "kind": "printed",
+   "meaning": "fraction of 400 images with the right relation, 0 to 1"
+  },
+  "unseen_16_categories": {
+   "value": {
+    "FLUX.1-dev": {
+     "vanilla": 0.18,
+     "compass": 0.58,
+     "learn_to_steer": 0.6
+    },
+    "SD 2.1": {
+     "vanilla": 0.15,
+     "compass": 0.52,
+     "learn_to_steer": 0.6
+    },
+    "SD 1.4": {
+     "vanilla": 0.07,
+     "compass": 0.4,
+     "learn_to_steer": 0.47
+    }
+   },
+   "source": "paper p. 5, Table 2; 200 prompts, CLIPSeg scorer (p. 14)",
+   "kind": "printed",
+   "meaning": "words reported absent from training, not a planned split"
+  },
+  "leakage_fix": {
+   "value": {
+    "off": 0.425,
+    "on": 0.57
+   },
+   "source": "paper p. 8, Table 4, FLUX.1-schnell validation",
+   "kind": "printed",
+   "meaning": ""
+  },
+  "aggregation": {
+   "value": {
+    "full_concatenation": 0.7,
+    "mean_per_layer": 0.69,
+    "mean_global": 0.78
+   },
+   "source": "paper p. 13, Table 9, FLUX.1-dev validation",
+   "kind": "printed",
+   "meaning": "the global mean scored highest and gave dull backgrounds"
+  },
+  "step_size": {
+   "value": {
+    "SD 2.1 and Flux": 5,
+    "SD 1.4": 7.5
+   },
+   "source": "paper p. 16",
+   "kind": "printed",
+   "meaning": ""
+  },
+  "iterations_per_step": {
+   "value": 15,
+   "source": "paper p. 16",
+   "kind": "printed",
+   "meaning": ""
+  },
+  "optimised_fraction": {
+   "value": 0.5,
+   "source": "paper p. 4, p. 16",
+   "kind": "printed",
+   "meaning": ""
+  },
+  "cost_seconds": {
+   "value": {
+    "SD 2.1": [
+     4.5,
+     90
+    ],
+    "FLUX.1-dev": [
+     11,
+     360
+    ]
+   },
+   "source": "paper p. 7",
+   "kind": "printed",
+   "meaning": ""
+  }
+ },
+ "code_against_paper": [
+  {
+   "what": "pooling the maps into one",
+   "paper": "a four-layer, single-head transformer with a learned query (p. 15)",
+   "code": "one MultiheadAttention layer with a learned query: 4 heads on FLUX.1-dev, 2 on SD 2.1",
+   "where": "train_relation_classifier/model.py:133-135,176-177; configs layer_attn_nheads"
+  },
+  {
+   "what": "the classifier's transformer",
+   "paper": "two-channel image flattened, projected, passed through a transformer (p. 15)",
+   "code": "the whole flattened pair becomes one token, so its self-attention has only itself to attend to",
+   "where": "train_relation_classifier/model.py:76-80"
+  },
+  {
+   "what": "iterations per step",
+   "paper": "15 (p. 16)",
+   "code": "range(15 + 1) passes, each of which updates if the loss is above its target: up to 16 updates",
+   "where": "pipelines/test_time_optimization.py:175-187; run.py:49 (FLUX.1-dev), 55 (SD 2.1), 61 (SD 1.4)"
+  },
+  {
+   "what": "what 'timestep' means to the head",
+   "paper": "the denoising timestep t (p. 4)",
+   "code": "the step index 0 to 49, snapped up to one of 5, 10, 15, 20, 25, 49",
+   "where": "pipelines/test_time_optimization.py:59-74,86-91,115"
+  },
+  {
+   "what": "training epochs on SD 2.1",
+   "paper": "150 for SD models (p. 16)",
+   "code": "num_epochs 100 in sd2_config.yaml, 150 in sd14_config.yaml",
+   "where": "train_relation_classifier/configs/sd2_config.yaml:30"
+  },
+  {
+   "what": "inversion guidance on SD",
+   "paper": "guidance scale 0 (p. 5)",
+   "code": "guidance_scale 1.0, which this pipeline treats as no classifier-free guidance (guidance_scale > 1.0 turns it on)",
+   "where": "generate_relations_data.py:163; pipeline_sd2_inversion_debug.py:113"
+  }
+ ],
+ "what_the_paper_left_open_and_the_code_settles": [
+  {
+   "question": "how a multi-token name becomes one map",
+   "answer": "the mean over the name's tokens",
+   "where": "utils.py:127-129"
+  },
+  {
+   "question": "which guidance branch supplies the maps",
+   "answer": "the prompt's own branch: the optimiser runs the U-Net on the text embedding alone",
+   "where": "pipelines/sd/pipeline_sd2_debug.py:347-350; sd2_test_time_optimization.py:33-41"
+  },
+  {
+   "question": "the size of the maps",
+   "answer": "resized to 16 x 16 and each renormalised to sum to 1 over the grid",
+   "where": "utils.py:51-74,152-154; configs map_size"
+  }
+ ],
+ "ours": {
+  "attention_separation_push": {
+   "value": {
+    "two_animals": 0,
+    "seeds": 8,
+    "seed_range": [
+     9,
+     16
+    ],
+    "steps": [
+     0,
+     19
+    ],
+    "note": "draft calls, strong pushes zoom into one face, no verdict recorded"
+   },
+   "source": "2-classifier-guidance/report/classifier-guided-poe/does-an-early-push-separate-the-cat-and-dog.md, table row result-sheet-layout",
+   "kind": "printed",
+   "meaning": ""
+  },
+  "overlap_of_top_10_percent": {
+   "value": {
+    "product_median_range": [
+     0.506,
+     0.814
+    ],
+    "joint_median_range": [
+     0.225,
+     0.394
+    ],
+    "steps": [
+     2,
+     40
+    ],
+    "seeds": 8
+   },
+   "source": "2-classifier-guidance/report/classifier-guided-poe/does-an-early-push-separate-the-cat-and-dog.md: intersection over union of the cat and dog maps' top 10%; the joint prompt is 'a cat and a dog' (scripts/rung2/attention_overlap.py:5)",
+   "kind": "printed",
+   "meaning": ""
+  },
+  "default_push_cap": {
+   "value": 0.1,
+   "source": "poe_repair/methods/_classifier_guided.py:46 PUSH_CAP_FRACTION",
+   "kind": "counted",
+   "meaning": ""
+  },
+  "proposed_window_and_cap": {
+   "value": {
+    "steps": [
+     0,
+     15
+    ],
+    "of": 50,
+    "cap": 0.4
+   },
+   "source": "the abstract-checkers brief and the Learn-to-Steer note, line 112",
+   "kind": "printed",
+   "meaning": ""
+  }
+ },
+ "open_risk": {
+  "detector_guidance_map": {
+   "value": {
+    "mAP@0.5_at_t": {
+     "0": 56.5,
+     "200": 58.4,
+     "400": 54.8,
+     "600": 38.1,
+     "800": 18.0
+    }
+   },
+   "source": "artifacts/notes/progress/abstract-checkers/01-reading/detector-guidance.md, line 66; that paper's p. 14, Table 1, on SD 2.1",
+   "kind": "printed",
+   "meaning": "a word-map detector's score, 0 to 100, higher is better"
+  }
+ }
+}

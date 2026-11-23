@@ -1,0 +1,87 @@
+{
+  "subject": "The word-map spatial checker: Learn-to-Steer's classifier on word cross-attention maps (arXiv 2509.02295v2), applied to SDXL's product of experts as our proposal",
+  "kind": "paper",
+  "landing": "standalone, /home/molef/PhD/concept-composition/2-classifier-guidance/artifacts/scenes/word-map-checker/",
+  "pace": "unattended (--auto)",
+  "published": "nothing: local files only",
+  "notation": "NOTATION.md",
+  "numbers": "numbers/numbers.json, from numbers/make_numbers.py",
+  "page_check": "numbers/check_pages.py",
+  "route": "route-zoom-ladder-word-map-checker.md",
+  "code_checkout": {
+    "repo": "https://github.com/sapir1779/learn-to-steer",
+    "commit": "a2ae42746ec93c5936410964be01c85c0ca2266e",
+    "path": "numbers/sources/learn-to-steer",
+    "note": "cloned read-only, read and never imported or run"
+  },
+  "ours": {
+    "sampler": "poe_repair/methods/_classifier_guided.py, last changed at 3867b3f1",
+    "attention_push": "2-classifier-guidance/scripts/rung2/attention_push.py, last changed at ff028dd5"
+  },
+  "style": {
+    "all levels": "clean cheat-sheet, journey 13's choice, in this colour key"
+  },
+  "network_view_depth": "inputs and how they join: caption, timestep and latent paths, where word maps are read and how the head uses them; the U-Net's levels stay closed",
+  "colour_key": {
+    "inputs": "#1f5fd0",
+    "hidden units": "#1d7a3e",
+    "network outputs": "#c0262d",
+    "backward signals and the push": "#c86a0a",
+    "off, fixed or broken": "#6b7a88"
+  },
+  "reuse": [
+    "journey 13 system picture https://claude.ai/artifact/FBbwapTjp1dbEmzpLspRBT",
+    "journey 13 nv4, nv4b",
+    "journey 02 sd4b, cv5b",
+    "the Readout Guidance ladder's closing page"
+  ],
+  "rungs": {
+    "0_system": {
+      "state": "built (linked)",
+      "url": "https://claude.ai/artifact/FBbwapTjp1dbEmzpLspRBT",
+      "files": ["0.5-network-view/wm0-where-the-checker-sits.png"],
+      "note": "the existing system picture was not edited; wm0 marks where the checker would sit"
+    },
+    "0_5_network_view": {
+      "state": "built",
+      "files": ["0.5-network-view/README.md", "0.5-network-view/make_network_view.py"],
+      "new": ["wm0", "wm1", "wm2", "wm3", "wm4", "wm5", "wm6"],
+      "linked": ["nv4", "nv4b", "sd4b", "cv5b"],
+      "illustrative": "the heat maps in wm2, wm3 and wm6 are schematic"
+    },
+    "1_illustrations": {
+      "state": "built: 6 of 6 accepted against their faithfulness notes",
+      "files": [
+        "1-illustrations/diagram-prompts.md",
+        "1-illustrations/wi1-where-each-word-landed.png",
+        "1-illustrations/wi2-a-small-judge-reads-only-the-two-maps.png",
+        "1-illustrations/wi3-it-learned-the-word-instead-of-the-picture.png",
+        "1-illustrations/wi4-the-judges-complaint-pushes-the-noise.png",
+        "1-illustrations/wi5-one-capped-nudge-against-sixteen-big-steps.png",
+        "1-illustrations/wi6-the-map-can-move-without-a-second-animal.png"
+      ],
+      "drafts": "1-illustrations/drop/, with each Codex session id, log and pre-revision picture",
+      "revision_rounds": {"wi1": 1, "wi2": 0, "wi3": 1, "wi4": 1, "wi5": 0, "wi6": 0},
+      "note": "drawn by Codex's image tool; every photo tile is a teaching drawing and none is an SDXL sample",
+      "known_limits": "wi5's bar lengths land within 3 percentage points of the printed values, so the printed numbers are the values; wi1's top panel border and wi5's orange are brighter than the colour key; colours were judged by eye and not measured against the key"
+    },
+    "2_miniature": {
+      "state": "built",
+      "files": ["2-miniature/README.md", "2-miniature/miniature.py", "2-miniature/miniature_answer_key.json", "2-miniature/make_miniature_figures.py"],
+      "new": ["mm0", "mm1", "mm2", "mm3", "mm4", "mm5"],
+      "design": "2 x 2 latent with 2 channels, 2 attention layers, hand-set head; 16 updates at step size 5 take left of from 0.2 to 0.9936, one capped push takes it to 0.2367"
+    },
+    "3_code": {
+      "state": "built: two walks, read and not run",
+      "files": ["3-code/walk-learn-to-steer.md", "3-code/walk-our-sampler.md"]
+    },
+    "companion": {
+      "state": "built",
+      "files": ["rebuild-from-fundamentals.md"]
+    },
+    "close": {
+      "state": "built, every thumbnail resolves",
+      "files": ["read-through-a-small-network.md"]
+    }
+  }
+}

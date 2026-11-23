@@ -1,0 +1,17 @@
+Style: a clean machine-learning cheat-sheet figure in the manner of the attached reference pictures. White page, thin outlines, a representative few arrows, generous white space, small clear sans-serif labels, real-looking photo tiles with a thin coloured frame. The part the figure is about glows softly in its colour and everything else is faded pale grey. It is a finished, welcoming figure and never a bare wireframe. Copy the look of the references only, and none of their content or words.
+
+Scene: Read left to right: a faded picture that is not connected to anything, two word maps, a small judge, four answers. Colours carry meaning and nothing else: blue #1f5fd0 for inputs (the noisy picture), green #1d7a3e for hidden values (the word maps and the small judge), red #c0262d for outputs (the judge's answer), orange #c86a0a for the backward signal and the push, grey #6b7a88 for what is off, fixed or secondary. Photo content keeps its natural colours.
+
+Cast:
+- Far left, faded pale grey and small: a photo tile of a cat on the left and a dog on the right, with a thin grey line struck diagonally across it. Label under it in grey: "never sees the picture".
+- Centre left, glowing green: two 2 by 2 grids stacked, labelled "cat map" (the left column bright, the right column pale) and "dog map" (the right column bright, the left column pale).
+- Centre: a small friendly judge character in a dark green robe, wearing a blindfold, holding a small gavel, sitting at a small bench, with a soft green glow. Label: "small judge".
+- Right: four rounded answer chips in a column: "above", "below", "left of", "right of". Only "left of" is filled solid red #c0262d with white text; the other three are white with a pale grey outline and grey text.
+
+Flows: Two green arrows from the two maps into the judge, one red arrow from the judge to the "left of" chip. No arrow touches the faded picture.
+
+Text in the image, spelled exactly and no other words: "never sees the picture", "cat map", "dog map", "small judge", "above", "below", "left of", "right of".
+
+Exclusions: no title banner, no legend box, no paragraphs, no equations, no invented words, no logos, no watermark, no decorative circuitry, no duplicated components, no arrow ending in empty space, no arrow crossing a label or a picture.
+
+Aspect ratio: landscape 3:2.
