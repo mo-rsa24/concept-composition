@@ -39,8 +39,8 @@ join after step D3 has chosen one.
 | Sample and paste | the same experts | sample each expert alone once per seed and paste its object onto one background |
 | Local patch model | one patch network | rebuilt from Local Mechanisms p29, after a costed question |
 
-The local patch model has no released code: the paper links none, and a GitHub search by title and by arXiv id returned nothing. Its rebuild waits for its
-own question.
+The local patch model has no released code: the paper links none, and a GitHub search by title and by arXiv id returned nothing. Its rebuild waits for board
+question 49.
 
 ## The protocol
 
@@ -86,4 +86,4 @@ own question.
 
 - How many images each expert sees, which the timing sets.
 - The picture-quality measure and its threshold, which must be committed before any composed image is scored.
-- Whether to rebuild the local patch model, which gets a costed question.
+- Whether to rebuild the local patch model, which is board question 49.

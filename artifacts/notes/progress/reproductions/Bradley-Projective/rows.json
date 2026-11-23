@@ -1,6 +1,9 @@
 [
   {
     "target_id": "Bradley-Local-T1-004",
-    "note": "Kmax 4 for separately composed models with an empty background (Table 2, p39), the number board question 31 names; the authors released no code or weights, so by board questions 30 and 31 the rule runs on our own single-object CLEVR models, under a design still to be written"
+    "note": "Kmax 4 for separately composed models with an empty background (Table 2, p39), the number board question 31 names; the authors released no code or weights, so by board questions 30 and 31 the rule runs on our own single-object CLEVR models, as the one-network control in reproductions/CLEVR/design.md; by board question 36 printed numbers are context because Bradley trains on 134 million images per model against our 8 million, so this rule's result on our models is compared only at equal training length",
+    "verdict": "not comparable",
+    "commit": "1b5c012a-f2bdb6d",
+    "run_id": "question 36"
   }
 ]
