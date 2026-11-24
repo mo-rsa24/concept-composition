@@ -11,7 +11,7 @@ RULES = [
     # Loop 4
     (P + "targets/one-network-against-separate-experts", M + "01-the-product-of-experts/01-overview.md", ""),
     (P + "targets/binding-each-body-ladder", R2 + "the-method-search/does-giving-each-subject-its-own-region-fix-identity.md", "the design ladder for M9"),
-    (P + "targets/how-far-sample-and-paste-reaches", R2 + "the-method-search/does-each-papers-method-beat-its-simple-baseline.md", "context for M1's baseline"),
+    (P + "targets/how-far-sample-and-paste-reaches", R2 + "the-method-search/does-composing-two-digit-models-beat-sampling-and-pasting.md", "context for M1's baseline"),
     (P + "targets/rivals-by-dataset", "1-lora-correction/report/against-other-methods/do-the-rivals-reproduce-their-printed-scores.md", "which rival reports on which benchmark"),
     (P + "targets/reads/how-a-number-becomes-a-target", "1-lora-correction/report/against-other-methods/do-the-rivals-reproduce-their-printed-scores.md", "how a printed number becomes a bar"),
     (P + "targets/", "", PROC),
@@ -28,7 +28,9 @@ RULES = [
     (P + "reproductions/", "", PROC),
     # Loop 6
     (P + "method-search/01-beat-the-baseline/what-the-push-follows", M + "02-the-readout-checker/01-overview.md", ""),
-    (P + "method-search/01-beat-the-baseline/", R2 + "the-method-search/does-each-papers-method-beat-its-simple-baseline.md", ""),
+    (P + "method-search/01-beat-the-baseline/paper-2", R2 + "the-method-search/does-adding-the-kept-push-to-co3-beat-co3-alone.md", ""),
+    (P + "method-search/01-beat-the-baseline/smoke-puma", R2 + "the-method-search/does-adding-the-kept-push-to-co3-beat-co3-alone.md", ""),
+    (P + "method-search/01-beat-the-baseline/", R2 + "the-method-search/does-composing-two-digit-models-beat-sampling-and-pasting.md", "the digit half; the SDXL half is does-adding-the-kept-push-to-co3-beat-co3-alone.md"),
     (P + "method-search/01c-clevr-paste-first/", "", WAIT + " (M7)"),
     (P + "method-search/04-bind-each-body/", R2 + "the-method-search/does-giving-each-subject-its-own-region-fix-identity.md", ""),
     (P + "method-search/abstract-checker-idea", M + "03-the-digit-map-checkers/01-overview.md", "the idea before Loop 8 tested it"),
@@ -48,8 +50,8 @@ RULES = [
     (P + "abstract-checkers/remove-one-checker", R2 + "abstract-checkers-on-digits/does-removing-one-checker-remove-its-property.md", "the design picture for V5"),
     (P + "abstract-checkers/", "", PROC),
     # Loop 9
-    (P + "noise-text-critic/02-can-it-read/", R2 + "can-a-sentence-score-read-the-five-properties.md", ""),
-    (P + "noise-text-critic/02c-fair-test/", "", WAIT + " (W2c)"),
+    (P + "noise-text-critic/02-can-it-read/", R2 + "the-sentence-score/can-a-sentence-score-read-the-five-properties.md", ""),
+    (P + "noise-text-critic/02c-fair-test/", R2 + "the-sentence-score/is-the-sentence-score-test-fair.md", ""),
     (P + "noise-text-critic/01-reading/latent-clip", M + "05-latent-clip/01-overview.md", ""),
     (P + "noise-text-critic/way-2", M + "05-latent-clip/01-overview.md", ""),
     (P + "noise-text-critic/01-reading/sentence-score-push", M + "04-the-sentence-score-push/01-overview.md", ""),
