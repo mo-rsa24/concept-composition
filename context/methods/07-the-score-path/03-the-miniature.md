@@ -36,6 +36,10 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#the-toy) ➡️
 
 The cosine is taught with worked numbers on [the cosine similarity card](../../../../../Obsidian/Mathematics/Linear%20Algebra/Cosine%20Similarity.md#where-to-learn-this).
 
+**W4**: Loop 9's step that trained a small canvas encoder of our own, which reads a noisy digit canvas into the same 768-number space as CLIP-L's caption vectors. "W4" on this page names both that step and the encoder it trained.
+
+**X5**: Loop 10's first run group, which fitted probes on the signature (the digit model's ten label differences on one noisy canvas), on the raw noise and on the noisy canvas, to test whether the signature carries which digits are present.
+
 ## The toy
 
 Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#table-of-contents) | [Next](#one-step-three-calls-two-differences) ➡️
@@ -127,13 +131,15 @@ $$
 **By hand, the product's row.** Its three cells over τ are 10.10, 10.10 and 14.01. Subtract the largest: −3.91, −3.91 and 0, so e^−3.91 = 0.020 twice and 1 once; the diagonal's share is 1 / (1 + 2 × 0.020) = 0.961, and its cross-entropy −log 0.961 = 0.039. ✅ The key gives 0.9613 and 0.0394.
 
 🔤 **The name:** softmax
-- **max**: pick the largest. **soft**: give a share to every cell instead of all to one, the larger the cell the larger its share.
+- **max**: pick the largest.
+- **soft**: give a share to every cell instead of all to one, the larger the cell the larger its share.
 - **On the matrix:** the product's row, cells 10.10, 10.10 and 14.01. A hard max hands everything to the third cell, shares (0, 0, 1). The softmax raises e to each cell and divides by their sum, giving (0.019, 0.019, 0.961). ✅ Computed this session.
 - **Formula, in those words:** the p^row line above: each cell's e to the power of cos / τ, over the row's total, so the three shares always add to 1.
 - **Consequence:** the gap between the cells sets how hard the softmax leans. Divide the same cosines by τ = 1 in place of 0.07 and the row's shares become (0.302, 0.302, 0.397), close to a third each. ✅ Computed this session. The card is [the softmax card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Softmax.md#where-to-learn-this).
 
 🔤 **The name:** cross-entropy
-- **entropy**: in everyday use, disorder; in information, how surprised you are on average by what comes. **cross**: measured across two things, here the right answer (all the share on the diagonal) and the shares the softmax actually gave.
+- **entropy**: in everyday use, disorder; in information, how surprised you are on average by what comes.
+- **cross**: measured across two things, here the right answer (all the share on the diagonal) and the shares the softmax actually gave.
 - **On the matrix:** the pale blue diagonal cell's share, read once per row and once per column.
 - **Formula, in those words:** the surprise at the right answer, minus the log of its share. A share of 0.961 costs 0.039, a share of 0.5 costs 0.693, and a share of 1/3, a row that cannot tell its captions apart, costs 1.099. ✅ Computed this session.
 - **Consequence:** at τ = 1 the product's diagonal share drops from 0.961 to 0.397 and its cross-entropy rises from 0.039 to 0.925, which is what lifts the loss from 0.0456 to 0.806 in the temperature line below. ✅ Computed this session. The card is [the cross-entropy card](../../../../../Obsidian/Mathematics/Statistics/Information%20Theory/Cross-Entropy.md#where-to-learn-this).

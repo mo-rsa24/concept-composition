@@ -42,6 +42,10 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#the-two-sentences-and-the-t
 
 **VAE decoder**: SDXL's network from the 4-channel latent to the finished 1024-pixel picture. NoisyCLIP skips it.
 
+**W2**: Loop 9's reading test, which scored right-against-wrong sentences with NoisyCLIP, frozen CLIP and Latent CLIP on cat and dog latents at steps 0 to 15, with no training, to see whether the score reads each of the five properties before anything is pushed.
+
+**W3**: Loop 9's step planned to push CO3's renders with the sentence score, allowed only on steps where its reading test, W2, found the score readable.
+
 ## The two sentences and the text encoder
 
 Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#table-of-contents) | [Next](#the-half-drawn-picture-and-its-noise-levels) ➡️
@@ -53,10 +57,11 @@ Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#t
 <td><a href="../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/0.5-network-view/nc12-what-survives-for-six-noun-pairs.png"><img src="../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/0.5-network-view/nc12-what-survives-for-six-noun-pairs.png" width="200" alt="Dot plot of the ratio from 0 to 1, one dot per noun pair in four rows: binding trained with mean 0.72, binding with random weights mean 0.13, order trained mean 0.28, order with random weights mean 0.08; the larger dot is cat by dog"></a><br>What survives for six noun pairs</td>
 </tr></table>
 
-*Left: the four sentences of one swap set go through CLIP-L's frozen text encoder to u₁ to u₄. "a cat to the left of a dog" and "a dog to the right of a cat" (same meaning) are summed; "a dog to the left of a cat" and "a cat to the right of a dog" (nouns swapped) are summed; w is the first sum minus the second. The box gives ratio = ‖w‖ / (2 ‖u₁ − u₃‖), 0 for a pure sum of word slots and 1 when the whole swap survives, and for cat and dog "order: 0.33, binding: 0.61". The faded row below runs the same four sentences through the same encoder with random weights: 0.08 and 0.11.* ✅ *Right: across, the same ratio from 0 to 1; one dot per noun pair, six pairs, four rows. Binding with trained weights averages 0.72, with random weights 0.13; order with trained weights 0.28, with random weights 0.08. The larger dot in each row is cat and dog.* ✅ *Both read at full size; the numbers come from the word check's result file* ✍️ *([word-check.json](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/word-check/word-check.json)). This check reads no image, so it bounds what any reader with this text encoder can do and says nothing about NoisyCLIP's image side* ✍️ *(the network-view card).*
+*Left: the four sentences of one swap set go through CLIP-L's frozen text encoder to u₁ to u₄. "a cat to the left of a dog" and "a dog to the right of a cat" (same meaning) are summed; "a dog to the left of a cat" and "a cat to the right of a dog" (nouns swapped) are summed; w is the first sum minus the second. The box gives ratio = ‖w‖ / (2 ‖u₁ − u₃‖), 0 for a pure sum of word slots and 1 when the whole swap survives, and for cat and dog "order: 0.33, binding: 0.61". The faded row below runs the same four sentences through the same encoder with random weights: 0.08 and 0.11.* ✅ *Right: across, the same ratio from 0 to 1; one dot per noun pair, six pairs, four rows. Binding with trained weights averages 0.72, with random weights 0.13; order with trained weights 0.28, with random weights 0.08. The larger dot in each row is cat and dog.* ✅ *Both read at full size; the numbers come from [the word check's result file](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/word-check/word-check.json).* ✍️ *This check reads no image, so it bounds what any reader with this text encoder can do and says nothing about NoisyCLIP's image side* ✍️ *(the network-view card).*
 
 🔤 **The name:** word slot
-- **word**: one word of the sentence, such as "cat". **slot**: a fixed place it can sit in, first noun or second noun.
+- **word**: one word of the sentence, such as "cat".
+- **slot**: a fixed place it can sit in, first noun or second noun.
 - **On the picture:** a sentence built as a sum of one vector per word in its slot; the "+" nodes on the left figure add two such sentences.
 - **Formula, in those words:** if every sentence were cat-in-slot-one plus relation plus dog-in-slot-two, the same-meaning sum and the swapped sum would hold every word slot once each, so w = 0 and the ratio is 0.
 - **Consequence:** on the ladder's word-check toy, adding one term c × side × (n_first − n_second), which knows which noun sits on which side, lifts the ratio from 0 at c = 0 to 0.24 at c = 0.25, 0.47 at c = 0.5 and 0.78 at c = 1 ✅ (c = 0 and 0.5 from [the word-check toy's key](../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/2-miniature/word_check_toy_key.json); 0.25 and 1 computed this session from its vectors). Trained CLIP's 0.33 for cat and dog order sits between the toy's c = 0.25 and c = 0.5. The toy is worked on [the miniature page](03-the-miniature.md#the-word-check-on-a-toy).
@@ -86,13 +91,15 @@ Navigation: ⬅️ [The two sentences and the text encoder](#the-two-sentences-a
 
 🔤 **The name:** timestep, from scaled-linear betas with leading spacing (the left figure's footer)
 - **timestep**: one tick of the clock SDXL was trained on, numbered 0 (almost clean) to 999 (almost all noise). On the table, the second column: each of the 50 sampler steps sits on one tick.
-- **betas**: β, the small amount of noise the training clock adds at each tick. **scaled-linear**: √β rises in a straight line from √0.00085 = 0.0292 at tick 0 to √0.012 = 0.1095 at tick 999, and β is that line squared.
+- **betas**: β, the small amount of noise the training clock adds at each tick.
+- **scaled-linear**: √β rises in a straight line from √0.00085 = 0.0292 at tick 0 to √0.012 = 0.1095 at tick 999, and β is that line squared.
 - **leading spacing**: the 50 steps take every 20th tick counted up from the start, 1, 21, 41 and on to 981, so step k sits at tick 981 − 20k: step 15 at 681 and step 29 at 401, as in the table.
 - **Formula, in those words:** ᾱ at a tick is the product of (1 − β) over every tick up to it, the signal scale is √ᾱ and the noise scale is √(1 − ᾱ).
 - **Consequence:** step 0 sits at tick 981, with signal scale 0.076 and noise scale 0.9971. Start the 50 steps at the clock's very end instead, tick 999, and the signal scale at step 0 falls to 0.0683. ✅ Computed this session from the two beta ends, which give back the table's 0.076 at tick 981 and 0.3076 at tick 681.
 
 🔤 **The name:** signal scale
-- **signal**: the part of the latent that is the picture. **scale**: the number it is multiplied by.
+- **signal**: the part of the latent that is the picture.
+- **scale**: the number it is multiplied by.
 - **On the picture:** the dashed line.
 - **Formula, in those words:** x_t = √ᾱ_t × the finished latent + σ_t × fresh noise, with (√ᾱ_t)² + σ_t² = 1.
 - **Consequence:** at step 0, 0.076² + 0.9971² = 0.0058 + 0.9942 = 1.000, so the picture holds 0.6% of the latent's variance. Move to step 15 and it holds 0.3076² = 9.5%; to step 20, where NoisyCLIP's training starts, 18.0%. ✅ Computed from the table.
@@ -115,7 +122,8 @@ $$
 $$
 
 🔤 **The name:** linear map
-- **linear**: each output is the inputs times fixed numbers, added up; doubling a change in the input doubles the change in the output. **map**: a rule that sends each input to an output.
+- **linear**: each output is the inputs times fixed numbers, added up; doubling a change in the input doubles the change in the output.
+- **map**: a rule that sends each input to an output.
 - **On the picture:** the weight table, one row per colour, one column per latent channel.
 - **Formula, in those words:** colour = W z + b, one weighted sum per row.
 - **Consequence:** on the miniature's pixel A, (1, 0.5, 0, 0.5), red is 60 − 30 + 0 − 35 + 150 = 145. Set its z₃ from 0.5 to 0 and red rises by 70 × 0.5 to 180. ✅ The answer key, and the move computed this session.
@@ -214,7 +222,8 @@ Navigation: ⬅️ [Compare: right minus wrong](#compare-right-minus-wrong) | �
 The chain rule is taken apart on the miniature's four links on [the miniature's gradient](03-the-miniature.md#the-gradient-back-to-the-latent), and [the chain rule card](../../../../../Obsidian/Mathematics/Calculus/Chain%20Rule.md#where-to-learn-this) holds its textbook pages.
 
 🔤 **The name:** the gradient of a cosine
-- **gradient**: the direction in which a number rises fastest, one slope per input. **cosine**: the dot product of two length-1 vectors.
+- **gradient**: the direction in which a number rises fastest, one slope per input.
+- **cosine**: the dot product of two length-1 vectors.
 - **On the picture:** the backward dot labelled "unit length", where the vector h is divided by its own length to give I.
 - **Formula, in those words:** for I = h / ‖h‖ and a fixed vector ΔT, ∂(I · ΔT)/∂h = (ΔT − (ΔT · I) I) / ‖h‖: take off the part of ΔT along I, then divide by h's length.
 - **Consequence:** on the miniature, (ΔT − (−0.0308) I) / 1.0182 = (0.2154, −0.1728), and its dot product with I = (0.6259, 0.7799) is 0.1348 − 0.1348 = 0. The gradient can only turn the picture's vector and never lengthen it. ✅ The key's `dD_dh`, the dot product computed this session. The learning tree has no page deriving this; the ladder's [rebuild companion, section 7](../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/rebuild-from-fundamentals.md#7-the-gradient-of-a-cosine) holds it and lists it as a gap.

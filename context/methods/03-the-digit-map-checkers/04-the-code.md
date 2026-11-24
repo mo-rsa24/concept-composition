@@ -33,6 +33,10 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#the-blocks-and-where-they-l
 
 **Window**: the set of timesteps at which the push acts; at every other step the push is zero.
 
+**V2**: the step on Loop 8's lane of the progress board that trained the digit-map checkers on digits 0 to 4 and tested whether they tell how many digits a canvas holds on digits 5 to 9, which they never trained on. The V2 learning script is its code.
+
+**V3**: the step on Loop 8's lane of the progress board that pushed the digit product with the count checker's gradient on unseen digit pairs, against the plain product and a random push of the same size. The V3 compose script is its code.
+
 ## The blocks and where they live
 
 Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#table-of-contents) | [Next](#the-schedule-and-the-sixteen-timesteps) ➡️
@@ -122,7 +126,8 @@ def inputs(cfg, model, x0, t, pair, noise):
 Lines 101 to 107. In training the maps are made under `torch.no_grad`, so the loss's slope stops at the maps and the U-Net is never trained. ✅
 
 🔤 **The name:** `torch.no_grad`
-- **no**: none. **grad**: gradient, the slope of one number with respect to another.
+- **no**: none.
+- **grad**: gradient, the slope of one number with respect to another.
 - **On the picture:** in training (the [network view's training figure](02-the-network-view.md#the-two-backward-passes)), the place where the orange lane stops before the maps.
 - **Formula, in those words:** inside the block, ∂(anything after) / ∂(anything inside) is not recorded, so the chain rule has no link to follow through it.
 - **Consequence:** leave it on in training and nothing changes but speed and memory, since the U-Net is frozen anyway. Leave it on in the push and g = (0, 0, 0, 0) on the miniature, an empty push. That is why the push code builds the maps again inside `torch.enable_grad()`. ✍️ The miniature page's broken-run control.

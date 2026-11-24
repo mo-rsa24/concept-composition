@@ -48,7 +48,10 @@ Neither expert ever draws two digits, which is the situation of the two real dig
 A Gaussian of width 0.1 is a bell around each canvas a density can draw, whose log falls by d² / (2 × 0.1²) at distance d from it: by 0.5 at d = 0.1 and by 50 at d = 1, which is where the −50 in the table below comes from. ✅ The Gaussian in more than one number is taught on [the multivariate normal card](../../../../../Obsidian/Mathematics/Statistics/Distributions/Multivariate%20Normal%20Distribution/Multivariate%20Normal%20Distribution.md#where-to-learn-this).
 
 🔤 **The name:** DDIM with eta 1
-- **DDIM**, Denoising Diffusion Implicit Model: **denoising**, taking the speckle out; **diffusion**, the speckle was put in a little at a time, the way ink spreads through water; **implicit**, each step is a fixed rule from the current canvas and its clean guess, which needs no fresh randomness.
+- **DDIM**: Denoising Diffusion Implicit Model.
+- **denoising**: taking the speckle out.
+- **diffusion**: the speckle was put in a little at a time, the way ink spreads through water.
+- **implicit**: each step is a fixed rule from the current canvas and its clean guess, which needs no fresh randomness.
 - **eta**: the dial for how much fresh randomness each step adds back. At 0 it adds none, so one starting noise always ends on the same canvas; at 1 it adds the full amount DDPM, the sampler DDIM was built from, adds.
 - **Consequence:** on the toy's step from 25 to 26, eta 0 adds no fresh noise; eta 1 adds fresh noise of size 0.232 to each of the four numbers and lowers the weight on the noise prediction from 0.670 to 0.628, so two draws standing on the same canvas at step 25 can still end on different canvases. Toy numbers, computed this session from the toy's schedule. ✅ The step's equation is drawn on [the code page's sampler step](04-the-code.md#the-sampler-step), and DDIM is taught with textbook pages on [the DDIM card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Diffusion%20Models/DDIM.md#where-to-learn-this).
 

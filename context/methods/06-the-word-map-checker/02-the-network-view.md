@@ -92,13 +92,15 @@ Worked on the miniature, whose maps are already 2 × 2 so the resize does nothin
 ✅ The answer key; the doubling follows from the division.
 
 🔤 **The name:** renormalise
-- **re-**: again. **normalise**: make something add up to a standard total, here 1.
+- **re-**: again.
+- **normalise**: make something add up to a standard total, here 1.
 - **On the picture:** step 3's formula, the map divided by its own sum.
 - **Formula, in those words:** each cell's share of the word's whole map, Â[p] = A[p] / Σ A.
 - **Consequence:** a word that takes little of the picture and one that takes much enter the head with the same total, 1. So the head reads where each word is and cannot read how strongly the U-Net attended to it. ✍️ The ladder's rebuild companion, rung 7.
 
 🔤 **The name:** bilinear resize
-- **bi-**: two. **linear**: along a straight line. A new cell's value is read off a straight line between its neighbours across, then a straight line down.
+- **bi-**: two.
+- **linear**: along a straight line. A new cell's value is read off a straight line between its neighbours across, then a straight line down.
 - **On the picture:** the step from the layer's grid to 16 × 16.
 - **Consequence:** shrinking 32 to 16 places each new cell at the middle of a 2 × 2 block and averages all 4 cells at 0.25 each. Shrinking 64 to 16 the same way, with no antialiasing, reads only the middle 4 of each block's 16 cells, and the other 12 have no influence. ✍️ The ladder's code walk, block 4, found by moving one input cell at a time through `F.interpolate` on CPU. SDXL's 100 maps from its 64 grid would be read this way.
 
@@ -159,7 +161,8 @@ Navigation: ⬅️ [The head reads the two stacks](#the-head-reads-the-two-stack
 *One training picture (blue), a dog left of a cat, goes up to the right caption "a dog to the left of a cat" and down to the wrong caption "a dog above a cat". Each is inverted and its word maps read (grey), and both get the label "left of" (red) before the head's cross-entropy (green). Footer: with the wrong caption added, GenEval position (the fraction of images with the right relation, 0 to 1) rose from 0.425 to 0.57 on FLUX.1-schnell's validation set, and the paper reports no direct measure of leakage after the fix.* ✅
 
 🔤 **The name:** cross-entropy
-- **entropy**: surprise, how unexpected an outcome is. **cross**: the surprise is measured with the head's chances against the label's answer, two different sources crossed.
+- **entropy**: surprise, how unexpected an outcome is.
+- **cross**: the surprise is measured with the head's chances against the label's answer, two different sources crossed.
 - **On the picture:** the green box between the label "left of" and the head.
 - **Formula, in those words:** with one true class, the loss is minus the log of the chance the head gave the true class, −log p̂[true]. It is the same quantity as the loss L_t in the update further down this page.
 - **Consequence:** on the miniature's fused body the head gives "left of" 0.2, and the loss is −log 0.2 = 1.6094. After one of Learn-to-Steer's updates the head gives 0.7961, and the loss falls to 0.2280. A head that gave the true class only 0.05 would pay 2.9957, so a confident wrong answer costs much more than an unsure one. ✅ Computed this session. Textbook pages are on [the cross-entropy card](../../../../../Obsidian/Mathematics/Statistics/Information%20Theory/Cross-Entropy.md#where-to-learn-this).
@@ -211,7 +214,9 @@ Navigation: ⬅️ [Two ways the gradient enters](#two-ways-the-gradient-enters)
 *Left panel, one joint prompt "a cat to the left of a dog": the cat map (red) and the dog map (blue) sit apart, because both words share one softmax at each patch, so where one wins the other loses. Right panel, our product, "a cat" and "a dog", one U-Net pass each: both maps sit in the middle, because each word has a softmax to itself and nothing stops both filling one body. The heat maps are drawn. Bottom: the overlap of the top 10% of the cat and dog maps (intersection over union; 1 means the same places), median over 8 seeds at each of steps 2 to 40: 0.506 to 0.814 for the product, 0.225 to 0.394 for the joint prompt. These were measured on SDXL with "a cat and a dog" as the joint prompt, not the panel's "a cat to the left of a dog".* ✅ *Read on the figure at full size; the medians* ✍️ *the early-push report, which computed them from its `overlap.json`.*
 
 🔤 **The name:** the overlap of the top 10%, intersection over union
-- **top 10%**: the brightest tenth of a map's patches, where the word is read most. **intersection**: the patches in both words' top tenth. **union**: the patches in either.
+- **top 10%**: the brightest tenth of a map's patches, where the word is read most.
+- **intersection**: the patches in both words' top tenth.
+- **union**: the patches in either.
 - **On a toy:** two maps of 100 patches each, so each word's top 10% is 10 patches. Draw the cat's 10 as one circle and the dog's 10 as another; the overlap is the patches both share.
 - **Formula, in those words:** shared patches over patches in either, so 6 shared gives 6 / (10 + 10 − 6) = 6/14 = 0.4286.
 - **Consequence:** share 8 patches and it rises to 8/12 = 0.6667; share all 10 and it is 1, the same places; share none and it is 0. The figure's 0.506 to 0.814 for the product and 0.225 to 0.394 for the joint prompt are this same share, measured on SDXL's maps. ✅ The toy computed this session; its counts are invented.

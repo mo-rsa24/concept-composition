@@ -35,6 +35,8 @@ The encoder, the decoder and the squeeze between them are drawn and worked on [t
 
 **Signal and noise weights**: x_t = √ᾱ_t · x_0 + σ_t · ε, where x_0 is the clean latent, ε standard noise, √ᾱ_t the weight on the clean latent and σ_t = √(1 − ᾱ_t) the weight on the noise.
 
+**W2**: Loop 9's reading test, which scored right-against-wrong sentences with NoisyCLIP, frozen CLIP and Latent CLIP on cat and dog latents at steps 0 to 15, with no training, to see whether the score reads each of the five properties before anything is pushed.
+
 ## The path, stage by stage
 
 Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#table-of-contents) | [Next](#the-names-taken-apart) ➡️
@@ -52,7 +54,8 @@ Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#t
 
 🔤 **The name:** summary token and position table
 - **summary token**: one extra token put in front of the 256 patch tokens. It is the same for every picture when it goes in; the 12 layers let it read every patch, and its row is what comes out as the picture's vector. On the overview's inset, the step from the 16 × 16 grid to the one vector of 640 numbers.
-- **position**: where a token sits in the sequence, first, second and so on. **table**: one stored row per place. The position table holds one learned row per place, which is added to the token in that place, so the layers can tell the top-left patch from the bottom-right one.
+- **position**: where a token sits in the sequence, first, second and so on.
+- **table**: one stored row per place. The position table holds one learned row per place, which is added to the token in that place, so the layers can tell the top-left patch from the bottom-right one.
 - **Formula, in those words:** rows needed = patches + 1 summary token = 256 + 1 = 257, the 257 entries the table above quotes.
 - **Consequence:** change what goes in and the rows needed change while the table stays at 257. A 64 × 64 latent cut into 4 × 4 patches needs 16 × 16 + 1 = 257 rows, a fit. The unpooled 128 × 128 latent needs 32 × 32 + 1 = 1,025, which is why the pooling below exists. The B/8 model on a 64 × 64 latent needs 8 × 8 + 1 = 65. ✅ Computed from the sizes.
 

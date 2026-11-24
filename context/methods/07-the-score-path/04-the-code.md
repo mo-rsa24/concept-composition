@@ -38,6 +38,14 @@ The gradient is taught with worked examples on [the gradient card](../../../../.
 
 **Batch dimension**: the first axis of a tensor, one entry per canvas.
 
+**V2**: the step on Loop 8's lane of the progress board that trained the digit-map checkers on digits 0 to 4 and tested whether they tell how many digits a canvas holds on digits 5 to 9, which they never trained on. The V2 learning script is its code.
+
+**W4**: Loop 9's step that trained a small canvas encoder of our own, which reads a noisy digit canvas into the same 768-number space as CLIP-L's caption vectors. "W4" on this page names both that step and the encoder it trained.
+
+**X4**: Loop 10's design step, which wrote the small experiment's run groups, cost and pass marks and was checked by the owner. Choices the ladder left open were left for X4 to settle.
+
+**X5**: Loop 10's first run group, which fitted probes on the signature (the digit model's ten label differences on one noisy canvas), on the raw noise and on the noisy canvas, to test whether the signature carries which digits are present.
+
 ## The blocks and where they live
 
 Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#table-of-contents) | [Next](#the-schedule-and-the-no-digit-label) ➡️
@@ -115,7 +123,8 @@ def timestep_embedding(t, dim):
 Lines 44 to 48, 110 and 62. `self.cemb` is the 11 × 256 label table (2,816 weights) and line 62 adds the sum inside each ResBlock after its first convolution. `y` holds one label per canvas, so ε_θ(x_t, t, c) takes a digit or no digit and never a pair. ✅
 
 🔤 **The name:** timestep embedding (the 64 sines and cosines)
-- **timestep**: the t the U-Net is told, 999 down to 0. **embedding**: placing it as a point among many numbers, here 64, so the network can read it.
+- **timestep**: the t the U-Net is told, 999 down to 0.
+- **embedding**: placing it as a point among many numbers, here 64, so the network can read it.
 - **On the code:** `freqs` holds 32 speeds, from 1 down to 10000^(−31/32) ≈ 0.000133; `args` is t times each speed, and the 64 numbers are the cosine and the sine of each.
 - **Formula, in those words:** entry i is cos(t × speed_i) or sin(t × speed_i), so as t runs from 999 to 0 the fastest entry turns about 159 full circles and the slowest about a fiftieth of one. ✅ Computed this session.
 - **Consequence:** move t from 999 to 979, the next sampler step. The fastest cosine goes from 0.9996 to 0.3838, a jump of 0.616, while the slowest goes from 0.9911 to 0.9915, a change of 0.0004. Neighbouring steps are told apart by the fast entries and distant ones by the slow entries. ✅ Computed this session from the four lines above. Videos that teach it are listed under [timestep embedding in the video lessons index](../../../../../Obsidian/Mathematics/references/videos/Video%20Lessons.md#timestep-embedding).
@@ -146,7 +155,9 @@ Navigation: ⬅️ [How the step and the label enter](#how-the-step-and-the-labe
 Lines 140 to 144, 161 and 293 to 294. With `share` 0.01, one canvas in a hundred holds two digits from the 40 pairs not held out; with `share` 0.0, which step X5 used, none does. A tenth of labels are replaced by 10, which is how the no-digit guess is learned. ✅ The script's docstring, lines 3 to 5, says the same in words: "the expert for 7 means 'a canvas with a 7 on it, sometimes beside another digit'". This is why the joint path is dead on digits ✍️ ([the ideas page, C2a](../../../artifacts/notes/progress/score-space/03-ideas.md#c-the-two-arithmetic-tests)).
 
 🔤 **The name:** mean squared error (`F.mse_loss`)
-- **error**: the gap between the guess and the truth, here the noise guess `pred` and the noise actually added. **squared**: each gap times itself, so a miss either way counts as positive. **mean**: averaged over every pixel.
+- **error**: the gap between the guess and the truth, here the noise guess `pred` and the noise actually added.
+- **squared**: each gap times itself, so a miss either way counts as positive.
+- **mean**: averaged over every pixel.
 - **Toy, two pixels:** real noise (1, −1), guess (0.5, −1). The gaps are −0.5 and 0, squared 0.25 and 0, mean 0.125. ✅ Computed this session.
 - **Consequence:** a model that guesses 0 everywhere scores (1 + 1) / 2 = 1.0 on the same pixels, eight times worse, so training moves the weights toward guesses that match the noise. ✅ Computed this session. The card is [the mean squared error card](../../../../../Obsidian/Artificial%20Intelligence/Machine%20Learning/Mean%20Squared%20Error.md#where-to-learn-this).
 
@@ -342,7 +353,8 @@ MIN_OVER_NOISE = 0.10        # and at least this much above the raw-noise probe 
 The X5 script, lines 37 and 38, with `MIN_CONTROL = 0.90` at line 40 and `CONTROL_T = 100` at line 39. Line 294 says that in the full read only the canvas row gates the control, on board question 74. ✅ The script's docstring, line 11, still says the signature and the noisy canvas "must each reach presence accuracy 0.9"; the gate in the code is the canvas row alone.
 
 🔤 **The name:** positive control
-- **control**: a check run beside the real test to show the instrument works. **positive**: a case where the answer is known to be yes, so a working instrument must say yes.
+- **control**: a check run beside the real test to show the instrument works.
+- **positive**: a case where the answer is known to be yes, so a working instrument must say yes.
 - **On the schedule:** t 100, where the clean canvas's weight √ᾱ is 0.946 against 0.0064 at t 999, about 149 times larger. An ink pixel and a background pixel with the same noise draw 0.5 read 1.108 and −0.784 there, against 0.506 and 0.494 at t 999. ✅ Computed this session from block 1.
 - **Consequence:** if the reader on the noisy canvas missed `MIN_CONTROL`, 0.90, at t 100, where the digits are plain, a miss at t 999 would say only that the reader is broken. Passing it, 0.950 by the finding ✍️, is what lets a miss in the early window be read as the signature carrying too little. Presence accuracy is the balanced accuracy taken apart on [the overview's result](01-overview.md#how-it-fails-and-how-you-know-it-worked).
 

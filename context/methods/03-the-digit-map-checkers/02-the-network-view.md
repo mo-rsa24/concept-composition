@@ -144,14 +144,17 @@ A learned embedding is a lookup table with one row of trained numbers per digit,
 | p = 0 | 15 × 31 | 7 × 15 |
 
 🔤 **The name:** scale and shift (FiLM)
-- **scale**: multiply. **shift**: add. **FiLM** is the name the literature gives this, feature-wise linear modulation: each channel ("feature-wise") gets its own multiply and add ("linear modulation").
+- **scale**: multiply.
+- **shift**: add.
+- **FiLM**: the name the literature gives this, feature-wise linear modulation, in which each channel ("feature-wise") gets its own multiply and add ("linear modulation").
 - **On the picture:** the blue box above c1, a linear layer from the 16 time features to 128 scales γ and 128 shifts β.
 - **Formula, in those words:** h ← h (1 + γ) + β. With γ = 0 and β = 0 the layer passes h through unchanged.
 - **Consequence:** in the miniature at t = 480 the first channel's value on the left half is 0.280 after its SiLU, and γ = 0.053, β = 0.098 make it 0.280 × 1.053 + 0.098 = 0.392. Switch the scale and shift off and it stays 0.280. ✅ The miniature's answer key. The same timestep therefore changes how much each channel counts, which is how one network handles 16 noise levels.
 
 🔤 **The name:** mean and max pooling
 - **pooling**: putting many things into one shared pool. Here, 128 positions per channel become 2 numbers.
-- **mean**: the average over positions. **max**: the largest value.
+- **mean**: the average over positions.
+- **max**: the largest value.
 - **Formula, in those words:** for each of 128 channels, the mean of its 8 × 16 grid and the max of it: 128 + 128 = 256 numbers, whatever the grid size.
 - **Consequence:** in the miniature, channel 1 reads 0.392 on the left half and −0.137 on the right; its mean is 0.128 and its max 0.392. The mean says how much of the channel is on overall and the max says whether it is strongly on anywhere, which a blob in one half shows. ✅ The miniature's answer key.
 

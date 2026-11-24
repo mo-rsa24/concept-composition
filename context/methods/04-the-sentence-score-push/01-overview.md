@@ -90,7 +90,8 @@ Navigation: ⬅️ [What one step does](#what-one-step-does) | 📋 [TOC](#table
 - **Consequence:** on the miniature I = (0.6259, 0.7799), so S_right = 0.6259 × 0.8 + 0.7799 × 0.6 = 0.9687. Turn T_right until it points along I and S_right rises to 1, its ceiling.
 
 🔤 **The name:** score difference, right minus wrong
-- **right** and **wrong**: the two sentences. **minus**: subtract the second score from the first.
+- **right and wrong**: the two sentences.
+- **minus**: subtract the second score from the first.
 - **On the picture:** the green "third score" box, fed by the two bars.
 - **Formula, in those words:** D = S_right − S_wrong = I · (T_right − T_wrong). Both scores use the same I, so only the place where the two sentence vectors differ can change D.
 - **Consequence:** on the miniature D = 0.9687 − 0.9995 = −0.0308, so the toy picture sits closer to the wrong sentence. Swap the two sentences and D becomes +0.0308; give both sentences the same vector and D is 0 and so is its gradient at every latent number.

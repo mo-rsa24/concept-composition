@@ -32,7 +32,8 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#what-one-step-does) ➡️
 **Noise prediction (ε) and score (s)**: two views of one arrow. The score points toward pictures the model finds more likely; the noise prediction is the same arrow scaled and flipped, ε = −σ_t s, where σ_t is how much noise the canvas still holds at step t.
 
 🔤 **The name:** noise prediction
-- **noise**: the random speckle mixed into the canvas. **prediction**: a guess at it. On the toy, the model's guess at how much speckle sits in each of the canvas's four numbers.
+- **noise**: the random speckle mixed into the canvas.
+- **prediction**: a guess at it. On the toy, the model's guess at how much speckle sits in each of the canvas's four numbers.
 - **Formula, in those words:** the guessed speckle is the score's pull, flipped and multiplied by the noise still in the canvas: ε = −σ_t s.
 - **Consequence:** at step 25, where σ_t is 0.693, the product's pull of −0.932 on "how much 4 in the left cell" is a noise prediction of +0.646, and the joint's pull of −0.156 is +0.108. Move σ_t to 0.986, its value at step 5, and the same pull of −0.932 would be a noise prediction of 0.919, so one pull reads as a bigger noise guess on a noisier canvas. Toy numbers, computed this session. ✅ The score is taught with textbook pages on [the score function card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Score%20Function.md#where-to-learn-this), and [the plan that shows noise prediction is the score](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/08-noise-prediction-is-the-score.md) derives the sign and the scale.
 
@@ -114,7 +115,8 @@ As a noise prediction the term is r_t = −σ_t I_t, which at step 25 is −0.69
 > The scene's `r_t` comes from unguided scores, and the digit runs use no guidance. The SDXL pipeline computes `r_t` from guided predictions, ε_cond guided = ε_empty + w (ε_cond − ε_empty). Subtracting the guided product from the guided joint leaves w times the unguided gap, so for the same model and step the SDXL `r_t` is the guidance scale (7.5 in the runs the world page quotes) times the scene's `r_t`. 🔍 This follows from the two code lines quoted on the world pages and has not been checked on a run.
 
 🔤 **The name:** guidance scale
-- **guidance**: steering toward something. **scale**: how far. On SDXL, how far each prediction is pushed from the empty prompt's toward its own prompt's: the w in ε_cond guided = ε_empty + w (ε_cond − ε_empty).
+- **guidance**: steering toward something.
+- **scale**: how far. On SDXL, how far each prediction is pushed from the empty prompt's toward its own prompt's: the w in ε_cond guided = ε_empty + w (ε_cond − ε_empty).
 - **On a one-number toy:** an empty-prompt prediction of 0.2 and a prompted one of 0.5. At w = 0 the guided prediction is 0.2, the prompt ignored; at w = 1 it is 0.5, the prompt as the model gave it; at w = 7.5 it is 2.45, carried past the prompt in the same direction.
 - **Consequence:** beside that empty 0.2, take two experts at 0.5 and 0.4 and a joint at 0.6. Unguided, the joint minus the product is 0.6 − (0.5 + 0.4 − 0.2) = −0.1. Guide each at w = 7.5 first (2.45, 1.70 and 3.20) and the gap becomes 3.20 − (2.45 + 1.70 − 0.2) = −0.75, which is 7.5 times −0.1: the arithmetic the note above rests on. Toy numbers, computed this session. ✅ Guidance is taught with textbook pages on [the classifier-free guidance card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Diffusion%20Models/Classifier-Free%20Guidance.md#where-to-learn-this).
 

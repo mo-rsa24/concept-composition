@@ -200,7 +200,9 @@ Navigation: ⬅️ [The push on four pixels](#the-push-on-four-pixels) | 📋 [T
 
 *The page's frame 14 at sampler step 20 (t = 591), digits 6 and 8, seed 1000, one seed sampled twice from the same noise. Plain lane, top: the clean guess is a 6 and an 8 drawn over each other, the two maps (purple for 6, green for 8) sit 3.1 pixels apart, the logit is −1.08, and the run ends as one blob. Pushed lane, bottom, pushed at steps 15 to 25: a 6 on the left and an 8 on the right, maps 9.1 pixels apart, logit 3.78, push length 17.9, ending as two clear, right digits apart. Right: means over all 320 canvases at each of the 50 steps, grey plain and orange pushed, with steps 15 to 25 shaded: the centres' separation in pixels, the overlap of the two maps, and the logit.* ✅ *Read on the still at full size.*
 
-A **map's centre** is where its mass balances across the canvas: each column's position, weighted by how much of the map sits in that column. The **overlap** is the map mass the two share: take the smaller of the two map values at each pixel, add them up, and divide by the 2,048 pixels. So 0 is no shared mass and 1 is two identical maps. ✅ Read in `trace_push.py`, lines 51 to 55. On this page's apart canvas the two four-pixel maps share 0.41 of their mass. ✅ Computed this session from the key's maps.
+A **map's centre** is where its mass balances across the canvas: each column's position, weighted by how much of the map sits in that column.
+
+The **overlap** is the map mass the two share: take the smaller of the two map values at each pixel, add them up, and divide by the 2,048 pixels. So 0 is no shared mass and 1 is two identical maps. ✅ Read in `trace_push.py`, lines 51 to 55. On this page's apart canvas the two four-pixel maps share 0.41 of their mass. ✅ Computed this session from the key's maps.
 
 | Mean over 320 canvases, job 94161 | Step 15 | Step 20 | Step 25 | Step 49 |
 |---|---|---|---|---|

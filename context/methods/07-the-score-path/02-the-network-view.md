@@ -34,6 +34,16 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#the-system) ➡️
 
 **DDIM step**: the sampler's move from one noise level to the next, using the noise guess. The code is read on [the product-of-experts code page](../01-the-product-of-experts/04-the-code.md#the-sampler-step).
 
+**V2**: the step on Loop 8's lane of the progress board that trained the digit-map checkers on digits 0 to 4 and tested whether they tell how many digits a canvas holds on digits 5 to 9, which they never trained on. The V2 learning script is its code.
+
+**W4**: Loop 9's step that trained a small canvas encoder of our own, which reads a noisy digit canvas into the same 768-number space as CLIP-L's caption vectors. "W4" on this page names both that step and the encoder it trained.
+
+**X4**: Loop 10's design step, which wrote the small experiment's run groups, cost and pass marks and was checked by the owner. Choices the ladder left open were left for X4 to settle.
+
+**X5**: Loop 10's first run group, which fitted probes on the signature (the digit model's ten label differences on one noisy canvas), on the raw noise and on the noisy canvas, to test whether the signature carries which digits are present.
+
+**X6**: Loop 10's planned second run group, which would train a reader of score paths into a space shared with captions (two-way) and with captions and canvases together (three-way).
+
 ## The system
 
 Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#table-of-contents) | [Next](#inside-the-digit-u-net) ➡️

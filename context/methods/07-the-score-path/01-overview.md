@@ -43,6 +43,12 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#what-one-canvas-goes-throug
 
 **The miniature**: the ladder's four-pixel toy with hand-set integer weights, worked in full on [the miniature page](03-the-miniature.md). It predicts nothing about the digit models.
 
+**X5**: Loop 10's first run group, which fitted probes on the signature (the digit model's ten label differences on one noisy canvas), on the raw noise and on the noisy canvas, to test whether the signature carries which digits are present.
+
+**X6**: Loop 10's planned second run group, which would train a reader of score paths into a space shared with captions (two-way) and with captions and canvases together (three-way).
+
+**X8**: Loop 10's planned last run group, which would read the trained spaces on unseen digits and run two arithmetic tests.
+
 ## What one canvas goes through
 
 Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#table-of-contents) | [Next](#the-names-taken-apart) ➡️
@@ -77,7 +83,7 @@ Navigation: ⬅️ [What one canvas goes through](#what-one-canvas-goes-through)
 🔤 **The name:** signature
 - **signature**: a mark that identifies who made it, without stating their name. Here, the pattern a canvas leaves on the model's answers.
 - **On the picture of [two ways to define the path](#two-ways-to-define-the-path):** the blue lower row, the ten maps d_t(0), ..., d_t(9) on one noisy canvas at one step.
-- **Formula, in those words:** ask the model about every digit, subtract the no-digit guess from each, keep all ten. A **signature path** is those ten stacked over a window of steps.
+- **Formula, in those words:** ask the model about every digit, subtract the no-digit guess from each, keep all ten. A signature path is those ten stacked over a window of steps.
 - **Consequence:** with only the canvas's own labels (3 and 7), the labels pick which differences are computed, so a reader is handed the answer. With all ten, a 3 on the canvas has to show up as a larger or differently shaped d_t(3) than d_t(5). ✍️ [The ideas page, A1](../../../artifacts/notes/progress/score-space/03-ideas.md#a-the-score-path-itself). On the real model one signature path is 10 × 16 × 2,048 = 327,680 numbers before pooling. ✅ Computed.
 
 🔤 **The name:** pooling
@@ -157,7 +163,8 @@ Navigation: ⬅️ [Two ways to define the path](#two-ways-to-define-the-path) |
 *From the finding. Up: presence accuracy, the balanced accuracy of calling "this digit is on the canvas", averaged over digits 0 to 4 on 2,000 canvases, 0.5 is chance. Across: the timestep, noisier at the left. Left panel: the early window, t 999 to 693. Right panel: t 712 to 480, which carries the same share of signal as SDXL's steps 0 to 15. The thick red line is the signature; the dashed line is the bar of 0.75.* ✅ *Read on the picture at full size.*
 
 🔤 **The name:** balanced accuracy
-- **accuracy**: the share of calls that were right. **balanced**: each side weighed equally, as on a pair of scales, however many items sit on each side.
+- **accuracy**: the share of calls that were right.
+- **balanced**: each side weighed equally, as on a pair of scales, however many items sit on each side.
 - **The picture, a table of an ordinary toy (not the finding's data):** 100 canvases, 10 holding a 3 and 90 without. The reader's call runs across the top and the truth down the side.
 
 | | reader says "a 3 is here" | reader says "no 3" |

@@ -31,6 +31,10 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#the-gradient-back-through-t
 
 **ReNO**: reward-based noise optimisation, the method Latent CLIP's authors plugged it into. It changes the starting noise of a one-step generator so that the finished picture scores higher.
 
+**W2**: Loop 9's reading test, which scored right-against-wrong sentences with NoisyCLIP, frozen CLIP and Latent CLIP on cat and dog latents at steps 0 to 15, with no training, to see whether the score reads each of the five properties before anything is pushed.
+
+**W3**: Loop 9's step planned to push CO3's renders with the sentence score, allowed only on steps where its reading test, W2, found the score readable.
+
 ## The gradient, back through the pooling
 
 Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#table-of-contents) | [Next](#the-names-taken-apart) ➡️
@@ -142,7 +146,13 @@ Navigation: ⬅️ [Beside NoisyCLIP's road](#beside-noisyclips-road) | 📋 [TO
 
 The ReNO column is ✍️ the reading note's account of the paper (p. 3 to 7) and of its released code; the W3 column is ✅ read in `w3_steer.py` and the W3 design.
 
-**The ReNO "how many times" cell stacks four settings; here they are one at a time.** A **gradient step** moves the starting noise a little along the gradient of the reward. **SGD**, stochastic gradient descent, is the rule that takes those steps; it descends the negative reward, which raises the reward, and [the gradient descent card](../../../../../Obsidian/Artificial%20Intelligence/Machine%20Learning/Gradient%20Descent.md#where-to-learn-this) works it. **Clipped to 0.1** means a gradient longer than 0.1 is shrunk to length 0.1 before it is used. The **learning rate** 5.0 multiplies it into the step, so a clipped step is 5.0 × 0.1 = 0.5 long; [the learning rate card](../../../../../Obsidian/Artificial%20Intelligence/Machine%20Learning/Learning%20Rate.md#where-to-learn-this) shows what a larger or smaller one does. **Momentum** 0.9 adds 0.9 of the previous step to each new one, so steps in a steady direction grow.
+**The ReNO "how many times" cell stacks four settings; here they are one at a time.**
+
+- **Gradient step**: moves the starting noise a little along the gradient of the reward.
+- **SGD**: stochastic gradient descent, the rule that takes those steps; it descends the negative reward, which raises the reward, and [the gradient descent card](../../../../../Obsidian/Artificial%20Intelligence/Machine%20Learning/Gradient%20Descent.md#where-to-learn-this) works it.
+- **Clipped to 0.1**: a gradient longer than 0.1 is shrunk to length 0.1 before it is used.
+- **Learning rate 5.0**: multiplies it into the step, so a clipped step is 5.0 × 0.1 = 0.5 long; [the learning rate card](../../../../../Obsidian/Artificial%20Intelligence/Machine%20Learning/Learning%20Rate.md#where-to-learn-this) shows what a larger or smaller one does.
+- **Momentum 0.9**: adds 0.9 of the previous step to each new one, so steps in a steady direction grow.
 
 🧸 **Toy:** a gradient of length 1 pointing the same way at every step (illustrative). Expected before computing: clipping shrinks it to 0.1, and the steps then grow under momentum.
 

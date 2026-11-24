@@ -87,7 +87,9 @@ Navigation: ⬅️ [Picture to equation](#picture-to-equation) | 📋 [TOC](#tab
 *Across: the sampler step, 0 the noisiest and 49 clean. Left axis, orange, log scale: |r_t| = σ_t |I_t|, the root mean square over 4000 canvases drawn from the joint's own noised pictures at that step. Right axis, green: the joint's belief in its likelier layout, averaged over the same canvases, from 0.5 (undecided) to 1 (decided). The grey band marks steps 0 to 9; the green dashed line is where the layout reaches 0.9; the orange dashed line is where |r_t| peaks.* ✅
 
 🔤 **The name:** root mean square
-- Read right to left: **square** each canvas's size of the term, take the **mean** of the squares, then the square **root** of that mean.
+- **square**: the name reads right to left, so this comes first: square each canvas's size of the term.
+- **mean**: take the mean of the squares.
+- **root**: then the square root of that mean.
 - **On a three-canvas toy:** sizes 0.1, 0.2 and 0.5 give √((0.01 + 0.04 + 0.25) / 3) = 0.316, where the plain mean is 0.267.
 - **Consequence:** raise the largest size from 0.5 to 1.0 and the root mean square jumps to 0.592 while the plain mean reaches 0.433, so the orange curve's height follows the canvases where the term is large. Toy numbers, computed this session. ✅
 

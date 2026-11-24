@@ -139,7 +139,7 @@ A worked case. b = 0.4 and the 0.6 gate are the design's. The prediction length 
 
 🔤 **The name:** threshold half and reading half
 - **threshold**: the line a value has to cross to count as a yes, here the cut-off on D above which a picture is called "two separate animals".
-- **half**: W2 splits the seeds in two. On the **threshold half** it chooses each step's cut-off and which steps pass the 0.6 gate; on the **reading half** it applies those choices once and reads the score.
+- **half**: W2 splits the seeds in two. On the threshold half it chooses each step's cut-off and which steps pass the 0.6 gate; on the reading half it applies those choices once and reads the score.
 - **Formula, in those words:** a step's score is the balanced accuracy on the reading half, with the cut-off chosen on the threshold half.
 - **Consequence:** read Latent CLIP's 7 gated counting steps on the half that chose them and they score a mean of 0.622; read them on the other half and the mean falls to 0.538.
 

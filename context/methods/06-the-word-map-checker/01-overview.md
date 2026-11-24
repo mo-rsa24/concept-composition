@@ -95,7 +95,8 @@ Navigation: ⬅️ [What one step does](#what-one-step-does) | 📋 [TOC](#table
 - **Consequence:** the weights of one patch must add to 1, so two words in one prompt compete for each patch. In one joint prompt "cat" takes e^4 / (1 + e^4 + e^4) = 0.4955 of the miniature's fused patch; in its own prompt, as the product runs it, it takes 0.9820. ✅ The answer key.
 
 🔤 **The name:** spatial relation
-- **spatial**: about places on the picture. **relation**: how two things stand to each other.
+- **spatial**: about places on the picture.
+- **relation**: how two things stand to each other.
 - **On the picture:** what the checker's one output names: is the cat above, below, left of or right of the dog.
 - **Formula, in those words:** the head's chance for each relation, p̂[r] = e^(logit for r) / the sum of e^(every logit).
 - **Consequence:** on the miniature's fused body both maps are identical, so all five logits are 0 and each relation gets 0.2. After one of Learn-to-Steer's updates the cat's map has moved left and the dog's right, and "left of" gets 0.7961. ✅ The answer key.
@@ -131,7 +132,10 @@ The worked case is the miniature's fused body, one push then one DDIM step, with
 **How much reaches the latent.** The DDIM step carries a change in the prediction into the next latent at the rate √(1 − ᾱ_{t−1}) − √(1 − ᾱ_t) √(ᾱ_{t−1}/ᾱ_t) = 0.6 − 0.8 × 0.8/0.6 = −0.4667, so the capped push of length 0.5657 moves the latent by 0.264. Learn-to-Steer's 16 updates at step size 5 move the same latent by 6.0072 and take "left of" to 0.9936. ✅ The answer key. The weights are hand-set, so the size of the gap says nothing about SDXL; its direction is why a head that fails at our dose has not been tested at theirs.
 
 🔤 **The name:** DDIM step
-- **DDIM**: denoising diffusion implicit model. **Denoising**: taking noise out. **Diffusion**: the noise was spread into the picture the way ink spreads in water, and the sampler runs that spreading backwards. **Implicit**: each step follows a fixed rule from the current latent and the prediction, with no fresh random noise, so the same starting noise always gives the same picture.
+- **DDIM**: denoising diffusion implicit model.
+- **Denoising**: taking noise out.
+- **Diffusion**: the noise was spread into the picture the way ink spreads in water, and the sampler runs that spreading backwards.
+- **Implicit**: each step follows a fixed rule from the current latent and the prediction, with no fresh random noise, so the same starting noise always gives the same picture.
 - **On the picture:** the last blue arrow, from the circle where the push is taken off to the next latent x_{t−1}.
 - **Formula, in those words:** guess the clean latent from the prediction, then put back noise at the next, smaller level using the same prediction. The two noise numbers are ᾱ_t, the share of the latent that is still signal, and σ_t = √(1 − ᾱ_t), the noise level: ᾱ_t = 0.36 gives σ_t = 0.8 on the miniature.
 
@@ -165,7 +169,8 @@ Navigation: ⬅️ [The push, by what moves](#the-push-by-what-moves) | 📋 [TO
 **How you would know it worked.** The design's bar for the spatial checker on SDXL is a balanced accuracy over steps 0 to 15 of at least 0.75, within 0.05 of held-out animal pairs, and at least 0.75 on right against wrong relation. ✍️ [Loop 7's checker design](../../../artifacts/notes/progress/abstract-checkers/03-design.md#the-design-on-one-page), row 2. In the sampler, a push at strength 0 never calls the head, so the run is byte-identical to the plain product; that is the check a new head must keep. ✅ [The code page](05-the-code.md#our-sampler-the-push-and-the-cap).
 
 🔤 **The name:** balanced accuracy
-- **accuracy**: the share of answers that are right. **balanced**: each true class counts equally, however many test cases it has, so the score is the average of the share right within each class.
+- **accuracy**: the share of answers that are right.
+- **balanced**: each true class counts equally, however many test cases it has, so the score is the average of the share right within each class.
 - **On a toy:** 20 test pairs of word maps, 16 truly "left of" and 4 truly "right of", with the truth down the side and the checker's answer across the top.
 
 | Truth | checker says "left of" | checker says "right of" | right within the class |

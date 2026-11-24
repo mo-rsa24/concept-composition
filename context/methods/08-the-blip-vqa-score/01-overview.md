@@ -77,7 +77,8 @@ Visual question answering is taught with textbook pages on [the visual question 
 
 🔤 **The name:** noun phrase
 
-- **noun**: a word naming a thing, such as "bench". **phrase**: a few words that work as one unit. A noun phrase is the noun with the words that describe it: "a blue bench". On the picture, the two blue cards under "Split the prompt".
+- **noun**: a word naming a thing, such as "bench".
+- **phrase**: a few words that work as one unit. A noun phrase is the noun with the words that describe it: "a blue bench". On the picture, the two blue cards under "Split the prompt".
 - **Found by spaCy**: spaCy is an English-parsing library; its `noun_chunks` returns the noun phrases of a sentence. The environment pins spaCy 3.5.3 with the `en_core_web_sm` 3.5.0 model ✅ [the scorer's install script](../../../1-lora-correction/scripts/review_install_t2icomp.sh), lines 9 and 10. That "a blue bench and a green bowl" splits into exactly "a blue bench" and "a green bowl" is ✍️ stated by the picture; the parser was not run for this page.
 - **Consequence:** the colour rides inside the question, so "a green bowl?" asks about a green bowl and not about any bowl. A picture with the colours swapped is asked about two things it does not hold. On "a yellow bow and a pink bowl", CO3's render with the colours swapped scored 0.1899 where PoE's render with both drawn scored 0.9540 ✍️ [the Attend-and-Excite finding](../../../1-lora-correction/report/against-other-methods/how-does-the-adapter-score-on-the-attend-and-excite-prompts.md#what-a-high-and-a-low-cell-look-like); the finding marks the swap as the reason 🔍 inferred, because the per-question answers were not kept.
 
@@ -85,13 +86,16 @@ Noun phrases are taught with textbook pages on [the noun phrase card](../../../.
 
 🔤 **The name:** yes-probability
 
-- **yes**: the answer word that is read. **probability**: a share of belief between 0 and 1. On the picture, the blue bars under "P(yes) per question".
+- **yes**: the answer word that is read.
+- **probability**: a share of belief between 0 and 1. On the picture, the blue bars under "P(yes) per question".
 - **Formula, in those words:** of the belief the answer transformer puts on its first word being "yes" or "no", the share on "yes".
 - **Consequence:** the answer transformer spreads its belief over 30,524 words, and every word except "yes" and "no" is thrown away before the share is taken. A model that gives "yes" 0.60 and "no" 0.15 and a model that gives them 0.06 and 0.015 both read 0.80. Worked on [the question page](02-how-the-question-reads-the-picture.md#the-answer-word-by-what-moves).
 
 🔤 **The name:** T2I-CompBench
 
-- **T2I**: text to image. **Comp**: compositional, prompts that put several described things together. **Bench**: benchmark, a fixed test that every method runs the same way so their numbers line up. On the picture, the red box with its Color, Shape and Texture rows.
+- **T2I**: text to image.
+- **Comp**: compositional, prompts that put several described things together.
+- **Bench**: benchmark, a fixed test that every method runs the same way so their numbers line up. On the picture, the red box with its Color, Shape and Texture rows.
 - **Formula, in those words:** a category's number is the mean of the BLIP-VQA scores of every picture made for its prompts. The T2I-CompBench++ paper scores 300 test prompts per category at 10 images per prompt with a fixed seed ✍️ [the new-rival scan](../../../artifacts/notes/progress/targets/reads/new-rival-scan.csv), its T2I-CompBench++ rows.
 - **Consequence:** fixed prompts do not fix the number. Plain SDXL on Color reads 0.5879 in CoMat's table and 0.6369 in ToMe's, so the two tables did not share a protocol ✍️ [the limits page](../../../artifacts/notes/progress/targets/limits.md#t2i-compbench), line 258. Our own rerun of plain SDXL through CoMat's sampler reads 0.6172 at seed 42 ✍️ [the CoMat review](../../../artifacts/notes/progress/reproductions/CoMat/review.md), line 35.
 

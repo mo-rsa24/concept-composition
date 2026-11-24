@@ -175,7 +175,8 @@ The first form is what the code computes: p_yes and p_no are entries 2748 and 20
 
 🔤 **The name:** softmax
 
-- **soft**: not all or nothing; every word keeps some share. **max**: the largest logit takes the largest share. On the picture, the grey bars with the two pale blue ones, yes and no, standing out.
+- **soft**: not all or nothing; every word keeps some share.
+- **max**: the largest logit takes the largest share. On the picture, the grey bars with the two pale blue ones, yes and no, standing out.
 - **Formula, in those words:** raise e to each word's logit and divide by the total, so the shares add to 1.
 - **Consequence:** the scorer's renormalisation over yes and no hides how sure BLIP was that the answer is a yes or a no at all. A question the model would rather answer "blue" still gets a confident-looking 0.80, as the worked case shows.
 

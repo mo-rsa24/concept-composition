@@ -106,7 +106,8 @@ $$
 $$
 
 🔤 **The name:** centre of mass
-- **centre**: the middle point. **mass**: how much there is. A map's centre of mass is the average place, each patch weighted by its share.
+- **centre**: the middle point.
+- **mass**: how much there is. A map's centre of mass is the average place, each patch weighted by its share.
 - **On the picture:** the two green boxes; with u as the weights, Δ_u is the cat map's average left-right place minus the dog's.
 - **Formula, in those words:** Δ_u = (sum over patches of place × cat share) − (the same for dog). Negative means the cat sits further left.
 - **Consequence:** on the fused body both averages are equal and Δ_u = 0. After one update the cat map reads (0.3582, 0.3382, 0.2973, 0.0063) and the dog's the mirror, so Δ_u = −0.6221 and "left of" gets 0.7961. ✅ The answer key. A hand-set head like this one is exactly a comparison of centres of mass, the rule hand-written losses use; Learn-to-Steer's point is that a trained head finds its own rule. ✍️ The miniature's card.
@@ -142,7 +143,8 @@ $$
 For the cat channel's bottom-left number (u = −1), both layers add up: −4 × (0.75 × 0.209987 / 2.202433 + 0.25 × 0.196612 / 2.299477) = −4 × (0.071507 + 0.021376) = −0.3715. A finite difference on all 8 numbers agrees to 1.2 × 10⁻¹⁰. ✅ The answer key, recomputed this session.
 
 🔤 **The name:** finite difference
-- **difference**: one value minus another. **finite**: of a real, measurable size, against the infinitely small change a derivative takes.
+- **difference**: one value minus another.
+- **finite**: of a real, measurable size, against the infinitely small change a derivative takes.
 - **On the picture:** a check beside the orange lane: nudge one latent number, run the whole forward pass again, and see how far the loss moved.
 - **Formula, in those words:** slope ≈ (loss after a nudge of h − loss before) / h.
 - **Consequence:** for the cat's bottom-left number a nudge of h = 1 gives −0.3156, h = 0.1 gives −0.3798, and h = 0.001 gives −0.3716, closing on the chain rule's −0.3715 as the nudge shrinks. A finite difference agreeing with the chain rule is what shows the hand-worked slopes have no slip. ✅ Computed this session with a reimplementation of the miniature from the formulas on this page, which reproduces the key's loss 1.6094 and gradient length 0.7664. The chain rule itself is on [the chain rule card](../../../../../Obsidian/Mathematics/Calculus/Chain%20Rule.md#where-to-learn-this).

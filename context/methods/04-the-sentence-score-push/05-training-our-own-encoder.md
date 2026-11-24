@@ -38,6 +38,8 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#what-one-training-example-d
 
 **The judged window**: the digit sampler's steps 14 to 25 of 50, which keep as much of the canvas as SDXL's steps 0 to 15 keep of a picture.
 
+**V1**: the step on Loop 8's lane of the progress board that built the small digit-canvas environment and checked that the canvases rebuild to the same data hash and that a zero push changes no pixel.
+
 ## What one training example does
 
 Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#table-of-contents) | [Next](#the-names-taken-apart) ➡️
@@ -76,12 +78,14 @@ Navigation: ⬅️ [What one training example does](#what-one-training-example-d
 **Each name points at one part of the opening picture.**
 
 🔤 **The name:** noise-aware
-- **noise**: the random grey speckle added to the canvas. **aware**: knowing about it. On the picture, the grey "step t" box feeding the green encoder.
+- **noise**: the random grey speckle added to the canvas.
+- **aware**: knowing about it. On the picture, the grey "step t" box feeding the green encoder.
 - **Formula, in those words:** each block's features h become h (1 + γ) + β, where γ and β are read from the step's learned table, so the same encoder treats each noise level differently (`FilmBlock`, lines 113 to 117).
 - **Consequence:** across the judged window the clean canvas's weight in x_t rises from about 0.076 near timestep 712 to 0.308 near timestep 480, against noise weighted 0.997 and 0.951 ✍️ ([the digit-map checkers' network view](../03-the-digit-map-checkers/02-the-network-view.md#the-canvas-and-its-noise), the same schedule at the nearest tabled timesteps). The seen-digit score climbs from 0.64 at step 14 to 0.89 at step 25 as that weight grows ✅ (the result file).
 
 🔤 **The name:** caption bank
-- **caption**: a sentence that describes a picture. **bank**: a store kept ready to draw from. On the picture, the top-left blue box, "35 captions naming only the digits 0 to 4", and the "34 other captions" strip.
+- **caption**: a sentence that describes a picture.
+- **bank**: a store kept ready to draw from. On the picture, the top-left blue box, "35 captions naming only the digits 0 to 4", and the "34 other captions" strip.
 - **Formula, in those words:** every training canvas is compared with all 35 at once, and the loss rewards the true one's share.
 - **Consequence:** a caption naming seven is not in the bank, so no update pushes a 7's vector toward or away from it. Reading a 7 then rests on where an unseen shape happens to land, and the unseen digits read 0.590 against 0.758 seen ✅ (the result file; the reasoning is [the finding's](../../../2-classifier-guidance/report/the-sentence-score/does-our-own-noise-aware-model-read-unseen-digit-pairs.md#concepts-this-uses)).
 
@@ -168,7 +172,9 @@ Lines 106 to 134. Each block halves the grid: 32 × 64 becomes 16 × 32, 8 × 16
 Lines 180 to 183, inside `train`. Every canvas in a batch of 256 gets its own random step from the 26, its own noise (`noised`, lines 162 to 164, x_t = √ᾱ x_0 + √(1 − ᾱ) ε), and one row of 35 cosines divided by τ; `bank` is the 35 seen captions' frozen vectors. 8,000 updates with Adam at 2 × 10⁻⁴ ✅ (lines 53 to 55 and 173).
 
 🔤 **The name:** Adam, adaptive moment estimation
-- **moment**: a running average, here of each weight's recent slopes (the first moment) and of their squares (the second). **adaptive**: each weight's step is divided by the root of its own second moment, so its size adapts to that weight's slopes. **estimation**: the averages are estimates built up update by update.
+- **moment**: a running average, here of each weight's recent slopes (the first moment) and of their squares (the second).
+- **adaptive**: each weight's step is divided by the root of its own second moment, so its size adapts to that weight's slopes.
+- **estimation**: the averages are estimates built up update by update.
 - **Formula, in those words:** step = learning rate × (average slope) / √(average squared slope), per weight.
 - **Consequence:** on the very first update the two averages are the slope and its square, so every weight moves by about the learning rate, 2 × 10⁻⁴, whatever its slope. A weight with slope 0.149 and one with slope 0.001 both move 0.0002, where a plain step at the same rate would move them 0.0000298 and 0.0000002. ✅ Computed this session with PyTorch's default Adam settings.
 

@@ -46,6 +46,10 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#what-one-step-does) ➡️
 
 **The miniature**: the ladder's four-pixel toy, worked in full on [the miniature page](03-the-miniature.md). Its weights are set by hand; its noise level is the real one at timestep 480.
 
+**V1**: the step on Loop 8's lane of the progress board that built the small digit-canvas environment and checked that the canvases rebuild to the same data hash and that a zero push changes no pixel.
+
+**V3**: the step on Loop 8's lane of the progress board that pushed the digit product with the count checker's gradient on unseen digit pairs, against the plain product and a random push of the same size. The V3 compose script is its code.
+
 ## What one step does
 
 Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#table-of-contents) | [Next](#the-names-taken-apart) ➡️
@@ -98,7 +102,9 @@ Navigation: ⬅️ [What one step does](#what-one-step-does) | 📋 [TOC](#table
 - **Consequence:** with no push the plain product drew 0 clean pairs of 320 on the ten pairs among digits 5 to 9; with the count checker's push it drew 43. ✍️ [The push finding, section 1](../../../2-classifier-guidance/report/abstract-checkers-on-digits/does-the-count-checkers-push-compose-unseen-digits.md#1-the-push-separates-the-fused-digit).
 
 🔤 **The name:** logit
-- **logit**: short for "logistic unit", the log of the odds. **odds**: the chance of yes divided by the chance of no. **log**: the natural logarithm, which turns "times e" into "plus 1".
+- **logit**: short for "logistic unit", the log of the odds.
+- **odds**: the chance of yes divided by the chance of no.
+- **log**: the natural logarithm, which turns "times e" into "plus 1".
 - **On the picture:** the red number at the end of the green trapezoid, before any chance is taken from it.
 - **Formula, in those words:** ℓ = log(σ / (1 − σ)), the log of the odds, and the sigmoid σ(ℓ) in [the words this page uses](#words-this-page-uses) turns it back into a chance.
 - **Consequence:** adding 1 to a logit multiplies the odds by e, about 2.72, wherever it starts. The table runs it on this page's two logits. ✅ Computed this session from the miniature's key and the saved count checker's logit.

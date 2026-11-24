@@ -26,7 +26,9 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#from-answers-to-one-picture
 
 **Seed**: the number that fixes a render's starting noise; the same prompt at ten seeds gives ten pictures.
 
-**Printed number**: a score as a rival's paper prints it in a table. **Rerun**: our own run of the rival's released code, scored with the same scorer.
+**Printed number**: a score as a rival's paper prints it in a table.
+
+**Rerun**: our own run of the rival's released code, scored with the same scorer.
 
 **Standard error**: how far a mean would typically move if the prompts were drawn again; here it comes from resampling prompts 10,000 times.
 

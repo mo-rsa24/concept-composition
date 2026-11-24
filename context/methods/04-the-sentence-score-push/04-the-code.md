@@ -173,7 +173,8 @@ Navigation: ⬅️ [Our differentiable copy of the map](#our-differentiable-copy
 Released `src/train_model_classic.py`, lines 47 to 51; line 71 freezes `logit_scale` again for every run. `text_model.*` and `text_projection.*` contain "text" and freeze; `vision_model.*` and `visual_projection.weight` do not. Against base CLIP, `visual_projection.weight`, `text_projection.weight` and the first text layer's key projection differ by 0, and the first vision layer's key projection differs by 6.1% of its norm; only those tensors were compared, and the command that produced the checkpoint is not released ✍️ ([the checkpoint comparison](../../../artifacts/notes/progress/noise-text-critic/01-reading/tools/checkpoint-compare.txt)).
 
 🔤 **The name:** `logit_scale`
-- **logit**: a score before a softmax turns it into a share. **scale**: what it is multiplied by.
+- **logit**: a score before a softmax turns it into a share.
+- **scale**: what it is multiplied by.
 - **On the picture:** not drawn; it multiplies every cell of the training matrix on [the network view](02-the-network-view.md#training-on-noisy-latents).
 - **Formula, in those words:** the stored number is t_s, and every cosine is multiplied by e^{t_s} before the softmax.
 - **Consequence:** NoisyCLIP stores 4.59375 and base CLIP 4.60517, multipliers of 98.86 and 100.00 ✍️ (the ladder's numbers file). A push that differentiates the scaled logit instead of the cosine is 98.86 times longer at the same λ ✍️ (the code walk, block 8).
@@ -235,7 +236,8 @@ Navigation: ⬅️ [The batch and the loss](#the-batch-and-the-loss) | 📋 [TOC
 `w3_steer.py`, lines 124 to 133. `image_features` and `text_features` (`common.py`, lines 114 to 120) normalise each vector to length 1, so every product here is a cosine. With one wrong sentence the `max` is that sentence's cosine, and the score is the ladder's D: on the miniature, 0.9687 − 0.9995 = −0.0308 ✅ (the key). The reading test scored exactly this on 220 cat and dog pictures ✍️ ([the reading finding](../../../2-classifier-guidance/report/the-sentence-score/can-a-sentence-score-read-the-five-properties.md#words-this-page-uses)).
 
 🔤 **The name:** highest wrong
-- **highest**: the largest of several. **wrong**: the sentences that name a mistake, such as "a photo of one animal" and "one animal that is part cat and part dog" for counting.
+- **highest**: the largest of several.
+- **wrong**: the sentences that name a mistake, such as "a photo of one animal" and "one animal that is part cat and part dog" for counting.
 - **Formula, in those words:** D = S_right − max over the wrong sentences of S_wrong, so the score is positive only when the right sentence beats every wrong one.
 - **Consequence:** the gradient of a maximum flows only to the wrong sentence that is currently highest. Run back on the reading finding's clean pair at seed 239: right 0.260, best wrong 0.235, D = +0.025 ✍️ ([the reading finding, section 3](../../../2-classifier-guidance/report/the-sentence-score/can-a-sentence-score-read-the-five-properties.md#3-counting-fails-even-on-the-finished-picture)).
 
@@ -283,7 +285,8 @@ Navigation: ⬅️ [The score difference in our code](#the-score-difference-in-o
 `w3_steer.py`, lines 158 to 168. The gradient is taken at `x.detach()` with tracking switched on, in full precision; a gradient of length 0 is counted in `self.dead` and gives no push.
 
 🔤 **The name:** fixed length
-- **fixed**: set once and not changed by the gradient. **length**: the push's size, ‖p‖.
+- **fixed**: set once and not changed by the gradient.
+- **length**: the push's size, ‖p‖.
 - **Formula, in those words:** p = 0.4 × ‖ε_guided‖ × g / ‖g‖: keep g's direction, throw away its size, and set the size to 0.4 of the prediction's.
 - **Consequence:** on the miniature, the λ σ_t form gives a push of length 1.6 × 0.1547 = 0.248; the fixed-length form, with ε_base's length √(4 × 0.25) = 1.0 standing in for the guided prediction, gives 0.4 whatever g's size, 1.6 times longer here. Double g and the first push doubles while the second does not change. ✅ Computed this session from the key's `g_length` and `eps_base`.
 

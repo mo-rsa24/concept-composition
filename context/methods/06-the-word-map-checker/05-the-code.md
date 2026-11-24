@@ -125,7 +125,8 @@ latents = latents - step_size * grad
 `test_time_optimization.py`, lines 175 to 187 (the dots stand for its lines setting the relation index and the first-pass checks) and 137 to 141. `max_refinement_steps` is 15, so 16 passes. The loop stops once the loss reaches its target, 10⁻⁵ at sampler step 0 rising to 7 × 10⁻⁵ from step 3. ✍️ Block 8. On the miniature all 16 updates fire and "left of" ends at 0.9936. ✅ [The miniature page](04-the-miniature.md#stage-4-two-ways-to-apply-it).
 
 🔤 **The name:** refine loop
-- **refine**: improve by small repeated changes. **loop**: the same steps run again.
+- **refine**: improve by small repeated changes.
+- **loop**: the same steps run again.
 - **On the picture:** the top row's orange arrow from the loss back to the latent, travelled up to 16 times per sampler step.
 - **Formula, in those words:** while the loss is above its target and fewer than 16 passes are done, x_t ← x_t − η ∇_{x_t} L_t.
 - **Consequence:** each pass runs the U-Net and the head forward and backward, which is why the paper reports SD 2.1 going from 4.5 s to 90 s per image. ✅ The paper's text, p. 7. On the miniature the gradient's length falls from 0.7664 at pass 0 to 0.0098 at pass 15. ✅ The answer key.
@@ -176,7 +177,8 @@ return poe_eps(eps_a, eps_b, eps_uncond)
 Lines 155 to 158 of `product_eps` (lines 149 to 158). Each subject's guided prediction is ε_∅ + g (ε_subject − ε_∅), and the product is their sum minus ε_∅ once. ✅ What the product is and why the empty prompt is taken off once is on [PoE composition](../../world/poe-composition.md#what-poe-composition-is).
 
 🔤 **The name:** classifier-free guidance, the guidance scale g
-- **guidance**: steering the sampler toward what the prompt asks. **classifier-free**: it needs no separate classifier, because the gap between the prediction with the prompt and the prediction with the empty prompt already points toward the prompt.
+- **guidance**: steering the sampler toward what the prompt asks.
+- **classifier-free**: it needs no separate classifier, because the gap between the prediction with the prompt and the prediction with the empty prompt already points toward the prompt.
 - **On the code:** `guided_eps(eps_a_raw, eps_uncond, guidance_scale)`, once per subject.
 
 $$

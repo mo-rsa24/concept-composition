@@ -37,6 +37,8 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#the-toy) ➡️
 
 **Alive**: 1 for a colour inside 0 to 255, which passes its gradient, and 0 for a clamped one.
 
+**W3**: Loop 9's step planned to push CO3's renders with the sentence score, allowed only on steps where its reading test, W2, found the score readable.
+
 ## The toy
 
 Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#table-of-contents) | [Next](#the-linear-map-on-two-pixels) ➡️
@@ -144,7 +146,8 @@ x_{\text{next}} = \underbrace{0.8}_{\text{next signal}}\ \frac{x_t - \underbrace
 $$
 
 🔤 **The name:** DDIM, denoising diffusion implicit model
-- **denoising**: taking noise out. **diffusion**: noise spreading into a picture tick by tick during training, which the sampler runs backwards. On the picture, the "DDIM step" box at the lower left.
+- **denoising**: taking noise out.
+- **diffusion**: noise spreading into a picture tick by tick during training, which the sampler runs backwards. On the picture, the "DDIM step" box at the lower left.
 - **implicit**: the DDIM paper's word for a model whose samples are a fixed function of the starting noise, with no fresh noise drawn on the way. In the step above, ε̂ is used twice: once to guess the clean latent, and once to put back the noise the next level should hold.
 - **Formula, in those words:** guess the clean latent as (x_t − 0.8 ε̂) / 0.6, scale it by the next signal 0.8, and add the next noise level 0.6 times the same ε̂.
 - **Consequence:** on pixel A's z₀ (x_t = 1, ε̂ = 0.468) the clean guess is 1.0427 and the next value 1.1149, the same on every run. Make the step draw fresh noise instead (the paper's setting η = 1): a new random number times 0.4961 joins, the reused ε̂ keeps a weight of only 0.3375, and the value becomes 0.9921 plus the draw, 1.4882 for a draw of +1 and 0.4960 for −1. The coefficient on ε̂ moves from −0.4667 to −0.7292, so the same push would move the next latent 0.7292 times its size instead of 0.4667. ✅ Computed this session from the step's four settings. [The DDIM card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Diffusion%20Models/DDIM.md#where-to-learn-this) holds its textbook pages.
