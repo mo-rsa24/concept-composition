@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-25 00:16 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-25 00:30 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -81,7 +81,7 @@ The finish range is `session_status.py`'s, from the 63 finished steps: fastest p
 | 7. Abstract-checker papers | Finished; its session is closed. | 0 | done | closed | nothing |
 | 8. Abstract checkers | Its digit identity checker reads pasted digits (0.861 against 0.75) but not the sampler's own states. Its method review found the first checker ranks but its cut drifts, and the second memorised. It finishes one cheap check of whether digits are readable there (job 94717), then closes its removal test as not run. Its SDXL test against CO3 is next. | 2 | 1.7 h to 61.7 h | busy | question 96 decides the SDXL test's readability gate; Loop 6's training list |
 | 11. Drain into the pillars | Stopped by your answer on 88; every finished result is on a report page. | 1 | when restarted | stopped its loop | a new result worth draining |
-| 12. Where CO3 leaks | Its six planned steps are done: nothing predicts which pairs borrow parts, and its first fix was null, a test that never used each animal's own prediction ([verdict](../leakage/06-verdict.md)). By question 98 it runs one more step: a free text-only check, then each animal's own prediction inside its drawn box, about 0.8 GPU-hours. | 1 to add | not yet estimated | idle | its own new step |
+| 12. Where CO3 leaks | Its six planned steps are done: nothing predicts which pairs borrow parts, and its first fix was null, a test that never used each animal's own prediction ([verdict](../leakage/06-verdict.md)). Now on step Z7 (question 98): the free text-only check runs (job 94790), then each animal's own prediction inside its drawn box beside a whole-picture control re-rendered in the same window, about 1.7 GPU-hours, its 48-picture bar written first ([design](../leakage/07-own-prediction/design.md)). | 1 | not yet estimated | busy | its own jobs |
 
 ## Resources
 
@@ -148,6 +148,7 @@ Newest first.
 | Time | To | What and why |
 |---|---|---|
 | 17:02 | Loop 8 | Its rewritten SDXL test passes the design check (stop rule, random and zero controls, comparison prompts fixed in advance, the same two-clear measure as Loop 6; about 7 GPU-hours, inside budget). Its board record goes to you as question 89. |
+| 00:30 | Loop 12 | Question 98 decided: it runs the own-prediction test as step Z7. Its design passed the check: bar written first, the control re-rendered in the same window so only the box contents differ, about 1.7 GPU-hours. |
 | 23:50 | Loop 12 | Its [method review](../leakage/method-review.md) answered: records corrected to say what the drawn-box test did, the two disagreeing records reconciled, question 97's third rerun read free from its own records. Next, in order: a free text-only check, each animal's own prediction inside its box (about 0.8 GPU-hours), and the text-side swap only if the free check supports it, with a positive control. |
 | 23:35 | Loops 12 and 8 | **Method review request** to Loop 12 after two nulls, with question 97 decided; Loop 8 runs that question's first rerun beside its free check. One line in `requests.md`. |
 | 22:30 | Loops 8 and 6 | Loop 8's method review answered (`method-review.md`): the first checker ranks but its cut drifts, the second memorised. Its removal test closes after the visibility check; the gate question is yours as 96, and both loops keep their recorded gate until then. |
