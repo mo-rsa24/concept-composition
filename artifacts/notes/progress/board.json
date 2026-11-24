@@ -981,23 +981,35 @@
   },
   {
    "id": "X7",
-   "label": "X7 Unseen pairs and the arithmetic tests",
+   "label": "X7 Figures for each trained space",
    "owner": "s10",
-   "proof": "artifacts/notes/progress/score-space/07-test/review.md reports unseen-pair accuracy and both arithmetic tests against their controls and bars",
    "needs": [
     "X6"
+   ],
+   "state": "todo",
+   "proof": "artifacts/notes/progress/score-space/07-figures/README.md shows, for each trained variation, one annotated-explainer overview and its clip-contrastive deep dives as PNG and SVG, each looked at full size",
+   "serves": "Both papers",
+   "objective": "Build and test"
+  },
+  {
+   "id": "X8",
+   "label": "X8 Unseen pairs and the arithmetic tests",
+   "owner": "s10",
+   "proof": "artifacts/notes/progress/score-space/08-test/review.md reports unseen-pair accuracy and both arithmetic tests against their controls and bars",
+   "needs": [
+    "X7"
    ],
    "state": "todo",
    "serves": "Both papers",
    "objective": "Build and test"
   },
   {
-   "id": "X8",
-   "label": "X8 Verdict per paper",
+   "id": "X9",
+   "label": "X9 Verdict per paper",
    "owner": "s10",
-   "proof": "artifacts/notes/progress/score-space/08-verdict.md has one row per variation with its numbers against its bar and a suggestion per paper",
+   "proof": "artifacts/notes/progress/score-space/09-verdict.md has one row per variation with its numbers against its bar and a suggestion per paper",
    "needs": [
-    "X7"
+    "X8"
    ],
    "state": "todo",
    "serves": "Both papers",
@@ -1447,7 +1459,8 @@
       "X5",
       "X6",
       "X7",
-      "X8"
+      "X8",
+      "X9"
      ]
     }
    ]

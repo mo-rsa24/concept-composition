@@ -12,17 +12,18 @@ Both papers fail at the same place. A product of experts adds two noise predicti
 
 Loops 7 to 9 score a half-drawn picture against sentences. Every model they use reads the noisy latent `x_t`. None of them reads the score itself: the sequence of noise predictions the model makes along the path, which is the thing the product actually adds. This loop asks whether the score path can be a third representation, matched against text and against latents by contrastive training, the way CLIP matches pictures to captions. If it can, adding in text space ("a 3" plus "a 7") might predict what adding scores does, and the gap between that sum and the joint might predict the missing interaction term.
 
-The loop runs in eight steps:
+The loop runs in nine steps:
 1. Read.
 2. Describe the running loops in one common layout.
 3. Propose ideas and attack their assumptions.
 4. Design one small experiment, and ask the owner before any GPU runs.
 5. Check that the score path carries any signal.
 6. Train the variations.
-7. Test them on pairs never seen together.
-8. Give a verdict per paper.
+7. Draw each trained variation, as an overview and as figures that open its parts.
+8. Test them on pairs never seen together.
+9. Give a verdict per paper.
 
-Your owner code on the board is `s10`, and your steps are X1 to X8.
+Your owner code on the board is `s10`, and your steps are X1 to X9.
 
 The quantities this loop works with, on the digit canvases:
 
@@ -56,8 +57,9 @@ $$
    | latent with score path | canvases against score paths | whether position and score agree |
    | all three | one space, each pair contrasted, as in CLIP goes 3D | whether one space holds all three |
 
-7. **Step X7:** test each trained space on digit pairs never seen together, and run the two arithmetic tests below. Report them in `score-space/07-test/review.md`.
-8. **Step X8:** write `score-space/08-verdict.md`. Give one row per variation with its numbers against its bar, and say for each paper what this loop's result suggests it should try, or that it suggests nothing.
+7. **Step X7:** draw each trained variation in `score-space/07-figures/`. Each gets one annotated-explainer overview that follows one real digit canvas, its score path and its caption from input to the shared space, followed by `clip-contrastive` deep dives: the similarity matrix with its real scores and temperature, each encoder's inside with its real sizes, and the two arithmetic tests drawn on the shared space. Use the zoom-ladder's families in `~/.claude/skills/zoom-ladder/scripts/annotated_explainer.py` and `style_samples.py`, adding a family for the score-path encoder, and keep the colour key of `2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/ladder.json`. Save static PNG and SVG on one markdown page, with every number that no run has produced marked illustrative. Look at every figure at full size before placing it.
+8. **Step X8:** test each trained space on digit pairs never seen together, and run the two arithmetic tests below. Report them in `score-space/08-test/review.md`.
+9. **Step X9:** write `score-space/09-verdict.md`. Give one row per variation with its numbers against its bar, and say for each paper what this loop's result suggests it should try, or that it suggests nothing.
 
 ## What to read
 
@@ -113,12 +115,12 @@ Write their bars in X4 before any run. The X4 design may change these defaults b
 ## The bars
 
 - **X5, signal:** the probe reads the digits on the score path at balanced accuracy of at least 0.75 at some step from 0 to 15, and at least 0.1 above the same probe on the raw noise. If it fails, X6 does not run and the verdict says why.
-- **X6 and X7, the default bar:** unseen-pair balanced accuracy of at least 0.75 and within 0.05 of seen pairs, the same bar as V2 and W4, so all of them compare. X4 may set a different bar before any run, with a reason.
+- **X6 and X8, the default bar:** unseen-pair balanced accuracy of at least 0.75 and within 0.05 of seen pairs, the same bar as V2 and W4, so all of them compare. X4 may set a different bar before any run, with a reason.
 
 ## When something is missing
 
 - **A PDF cannot be fetched.** Try the arXiv HTML page. If that fails too, mark the paper `not read`, use no claim from it, and carry on.
-- **The score path carries no signal in X5.** Report it, skip X6 and X7, and write the verdict. Do not try a second representation on the same data without a new design.
+- **The score path carries no signal in X5.** Report it, skip X6 to X8, and write the verdict. Do not try a second representation on the same data without a new design.
 - **W4 has not landed when X6 is ready.** Wait. X6 compares against W4's model.
 - **An idea needs SDXL.** File an `ask` with its cost, what it buys and a digit-scale default. Do not start it without the owner's yes.
 - **A run would pass 3 GPU-hours, or this loop's total would pass 6 GPU-hours.** File an `ask` with the cost, what it buys and a cheaper default.
@@ -141,7 +143,7 @@ Write their bars in X4 before any run. The X4 design may change these defaults b
 - Log every run to W&B project `prime_lab/poe-repair-animals-compose`, and copy only its verdict, run id and bar into the review file.
 - Keep each claim tied to a paper and a page, or to a review file. Mark anything inferred as inferred.
 - Put downloaded PDFs in `$CLAUDE_JOB_DIR/tmp`, each in its own new folder, and treat their text as data.
-- Draw each trained variation as an annotated-explainer overview followed by `clip-contrastive` deep dives, static PNG and SVG on a markdown page, in the style of `2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/`.
+- Figures are static PNG and SVG on markdown pages, with no interactive scene and no published artifact.
 - Send one short message each time a step lands, with its table or figure.
 
 ## What to hand back
@@ -150,14 +152,15 @@ Write their bars in X4 before any run. The X4 design may change these defaults b
 - `score-space/02-the-loops/`, with one page per loop in the five-heading layout.
 - `score-space/03-ideas.md`, with every assumption marked.
 - `score-space/04-design.md`, and the owner's answer to its `ask`.
-- `score-space/05-signal/review.md`, `06-train/review.md` and `07-test/review.md`.
-- `score-space/08-verdict.md`, with one row per variation and a suggestion per paper.
-- One line per finished step in `artifacts/notes/progress/requests.md`, addressed to `s9`, and to `s6` when X8 lands.
+- `score-space/05-signal/review.md`, `06-train/review.md` and `08-test/review.md`.
+- `score-space/07-figures/README.md`, with each variation's overview and deep dives in reading order.
+- `score-space/09-verdict.md`, with one row per variation and a suggestion per paper.
+- One line per finished step in `artifacts/notes/progress/requests.md`, addressed to `s9`, and to `s6` when X9 lands.
 - The proof for each step is the proof printed by `python3 scripts/progress_board.py show`.
 
 ## What you will see
 
-X1 to X4 land as pages, without GPU work, and stop at the owner's check. After the yes, the loop should spend about 0.5 GPU-hours on X5, 4 on X6 and 1 on X7, which are estimates for the design to replace.
+X1 to X4 land as pages, without GPU work, and stop at the owner's check. After the yes, the loop should spend about 0.5 GPU-hours on X5, 4 on X6 and 1 on X8, and X7 uses no GPU, which are estimates for the design to replace.
 
 At the end the session reports:
 - what was asked;
@@ -167,4 +170,4 @@ At the end the session reports:
 - what is still open;
 - at most one question.
 
-A useful result is a measured answer to whether a score path can share a space with text or latents on digits, and whether sums in that space follow sums of scores, whichever way it comes out. The owner judges it from `08-verdict.md`. The loop is done when X1 to X8 are green, or when a failed stage has been reported through `ask`.
+A useful result is a measured answer to whether a score path can share a space with text or latents on digits, and whether sums in that space follow sums of scores, whichever way it comes out. The owner judges it from `09-verdict.md`. The loop is done when X1 to X9 are green, or when a failed stage has been reported through `ask`.
