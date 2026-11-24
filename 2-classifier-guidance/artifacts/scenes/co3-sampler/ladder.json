@@ -62,7 +62,7 @@
     "draw_overview.py"
    ],
    "style": "annotated explainer, in the register of reference/owner-annotated-progress-with-code-boxes.png",
-   "open_slot": "worked case with a real latent: waits for /datasets/mmolefe/poe_repair_min/loop-12/z2/smoke/ (not present on 2026-11-24)"
+   "worked_case_slot": "filled: one panel of exact-plane/co3-exact-plane.png (eagle x fox, step 4), cropped in draw_overview.py"
   },
   "0.5": {
    "state": "built",
@@ -137,6 +137,65 @@
   "close": {
    "state": "missing",
    "why": "the closing page reads the subject through the miniature, which is skipped"
+  },
+  "worked case": {
+   "state": "built",
+   "shows": "every CO3 pass on two real pictures at seed 6001 (cheetah x cougar, borrowed; eagle x fox, own parts): decoded guesses per step with distances and weights, the exact flat sheet through the three Tweedie means per step, the CO3-versus-plain path gap over 50 steps, and one corrector pass worked with real numbers",
+   "folder": "exact-plane/",
+   "figures": [
+    {
+     "part": "what CO3 sees at each step, cheetah x cougar",
+     "files": [
+      "exact-plane/co3-steps-cheetah-cougar.png",
+      "exact-plane/co3-steps-cheetah-cougar.svg",
+      "exact-plane/draw_steps.py"
+     ]
+    },
+    {
+     "part": "the same, eagle x fox, smaller",
+     "files": [
+      "exact-plane/co3-steps-eagle-fox.png",
+      "exact-plane/co3-steps-eagle-fox.svg",
+      "exact-plane/draw_steps.py"
+     ]
+    },
+    {
+     "part": "the exact sheet per step, both pairs",
+     "files": [
+      "exact-plane/co3-exact-plane.png",
+      "exact-plane/co3-exact-plane.svg",
+      "exact-plane/draw_exact_plane.py"
+     ]
+    },
+    {
+     "part": "where CO3 changes the path",
+     "files": [
+      "exact-plane/co3-path-difference.png",
+      "exact-plane/co3-path-difference.svg",
+      "exact-plane/draw_path_difference.py"
+     ]
+    },
+    {
+     "part": "one corrector pass worked through",
+     "files": [
+      "exact-plane/worked-pass.md",
+      "exact-plane/write_worked_pass.py"
+     ]
+    }
+   ],
+   "numbers": {
+    "script": "exact-plane/exact_plane_numbers.py",
+    "json": "exact-plane/exact_plane_numbers.json"
+   },
+   "source": {
+    "slurm_job": 94450,
+    "code_snapshot": "44b51af4",
+    "runner": "2-classifier-guidance/scripts/leakage/co3_inside.py",
+    "design": "artifacts/notes/progress/leakage/co3-inside/design.md",
+    "cluster": "/datasets/mmolefe/poe_repair_min/loop-12/co3-inside/",
+    "laptop_copy": "/home/molef/.claude/jobs/0071c318/tmp/co3-inside/"
+   },
+   "style": "the ladder's colour key and co3_figkit crossing check; the toy figures co3-toy-corrector.png and co3-geometry-sketch.png drawn again on real vectors"
   }
  },
  "paper_code_disagreements": "code-walk.md, section 'Where the paper and the code disagree'"

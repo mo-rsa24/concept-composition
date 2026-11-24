@@ -26,12 +26,9 @@ algorithm, how many passes and which $\beta$ is laid out in the [schedule figure
 The picture at the end of the overview is the project's own CO3 render of "an eagle and a fox", seed 6001, from the
 Loop 6 paper-2 run (`/datasets/mmolefe/poe_repair_min/loop-6/m1/paper-2/full/renders/co3/an_eagle__x__a_fox/`).
 
-> [!NOTE]
-> **Waiting for the Loop 12 Z2 smoke run.** A worked case with a real latent (the distances $d_1$ and $d_2$ at each
-> pass, the weights they give, and the latent before and after each of the six CO3 steps) belongs here. Its source
-> will be `/datasets/mmolefe/poe_repair_min/loop-12/z2/smoke/`, which did not exist on 2026-11-24. No numbers are shown
-> until it lands. The project's loader sets the corrector's `verbose` to False, so the run must log `dists` and
-> `weights` itself for this slot to be filled.
+The box beside it, at the overview's bottom right, is one panel of [the worked case](#the-worked-case-every-pass-on-two-real-pictures)
+further down: every one of CO3's 40 passes recorded on two real pictures, with the distances, the weights and the move
+drawn exactly.
 
 ## One figure per part
 
@@ -51,7 +48,9 @@ and the new latent is noise built from the four predictions. That is why the pap
 **The corrector, Algorithm 3.** Each prediction is first guided with the empty prompt's ($\lambda$ = 0.8), turned into
 a Tweedie mean, and the means are summed with weights 2, $w_1$, $w_2$, which sum to 1. The latent survives with weight
 1, so this pass edits it. The figure's boxed rules set the printed algorithm beside what the code computes, because
-the rescale step differs.
+the rescale step differs. [One real corrector pass](exact-plane/worked-pass.md) fills each of these lines with the
+numbers a cheetah and cougar run produced, and [the exact-plane figure](exact-plane/co3-exact-plane.png) draws where the
+weighted sum lands among the three Tweedie means.
 
 <a href="co3-corrector.png"><img src="co3-corrector.png" width="200" alt="Algorithm 3 as a small network, with the printed and coded rules boxed beneath"></a>
 
@@ -60,6 +59,39 @@ affinity $e^{-\beta d_k}$, and the concepts share a total weight of $-1$ by affi
 $d_1 - d_2$ matters: at $\beta$ = 0.9 a gap of 1 gives $w_1 = -0.289$ and a gap of 5 gives $-0.011$.
 
 <a href="co3-weights.png"><img src="co3-weights.png" width="200" alt="equations 14 and 15 as a small network beside equation 15's curve"></a>
+
+## The worked case: every pass on two real pictures
+
+One run recorded all 40 of CO3's passes at seed 6001 on two prompts: "a cheetah and a cougar", whose finished picture
+borrows (the cougar has cheetah spots and tear marks), and "an eagle and a fox", where each animal keeps its own parts.
+The [run's design note](../../../../artifacts/notes/progress/leakage/co3-inside/design.md) says what it recorded and how
+its control was passed. Every number the figures print is in `exact-plane/exact_plane_numbers.json`.
+
+**What each prompt's guess looks like at each step.** One row per CO3 step: the decoded clean-picture guesses under the
+empty prompt, the joint prompt and each animal alone, with the two distances and two weights CO3 computed, and the
+finished pictures with CO3 on and off. By the last corrected step all four guesses share one layout, two animals side by
+side, so the four predictions CO3 compares differ only in detail.
+
+<a href="exact-plane/co3-steps-cheetah-cougar.png"><img src="exact-plane/co3-steps-cheetah-cougar.png" width="200" alt="cheetah and cougar: four decoded guesses per CO3 step with distances and weights, and the finished pictures"></a>
+<a href="exact-plane/co3-steps-eagle-fox.png"><img src="exact-plane/co3-steps-eagle-fox.png" width="200" alt="eagle and fox: the same grid, smaller"></a>
+
+**The move, drawn exactly.** The joint prompt's and the two animals' Tweedie means are three points among 65,536 numbers,
+and they fix one flat sheet. Each panel draws that sheet at true lengths. The corrector's weighted sum lands on the sheet,
+past the joint's point on the side away from the animals' weighted average, and the numbers under each panel check that
+it sits on the sheet. The code's rescale, which matches largest entries, then lifts it off the sheet: a little on
+cheetah × cougar, and on eagle × fox by about as much as the weighted sum moved it within the sheet.
+
+<a href="exact-plane/co3-exact-plane.png"><img src="exact-plane/co3-exact-plane.png" width="200" alt="the flat sheet through the three Tweedie means at each of CO3's six steps, both pairs"></a>
+
+**Where CO3 changes the path.** The gap between the CO3 latent and the latent the same seed reaches with CO3 off, at each
+of the 50 steps, as a share of the plain latent's length. It opens during CO3's six steps and keeps widening through
+the 44 plain steps after them, which run the same sampler in both runs.
+
+<a href="exact-plane/co3-path-difference.png"><img src="exact-plane/co3-path-difference.png" width="200" alt="relative gap between the CO3 and plain latents over 50 steps, both pairs, CO3's steps shaded"></a>
+
+**One pass, worked through.** [The worked pass](exact-plane/worked-pass.md) takes the first corrector pass at t = 921 on
+cheetah × cougar and fills the chain $d_k \to a_k \to w_k \to \tilde x \to r \to x_t^{(2)}$ with its real values, ending
+with the check that the result matches the latent the next pass received.
 
 ## The code, line by line
 

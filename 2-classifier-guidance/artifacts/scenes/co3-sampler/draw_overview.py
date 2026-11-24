@@ -120,9 +120,25 @@ c.text(MX + 0.12, 3.88, "after step 49: VAE decode", size=8.4, ha="left")
 c.image(HERE / "source" / "co3-eagle-fox-seed-6001.png", MX - 1.0, 1.6, 2.0, 2.0)
 r = N["render"]
 c.text(MX, 1.12, f"\"{r['prompt']}\", seed {r['seed']}\nloop-6 render, {r['seconds']} s", size=8.2)
-c.box(16.0, 0.35, 2.25, 3.25, "", kind="white", ec=KEY["fixed"], ls="--", lw=1.4)
-c.ax.text(17.125, 1.98, "Worked case with a\nreal latent: waits for\nthe Loop 12 Z2 smoke\nrun. Source, once it\nlands:\n"
-          "/datasets/mmolefe/\npoe_repair_min/\nloop-12/z2/smoke/\nNo numbers until then.", ha="center", va="center",
-          fontsize=7.9, color=KEY["fixed"], zorder=4, linespacing=1.25)
+c.box(16.0, 0.35, 2.25, 3.25, "", kind="white", ec=KEY["method"], lw=1.4, container=True)
+# one panel of exact-plane/co3-exact-plane.png (eagle x fox, step 4), cropped by the fractions its layout gives:
+# canvas 23.95 x 12.9 units, that panel and its lines from x 16.75 to 20.15 and y 0.95 to 5.5
+from matplotlib.patches import Rectangle  # noqa: E402
+import numpy as np  # noqa: E402
+from PIL import Image  # noqa: E402
+
+_im = Image.open(HERE / "exact-plane" / "co3-exact-plane.png").convert("RGB")
+_w, _h = _im.size
+_crop = np.asarray(_im.crop((int(_w * 16.75 / 23.95), int(_h * (12.9 - 5.5) / 12.9),
+                             int(_w * 20.15 / 23.95), int(_h * (12.9 - 0.95) / 12.9))))
+_iw = 2.35 * 3.4 / 4.55
+c.ax.imshow(_crop, extent=(17.125 - _iw / 2, 17.125 + _iw / 2, 1.15, 3.5), zorder=3, interpolation="bilinear")
+c.ax.set_xlim(0, c.w)
+c.ax.set_ylim(0, c.h)
+_frame = Rectangle((17.125 - _iw / 2, 1.15), _iw, 2.35, fill=False, ec=KEY["method"], lw=1.4, zorder=4)
+c.ax.add_patch(_frame)
+c.obstacles.append((_frame, "exact-plane thumbnail", "rect"))
+c.ax.text(17.125, 0.72, "Worked case, real latents:\nexact-plane/ (one of its\ntwelve panels)", ha="center", va="center",
+          fontsize=7.9, color=KEY["method"], zorder=4, linespacing=1.25)
 
 c.save("co3-overview")
