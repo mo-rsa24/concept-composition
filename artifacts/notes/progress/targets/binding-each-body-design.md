@@ -21,7 +21,7 @@ alone, and $m_A$ and $m_B$ are masks that sum to 1 at every latent cell.
 
 | Rung | Question | Runs on | Rows | Stop rule | Cost |
 |---|---|---|---|---|---|
-| 1 | Do the right regions fix identity at all? | Cat and dog, 8 seeds with saved boxes | Joint prompt, plain product, right boxes, random boxes, swapped prompts, same prompt twice | Under 4 clear pairs of 8 with the right boxes stops the idea | About 1 GPU-hour, 48 renders plus 4 previews |
+| 1 | Do the right regions fix identity at all? | Cat and dog, 8 seeds with saved boxes | Joint prompt, plain product, right boxes, random boxes, swapped prompts, same prompt twice | Under 4 clear pairs of 8 with the right boxes stops the idea, once bootstrapping and then MultiDiffusion's own code have also been run on the same boxes | About 1 GPU-hour, 48 renders plus 4 previews |
 | 2 | Can CO3 find its own regions and improve? | M1's 12 tuning pairs at seeds 6001 to 6008 | CO3 alone (reused), its own masks, swapped masks, random masks | No lead over CO3 alone stops the idea | About 5.3 GPU-hours, 288 renders plus a smoke test |
 | 3 | Does a trained per-body checker add anything? | The same tuning pairs | Rung 2's best row, with and without the checker | Runs only if rung 2 leads and identity errors remain | Costed after step D3 chooses the architecture |
 
