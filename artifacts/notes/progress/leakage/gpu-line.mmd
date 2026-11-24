@@ -1,0 +1,18 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  Q[("cluster queue, bigbatch<br/>other users and Loops 6 and 8 ahead")]:::plain
+  subgraph LINE["Loop 12's one-job line (the brief allows one GPU job at a time)"]
+    direction LR
+    S["done: smoke runs<br/>94366, 94384<br/>(capture changes 0.0 of 255)"]:::done
+    N["now: Z2 small read, job 94534<br/>eagle x fox and cheetah x cougar,<br/>8 seeds each, about 15 min of GPU"]:::doing
+    H["held: CO3 ladder capture, job 94450<br/>every corrector pass on 2 pairs,<br/>about 0.3 GPU-hours"]:::held
+    F["after: Z2 full run<br/>12 pairs x 8 seeds,<br/>about 1.5 GPU-hours"]:::todo
+    S --> N --> H --> F
+  end
+  Q -- "waits on Resources" --> N
+  N -. "when it finishes: release the hold" .-> H
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef done fill:#d3f9d8,stroke:#2b8a3e,stroke-width:2px
+  classDef doing fill:#ffe8cc,stroke:#e8590c,stroke-width:2px
+  classDef held fill:#ffffff,stroke:#868e96,stroke-width:2px,stroke-dasharray: 6 4
+  classDef todo fill:#f1f3f5,stroke:#868e96,stroke-width:2px
