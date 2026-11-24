@@ -317,5 +317,12 @@
    "time": "2026-11-24T16:46:00+02:00"
   }
  ],
- "last_briefing": "2026-11-24T16:50:00+02:00"
+ "last_briefing": "2026-11-24T16:50:00+02:00",
+ "watches": [
+  {
+   "what": "bring question 80 back to the owner",
+   "when": "Loop 6's per-step read on CO3 is scored (jobs 94593, 94594; method-search/01b-balance-the-checker-data/)",
+   "set": "2026-11-24T16:58:00+02:00"
+  }
+ ]
 }

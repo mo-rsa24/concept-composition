@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-24 16:56 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-24 16:58 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -51,7 +51,7 @@ Newest first. A default happens only if you answer with it; nothing changes whil
 
 | # | The question, in one line | Why it is yours | Default | Waiting |
 |---|---|---|---|---|
-| 80 | Should a checker choose CO3's weight-sharpness setting at each of its corrected steps ([design](../score-space/11-the-checker-chooses-on-co3.md))? First read on 6 of 12 pairs | over 3 GPU-hours on one run (about 3.1) | Loop 6 runs the first read | 4 h 8 min |
+| 80 | Should a checker choose CO3's weight-sharpness setting at each of its corrected steps ([design](../score-space/11-the-checker-chooses-on-co3.md))? First read on 6 of 12 pairs | over 3 GPU-hours on one run (about 3.1) | **you chose to wait** until Loop 6's per-step read of its checker on CO3 lands (jobs 94593 and 94594); Loop 13 brings it back with that result | since 12:25 |
 | 79 | Loop 9's test of whether sentence scores read a picture's properties has two recorded verdicts (null in its own review, inconclusive in a later fairness test). Which leads the report's title? | two records disagree | keep the test's own verdict, give the fairness test its own finding | 5 h 16 min |
 | none | Loop 10 is closed, but four of its steps (training and testing the shared spaces, and its verdict, which is written) stay open on the board, so the board counts it unfinished | changes another loop's step state | none set | since 10:34 |
 
@@ -170,4 +170,4 @@ been acted on, 93 asked nothing, and 15 waited. Nine of those were re-routed or 
 
 ## Last tick
 
-2026-11-24 16:56. Next tick about 17:06. The briefing for you is [the briefing page](briefing.md).
+2026-11-24 16:58. Next tick about 17:06. The briefing for you is [the briefing page](briefing.md).

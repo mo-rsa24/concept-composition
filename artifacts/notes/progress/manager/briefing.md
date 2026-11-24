@@ -39,7 +39,7 @@ Nothing changes while a question waits.
 
 | # | The question | Default |
 |---|---|---|
-| 80 | Should a checker choose CO3's sharpness setting at each of its corrected steps? A first read costs about 3.1 GPU-hours | Loop 6 runs the first read |
+| 80 | Should a checker choose CO3's sharpness setting at each of its corrected steps? A first read costs about 3.1 GPU-hours | you chose to wait for Loop 6's per-step read of its checker on CO3; it comes back to you with that result |
 | 79 | Loop 9's sentence-score test has two recorded verdicts (null, and inconclusive in a later fairness test). Which leads the report's title? | keep the test's own verdict, with the fairness test as its own finding |
 
 Also yours, not on the board: Loop 10 is closed but four of its steps stay open on the board, so the
