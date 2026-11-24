@@ -104,13 +104,13 @@ readout (blue), at 0.61 to 0.66. On the right the signature (thick red) rises fr
 past the path length (0.62) and the noisy canvas (0.59); raw noise and shuffled labels stay at 0.50, and no line reaches 0.75
 `verified` (read on the picture; matches the review, line 5).
 
-**The number.** The bar, window by window `stated` (the table is the review's, lines 22 to 25; its best values match the
+**The number.** The bar, window by window `verified` (the table is the review's, lines 22 to 25, and every cell matches the
 `verdict` entries of [the score path result file](../../artifacts/notes/progress/score-space/05-signal/full.json), read on
-2026-11-24, and the early window's raw-noise cell does not, see [Where the sources disagree](#where-the-sources-disagree)):
+2026-11-24):
 
 | Window | Signature, best step | Raw noise at that step | 0.75 met | 0.1 over noise met | Result |
 |---|---|---|---|---|---|
-| Early, t 999 to 693 | 0.513 at t 754 | 0.50 | no | no | miss |
+| Early, t 999 to 693 | 0.513 at t 754 | 0.493 | no | no | miss |
 | SDXL-matched, t 712 to 480 | 0.700 at t 480 | 0.499 | no | yes, by 0.20 | miss |
 
 Both windows miss and the control and the overfit test passed, so the design's table makes this null. The signature reads
@@ -138,12 +138,12 @@ full read used; both are under [Where the sources disagree](#where-the-sources-d
 |---|---:|---:|---:|---:|---:|---:|---|
 | Signature, ten $d_t$ maps | 0.493 | 0.502 | 0.510 | 0.502 | 0.565 | 0.700 | 0.655 at t 480 |
 | Noisy canvas $x_t$ | 0.497 | 0.496 | 0.494 | 0.505 | 0.523 | 0.593 | 0.576 at t 480 |
-| Raw noise | 0.505 | 0.497 | 0.497 | 0.500 | 0.504 | 0.499 | about 0.5 |
+| Raw noise | 0.505 | 0.497 | 0.497 | 0.500 | 0.504 | 0.499 | 0.543 at t 570 |
 | Error readout, 10 numbers | 0.608 | 0.656 | 0.656 | 0.643 | 0.711 | 0.742 | 0.681 at t 480 |
-| Path length, 10 numbers | 0.491 | 0.501 | 0.526 | 0.521 | 0.572 | 0.621 | 0.576 at t 480 |
-| Signature, labels shuffled | 0.50 to 0.51 throughout | | | | | | about 0.5 |
+| Path length, 10 numbers | 0.491 | 0.501 | 0.526 | 0.521 | 0.572 | 0.621 | 0.577 at t 539 |
+| Signature, labels shuffled | 0.49 to 0.51 throughout | | | | | | 0.504 at t 696 |
 
-**More than the canvas.** In the matched window the signature leads the noisy canvas from about t 600 onward, by 0.107 at
+**More than the canvas.** In the matched window the signature leads the noisy canvas from about t 600 onward, by 0.106 at
 t 480, with the same reader on both (review, line 42).
 
 **Which digits, not only where.** On `apart` against `wrong` the signature reaches 0.655.
@@ -204,18 +204,13 @@ only the canvas row gating. No bar was changed (review, line 64).
 
 Navigation: ⬅️ [Previous](#3-the-checks-that-the-reader-works) | 📋 [TOC](#table-of-contents) | [Next](#what-this-cannot-tell-you) ➡️
 
-**Eight places where two records say different things. This page reports both and resolves none.**
+**Three places where two records say different things. This page reports both and resolves none.**
 
 | What | One source | The other source |
 |---|---|---|
 | The reader in the full read | [the probe-input diagram's source](../../artifacts/notes/progress/score-space/05-signal/what-each-probe-reads.mmd), line 17: "linear probe per digit"; [the score path design](../../artifacts/notes/progress/score-space/04-design.md), line 63, asks "Can a linear probe on the signature read which digits are present" | the same design, line 78: "One small convolutional probe, the same architecture for every input that has a grid", with logistic regression for the error readout and path length; [the score path review](../../artifacts/notes/progress/score-space/05-signal/review.md), line 64, and the result file's `"probe": "conv"` |
 | The signature's size at the reader | [the probe-input diagram's source](../../artifacts/notes/progress/score-space/05-signal/what-each-probe-reads.mmd), line 11: "d_t(0..9), pooled 4x4, 1,280 numbers" | [the score path design](../../artifacts/notes/progress/score-space/04-design.md), line 69: "the ten $d_t(c)$ maps, pooled 2 by 2", 10 by 16 by 32 per step, and line 78 for the reader. Line 55 pools 4 by 4 for the cache, and line 78 gives 1,280 numbers for the stacked window pooled 2 by 4 |
 | The noisy canvas and raw noise at the reader | [the probe-input diagram's source](../../artifacts/notes/progress/score-space/05-signal/what-each-probe-reads.mmd), lines 14 and 15: "128 pooled" | [the score path design](../../artifacts/notes/progress/score-space/04-design.md), lines 70 and 71: "pooled 2 by 2", 1 by 16 by 32 |
-| Path length's best `apart` against `wrong` | [section 2's table](#2-what-the-other-inputs-read) and [the score path review](../../artifacts/notes/progress/score-space/05-signal/review.md), line 39: "0.576 at t 480" | [the score path result file](../../artifacts/notes/progress/score-space/05-signal/full.json), key `sdxl.path_length[].apart_vs_wrong`: 0.561 at t 480, and its best, 0.5765, at t 539 |
-| The signature with labels shuffled | [section 2's table](#2-what-the-other-inputs-read) and [the score path review](../../artifacts/notes/progress/score-space/05-signal/review.md), line 40: "0.50 to 0.51 throughout" | [the score path result file](../../artifacts/notes/progress/score-space/05-signal/full.json), `presence` under keys `early.shuffled` and `sdxl.shuffled`: 0.494 to 0.511 (0.494 to 0.507 in the early window, 0.496 to 0.511 in the matched window) |
-| Raw noise's best `apart` against `wrong` | [section 2's table](#2-what-the-other-inputs-read) and [the score path review](../../artifacts/notes/progress/score-space/05-signal/review.md), line 37: "about 0.5" | [the score path result file](../../artifacts/notes/progress/score-space/05-signal/full.json), key `sdxl.raw_noise[].apart_vs_wrong`: reaches 0.543 at t 570; `early.raw_noise[].apart_vs_wrong` reaches 0.5245 at t 693 |
-| The signature's lead over the noisy canvas at t 480 | [section 2](#2-what-the-other-inputs-read) and [the score path review](../../artifacts/notes/progress/score-space/05-signal/review.md), line 42: "by 0.107 at t 480" | [the score path result file](../../artifacts/notes/progress/score-space/05-signal/full.json), `presence` at t 480: `sdxl.signature` 0.6995 minus `sdxl.canvas` 0.5933, which is 0.106 |
-| Raw noise at the early window's best step | [section 1's table](#1-the-signature-misses-the-bar-in-both-windows) and [the score path review](../../artifacts/notes/progress/score-space/05-signal/review.md), line 24: 0.50 at t 754 | [the score path result file](../../artifacts/notes/progress/score-space/05-signal/full.json), key `early.raw_noise[].presence` at t 754: 0.4934, which is 0.49 at two places |
 
 ## What this cannot tell you
 
@@ -308,7 +303,7 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] Whether the stacked early window's 0.607 comes from cancelling the shared noise draw (review, line 78).
 - [ ] The text-aligned encoder and the two arithmetic tests were not run, by the design's rule and the owner's answer to board question 76.
 - [ ] The figure of one canvas and its ten maps in section 3.
-- [ ] The eight disagreements under [Where the sources disagree](#where-the-sources-disagree).
+- [ ] The three disagreements under [Where the sources disagree](#where-the-sources-disagree).
 
 ## Cross-references
 
