@@ -5,7 +5,7 @@ Each picture is noised to each step with four draws, shared by both models, and 
 A property's checker score is the right sentence's cosine minus the highest wrong sentence's. Its threshold is
 chosen at each step on one half of the seeds and read on the other half.
 
-Writes under loop-9/w2/read[-smoke]/: scores.npz, result.json, balanced-accuracy-by-step.png.
+Writes under loop-9/w2/read[-smoke]/: scores.npz, vectors-<model>.npy, result.json, balanced-accuracy-by-step.png.
 """
 from __future__ import annotations
 
@@ -276,6 +276,7 @@ def main() -> int:
     print("input path:", json.dumps(inputs), flush=True)
 
     cos = {m: np.zeros((len(steps), draws, len(keys), len(sentences)), np.float32) for m in MODELS}
+    vectors = {}
     t0 = time.time()
     with torch.no_grad():
         text = {m: text_features(loaded[m][0], loaded[m][1], sentences, device) for m in PIXEL_MODELS}
@@ -288,12 +289,17 @@ def main() -> int:
                     z0, n = Z[i:i + BATCH].to(device), noise[i:i + BATCH].to(device)
                     x = scheduler.add_noise(z0, n, timesteps[step].repeat(z0.shape[0]).to(device))
                     pixels = latent_to_clip(x)
-                    for m in PIXEL_MODELS:
-                        cos[m][a, dr, i:i + z0.shape[0]] = (image_features(loaded[m][0], pixels) @ text[m].T).float().cpu().numpy()
-                    latent_features = latent_clip_image(loaded["latent_clip"][0], x)
-                    cos["latent_clip"][a, dr, i:i + z0.shape[0]] = (latent_features @ text["latent_clip"].T).float().cpu().numpy()
+                    features = {m: image_features(loaded[m][0], pixels) for m in PIXEL_MODELS}
+                    features["latent_clip"] = latent_clip_image(loaded["latent_clip"][0], x)
+                    for m, f in features.items():
+                        cos[m][a, dr, i:i + z0.shape[0]] = (f @ text[m].T).float().cpu().numpy()
+                        if m not in vectors:
+                            vectors[m] = np.zeros((len(steps), draws, len(keys), f.shape[1]), np.float16)
+                        vectors[m][a, dr, i:i + z0.shape[0]] = f.half().cpu().numpy()
             print(f"[{time.time() - t0:6.0f}s] step {step} done", flush=True)
     np.savez_compressed(out / "scores.npz", keys=np.array(keys), sentences=np.array(sentences), steps=np.array(steps), **cos)
+    for m, v in vectors.items():  # the normalised image vectors, kept so a linear probe can be trained later without rescoring
+        np.save(out / f"vectors-{m}.npy", v)
 
     def checker(m, right, wrong):
         c = cos[m]
