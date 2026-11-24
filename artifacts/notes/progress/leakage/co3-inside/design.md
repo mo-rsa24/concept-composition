@@ -20,7 +20,11 @@ At the corrected steps the latent is 0.6% to 1.7% picture on SDXL's schedule. Th
 
 **The records reproduce the code.** From each pass's recorded latent, predictions and weights, the runner recomputes the next latent with the authors' formulas (`attn_utils.py`, resampler lines 194 to 198, corrector lines 251 to 257) and compares it with the latent the next pass actually received. A relative difference above 1% on any pass means the records do not describe what ran, and the figures are not drawn.
 
-**One open question it settles.** In the code as written, the list of distances that sets the weights gains two entries on every pass and is never cleared (`attn_utils.py` line 187), which the weight-length check at line 71 should reject from the second pass. The recorded weights show what the running code actually uses.
+**The weights the code uses.** The distance list that sets the weights is filled with one distance per subject on each pass and cleared at the end of the pass (`attn_utils.py` lines 187 and 209 in the resampler, 245 and 267 in the corrector), so each pass's weights come from that pass's two distances. The run recorded the weights the code returned on every pass: two per pass on all 80 passes.
+
+## What the run recorded
+
+Slurm job 94450, code snapshot `44b51af4`, outputs under `/datasets/mmolefe/poe_repair_min/loop-12/co3-inside/`. The control passed on both pairs: recomputing each pass from the records reproduces the next latent to a relative difference of at most 0.00073 (eagle × fox) and 0.00077 (cheetah × cougar), against the 0.01 limit. For cheetah × cougar the two distances stay close on every corrected step (for example 0.8 and 1.0 at steps 1 to 3), so the weights stay near −0.55 and −0.45; for eagle × fox they spread further (2.4 and 4.1 at step 5, weights −0.82 and −0.18).
 
 ## Cost and what it buys
 
