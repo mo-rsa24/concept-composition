@@ -1,7 +1,7 @@
 %%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
 flowchart LR
   S["a pretrained sampler<br/>CO3, ToMe, plain SDXL, PoE"]:::plain
-  R["its own failure signal at steps 0 to 5<br/>attention overlap, d_t maps, blob count<br/>(Z2 finds which one, for CO3)"]:::doing
+  R["its own failure signal at steps 0 to 5<br/>attention overlap, d_t maps, blob count<br/>(for CO3 borrowing, Z2 found none<br/>of three readings predicts it)"]:::doing
   C["small checker on that signal only<br/>never sees 'cheetah' or 'cougar'"]:::plain
   G{"use it to"}:::plain
   P["push: its gradient<br/>added while sampling"]:::plain

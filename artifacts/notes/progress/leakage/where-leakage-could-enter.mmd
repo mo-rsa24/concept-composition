@@ -8,15 +8,15 @@ flowchart LR
   subgraph UNET["SDXL U-Net, one step"]
     L["4. layout<br/>where each body goes,<br/>set in the early steps"]:::plain
     CA["2. cross-attention<br/>each word's map over the canvas;<br/>maps can overlap"]:::plain
-    SA["3. self-attention<br/>pixels share features,<br/>cheetah spots reach the cougar"]:::plain
+    SA["3. self-attention<br/>pixels share features<br/>(a route the papers name; untested on CO3)"]:::plain
   end
   S["5. sum of predictions<br/>CO3 mixes joint and single-subject<br/>noise predictions at 6 corrected steps"]:::plain
   IMG[("picture<br/>two bodies, borrowed parts")]:::plain
   P --> T --> CA
   N --> L --> CA --> SA --> S --> IMG
-  T -. "Z2 reads: CLIP name cosine<br/>(A Cat Is A Cat, Magnet, Follow the Flow, ToMe)" .-> T
-  CA -. "Z2 reads: map overlap at corrected steps<br/>(DAAM, Conform, Divide & Bind,<br/>DeLeaker, Self-Cross, MMDiT)" .-> CA
-  SA -. "Bounded Attention, Self-Cross<br/>(Z3's default fix acts here and at 2)" .-> SA
+  T -. "Z2 read: text cosine, no prediction<br/>(A Cat Is A Cat, Magnet, Follow the Flow, ToMe)" .-> T
+  CA -. "Z2 read: map overlap at 14 steps, 3 windows;<br/>no window predicted borrowing<br/>(DAAM, Conform, Divide & Bind,<br/>DeLeaker, Self-Cross, MMDiT)" .-> CA
+  SA -. "Bounded Attention, Self-Cross<br/>(the rival Paper 2 must beat; acts here and at 2)" .-> SA
   L -. "Be Decisive" .-> L
-  S -. "Z2 reads: d_t map cosine<br/>(this project's own question)" .-> S
+  S -. "Z2 read: d_t map cosine, no prediction<br/>(this project's own question)" .-> S
   classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
