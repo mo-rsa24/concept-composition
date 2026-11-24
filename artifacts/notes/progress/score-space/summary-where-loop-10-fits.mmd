@@ -1,0 +1,19 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef found fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px,color:#111111
+  classDef paper fill:#fff4e6,stroke:#e8590c,stroke-width:2px,color:#111111
+
+  L9["Loop 9: sentence scores<br/>on SDXL read nothing at its<br/>steps 0 to 15 (best 0.56, bar 0.75)"]:::plain
+  L8["Loop 8: checker on 2 maps<br/>reads WHERE digits sit (0.81)<br/>not WHICH (0.511)"]:::plain
+  L10["Loop 10: all 10 signed maps<br/>read WHICH digits: 0.655<br/>presence 0.700 (bar 0.75)"]:::found
+  L6["Loop 6: CO3 already draws<br/>2 bodies in 96 of 96;<br/>misses are wrong names"]:::plain
+
+  P1["Paper 1<br/>separate experts"]:::paper
+  P2["Paper 2<br/>CO3 plus a checker"]:::paper
+
+  L9 -->|"same noise level, but SDXL<br/>against digits: a mixed comparison"| L10
+  L8 -->|"identity was<br/>the missing half"| L10
+  L10 -.->|"untested: feed the checker<br/>all 10 signed maps"| P1
+  L10 -.->|"untested: each subject's map<br/>tells which body it names"| L6
+  L6 --> P2
