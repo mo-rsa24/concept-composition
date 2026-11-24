@@ -1,0 +1,768 @@
+{
+ "how": "Drawn by eye by a Claude agent on 2026-11-24, before any picture of the fix was rendered. Each 1024x1024 CO3 picture from Z2's full run (copied read-only from /datasets/mmolefe/poe_repair_min/loop-12/z2/full/<pair>/seed-<seed>.png) was read at full size with a labelled 64-pixel grid over it, and one axis-aligned box was drawn around each animal's whole visible body (head, tail, legs, plumes), excluding water reflections and shadows. Boxes are [x0, y0, x1, y1] in picture pixels; divide by 8 for the 128x128 latent. A is the first animal in the pair name and B the second. Each box is assigned by body shape: an animal wearing the other's head or markings keeps the label of the body it has, and the note says what it borrowed. layout is 'two' when the picture holds exactly one A body and one B body, and 'not_two' when it holds two of one animal, no body of one animal, or an extra animal; then only the boxes that can be given are filled, and the extra animals' boxes are written in the note. Every box was checked on the contact sheets boxes-<pair>.png.",
+ "a_cheetah__x__a_cougar": {
+  "6001": {
+   "A": [
+    100,
+    205,
+    545,
+    935
+   ],
+   "B": [
+    575,
+    205,
+    885,
+    920
+   ],
+   "layout": "two",
+   "note": "Left is a clear cheetah. Right has a cougar's face and plain tan chest but cheetah spots over its body and legs; assigned B by its cougar head and build."
+  },
+  "6002": {
+   "A": [
+    118,
+    135,
+    685,
+    1024
+   ],
+   "B": [
+    508,
+    100,
+    1024,
+    1024
+   ],
+   "layout": "two",
+   "note": "Left is a clear cheetah, its tail curling at the bottom. Right has a cougar's head on a cheetah-spotted body running off the right edge; assigned B by its cougar head. The two overlap around x 510 to 685."
+  },
+  "6003": {
+   "A": [
+    75,
+    100,
+    495,
+    985
+   ],
+   "B": [
+    440,
+    170,
+    930,
+    970
+   ],
+   "layout": "two",
+   "note": "Left is a clear cheetah. Right is a slender spotted cat with a cougar's ears and reddish tan face but cheetah tear marks; assigned B as the cougar, a hard call since both bodies are cheetah-shaped."
+  },
+  "6004": {
+   "A": [
+    0,
+    175,
+    420,
+    960
+   ],
+   "B": [
+    510,
+    140,
+    1024,
+    940
+   ],
+   "layout": "two",
+   "note": "Left is a clear cheetah, its body cut by the left edge. Right has a cougar's head on a cheetah-spotted body; assigned B by its cougar head."
+  },
+  "6005": {
+   "A": [
+    130,
+    205,
+    620,
+    965
+   ],
+   "B": [
+    595,
+    70,
+    985,
+    965
+   ],
+   "layout": "two",
+   "note": "Left is a clear cheetah. Right has a cougar's head on a tall body with sparse cheetah spots; assigned B by its cougar head."
+  },
+  "6006": {
+   "A": [
+    115,
+    115,
+    595,
+    960
+   ],
+   "B": null,
+   "layout": "not_two",
+   "note": "Two cheetahs, both with tear marks and spotted coats, no cougar. A boxes the left cheetah; the second cheetah on the right is at [630,110,960,965]."
+  },
+  "6007": {
+   "A": [
+    25,
+    200,
+    450,
+    960
+   ],
+   "B": [
+    570,
+    285,
+    875,
+    955
+   ],
+   "layout": "two",
+   "note": "Left is a clear cheetah. Right has a cougar's head on a cheetah-spotted body; assigned B by its cougar head."
+  },
+  "6008": {
+   "A": [
+    160,
+    225,
+    505,
+    950
+   ],
+   "B": [
+    610,
+    280,
+    945,
+    955
+   ],
+   "layout": "two",
+   "note": "Left is a clear cheetah. Right has a cougar's head on a cheetah-spotted body; assigned B by its cougar head."
+  }
+ },
+ "a_duck__x__a_goose": {
+  "6001": {
+   "A": [
+    580,
+    390,
+    965,
+    780
+   ],
+   "B": [
+    175,
+    265,
+    540,
+    790
+   ],
+   "layout": "two",
+   "note": "Both birds are mixed, a hard call. Left is the larger, upright pale-bodied bird with a hen mallard's head: assigned B (goose) by its size and goose body. Right is smaller with a drake mallard's green head on a Canada-goose-patterned body: assigned A (duck). Boxes exclude the water reflections."
+  },
+  "6002": {
+   "A": [
+    55,
+    280,
+    570,
+    760
+   ],
+   "B": [
+    638,
+    295,
+    1024,
+    745
+   ],
+   "layout": "two",
+   "note": "Left has a hen mallard's head on a stocky duck body standing on its legs: A. Right is a long-necked Canada goose body with a drake mallard's green head and yellow bill, swimming: B. Boxes exclude the reflections."
+  },
+  "6003": {
+   "A": [
+    65,
+    210,
+    490,
+    735
+   ],
+   "B": [
+    478,
+    295,
+    985,
+    760
+   ],
+   "layout": "two",
+   "note": "Both birds are long-necked, a hard call. Left has a drake mallard's green head and yellow bill and reads as an elongated mallard: A. Right has a hen mallard's head pattern on a white-breasted, orange-billed greylag-like body: B. Boxes exclude the reflections."
+  },
+  "6004": {
+   "A": [
+    585,
+    525,
+    895,
+    825
+   ],
+   "B": [
+    40,
+    175,
+    545,
+    820
+   ],
+   "layout": "two",
+   "note": "Right is a small duckling: A. Left is a large goose body (long neck, barred grey breast) wearing a drake mallard's green head and yellow bill: B by its goose body."
+  },
+  "6005": {
+   "A": [
+    610,
+    365,
+    985,
+    840
+   ],
+   "B": [
+    50,
+    250,
+    480,
+    830
+   ],
+   "layout": "two",
+   "note": "Left is a large Canada-goose body with a black neck and a mallard-green head and yellow bill: B. Right is a smaller brown bird with a hen mallard's face on a long goose-like neck: A. A hard call; both carry the other's parts."
+  },
+  "6006": {
+   "A": [
+    635,
+    470,
+    955,
+    855
+   ],
+   "B": [
+    70,
+    340,
+    560,
+    850
+   ],
+   "layout": "two",
+   "note": "Right is a fluffy duckling with a duck bill: A. Left is a large goose body (barred breast, goose posture) with a drake mallard's green head: B by its body."
+  },
+  "6007": {
+   "A": [
+    525,
+    575,
+    930,
+    790
+   ],
+   "B": [
+    70,
+    155,
+    695,
+    770
+   ],
+   "layout": "two",
+   "note": "Left is a large goose body with two heads, a black-and-white goose head above a mallard-green duck head: B by its body (the second head is a borrowed duck part). Right is a swimming hen mallard: A. Boxes exclude the reflections."
+  },
+  "6008": {
+   "A": [
+    175,
+    270,
+    435,
+    745
+   ],
+   "B": [
+    515,
+    235,
+    970,
+    660
+   ],
+   "layout": "two",
+   "note": "Left is a smaller upright grey bird with a duck-like bill and long neck: A, a hard call. Right is a drake mallard's green head and yellow bill on a Canada-goose body with a white side and black tail: B by its larger goose body. Boxes exclude the reflections."
+  }
+ },
+ "a_puma__x__a_condor": {
+  "6001": {
+   "A": [
+    75,
+    175,
+    440,
+    775
+   ],
+   "B": [
+    578,
+    255,
+    890,
+    830
+   ],
+   "layout": "two",
+   "note": "Left is a clear puma. Right is a perched condor body with dark wings and talons but a tan cat-like head with an ear and tan fur on its chest: B by its winged body."
+  },
+  "6002": {
+   "A": [
+    115,
+    155,
+    560,
+    885
+   ],
+   "B": [
+    540,
+    125,
+    1000,
+    800
+   ],
+   "layout": "two",
+   "note": "Left is a clear puma. Right is a clear condor with a dark hooked-beak head."
+  },
+  "6003": {
+   "A": [
+    75,
+    120,
+    455,
+    925
+   ],
+   "B": [
+    495,
+    275,
+    925,
+    755
+   ],
+   "layout": "two",
+   "note": "Left is a clear puma. Right is a condor body with a dark, furry, snouted head that looks part mammal: B by its winged body."
+  },
+  "6004": {
+   "A": [
+    590,
+    95,
+    945,
+    905
+   ],
+   "B": [
+    35,
+    95,
+    510,
+    880
+   ],
+   "layout": "two",
+   "note": "Both are fused, a hard call. Right has a puma's head, chest and front paws with condor wings folded on its sides: A by its puma body. Left has a black cat's head on a folded-wing, feathered bird body standing on cat legs with paws: B by its folded-wing body, though it has no condor head."
+  },
+  "6005": {
+   "A": [
+    0,
+    265,
+    455,
+    900
+   ],
+   "B": [
+    520,
+    225,
+    1000,
+    950
+   ],
+   "layout": "two",
+   "note": "Left is a clear puma, tail running off the left edge. Right is a tan-feathered condor with a pinkish bare head and a pointed ear-like crest: B."
+  },
+  "6006": {
+   "A": [
+    55,
+    120,
+    460,
+    890
+   ],
+   "B": [
+    575,
+    305,
+    985,
+    915
+   ],
+   "layout": "two",
+   "note": "Left is a clear puma. Right is a clear condor."
+  },
+  "6007": {
+   "A": [
+    25,
+    190,
+    480,
+    750
+   ],
+   "B": [
+    470,
+    370,
+    905,
+    845
+   ],
+   "layout": "two",
+   "note": "Left is a clear puma. Right is a condor body with folded wings but a puma's head: B by its winged body."
+  },
+  "6008": {
+   "A": [
+    190,
+    385,
+    640,
+    890
+   ],
+   "B": [
+    585,
+    495,
+    855,
+    855
+   ],
+   "layout": "two",
+   "note": "Left is a clear puma. Right is an upright folded-wing body with a black cat's head and a fanned feather tail: B by its winged body, a hard call since it has no condor head."
+  }
+ },
+ "a_boar__x__a_pheasant": {
+  "6001": {
+   "A": [
+    65,
+    420,
+    860,
+    840
+   ],
+   "B": [
+    730,
+    365,
+    1015,
+    540
+   ],
+   "layout": "not_two",
+   "note": "One boar and two pheasants. The boar has a feathered tail and a tube-like snout. B boxes the upper pheasant; a second pheasant lies on the ground at [695,760,1005,895]. Boxes overlap where the boar's head meets the upper pheasant's tail."
+  },
+  "6002": {
+   "A": [
+    45,
+    335,
+    660,
+    800
+   ],
+   "B": [
+    640,
+    485,
+    990,
+    810
+   ],
+   "layout": "not_two",
+   "note": "One boar and two birds. B boxes the large pheasant with a crest and chestnut breast; a smaller hen pheasant stands at [500,680,765,830]."
+  },
+  "6003": {
+   "A": [
+    85,
+    400,
+    770,
+    830
+   ],
+   "B": [
+    660,
+    640,
+    990,
+    845
+   ],
+   "layout": "not_two",
+   "note": "One boar, one black pheasant, and a small extra bird at [555,770,680,900]. The boar's tail is drawn as a bird's tail feathers and its feet end in bird-like claws."
+  },
+  "6004": {
+   "A": [
+    65,
+    440,
+    805,
+    845
+   ],
+   "B": [
+    535,
+    665,
+    910,
+    905
+   ],
+   "layout": "not_two",
+   "note": "One boar, one clear ring-necked pheasant, and a small extra bird at bottom left at [170,875,300,940]. The boar's tail is drawn as tail feathers."
+  },
+  "6005": {
+   "A": [
+    60,
+    435,
+    740,
+    865
+   ],
+   "B": [
+    690,
+    640,
+    955,
+    865
+   ],
+   "layout": "two",
+   "note": "One boar and one pheasant with a chicken-like comb. Boxes overlap slightly at the boar's snout."
+  },
+  "6006": {
+   "A": [
+    55,
+    450,
+    770,
+    890
+   ],
+   "B": [
+    680,
+    635,
+    935,
+    910
+   ],
+   "layout": "not_two",
+   "note": "One boar, one clear ring-necked pheasant, and a tiny chick-like bird on the snow at [600,895,660,940]. The boar's tail is drawn as tail feathers."
+  },
+  "6007": {
+   "A": [
+    55,
+    330,
+    695,
+    885
+   ],
+   "B": [
+    575,
+    490,
+    975,
+    895
+   ],
+   "layout": "two",
+   "note": "One boar and one pheasant with a blue fanned tail and a rooster-like head. The boar's hind feet end in bird-like claws. Boxes overlap where the pheasant's head sits under the boar's snout."
+  },
+  "6008": {
+   "A": [
+    315,
+    410,
+    960,
+    820
+   ],
+   "B": [
+    30,
+    685,
+    440,
+    895
+   ],
+   "layout": "two",
+   "note": "One boar and one clear ring-necked pheasant. The boar's tail is drawn as tail feathers and its feet as bird claws."
+  }
+ },
+ "a_bobcat__x__a_quail": {
+  "6001": {
+   "A": [
+    10,
+    380,
+    510,
+    870
+   ],
+   "B": [
+    700,
+    430,
+    965,
+    880
+   ],
+   "layout": "two",
+   "note": "Clear bobcat and clear quail. The bobcat's ear tufts are drawn as quail-like plumes."
+  },
+  "6002": {
+   "A": [
+    85,
+    30,
+    510,
+    835
+   ],
+   "B": [
+    670,
+    300,
+    1024,
+    840
+   ],
+   "layout": "two",
+   "note": "Bobcat with plume-like ear tufts and a red inner ear; quail with a doubled plume, tail running off the right edge. An unreadable dark shape at the bottom-left edge [0,700,85,830] is not boxed."
+  },
+  "6003": {
+   "A": [
+    80,
+    230,
+    440,
+    855
+   ],
+   "B": [
+    650,
+    475,
+    940,
+    855
+   ],
+   "layout": "two",
+   "note": "Clear bobcat with plume-like ear tufts and a clear quail."
+  },
+  "6004": {
+   "A": [
+    0,
+    55,
+    525,
+    835
+   ],
+   "B": [
+    660,
+    185,
+    1024,
+    835
+   ],
+   "layout": "two",
+   "note": "Bobcat cut by the left edge, with plume-like ear tufts; quail with a tall plume, tail running off the right edge."
+  },
+  "6005": {
+   "A": [
+    80,
+    155,
+    460,
+    860
+   ],
+   "B": [
+    670,
+    455,
+    980,
+    835
+   ],
+   "layout": "two",
+   "note": "Clear bobcat with plume-like ear tufts and a clear quail."
+  },
+  "6006": {
+   "A": [
+    40,
+    115,
+    535,
+    840
+   ],
+   "B": [
+    655,
+    245,
+    1024,
+    845
+   ],
+   "layout": "two",
+   "note": "Bobcat with plume-like ear tufts; the quail's plume is drawn as two long ear-like shapes, a borrowed bobcat part on the quail."
+  },
+  "6007": {
+   "A": [
+    10,
+    125,
+    500,
+    850
+   ],
+   "B": [
+    680,
+    425,
+    1015,
+    850
+   ],
+   "layout": "two",
+   "note": "Clear bobcat with plume-tipped ears and a clear quail."
+  },
+  "6008": {
+   "A": [
+    75,
+    240,
+    565,
+    825
+   ],
+   "B": [
+    630,
+    185,
+    990,
+    800
+   ],
+   "layout": "not_two",
+   "note": "One bobcat, one large quail, and a second small quail at [595,715,740,825] under the bobcat's paw. The bobcat's ear tufts are drawn as quail-like plumes."
+  }
+ },
+ "a_seal__x__a_gull": {
+  "6001": {
+   "A": [
+    0,
+    545,
+    600,
+    870
+   ],
+   "B": [
+    635,
+    550,
+    1000,
+    855
+   ],
+   "layout": "two",
+   "note": "Clear seal and clear gull."
+  },
+  "6002": {
+   "A": [
+    455,
+    520,
+    1024,
+    750
+   ],
+   "B": [
+    70,
+    390,
+    350,
+    765
+   ],
+   "layout": "two",
+   "note": "Left is a clear gull. Right is a dark seal body with a beak-like snout and a feathered tail tip: A by its seal body. Boxes exclude the reflections."
+  },
+  "6003": {
+   "A": [
+    530,
+    425,
+    1024,
+    845
+   ],
+   "B": [
+    50,
+    530,
+    530,
+    845
+   ],
+   "layout": "two",
+   "note": "Right is a clear seal. Left is a white pear-shaped body with grey sides, a hooked gull beak, and black-tipped limbs spread like flippers or wingtips: B by its gull head and plumage, a hard call since the body is close to a seal pup's."
+  },
+  "6004": {
+   "A": [
+    290,
+    575,
+    1020,
+    825
+   ],
+   "B": [
+    560,
+    415,
+    850,
+    715
+   ],
+   "layout": "not_two",
+   "note": "One seal in front, a second grey seal-like body behind it at [85,640,360,795], and two gulls. B boxes the white gull on the right; a large brown gull stands at [35,175,500,640]. Boxes overlap where the gull stands on the seal."
+  },
+  "6005": {
+   "A": [
+    95,
+    485,
+    450,
+    850
+   ],
+   "B": null,
+   "layout": "not_two",
+   "note": "Two seals, no gull body. A boxes the white seal on the left; the right animal at [445,645,885,850] is a spotted seal body lying flat with a gull's hooked beak for a head."
+  },
+  "6006": {
+   "A": [
+    0,
+    455,
+    505,
+    790
+   ],
+   "B": [
+    540,
+    455,
+    1024,
+    795
+   ],
+   "layout": "two",
+   "note": "Clear seal and clear gull, the gull's tail running off the right edge."
+  },
+  "6007": {
+   "A": [
+    395,
+    585,
+    1024,
+    830
+   ],
+   "B": null,
+   "layout": "not_two",
+   "note": "Two seals, no gull body. A boxes the dark seal on the right; the left animal at [0,600,360,825] is a speckled seal body with flippers and a gull's beak for a head."
+  },
+  "6008": {
+   "A": [
+    0,
+    505,
+    495,
+    830
+   ],
+   "B": [
+    485,
+    495,
+    990,
+    800
+   ],
+   "layout": "two",
+   "note": "Left is a clear seal. Right is a white pear-shaped body with grey folded-wing sides and a hooked gull head: B, with a seal-like hind flipper trailing to the right (a borrowed seal part)."
+  }
+ }
+}
