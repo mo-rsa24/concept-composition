@@ -15,6 +15,7 @@ Outputs are on the cluster under `/datasets/mmolefe/poe_repair_min/loop-6/m7/`, 
 | Positions 1, 2 and 3, resumed from those pictures with the handle closed | 93907, 93908, 93909 | `100772b7-15d8bdd` | `full/renders/` | running, and positions 1 and 2 have each rendered past 1,024 new pictures in one process |
 | Scorer subsets s0 to s7, 250 pictures each, one job at a time | 93949 to 93956 | `100772b7-15d8bdd` | `full/renders/` | running |
 | EDM2 smoke test on the empty scenes, 16,384 images seen, then 16 samples | 94044 | `beaf1219-15d8bdd` | `smoke/models/empty/` | passed, 3 minutes 31 seconds |
+| EDM2 overfit on 16 pictures of position 1, EDM2's fixed ramp | 94047 | `50d1d1a1-15d8bdd` | `overfit/models/p1-16/` | failed, the samples are noise |
 | Scorer: overfit on 16 pictures, then 1,600 train and 400 held out, on CPU | 93978 | `a6c06e83-15d8bdd` | `full/scorer/` | queued behind the last subset |
 
 ## The smoke render
@@ -29,8 +30,15 @@ window needs fixing before any sample is scored.
 
 The EDM2 smoke test trained `edm2-img64-xs` at 6.82 seconds per thousand images on one RTX 3090, with 128 images per GPU pass and 22 GB in use.
 At that rate one model takes about 3.8 GPU-hours for 2 million images and the four models take about 15.2, against the design's budget of 8 to
-10. EDM2's learning rate ramps up over its first 10 million images, so a 2-million-image run stays at or below 20% of the full rate. The overfit
-rung tests whether a model still learns under that ramp.
+10.
+
+**EDM2's fixed ramp does not train a short run.** With the ramp at its fixed 10 million images, a model trained on 16 pictures for 256,000 images
+reached a learning rate of 0.0003, which is 2.5% of the full 0.012. Its loss moved from 1.13 to 1.03, and its samples are noise with the scene's
+rough brightness.
+
+<a href="overfit-unscaled-ramp-real-and-sampled.png"><img src="overfit-unscaled-ramp-real-and-sampled.png" width="420" alt="Top two rows: the 16 real pictures of one object. Bottom two rows: 16 samples from the model, which are colour noise"></a>
+
+Each model now keeps the preset's ramp as a fraction of training, 0.93%, through `edm2_scaled_ramp.py`, which changes no file of EDM2.
 
 ## The window control
 

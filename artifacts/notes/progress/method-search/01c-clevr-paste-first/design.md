@@ -56,8 +56,10 @@ image's jittered camera, with a uniform offset of up to 0.02 of the image in x a
 ## Models
 
 Each of the 4 models is EDM2's `edm2-img64-xs`, unconditional, trained once for 2 million images seen, a quarter of the earlier 8 million
-image length. Sampling uses EDM2's 32-step Heun sampler with 65 model calls and no guidance. The one-network control belongs to step M6
-and trains only if this stage does not stop.
+image length. The preset ramps its learning rate over 10 million of its 1,074 million images, 0.93% of training, and each model keeps that
+fraction, about 19,000 images for a run of 2 million. An unscaled ramp would hold such a run at or below 20% of the full rate. Sampling uses
+EDM2's 32-step Heun sampler with 65 model calls and no guidance. The one-network control belongs to step M6 and trains only if this stage
+does not stop.
 
 ## The scorer
 
@@ -108,7 +110,8 @@ Each rung saves its config, numbers, sheet and commit under `/datasets/mmolefe/p
 
 1. **Smoke test.** Render 8 pictures per set, check by eye that each object sits at its position, train one model for a few thousand
    images, and sample one batch. Records seconds per picture and per thousand images.
-2. **Overfit.** One model fits 16 pictures, and the scorer gets at least 15 of 16 right.
+2. **Overfit.** One model trains on 16 pictures of position 1 for 256,000 images seen. Its 16 samples must look like those scenes by eye, and
+   the scorer must find the object at position 1 in at least 15 of them. The scorer separately fits 16 real pictures and gets at least 15 right.
 3. **1% of the data.** 50 pictures per set train, and the logged loss falls.
 4. **Controls.** The window control and the scorer's 99% check.
 5. **Comparison.** The full renders, four trainings, and the three measurements above.
