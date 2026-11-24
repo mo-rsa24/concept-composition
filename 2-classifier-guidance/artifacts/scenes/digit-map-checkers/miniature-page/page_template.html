@@ -1,0 +1,857 @@
+<title>Digit-map checkers by hand</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marhey:wght@500;700&family=Paprika&family=Mouse+Memoirs&family=Public+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one screen on a desktop. Walk bar, then the controls, then the figure beside a narrow explainer panel.
+   Colours are the ladder's own key (ladder.json): blue inputs, green trained units, red the logit, orange backward,
+   grey frozen, purple count, teal identity. */
+:root{
+  --paper:#f7f9fb; --panel:#ffffff; --shade:#eef2f6; --ink:#1c2833; --muted:#5b6b79; --rule:#d3dce4;
+  --inp:#1f5fd0; --hid:#1d7a3e; --out:#c0262d; --bwd:#c86a0a; --frz:#6b7a88; --count:#7b3fa0; --ident:#0f7f86;
+  --inp-soft:#e3ecfb; --hid-soft:#e1f1e6; --out-soft:#f8e1e2; --bwd-soft:#fbead8; --frz-soft:#eceff2;
+  --shout:"Marhey","Trebuchet MS",system-ui,sans-serif; --title:"Paprika",Georgia,serif;
+  --label:"Mouse Memoirs","Arial Narrow",system-ui,sans-serif; --prose:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --data:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#11171d; --panel:#18212a; --shade:#1f2a34; --ink:#e6edf3; --muted:#9db0bf; --rule:#33434f;
+  --inp:#79a6ff; --hid:#5cc685; --out:#ff7378; --bwd:#ffa24a; --frz:#9aa8b5; --count:#bf93e6; --ident:#44c9d1;
+  --inp-soft:#1c2c47; --hid-soft:#173324; --out-soft:#3a1c1f; --bwd-soft:#3a2914; --frz-soft:#232d36; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#11171d; --panel:#18212a; --shade:#1f2a34; --ink:#e6edf3; --muted:#9db0bf; --rule:#33434f;
+  --inp:#79a6ff; --hid:#5cc685; --out:#ff7378; --bwd:#ffa24a; --frz:#9aa8b5; --count:#bf93e6; --ident:#44c9d1;
+  --inp-soft:#1c2c47; --hid-soft:#173324; --out-soft:#3a1c1f; --bwd-soft:#3a2914; --frz-soft:#232d36; color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--prose);font-size:17px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+#app{height:100%;display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:8px;padding-block:10px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.top h1{font-family:var(--shout);font-weight:700;font-size:clamp(26px,2.4vw,34px);margin:0;line-height:1.1;text-wrap:balance}
+.walk{display:flex;align-items:center;gap:10px}
+#fnum{font-family:var(--data);font-size:16px;min-width:5ch;text-align:center}
+button,select{font:inherit;font-size:15px;color:var(--ink);background:var(--panel);border:1px solid var(--rule);border-radius:7px;padding:4px 11px;cursor:pointer}
+button:hover{border-color:var(--muted)}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--inp);outline-offset:2px}
+.controls{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:7px 14px}
+.ctl{display:flex;align-items:center;gap:8px;transition:opacity .2s}
+.ctl.off{opacity:.38}
+.lab{font-family:var(--label);font-size:17px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex}.seg button{border-radius:0;margin-left:-1px}.seg button:first-child{border-radius:7px 0 0 7px}.seg button:last-child{border-radius:0 7px 7px 0}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.seg button.count[aria-pressed="true"]{background:var(--count);border-color:var(--count);color:#fff}
+.seg button.identity[aria-pressed="true"]{background:var(--ident);border-color:var(--ident);color:#fff}
+output{font-family:var(--data);font-size:15px;min-width:9ch}
+input[type=range]{width:150px;accent-color:var(--inp)}
+#bsl{accent-color:var(--bwd)}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) 410px;gap:18px;min-height:0}
+.figcol{display:grid;grid-template-rows:minmax(0,1fr) auto;gap:6px;min-height:0;min-width:0}
+.fig{min-height:0;min-width:0;background:var(--panel);border:1px solid var(--rule);border-radius:12px;display:flex;align-items:center;justify-content:center;padding:6px}
+.fig svg{width:100%;height:100%;max-width:1150px;display:block}
+.fig svg[hidden]{display:none!important}
+.transport{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-height:36px}
+.transport[hidden]{display:none!important}
+#aprog{font-family:var(--data);font-size:14px;color:var(--muted)}
+.broken{display:flex;align-items:center;gap:6px;font-size:15px;margin-left:auto}
+.broken[hidden]{display:none!important}
+#panel{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:12px 16px;overflow:auto;min-height:0}
+#panel h2{font-family:var(--title);font-size:24px;line-height:1.2;margin:0 0 6px;text-wrap:balance}
+.cap{min-height:5.2em;margin:0 0 10px}
+.notice{background:var(--out-soft);border-radius:8px;padding:6px 10px;margin:0 0 8px}
+.card{border-top:1px solid var(--rule);padding-top:8px;margin-top:8px}
+.card h3 .m{text-transform:none;font-family:var(--data);font-size:15px;letter-spacing:0}
+.card h3{font-family:var(--label);font-weight:400;font-size:18px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:0 0 4px}
+.card p{margin:0 0 6px;font-size:15.5px}
+pre.code{font-family:var(--data);font-size:12.5px;background:var(--shade);border-radius:7px;padding:6px 8px;margin:4px 0;overflow-x:auto;white-space:pre}
+.where{font-family:var(--data);font-size:12px;color:var(--muted)}
+table.nums{border-collapse:collapse;font-family:var(--data);font-size:13px;font-variant-numeric:tabular-nums;margin:2px 0 6px}
+table.nums th{font-family:var(--prose);font-weight:600;font-size:12.5px;text-align:left;color:var(--muted);padding:1px 7px 1px 0}
+table.nums td{padding:1px 8px 1px 0;text-align:right}
+.tag{display:inline-block;font-family:var(--label);font-size:15px;letter-spacing:.08em;text-transform:uppercase;border-radius:5px;padding:0 6px;margin-right:4px}
+.tag.ill{background:var(--frz-soft);color:var(--frz)}.tag.real{background:var(--hid-soft);color:var(--hid)}
+.check{font-size:14px;background:var(--shade);border-radius:8px;padding:6px 9px;margin-top:10px}
+.check b{color:var(--hid)}
+.c-count{color:var(--count);font-weight:600}.c-ident{color:var(--ident);font-weight:600}.c-bwd{color:var(--bwd)}.c-out{color:var(--out)}
+details{border-top:1px solid var(--rule);padding:6px 0;font-size:15px}
+summary{cursor:pointer;font-family:var(--label);font-size:18px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+details ul{padding-left:18px;margin:6px 0}
+details li{margin-bottom:4px}
+/* figure text */
+svg text{font-family:var(--prose);fill:var(--ink);paint-order:stroke;stroke:var(--panel);stroke-width:3.5px;stroke-linejoin:round}
+svg .val{font-family:var(--data);font-size:13px;stroke-width:0}
+svg .lbl{font-family:var(--label);font-size:19px;letter-spacing:.05em;fill:var(--muted)}
+svg .wt{font-family:var(--data);font-size:12px;fill:var(--muted)}
+svg .big{font-family:var(--title);font-size:22px}
+svg .mono{font-family:var(--data);font-size:14px}
+.node circle{stroke-width:2.2}
+.node.inp circle{fill:var(--inp-soft);stroke:var(--inp)} .node.inp .val{fill:var(--inp)}
+.node.hid circle{fill:var(--hid-soft);stroke:var(--hid)} .node.hid .val{fill:var(--hid)}
+.node.out circle{fill:var(--out-soft);stroke:var(--out)} .node.out .val{fill:var(--out)}
+.node.loss.count circle{fill:var(--panel);stroke:var(--count)} .node.loss.count .val{fill:var(--count)}
+.node.loss.identity circle{fill:var(--panel);stroke:var(--ident)} .node.loss.identity .val{fill:var(--ident)}
+.node.g circle{fill:var(--bwd-soft);stroke:var(--bwd)} .node.g .val{fill:var(--bwd);font-weight:600}
+.node.blank .val{fill:var(--muted)}
+.edge{fill:none;stroke:var(--frz);stroke-width:1.4;opacity:.55}
+.edge.zero{stroke-dasharray:3 4;opacity:.35}
+.edge.on{stroke:var(--hid);opacity:.95;stroke-width:2}
+.edge.on.t{stroke:var(--inp)}
+.edge.onb{stroke:var(--bwd);opacity:.95;stroke-width:2.4}
+.edge.off{opacity:.15}
+.wt.g{fill:var(--bwd);font-weight:600}.wt.new{fill:var(--hid);font-weight:600}
+.dim{opacity:.28;transition:opacity .25s}
+.box{stroke-width:2}
+.box.frz{fill:var(--frz-soft);stroke:var(--frz)}.box.frz.glow{stroke:var(--bwd);stroke-width:3}
+.box.inp{fill:var(--inp-soft);stroke:var(--inp)}.box.hid{fill:var(--hid-soft);stroke:var(--hid)}.box.out{fill:var(--out-soft);stroke:var(--out)}
+.box.plain{fill:var(--panel);stroke:var(--rule)}
+.packet{stroke:var(--panel);stroke-width:1.5}
+.packet.f{fill:var(--hid)}.packet.fi{fill:var(--inp)}.packet.b{fill:var(--bwd)}
+.ptext{font-family:var(--data);font-size:11.5px;stroke-width:3px}
+.ptext.f{fill:var(--hid)}.ptext.fi{fill:var(--inp)}.ptext.b{fill:var(--bwd)}
+.stopmark{fill:var(--bwd);font-family:var(--title);font-size:17px}
+.vol-front{stroke-width:1.6}.vol-top,.vol-side{stroke-width:1.2;opacity:.8}
+.bar{stroke:none}
+.axis{stroke:var(--muted);stroke-width:1}
+.grid{stroke:var(--rule);stroke-width:1}
+@media (max-width:860px){
+  html,body{height:auto}
+  #app{height:auto}
+  .stage{grid-template-columns:minmax(0,1fr)}
+  .fig{overflow-x:auto;display:block}
+  .fig svg{min-width:720px;height:auto}
+  #panel{overflow:visible}
+  input[type=range]{width:120px}
+}
+@media (prefers-reduced-motion: reduce){.dim,.ctl{transition:none}}
+</style>
+
+<div id="app">
+  <header class="top">
+    <h1>Digit-map checkers, by hand</h1>
+    <div class="walk">
+      <button id="prev" aria-label="previous frame">‹ back</button>
+      <span id="fnum" aria-live="polite">1 / 13</span>
+      <button id="next" aria-label="next frame">next ›</button>
+    </div>
+  </header>
+
+  <div class="controls" data-optional>
+    <div class="ctl" data-c="canvas"><span class="lab">canvas</span>
+      <div class="seg"><button id="cv-apart" data-canvas="apart">apart 1 | 3</button><button id="cv-wrong" data-canvas="wrong">wrong 3 | 2</button></div></div>
+    <div class="ctl" data-c="branch"><span class="lab">question</span>
+      <div class="seg"><button id="br-count" class="count" data-branch="count">count</button><button id="br-identity" class="identity" data-branch="identity">identity</button></div></div>
+    <div class="ctl" data-c="noise"><label class="lab" for="tsl">how much noise</label>
+      <input type="range" id="tsl" min="0" max="15" step="1" value="15"><output id="tout" for="tsl">t = 480</output>
+      <button id="sweep" aria-label="sweep the noise level from t 712 to 480">▶ sweep noise</button></div>
+    <div class="ctl" data-c="b"><label class="lab" for="bsl">push length b</label>
+      <input type="range" id="bsl" min="0" max="20" step="1" value="8" list="bmark"><datalist id="bmark"><option value="8"></option></datalist>
+      <output id="bout" for="bsl">0.40</output></div>
+  </div>
+
+  <main class="stage">
+    <section class="figcol">
+      <div class="fig" id="figwrap">
+        <svg id="over" viewBox="0 0 1000 600" role="img" aria-label="The real system: two noisy canvases, the frozen U-Net, two maps, the checker and its logit"></svg>
+        <svg id="noise" viewBox="0 0 1000 600" role="img" aria-label="The two real canvases at the chosen noise level, the four-pixel miniature, and the count score across the 16 timesteps" hidden></svg>
+        <svg id="net" viewBox="0 0 1000 600" role="img" aria-label="The miniature network: four pixels, the frozen expert, two maps, one convolution, the scale and shift, the pool, the logit and the loss" hidden></svg>
+        <svg id="cnn" viewBox="0 0 1000 600" role="img" aria-label="The full-size checker drawn as convolution volumes, with every shape and weight count" hidden></svg>
+        <svg id="pushfig" viewBox="0 0 1000 600" role="img" aria-label="The push on the four pixels: the product's noise guess, the push and the pushed guess" hidden></svg>
+        <svg id="res" viewBox="0 0 1000 600" role="img" aria-label="Balanced accuracy of the real checkers on pairs holding digit 4" hidden></svg>
+      </div>
+      <div class="transport" data-optional id="transport">
+        <button id="play">▶ play</button><button id="pause">❚❚ pause</button><button id="stepb">step ›</button>
+        <label class="lab" for="speed">speed</label>
+        <select id="speed"><option value="0.5">½×</option><option value="1" selected>1×</option><option value="2">2×</option></select>
+        <span id="aprog"></span>
+        <label class="broken" id="brokenwrap"><input type="checkbox" id="broken"> broken run: maps built inside no_grad</label>
+      </div>
+    </section>
+
+    <aside id="panel" aria-live="polite">
+      <p class="notice" id="notice" hidden></p>
+      <h2 id="ptitle"></h2>
+      <p class="cap" id="cap"></p>
+      <div id="pbody"></div>
+      <div class="check" id="check"></div>
+      <details>
+        <summary>where these numbers come from</summary>
+        <ul>
+          <li><span class="tag ill">illustrative</span>The miniature: every weight, the frozen expert (ε<sub>∅</sub> = 0.9x; asking for digit y subtracts 0.5·T<sub>y</sub>·σ(3x)), the noise draw on the four pixels (0.5, −0.3, 0.2, −0.6), and the training step of 0.05 on a batch of two.</li>
+          <li><span class="tag real">real</span>The 16 timesteps and their ᾱ (linear betas, <code>canvas_unet.py</code> lines 35 to 38; <code>v2_learn.py</code> line 46), the time features (<code>checker.py</code> lines 69 to 73; the miniature keeps the first frequency's two), the two canvases <code>apart_1_3</code> and <code>wrong_1_3</code> (data hash f70b0fb3…), every layer shape and weight count, and the training counts.</li>
+          <li>The noise on the real canvases is one numpy draw (seed 0) shared across all 16 levels. The checker draws its own.</li>
+          <li>Scores: count 0.774 on pairs holding 4 and 0.781 on trained pairs (job 94085's log lines); identity 0.555 and 0.603 (the V2 review, <code>05-does-it-learn/review.md</code>); one combined checker 0.704 on all kinds and 0.511 on apart against wrong (job 94080).</li>
+          <li>Every number is read from <code>page_key.json</code>, written by <code>make_page_key.py</code>, which reuses <code>../2-miniature/miniature.py</code>. At t = 480 its 94 values equal that miniature's own key. Its hand gradients match central differences to 2.6e-09, and this page checks them again live.</li>
+        </ul>
+      </details>
+      <details>
+        <summary>what is not drawn</summary>
+        <ul>
+          <li>The frozen U-Net's inside. It has skip connections; here it is one grey box, and the miniature stands in a formula for it.</li>
+          <li>Skip connections in the checker: PixelHead has none, so none are drawn.</li>
+          <li>The three stem convolutions and <code>c1</code> become one convolution with one window per half; <code>c2</code> is left out; the MLP's hidden layer of 256 and its SiLU are left out; 16 time features become 2.</li>
+          <li>Adam at 0.001 on 256 canvases for 4,000 updates becomes one plain step of 0.05 on two canvases.</li>
+          <li>Count's other three kinds of canvas (overlaid, same half, single).</li>
+          <li>Real maps, logits and gradients on these canvases: the split run never saved its two heads, so this needs one GPU job.</li>
+          <li>The real count checker's score at each timestep: <code>split.json</code> was not written when the ladder was built, so the noise frame plots the miniature's score.</li>
+          <li>The push uses the miniature's starting weights, not trained ones.</li>
+        </ul>
+      </details>
+      <details>
+        <summary>how to read the page</summary>
+        <ul>
+          <li>Blue: pixels and time. Green: trained units. Red: the logit. Orange: anything flowing backward. Grey: frozen. Purple: count. Teal: identity.</li>
+          <li>A circle holds the value at that node. A number on a line is that connection's weight.</li>
+          <li>The right arrow key or <b>next</b> moves one idea on. <b>Play</b> replays the current pass, <b>step</b> moves it one layer, and <b>sweep noise</b> runs the 16 timesteps.</li>
+        </ul>
+      </details>
+    </aside>
+  </main>
+</div>
+
+<script type="application/json" id="key">/*PAGE_KEY*/</script>
+<script>
+(function(){
+"use strict";
+const K = JSON.parse(document.getElementById("key").textContent);
+const RM = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+const NS = "http://www.w3.org/2000/svg";
+const MINUS = "−";
+const S = {f:0, canvas:"apart", branch:"count", ti:15, bi:K.b_grid.indexOf(0.4), broken:false};
+const st = () => K.steps[S.ti], cv = () => st().canvases[S.canvas], br = () => st().branches[S.branch];
+const row = () => br().rows[S.canvas], pu = () => st().push[S.canvas], bb = () => pu().by_b[S.bi];
+const W = K.weights;
+const fmt = (v, d = 2, sign = false) => { const s = Math.abs(v).toFixed(d); if (v < 0 && +s !== 0) return MINUS + s; return (sign ? "+" : "") + s; };
+const vec = (a, d = 2) => "(" + a.map(v => fmt(v, d)).join(", ") + ")";
+const $ = id => document.getElementById(id);
+function el(tag, attrs, parent){ const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+function tx(parent, x, y, s, cls, anchor){ const e = el("text", {x, y, "text-anchor": anchor || "middle", class: cls || ""}, parent); e.textContent = s; return e; }
+const CANVAS_NAME = {apart: "apart_1_3", wrong: "wrong_1_3"};
+
+/* ---------------------------------------------------------------- real canvases as images */
+const imgCache = {};
+function canvasURL(name, tk){
+  const k = name + "|" + tk; if (imgCache[k]) return imgCache[k];
+  const b = atob(K.real_canvases[name].frames[tk]); const c = document.createElement("canvas"); c.width = 64; c.height = 32;
+  const ctx = c.getContext("2d"); const id = ctx.createImageData(64, 32);
+  for (let i = 0; i < 2048; i++){ const v = b.charCodeAt(i); id.data[4*i] = id.data[4*i+1] = id.data[4*i+2] = v; id.data[4*i+3] = 255; }
+  ctx.putImageData(id, 0, 0); return (imgCache[k] = c.toDataURL());
+}
+function realImage(parent, x, y, w, h, name, tk, stroke){
+  const im = el("image", {x, y, width: w, height: h, preserveAspectRatio: "none", style: "image-rendering:pixelated"}, parent);
+  im.setAttribute("href", canvasURL(name, tk));
+  el("rect", {x, y, width: w, height: h, fill: "none", stroke: stroke || "var(--inp)", "stroke-width": 2}, parent);
+  return im;
+}
+
+/* ---------------------------------------------------------------- the miniature network: geometry */
+const PX = {x: 70, ys: [135, 235, 355, 455], r: 24};
+const FZ = {x0: 130, x1: 300, y0: 100, y1: 490};
+const MAPX = 390, MR = 22, MAPY = [110, 160, 210, 260, 330, 380, 430, 480];
+const HX = 590, HR = 24, HY = [[145, 225], [365, 445]];
+const PLX = 780, PR = 22, PLY = [175, 235, 355, 415];
+const PHI = {x0: 680, x1: 800, y0: 22, y1: 74}, GB = {x0: 545, x1: 635, y0: 28, y1: 68};
+const LG = {x: 930, y: 295, r: 30}, LS = {x: 930, y: 445, r: 26};
+const mapIndex = (h, m, k) => h * 4 + m * 2 + k;           // map node: half h, map m (a or b), tap k
+const N = {}, E = {};                                        // nodes and edges by id
+const net = $("net");
+const gEdges = el("g", {}, net), gLabels = el("g", {}, net), gNodes = el("g", {}, net), gPk = el("g", {}, net);
+
+function edge(id, d, cls, group){ const p = el("path", {d, class: "edge " + (cls || "")}, gEdges); E[id] = {p, group}; return p; }
+function line(x1, y1, x2, y2){ return `M${x1} ${y1} L${x2} ${y2}`; }
+function node(id, x, y, r, kind){
+  const g = el("g", {class: "node " + kind}, gNodes); const c = el("circle", {cx: x, cy: y, r}, g);
+  const t = tx(g, x, y + 4.5, "·", "val"); N[id] = {g, c, t, x, y, r, kind}; return N[id];
+}
+// edges first so nodes sit on top
+PX.ys.forEach((y, i) => edge("px" + i, line(PX.x + PX.r, y, FZ.x0, y), "", "px"));
+MAPY.forEach((y, j) => edge("fm" + j, line(FZ.x1, y, MAPX - MR, y), "", "fm"));
+const KLAB = {};
+for (let h = 0; h < 2; h++) for (let c = 0; c < 2; c++) for (let m = 0; m < 2; m++) for (let k = 0; k < 2; k++){
+  const j = mapIndex(h, m, k), y1 = MAPY[j], y2 = HY[h][c], x1 = MAPX + MR, x2 = HX - HR;
+  const id = `k${h}${c}${m}${k}`, w = W.K[c][m][k];
+  edge(id, line(x1, y1, x2, y2), w === 0 ? "zero" : "", "k");
+  const tt = c === 0 ? 0.6 : 0.25;
+  E[id].tl = tt;
+  KLAB[id] = tx(gLabels, x1 + tt * (x2 - x1), y1 + tt * (y2 - y1) + 4, "", "wt");
+}
+for (let h = 0; h < 2; h++) for (let c = 0; c < 2; c++) for (let p = 0; p < 2; p++)
+  edge(`hp${h}${c}${p}`, line(HX + HR, HY[h][c], PLX - PR, PLY[p * 2 + c]), "", "hp");
+const VLAB = [];
+PLY.forEach((y, q) => { edge("pl" + q, line(PLX + PR, y, LG.x - LG.r, LG.y), "", "pl");
+  const tt = 0.42, x1 = PLX + PR, x2 = LG.x - LG.r; VLAB.push(tx(gLabels, x1 + tt * (x2 - x1), y + tt * (LG.y - y) - 5, fmt(W.v[q], 1), "wt")); });
+edge("phg", line(PHI.x0, 48, GB.x1, 48), "t", "t");
+edge("gbh", line(HX, GB.y1, HX, HY[0][0] - HR - 3), "t", "t");
+edge("phl", `M${PHI.x1} 48 L${LG.x} 48 L${LG.x} ${LG.y - LG.r}`, "t", "t");
+tx(gLabels, LG.x + 10, 150, "u", "wt", "start");
+edge("ll", line(LG.x, LG.y + LG.r, LG.x, LS.y - LS.r), "", "ll");
+// boxes
+const fzBox = el("rect", {x: FZ.x0, y: FZ.y0, width: FZ.x1 - FZ.x0, height: FZ.y1 - FZ.y0, rx: 12, class: "box frz"}, gEdges);
+tx(gLabels, (FZ.x0 + FZ.x1) / 2, 285, "frozen U-Net", "big");
+tx(gLabels, (FZ.x0 + FZ.x1) / 2, 312, "3 calls: a, b, ∅", "lbl");
+el("rect", {x: PHI.x0, y: PHI.y0, width: PHI.x1 - PHI.x0, height: PHI.y1 - PHI.y0, rx: 9, class: "box inp"}, gEdges);
+const phiTxt = tx(gLabels, (PHI.x0 + PHI.x1) / 2, 53, "", "mono");
+tx(gLabels, PHI.x1, 15, "φ(t)", "lbl", "end");
+el("rect", {x: GB.x0, y: GB.y0, width: GB.x1 - GB.x0, height: GB.y1 - GB.y0, rx: 9, class: "box inp"}, gEdges);
+tx(gLabels, (GB.x0 + GB.x1) / 2, 53, "×(1+γ)+β", "mono");
+// nodes
+PX.ys.forEach((y, i) => { node("px" + i, PX.x, y, PX.r, "inp"); tx(gLabels, PX.x - 30, y + 5, "p" + "₁₂₃₄"[i], "lbl", "end"); });
+MAPY.forEach((y, j) => node("m" + j, MAPX, y, MR, "hid"));
+[0, 1].forEach(h => [0, 1].forEach(m => tx(gLabels, MAPX - 28, MAPY[mapIndex(h, m, 0)] + 30, m ? "m_b" : "m_a", "lbl", "end")));
+for (let h = 0; h < 2; h++) for (let c = 0; c < 2; c++) node(`h${h}${c}`, HX, HY[h][c], HR, "hid");
+PLY.forEach((y, q) => node("pl" + q, PLX, y, PR, "hid"));
+node("logit", LG.x, LG.y, LG.r, "out"); node("loss", LS.x, LS.y, LS.r, "loss count");
+const lossLab = tx(gLabels, LS.x - 34, LS.y + 5, "", "lbl", "end");
+const afterLab = tx(gLabels, LG.x, LG.y + LG.r + 22, "", "wt new");
+tx(gLabels, PX.x, 560, "xₜ", "lbl"); tx(gLabels, MAPX, 560, "maps", "lbl"); tx(gLabels, HX, 560, "conv · SiLU", "lbl");
+tx(gLabels, PLX, 560, "mean · max", "lbl"); tx(gLabels, LG.x, 560, "logit", "lbl");
+const stopTxt = tx(gLabels, MAPX + 2, 530, "", "stopmark");
+const NET_GROUPS = {px: ["px0","px1","px2","px3"], maps: MAPY.map((_, j) => "m" + j), hid: ["h00","h01","h10","h11"], pool: ["pl0","pl1","pl2","pl3"]};
+
+/* ---------------------------------------------------------------- the animation: phases for the network */
+const FWD = [
+  {name: "pixels", edges: [], reveal: ["xt"], dur: 450, kind: "fi"},
+  {name: "frozen U-Net", edges: ["px0","px1","px2","px3"], reveal: ["fz"], kind: "fi", carry: id => cv().xt[+id.slice(2)]},
+  {name: "maps", edges: MAPY.map((_, j) => "fm" + j), reveal: ["maps"], kind: "f", carry: id => mapVal(+id.slice(2))},
+  {name: "convolution", edges: Object.keys(KLAB), reveal: ["pre"], kind: "f"},
+  {name: "SiLU", edges: [], reveal: ["act"], dur: 500, kind: "f"},
+  {name: "scale and shift", edges: ["phg", "gbh"], reveal: ["h"], kind: "fi"},
+  {name: "mean and max", edges: null, reveal: ["pool"], kind: "f"},
+  {name: "logit", edges: ["pl0","pl1","pl2","pl3","phl"], reveal: ["logit"], kind: "f", carry: id => id === "phl" ? null : cv()[+id.slice(2) < 2 ? "mean" : "max"][+id.slice(2) % 2]},
+  {name: "loss", edges: ["ll"], reveal: ["loss"], kind: "f"}
+];
+const DEPTH = {maps: 2, act: 4, h: 5, pool: 6, logit: 7, loss: 8};
+function poolEdges(){ const a = cv().argmax, out = []; for (let h = 0; h < 2; h++) for (let c = 0; c < 2; c++){ out.push(`hp${h}${c}0`); if (a[c] === h) out.push(`hp${h}${c}1`); } return out; }
+function backTrain(){ return [
+  {name: "∂L/∂ℓ", edges: ["ll"], reveal: ["g_logit"], kind: "b", back: true},
+  {name: "into the pool", edges: ["pl0","pl1","pl2","pl3"], reveal: ["g_pool"], kind: "b", back: true, carry: () => row().dloss_dlogit},
+  {name: "into each unit", edges: null, reveal: ["g_hidden"], kind: "b", back: true},
+  {name: "into the kernel", edges: Object.keys(KLAB), reveal: ["g_K"], kind: "b", back: true, toLabel: true},
+  {name: "stops at the maps", edges: [], reveal: ["stop"], kind: "b", dur: 600},
+  {name: "one step of 0.05", edges: [], reveal: ["update"], kind: "f", dur: 700}
+]; }
+function backPush(){ const ph = [
+  {name: "ℓ itself, slope 1", edges: [], reveal: ["g_logit"], kind: "b", dur: 450},
+  {name: "into the pool", edges: ["pl0","pl1","pl2","pl3"], reveal: ["g_pool"], kind: "b", back: true, carry: () => 1},
+  {name: "into each unit", edges: null, reveal: ["g_hidden"], kind: "b", back: true},
+  {name: "into the maps", edges: Object.keys(KLAB), reveal: ["g_maps"], kind: "b", back: true}];
+  if (S.broken) ph.push({name: "stops: maps were built without gradient", edges: [], reveal: ["stop", "g_zero"], kind: "b", dur: 700});
+  else ph.push({name: "through |·| and 3 U-Net calls", edges: MAPY.map((_, j) => "fm" + j), reveal: ["g_fz"], kind: "b", back: true, carry: id => pu().dlogit_dmaps[+id.slice(2) % 4 >= 2 ? 1 : 0][mapPix(+id.slice(2))]},
+               {name: "into the four pixels", edges: ["px0","px1","px2","px3"], reveal: ["g_px"], kind: "b", back: true});
+  return ph; }
+const mapPix = j => (j < 4 ? 0 : 2) + (j % 2);                   // pixel index of map node j
+const mapWhich = j => (j % 4) >= 2 ? 1 : 0;                       // 0 = m_a, 1 = m_b
+const mapVal = j => cv()[mapWhich(j) ? "m_b" : "m_a"][mapPix(j)];
+
+const A = {phases: [], start: 0, done: 0, frac: 0, playing: false, stepping: false, last: 0, raf: 0, mode: "net"};
+function speed(){ return +$("speed").value || 1; }
+function phaseEdges(ph){ if (ph.edges) return ph.edges; return ph.name === "mean and max" || ph.back ? poolEdges() : []; }
+
+/* ---------------------------------------------------------------- frames */
+const FR = [
+  {id: "two-questions", fig: "over", ctl: ["branch", "noise"], anim: null},
+  {id: "noise", fig: "noise", ctl: ["noise", "canvas"], anim: "sweepT"},
+  {id: "maps", fig: "net", ctl: ["canvas", "noise"], anim: "net", depth: "maps"},
+  {id: "full-size", fig: "cnn", ctl: [], anim: null},
+  {id: "convolution", fig: "net", ctl: ["canvas", "noise"], anim: "net", depth: "act"},
+  {id: "scale-and-shift", fig: "net", ctl: ["canvas", "noise"], anim: "net", depth: "h"},
+  {id: "mean-and-max", fig: "net", ctl: ["canvas", "noise"], anim: "net", depth: "pool"},
+  {id: "logit", fig: "net", ctl: ["canvas", "noise"], anim: "net", depth: "logit"},
+  {id: "labels", fig: "net", ctl: ["canvas", "branch", "noise"], anim: "net", depth: "loss"},
+  {id: "training", fig: "net", ctl: ["canvas", "branch", "noise"], anim: "net", depth: "loss", back: "train"},
+  {id: "push", fig: "net", ctl: ["canvas", "noise"], anim: "net", depth: "logit", back: "push"},
+  {id: "push-length", fig: "pushfig", ctl: ["canvas", "noise", "b"], anim: "sweepB"},
+  {id: "results", fig: "res", ctl: ["branch"], anim: null}
+];
+window.HLD_ANCHORS = FR.map(f => f.id);
+
+function buildPhases(){
+  const fr = FR[S.f]; A.restore = null; A.mode = fr.anim; A.frac = 0; A.playing = false; A.stepping = false; cancelAnimationFrame(A.raf);
+  if (fr.anim === "net"){
+    const d = DEPTH[fr.depth]; const fwd = FWD.slice(0, d + 1);
+    const back = fr.back === "train" ? backTrain() : fr.back === "push" ? backPush() : [];
+    A.phases = fwd.concat(back); A.start = back.length ? fwd.length : 0; A.done = A.phases.length;
+  } else if (fr.anim === "sweepT"){ A.phases = K.timesteps.map(t => ({name: "t = " + t})); A.start = 0; A.done = A.phases.length; }
+  else if (fr.anim === "sweepB"){ A.phases = K.b_grid.map(b => ({name: "b = " + b.toFixed(2)})); A.start = 0; A.done = A.phases.length; }
+  else { A.phases = []; A.done = 0; }
+}
+
+/* ---------------------------------------------------------------- painting the network */
+function revealed(){ const R = new Set(); for (let i = 0; i < A.done; i++) (A.phases[i].reveal || []).forEach(r => R.add(r)); return R; }
+function setNode(id, text, cls){ const n = N[id]; n.t.textContent = text; n.g.setAttribute("class", "node " + cls); }
+function paintNet(){
+  const fr = FR[S.f], R = revealed(), c = cv(), back = fr.back;
+  const g = R.has("g_logit");
+  // pixels
+  for (let i = 0; i < 4; i++){
+    if (R.has("g_px")) setNode("px" + i, fmt(pu().g[i]), "g");
+    else if (R.has("g_zero") && R.has("stop")) setNode("px" + i, "0", "g");
+    else setNode("px" + i, R.has("xt") ? fmt(c.xt[i], 2, true) : "·", R.has("xt") ? "inp" : "inp blank");
+  }
+  fzBox.setAttribute("class", "box frz" + (R.has("g_fz") ? " glow" : ""));
+  for (let j = 0; j < 8; j++){
+    if (R.has("g_maps")) setNode("m" + j, fmt(pu().dlogit_dmaps[mapWhich(j)][mapPix(j)]), "g");
+    else setNode("m" + j, R.has("maps") ? fmt(mapVal(j)) : "·", R.has("maps") ? "hid" : "hid blank");
+  }
+  for (let h = 0; h < 2; h++) for (let ch = 0; ch < 2; ch++){
+    const id = `h${h}${ch}`;
+    if (R.has("g_hidden")) setNode(id, fmt(back === "push" ? pu().dlogit_dpre[h][ch] : row().dpre[h][ch]), "g");
+    else if (R.has("h")) setNode(id, fmt(c.h[h][ch]), "hid");
+    else if (R.has("act")) setNode(id, fmt(c.act[h][ch]), "hid");
+    else if (R.has("pre")) setNode(id, fmt(c.pre[h][ch]), "hid");
+    else setNode(id, "·", "hid blank");
+  }
+  for (let q = 0; q < 4; q++){
+    if (R.has("g_pool")) setNode("pl" + q, fmt(back === "push" ? pu().dlogit_dfeat[q] : row().dfeat[q]), "g");
+    else setNode("pl" + q, R.has("pool") ? fmt(c[q < 2 ? "mean" : "max"][q % 2]) : "·", R.has("pool") ? "hid" : "hid blank");
+  }
+  if (g) setNode("logit", back === "push" ? "1" : fmt(row().dloss_dlogit, 3), "g");
+  else setNode("logit", R.has("logit") ? fmt(c.logit, 3) : "·", R.has("logit") ? "out" : "out blank");
+  const showLoss = fr.depth === "loss";
+  N.loss.g.style.display = showLoss ? "" : "none"; E.ll.p.style.display = showLoss ? "" : "none";
+  setNode("loss", R.has("loss") ? fmt(row().loss, 3) : "·", "loss " + S.branch + (R.has("loss") ? "" : " blank"));
+  lossLab.textContent = showLoss ? "loss, y = " + row().y : "";
+  afterLab.textContent = R.has("update") ? "after: " + fmt(row().logit_after_one_step, 3) : "";
+  stopTxt.textContent = R.has("stop") ? "✕ stops at the maps" : "";
+  // kernel labels: weights, their gradient, or their value after one step
+  for (const id in KLAB){
+    const [h, ch, m, k] = id.slice(1).split("").map(Number);
+    let v = W.K[ch][m][k], cls = "wt";
+    if (R.has("update")){ v = br().K_after[ch][m][k]; cls = "wt new"; }
+    else if (R.has("g_K")){ v = br().grad.K[ch][m][k]; cls = "wt g"; }
+    KLAB[id].textContent = (cls === "wt" && v === 0) ? "0" : fmt(v, cls === "wt" ? 1 : 3);
+    KLAB[id].setAttribute("class", cls);
+    KLAB[id].style.display = h === 1 && cls !== "wt" ? "none" : "";   // the kernel is shared, so its gradient shows once
+  }
+  phiTxt.textContent = st().time_features.map(v => fmt(v, 2)).join("  ");
+  // edges: lit, travelling or resting
+  const lit = new Set(), litB = new Set();
+  for (let i = 0; i < A.done; i++){ const ph = A.phases[i]; phaseEdges(ph).forEach(e => (ph.kind === "b" ? litB : lit).add(e)); }
+  for (const id in E){
+    const e = E[id]; let cls = "edge" + (e.p.classList.contains("zero") ? " zero" : "") + (["phg","gbh","phl"].includes(id) ? " t" : "");
+    if (litB.has(id)) cls += " onb"; else if (lit.has(id)) cls += " on";
+    if (id.startsWith("hp") && id.endsWith("1")){ const h = +id[2], ch = +id[3]; if (c.argmax[ch] !== h) cls += " off"; }
+    e.p.setAttribute("class", cls);
+  }
+  // dim what this frame does not use
+  const depth = DEPTH[fr.depth];
+  const dimIf = (els, cond) => els.forEach(x => x.classList.toggle("dim", cond));
+  dimIf([N.loss.g], !showLoss);
+  dimIf(["pl0","pl1","pl2","pl3"].map(i => N[i].g), depth < 6 && !back);
+  dimIf(["h00","h01","h10","h11"].map(i => N[i].g), depth < 3 && !back);
+  dimIf([N.logit.g], depth < 7 && !back);
+  // packets for the phase in progress
+  while (gPk.firstChild) gPk.removeChild(gPk.firstChild);
+  const ph = A.phases[A.done];
+  if (ph && (A.playing || A.frac > 0) && A.mode === "net"){
+    const es = phaseEdges(ph), f = Math.min(1, A.frac), carry = ph.carry && es.length <= 8;
+    es.forEach(id => {
+      const p = E[id].p, L = p.getTotalLength();
+      let s = ph.back ? 1 - f : f;
+      if (ph.toLabel) s = 1 - f * (1 - E[id].tl);
+      const pt = p.getPointAtLength(s * L);
+      el("circle", {cx: pt.x, cy: pt.y, r: 5.5, class: "packet " + ph.kind}, gPk);
+      if (carry){ const v = ph.carry(id); if (v != null) tx(gPk, pt.x, pt.y - 9, fmt(v), "ptext " + ph.kind); }
+    });
+  }
+}
+
+/* ---------------------------------------------------------------- the other figures */
+function clear(svg){ while (svg.firstChild) svg.removeChild(svg.firstChild); }
+function arrow(svg, x1, y, x2, color){ el("path", {d: line(x1, y, x2 - 8, y), stroke: color || "var(--frz)", "stroke-width": 2, fill: "none"}, svg);
+  el("polygon", {points: `${x2},${y} ${x2 - 10},${y - 5} ${x2 - 10},${y + 5}`, fill: color || "var(--frz)"}, svg); }
+function tkey(){ return String(st().t); }
+
+function drawOver(){
+  const s = $("over"); clear(s);
+  const tk = tkey();
+  [["apart", 120], ["wrong", 350]].forEach(([n, y]) => {
+    const ex = K.real_canvases[CANVAS_NAME[n]].about;
+    tx(s, 40, y - 14, n + "  " + ex.holds.join(" | "), "lbl", "start");
+    realImage(s, 40, y, 256, 128, CANVAS_NAME[n], tk);
+    const yc = K.labels.count[n], yi = K.labels.identity[n];
+    tx(s, 40, y + 156, "count y = " + yc, "mono", "start").setAttribute("class", "mono " + (S.branch === "count" ? "c-count" : ""));
+    tx(s, 170, y + 156, "identity y = " + yi, "mono", "start").setAttribute("class", "mono " + (S.branch === "identity" ? "c-ident" : ""));
+    arrow(s, 300, y + 64, 370);
+  });
+  el("rect", {x: 372, y: 190, width: 150, height: 230, rx: 14, class: "box frz"}, s);
+  tx(s, 447, 290, "frozen U-Net", "big"); tx(s, 447, 318, "3 calls", "lbl");
+  arrow(s, 524, 305, 572, "var(--frz)");
+  el("rect", {x: 574, y: 250, width: 130, height: 110, rx: 12, class: "box hid"}, s);
+  tx(s, 639, 298, "2 maps", "big"); tx(s, 639, 325, "2 × 32 × 64", "mono");
+  arrow(s, 706, 305, 750, "var(--hid)");
+  el("rect", {x: 752, y: 235, width: 140, height: 140, rx: 12, class: "box plain", "stroke-width": 2}, s);
+  tx(s, 822, 288, "checker", "big"); tx(s, 822, 316, "481,665", "mono"); tx(s, 822, 340, "weights", "lbl");
+  arrow(s, 894, 305, 926, "var(--hid)");
+  el("circle", {cx: 955, cy: 305, r: 28, class: "box out"}, s); tx(s, 955, 312, "ℓ", "big");
+  tx(s, 955, 360, "σ(ℓ)", "mono");
+  tx(s, 447, 448, "t = " + st().t, "mono");
+}
+
+function drawNoise(){
+  const s = $("noise"); clear(s); const tk = tkey(), step = st();
+  [["apart", 64], ["wrong", 300]].forEach(([n, y]) => {
+    const ex = K.real_canvases[CANVAS_NAME[n]].about;
+    tx(s, 40, y - 12, n + "  " + ex.holds.join(" | "), "lbl", "start");
+    realImage(s, 40, y, 384, 192, CANVAS_NAME[n], tk, n === S.canvas ? "var(--inp)" : "var(--rule)");
+    tx(s, 500, y - 12, "clean", "lbl");
+    realImage(s, 436, y, 128, 64, CANVAS_NAME[n], "clean", "var(--rule)");
+  });
+  // the 16 timesteps as a ruler
+  const x0 = 40, dx = 34;
+  el("line", {x1: x0, y1: 540, x2: x0 + 15 * dx, y2: 540, class: "axis"}, s);
+  K.timesteps.forEach((t, i) => { const on = i === S.ti, x = x0 + i * dx;
+    el("circle", {cx: x, cy: 540, r: on ? 8 : 4, fill: on ? "var(--inp)" : "var(--frz)"}, s);
+    if (i % 3 === 0 || on) tx(s, x, on ? 568 : 566, String(t), on ? "mono" : "wt"); });
+  tx(s, x0, 520, "t", "lbl", "start");
+  // the miniature's four pixels, clean and noisy
+  const mx = 610, sz = 64, c = cv();
+  tx(s, mx, 48, "miniature  " + S.canvas, "lbl", "start");
+  [["x₀", c.x0, 64], ["xₜ", c.xt, 150]].forEach(([lab, arr, y]) => {
+    tx(s, mx - 10, y + 40, lab, "lbl", "end");
+    arr.forEach((v, i) => { const g = Math.round((Math.max(-1, Math.min(1, v)) + 1) * 127.5);
+      el("rect", {x: mx + i * (sz + 8) + (i > 1 ? 14 : 0), y, width: sz, height: sz, rx: 6, fill: `rgb(${g},${g},${g})`, stroke: "var(--inp)", "stroke-width": 1.5}, s);
+      tx(s, mx + i * (sz + 8) + (i > 1 ? 14 : 0) + sz / 2, y + sz + 18, fmt(v, 2, true), "val"); });
+  });
+  tx(s, mx, 268, `${step.sqrt_abar.toFixed(3)} · x₀ + ${step.sqrt_one_minus_abar.toFixed(3)} · ε`, "mono", "start");
+  // the count score across the 16 timesteps
+  const px0 = 620, px1 = 960, py0 = 330, py1 = 500, lo = 0.70, hi = 0.82;
+  const X = i => px0 + i * (px1 - px0) / 15, Y = v => py1 - (v - lo) / (hi - lo) * (py1 - py0);
+  tx(s, px0, 314, "count score σ(ℓ), after one step", "lbl", "start");
+  [0.70, 0.76, 0.82].forEach(v => { el("line", {x1: px0, y1: Y(v), x2: px1, y2: Y(v), class: "grid"}, s); tx(s, px0 - 6, Y(v) + 4, v.toFixed(2), "wt", "end"); });
+  ["apart", "wrong"].forEach(n => {
+    const pts = K.steps.map((st_, i) => `${X(i)},${Y(st_.branches.count.rows[n].p_after_one_step)}`).join(" ");
+    el("polyline", {points: pts, fill: "none", stroke: "var(--count)", "stroke-width": n === S.canvas ? 3 : 1.6, "stroke-dasharray": n === "apart" ? "" : "6 4"}, s);
+    const v = step.branches.count.rows[n].p_after_one_step;
+    el("circle", {cx: X(S.ti), cy: Y(v), r: 6, fill: "var(--count)"}, s);
+    tx(s, X(S.ti) + (S.ti > 11 ? -10 : 10), Y(v) + (n === "apart" ? -10 : 18), n + " " + v.toFixed(3), "wt", S.ti > 11 ? "end" : "start");
+  });
+  tx(s, px0, 524, "712", "wt", "start"); tx(s, px1, 524, "480", "wt", "end");
+}
+
+function volume(s, x, yc, w, h, d, label, shape, weights, kind){
+  const y = yc - h / 2, fill = kind === "frz" ? "var(--frz-soft)" : "var(--hid-soft)", stroke = kind === "frz" ? "var(--frz)" : "var(--hid)";
+  el("polygon", {points: `${x},${y} ${x + d},${y - d} ${x + w + d},${y - d} ${x + w},${y}`, fill, stroke, class: "vol-top"}, s);
+  el("polygon", {points: `${x + w},${y} ${x + w + d},${y - d} ${x + w + d},${y + h - d} ${x + w},${y + h}`, fill, stroke, class: "vol-side"}, s);
+  el("rect", {x, y, width: w, height: h, fill, stroke, class: "vol-front"}, s);
+  const cx = x + (w + d) / 2;
+  tx(s, cx, 395, label, "lbl"); tx(s, cx, 420, shape, "wt"); if (weights) tx(s, cx, 440, weights, "wt");
+}
+function drawCnn(){
+  const s = $("cnn"); clear(s); const L = K.full_scale.layers, n = v => v.toLocaleString("en-US");
+  el("rect", {x: 10, y: 270, width: 90, height: 90, rx: 10, class: "box frz"}, s);
+  tx(s, 55, 305, "frozen", "lbl"); tx(s, 55, 328, "U-Net", "lbl");
+  arrow(s, 102, 315, 118);
+  const sc = 1.3, dz = c => Math.max(3, c * 0.3);
+  volume(s, 122, 315, 64 * sc, 32 * sc, dz(2), "maps", "2×32×64", "", "hid");
+  arrow(s, 218, 315, 234);
+  volume(s, 238, 315, 64 * sc, 32 * sc, dz(64), "stem 1", "64×32×64", n(L[0].weights));
+  arrow(s, 342, 315, 360);
+  volume(s, 364, 315, 32 * sc, 16 * sc, dz(64), "stem 2", "64×16×32", n(L[1].weights));
+  arrow(s, 427, 315, 445);
+  volume(s, 449, 315, 16 * sc, 8 * sc, 128 * 0.3, "stem 3", "128×8×16", n(L[2].weights));
+  arrow(s, 510, 315, 528);
+  volume(s, 532, 315, 16 * sc, 8 * sc, 128 * 0.3, "c1", "128×8×16", n(L[3].weights));
+  arrow(s, 593, 315, 611);
+  volume(s, 615, 315, 16 * sc, 8 * sc, 128 * 0.3, "c2", "128×8×16", n(L[5].weights));
+  arrow(s, 676, 315, 696);
+  el("rect", {x: 698, y: 285, width: 70, height: 60, rx: 9, class: "box hid"}, s);
+  tx(s, 733, 320, "256", "mono"); tx(s, 733, 395, "pool", "lbl"); tx(s, 733, 420, "mean, max", "wt");
+  arrow(s, 770, 315, 792);
+  el("rect", {x: 794, y: 280, width: 92, height: 70, rx: 9, class: "box hid"}, s);
+  tx(s, 840, 312, "272→256", "wt"); tx(s, 840, 330, "→1", "wt");
+  tx(s, 840, 395, "MLP", "lbl"); tx(s, 840, 420, n(L[7].weights + L[8].weights), "wt");
+  arrow(s, 888, 315, 922, "var(--out)");
+  el("circle", {cx: 950, cy: 315, r: 26, class: "box out"}, s); tx(s, 950, 322, "ℓ", "big");
+  // time features
+  el("rect", {x: 500, y: 120, width: 170, height: 52, rx: 10, class: "box inp"}, s);
+  tx(s, 585, 152, "φ(t): 16 numbers", "lbl");
+  el("path", {d: line(560, 172, 560, 262), stroke: "var(--inp)", "stroke-width": 2, fill: "none"}, s);
+  tx(s, 552, 225, "γ, β: 4,352", "wt", "end");
+  el("path", {d: `M670 146 L840 146 L840 276`, stroke: "var(--inp)", "stroke-width": 2, fill: "none"}, s);
+  tx(s, 120, 520, "weights per layer under each block; " + n(K.full_scale.weights) + " in all", "lbl", "start");
+  tx(s, 120, 548, "each layer feeds only the next: no skip connections", "lbl", "start");
+}
+
+function drawPush(){
+  const s = $("pushfig"); clear(s); const p = pu(), b = bb(), c = cv();
+  // the length ruler, in units of b
+  const r0 = 160, r1 = 860, R = v => r0 + v * (r1 - r0);
+  tx(s, r0, 40, "push length, as a share of ‖ε_product‖ = " + p.norm_eps_product.toFixed(3), "lbl", "start");
+  el("rect", {x: r0, y: 56, width: r1 - r0, height: 18, rx: 4, fill: "var(--frz-soft)", stroke: "var(--frz)"}, s);
+  el("rect", {x: r0, y: 56, width: Math.max(0.5, R(b.b) - r0), height: 18, rx: 4, fill: "var(--bwd)"}, s);
+  el("line", {x1: R(0.4), y1: 50, x2: R(0.4), y2: 82, stroke: "var(--ink)", "stroke-width": 2}, s);
+  tx(s, R(0.4), 100, "0.4", "mono"); tx(s, r0, 100, "0", "wt"); tx(s, r1, 100, "1", "wt");
+  tx(s, r1 + 12, 70, "b = " + b.b.toFixed(2), "mono", "start");
+  // per-pixel bars
+  const z = 320, k = 150, gw = 200;
+  el("line", {x1: 100, y1: z, x2: 940, y2: z, class: "axis"}, s);
+  const series = [["ε_product", c.eps_product, "var(--frz)"], ["push", b.push, "var(--bwd)"], ["ε_hat", b.eps_hat, "var(--out)"]];
+  series.forEach(([name, , col], j) => { const t_ = tx(s, 130 + j * 170, 150, "■ " + name, "mono", "start"); t_.setAttribute("fill", col); t_.style.fill = col; });
+  for (let i = 0; i < 4; i++){
+    const gx = 130 + i * gw;
+    series.forEach(([name, arr, col], j) => {
+      const v = arr[i], x = gx + j * 50, h = v * k;
+      el("rect", {x, y: Math.min(z, z - h), width: 36, height: Math.max(1, Math.abs(h)), fill: col, class: "bar"}, s);
+      tx(s, x + 18, v >= 0 ? z - h - 8 : z - h + 18, fmt(v), "val");
+    });
+    tx(s, gx + 68, 510, "p" + "₁₂₃₄"[i], "lbl");
+  }
+  tx(s, 100, 560, `clean-canvas guess moves by ${p.clean_guess_gain.toFixed(2)} × push = ${vec(b.x0_hat_shift)}`, "mono", "start");
+}
+
+function drawRes(){
+  const s = $("res"); clear(s); const R = K.results;
+  const x0 = 330, x1 = 940, lo = 0.4, hi = 0.9, X = v => x0 + (v - lo) / (hi - lo) * (x1 - x0);
+  tx(s, x0, 50, "balanced accuracy on pairs holding digit 4 (axis starts at 0.4)", "lbl", "start");
+  const rows = [
+    ["count checker", R.count_map_reader.pairs_holding_4, "var(--count)", "count"],
+    ["identity checker", R.identity_map_reader.pairs_holding_4, "var(--ident)", "identity"],
+    ["one combined checker, all kinds", R.combined_checker.all_kinds, "var(--frz)", ""],
+    ["combined, apart against wrong", R.combined_checker.apart_vs_wrong, "var(--frz)", ""]];
+  rows.forEach(([name, v, col, b], i) => {
+    const y = 110 + i * 100, on = b === S.branch;
+    tx(s, x0 - 16, y + 30, name, on ? "big" : "lbl", "end");
+    el("rect", {x: x0, y, width: X(v) - x0, height: 44, rx: 5, fill: col, opacity: on || !b ? 1 : 0.55}, s);
+    tx(s, X(v) + 10, y + 29, v.toFixed(3), "mono", "start");
+  });
+  [[R.chance, "chance 0.5"], [R.bar, "bar 0.75"]].forEach(([v, lab]) => {
+    el("line", {x1: X(v), y1: 86, x2: X(v), y2: 520, stroke: "var(--ink)", "stroke-width": 1.5, "stroke-dasharray": "5 4"}, s);
+    tx(s, X(v), 548, lab, "lbl"); });
+}
+
+/* ---------------------------------------------------------------- the explainer panel */
+const code = (lines, where) => `<pre class="code">${lines}</pre><div class="where">${where}</div>`;
+const tbl = (head, rows) => `<table class="nums"><tr>${head.map(h => `<th>${h}</th>`).join("")}</tr>${rows.map(r => `<tr>${r.map((v, i) => i === 0 ? `<th>${v}</th>` : `<td>${v}</td>`).join("")}</tr>`).join("")}</table>`;
+const brc = () => S.branch === "count" ? "c-count" : "c-ident";
+const PANEL = {
+  "two-questions": () => ({title: "Two questions, one network",
+    cap: "Count asks whether two digits sit one per half. Identity asks whether they are the two asked digits, so it must tell apart canvases with the same layout.",
+    body: `<div class="card"><h3>real</h3><p>Both train the same 481,665-weight network on the 6 pairs among digits 0 to 3. <span class="c-count">Count</span> trains on ${K.full_scale.counts.count.train_pairs_0_to_3.toLocaleString("en-US")} canvases; <span class="c-ident">identity</span> keeps only apart and wrong, ${K.full_scale.counts.identity.train_pairs_0_to_3.toLocaleString("en-US")}. Both are scored on the 4 pairs holding digit 4.</p>
+      ${code('out["target"] = split["apart"].copy()  # count\nnp.isin(split["kind"], [apart, wrong])  # identity', "2-classifier-guidance/scripts/abstract_checkers/v2_learn.py lines 300 and 303")}</div>`}),
+  "noise": () => { const s = st(); return {title: "What the noise leaves",
+    cap: `At t = ${s.t} the canvas keeps ${s.sqrt_abar.toFixed(3)} of its clean picture and ${s.sqrt_one_minus_abar.toFixed(3)} of noise. Sweep the noise level and every number on the page follows it.`,
+    body: `<div class="card"><h3>real</h3><p>x<sub>t</sub> = √ᾱ<sub>t</sub> x<sub>0</sub> + √(1−ᾱ<sub>t</sub>) ε with ᾱ<sub>${s.t}</sub> = ${s.abar}. The checkers train on the 16 timesteps from 712 to 480, which give the toy SDXL's noise at its first 16 sampler steps.</p>
+      <p>Real score by noise level: the identity checker rose from 0.48 at the noisiest step to 0.65 at the least noisy; the combined checker from 0.59 to 0.81. The count checker's per-step scores are not written yet.</p>
+      ${code("SDXL_MATCHED = torch.tensor([712, 696, ..., 495, 480])", "v2_learn.py line 46")}</div>
+      <div class="card"><h3><span class="tag ill">illustrative</span> the plot</h3><p>The miniature's count score after one training step: ${S.canvas} ${s.branches.count.rows[S.canvas].p_after_one_step.toFixed(3)} at t = ${s.t}.</p></div>`}; },
+  "maps": () => { const c = cv(), j = c.m_a.indexOf(Math.max(...c.m_a)); return {title: "The frozen U-Net draws two maps",
+    cap: `Each map is where asking for one digit changes the noise guess, scaled to add to 4. On the ${S.canvas} canvas the digit-1 map peaks at pixel ${j + 1}, ${fmt(c.m_a[j])}.`,
+    body: `<div class="card"><h3><span class="tag ill">illustrative</span> the four pixels</h3>
+      ${tbl(["", "p₁", "p₂", "p₃", "p₄"], [["xₜ", ...c.xt.map(v => fmt(v))], ["ε_∅", ...c.eps_null.map(v => fmt(v))], ["ε_a − ε_∅", ...c.d_a.map(v => fmt(v))], ["ε_b − ε_∅", ...c.d_b.map(v => fmt(v))], ["m_a", ...c.m_a.map(v => fmt(v))], ["m_b", ...c.m_b.map(v => fmt(v))]])}
+      <p>m<sub>a</sub> = 4 · |ε<sub>a</sub> − ε<sub>∅</sub>| / Σ |ε<sub>a</sub> − ε<sub>∅</sub>|, and the same for b.</p></div>
+      <div class="card"><h3>stands for</h3><p>Three calls of the frozen digit U-Net on 1 × 32 × 64, each map scaled to add to 2,048. The checker sees only the maps.</p>
+      ${code("e0, ea, eb = model(xt.repeat(3, 1, 1, 1), t.repeat(3), y).chunk(3)\nchannels.append(d.abs() / total * PIXELS)", "v2_learn.py lines 89 and 93")}</div>`}; },
+  "full-size": () => ({title: "The checker at full size",
+    cap: "Three convolutions shrink the 2 × 32 × 64 maps to 128 × 8 × 16, and a mean and a max pool them to 256 numbers. Each layer feeds only the next, so there are no skip connections.",
+    body: `<div class="card"><h3>real</h3>${tbl(["layer", "out", "weights"], K.full_scale.layers.map(l => [l.layer, (l.out_shape || []).join("×"), l.weights.toLocaleString("en-US")]))}
+      ${code("self.stem = nn.Sequential(Conv2d(1, 64, 3), SiLU, Conv2d(64, 64, 3, stride=2), SiLU,\n                          Conv2d(64, 128, 3, stride=2), SiLU)\nhead.stem[0] = nn.Conv2d(2, 64, 3, padding=1)", "scripts/mnist/pixel_checker.py line 39; v2_learn.py line 81")}</div>
+      <div class="card"><h3>the miniature keeps</h3><p>One convolution, SiLU, the scale and shift, the mean and max, one readout. Each later frame says which real layer a piece stands for.</p></div>`}),
+  "convolution": () => { const c = cv(); return {title: "Convolution, then SiLU",
+    cap: `One kernel slides over each half: four map values in, two channels out. On the left half channel 1 sums to ${fmt(c.pre[0][0])}, and SiLU turns it into ${fmt(c.act[0][0])}.`,
+    body: `<div class="card"><h3><span class="tag ill">illustrative</span> kernel <span class="m">K</span>, 2 × 2 × 2</h3>
+      ${tbl(["out channel", "m_a tap 1", "m_a tap 2", "m_b tap 1", "m_b tap 2", "bias"], [0, 1].map(ch => ["channel " + (ch + 1), ...W.K[ch][0].map(v => fmt(v, 1)), ...W.K[ch][1].map(v => fmt(v, 1)), fmt(W.bias[ch], 1)]))}
+      <p>Row = the channel the weights feed; column = the map and tap they read. The same K is used on both halves.</p>
+      ${tbl(["", "ch 1", "ch 2"], [["pre, left", ...c.pre[0].map(v => fmt(v))], ["pre, right", ...c.pre[1].map(v => fmt(v))], ["SiLU, left", ...c.act[0].map(v => fmt(v))], ["SiLU, right", ...c.act[1].map(v => fmt(v))]])}</div>
+      <div class="card"><h3>stands for</h3><p>The stem's three convolutions and c1: 3 × 3 kernels, 128 channels on an 8 × 16 grid, ${(1216 + 36928 + 73856 + 147584).toLocaleString("en-US")} weights.</p>
+      ${code("h = F.silu(self.c1(self.stem(x)))", "pixel_checker.py line 53")}</div>`}; },
+  "scale-and-shift": () => { const s = st(), c = cv(); return {title: "The timestep scales and shifts",
+    cap: `The two time features at t = ${s.t} make γ = ${vec(s.gamma, 3)} and β = ${vec(s.beta, 3)}. Every hidden value becomes h = SiLU(pre) × (1 + γ) + β.`,
+    body: `<div class="card"><h3><span class="tag real">real</span> <span class="m">φ(t)</span>, first frequency</h3><p>φ = (sin, cos) of log(ᾱ/(1−ᾱ))/10 = ${vec(s.time_features, 4)}</p>
+      <h3><span class="tag ill">illustrative</span> <span class="m">W_γ, W_β</span>, 2 × 2</h3>
+      ${tbl(["", "φ₁", "φ₂"], [["γ ch 1", ...W.Wg[0].map(v => fmt(v, 1))], ["γ ch 2", ...W.Wg[1].map(v => fmt(v, 1))], ["β ch 1", ...W.Wb[0].map(v => fmt(v, 1))], ["β ch 2", ...W.Wb[1].map(v => fmt(v, 1))]])}
+      ${tbl(["h", "ch 1", "ch 2"], [["left", ...c.h[0].map(v => fmt(v))], ["right", ...c.h[1].map(v => fmt(v))]])}</div>
+      <div class="card"><h3>stands for</h3><p>film, a linear layer from 16 time features to 128 scales and 128 shifts, 4,352 weights.</p>
+      ${code("g, b = self.film(cond).chunk(2, 1)\nh = h * (1 + g[:, :, None, None]) + b[:, :, None, None]", "pixel_checker.py lines 52 and 54")}</div>`}; },
+  "mean-and-max": () => { const c = cv(); return {title: "Mean and max over halves",
+    cap: `Channel 1's mean is ${fmt(c.mean[0])} and its max ${fmt(c.max[0])}, from the ${c.argmax[0] ? "right" : "left"} half. Only the half that holds the max gets gradient back.`,
+    body: `<div class="card"><h3><span class="tag ill">illustrative</span> the four pooled numbers</h3>${tbl(["", "mean", "max", "max from"], [0, 1].map(ch => ["channel " + (ch + 1), fmt(c.mean[ch]), fmt(c.max[ch]), c.argmax[ch] ? "right" : "left"]))}</div>
+      <div class="card"><h3>stands for</h3><p>A mean and a max over the 8 × 16 = 128 positions of each of 128 channels: 256 numbers, no weights.</p>
+      ${code("self.mlp(torch.cat([h.mean((2, 3)), h.amax((2, 3)), cond], 1))", "pixel_checker.py line 56")}</div>`}; },
+  "logit": () => { const c = cv(), s = st(); return {title: "One logit, one chance",
+    cap: `The readout weighs the four pooled numbers and the two time features: ℓ = ${fmt(c.logit, 3)}. Its chance of label 1 is σ(ℓ) = ${c.p.toFixed(3)}.`,
+    body: `<div class="card"><h3><span class="tag ill">illustrative</span> the readout</h3><p>ℓ = v · (mean₁, mean₂, max₁, max₂) + u · φ + c</p>
+      ${tbl(["", "values"], [["v", vec(W.v, 1)], ["u", vec(W.u, 1)], ["c", fmt(W.c, 1)], ["pooled", vec(c.mean.concat(c.max))], ["φ", vec(s.time_features)]])}</div>
+      <div class="card"><h3>stands for</h3><p>The MLP: 272 inputs (256 pooled, 16 time features), a hidden layer of 256 with SiLU, one output. 70,145 weights.</p>
+      ${code("self.mlp = nn.Sequential(nn.Linear(256 + 16, 256), nn.SiLU(), nn.Linear(256, 1))", "pixel_checker.py line 45")}</div>`}; },
+  "labels": () => { const b = br(), r = row(); return {title: "Same canvas, two labels",
+    cap: `The ${S.canvas} canvas is label ${K.labels.count[S.canvas]} for count and ${K.labels.identity[S.canvas]} for identity. With the ${S.branch} label the loss is ${r.loss.toFixed(3)}, and its slope in the logit is σ(ℓ) − y = ${fmt(r.dloss_dlogit, 3)}.`,
+    body: `<div class="card"><h3><span class="tag ill">illustrative</span> both canvases, <span class="${brc()}">${S.branch}</span></h3>
+      ${tbl(["canvas", "y", "σ(ℓ)", "loss", "σ(ℓ) − y"], ["apart", "wrong"].map(n => { const q = b.rows[n]; return [n, q.y, q.p.toFixed(3), q.loss.toFixed(3), fmt(q.dloss_dlogit, 3)]; }))}
+      <p>L = −[y log σ(ℓ) + (1 − y) log(1 − σ(ℓ))]. Batch loss ${b.batch_loss_before.toFixed(3)}.</p></div>
+      <div class="card"><h3>stands for</h3><p>Binary cross-entropy on 256 canvases, half label 1. <span class="c-count">Count</span> calls both canvases 1; <span class="c-ident">identity</span> calls wrong 0.</p>
+      ${code("loss = F.binary_cross_entropy_with_logits(head(inputs(...), t, pair)[:, 0], y)", "v2_learn.py line 126")}</div>`}; },
+  "training": () => { const b = br(), ra = b.rows.apart, rw = b.rows.wrong; return {title: "Training: back into the weights",
+    cap: `The slope ${fmt(row().dloss_dlogit, 3)} runs back through the readout, the pool and SiLU into the kernel, then stops at the maps. One step moves the ${S.branch} logits ${fmt(ra.logit, 3)} → ${fmt(ra.logit_after_one_step, 3)} and ${fmt(rw.logit, 3)} → ${fmt(rw.logit_after_one_step, 3)}.`,
+    body: `<div class="card"><h3><span class="tag ill">illustrative</span> <span class="m">∂L/∂K</span>, averaged over both canvases</h3>
+      ${tbl(["", "m_a 1", "m_a 2", "m_b 1", "m_b 2"], [0, 1].map(ch => ["ch " + (ch + 1), ...b.grad.K[ch][0].map(v => fmt(v, 3)), ...b.grad.K[ch][1].map(v => fmt(v, 3))]))}
+      ${tbl(["", "before", "after one step"], [["apart logit", fmt(ra.logit, 3), fmt(ra.logit_after_one_step, 3)], ["wrong logit", fmt(rw.logit, 3), fmt(rw.logit_after_one_step, 3)], ["gap", fmt(b.gap_before, 4), fmt(b.gap_after, 4)], ["batch loss", b.batch_loss_before.toFixed(4), b.batch_loss_after.toFixed(4)]])}
+      <p>${S.branch === "count" ? "Count wants both logits up, and both rise." : "Identity wants apart up and wrong down; the shared weights move both together, so the gap barely changes."}</p></div>
+      <div class="card"><h3>stands for</h3><p>Adam at 0.001 on 256 canvases, 4,000 updates. The maps are built inside <code>torch.no_grad</code>, so nothing reaches the U-Net.</p>
+      ${code("with torch.no_grad():\n    return maps(model, xt, t, pair, cfg[\"input\"])\n...\nloss.backward()\nopt.step()", "v2_learn.py lines 106 to 107 and 128 to 129")}</div>`}; },
+  "push": () => { const p = pu(); return {title: "The push: back into the canvas",
+    cap: S.broken ? "With the maps built inside torch.no_grad, as training builds them, nothing flows past the maps: g = (0, 0, 0, 0). There is nothing to push along."
+                  : `With no label, the logit's own slope runs past the maps, through the frozen U-Net, to the pixels: g = ${vec(p.g)}.`,
+    body: `<div class="card"><h3><span class="tag ill">illustrative</span> <span class="m">g = ∇ₓ ℓ</span></h3>
+      ${tbl(["", "p₁", "p₂", "p₃", "p₄"], [["g", ...p.g.map(v => fmt(v, 3))], ["maps inside no_grad", ...p.g_maps_inside_no_grad.map(v => fmt(v, 0))]])}
+      <p>‖g‖ = ${p.norm_g.toFixed(3)}. A step of 0.01 along g raises ℓ from ${fmt(cv().logit, 4)} to ${fmt(p.logit_after_small_step_along_g, 4)}, which checks the sign.</p></div>
+      <div class="card"><h3>training against the push</h3>${tbl(["", "training", "push"], [["starts at", "the loss, with y", "ℓ, no label"], ["ends at", "the weights", "the noisy canvas"], ["changes", "the weights", "the noise guess"]])}</div>
+      <div class="card"><h3>stands for</h3><p>Step V3's design: the trained weights stay fixed and the gradient runs through the maps' scaling, the absolute value and all three U-Net calls. The maps must be rebuilt outside <code>no_grad</code> for this.</p>
+      <div class="where">artifacts/notes/progress/abstract-checkers/03-design.md, "How the push is computed"</div></div>`}; },
+  "push-length": () => { const p = pu(), b = bb(), s = st(); return {title: "How long the push is",
+    cap: `The push keeps only the direction of g and sets its length to b × ‖ε_product‖ = ${b.b.toFixed(2)} × ${p.norm_eps_product.toFixed(3)} = ${b.push_length.toFixed(3)}. At t = ${s.t} that moves the clean-canvas guess ${p.clean_guess_gain.toFixed(2)} times as far.`,
+    body: `<div class="card"><h3><span class="tag ill">illustrative</span> <span class="m">at b = ${b.b.toFixed(2)}</span></h3>
+      ${tbl(["", "p₁", "p₂", "p₃", "p₄"], [["ε_product", ...cv().eps_product.map(v => fmt(v))], ["push", ...b.push.map(v => fmt(v))], ["ε_hat", ...b.eps_hat.map(v => fmt(v))]])}
+      <p>ε_hat = ε<sub>product</sub> − ‖ε<sub>product</sub>‖ · b · g / ‖g‖. The design sets b = 0.4 for one checker.</p>
+      <p>The guess of the clean canvas is (xₜ − √(1−ᾱ) ε_hat)/√ᾱ, so it moves by √(1−ᾱ)/√ᾱ = ${p.clean_guess_gain.toFixed(2)} times the push. Sweep the noise: that factor is 13.11 at t = 712 and 3.09 at 480.</p></div>
+      <div class="card"><h3>stands for</h3><p>One checker's push added to the product of the two digit experts at each of the first 16 sampler steps.</p><div class="where">03-design.md, step V3; numbers.json "push"</div></div>`}; },
+  "results": () => { const R = K.results; return {title: "What the real checkers reached",
+    cap: "On pairs holding digit 4, count scored 0.774 against a 0.75 bar and identity 0.555, near chance at 0.5. The real heads were never saved, so no real map or gradient appears above.",
+    body: `<div class="card"><h3><span class="tag real">real</span></h3>
+      ${tbl(["checker", "holding 4", "trained pairs", "job"], [["count", R.count_map_reader.pairs_holding_4, R.count_map_reader.trained_pairs, 94085], ["identity", R.identity_map_reader.pairs_holding_4, R.identity_map_reader.trained_pairs, 94085], ["combined, all kinds", R.combined_checker.all_kinds, "", 94080], ["combined, apart vs wrong", R.combined_checker.apart_vs_wrong, "", 94080]])}
+      <p>Count learned where ink sits. Identity has to tell apart two canvases with the same layout, which the miniature's training step already shows is hard: one step moves both logits together.</p>
+      <div class="where">05-does-it-learn/review.md; numbers.json results_printed</div></div>`}; }
+};
+
+/* ---------------------------------------------------------------- live check: the page recomputes the key */
+const sig = z => 1 / (1 + Math.exp(-z)), silu = z => z * sig(z), dsilu = z => { const s = sig(z); return s * (1 + z * (1 - s)); };
+const T = K.templates;
+function expertD(x){ return [T["1"], T["3"]].map(Tm => x.map((v, i) => -K.expert.k * Tm[i] * sig(K.expert.g * v))); }
+function mapsOf(x){ return expertD(x).map(d => { const a = d.map(Math.abs), s = a.reduce((p, q) => p + q, 0); return a.map(v => 4 * v / s); }); }
+function headF(m, P, phi){
+  const win = [0, 1].map(h => [0, 1].map(mm => [m[mm][2*h], m[mm][2*h+1]]));
+  const pre = [0, 1].map(h => [0, 1].map(c => { let s = P.bias[c]; for (let mm = 0; mm < 2; mm++) for (let k = 0; k < 2; k++) s += P.K[c][mm][k] * win[h][mm][k]; return s; }));
+  const act = pre.map(r => r.map(silu));
+  const gam = [0, 1].map(c => P.Wg[c][0] * phi[0] + P.Wg[c][1] * phi[1]), bet = [0, 1].map(c => P.Wb[c][0] * phi[0] + P.Wb[c][1] * phi[1]);
+  const h = act.map(r => r.map((a, c) => a * (1 + gam[c]) + bet[c]));
+  const arg = [0, 1].map(c => h[1][c] > h[0][c] ? 1 : 0), feat = [(h[0][0] + h[1][0]) / 2, (h[0][1] + h[1][1]) / 2, h[arg[0]][0], h[arg[1]][1]];
+  const logit = P.v.reduce((s, v, i) => s + v * feat[i], 0) + P.u[0] * phi[0] + P.u[1] * phi[1] + P.c;
+  return {win, pre, gam, arg, logit};
+}
+function headB(m, P, phi, dl){
+  const f = headF(m, P, phi), dh = [[0, 0], [0, 0]];
+  for (let c = 0; c < 2; c++){ dh[0][c] += dl * P.v[c] / 2; dh[1][c] += dl * P.v[c] / 2; dh[f.arg[c]][c] += dl * P.v[2 + c]; }
+  const dpre = dh.map((r, h) => r.map((v, c) => v * (1 + f.gam[c]) * dsilu(f.pre[h][c])));
+  const gK = [0, 1].map(c => [0, 1].map(mm => [0, 1].map(k => dpre[0][c] * f.win[0][mm][k] + dpre[1][c] * f.win[1][mm][k])));
+  const dm = [0, 1].map(mm => [0, 1, 2, 3].map(j => { const h = j >> 1, k = j & 1; return dpre[h][0] * P.K[0][mm][k] + dpre[h][1] * P.K[1][mm][k]; }));
+  return {gK, dm};
+}
+function mapsB(x, dm){
+  const D = expertD(x), dx = [0, 0, 0, 0];
+  D.forEach((d, j) => { const a = d.map(Math.abs), s = a.reduce((p, q) => p + q, 0), dot = dm[j].reduce((p, v, i) => p + v * a[i], 0);
+    const Tm = j ? T["3"] : T["1"];
+    for (let i = 0; i < 4; i++){ const da = 4 * (dm[j][i] / s - dot / (s * s)), sg = sig(K.expert.g * x[i]);
+      dx[i] += da * Math.sign(d[i]) * (-K.expert.k * Tm[i] * K.expert.g * sg * (1 - sg)); } });
+  return dx;
+}
+function numeric(fn, arr){ const h = 1e-6; return arr.map((v, i) => { const a = arr.slice(); a[i] = v + h; const up = fn(a); a[i] = v - h; return (up - fn(a)) / (2 * h); }); }
+function liveCheck(){
+  const s = st(), phi = s.time_features.length && [Math.sin(s.log_snr_exact / 10), Math.cos(s.log_snr_exact / 10)];
+  const P = W, keyDiff = [], gradErr = [];
+  const relErr = (a, b) => Math.max(...a.map((v, i) => Math.abs(v - b[i]))) / Math.max(1e-8, ...b.map(Math.abs));
+  ["apart", "wrong"].forEach(n => {
+    const x = K.steps[S.ti].canvases[n].x0.map((v, i) => Math.sqrt(s.abar) * v + Math.sqrt(1 - s.abar) * K.eps[i]);
+    const m = mapsOf(x), f = headF(m, P, phi);
+    keyDiff.push(Math.abs(f.logit - s.canvases[n].logit), ...m[0].map((v, i) => Math.abs(v - s.canvases[n].m_a[i])));
+    const g = mapsB(x, headB(m, P, phi, 1).dm), gn = numeric(xx => headF(mapsOf(xx), P, phi).logit, x);
+    gradErr.push(relErr(g, gn));
+    keyDiff.push(...g.map((v, i) => Math.abs(v - s.push[n].g[i])));
+  });
+  // training gradient on the kernel, batch of both canvases, for the chosen question
+  const xs = ["apart", "wrong"].map(n => K.steps[S.ti].canvases[n].x0.map((v, i) => Math.sqrt(s.abar) * v + Math.sqrt(1 - s.abar) * K.eps[i]));
+  const ys = ["apart", "wrong"].map(n => K.labels[S.branch][n]);
+  const flatK = P.K.flat(2), withK = fk => Object.assign({}, P, {K: [[fk.slice(0, 2), fk.slice(2, 4)], [fk.slice(4, 6), fk.slice(6, 8)]]});
+  const batchLoss = fk => xs.reduce((acc, x, i) => { const l = headF(mapsOf(x), withK(fk), phi).logit, p = sig(l); return acc - (ys[i] * Math.log(p) + (1 - ys[i]) * Math.log(1 - p)) / 2; }, 0);
+  const hand = [0, 0, 0, 0, 0, 0, 0, 0];
+  xs.forEach((x, i) => { const m = mapsOf(x), l = headF(m, P, phi).logit; headB(m, P, phi, sig(l) - ys[i]).gK.flat(2).forEach((v, j) => hand[j] += v / 2); });
+  gradErr.push(relErr(hand, numeric(batchLoss, flatK)));
+  keyDiff.push(...hand.map((v, j) => Math.abs(v - br().grad.K.flat(2)[j])));
+  const kd = Math.max(...keyDiff), ge = Math.max(...gradErr), ok = kd < 1e-4 && ge < 1e-5;
+  $("check").innerHTML = `${ok ? "<b>✓</b>" : "<b class='c-out'>✗</b>"} Recomputed in this page at t = ${s.t}: the key's logits, maps, g and ∂L/∂K agree to ${kd.toExponential(1)}; hand gradients match numerical ones to ${ge.toExponential(1)}.`;
+  window.__check = {keyDiff: kd, gradErr: ge, ok};
+}
+K.steps.forEach(s => { s.log_snr_exact = Math.log(s.abar / (1 - s.abar)); });
+
+/* ---------------------------------------------------------------- render and controls */
+function render(){
+  const fr = FR[S.f];
+  ["over", "noise", "net", "cnn", "pushfig", "res"].forEach(id => { $(id).toggleAttribute("hidden", id !== fr.fig); });
+  document.querySelectorAll(".ctl").forEach(c => c.classList.toggle("off", !fr.ctl.includes(c.dataset.c)));
+  $("fnum").textContent = (S.f + 1) + " / " + FR.length;
+  $("cv-apart").setAttribute("aria-pressed", S.canvas === "apart"); $("cv-wrong").setAttribute("aria-pressed", S.canvas === "wrong");
+  $("br-count").setAttribute("aria-pressed", S.branch === "count"); $("br-identity").setAttribute("aria-pressed", S.branch === "identity");
+  $("tsl").value = S.ti; $("tout").textContent = "t = " + st().t; $("bsl").value = S.bi; $("bout").textContent = K.b_grid[S.bi].toFixed(2);
+  N.loss.g.setAttribute("class", "node loss " + S.branch);
+  if (fr.fig === "net") paintNet(); else if (fr.fig === "over") drawOver(); else if (fr.fig === "noise") drawNoise();
+  else if (fr.fig === "cnn") drawCnn(); else if (fr.fig === "pushfig") drawPush(); else drawRes();
+  const p = PANEL[fr.id](); $("ptitle").textContent = p.title; $("cap").textContent = p.cap; $("pbody").innerHTML = p.body;
+  $("transport").hidden = !fr.anim; $("brokenwrap").hidden = fr.back !== "push"; $("broken").checked = S.broken;
+  $("play").hidden = RM && fr.anim !== "net"; $("sweep").hidden = RM;
+  const total = A.phases.length;
+  const ph = A.phases[Math.min(A.done, total - 1)];
+  $("aprog").textContent = !fr.anim ? "" : A.mode === "sweepT" ? "t = " + st().t : A.mode === "sweepB" ? "b = " + K.b_grid[S.bi].toFixed(2) : (A.done >= total ? "end: " + (A.phases[total - 1] || {}).name : (A.playing ? "playing: " : "next: ") + (ph ? ph.name : ""));
+  liveCheck();
+}
+function go(i, fromHash){
+  S.f = Math.max(0, Math.min(FR.length - 1, i)); buildPhases();
+  if (!fromHash && location.hash !== "#" + FR[S.f].id){ try { history.replaceState(null, "", "#" + FR[S.f].id); } catch (e) { location.hash = FR[S.f].id; } }
+  $("notice").hidden = true; render();
+}
+function fromHash(){
+  const h = location.hash.replace(/^#/, ""); if (!h) return go(0, true);
+  const i = FR.findIndex(f => f.id === h);
+  if (i < 0){ go(0, true); $("notice").hidden = false; $("notice").textContent = `There is no part of this page called "${h}". Showing the start.`; }
+  else go(i, true);
+}
+
+/* ---------------------------------------------------------------- the player */
+function applySweep(){ if (A.mode === "sweepT") S.ti = Math.min(15, A.done); else if (A.mode === "sweepB") S.bi = Math.min(K.b_grid.length - 1, A.done); }
+function phaseDur(ph){ if (A.mode !== "net") return 420; return (ph.dur || 1000); }
+function tick(now){
+  const ph = A.phases[A.done]; if (!ph){ stop(); return; }
+  const dt = Math.min(100, now - A.last) * speed(); A.last = now;
+  A.frac += dt / phaseDur(ph);
+  if (A.frac >= 1){ A.frac = 0; A.done++; if (A.mode !== "net") applySweep(); if (A.stepping || A.done >= A.phases.length){ stop(); return; } }
+  render(); A.raf = requestAnimationFrame(tick);
+}
+function stop(){ A.playing = false; A.stepping = false; cancelAnimationFrame(A.raf); render(); }
+function begin(stepping){
+  if (!A.phases.length) return;
+  if (A.done >= A.phases.length){ A.done = A.start; A.frac = 0; if (A.mode !== "net") applySweep(); }
+  if (RM){ // reduced motion: no travel, only the end state or one more layer
+    if (stepping){ A.done = Math.min(A.phases.length, A.done + 1); if (A.mode !== "net") applySweep(); }
+    else { A.done = A.phases.length; if (A.mode !== "net") applySweep(); }
+    A.frac = 0; render(); return;
+  }
+  A.playing = true; A.stepping = !!stepping; A.last = performance.now(); cancelAnimationFrame(A.raf); A.raf = requestAnimationFrame(tick);
+}
+$("play").addEventListener("click", () => begin(false));
+$("pause").addEventListener("click", () => { if (A.playing) stop(); });
+$("stepb").addEventListener("click", () => { if (A.playing && !A.stepping){ stop(); return; } begin(true); });
+$("speed").addEventListener("change", () => {});
+$("sweep").addEventListener("click", () => {
+  if (FR[S.f].anim !== "sweepT"){ // sweep from any frame: run the timesteps without leaving it
+    cancelAnimationFrame(A.raf); const keep = {phases: A.phases, start: A.start, done: A.done, mode: A.mode};
+    A.mode = "sweepT"; A.phases = K.timesteps.map(t => ({name: "t = " + t})); A.start = 0; A.done = A.phases.length; A.restore = keep;
+  }
+  begin(false);
+});
+const _stop = stop;
+stop = function(){ _stop(); if (A.restore && !A.playing){ const r = A.restore; A.restore = null; Object.assign(A, r); A.frac = 0; render(); } };
+$("prev").addEventListener("click", () => go(S.f - 1));
+$("next").addEventListener("click", () => go(S.f + 1));
+document.querySelectorAll("[data-canvas]").forEach(b => b.addEventListener("click", () => { S.canvas = b.dataset.canvas; buildPhases(); render(); }));
+document.querySelectorAll("[data-branch]").forEach(b => b.addEventListener("click", () => { S.branch = b.dataset.branch; buildPhases(); render(); }));
+$("tsl").addEventListener("input", e => { S.ti = +e.target.value; render(); });
+$("bsl").addEventListener("input", e => { S.bi = +e.target.value; render(); });
+$("broken").addEventListener("change", e => { S.broken = e.target.checked; buildPhases(); render(); });
+document.addEventListener("keydown", e => {
+  if (e.target.matches && e.target.matches("input,select,textarea")) return;
+  if (e.key === "ArrowRight"){ go(S.f + 1); e.preventDefault(); } else if (e.key === "ArrowLeft"){ go(S.f - 1); e.preventDefault(); }
+});
+window.addEventListener("hashchange", fromHash);
+// for stills: put the animation at phase p, fraction f, without playing
+window.__seek = (p, f) => { A.done = Math.max(0, Math.min(A.phases.length, p)); A.frac = f || 0; A.playing = false; if (A.mode !== "net") applySweep(); paintNetOrAll(); };
+function paintNetOrAll(){ if (FR[S.f].fig === "net"){ render(); if (A.frac > 0){ A.playing = true; paintNet(); A.playing = false; } } else render(); }
+window.__state = S; window.__anim = A;
+fromHash();
+})();
+</script>
