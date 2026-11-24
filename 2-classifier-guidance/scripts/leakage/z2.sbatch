@@ -6,7 +6,7 @@
 #SBATCH --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-12/logs/%x-%j.log
 # Loop 12 step Z2. Submit with the code snapshot in SNAP:
-#   sbatch --export=ALL,SNAP=<snapshot> z2.sbatch <smoke|small|full>
+#   sbatch --export=ALL,SNAP=<snapshot> z2.sbatch <smoke|small|full|inside>
 set -uo pipefail
 STAGE=${1:?stage}
 ROOT=/datasets/mmolefe/poe_repair_min/loop-12
@@ -43,6 +43,7 @@ case "$STAGE" in
   smoke) "$PY" "$S/z2_predictors.py" --splits "$SPLITS" --m1 "$M1" --out "$OUT" --rung smoke --pairs an_eagle__x__a_fox --seeds 6001 --plain-check; rc=$? ;;
   small) "$PY" "$S/z2_predictors.py" --splits "$SPLITS" --m1 "$M1" --out "$OUT" --rung small --pairs an_eagle__x__a_fox,a_cheetah__x__a_cougar; rc=$? ;;
   full)  "$PY" "$S/z2_predictors.py" --splits "$SPLITS" --m1 "$M1" --out "$OUT" --rung full; rc=$? ;;
+  inside) OUT=$ROOT/co3-inside; mkdir -p "$OUT"; "$PY" "$S/co3_inside.py" --splits "$SPLITS" --out "$OUT" --pairs an_eagle__x__a_fox,a_cheetah__x__a_cougar --seed 6001; rc=$? ;;
   *) echo "ABORT: unknown stage $STAGE"; exit 2 ;;
 esac
 echo "[$(date -u +%H:%M:%S)] DONE stage=$STAGE exit=$rc"
