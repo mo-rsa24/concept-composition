@@ -5,7 +5,9 @@ flowchart TB
     V1["V1 test bed<br/>PASS"]:::good --> V2["V2 checker on unseen digits<br/>count PASS 0.791<br/>identity MISS 0.555"]:::mixed
     V2 --> V3["V3 push composes unseen pairs<br/>PASS: 43 of 320 vs 0"]:::good
     V3 --> V5["V5 remove one checker<br/>NULL by the rule: removing count or order<br/>each moved another column about 7 points"]:::mixed
-    V5 --> V4["V4 on SDXL's unseen objects<br/>NOT RUN: needs M5's animal list;<br/>rewrite is board question 86"]:::todo
+    V5 --> V6["V6 checker reads which digits<br/>PASS on pasted digits: 0.861<br/>MISS on sampler states: 0.651"]:::mixed
+    V6 --> V7["V7 V5 rerun with it<br/>CLOSED, not run"]:::todo
+    V6 --> V4["V4 identity checker on CO3's states<br/>NOT RUN: needs M5's list;<br/>its gate is board question 96"]:::todo
   end
   L9["Loop 9: sentence scores read<br/>no identity at early steps"]:::other
   L10["Loop 10: score path 0.700<br/>at SDXL's noise, 0.513 early"]:::other
@@ -13,7 +15,7 @@ flowchart TB
   R["Paper 2 rivals on SDXL<br/>no comparison yet"]:::todo
   L9 -. "agrees: identity<br/>unreadable early" .-> V2
   L10 -. "agrees: more signal<br/>at SDXL's noise" .-> V2
-  L6 -. "risk: count is what<br/>the rival already does" .-> V4
+  L6 -. "V4 targets identity,<br/>CO3's failure" .-> V4
   V4 -.-> R
   classDef good fill:#b7f0b1,stroke:#222222,stroke-width:2px,color:#111111
   classDef mixed fill:#fff1c2,stroke:#b58900,stroke-width:2px,color:#111111
