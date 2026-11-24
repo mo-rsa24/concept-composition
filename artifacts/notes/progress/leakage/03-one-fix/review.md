@@ -1,6 +1,6 @@
 # Review: does correcting each animal's region later in sampling stop the borrowing? (step Z3)
 
-**No.** With one box per animal drawn by eye on CO3's finished pictures, the drawn-box correction at steps 15 to 30 gives 5 pictures of 48 with two clear subjects that keep their own parts, the same as CO3 alone (5) and as the whole-picture correction in the same window (5). The bar in [the design](design.md) needed a lead of at least 4 with an exact one-sided McNemar p below 0.05; the lead is 0 (3 seeds gained, 3 lost, p = 0.66). **Null.** This was the positive control: with the regions known, the correction does not remove borrowing as the blind calls count it, so step 3 (a reader that finds the regions) does not run.
+**No.** With one box per animal drawn by eye on CO3's finished pictures, the drawn-box correction at steps 15 to 30, which inside each animal's box takes twice the joint prompt's guess minus the other animal's guess and gives the animal's own prediction weight 0, gives 5 pictures of 48 with two clear subjects that keep their own parts, the same as CO3 alone (5) and as the whole-picture correction in the same window (5). The bar in [the design](design.md) needed a lead of at least 4 with an exact one-sided McNemar p below 0.05; the lead is 0 (3 seeds gained, 3 lost, p = 0.66). **Null.** This was the positive control: with the regions known, this correction does not remove borrowing as the blind calls count it, so step 3 (a reader that finds the regions) does not run. Each animal's own prediction never entered its box, so the test says nothing about a rule that uses it.
 
 ## Runs
 
@@ -47,7 +47,7 @@ The positive control failed on the measure that counts: a correction that knows 
 
 - The borrowed parts that survive (tear lines on a face, a mallard head on a goose) are set before step 15 or inside the box the correction leaves to its own animal; a window that reaches earlier, or a rule that also corrects the face, would test that.
 - One pass per step is too weak; on cheetah × cougar it moved the spots and not the face.
-- Borrowing is not a matter of place: the cougar is drawn with a cheetah's face because the joint prompt's prediction for "cougar" carries cheetah features wherever it acts, which a correction by region cannot reach.
+- The joint prompt's prediction carries the cheetah's features on the cougar's face as well as its body, and subtracting the cheetah's prediction removes only part of them. A rule that puts each animal's own prediction inside its box, which this test never used, would test whether the cougar's own prediction draws a clean cougar there.
 
 ## What this cannot say
 

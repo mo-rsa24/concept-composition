@@ -18,7 +18,7 @@ $$\tilde x(\text{cell}) = W_0\,\hat x^{C}(\text{cell}) + W_A(\text{cell})\,\hat 
 
 - $\hat x^{C}, \hat x^{A}, \hat x^{B}$ are the clean-picture guesses of the joint prompt and of each animal alone, as in CO3's corrector.
 - $W_0 = 2$ everywhere, as in CO3's corrector.
-- **Inside animal A's box:** $W_A = 0$ and $W_B = -1$. The other animal's prediction is subtracted where A is drawn, and A's own is left in.
+- **Inside animal A's box:** $W_A = 0$ and $W_B = -1$, so the cell's guess is twice the joint prompt's guess minus B's guess. B's prediction is subtracted where A is drawn; A's own prediction gets weight 0 and is not used.
 - **Inside animal B's box:** $W_A = -1$ and $W_B = 0$.
 - **Where the boxes overlap, and outside both:** CO3's own whole-canvas weights from equation 15 at that pass ($\beta = 0.9$).
 

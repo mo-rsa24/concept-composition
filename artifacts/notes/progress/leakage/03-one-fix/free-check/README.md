@@ -16,7 +16,7 @@ Each map is one cell per point of the 128 by 128 latent, at the last corrector p
 
 ## The per-place rule, written down
 
-**In each animal's region, push away from the other animal's prediction.** Inside the box drawn on the cougar, the cheetah's prediction is subtracted (and the cougar's is not); inside the box on the cheetah, the cougar's is subtracted; outside both boxes, CO3's own whole-canvas weights apply. This fixes the direction that the question and [the ideas note](../../ideas/what-co3-does-that-our-loops-did-not.md) described differently. The note's version (subtract the cheetah where the cougar is) is this rule; the question's version (CO3's distance per cell) is not used, because on the recorded seed it reads "cheetah" on both bodies.
+**In each animal's region, push away from the other animal's prediction.** Inside the box drawn on the cougar, twice the joint prompt's guess minus the cheetah's guess is used, and the cougar's own guess gets weight 0; inside the box on the cheetah, the cougar's is subtracted; outside both boxes, CO3's own whole-canvas weights apply. This fixes the direction that the question and [the ideas note](../../ideas/what-co3-does-that-our-loops-did-not.md) described differently. The note's version (subtract the cheetah where the cougar is) is this rule; the question's version (CO3's distance per cell) is not used, because on the recorded seed it reads "cheetah" on both bodies.
 
 ## What this cannot say
 

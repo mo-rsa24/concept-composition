@@ -1,6 +1,6 @@
 # Verdict: where CO3's subjects borrow each other's parts, and what stops it (step Z6)
 
-**CO3 draws two bodies and one borrows the other's parts, and this loop did not find where that starts or a fix that stops it.** Three readings inside SDXL, taken across the whole sampling path, do not predict which pairs borrow; a correction of each animal's region late in sampling, with the regions drawn by hand, leaves the count of clean pictures where CO3 alone has it. Paper 2's next test is a fix in the text encoder, with Bounded Attention run as the rival.
+**CO3 draws two bodies and one borrows the other's parts, and this loop did not find where that starts or a fix that stops it.** Three readings inside SDXL, taken across the whole sampling path, do not predict which pairs borrow; a correction late in sampling that subtracts the other animal's prediction inside each animal's hand-drawn region leaves the count of clean pictures where CO3 alone has it. Paper 2's next test is a fix in the text encoder, with Bounded Attention run as the rival.
 
 ## The mechanism
 
@@ -10,7 +10,7 @@
 
 ## The fix against its bar
 
-**Null.** On the six borrowing pairs (48 pictures per row), CO3 with one corrector pass per step at steps 15 to 30, subtracting the other animal's prediction inside each animal's drawn box, gives 5 pictures with two clear subjects that keep their own parts; CO3's whole-picture weights in the same window give 5, and CO3 alone 5. The bar needed a lead of at least 4 with an exact McNemar p below 0.05; the lead is 0 (p = 0.66). Two blind reviewers agreed on 128 of 144 rungs, and a third settled 16 ([Z3's review](03-one-fix/review.md), W&B `xql3iwpp`). On cheetah × cougar the correction takes the borrowed spots off the cougar's body and the cheetah's tear lines stay on its face, so the pictures still count as borrowed.
+**Null.** On the six borrowing pairs (48 pictures per row), CO3 with one corrector pass per step at steps 15 to 30, which inside each animal's drawn box takes twice the joint prompt's guess minus the other animal's guess (the animal's own prediction gets weight 0), gives 5 pictures with two clear subjects that keep their own parts; CO3's whole-picture weights in the same window give 5, and CO3 alone 5. The bar needed a lead of at least 4 with an exact McNemar p below 0.05; the lead is 0 (p = 0.66). Two blind reviewers agreed on 128 of 144 rungs, and a third settled 16 ([Z3's review](03-one-fix/review.md), W&B `xql3iwpp`). On cheetah × cougar the correction takes the borrowed spots off the cougar's body and the cheetah's tear lines stay on its face, so the pictures still count as borrowed.
 
 ## The method chosen
 
@@ -22,7 +22,7 @@
 
 ## What it suggests for Paper 1
 
-Paper 1 composes two experts trained apart, each drawing its own region, so each expert's prediction cannot carry the other subject's features. Z3 suggests that this is where borrowing lives on CO3: the correction knew exactly where each animal was and the cougar kept a cheetah's face, as if the "cougar" prediction itself carried cheetah features. If that holds, Paper 1's experts are protected from borrowing by construction, and Paper 1 can say so with Z3 as the contrast: a single model that has seen both subjects borrows even when its regions are given, while experts that never met cannot (inferred; Paper 1's own runs would need a part-binding count to show it).
+Paper 1 composes two experts trained apart, each drawing its own region, so neither expert's prediction can carry the other subject's features. This loop cannot yet say whether that protects Paper 1 from borrowing. Z3's correction never put an animal's own prediction inside its box (inside each box it used twice the joint prompt's guess minus the other animal's), so it does not show whether a single model's prediction for "cougar" carries cheetah features. A test that uses each animal's own prediction inside its box would answer that, and with it whether Paper 1's experts are protected by construction (inferred).
 
 ## Compute
 
