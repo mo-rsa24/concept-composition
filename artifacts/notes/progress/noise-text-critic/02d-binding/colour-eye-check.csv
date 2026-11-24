@@ -1,0 +1,33 @@
+index,meant,pass,note
+00,red_cat_blue_dog,0,"cat's black-and-white tail and dark fur behind its back uncoloured, about an eighth of the cat"
+00,blue_cat_red_dog,0,"cat's black-and-white tail and dark fur behind its back uncoloured, about an eighth of the cat"
+01,red_cat_blue_dog,1,"both right; dog's hind leg and belly between its front legs uncoloured, just under a tenth"
+01,blue_cat_red_dog,1,"both right; dog's hind leg and belly between its front legs uncoloured, just under a tenth"
+02,red_cat_blue_dog,1,both right; small tan patch at the dog's front leg uncoloured
+02,blue_cat_red_dog,1,both right; small tan patch at the dog's front leg uncoloured
+03,red_cat_blue_dog,1,both fully coloured; background clean
+03,blue_cat_red_dog,1,both fully coloured; background clean
+04,red_cat_blue_dog,1,both fully coloured; background clean
+04,blue_cat_red_dog,1,both fully coloured; background clean
+05,red_cat_blue_dog,1,both right; small dark patch on the dog's back under the cat uncoloured; collar keeps its colour
+05,blue_cat_red_dog,1,both right; small dark patch on the dog's back under the cat uncoloured; collar keeps its colour
+06,red_cat_blue_dog,1,both right; small tan patch between the paws uncoloured
+06,blue_cat_red_dog,1,both right; small tan patch between the paws uncoloured
+07,red_cat_blue_dog,0,"dog's white front leg and paw in the foreground uncoloured, about a sixth of the dog"
+07,blue_cat_red_dog,0,"dog's white front leg and paw in the foreground uncoloured, about a sixth of the dog"
+08,red_cat_blue_dog,1,both right; small dark patch between cat and dog part-coloured; a few specks on the floor
+08,blue_cat_red_dog,1,both right; small dark patch between cat and dog part-coloured; a few specks on the floor
+09,red_cat_blue_dog,1,both fully coloured; cat's white toes barely visible
+09,blue_cat_red_dog,1,both fully coloured; cat's white toes barely visible
+10,red_cat_blue_dog,0,"dog's head is red like the cat, not blue; dog's body uncoloured"
+10,blue_cat_red_dog,0,"dog's head is blue like the cat, not red; dog's body uncoloured"
+11,red_cat_blue_dog,1,both right; small dark shadow under the dog's chin uncoloured
+11,blue_cat_red_dog,1,both right; small dark shadow under the dog's chin uncoloured
+12,red_cat_blue_dog,1,both right; small tan patch on the dog's haunch uncoloured
+12,blue_cat_red_dog,1,both right; small tan patch on the dog's haunch uncoloured
+13,red_cat_blue_dog,1,"borderline: cat's right ear and fur behind its head uncoloured, left ear and left flank streaky; near a tenth"
+13,blue_cat_red_dog,1,"borderline: cat's right ear and fur behind its head uncoloured, left ear and left flank streaky; near a tenth"
+14,red_cat_blue_dog,1,both fully coloured; orange object at bottom right keeps its colour
+14,blue_cat_red_dog,1,both fully coloured; orange object at bottom right keeps its colour
+15,red_cat_blue_dog,1,both fully coloured; background clean
+15,blue_cat_red_dog,1,both fully coloured; background clean
