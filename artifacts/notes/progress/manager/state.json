@@ -322,11 +322,6 @@
  "last_briefing": "2026-11-24T16:50:00+02:00",
  "watches": [
   {
-   "what": "bring question 80 back to the owner",
-   "when": "Loop 6's per-step read on CO3 is scored (jobs 94593, 94594; method-search/01b-balance-the-checker-data/)",
-   "set": "2026-11-24T16:58:00+02:00"
-  },
-  {
    "what": "tell the owner to restart Loop 11",
    "when": "Loop 8's identity step V6 or Loop 6's two-colour CLEVR test M10 is done",
    "set": "2026-11-24T17:08:00+02:00"
@@ -336,6 +331,11 @@
    "when": "Loop 8 reports its shared-device checks finished, or at each tick: pgrep on mscluster107 and nvidia-smi card 1",
    "set": "2026-11-24T17:58:00+02:00",
    "host_job_ends": "2026-11-24T23:36:00+02:00"
+  },
+  {
+   "what": "report Loop 6's full 96-trajectory read to the owner for question 80",
+   "when": "the 21-trajectory reread on card 1 finishes",
+   "set": "2026-11-24T18:25:00+02:00"
   }
  ]
 }

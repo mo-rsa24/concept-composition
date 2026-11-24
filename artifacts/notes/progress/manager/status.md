@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-24 18:15 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-24 18:25 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -31,6 +31,7 @@ overrule one, answer it again: `python3 scripts/progress_board.py answer <number
 | 78 | Who runs Loop 10's small digit test of whether the experts' vote beats simply pasting their samples, for Paper 1? | **Loop 6**, after its current step | About 0.3 GPU-hours inside Loop 6's budget, and it adds the paste comparison the reviewer finds Paper 1's tests lack. |
 | 81 | Loop 11's ten format conflicts on the 48 method and finding pages it wrote | **All ten of its defaults** | None changes a recorded number or verdict; where two verdicts exist both stay side by side. The reviewer found Loop 11's work sound. No GPU. |
 | 85 | The reviewer's fixes for Loop 6's search for the best checker | **Yes to two of three**: first check whether the checker can tell CO3's clean pictures from its borrowed-part ones at each step (about 1.2 GPU-hours), and give the two-colour CLEVR test a paste comparison (CPU only) | Both are reversible and inside budget. The third fix changes how Loop 6 is judged, so it is yours, as question 87. |
+| none | Loop 6's read came out inconclusive by count: 21 of 96 trajectories missed the 3-of-255 match because they were first drawn on an RTX 8000 and reread on an RTX 3090 | **Rerun those 21 on mscluster107 card 1** after Loop 8's checks, before Loop 6's training | About 15 minutes; it meets the read's own written rule on the matching card type and changes no bar. Loop 6 records that the rerun was decided after the 75-trajectory result. |
 | none | Eight requests were addressed to Loops 7 and 10, which have stopped | **Re-routed**: four to Loop 8, four to Loop 11 | Each corrects a page that disagreed with what ran; no result changes. A ninth, on numbers in Loop 10's digit-signal review, Loop 10 fixed itself (commit `77cf7bb7`: five copying slips corrected to match its result file, verdict unchanged). |
 
 **Acted on.** Loop 6 carried out 83, 78 and 85 by 16:31 (commits `6f8f65e5` and `58cee28a`): the region test is closed on the board, the digit test is its new step M11, and the check of whether its checker can see CO3's failure is designed with its bar written first and runs as jobs 94593 and 94594 before any comparison renders.
@@ -54,7 +55,7 @@ Newest first. A default happens only if you answer with it; nothing changes whil
 
 | # | The question, in one line | Why it is yours | Default | Waiting |
 |---|---|---|---|---|
-| 80 | Should a checker choose CO3's weight-sharpness setting at each of its corrected steps ([design](../score-space/11-the-checker-chooses-on-co3.md))? First read on 6 of 12 pairs | over 3 GPU-hours on one run (about 3.1) | **you chose to wait** until Loop 6's per-step read of its checker on CO3 lands (jobs 94593 and 94594); Loop 13 brings it back with that result | since 12:25 |
+| 80 | Should a checker choose CO3's weight-sharpness setting at each of its corrected steps ([design](../score-space/11-the-checker-chooses-on-co3.md))? First read on 6 of 12 pairs | over 3 GPU-hours on one run (about 3.1) | **The read you waited for has landed:** on 75 of 96 trajectories the checker's best balanced accuracy is 0.616 at step 25, under the 0.65 floor at every step, so it does not yet see CO3's failure. Inconclusive by count until the 21 missing trajectories are rerun (about 15 minutes, approved below). Recommendation: decline 80 if the full read stays under 0.65, since a checker that cannot see the failure cannot choose CO3's setting to fix it | since 12:25 |
 
 Your own reading step (confirm the draft statements from your readings) is ready on the board.
 
@@ -67,7 +68,7 @@ The finish range is `session_status.py`'s, from the 52 finished steps: fastest p
 | Loop | Doing now, and why | Steps left | Estimated finish | Session | Held by |
 |---|---|---|---|---|---|
 | 4. Rivals and targets | Keeping every target current. It recorded the CLEVR paste result and placed the two-colour CLEVR test in the CLEVR plan. | 1 | none useful: it ends after the paper tables, which have not started | idle | nothing |
-| 6. Best method | Checking whether its checker can tell CO3's clean pictures from its borrowed-part ones at each step (job 94594, 1 h 04 min of 2 h 30 min), before choosing which training list Paper 2's checker uses (step M5). Two-colour CLEVR renders for Paper 1 run beside it (1 h 35 min of 10 h). | 9 | 4.4 h to 208.0 h | busy | its own read; question 80 waits on this read; next on card 1 after Loop 8 |
+| 6. Best method | Its read of whether the checker sees CO3's failure landed inconclusive by count (75 of 96 matched; best 0.616 at step 25 against a 0.75 bar and 0.65 floor). It reruns the 21 missing trajectories on card 1 after Loop 8, then trains on its fixed lists. Two-colour CLEVR renders for Paper 1 run beside it. | 9 | 4.4 h to 207.6 h | busy | card 1 after Loop 8 |
 | 7. Abstract-checker papers | Finished; its session is closed. | 0 | done | closed | nothing |
 | 8. Abstract checkers | Its digit identity checker passed every robustness bar (second seed 0.877 against 0.75, shuffled labels 0.500, weakest pair 0.844). Its last two checks run on mscluster107 card 1: the rule that needs no training now, the read on real sampler states next. Its SDXL test is rewritten to your answer on 86. | 3 | 1.9 h to 85.5 h | busy | its own run; the SDXL test waits on Loop 6's training list |
 | 11. Drain into the pillars | Stopped by your answer on 88. Its pillar checks are done and its census found every finished verdict on a report page (14 findings, eight method folders). Its final step stays open until Loops 6 and 8 stop. | 1 | when restarted | stopped its loop | waiting for a result worth draining: Loop 8's identity checker or Loop 6's two-colour CLEVR test |
@@ -97,6 +98,7 @@ Newest first.
 
 | Concerns | Finding | Source |
 |---|---|---|
+| All loops | **The same CO3 run gives different pictures on different card types.** Loop 6's rerun of M1's 96 CO3 trajectories on an RTX 3090 matched all 48 first drawn on a 3090 and none of the 21 checked from an RTX 8000, beyond 3 of 255 in mean pixel value. Any comparison of pictures drawn on mixed card types mixes the card in. No environment page records this, and the environment pillar's keeper has stopped. | Loop 6's message at 18:22 |
 | Loop 6 | **Design note, not a problem.** The new check scores whether the checker's score lands on the right side of zero, a fixed cut. If its area under the curve, reported beside, is high while that accuracy is low, the checker separates CO3's clean pictures from its borrowed-part ones and only its cut is off. Read the two numbers together when the check lands. | `method-search/01b-balance-the-checker-data/design.md`, the check section |
 | Loop 6 | **The checker training failed twice in 3 minutes** (jobs 94473 and 94474); the reruns (94579 and 94580) finished in 11 and 12 minutes. | `sacct` |
 | Loops 6 and 8 | **A run of bad results, now reviewed.** Loop 6's region test missed three times in a row and Loop 8's misses shared a cause. Both answered their reviews within minutes and corrected their records and pictures (Loop 6 commit `f29cf613`, Loop 8 commit `8c310b3a`). | [the review](../reviewer/2026-11-24-review.md) |
