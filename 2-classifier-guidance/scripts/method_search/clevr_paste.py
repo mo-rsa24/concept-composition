@@ -8,7 +8,7 @@ taken from expert sample i and laid on background sample i. The window's outer 2
   score  scores both sets with the position scorer and applies the bar: a paste rate of at least 0.906 predicts 7 objects
 
 The window sizes are named, so the choice on board question 66 is one argument: `written` keeps 18 by 18 everywhere, and `tall-p3`
-gives position 3 a window 18 wide and 24 tall that starts one row below the other two windows.
+gives position 3 a window 18 wide and 24 tall that starts on the row where the other two windows end.
 
 Usage: python clevr_paste.py paste --samples <dir> --out <dir> --windows written|tall-p3
        python clevr_paste.py score --pasted <dir> --scorer <dir>
