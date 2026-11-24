@@ -5,6 +5,7 @@ The design is artifacts/notes/progress/method-search/01c-clevr-paste-first/desig
 
   control   on 256 real single-object renders per position, the share of changed pixels that fall inside that position's window
   diagnose  how many changed pixels an empty scene has, and how many outside the window sit on the object's own footprint
+  footprint the check chosen on board question 66: 95% of each object's own footprint inside its window
   pack      one set's renders as a zip of 64 by 64 PNGs for EDM2
 
 A pixel counts as changed when any colour channel differs from the mean empty scene by more than 0.1 on a 0-to-1 scale. The
@@ -128,6 +129,43 @@ def diagnose(args):
     print(json.dumps(result), flush=True)
 
 
+def footprint(args):
+    """The window check chosen on board question 66: at least 95% of each object's own changed pixels fall inside its window.
+
+    A position's footprint is the connected part, through the position itself, of the pixels that change in at least 2% of its
+    256 renders. Only changed pixels on that footprint count, pooled over the renders.
+    """
+    from clevr_paste import WINDOWS
+    windows = WINDOWS[args.windows]
+    args.out.mkdir(parents=True, exist_ok=True)
+    empty = np.mean([to_64(p) for p in first_images(args.renders, "empty", CONTROL_IMAGES)], axis=0)
+    rows = {}
+    for name, (x, y) in POSITIONS.items():
+        x0, y0, x1, y1 = windows[name]
+        changed = [np.abs(to_64(p) - empty).max(-1) > CHANGED_ABOVE for p in first_images(args.renders, name, CONTROL_IMAGES)]
+        frequency = np.sum(changed, axis=0) / CONTROL_IMAGES
+        parts, _ = label(frequency >= OBJECT_FREQUENCY)
+        centre = parts[int(y * SIZE), int(x * SIZE)]
+        if centre == 0:
+            raise SystemExit(f"{name}: the position's own pixel changes in under {OBJECT_FREQUENCY:.0%} of renders")
+        on_object = parts == centre
+        window = np.zeros((SIZE, SIZE), dtype=bool)
+        window[y0:y1, x0:x1] = True
+        total = int(sum((c & on_object).sum() for c in changed))
+        inside = int(sum((c & on_object & window).sum() for c in changed))
+        every_changed = int(sum(c.sum() for c in changed))
+        every_inside = int(sum((c & window).sum() for c in changed))
+        rows[name] = {"window_pixels": [x0, y0, x1, y1], "footprint_changed_pixels": total, "inside_window": inside,
+                      "footprint_inside_share": round(inside / max(total, 1), 4),
+                      "written_rule_inside_share": round(every_inside / max(every_changed, 1), 4),
+                      "passes": inside / max(total, 1) >= MIN_INSIDE_SHARE}
+    result = {"windows": args.windows, "images_per_position": CONTROL_IMAGES, "object_frequency": OBJECT_FREQUENCY,
+              "min_inside_share": MIN_INSIDE_SHARE, "positions": rows, "passes": all(r["passes"] for r in rows.values())}
+    (args.out / f"window-footprint-{args.windows}.json").write_text(json.dumps(result, indent=1) + "\n")
+    print(json.dumps(result), flush=True)
+    raise SystemExit(0 if result["passes"] else 1)
+
+
 def pack(args):
     """Writes one set's renders as a zip of 64 by 64 PNGs, the form EDM2's dataset reader takes, and replaces the file only when complete."""
     args.out.mkdir(parents=True, exist_ok=True)
@@ -152,14 +190,15 @@ def pack(args):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("stage", choices=["control", "diagnose", "pack"])
+    ap.add_argument("stage", choices=["control", "diagnose", "footprint", "pack"])
+    ap.add_argument("--windows", default="tall-p3")
     ap.add_argument("--renders", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--set")
     ap.add_argument("--count", type=int, default=5000)
     ap.add_argument("--name", help="the zip's name, when it holds only part of a set")
     args = ap.parse_args()
-    {"control": control, "diagnose": diagnose, "pack": pack}[args.stage](args)
+    {"control": control, "diagnose": diagnose, "footprint": footprint, "pack": pack}[args.stage](args)
 
 
 if __name__ == "__main__":
