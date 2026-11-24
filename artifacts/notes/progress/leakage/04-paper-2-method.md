@@ -6,6 +6,10 @@ Step Z4 chooses Paper 2's method from what [Z2](02-what-predicts-borrowing/desig
 
 **Prefer methods that leave the diffusion model's weights untouched.** The owner said on 2026-11-24 that classifier guidance is the current best fit because no diffusion model has to be trained, and that it is not a commitment. A candidate that trains the diffusion model, even as a LoRA, needs a reason the others cannot meet. Every candidate is judged on one starting noise per seed following its own trajectory: restarting seeds or keeping the best of several tries is selection, which the owner ruled out as the method on 2026-11-18, and appears only as a baseline.
 
+## The bar and the rival
+
+[Loop 4's leakage rivals page](../targets/leakage-rivals.md), built on this loop's mechanism table, sets them. No paper prints a borrowed-part rate on SDXL, so the bar is CO3 alone on the same pictures, by M1's rule: a lead of at least 5 faithful pairs of 96 and more than 1.96 standard errors. Bounded Attention is the one rival with released SDXL code (`run_xl.py` in its repository), so it is both Z3's default fix and the rival Z4 must beat; its row must say where its boxes came from, and boxes read from finished renders make it an upper bound. Be Decisive's repository holds only a README, so its numbers are printed context. Self-Cross Guidance is released without an SDXL pipeline; its GPT-4o not-a-mixture score is the closest published measure to borrowing.
+
 ## The candidates
 
 | Candidate | What it does | Trains the diffusion model? | Evidence so far | Waits on |
