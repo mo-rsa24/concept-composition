@@ -1336,12 +1336,11 @@
    "needs": [
     "Y4"
    ],
-   "state": "doing",
+   "state": "todo",
    "serves": "Both papers",
    "objective": "Absorb and check the record",
-   "started": "2026-11-24T16:47:41+02:00",
-   "updated": "2026-11-24T16:47:41+02:00",
-   "note": "final census and drain, then the loop stops (question 88)"
+   "updated": "2026-11-24T16:55:44+02:00",
+   "note": "final census 2026-11-24 drained every finished verdict (14 findings, 8 method folders); waiting on V6 and M10, and on Loops 5 to 10 stopping; Loop 11 stopped by question 88 and restarts on Loop 13's word"
   }
  ],
  "blocks": [
@@ -1610,7 +1609,7 @@
    "description": "BEFORE: nothing. It starts by itself when the paper repository (step D1) is done.\n\n1. IT RUNS as the background session 🔬 PhD Loop 5: Reproduce Rivals And Choose Checker, following:\nartifacts/notes/progress/prompts/session-5-reproduce-and-choose.md\n\n2. IT DOES: compares candidate checker architectures on small data, by a selection rule written before any of them trains.\n\n3. YOU DO: answer anything on the waiting picture.\n\nOUTCOME: one chosen architecture, with the comparison saved.\nDONE WHEN: the checker review names the choice and the rule that picked it.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nSCOREBOARD: /home/molef/PhD/concept-composition/artifacts/notes/progress/scoreboard.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: arch",
    "event_id": "l29esd328d9glp7jd5p4fn4ekg",
    "start": "2026-11-22T11:35:00+02:00",
-   "end": "2026-11-24T16:55:16+02:00",
+   "end": "2026-11-24T18:56:07+02:00",
    "synced": "1150295b1faf"
   },
   {
@@ -2896,6 +2895,15 @@
    "asked": "2026-11-24T16:41:11+02:00",
    "answer": "Owner, in chat, 2026-11-24: the default. Loop 11 finishes its pillar checks and its final drain, then stops until a research loop reports a new result worth draining.",
    "answered": "2026-11-24T16:45:15+02:00"
+  },
+  {
+   "id": 89,
+   "question": "The board script cannot change a step once it exists, and the shared rules forbid editing board.json by hand, so three records on the board now disagree with your answers: (1) Loop 8's SDXL test still needs Loop 6's architecture choice and names faithful pairs against the plain product as its proof, where your question 86 made it need Loop 6's training list and be judged on two clear subjects against CO3; (2) Loop 6's small CLEVR test (step M6) still shows as to do and still holds the go or no-go, though question 84 closed it; (3) Loop 10's four skipped steps stay open, so the board counts a closed loop as unfinished. May Loop 13 add an 'edit' command to scripts/progress_board.py (change a step's needs or proof, or mark it closed without running) and use it for exactly these three?",
+   "holds": null,
+   "default": "the three records stay as they are, and the page keeps listing them",
+   "by": "s13",
+   "state": "open",
+   "asked": "2026-11-24T16:55:12+02:00"
   }
  ]
 }

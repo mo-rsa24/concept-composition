@@ -1,6 +1,7 @@
 # Review: does sample-and-paste already solve small CLEVR? (step M7)
 
-This file holds what the runs in [the M7 design](design.md) produced. M7 has no verdict yet.
+This file holds what the runs in [the M7 design](design.md) produced. M7's verdict is that paste solves small separated CLEVR, so M7 stops,
+in [the paste verdict](#the-paste-verdict) below.
 
 ## Runs
 
@@ -61,7 +62,7 @@ model takes about 1.5 hours with start-up and the four take about 6 GPU-hours, i
 
 **The first full model draws its object in place.** The position 1 expert trained on 2,000,896 images in 77 minutes on one Blackwell card (W&B
 `zv6oef8h`). Its first 16 samples, drawn by the training job, each hold one clear object at position 1, and the scorer agrees on 16 of 16. The
-expert check on 256 samples is still to run.
+expert check on 256 samples follows.
 
 <a href="full-p1-first-16-samples.png"><img src="full-p1-first-16-samples.png" width="420" alt="Sixteen samples from the position 1 expert, each a single CLEVR object at the upper left on an empty floor"></a>
 
@@ -101,7 +102,7 @@ in-place rate does not measure.
 <a href="paste-three-experts-first-32.png"><img src="paste-three-experts-first-32.png" width="420" alt="Thirty-two pasted images, each with three objects at the three positions, several on a faintly lighter square around the object"></a>
 
 **What follows from the design and from the owner's answer on board question 54.** Object count on separated CLEVR positions cannot separate Paper 1
-from pasting, so step M6 does not run on these models. The test where pasting fails is the one the owner chose on 2026-11-24: two experts trained on
+from pasting, so step M6 does not run on these models, and the board closes it as not run, under the owner's answer to question 84. The test where pasting fails is the one the owner chose on 2026-11-24: two experts trained on
 one colour each, told what to draw and not where, in [the Stage 2 design](../05-two-experts-by-colour/design.md).
 
 **GPU time.** M7 used about 8.5 GPU-hours against the 9 to 12 approved on board question 48: about 2.9 for the smoke, overfit and 1% rungs, about
