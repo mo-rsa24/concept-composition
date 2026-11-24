@@ -15,6 +15,7 @@ Can small checkers that read only where each word landed teach SDXL to draw two 
 - [Step V4: does it work on SDXL's unseen objects](#step-v4-does-it-work-on-sdxls-unseen-objects)
 - [Step V5: remove one checker at a time](#step-v5-remove-one-checker-at-a-time)
 - [Two extensions with no step yet](#two-extensions-with-no-step-yet)
+- [What ran differently from this design](#what-ran-differently-from-this-design)
 - [What this design cannot say](#what-this-design-cannot-say)
 
 ## The design on one page
@@ -352,6 +353,22 @@ $m_i$ is subject $i$'s word map and $N$ is the number of subjects. The word head
 **Limits to expect.** A 32 by 32 map gives nine subjects about 114 cells each, and one SDXL pass with gradients on nine prompts may not fit in memory, so the smoke rung measures both. The CLEVR benchmark's prompts stay out of this test.
 
 **Cost:** about 10 GPU-hours as budgeted, for 480 pictures with more expert passes per step. **Buys:** a measured answer to how far the checkers scale past two subjects.
+
+## What ran differently from this design
+
+The design above is kept as it was registered. Loop 8 ran steps V1, V2, V3 and V5 from it, and in five places what ran differs from the text. Each row names the design line, what ran, and where the change was decided. No result or bar is changed here.
+
+| Design line | The design says | What ran | Decided by | Commit |
+|---|---|---|---|---|
+| 53, V2's bars | three bars on the checker, the third on `apart` against `wrong` | the third bar applies to the identity checker, trained apart from the count checker | board questions 67 and 69 | `6c3f8a16` |
+| 70, the two maps | each map adds to 1 | each map adds to 1, then is multiplied by the 2,048 pixels, so it adds to 2,048 with mean 1 | [V2's design](05-does-it-learn/design.md), the map scale | `34750ade` |
+| 164, V3's push | the checker pushes on steps 0 to 15 | sampler steps 15 to 25 of 50 (timesteps 693 to 489), the toy steps matched to SDXL's noise | board question 64 | `777ab014` |
+| 223, V5's right-digits column | of the canvases that pass count, the share holding both asked digits | of those canvases, the share the judge calls clean: two confident single digits, the two asked, one per half | [V5's design](08-remove-one-checker/design.md) | `9242d9e9` |
+| 240, V5's null | no removal lowers its own column by the margin | no property meets the whole rule, including a removal that lowers its own column but moves another past the limit | board question 75; the rule was in the code before the run | `9242d9e9` |
+
+**Where each step's verdict is.** V2: [does a checker learn plurality on unseen digits](../../../../2-classifier-guidance/report/abstract-checkers-on-digits/does-a-checker-learn-plurality-on-unseen-digits.md). V3: [does the count checker's push compose unseen digits](../../../../2-classifier-guidance/report/abstract-checkers-on-digits/does-the-count-checkers-push-compose-unseen-digits.md). V5: [does removing one checker remove its property](../../../../2-classifier-guidance/report/abstract-checkers-on-digits/does-removing-one-checker-remove-its-property.md). Steps V6 and V7 have their own designs: [reading identity](10-reading-identity/design.md) and [removing one checker with identity](11-remove-one-with-identity/design.md).
+
+**Step V4 has not run.** Five places where this design and the word-map checker ladder (`2-classifier-guidance/artifacts/scenes/word-map-checker/`) disagree are listed on `context/methods/06-the-word-map-checker/`'s overview: the wrong-relation example's label (line 28), the push's form (lines 97 to 100, a fixed length against a capped step), what the SDXL checker reads, how it is told the time, and which model the 0.60 on unseen categories was measured on. V4's own design settles each before it runs; whether V4 is rewritten is board question 86.
 
 ## What this design cannot say
 
