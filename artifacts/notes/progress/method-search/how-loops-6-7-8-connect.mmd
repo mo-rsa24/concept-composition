@@ -5,12 +5,16 @@ flowchart TB
   classDef todo fill:#eeeeee,stroke:#777777,stroke-width:2px,color:#111111
   classDef ask fill:#fff3cd,stroke:#b58900,stroke-width:2px,color:#111111
 
-  subgraph L6["Loop 6: improve today's checker"]
+  subgraph L6["Loop 6: find the best method for each paper"]
     direction LR
-    M1["DONE, M1: neither method<br/>beat its baseline"]:::done
-    Q57["YOUR CALL: score M5 and D3<br/>on CO3 as well as plain PoE?"]:::ask
-    M5["M5, D3, M2, M3<br/>data, reader, labels, tuning"]:::todo
-    M1 --> Q57 --> M5
+    M1["DONE, M1: neither method beat its baseline<br/>CO3 already draws two bodies, 96 of 96"]:::done
+    M7["DONE, M7: paste places every object<br/>on separated CLEVR, 1,024 of 1,024"]:::done
+    M5["NOW, M5: checker data,<br/>CO3 rows decide"]:::doing
+    Q85["YOUR CALL, question 85:<br/>check the checker reads CO3's failure first?"]:::ask
+    M10["M10: two colour experts,<br/>told what, not where"]:::todo
+    M1 --> M7 --> M5
+    Q85 -.-> M5
+    M7 --> M10
   end
 
   subgraph L7["Loop 7: read and design"]
@@ -18,21 +22,21 @@ flowchart TB
     U["DONE: 25 papers read, 5 checkers designed.<br/>Only the spatial checker has a trained precedent on unseen concepts"]:::done
   end
 
-  subgraph L8["Loop 8: test abstract checkers"]
+  subgraph L8["Loop 8: test abstract checkers on digits"]
     direction LR
-    V1["NOW, V1: digit world built<br/>cluster check still to run"]:::doing
-    V2["V2: learns plurality<br/>on unseen digits?"]:::todo
-    V3["V3: its push composes<br/>unseen digits?"]:::todo
-    V4["V4: works on SDXL's<br/>unseen objects?"]:::todo
-    Q56["YOUR CALL: remove one checker<br/>at a time on SDXL, ~40 GPU-hours?"]:::ask
-    V1 --> V2 --> V3 --> V4 -.-> Q56
+    V2["DONE, V2: the count checker reads<br/>unseen digits, 0.782 and 0.791;<br/>the identity checker misses, 0.555"]:::done
+    V3["DONE, V3: its push draws 43 clean<br/>pairs of 320 on unseen digits, against 0"]:::done
+    V6["NOW, V6: an identity checker<br/>that reads which digits"]:::doing
+    V4["V4: on SDXL's unseen objects"]:::todo
+    V2 --> V3 --> V6 --> V4
   end
 
   P["Paper 2 at real-world scale"]:::todo
   U -->|"design"| V2
-  M1 -.->|"CO3 already draws two bodies"| V4
+  V3 -->|"count checker"| M10
+  M1 -.->|"identity, not plurality, is CO3's gap"| V6
   M5 --> P
-  Q56 -.-> P
+  V4 -.-> P
 
   style L6 fill:#fafafa,stroke:#222222,stroke-width:1px
   style L7 fill:#fafafa,stroke:#222222,stroke-width:1px

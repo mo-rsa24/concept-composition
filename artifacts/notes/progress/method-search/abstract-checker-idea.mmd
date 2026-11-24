@@ -14,7 +14,7 @@ flowchart TB
     P2["Counting head:<br/>one separate blob per noun?"]
     P3["Binding head:<br/>red on book, not on vase?"]
     P4["Spatial head:<br/>is A left of B?"]
-    P5["Sum of 3 gradients,<br/>capped, added to the<br/>product of experts"]
+    P5["Each checker pushes at its own<br/>fixed length; removing one<br/>leaves the others unchanged"]
     P1 --> P2 & P3 & P4
     P2 & P3 & P4 --> P5
   end
