@@ -50,6 +50,15 @@ case "$STAGE" in
          [ "$rc" -eq 0 ] && { "$PY" "$S/m5_read_co3.py" score --out "$OUT" --calls "$CALLS" --key "$KEY"; rc=$?; } ;;
   reread) "$PY" "$S/m5_read_co3.py" read --head "$HEAD" --splits "$SPLITS" --m1-co3 "$M1" --out "$OUT-rtx8000" --redo-from "$OUT/reads.jsonl"; rc=$?
          [ "$rc" -eq 0 ] && { "$PY" "$S/m5_read_co3.py" score --out "$OUT" --also "$OUT-rtx8000" --calls "$CALLS" --key "$KEY"; rc=$?; } ;;
+  save)   # keep the read steps' states for one of M1's shards, on the card type that drew it: shard 0 a Quadro RTX 8000, shard 1 an RTX 3090
+         CARD=$(nvidia-smi --query-gpu=name --format=csv,noheader -i "${GPU:-0}")
+         case "$SHARD:$CARD" in 0:*"RTX 8000"*|1:*"RTX 3090"*) ;; *) echo "ABORT: shard $SHARD must run on the card type M1 used, not $CARD"; exit 7 ;; esac
+         "$PY" "$S/m5_read_co3.py" read --head "$HEAD" --splits "$SPLITS" --m1-co3 "$M1" --out "$OUT-states-shard$SHARD" \
+           --shard "$SHARD" --num-shards 2 --save-latents; rc=$? ;;
+  heads)  # score the kept checker (the control) and M5's two trained checkers on the saved states
+         F=$ROOT/m5/full
+         "$PY" "$S/m5_read_co3.py" heads --heads "kept=$HEAD" "current=$F/current/head_step_002000.pt" "balanced=$F/balanced/head_step_002000.pt" \
+           --latents-from "$OUT-states-shard0" "$OUT-states-shard1" --out "$ROOT/m5/heads-read" --calls "$CALLS" --key "$KEY"; rc=$? ;;
   *) echo "ABORT: unknown stage $STAGE"; exit 2 ;;
 esac
 echo "[$(date -u +%H:%M:%S)] DONE stage=$STAGE exit=$rc"

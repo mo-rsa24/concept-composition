@@ -102,6 +102,15 @@ area under the curve and a per-pair table are reported beside it.
 | It does not | under 0.65 at every step | the owner decides whether to pause D3 and M2 for a checker that reads identity |
 | Inconclusive | the best step between 0.65 and 0.75, or fewer than 80 trajectories reproduce | reported, and the comparison waits for the owner |
 
+**The same read on M5's two checkers.** The kept checker missed the floor on all 96 (the review holds the numbers), and the owner's answer on
+board question 93, decided by Loop 13, reads the two checkers M5 trains, on the current and the balanced list, the same way and against the
+same bar, before D3 or M2 spends anything. If neither reaches the 0.65 floor at some step, pausing D3 and M2 for a checker that reads identity
+goes to the owner, with Loop 8's identity checker and the attention-map reader as the candidates.
+
+So that each further checker needs no CO3 run, one more pass keeps the state CO3 reaches at each read step, each shard of pairs on the card
+type M1 drew it on (shard 0 on a Quadro RTX 8000, shard 1 on an RTX 3090). Each checker is then scored on those states. The kept checker is
+scored on them again as a control: its scores must match the ones recorded in the read, so the states stand in for the trajectories.
+
 **Cost:** about 1.2 GPU-hours, 96 CO3 runs at the 43.2 seconds M1 measured. **Buys:** whether the clean-pair checker can see CO3's failure
 at all, before about 11 GPU-hours go into choosing its training list.
 

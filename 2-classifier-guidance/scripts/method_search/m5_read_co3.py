@@ -11,6 +11,8 @@ match M1's within 3 of 255, and the labels are M1's blind calls on CO3 alone.
 
 Usage: python m5_read_co3.py read --head <pt> --splits <json> --m1-co3 <dir> --out <dir> [--redo-from <reads.jsonl>]
        python m5_read_co3.py score --out <dir> [--also <dir> ...] --calls <csv> --key <json>
+       python m5_read_co3.py read ... --shard <k> --num-shards 2 --save-latents      keep the states, on the card type that drew shard k
+       python m5_read_co3.py heads --heads <name>=<pt> ... --latents-from <dir> ... --out <dir> --calls <csv> --key <json>
 
 M1 drew half its pairs on a Quadro RTX 8000 and half on an RTX 3090, and a CO3 run reproduces only on the card type that drew it, so the
 rerun of the non-reproduced trajectories runs on an RTX 8000 into its own folder and the score merges the two.
@@ -44,6 +46,7 @@ def read(args):
     from diffusers.models.unets.unet_2d_condition import UNet2DConditionOutput
 
     pairs, seeds = tuning(args.splits)
+    pairs = pairs[args.shard::args.num_shards]       # M1's split: shard 0 drew on a Quadro RTX 8000, shard 1 on an RTX 3090
     prompts = {pair: joint_prompt(pair) for pair in pairs}
     if any(not is_allowed(p) for p in prompts.values()):
         raise SystemExit("the subject guard refuses a prompt")
@@ -52,7 +55,7 @@ def read(args):
     real_unet = model.unet
     real_unet.requires_grad_(False)
     checker, head_step = build_checker(model, real_unet, args.head, prompts[pairs[0]])
-    state = {"step": None, "reads": {}}
+    state = {"step": None, "reads": {}, "states": {}}
 
     class ReadingUNet(torch.nn.Module):
         def __init__(self, unet):
@@ -71,6 +74,8 @@ def read(args):
                 with torch.no_grad():
                     o = checker.head(checker.reader(sample[:1].to(checker.reader.seq_e.dtype), timestep.reshape(1)))
                 state["reads"][state["step"]] = [float(v) for v in o.reshape(-1).float().cpu()]
+                if args.save_latents:
+                    state["states"][state["step"]] = {"x": sample[:1].detach().to(torch.float16).cpu(), "t": int(timestep.reshape(-1)[0])}
             return out if isinstance(out, UNet2DConditionOutput) else out
 
     model.unet = ReadingUNet(real_unet)
@@ -97,13 +102,16 @@ def read(args):
                     continue
                 if args.limit is not None and len(done) >= args.limit:
                     return
-                state["reads"] = {}
+                state["reads"], state["states"] = {}, {}
                 begin = time.time()
                 seed_everything(seed)
                 image = model.sample_loop(start_noise(model, seed))[0]
                 folder = args.out / "renders" / pair
                 folder.mkdir(parents=True, exist_ok=True)
                 image.save(folder / f"seed-{seed}.png")
+                if args.save_latents:
+                    (args.out / "latents" / pair).mkdir(parents=True, exist_ok=True)
+                    torch.save(state["states"], args.out / "latents" / pair / f"seed-{seed}.pt")
                 with Image.open(args.m1_co3 / pair / f"seed-{seed}.png") as old:
                     diff = float(np.abs(np.asarray(image.convert("RGB"), dtype=np.float64)
                                         - np.asarray(old.convert("RGB"), dtype=np.float64)).mean())
@@ -114,6 +122,53 @@ def read(args):
                 log.flush()
                 done.add(key)
                 print(f"{key} diff {diff:.2f} steps read {sorted(state['reads'])} {row['seconds']} s", flush=True)
+
+
+def heads(args):
+    """Score further checkers on the saved states of earlier reads, with no CO3 run. The kept checker is read again as a control:
+    its scores must match the recorded ones, so the saved states stand in for the trajectories."""
+    import torch
+    sys.path.insert(0, str(HERE))
+    sys.path.insert(0, str(HERE.parent / "rung2"))
+    from co3_common import load, load_parser
+    from paper2_rows import build_checker, point_checker
+    from train_readout_pair import joint_prompt
+
+    source = {}
+    for folder in args.latents_from:
+        for r in map(json.loads, (folder / "reads.jsonl").read_text().splitlines()):
+            path = folder / "latents" / r["pair"] / f"seed-{r['seed']}.pt"
+            if path.exists() and (r["key"] not in source or (r["reproduced"] and not source[r["key"]][0]["reproduced"])):
+                source[r["key"]] = (r, path)
+    print(f"{len(source)} saved trajectories, {sum(r['reproduced'] for r, _ in source.values())} reproduced", flush=True)
+    first = next(iter(source.values()))[0]["pair"]
+    model, config = load(joint_prompt(first), load_parser(), args.out / "_config")
+    real_unet = model.unet
+    real_unet.requires_grad_(False)
+    for spec in args.heads:
+        name, path = spec.split("=", 1)
+        checker, head_step = build_checker(model, real_unet, Path(path), joint_prompt(first))
+        out = args.out / name
+        out.mkdir(parents=True, exist_ok=True)
+        largest = 0.0
+        with open(out / "reads.jsonl", "w") as log:
+            for key, (r, latent_path) in sorted(source.items()):
+                point_checker(model, checker, joint_prompt(r["pair"]))
+                saved = torch.load(latent_path, weights_only=False)
+                reads = {}
+                for step, st in sorted(saved.items()):
+                    with torch.no_grad():
+                        x = st["x"].to(real_unet.device)
+                        t = torch.tensor([st["t"]], device=real_unet.device)
+                        o = checker.head(checker.reader(x.to(checker.reader.seq_e.dtype), t))
+                    reads[str(step)] = [float(v) for v in o.reshape(-1).float().cpu()]
+                    if str(step) in r["reads"]:
+                        largest = max(largest, abs(reads[str(step)][0] - r["reads"][str(step)][0]))
+                log.write(json.dumps({**{k: r[k] for k in ("key", "pair", "seed", "pixel_diff_to_m1_of_255", "reproduced")},
+                                      "head": path, "head_step": head_step, "reads": reads}) + "\n")
+        (out / "control.json").write_text(json.dumps({"head": path, "largest_difference_to_recorded_kept_scores": largest}) + "\n")
+        print(f"{name}: {len(source)} read; largest difference to the kept checker's recorded scores {largest:.4f}", flush=True)
+        score(argparse.Namespace(out=out, also=None, calls=args.calls, key=args.key))
 
 
 def auc(scores, labels):
@@ -169,7 +224,7 @@ def score(args):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("stage", choices=["read", "score"])
+    ap.add_argument("stage", choices=["read", "score", "heads"])
     ap.add_argument("--head", type=Path)
     ap.add_argument("--splits", type=Path)
     ap.add_argument("--m1-co3", type=Path)
@@ -178,9 +233,14 @@ def main():
     ap.add_argument("--key", type=Path)
     ap.add_argument("--redo-from", type=Path, help="an earlier reads.jsonl; rerun only its trajectories that did not reproduce")
     ap.add_argument("--also", type=Path, nargs="*", help="score: further read folders, merged, a reproduced row winning")
+    ap.add_argument("--shard", type=int, default=0)
+    ap.add_argument("--num-shards", type=int, default=1)
+    ap.add_argument("--save-latents", action="store_true", help="read: keep each read step's state, so later checkers need no CO3 run")
+    ap.add_argument("--heads", nargs="*", help="heads: name=path for each checker to score on the saved states")
+    ap.add_argument("--latents-from", type=Path, nargs="*", help="heads: read folders holding reads.jsonl and latents/")
     ap.add_argument("--limit", type=int, help="stop after this many runs, for the smoke rung")
     args = ap.parse_args()
-    {"read": read, "score": score}[args.stage](args)
+    {"read": read, "score": score, "heads": heads}[args.stage](args)
 
 
 if __name__ == "__main__":
