@@ -1,0 +1,22 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}, 'flowchart': {'nodeSpacing': 34, 'rankSpacing': 34}}}%%
+flowchart TB
+  X["digit canvas, 32 x 64, digits 0 to 4<br/>noised to one of steps 0 to 15"]:::input
+  C["true caption, e.g.<br/>the digit three and the digit four, apart"]:::input
+  V["our small image encoder<br/>4 convolution blocks, told the step"]:::image
+  T["CLIP ViT-L/14 text encoder, frozen<br/>35 captions, digits 0 to 4 only"]:::frozen
+  L["loss: pick the true caption out of the 35<br/>8,000 updates, nothing else trained"]:::push
+  U{"W4 test, read once:<br/>unseen digits 5 to 9, names never in the loss"}:::plain
+  Y["passes: cost an SDXL version<br/>and ask before training it"]:::plain
+  N["misses: a sentence score learned on<br/>some concepts does not carry to new ones"]:::plain
+
+  X --> V --> L
+  C --> T --> L
+  L --> U
+  U -->|"0.75 or better, gap 0.05 or less"| Y
+  U -->|"below the bar"| N
+
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef input fill:#ffffff,stroke:#1f5fd0,stroke-width:2px,color:#111111
+  classDef image fill:#dff3e4,stroke:#2f8a4a,stroke-width:2px,color:#111111
+  classDef frozen fill:#efeaf9,stroke:#8b7fb0,stroke-width:2px,color:#444444
+  classDef push fill:#fff1e0,stroke:#c86a0a,stroke-width:3px,color:#111111

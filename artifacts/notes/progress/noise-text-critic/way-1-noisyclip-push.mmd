@@ -1,0 +1,22 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}, 'flowchart': {'nodeSpacing': 34, 'rankSpacing': 34}}}%%
+flowchart TB
+  X["half-drawn SDXL latent x_t<br/>4 x 128 x 128, steps 0 to 15 of 50"]:::input
+  S["right: a photo of a puma and a condor<br/>wrong: a photo of two pumas, ..."]:::input
+  M["fixed linear map to RGB, clamp 0 to 255<br/>resize to 224 x 224"]:::fixed
+  V["NoisyCLIP image encoder, ViT-L/14<br/>tuned on noisy SDXL latents 20 to 29"]:::image
+  T["CLIP text encoder, frozen"]:::frozen
+  D{"checker D = S right minus highest S wrong<br/>W2: does D read the property?"}:::plain
+  G["gradient of D with respect to x_t<br/>through a hard or soft clamp"]:::push
+  P["push length 0.4 x size of CO3's prediction<br/>only on steps that read at 0.6 or better"]:::push
+  E["CO3's next step uses<br/>its prediction minus the push"]:::plain
+
+  X --> M --> V --> D
+  S --> T --> D
+  D --> G --> P --> E
+
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef input fill:#ffffff,stroke:#1f5fd0,stroke-width:2px,color:#111111
+  classDef image fill:#dff3e4,stroke:#2f8a4a,stroke-width:2px,color:#111111
+  classDef frozen fill:#efeaf9,stroke:#8b7fb0,stroke-width:2px,color:#444444
+  classDef fixed fill:#f1f3f5,stroke:#6b7a88,stroke-width:2px,color:#111111
+  classDef push fill:#fff1e0,stroke:#c86a0a,stroke-width:3px,color:#111111
