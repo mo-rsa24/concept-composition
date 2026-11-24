@@ -60,7 +60,7 @@ The bar on 96 pictures (a lead of 5) does not apply to 48. On 48 matched picture
 | Broken | row 3 meets the lead but its `broken` count exceeds row 1's by more than 3 |
 | Inconclusive | either control below fails |
 
-A lead of 4 of 48 is about twice the change a repeated pushed render showed on 96 pictures (about 2 of 96, Loop 6's M1 design), scaled to 48. The bar and the McNemar test live in `2-classifier-guidance/scripts/leakage/z3_bars.py`, committed before the first render.
+A lead of 4 of 48 is about twice the change a repeated pushed render showed on 96 pictures (about 2 of 96, Loop 6's M1 design), scaled to 48. The two conditions together are stricter than the lead alone: with no seed going the other way, a lead of 4 gives an exact one-sided p of 0.0625 and fails, so in practice row 3 needs at least 5 more `two_clear` pictures than row 1 (5 against 0 discordant seeds gives p = 0.031). The bar and the McNemar test live in `2-classifier-guidance/scripts/leakage/z3_bars.py`, committed before the first render.
 
 **What would surprise.** Row 2 rising as far as row 3 would mean any extra correction late in sampling helps and the regions add nothing. Row 3 rising while the borrowed parts stay (pictures moving from `two_bodies` to `two_clear` by losing a subject's identity) would show in the notes and the `broken` count.
 
