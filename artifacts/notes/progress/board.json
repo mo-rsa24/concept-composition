@@ -535,8 +535,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-24T14:31:20+02:00",
-   "updated": "2026-11-24T18:26:31+02:00",
-   "note": "CO3 reread of 21 running on mscluster107 card 1 (RTX 8000), then balanced overfit and 1% there; current list's overfit running under Slurm 94622"
+   "updated": "2026-11-24T18:47:15+02:00",
+   "note": "kept checker misses CO3's failure on all 96 (best 0.602, floor 0.65); question 93 A: read both trained checkers on saved states; full current queued 94638, states shard 1 queued 94637, balanced rungs on card 1"
   },
   {
    "id": "D3",
@@ -2969,8 +2969,10 @@
    "holds": "D3",
    "default": "A",
    "by": "s6",
-   "state": "open",
-   "asked": "2026-11-24T18:44:34+02:00"
+   "state": "answered",
+   "asked": "2026-11-24T18:44:34+02:00",
+   "answer": "Decided by Loop 13 for the owner: A. Read the two checkers M5 is training now the same way, on CO3's 96 tuning trajectories, with the bar as written and the area under the curve beside it, about 2.2 GPU-hours, before any architecture or label step spends its share of about 31 GPU-hours. It is reversible, inside Loop 6's budget, changes no bar, and is the fix the reviewer named first (reviewer/2026-11-24-review.md, Loop 6). If neither new checker reaches the 0.65 floor, pausing the architecture and label steps for an identity reader is a change of direction and returns to the owner. The owner may overrule by answering again.",
+   "answered": "2026-11-24T18:45:09+02:00"
   }
  ]
 }
