@@ -44,15 +44,15 @@ uses a dash as a clause separator. The discovery routes to both pillars are in p
 | R1 | three finding titles use the reviews' own verdict words instead of support, null or inconclusive | the rivals, environment and regions findings | owner's call, item 6 | waiting |
 | R2 | five findings carry two verdicts | rivals, checker learning, five properties, regions, fairness | owner's call, item 7 | waiting |
 | R3 | 26 embedded pictures sit in the loops' progress folders, which have no cards | 12 findings | owner's call, item 8 | waiting |
-| R4 | four rungs have a number and neither a figure nor a slot | removal rungs 3 to 5, push rung 5 | this loop | to fix |
-| R5 | the report index's Figures still missing list carries none of the 20 slots in these findings | `report/00-INDEX.md` | this loop | to fix |
-| R6 | the question-group rows use folder paths as link text | `report/00-INDEX.md`, the three new rows | this loop | to fix |
-| R7 | the Cross-references section on one finding has no breadcrumb or contents entry | environment finding | this loop | to fix |
-| R8 | "(board question 75)" sits in a finding title | removal finding and its index row | this loop | to fix |
-| R9 | claims run past four sentences | most of the 13 findings | this loop | to fix |
+| R4 | four rungs have a number and neither a figure nor a slot | removal rungs 3 to 5, push rung 5 | this loop | fixed, `eda9d9a4` |
+| R5 | the report index's Figures still missing list carries none of the 20 slots in these findings | `report/00-INDEX.md` | this loop | fixed, `eda9d9a4` |
+| R6 | the question-group rows use folder paths as link text | `report/00-INDEX.md`, the three new rows | this loop | fixed, `eda9d9a4` |
+| R7 | the Cross-references section on one finding has no breadcrumb or contents entry | environment finding | this loop | fixed, `eda9d9a4` |
+| R8 | "(board question 75)" sits in a finding title | removal finding and its index row | this loop | fixed, `eda9d9a4` |
+| R9 | claims run past four sentences | most of the 13 findings | this loop | fixed, `eda9d9a4` |
 | R10 | seven findings cite the board step and design instead of a plan file | seven findings | owner's call, item 9 | waiting |
 | R11 | most numbers are marked stated because the cluster result files were not opened | 184 stated against 93 verified | this loop, read only on the cluster | to fix |
-| R12 | no finding has a Depends on section, and few link their method pages | 13 findings | the cross-reference pass | to fix |
+| R12 | no finding has a Depends on section, and few link their method pages | 13 findings | the cross-reference pass | fixed, `f3cee98a` |
 | R13 | the repeatability check is filed as a finding rather than an environment fact | environment finding | owner's call, item 10 | waiting |
 | R14 | as C12 | `MASTER_PLAN.md` | outside this loop's files | reported |
 
