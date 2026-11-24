@@ -1,0 +1,18 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef bad fill:#ffffff,stroke:#b3261e,stroke-width:3px,color:#111111
+
+  subgraph NEXT["Repaired: one path per label, all ten, on the same x_t"]
+    C2["canvas with a 3 and a 7,<br/>noised to step t"]:::plain --> M2["digit model<br/>asked for every label 0 to 9"]:::plain
+    M2 --> P2["signature: d_t(0) ... d_t(9),<br/>10 maps per step"]:::plain
+    P2 --> R2["reader must find which<br/>labels the canvas supports"]:::plain
+  end
+  subgraph NOW["As the brief writes it: d_t under the canvas's own label"]
+    C1["canvas with a 3 and a 7,<br/>noised to step t"]:::plain --> M1["digit model<br/>asked for labels 3 and 7"]:::plain
+    L1["labels 3 and 7<br/>(the answer)"]:::bad --> M1
+    M1 --> P1["path: d_t(3), d_t(7)"]:::plain
+    P1 --> R1["reader recovers 3 and 7<br/>from the labels it was handed"]:::bad
+  end
+
+  style NEXT fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
