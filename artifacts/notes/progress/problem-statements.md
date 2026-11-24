@@ -108,7 +108,9 @@ kept recipe uses strength 30 on steps 0 to 15 with the push capped at 0.4 of the
 
 On 128 cat and dog seeds, counted clean or near-clean by eye: plain product 0, kept push 54, joint prompt 69, CO3 101. The
 scorer gives 0, 35, 57 and 89. The push's counts are on the void list, because each improvement round was kept or dropped
-on these same seeds. No run has added the push to CO3, so the method this statement proposes has no result yet. The checker's
+on these same seeds. Adding the kept push to CO3 on 12 tuning pairs at 8 seeds drew 7 faithful pairs of 96 against 11 for CO3
+alone, a null ([step M1](method-search/01-beat-the-baseline/review.md)). That checker predates step D3, so the method this statement
+proposes has no result with its own checker yet. The checker's
 4,400-picture pool came from Attend-and-Excite renders, so it cannot be scored fairly on those prompts.
 
 **The closest published work**
