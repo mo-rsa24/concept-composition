@@ -1,5 +1,5 @@
 {
- "last_tick": "2026-11-24T16:15:00+02:00",
+ "last_tick": "2026-11-24T16:25:00+02:00",
  "last_alignment_round": "2026-11-24T16:10:00+02:00",
  "steps": {
   "P0": "done",
@@ -177,7 +177,9 @@
   "81": "open",
   "82": "answered",
   "83": "open",
-  "84": "answered"
+  "84": "answered",
+  "85": "open",
+  "86": "open"
  },
  "nudges": [
   {
@@ -186,6 +188,18 @@
    "to": "s6",
    "kind": "method review request",
    "pattern": "M9: regions without names, reader 1 11/24, reader 2 10/24"
+  },
+  {
+   "time": "2026-11-24T16:25:00+02:00",
+   "to": "s6",
+   "kind": "reviewer verdict fix",
+   "question": 85
+  },
+  {
+   "time": "2026-11-24T16:25:00+02:00",
+   "to": "s8",
+   "kind": "reviewer verdict fix",
+   "question": 86
   }
  ],
  "notifications": [
@@ -201,5 +215,19 @@
  "patterns_requested": [
   "s6:M9:three-misses-2026-11-24"
  ],
- "void_list_table_lines": 26
+ "void_list_table_lines": 26,
+ "last_reviewer_run": {
+  "time": "2026-11-24T16:25:00+02:00",
+  "loops": [
+   "s6",
+   "s8"
+  ],
+  "file": "reviewer/2026-11-24-review.md",
+  "next_full_pass_due": "2026-11-25T16:25:00+02:00",
+  "not_yet": [
+   "s4",
+   "s11",
+   "s12"
+  ]
+ }
 }

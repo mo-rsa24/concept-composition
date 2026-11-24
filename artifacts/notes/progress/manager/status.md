@@ -5,7 +5,7 @@ questions, `requests.md`, the cluster queue and the list of live sessions. It de
 row either points at something you answer or reports what a loop's own files say. Paper 1 is experts
 that never met; Paper 2 is doing better than CO3 inside one model.
 
-**Last tick:** 2026-11-24 16:15 (UTC+2). Board: 56 of 90 steps done, 6 in progress.
+**Last tick:** 2026-11-24 16:25 (UTC+2). Board: 56 of 90 steps done, 6 in progress.
 
 ## Contents
 
@@ -19,11 +19,13 @@ that never met; Paper 2 is doing better than CO3 inside one model.
 
 ## For you to answer
 
-Five board questions are open. Answer with `python3 scripts/progress_board.py answer <number> "<answer>"`,
+Seven board questions are open. Answer with `python3 scripts/progress_board.py answer <number> "<answer>"`,
 or in chat to the loop that asked.
 
 | # | Asked by | The question, in one line | Default if you say nothing | Open for |
 |---|---|---|---|---|
+| 86 | Loop 13, from the reviewer | Rewrite Loop 8's SDXL test (V4) to push an identity checker on CO3's own trajectory and judge it against CO3 alone by Paper 2's bar, starting once M5 lands instead of waiting for D3? About 6 GPU-hours, as budgeted | Loop 8 continues unchanged | just filed |
+| 85 | Loop 13, from the reviewer | Before Loop 6's next comparisons, check whether its checker tells CO3's clean pictures from its borrowed-part ones at each step (about 1.2 GPU-hours), judge on two clear subjects with style ignored, and add a paste row to the two-colour CLEVR test? | Loop 6 continues unchanged | just filed |
 | 83 | Loop 6 | Paper 2's region-per-subject test (M9) failed its second region reader too (10 of 24 reads against a limit of 6): close it, try one last reader from Loop 10's per-subject signal, or take boxes from Be Decisive? | close M9, reporting the first rung and the two failed readers; no cost | 1 h 39 min |
 | 81 | Loop 11 | Ten points where the pillar formats conflict on the 48 pages Loop 11 wrote (page shape for `context/methods/`, commands on method pages, picture width, verdict words, cards for loop pictures and five more): take all ten defaults or name the ones to change? | all ten defaults as listed on the board | 3 h 12 min |
 | 80 | Loop 10 | Who runs the test where the checker picks CO3's weight sharpness at each corrected step (`score-space/11-the-checker-chooses-on-co3.md`), and at which size first? | Loop 6 runs the 6-pair first read, about 3.1 GPU-hours, and adds the rest only if the checker leads CO3 alone by 5 of 96 | 3 h 45 min |
@@ -86,6 +88,15 @@ compares them with each loop's reviews and board notes since then.
 | 11. Drain into the pillars | yes | [Its checks page](../drain/04-checks.md) audits the 48 pages it wrote (34 under `context/methods/`, 14 in `report/`), the work its brief asks for. |
 | 12. Where CO3 leaks | yes | [Its method candidates](../leakage/04-paper-2-method.md) keep your constraint: no change to SDXL's weights, one trajectory per seed, best-of-N only as a baseline. |
 
+**The reviewer's verdicts**, from [the 2026-11-24 review](../reviewer/2026-11-24-review.md), run on Loops 6 and 8 at the owner's request:
+
+| Loop | Verdict | Why |
+|---|---|---|
+| 6. Best method | fix | The checker search still judges two separate bodies, which CO3 already draws in 96 of 96, and nothing shows the checker sees CO3's borrowed parts at the steps where it pushes; the two-colour CLEVR test has no paste row. |
+| 8. Abstract checkers | fix | V6 repairs the identity miss, but V7 keeps the scoring behind most of V5's null, and V4 tests counting against the plain product when Paper 2's open failure is identity against CO3. |
+
+Loops 4, 11 and 12 are reviewed on the next 24-hour pass.
+
 **Loop 11's intent, written by Loop 13 from its brief for you to correct.** Loop 11 takes the
 diagrams, picture sheets and results the research loops produce, which sit in their own notes folders
 where no pillar page shows them, and drains them into `report/` and `context/`: checked against the
@@ -96,6 +107,8 @@ It took this over from Loops 2 and 3, which have stopped.
 
 | Time | To | What and why |
 |---|---|---|
+| 2026-11-24 16:25 | Loop 6 | **Reviewer verdict: fix**, pointing at the review file and board question 85. Also one line in `requests.md`. |
+| 2026-11-24 16:25 | Loop 8 | **Reviewer verdict: fix**, pointing at the review file and board question 86. Also one line in `requests.md`. |
 | 2026-11-24 16:09 | Loop 6 | **Method review request on M9**, after three misses in a row (above). Asks Loop 6 to pause new M9 runs, but not M5's training or the CLEVR renders, and to write a short review in its folder answering five things: what the misses share, which unread papers bear on them, whether another loop's results explain them, whether M9 is still worth its cost for Paper 2, and what it would change. It names four results from other loops: Loop 8's identity read working in the later window but not the early one, Loop 9's finding that SDXL's own features read where sentence scores do not, the DAAM attention-overlap result from Loop 12's reading, and Loop 10's per-subject signal (question 83's option B). Also one line in `requests.md`. **Answered** at 16:11 (commit `d0d65be7`): all three misses separate the subjects with a signal that has not separated them yet, six unread papers are named, and M9 in its current form is judged not worth its 4.8 GPU-hours. |
 
 ## Requests waiting
@@ -129,4 +142,4 @@ them. This is yours to assign; it is listed under things that may be wrong.
 
 ## Last tick
 
-2026-11-24 16:15. Next tick about 17:15.
+2026-11-24 16:25. Next tick about 17:06.
