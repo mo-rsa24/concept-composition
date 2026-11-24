@@ -2,3 +2,5 @@
 numbers/env/
 __pycache__/
 miniature-page/stills/gate/
+numbers/real/*.npz
+numbers/real/trace/*.npz
