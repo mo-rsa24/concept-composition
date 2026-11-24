@@ -6,7 +6,7 @@
 #SBATCH --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82,mscluster84
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-6/logs/%x-%j.log
 # Step M5: train the clean-pair checker on the current or the balanced list. Submit with the code snapshot in SNAP:
-#   sbatch --export=ALL,SNAP=<snapshot> m5_train.sbatch <smoke|full> <current|balanced>
+#   sbatch --export=ALL,SNAP=<snapshot> m5_train.sbatch <smoke|overfit|tiny|full> <current|balanced>
 # Every stage first rebuilds the two lists and checks them against the committed composition.json.
 set -uo pipefail
 STAGE=${1:?stage}; LIST=${2:?list}
@@ -42,6 +42,20 @@ cmp -s "$OUT/lists/composition.json" "$REPO/artifacts/notes/progress/method-sear
 COMMON=(--manifest "$OUT/lists/training_set_$LIST.json" --pair-prompt --aug --early-frac 0.5 --accum 4 --out-root "$OUT/$STAGE")
 case "$STAGE" in
   smoke) "$PY" "$S/rung2/train_readout_pair.py" "${COMMON[@]}" --run "$LIST" --steps 2 --eval-every 1000; rc=$? ;;
+  overfit)
+    # 16 of the list's pictures, checked on themselves; passes at a balanced accuracy of 0.9375 (15 of 16) at some step of the first 20.
+    "$PY" "$S/method_search/m5_overfit_tiles.py" --list "$OUT/lists/training_set_$LIST.json" --out "$OUT/overfit/$LIST-tiles" || exit 5
+    "$PY" "$S/rung2/train_readout_pair.py" --manifest "$OUT/overfit/$LIST-tiles/overfit-train.json" --eval "$OUT/overfit/$LIST-tiles/overfit-check.json" \
+      --pair-prompt --aug --early-frac 0.5 --accum 4 --out-root "$OUT/overfit" --run "$LIST" --steps 400 --eval-every 100; rc=$?
+    [ "$rc" -eq 0 ] && { "$PY" -c "
+import json,sys; c=json.load(open('$OUT/overfit/$LIST/check.json')); b=[r['whole_evaluation_set_balanced_accuracy'] for r in c['per_step']]
+best=max(b); print('OVERFIT', 'PASSED' if best>=0.9375 else 'FAILED', 'best balanced accuracy', round(best,4), 'at step', b.index(best)); sys.exit(0 if best>=0.9375 else 6)"; rc=$?; } ;;
+  tiny)
+    # 1% of the list's pictures per source and label; passes when the mean of the last two logged losses is below the first.
+    "$PY" "$S/rung2/train_readout_pair.py" "${COMMON[@]}" --run "$LIST" --frac 0.01 --steps 400 --eval-every 400 | tee "$OUT/$STAGE-$LIST.log"; rc=${PIPESTATUS[0]}
+    [ "$rc" -eq 0 ] && { "$PY" -c "
+import re,sys; l=[float(m) for m in re.findall(r'loss ([0-9.]+)', open('$OUT/$STAGE-$LIST.log').read())]
+ok=len(l)>=3 and sum(l[-2:])/2<l[0]; print('LOSS', l, 'FALLS' if ok else 'DOES NOT FALL'); sys.exit(0 if ok else 6)"; rc=$?; } ;;
   full)  "$PY" "$S/rung2/train_readout_pair.py" "${COMMON[@]}" --run "$LIST" --steps 2000 --eval-every 500; rc=$? ;;
   *) echo "ABORT: unknown stage $STAGE"; exit 2 ;;
 esac

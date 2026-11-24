@@ -135,8 +135,10 @@ seconds and 192 CO3 pictures at 59 seconds. No API tokens. The smoke rung replac
 Each rung saves its config, numbers, sheet and commit under `/datasets/mmolefe/poe_repair_min/loop-6/m5/<rung>/`.
 
 1. **Smoke test.** One batch from each list, one checkpoint saved and reloaded, one pushed render. Records seconds per update and picture.
-2. **Overfit.** Each checker memorises 16 pictures, reaching at least 15 of 16 right.
-3. **1% of the data.** Each list trains on 1% of its pictures, and the logged loss falls.
+2. **Overfit.** Each checker trains 400 updates on 16 of its list's pictures, 8 clean and 8 rejects, and is checked on the same 16. It
+   passes at a balanced accuracy of at least 0.9375, which is 15 of 16 right, at some step of the first 20 sampler steps.
+3. **1% of the data.** Each list trains 400 updates on 1% of its pictures per source and label. It passes when the mean of the last two
+   logged losses, taken every 100 updates, is below the first.
 4. **Controls.** The zero-push checks on plain PoE and on CO3.
 5. **Comparison.** Both full trainings, the six rows and the blind count.
 
