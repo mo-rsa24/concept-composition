@@ -17,7 +17,8 @@ Outputs are on the cluster under `/datasets/mmolefe/poe_repair_min/loop-6/m7/`, 
 | EDM2 smoke test on the empty scenes, 16,384 images seen, then 16 samples | 94044 | `beaf1219-15d8bdd` | `smoke/models/empty/` | passed, 3 minutes 31 seconds |
 | EDM2 overfit on 16 pictures of position 1, EDM2's fixed ramp | 94047 | `50d1d1a1-15d8bdd` | `overfit/models/p1-16/` | failed, the samples are noise |
 | Scorer: overfit on 16 pictures, then 1,600 train and 400 held out, on CPU | 93978 | `a6c06e83-15d8bdd` | `full/scorer/` | passed: 16 of 16 on the overfit, and 100% at all three positions on the 400 held-out renders against a bar of 99% (W&B `guf6vtho`) |
-| EDM2 overfit on 16 pictures of position 1, ramp scaled to the run | 94055 | `0306b4bf-15d8bdd` | `overfit-scaled-ramp/models/p1-16/` | running |
+| EDM2 overfit on 16 pictures of position 1, ramp scaled to the run | 94055 | `0306b4bf-15d8bdd` | `overfit-scaled-ramp/models/p1-16/` | failed: the scorer finds the object in 0 of 16 samples, against a bar of 15 |
+| The same overfit at batch 256 | 94066 | `a601dd41-15d8bdd` | `overfit-batch-256/models/p1-16/` | running |
 
 ## The smoke render
 
@@ -40,6 +41,15 @@ rough brightness.
 <a href="overfit-unscaled-ramp-real-and-sampled.png"><img src="overfit-unscaled-ramp-real-and-sampled.png" width="420" alt="Top two rows: the 16 real pictures of one object. Bottom two rows: 16 samples from the model, which are colour noise"></a>
 
 Each model now keeps the preset's ramp as a fraction of training, 0.93%, through `edm2_scaled_ramp.py`, which changes no file of EDM2.
+
+**The scaled ramp alone does not pass the overfit rung.** The learning rate reaches 0.012 and the loss falls from 0.88 to -2.28, which is possible because
+EDM2's loss includes a learned uncertainty term. The samples show the right floor and lighting with faint coloured blotches, and the scorer finds an
+object at position 1 in 0 of 16 (`overfit-scaled-ramp-scorer.json`). At EDM2's batch of 2,048, 256,000 images are only 125 weight updates.
+
+<a href="overfit-scaled-ramp-real-and-sampled.png"><img src="overfit-scaled-ramp-real-and-sampled.png" width="420" alt="Top two rows: the 16 real pictures. Bottom two rows: 16 samples with the right floor and lighting and faint coloured blotches in place of objects"></a>
+
+**The next and last change on this rung is a batch of 256,** which gives 1,000 updates for the same 256,000 images. If it also misses 15 of 16, the rung stops and
+the training recipe goes to the owner, so settings are not turned until one happens to pass.
 
 ## The window control
 
