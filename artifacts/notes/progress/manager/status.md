@@ -34,6 +34,8 @@ Your own step C2 (confirm the draft statements from your readings) is ready on t
 
 ## Where each loop is
 
+<a href="loops-and-blockers.png"><img src="loops-and-blockers.png" width="200" alt="Each watched loop as a box, with arrows from your open questions to the steps they hold, cluster jobs in blue, and the nine stranded requests to Loops 7 and 10 dashed grey."></a>
+
 Estimated finish is the range `session_status.py` prints from the 51 finished steps: the low end at
 the fastest step pace seen, the high end at the slowest. Session state is from the live session list.
 
