@@ -310,6 +310,9 @@ findings embed from; a finding with no sibling yet sits flat.
 | [is-the-gap-the-samplers-or-the-models/](../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/) | Is the gap the samplers or the models | 12 |
 | [what-the-adapter-ablations-show/](../3-understanding-compositionality/report/what-the-adapter-ablations-show/) | Which layers the adapter needs and how much rank the correction takes | 2 |
 | [is-the-adapter-just-copying-the-joint-prompt/](../1-lora-correction/report/is-the-adapter-just-copying-the-joint-prompt/) | Whether the target itself is right, and what the adapter adds beyond it | 2 |
+| [abstract-checkers-on-digits/](../2-classifier-guidance/report/abstract-checkers-on-digits/) | Whether small checkers trained on noisy digit canvases learn a property they never trained on, and whether their push composes unseen digits | 4 |
+| [the-method-search/](../2-classifier-guidance/report/the-method-search/) | Whether each paper's method beats the simplest thing a reviewer would try first | 3 |
+| [the-sentence-score/](../2-classifier-guidance/report/the-sentence-score/) | Whether a sentence score from a CLIP-like model can read a half-drawn picture, and whether that test was fair | 2 |
 
 ## The documents that are not findings
 

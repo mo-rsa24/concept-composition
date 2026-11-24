@@ -17,13 +17,13 @@ The drain's sweep (`/artifacts-drain . --dry-run`) found 8 new and 4 changed fil
 
 | Where it came from | Pictures and scene pages, unplaced | Reviews holding a verdict | Reviews with no verdict yet |
 |---|---|---|---|
-| Loop 4 | 11 | 0 | 0 |
-| Loop 5 | 12 | 2 | 4 |
-| Loop 6 | 18 | 2 | 1 |
+| Loop 4 | 9 | 0 | 0 |
+| Loop 5 | 8 | 0 | 1 |
+| Loop 6 | 11 | 0 | 1 |
 | Loop 7 | 12 | 0 | 0 |
-| Loop 8 | 12 | 4 | 0 |
-| Loop 9 | 10 | 1 | 1 |
-| Loop 10 | 19 | 1 | 0 |
+| Loop 8 | 3 | 0 | 0 |
+| Loop 9 | 8 | 2 | 0 |
+| Loop 10 | 18 | 0 | 0 |
 | scenes in `2-classifier-guidance/artifacts/scenes/` | 200 | 0 | 0 |
 | older results and scenes, made before the loops | 406 | not counted | not counted |
 
@@ -33,16 +33,8 @@ Each row is a review file whose verdict is recorded. The verdict column quotes t
 
 | File | Loop | What the review records | Lands on |
 |---|---|---|---|
-| [review.md](../../../../artifacts/notes/progress/reproductions/FKC/review.md) `FKC` | Loop 5 | This file holds what the runs in the FKC design produced. FKC is not rerun, by the owner's answer to board question 41, so its printed 0.78 stays as context | `1-lora-correction/report/against-other-methods/do-the-rivals-reproduce-their-printed-scores.md` (to write) |
-| [review.md](../../../../artifacts/notes/progress/reproductions/RTD/review.md) `RTD` | Loop 5 | This file holds what the runs in the RTD design produced. RTD does not reproduce its printed T2I-CompBench Complex score on the 988 allowed prompts | `1-lora-correction/report/against-other-methods/do-the-rivals-reproduce-their-printed-scores.md` (to write) |
-| [review.md](../../../../artifacts/notes/progress/method-search/01-beat-the-baseline/review.md) `01-beat-the-baseline` | Loop 6 | This file holds what the runs in the M1 design produced. Both verdicts are null | `2-classifier-guidance/report/the-method-search/does-each-papers-method-beat-its-simple-baseline.md` (to write) |
-| [review.md](../../../../artifacts/notes/progress/method-search/04-bind-each-body/review.md) `04-bind-each-body` | Loop 6 | This file holds what the runs in the M9 design produced. With bootstrapping on, rung 1 reaches 8 clear pairs of 8 on right boxes, and its written verdict is "regions without names" | `2-classifier-guidance/report/the-method-search/does-giving-each-subject-its-own-region-fix-identity.md` (to write) |
-| [review.md](../../../../artifacts/notes/progress/abstract-checkers/04-environment/review.md) `04-environment` | Loop 8 | Status: passed. Two rebuilds give the same data hash on the laptop and on the cluster, and a zero push leaves every pixel unchanged on all 20 digit pairs at 8 seeds | `2-classifier-guidance/report/abstract-checkers-on-digits/is-the-small-environment-repeatable.md` (to write) |
-| [review.md](../../../../artifacts/notes/progress/abstract-checkers/05-does-it-learn/review.md) `05-does-it-learn` | Loop 8 | Status: done, by the count checker. The count checker passes on digits 5 to 9, which it never trained on (W&B run `tyhrpyov`), and by the owner's answer to board question 69 step V3 runs with its push alone | `2-classifier-guidance/report/abstract-checkers-on-digits/does-a-checker-learn-plurality-on-unseen-digits.md` (to write) |
-| [review.md](../../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/review.md) `06-does-it-compose` | Loop 8 | Status: support. On the 10 pairs among digits 5 to 9, which the count checker never trained on, its push turns the plain product's 0 clean pairs of 320 into 43 | `2-classifier-guidance/report/abstract-checkers-on-digits/does-the-count-checkers-push-compose-unseen-digits.md` (to write) |
-| [review.md](../../../../artifacts/notes/progress/abstract-checkers/08-remove-one-checker/review.md) `08-remove-one-checker` | Loop 8 | Status: null by the written rule (board question 75). The rerun approved in board question 73 ran 960 canvases per row (W&B run `j4anxfgy`) | `2-classifier-guidance/report/abstract-checkers-on-digits/does-removing-one-checker-remove-its-property.md` (to write) |
-| [review.md](../../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md) `02-can-it-read` | Loop 9 | State: null on counting, prompt match and left-right order, and inconclusive on position and size and on binding. No model reads any of the five properties at steps 0 to 15: NoisyCLIP, frozen CLIP and Latent CLIP each stay between 0.46 and 0.56 mean balanced accuracy against the 0.75 bar, and none beats frozen CLIP | `2-classifier-guidance/report/the-sentence-score/can-a-sentence-score-read-the-five-properties.md` (to write) |
-| [review.md](../../../../artifacts/notes/progress/score-space/05-signal/review.md) `05-signal` | Loop 10 | Status: null by the written rule. The signature, the ten maps $d_t(0), \dots, d_t(9)$ on one noisy canvas, reads digit presence at best at 0.700 (balanced accuracy, 0 to 1, 0.5 is chance), at timestep 480 in the SDXL-matched window, against a bar of 0.75 | `2-classifier-guidance/report/the-score-path/does-the-score-path-carry-which-digits-are-present.md` (to write) |
+| [review.md](../../../../artifacts/notes/progress/noise-text-critic/02b-linear-probe/review.md) `02b-linear-probe` | Loop 9 | State: null for all three encoders. A logistic regression trained on each encoder's image vectors, one per step from 0 to 15, reads both properties a little better than chance on seen pairs, at best 0.637 and 0.644 for NoisyCLIP |  |
+| [review.md](../../../../artifacts/notes/progress/noise-text-critic/04-train-our-own/review.md) `04-train-our-own` | Loop 9 | State: null. The encoder learns the digit pairs it was trained on: 0.758 balanced accuracy on held-back seen canvases in the SDXL-matched window, steps 14 to 25 |  |
 
 ## Reviews with no verdict yet
 
@@ -50,12 +42,8 @@ These get no finding until their verdict lands. Y5 checks them on every tick.
 
 | File | Loop | What the review records | Why it waits |
 |---|---|---|---|
-| [review.md](../../../../artifacts/notes/progress/reproductions/CO3/review.md) `CO3` | Loop 5 | This file holds what the runs in the CO3 design produced. CO3 has no verdict yet. | waits for a verdict: the step is still running |
 | [review.md](../../../../artifacts/notes/progress/reproductions/CoInD/review.md) `CoInD` | Loop 5 | This file holds what the runs in the CoInD design produced. CelebA is context by the owner's answer to board question 35, so this rerun stopped after the classifier and the smoke test | no finding: CelebA was made context by the owner's answer to board question 35, so no generated face was scored |
-| [review.md](../../../../artifacts/notes/progress/reproductions/CoMat/review.md) `CoMat` | Loop 5 | This file holds what the runs in the CoMat design produced. CoMat has no verdict yet | waits for a verdict: the step is still running |
-| [review.md](../../../../artifacts/notes/progress/reproductions/ToMe/review.md) `ToMe` | Loop 5 | This file holds what the runs in the ToMe design produced. ToMe has no verdict yet | waits for a verdict: the step is still running |
 | [review.md](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/review.md) `01c-clevr-paste-first` | Loop 6 | This file holds what the runs in the M7 design produced. M7 has no verdict yet. | waits for a verdict: the step is still running (M7) |
-| [review.md](../../../../artifacts/notes/progress/noise-text-critic/02c-fair-test/review.md) `02c-fair-test` | Loop 9 | State: running. No W2c score exists yet | waits for a verdict: the step is still running (W2c) |
 
 ## Pictures and scene pages, by loop
 
@@ -63,18 +51,16 @@ Folders with more than ten files are folded; open one to see every file.
 
 ### Loop 4
 
-**`artifacts/notes/progress/targets/`: 10 files**
+**`artifacts/notes/progress/targets/`: 8 files**
 
 | File | What it shows | Lands on |
 |---|---|---|
-| [binding-each-body-ladder.png](../../../../artifacts/notes/progress/targets/binding-each-body-ladder.png) | The three rungs and where each one stops | `2-classifier-guidance/report/the-method-search/does-giving-each-subject-its-own-region-fix-identity.md` (to write), the design ladder for M9 |
-| [how-far-sample-and-paste-reaches.png](../../../../artifacts/notes/progress/targets/how-far-sample-and-paste-reaches.png) | Paste is predicted to reach 7 objects | `2-classifier-guidance/report/the-method-search/does-each-papers-method-beat-its-simple-baseline.md` (to write), context for M1's baseline |
 | [how-one-rival-gets-reproduced.png](../../../../artifacts/notes/progress/targets/how-one-rival-gets-reproduced.png) | how-one-rival-gets-reproduced.png | none: a picture of the route's own plan, which stays beside the plan it explains |
 | [how-the-clevr-target-gets-tested.png](../../../../artifacts/notes/progress/targets/how-the-clevr-target-gets-tested.png) | how-the-clevr-target-gets-tested.png | none: a picture of the route's own plan, which stays beside the plan it explains |
 | [one-clevr-experiment-for-both-papers.png](../../../../artifacts/notes/progress/targets/one-clevr-experiment-for-both-papers.png) | One CLEVR experiment for both papers | none: a picture of the route's own plan, which stays beside the plan it explains |
 | [one-network-against-separate-experts.png](../../../../artifacts/notes/progress/targets/one-network-against-separate-experts.png) | one-network-against-separate-experts.png | `context/methods/01-the-product-of-experts/01-overview.md` (to write) |
 | [path-to-a-filled-scoreboard.png](../../../../artifacts/notes/progress/targets/path-to-a-filled-scoreboard.png) | path-to-a-filled-scoreboard.png | none: a picture of the route's own plan, which stays beside the plan it explains |
-| [rivals-by-dataset.png](../../../../artifacts/notes/progress/targets/rivals-by-dataset.png) | rivals-by-dataset.png | `1-lora-correction/report/against-other-methods/do-the-rivals-reproduce-their-printed-scores.md` (to write), which rival reports on which benchmark |
+| [rivals-by-dataset.png](../../../../artifacts/notes/progress/targets/rivals-by-dataset.png) | rivals-by-dataset.png | `1-lora-correction/report/against-other-methods/do-the-rivals-reproduce-their-printed-scores.md`, which rival reports on which benchmark |
 | [what-we-are-doing-and-the-three-detours.png](../../../../artifacts/notes/progress/targets/what-we-are-doing-and-the-three-detours.png) | what-we-are-doing-and-the-three-detours.png | none: a picture of the route's own plan, which stays beside the plan it explains |
 | [where-clevr-sits-before-the-go-or-no-go.png](../../../../artifacts/notes/progress/targets/where-clevr-sits-before-the-go-or-no-go.png) | where-clevr-sits-before-the-go-or-no-go.png | none: a picture of the route's own plan, which stays beside the plan it explains |
 
@@ -82,18 +68,16 @@ Folders with more than ten files are folded; open one to see every file.
 
 | File | What it shows | Lands on |
 |---|---|---|
-| [how-a-number-becomes-a-target.png](../../../../artifacts/notes/progress/targets/reads/how-a-number-becomes-a-target.png) | how-a-number-becomes-a-target.png | `1-lora-correction/report/against-other-methods/do-the-rivals-reproduce-their-printed-scores.md` (to write), how a printed number becomes a bar |
+| [how-a-number-becomes-a-target.png](../../../../artifacts/notes/progress/targets/reads/how-a-number-becomes-a-target.png) | how-a-number-becomes-a-target.png | `1-lora-correction/report/against-other-methods/do-the-rivals-reproduce-their-printed-scores.md`, how a printed number becomes a bar |
 
 ### Loop 5
 
-**`artifacts/notes/progress/reproductions/`: 4 files**
+**`artifacts/notes/progress/reproductions/`: 2 files**
 
 | File | What it shows | Lands on |
 |---|---|---|
-| [prompts-the-guard-keeps-out.png](../../../../artifacts/notes/progress/reproductions/prompts-the-guard-keeps-out.png) | prompts-the-guard-keeps-out.png | `1-lora-correction/report/against-other-methods/do-the-rivals-reproduce-their-printed-scores.md` (to write), the prompts dropped by the subject guard |
 | [what-each-row-waits-on.png](../../../../artifacts/notes/progress/reproductions/what-each-row-waits-on.png) | what-each-row-waits-on.png | none: a picture of the route's own plan, which stays beside the plan it explains |
 | [where-we-go-from-here.png](../../../../artifacts/notes/progress/reproductions/where-we-go-from-here.png) | where-we-go-from-here.png | none: a picture of the route's own plan, which stays beside the plan it explains |
-| [which-rival-reruns-set-a-bar.png](../../../../artifacts/notes/progress/reproductions/which-rival-reruns-set-a-bar.png) | which-rival-reruns-set-a-bar.png | `1-lora-correction/report/against-other-methods/do-the-rivals-reproduce-their-printed-scores.md` (to write) |
 
 **`artifacts/notes/progress/reproductions/CO3/`: 1 file**
 
@@ -107,14 +91,12 @@ Folders with more than ten files are folded; open one to see every file.
 |---|---|---|
 | [comat-one-percent-seed42.png](../../../../artifacts/notes/progress/reproductions/CoMat/comat-one-percent-seed42.png) | sheet of 9 prompts at seed 42 | waits for a verdict: the step is still running |
 
-**`artifacts/notes/progress/reproductions/RTD/`: 4 files**
+**`artifacts/notes/progress/reproductions/RTD/`: 2 files**
 
 | File | What it shows | Lands on |
 |---|---|---|
-| [plain-sdxl-against-rtd-eight-random-complex-prompts-seed0.png](../../../../artifacts/notes/progress/reproductions/RTD/plain-sdxl-against-rtd-eight-random-complex-prompts-seed0.png) | plain-sdxl-against-rtd-eight-random-complex-prompts-seed0.png | `1-lora-correction/report/against-other-methods/do-the-rivals-reproduce-their-printed-scores.md` (to write) |
-| [where-the-rtd-run-stands.png](../../../../artifacts/notes/progress/reproductions/RTD/where-the-rtd-run-stands.png) | where-the-rtd-run-stands.png | `1-lora-correction/report/against-other-methods/do-the-rivals-reproduce-their-printed-scores.md` (to write) |
-| [which-job-renders-which-prompts.png](../../../../artifacts/notes/progress/reproductions/RTD/which-job-renders-which-prompts.png) | which-job-renders-which-prompts.png | `1-lora-correction/report/against-other-methods/do-the-rivals-reproduce-their-printed-scores.md` (to write) |
-| [why-the-complex-score-misses.png](../../../../artifacts/notes/progress/reproductions/RTD/why-the-complex-score-misses.png) | why-the-complex-score-misses.png | `1-lora-correction/report/against-other-methods/do-the-rivals-reproduce-their-printed-scores.md` (to write) |
+| [where-the-rtd-run-stands.png](../../../../artifacts/notes/progress/reproductions/RTD/where-the-rtd-run-stands.png) | where-the-rtd-run-stands.png | `1-lora-correction/report/against-other-methods/do-the-rivals-reproduce-their-printed-scores.md` |
+| [which-job-renders-which-prompts.png](../../../../artifacts/notes/progress/reproductions/RTD/which-job-renders-which-prompts.png) | which-job-renders-which-prompts.png | `1-lora-correction/report/against-other-methods/do-the-rivals-reproduce-their-printed-scores.md` |
 
 **`artifacts/notes/progress/reproductions/ToMe/`: 1 file**
 
@@ -130,7 +112,7 @@ Folders with more than ten files are folded; open one to see every file.
 
 ### Loop 6
 
-**`artifacts/notes/progress/method-search/`: 4 files**
+**`artifacts/notes/progress/method-search/`: 5 files**
 
 | File | What it shows | Lands on |
 |---|---|---|
@@ -138,16 +120,7 @@ Folders with more than ten files are folded; open one to see every file.
 | [how-loops-6-7-8-connect.png](../../../../artifacts/notes/progress/method-search/how-loops-6-7-8-connect.png) | how-loops-6-7-8-connect.png | none: a picture of the route's own plan, which stays beside the plan it explains |
 | [how-the-checker-could-scale.png](../../../../artifacts/notes/progress/method-search/how-the-checker-could-scale.png) | how-the-checker-could-scale.png | `context/methods/02-the-readout-checker/01-overview.md` (to write) |
 | [loop-6-route.png](../../../../artifacts/notes/progress/method-search/loop-6-route.png) | loop-6-route.png | none: a picture of the route's own plan, which stays beside the plan it explains |
-
-**`artifacts/notes/progress/method-search/01-beat-the-baseline/`: 5 files**
-
-| File | What it shows | Lands on |
-|---|---|---|
-| [paper-1-four-rows-first-two-seeds.png](../../../../artifacts/notes/progress/method-search/01-beat-the-baseline/paper-1-four-rows-first-two-seeds.png) | Four rows of digit canvases for five digit pairs at seeds 0 and 1: paste, the method with no push, the method with the checker push, and the method with a random push. A green frame marks a canvas the judge calls clean and a red frame one… | `2-classifier-guidance/report/the-method-search/does-each-papers-method-beat-its-simple-baseline.md` (to write) |
-| [paper-2-three-rows-seed-6002.png](../../../../artifacts/notes/progress/method-search/01-beat-the-baseline/paper-2-three-rows-seed-6002.png) | Three rows of renders at seed 6002 for puma and condor, zebra and flamingo, and seal and gull: CO3 alone, CO3 with the checker push, and CO3 with a random push of the same size | `2-classifier-guidance/report/the-method-search/does-each-papers-method-beat-its-simple-baseline.md` (to write) |
-| [smoke-puma-and-condor-seed-6001.png](../../../../artifacts/notes/progress/method-search/01-beat-the-baseline/smoke-puma-and-condor-seed-6001.png) | Three renders of a puma and a condor at seed 6001: CO3 alone and the random push draw a bird with a puma's face, and the checker push draws a clear puma beside a clear dark bird | `2-classifier-guidance/report/the-method-search/does-each-papers-method-beat-its-simple-baseline.md` (to write) |
-| [the-two-comparisons.png](../../../../artifacts/notes/progress/method-search/01-beat-the-baseline/the-two-comparisons.png) | the-two-comparisons.png | `2-classifier-guidance/report/the-method-search/does-each-papers-method-beat-its-simple-baseline.md` (to write) |
-| [what-the-push-follows.png](../../../../artifacts/notes/progress/method-search/01-beat-the-baseline/what-the-push-follows.png) | what-the-push-follows.png | `context/methods/02-the-readout-checker/01-overview.md` (to write) |
+| [loop-6-scoreboard.png](../../../../artifacts/notes/progress/method-search/loop-6-scoreboard.png) | loop 6 scoreboard *(file name)* | none: a picture of the route's own plan, which stays beside the plan it explains |
 
 **`artifacts/notes/progress/method-search/01c-clevr-paste-first/`: 6 files**
 
@@ -159,14 +132,6 @@ Folders with more than ten files are folded; open one to see every file.
 | [overfit-unscaled-ramp-real-and-sampled.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/overfit-unscaled-ramp-real-and-sampled.png) | Top two rows: the 16 real pictures of one object. Bottom two rows: 16 samples from the model, which are colour noise | waits for a verdict: the step is still running (M7) |
 | [smoke-objects-at-their-positions.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/smoke-objects-at-their-positions.png) | Twelve CLEVR renders at 64 pixels: four with one object at position 1, four empty scenes, and four with objects at all three positions, each asked position outlined by its 18-pixel paste window | waits for a verdict: the step is still running (M7) |
 | [window-control-written-rule.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/window-control-written-rule.png) | How often each pixel changes, for the three positions, with the 18 by 18 window drawn: position 3's object runs past the top and bottom of its window | waits for a verdict: the step is still running (M7) |
-
-**`artifacts/notes/progress/method-search/04-bind-each-body/`: 3 files**
-
-| File | What it shows | Lands on |
-|---|---|---|
-| [rung-1-bootstrapped-five-rows-eight-seeds.png](../../../../artifacts/notes/progress/method-search/04-bind-each-body/rung-1-bootstrapped-five-rows-eight-seeds.png) | Eight seeds by five conditions: with bootstrapping the region rows draw two separate animals as cut-outs on flat grey, and the same-prompt row draws two cats | `2-classifier-guidance/report/the-method-search/does-giving-each-subject-its-own-region-fix-identity.md` (to write) |
-| [rung-1-six-rows-eight-seeds.png](../../../../artifacts/notes/progress/method-search/04-bind-each-body/rung-1-six-rows-eight-seeds.png) | Eight seeds by six conditions: the joint prompt draws a cat beside a dog, and every region row draws one animal or a fused cat-dog | `2-classifier-guidance/report/the-method-search/does-giving-each-subject-its-own-region-fix-identity.md` (to write) |
-| [rung-2-step-10-word-attention-boxes.png](../../../../artifacts/notes/progress/method-search/04-bind-each-body/rung-2-step-10-word-attention-boxes.png) | Step-10 word attention for 22 reads: most show two separate bodies, and in the failing reads the second word lights up both bodies or the background, so its box lands on the wrong body or the whole frame | `2-classifier-guidance/report/the-method-search/does-giving-each-subject-its-own-region-fix-identity.md` (to write) |
 
 ### Loop 7
 
@@ -191,37 +156,18 @@ Folders with more than ten files are folded; open one to see every file.
 
 ### Loop 8
 
-**`artifacts/notes/progress/abstract-checkers/`: 2 files**
+**`artifacts/notes/progress/abstract-checkers/`: 1 file**
 
 | File | What it shows | Lands on |
 |---|---|---|
 | [how-the-loops-fit.png](../../../../artifacts/notes/progress/abstract-checkers/how-the-loops-fit.png) | Three loops as boxes. Loop 7 reads papers, works out the score maths and writes the design. Loop 8 builds the digit world, asks whether a checker learns plurality on unseen digits, whether its gradient composes them, and whether it works o… | none: a picture of the route's own plan, which stays beside the plan it explains |
-| [remove-one-checker.png](../../../../artifacts/notes/progress/abstract-checkers/remove-one-checker.png) | Five checkers with counting switched off. The rest are scaled to a fixed length, added, capped at 0.4 of the prediction's length, and pushed into the product of A and B. Five scorers that never steer read the pictures. If only counting fal… | `2-classifier-guidance/report/abstract-checkers-on-digits/does-removing-one-checker-remove-its-property.md` (to write), the design picture for V5 |
 
-**`artifacts/notes/progress/abstract-checkers/04-environment/`: 2 files**
-
-| File | What it shows | Lands on |
-|---|---|---|
-| [canvas-kinds.png](../../../../artifacts/notes/progress/abstract-checkers/04-environment/canvas-kinds.png) | Five rows of pasted MNIST canvases, one row per kind, with training digits 0 to 4 on the left and unseen digits 5 to 9 on the right, each titled with its asked pair and label | `2-classifier-guidance/report/abstract-checkers-on-digits/is-the-small-environment-repeatable.md` (to write) |
-| [digit-blind-reader.png](../../../../artifacts/notes/progress/abstract-checkers/04-environment/digit-blind-reader.png) | Five rows of unseen-digit canvases, one per kind, each beside its label, count and the share a layout-only rule labels correctly: 100.0, 99.6, 99.6 and 99.2 percent, and 0.0 percent on the wrong-digit row | `2-classifier-guidance/report/abstract-checkers-on-digits/is-the-small-environment-repeatable.md` (to write) |
-
-**`artifacts/notes/progress/abstract-checkers/05-does-it-learn/`: 2 files**
+**`artifacts/notes/progress/abstract-checkers/09-summary/`: 2 files**
 
 | File | What it shows | Lands on |
 |---|---|---|
-| [balanced-accuracy-by-step.png](../../../../artifacts/notes/progress/abstract-checkers/05-does-it-learn/balanced-accuracy-by-step.png) | Balanced accuracy against sampler step 0 to 15 on digits 5 to 9. All five canvas kinds rise from 0.50 to 0.62, and both right digits against a wrong digit stays at 0.50, with the pass mark at 0.75 | `2-classifier-guidance/report/abstract-checkers-on-digits/does-a-checker-learn-plurality-on-unseen-digits.md` (to write) |
-| [two-noise-levels.png](../../../../artifacts/notes/progress/abstract-checkers/05-does-it-learn/two-noise-levels.png) | Balanced accuracy on pairs holding digit 4 across the 16-step window. At SDXL's noise, all canvas kinds rise from 0.59 to 0.81; at the toy's own early noise they rise from 0.50 to 0.60. Right digits against a wrong digit stays near 0.5 at… | `2-classifier-guidance/report/abstract-checkers-on-digits/does-a-checker-learn-plurality-on-unseen-digits.md` (to write) |
-
-**`artifacts/notes/progress/abstract-checkers/06-does-it-compose/`: 6 files**
-
-| File | What it shows | Lands on |
-|---|---|---|
-| [smoke-plain.png](../../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/smoke-plain.png) | smoke-plain.png | `2-classifier-guidance/report/abstract-checkers-on-digits/does-the-count-checkers-push-compose-unseen-digits.md` (to write) |
-| [smoke-push.png](../../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/smoke-push.png) | Smoke test sheet with the push: four canvases asked for 0 and 1, each now two separate marks, none framed green | `2-classifier-guidance/report/abstract-checkers-on-digits/does-the-count-checkers-push-compose-unseen-digits.md` (to write) |
-| [unseen-best4.png](../../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/unseen-best4.png) | unseen-best4.png | `2-classifier-guidance/report/abstract-checkers-on-digits/does-the-count-checkers-push-compose-unseen-digits.md` (to write) |
-| [unseen-plain.png](../../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/unseen-plain.png) | Ten rows of eight canvases, one row per pair from 5 and 6 to 8 and 9. Every canvas holds one fused glyph; none is framed green. Title: 0 clean pairs of 320 | `2-classifier-guidance/report/abstract-checkers-on-digits/does-the-count-checkers-push-compose-unseen-digits.md` (to write) |
-| [unseen-push.png](../../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/unseen-push.png) | The same pairs and seeds with the push. Many canvases now hold two separate digits, one per half, some framed green as clean pairs, others two digits of the wrong identity or one digit. Title: 43 clean pairs of 320 | `2-classifier-guidance/report/abstract-checkers-on-digits/does-the-count-checkers-push-compose-unseen-digits.md` (to write) |
-| [unseen-random.png](../../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/unseen-random.png) | unseen-random.png | `2-classifier-guidance/report/abstract-checkers-on-digits/does-the-count-checkers-push-compose-unseen-digits.md` (to write) |
+| [evidence-at-a-glance.png](../../../../artifacts/notes/progress/abstract-checkers/09-summary/evidence-at-a-glance.png) | Left: plain-product canvases for digit pairs 5 and 6 to 5 and 9, each a single fused glyph; below, the same seeds with the count checker's push, many now two separate digits, a few framed green as clean. Right: clean pairs of 320, plain 0,… | none: a picture of the route's own plan, which stays beside the plan it explains |
+| [where-loop-8-stands.png](../../../../artifacts/notes/progress/abstract-checkers/09-summary/where-loop-8-stands.png) | Loop 8's steps in order with their verdicts, V4 not run; Loops 9 and 10 point to V2 as agreeing that identity is unreadable early and that SDXL's noise level carries more signal; Loop 6 points to V4 as the risk that counting is what the ri… | none: a picture of the route's own plan, which stays beside the plan it explains |
 
 ### Loop 9
 
@@ -243,25 +189,14 @@ Folders with more than ten files are folded; open one to see every file.
 | [latent-clip-beside-noisyclip.png](../../../../artifacts/notes/progress/noise-text-critic/01-reading/latent-clip-beside-noisyclip.png) | A half-drawn SDXL latent goes either through NoisyCLIP or through Latent CLIP. Both give a right-minus-wrong sentence score. W2 asks whether it reads at steps 0 to 15, and only steps that read reach the push on CO3 in W3. | `context/methods/05-latent-clip/01-overview.md` (to write) |
 | [sentence-score-push.png](../../../../artifacts/notes/progress/noise-text-critic/01-reading/sentence-score-push.png) | A half-drawn SDXL latent passes through a fixed linear map into the NoisyCLIP image encoder. A right and a wrong sentence pass through the frozen CLIP text encoder. The two scores are subtracted, and the gradient of that difference is adde… | `context/methods/04-the-sentence-score-push/01-overview.md` (to write) |
 
-**`artifacts/notes/progress/noise-text-critic/02-can-it-read/`: 1 file**
-
-| File | What it shows | Lands on |
-|---|---|---|
-| [balanced-accuracy-by-step.png](../../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/balanced-accuracy-by-step.png) | Five panels, one per property, of balanced accuracy on the reading half against sampler step 0 to 15, for NoisyCLIP, frozen CLIP and Latent CLIP; every line stays near the 0.5 chance line, under the 0.75 bar | `2-classifier-guidance/report/the-sentence-score/can-a-sentence-score-read-the-five-properties.md` (to write) |
-
-**`artifacts/notes/progress/noise-text-critic/02-can-it-read/example/`: 1 file**
-
-| File | What it shows | Lands on |
-|---|---|---|
-| [noisyclip-counting-on-six-finished-pictures.png](../../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/example/noisyclip-counting-on-six-finished-pictures.png) | Six finished cat and dog pictures with NoisyCLIP's cosine to the three counting sentences at step 49; three called right, three called wrong, including two cats called one animal | `2-classifier-guidance/report/the-sentence-score/can-a-sentence-score-read-the-five-properties.md` (to write) |
-
 ### Loop 10
 
-**`artifacts/notes/progress/score-space/`: 1 file**
+**`artifacts/notes/progress/score-space/`: 2 files**
 
 | File | What it shows | Lands on |
 |---|---|---|
 | [03-score-path-defined-two-ways.png](../../../../artifacts/notes/progress/score-space/03-score-path-defined-two-ways.png) | Top: a canvas with a 3 and a 7 goes into the digit model together with the labels 3 and 7, marked in red as the answer; the path d_t(3), d_t(7) lets a reader recover 3 and 7 from the labels it was handed, also marked red. Bottom, in blue:… | `context/methods/07-the-score-path/01-overview.md` (to write) |
+| [summary-where-loop-10-fits.png](../../../../artifacts/notes/progress/score-space/summary-where-loop-10-fits.png) | Loop 9's sentence scores and Loop 8's two-map checker feed into Loop 10's finding that all ten signed maps read which digits are present at 0.655. Dashed, untested arrows lead to Paper 1 (feed the checker all ten maps) and to Loop 6 and Pa… | `context/methods/07-the-score-path/01-overview.md` (to write) |
 
 **`artifacts/notes/progress/score-space/00-ladder/`: 1 file**
 
@@ -303,13 +238,6 @@ Folders with more than ten files are folded; open one to see every file.
 | File | What it shows | Lands on |
 |---|---|---|
 | [three-spaces-and-the-closest-papers.png](../../../../artifacts/notes/progress/score-space/01-reading/three-spaces-and-the-closest-papers.png) | Three inputs, a caption, a noisy canvas and a score path, each with an arrow toward one shared space. The caption reaches it through a frozen text encoder and the canvas through a trained image encoder. The score path's arrow is dashed, la… | `context/methods/07-the-score-path/01-overview.md` (to write) |
-
-**`artifacts/notes/progress/score-space/05-signal/`: 2 files**
-
-| File | What it shows | Lands on |
-|---|---|---|
-| [presence-by-timestep.png](../../../../artifacts/notes/progress/score-space/05-signal/presence-by-timestep.png) | Two panels of presence accuracy against timestep. Left, the early window, t 999 to 693: every input sits at chance, 0.49 to 0.53, except the error readout at 0.61 to 0.66. Right, the SDXL-matched window, t 712 to 480: the signature rises f… | `2-classifier-guidance/report/the-score-path/does-the-score-path-carry-which-digits-are-present.md` (to write) |
-| [what-each-probe-reads.png](../../../../artifacts/notes/progress/score-space/05-signal/what-each-probe-reads.png) | what-each-probe-reads.png | `2-classifier-guidance/report/the-score-path/does-the-score-path-carry-which-digits-are-present.md` (to write) |
 
 ### Scenes in `2-classifier-guidance/artifacts/scenes/`
 
