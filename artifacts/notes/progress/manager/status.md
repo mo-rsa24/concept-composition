@@ -52,7 +52,7 @@ Newest first. A default happens only if you answer with it; nothing changes whil
 
 | # | The question, in one line | Why it is yours | Default | Waiting |
 |---|---|---|---|---|
-| 89 | The board script cannot change a step once it exists, so three records disagree with your answers: Loop 8's SDXL test still points at the old prerequisite and proof, the closed small CLEVR test still holds the go or no-go, and Loop 10's skipped steps keep a closed loop unfinished. May Loop 13 add an edit command to the board script and fix exactly these three? | changes a shared script and other loops' records | the records stay, and this page keeps listing them | just filed |
+| 89 | The board script cannot change a step once it exists, so three records disagree with your answers: Loop 8's SDXL test still points at the old prerequisite and proof, the closed small CLEVR test still holds the go or no-go, and Loop 10's skipped steps keep a closed loop unfinished. May Loop 13 add an edit command to the board script and fix exactly these three? Loop 4 asks that the fix also make the recipe freeze wait on the two-colour CLEVR test, as your answer to question 84 meant. | changes a shared script and other loops' records | the records stay, and this page keeps listing them | just filed |
 | 80 | Should a checker choose CO3's weight-sharpness setting at each of its corrected steps ([design](../score-space/11-the-checker-chooses-on-co3.md))? First read on 6 of 12 pairs | over 3 GPU-hours on one run (about 3.1) | **you chose to wait** until Loop 6's per-step read of its checker on CO3 lands (jobs 94593 and 94594); Loop 13 brings it back with that result | since 12:25 |
 
 Your own reading step (confirm the draft statements from your readings) is ready on the board.

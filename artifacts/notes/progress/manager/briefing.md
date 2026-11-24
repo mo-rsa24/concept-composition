@@ -3,7 +3,7 @@
 The one page to read. Loop 13 rewrites it every 6 hours, and at once when you say "updates", "brief me"
 or "where are we". The full detail is on [the status page](status.md).
 
-**Written:** 2026-11-24 16:56 (UTC+2).
+**Written:** 2026-11-24 17:42 (UTC+2).
 
 ## Contents
 
@@ -13,36 +13,36 @@ or "where are we". The full detail is on [the status page](status.md).
 
 ## Where we are
 
-<a href="briefing/where-we-are.png"><img src="briefing/where-we-are.png" width="200" alt="The five research and support loops as boxes feeding Paper 1 and Paper 2, with your five waiting questions on the left."></a>
+<a href="briefing/where-we-are.png"><img src="briefing/where-we-are.png" width="200" alt="The running loops feeding Paper 1 and Paper 2, Loop 11 stopped until a new result, and your one open question on the left."></a>
 
-1. **Paper 1** (experts that never met) is level with simply pasting the two experts' samples: 295 clean
-   digit pairs of 320 against paste's 287. A CLEVR test where neither expert is told where to draw, now
-   with a paste comparison, is rendering, so we will see whether paste can be beaten when it is not
-   given positions.
-2. **Paper 2** (better than CO3) has found that CO3 already draws both subjects in 96 of 96 test
-   pictures; its real failure is borrowed parts and wrong identity. Loop 6 is checking whether its
-   checker can even see that failure, a 1.2 GPU-hour read, before spending about 11 more GPU-hours.
-   Loop 8's identity checker reads unseen digits at 0.861 against a 0.75 bar.
-3. **What changed today:** the reviewer read Loops 6 and 8 against the project's 84 papers and asked
-   both to fix their aim; both corrected their records within minutes. The manager decided four of
-   your questions and closed five idle sessions of finished or duplicate loops.
-4. **The cluster** has no idle node: 17 of 48 `bigbatch` nodes and 4 of 7 `biggpu` nodes are down or
-   drained, so jobs wait for each other, not for us.
-5. **You answered** at 16:55: Loop 6's checker is now judged on two clear subjects with drawing style
-   ignored, Loop 8's SDXL test targets identity against CO3, and Loop 11 stops after its last two steps.
-   You also settled Loop 9's title (its own verdict leads) and chose to hold question 80 until
-   Loop 6's read lands.
+1. **Paper 1** (experts that never met) is level with simply pasting the two experts' samples (295
+   clean digit pairs of 320 against 287). Loop 6's CLEVR test where neither expert is told where to
+   draw is rendering, with a paste comparison beside it, to see whether paste can be beaten when it
+   is not given positions.
+2. **Paper 2** (better than CO3): CO3 draws both subjects in 96 of 96 tuning pictures and fails on
+   borrowed parts. Loop 6 is now reading whether its checker can see that failure at all, the result
+   question 80 waits on. Loop 8's identity checker reads unseen digits at 0.861 against a 0.75 bar,
+   and its SDXL test is re-aimed at identity against CO3. Loop 12's main pass on which pairs borrow
+   parts is running.
+3. **Since the last briefing:** you answered five questions (79, 86, 87, 88, and the hold on 80);
+   Loops 6 and 8 applied your answers before any new result existed; Loop 11 stopped with every
+   finished result on a report page; Loops 4 and 6 fixed the contradictions Loop 11 found.
+4. **The cluster** has no idle node (17 of 48 `bigbatch` nodes down or drained); 4 of our 6 slots run
+   and 11 jobs wait, the longest a 20-minute Loop 8 check, queued about an hour.
+5. **Waiting on you:** one question, 89, whether the manager may fix three board records that disagree
+   with your answers.
 
 ## For you to decide
 
 Answer with `python3 scripts/progress_board.py answer <number> "<your answer>"`, or in this session.
-Nothing changes while a question waits.
 
 | # | The question | Default |
 |---|---|---|
-| 89 | The board script cannot change a step once it exists, so three records disagree with your answers (Loop 8's SDXL test, the closed small CLEVR test, Loop 10's skipped steps). May Loop 13 add an edit command to the board script and fix exactly these three? | the records stay as they are |
-| 80 | Should a checker choose CO3's sharpness setting at each of its corrected steps? A first read costs about 3.1 GPU-hours | you chose to wait for Loop 6's per-step read of its checker on CO3; it comes back to you with that result |
+| 89 | The board script cannot change a step once it exists, so three records disagree with your answers: Loop 8's SDXL test points at the old prerequisite and proof, the closed small CLEVR test still holds up the recipe freeze, and Loop 10's skipped steps keep a closed loop unfinished. May Loop 13 add an edit command to the board script and fix exactly these, including making the recipe freeze wait on the two-colour CLEVR test as your answer to question 84 meant? | the records stay as they are |
+| 80 | Should a checker choose CO3's sharpness setting at each of its corrected steps (a first read costs about 3.1 GPU-hours)? | on hold by your choice until Loop 6's read lands; it comes back to you then |
 
+**When Loop 11 restarts.** Loop 13 may not start sessions, so it tells you when Loop 8's identity result
+or Loop 6's two-colour CLEVR test is done; restarting Loop 11 then puts the new result on a report page.
 
 ## What the manager does for you
 

@@ -3,20 +3,19 @@ flowchart LR
   classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
   classDef you fill:#fff4e5,stroke:#d97706,stroke-width:3px,color:#111111
   classDef run fill:#eaf1ff,stroke:#a8c7fa,stroke-width:2px,color:#111111
-  YOU{{"You<br/>5 questions wait:<br/>how to judge the checker,<br/>rewrite the SDXL test, and 3 more"}}:::you
+  classDef stopped fill:#f3f3f3,stroke:#888888,stroke-width:2px,color:#555555,stroke-dasharray: 5 5
+  YOU{{"You<br/>1 question: fix three board records (89)<br/>1 on hold until Loop 6's read (80)"}}:::you
   P1["Paper 1: experts that never met<br/>level with pasting so far (295 vs 287 of 320)"]:::plain
   P2["Paper 2: better than CO3<br/>CO3 draws both bodies (96 of 96),<br/>fails on borrowed parts"]:::plain
-  L6["Loop 6: finds the best method<br/>checks if its checker sees CO3's failure"]:::run
-  L8["Loop 8: identity checker<br/>reads unseen digits at 0.861 (bar 0.75)"]:::run
-  L12["Loop 12: which pairs borrow parts<br/>main pass waits for a node"]:::run
-  L4["Loop 4: rivals and targets<br/>keeps the scoreboard current"]:::plain
-  L11["Loop 11: puts results on the report pages"]:::plain
-  L6 --> P1
+  L6["Loop 6: best method<br/>reading whether its checker sees<br/>CO3's failure (running)"]:::run
+  L6b["Loop 6: two-colour CLEVR test<br/>with a paste comparison (rendering)"]:::run
+  L8["Loop 8: identity checker<br/>0.861 on unseen digits (bar 0.75);<br/>SDXL test re-aimed at CO3"]:::run
+  L12["Loop 12: which pairs borrow parts<br/>main pass running"]:::run
+  L11["Loop 11: report pages<br/>stopped until a new result"]:::stopped
   L6 --> P2
   L8 --> P2
   L12 --> P2
-  L4 -. "targets" .-> P1
-  L4 -. "targets" .-> P2
-  YOU -- "decides direction" --> L6
-  YOU -- "decides direction" --> L8
-  YOU -. "question 88: pause when done?" .-> L11
+  L6b --> P1
+  YOU -. "question 80 waits on" .-> L6
+  L8 -. "result to drain" .-> L11
+  L6b -. "result to drain" .-> L11
