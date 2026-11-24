@@ -36,6 +36,7 @@ The [two-paper route](../../../../plans/route-two-papers.md) says what the work 
 | 7. Read the abstract-checker papers | `s7` | `artifacts/notes/progress/abstract-checkers/01-reading/`, `02-score-view.md`, `03-design.md` |
 | 8. Test abstract checkers | `s8` | `artifacts/notes/progress/abstract-checkers/04-environment/` and later stage folders, `2-classifier-guidance/scripts/abstract_checkers/`, `/datasets/mmolefe/poe_repair_min/loop-8/` |
 | 9. Turn concepts into scores | `s9` | `artifacts/notes/progress/noise-text-critic/`, `2-classifier-guidance/scripts/noise_text_critic/`, `/datasets/mmolefe/poe_repair_min/loop-9/` |
+| 10. The score path as a third space | `s10` | `artifacts/notes/progress/score-space/`, `2-classifier-guidance/scripts/score_space/`, `/datasets/mmolefe/poe_repair_min/loop-10/` |
 
 A session that needs a change in another session's area writes one line to
 `artifacts/notes/progress/requests.md`, naming the owner. Each session reads that file on every tick.

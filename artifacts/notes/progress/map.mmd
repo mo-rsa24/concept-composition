@@ -49,7 +49,11 @@ flowchart TB
     end
     subgraph L9["Session 9: turn concepts into scores"]
       direction TB
-      W1["W1 Noise-aware text papers read"]:::done --> W2["W2 Sentence scores read the five properties<br/>YOU ARE HERE"]:::doing --> W3["W3 Sentence score steers CO3"]:::todo --> W4["W4 Our own noise-aware model on digits"]:::todo --> W5["W5 Verdict: Paper 2, Paper 3 or drop"]:::todo --> W1b["W1b Latent CLIP read"]:::done
+      W1["W1 Noise-aware text papers read"]:::done --> W2["W2 Sentence scores read the five properties<br/>YOU ARE HERE"]:::doing --> W3["W3 Sentence score steers CO3"]:::todo --> W4["W4 Our own noise-aware model on digits"]:::todo --> W5["W5 Verdict: Paper 2, Paper 3 or drop"]:::todo --> W1b["W1b Latent CLIP read"]:::done --> W2b["W2b Linear probe on frozen vectors"]:::todo
+    end
+    subgraph L10["Session 10: the score path as a third space"]
+      direction TB
+      X1["X1 Score-path papers read"]:::todo --> X2["X2 Running loops described side by side"]:::todo --> X3["X3 Ideas and their wrong assumptions"]:::todo --> X4["X4 Small experiment designed, owner checked"]:::todo --> X5["X5 Does the score path carry signal"]:::todo --> X6["X6 Train the two-way and three-way spaces"]:::todo --> X7["X7 Unseen pairs and the arithmetic tests"]:::todo --> X8["X8 Verdict per paper"]:::todo
     end
   end
   subgraph JOIN["THE LOOP, AFTER THE LANES JOIN"]
@@ -72,7 +76,7 @@ flowchart TB
   X0["Detour: idea walk, 7 claims, paused"]:::detour -.-> P2
   X1["Detour: zoom-ladder, about 430k tokens"]:::detour -.-> P2
   X2["Detour: reading route and pictures, about 1.8M tokens"]:::detour -.-> P2
-  L1 ~~~ L2 ~~~ L3 ~~~ L4 ~~~ L5 ~~~ L6 ~~~ L7 ~~~ L8 ~~~ L9
+  L1 ~~~ L2 ~~~ L3 ~~~ L4 ~~~ L5 ~~~ L6 ~~~ L7 ~~~ L8 ~~~ L9 ~~~ L10
   S0 --> SA --> LOOP --> JOIN --> CAL --> SE --> SF --> GOAL
   style S0 fill:#fafafa,stroke:#adb5bd
   style SA fill:#fafafa,stroke:#adb5bd
@@ -86,6 +90,7 @@ flowchart TB
   style L7 fill:#ffffff,stroke:#a8c7fa
   style L8 fill:#ffffff,stroke:#a8c7fa
   style L9 fill:#ffffff,stroke:#a8c7fa
+  style L10 fill:#ffffff,stroke:#a8c7fa
   style JOIN fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
   style CAL fill:#fff9db,stroke:#f08c00
   style SE fill:#fafafa,stroke:#adb5bd
