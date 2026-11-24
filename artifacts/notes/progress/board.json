@@ -2947,8 +2947,30 @@
    "holds": "Z3",
    "default": "(A) CO3 with one weight per cell, about 1 GPU-hour; Bounded Attention stays the rival for Z4",
    "by": "s12",
+   "state": "answered",
+   "asked": "2026-11-24T18:14:27+02:00",
+   "answer": "Decided by Loop 13 for the owner: not option A as written. The reviewer (reviewer/2026-11-24-review.md, Loop 12) finds that A reads its per-place weights at CO3's steps 0 to 5, where the recorded cheetah and cougar run shows each animal's prediction still drawing both bodies, the same failure that closed Loop 6's region test. Instead: (1) a free check on the saved CO3 records and Z2's per-window length-map similarity for whether either finds the borrowing body; (2) a positive control, place-by-place correction at about steps 15 to 30 with one box per animal drawn by eye on CO3's finished pictures, on the six borrowing pairs (48 pictures), beside CO3's whole-canvas weights in the same window (48 more), CO3 alone taken from Z2's 96 one-card re-renders and called again blind in the same set; about 1.7 GPU-hours, its bar written before the run; (3) a reader only if the control works, judged on all 12 pairs by M1's lead of 5 of 96 and 1.96 standard errors. Bounded Attention stays the rival for Z4. How the pictures are scored is a bar change and goes to the owner as question 92. The owner may overrule by answering again.",
+   "answered": "2026-11-24T18:31:14+02:00"
+  },
+  {
+   "id": 92,
+   "question": "Loop 12's test of a fix for borrowed parts (one animal getting the other's spots or beak) is set to score 'faithful pairs', which also fails a picture for being a drawing: on the six pairs that borrow, CO3 alone has 5 faithful of 48 but 33 of 48 marked damaged, mostly as drawings. Should it score 'two clear subjects with their own parts, drawing style ignored', with broken anatomy as a guard and two blind reviewers, the same measure you set for Loop 6's checker search on question 87, so every Paper 2 result is counted one way? This changes a recorded bar before any result.",
+   "holds": null,
+   "default": "faithful pairs, as recorded in targets/leakage-rivals.md",
+   "by": "s13",
+   "state": "answered",
+   "asked": "2026-11-24T18:31:14+02:00",
+   "answer": "Owner, in chat, 2026-11-24, asked Loop 13 to decide. Decided by Loop 13: yes. Loop 12's fix test counts two clear subjects with their own parts, drawing style ignored, with broken anatomy as a guard, two blind reviewers with their agreement reported and a third for disagreements, matching the owner's answer to question 87 so every Paper 2 result is counted one way. The bar changes before any result of the fix exists. Faithful pairs and damage are reported beside it.",
+   "answered": "2026-11-24T18:33:45+02:00"
+  },
+  {
+   "id": 93,
+   "question": "Paper 2's push follows a checker that scores whether a half-drawn picture is a clean pair of the two subjects. Today's read shows that checker cannot tell CO3's good pictures from its pictures with borrowed parts: on all 96 tuning pictures, its yes-or-no call is right at best 60% of the time against the 75% bar (step 5; chance is 50%), although it ranks a good picture above a bad one about 7 times in 10. The next three steps, which choose the checker's training list, its architecture and its labels, together cost about 31 GPU-hours. Options: A (recommended) run the same read on the two checkers M5 is training now, about 2.2 GPU-hours, and decide after it; B pause the architecture and label steps now and move to a checker built to read identity (Loop 8's identity checker, or the attention-map reader among the architecture candidates); C carry on as designed, since those steps may themselves find a checker that sees the failure. Evidence: method-search/01b-balance-the-checker-data/review.md.",
+   "holds": "D3",
+   "default": "A",
+   "by": "s6",
    "state": "open",
-   "asked": "2026-11-24T18:14:27+02:00"
+   "asked": "2026-11-24T18:44:34+02:00"
   }
  ]
 }
