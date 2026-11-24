@@ -126,7 +126,7 @@ The count checker passed its rehearsal and the identity checker missed. The owne
 
 | Result | What it takes | Next |
 |---|---|---|
-| Support | The map reader on `unseen_test`: balanced accuracy at least 0.75, and within 0.05 of `seen_test` | V2 is done and V3 runs with the count push alone |
+| Support | The map reader on `unseen_test`: balanced accuracy at least 0.75, and within 0.05 of `seen_test`. Board question 55's `apart` against `wrong` bar belongs to the identity checker after board question 67, which missed it | V2 is done and V3 runs with the count push alone |
 | Null | The overfit check passes and either bar is missed | The chain stops and goes to the owner |
 | Inconclusive | The overfit check fails | Find the cause before anything else runs |
 

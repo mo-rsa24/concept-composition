@@ -9,9 +9,9 @@
 | Question | Answer | Evidence | Conclusive? |
 |---|---|---|---|
 | Can a checker learn "two digits apart" on digits it never saw? | **Yes** | balanced accuracy 0.791 on digits 5 to 9 against 0.782 on digits 0 to 4, pass mark 0.75 (0.5 is chance) | **yes**, by a bar written before the run |
-| Can it learn *which* digits are present? | **No**, at these noise levels | 0.555 on digits it never saw, pass mark 0.75 | **yes, a miss** |
+| Can it learn *which* digits are present? | **No**, at these noise levels | 0.555 on the pairs holding digit 4 in the rehearsal, and 0.556 for the same recipe on digits 5 to 9; pass mark 0.75 | **yes, a miss** |
 | Does its push make two separate, right digits? | **Yes** | 43 clean pairs of 320 against 0 plain; random push 1; best of 4 seeds 0; lead 5.7 standard errors | **yes**; a rerun on another machine gave 41 |
-| Does each checker control only its own property? | **Mostly, for 2 of 3** | removing count drops count 38% to 10%; removing order drops order 88% to 48%; each also moves one other score about 7 points | **no**: null by the written rule |
+| Does each checker control only its own property? | **Mostly, for 2 of 3** | removing count drops count 38% to 10%; removing order drops order 88% to 48%; each of those two also moves one other score about 7 points; removing right digits barely moves anything | **no**: null by the written rule |
 | Does any of this work on SDXL, against the rivals? | **Unknown** | step V4 has not run | **not tested** |
 
 The explanations, figures and run records are in the stage reviews: [the test bed](../04-environment/review.md), [learning on unseen digits](../05-does-it-learn/review.md), [composing unseen digits](../06-does-it-compose/review.md) and [removing one checker](../08-remove-one-checker/review.md).

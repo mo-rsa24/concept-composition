@@ -1,6 +1,6 @@
 # Review: remove one checker at a time, on digits (step V5)
 
-**Status: null by the written rule (board question 75).** The rerun approved in board question 73 ran 960 canvases per row (W&B run `j4anxfgy`). Removing count or removing order each lowers its own property by far more than the margin, and so does a random push in its place. Each removal also moves one other column by about 7 points, past the 4.2-point limit, so no property meets the whole rule. The code labels that null. The design's words define null as no removal lowering its own column, which is not what happened, so the label is the owner's call. The first run, below the rerun, was inconclusive by the rules and stays as recorded.
+**Status: null by the written rule (board question 75).** The rerun approved in board question 73 ran 960 canvases per row (W&B run `j4anxfgy`). Removing count or removing order each lowers its own property by far more than the margin, and so does a random push in its place. Each of those two removals also moves one other column by about 7 points, past the 4.2-point limit (count moves order by 6.8, order moves right digits by 6.9). Removing right digits barely lowers its own column (2.6 points) and moves order by 3.0. No property meets the whole rule, so the code labels the run null, and the owner settled that label in board question 75; the design now defines null to include this case. The first run, below the rerun, was inconclusive by the rules and stays as recorded.
 
 ## The rerun: 960 canvases per row
 

@@ -2,6 +2,8 @@
 
 **Status: done, by the count checker.** The count checker passes on digits 5 to 9, which it never trained on (W&B run `tyhrpyov`), and by the owner's answer to board question 69 step V3 runs with its push alone. The first design's single checker, which had to tell both layout and digit identity, is null on digits 5 to 9 (W&B run `a562r799`), and the identity checker trained apart misses its rehearsal; both verdicts stay as recorded below.
 
+**Which bars the step met.** Board question 55 made V2 also need balanced accuracy of at least 0.75 on `apart` against `wrong`. Board question 67 split that work into two checkers: the count checker carries the first two bars, and the identity checker carries question 55's bar. The count checker meets its two bars. Question 55's bar is met by no checker here: the identity checker reads 0.555 on the pairs holding digit 4, and the right-digits checker trained the same way reads 0.556 on digits 5 to 9 (step V5). The board marks V2 done on the count checker by the owner's answer to question 69.
+
 **Noise levels.** The board's proof for V2 names steps 0 to 15. The single checker was read at the toy's own sampler steps 0 to 15 (timesteps 999 to 693). After board question 64, every later checker here was read at the 16 timesteps 712 down to 480 that match SDXL's first 16 steps, which lie between the toy's sampler steps 14 and 25.
 
 ## The count checker on digits 5 to 9
@@ -72,7 +74,7 @@ The verdict is null by the written rule: the overfit rung passed and the frozen 
 
 **The raw reader did not train.** Its final loss is 0.6931, the loss of a constant guess, and it answers label 0 on every read: 0.00 right on `apart` and 1.00 on the other four kinds. The map-against-raw comparison therefore has no result. `final.json` holds `raw_matches_map_on_unseen: true` only because 0.500 is within 0.05 of 0.540, so that flag does not show the surprise the design describes.
 
-**The toy is noisier than SDXL at the same step numbers.** The toy's steps 0 to 15 run from timestep 999 to 693, where the signal share of the noisy image ($\bar\alpha$) goes from 0.00004 to 0.0076. SDXL's scheduler, a scaled-linear schedule with leading spacing, runs from timestep 981 to 681, where it goes from 0.0058 to 0.0946. The signal-to-noise ratio is 144 times higher for SDXL at step 0 and 13.7 times higher at step 15. SDXL's window has the same $\bar\alpha$ as the toy's timesteps 712 to 480, which are toy sampler steps 14 to 25, so only steps 14 and 15 of this test overlap it. This null therefore says nothing direct about SDXL's early steps. Equal $\bar\alpha$ in pixels and in SDXL's latents is also not equal difficulty (inferred).
+**The toy is noisier than SDXL at the same step numbers.** The toy's steps 0 to 15 run from timestep 999 to 693, where the signal share of the noisy image ($\bar\alpha$) goes from 0.00004 to 0.0076. SDXL's scheduler, a scaled-linear schedule with leading spacing, runs from timestep 981 to 681, where it goes from 0.0058 to 0.0946 (the toy's nearest timestep to 0.0946, 480, has 0.0949, the end value the design quotes). The signal-to-noise ratio is 144 times higher for SDXL at step 0 and 13.7 times higher at step 15. SDXL's window has the same $\bar\alpha$ as the toy's timesteps 712 to 480, which are toy sampler steps 14 to 25, so only steps 14 and 15 of this test overlap it. This null therefore says nothing direct about SDXL's early steps. Equal $\bar\alpha$ in pixels and in SDXL's latents is also not equal difficulty (inferred).
 
 ## The ladder
 

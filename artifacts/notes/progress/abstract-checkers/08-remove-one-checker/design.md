@@ -15,7 +15,7 @@ Does removing one checker damage only its own property? If it does, composition 
 | Property | Checker | Training label | Score on a finished canvas |
 |---|---|---|---|
 | Count | V2's count checker, saved as `v2/count-final/count-head-map.pt` | `apart` and `wrong` are 1; `single`, `overlaid`, `same_half` are 0 | share of canvases with two separate digits, one per half |
-| Right digits | a map reader trained on `apart` (1) against `wrong` (0) on all 10 pairs among digits 0 to 4 | as V2's identity checker | of the canvases that pass count, the share the judge calls clean |
+| Right digits | a map reader trained on `apart` (1) against `wrong` (0) on all 10 pairs among digits 0 to 4 | as V2's identity checker | of the canvases that pass count, the share holding both asked digits, read as the judge's clean call: two confident single digits, the two asked, one per half |
 | Order | a map reader trained on `apart` canvases, each read with its true order (1) and the flipped order (0) | the asked order is given by the order of the two map channels: the first channel is the digit asked to be on the left | of the clean canvases, the share with the asked left digit on the left |
 
 The three scores multiply to the share of canvases that are fully right. Each column is scored only on canvases that passed the column before it.
@@ -44,7 +44,7 @@ The three scores multiply to the share of canvases that are fully right. Each co
 |---|---|
 | Support | All three together beat the plain product on fully right canvases by more than 1.96 standard errors. Each removal lowers its own column by at least 6.25 percentage points and more than 1.96 standard errors, its random-push row falls by the same rule, and no other column moves by both more than 4.2 points and more than 1.96 standard errors |
 | Partial | At least one property meets that rule and at least one does not |
-| Null | No removal lowers its own column by that margin |
+| Null | No property meets the whole rule above. This includes a run in which a removal lowers its own column by the margin but moves another column past the limit; the code labels such a run null, and board question 75 settled that reading |
 | Inconclusive | The zero-push check fails, a row is void by the 0.6 total-length rule, or a cell the verdict needs holds fewer than 40 canvases |
 
 The bars sit in `2-classifier-guidance/scripts/abstract_checkers/v5_remove.py`.
