@@ -40,10 +40,9 @@ Nothing changes while a question waits.
 
 | # | The question | Default |
 |---|---|---|
+| 89 | The board script cannot change a step once it exists, so three records disagree with your answers (Loop 8's SDXL test, the closed small CLEVR test, Loop 10's skipped steps). May Loop 13 add an edit command to the board script and fix exactly these three? | the records stay as they are |
 | 80 | Should a checker choose CO3's sharpness setting at each of its corrected steps? A first read costs about 3.1 GPU-hours | you chose to wait for Loop 6's per-step read of its checker on CO3; it comes back to you with that result |
 
-Also yours, not on the board: Loop 10 is closed but four of its steps stay open on the board, so the
-board counts it unfinished.
 
 ## What the manager does for you
 

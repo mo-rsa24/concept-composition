@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-24 16:58 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-24 17:03 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -52,8 +52,8 @@ Newest first. A default happens only if you answer with it; nothing changes whil
 
 | # | The question, in one line | Why it is yours | Default | Waiting |
 |---|---|---|---|---|
+| 89 | The board script cannot change a step once it exists, so three records disagree with your answers: Loop 8's SDXL test still points at the old prerequisite and proof, the closed small CLEVR test still holds the go or no-go, and Loop 10's skipped steps keep a closed loop unfinished. May Loop 13 add an edit command to the board script and fix exactly these three? | changes a shared script and other loops' records | the records stay, and this page keeps listing them | just filed |
 | 80 | Should a checker choose CO3's weight-sharpness setting at each of its corrected steps ([design](../score-space/11-the-checker-chooses-on-co3.md))? First read on 6 of 12 pairs | over 3 GPU-hours on one run (about 3.1) | **you chose to wait** until Loop 6's per-step read of its checker on CO3 lands (jobs 94593 and 94594); Loop 13 brings it back with that result | since 12:25 |
-| none | Loop 10 is closed, but four of its steps (training and testing the shared spaces, and its verdict, which is written) stay open on the board, so the board counts it unfinished | changes another loop's step state | none set | since 10:34 |
 
 Your own reading step (confirm the draft statements from your readings) is ready on the board.
 
@@ -114,7 +114,7 @@ Round 1, 2026-11-24 16:10, against the intents in [the alignment check](../score
 | 4. Rivals and targets | yes | next pass | It said Paper 1 needs a test where pasting fails; the two-colour CLEVR test is now in [the CLEVR plan](../targets/clevr-scaling-plan.md). |
 | 6. Best method | partly, now re-aimed | **fix** | The checker search still aims at drawing two separate bodies, which CO3 already does in 96 of 96 pictures, while CO3's real failure is borrowed parts ([review](../reviewer/2026-11-24-review.md#loop-6-find-the-best-method)). |
 | 7. Abstract-checker papers | yes, finished | not reviewed | Its three steps are done; the five-checker design is in `abstract-checkers/03-design.md`. |
-| 8. Abstract checkers | partly | **fix** | The digit half holds (0.861 on unseen digits 5 to 9 against 0.75), but its SDXL test counts bodies against the plain product, not identity against CO3 ([review](../reviewer/2026-11-24-review.md#loop-8-test-abstract-checkers)). |
+| 8. Abstract checkers | partly, now re-aimed | **fix** | The digit half holds (0.861 on unseen digits 5 to 9 against 0.75), but its SDXL test counts bodies against the plain product, not identity against CO3 ([review](../reviewer/2026-11-24-review.md#loop-8-test-abstract-checkers)). |
 | 10. Score path | closed | not reviewed | Its verdict is written (`score-space/09-verdict.md`). |
 | 11. Drain into the pillars | yes | **continue** | [Its checks page](../drain/04-checks.md) covers all 48 pages it wrote, with 15 of 28 findings fixed. |
 | 12. Where CO3 leaks | yes | next pass | [Its method candidates](../leakage/04-paper-2-method.md) keep your constraints: SDXL's weights untouched, one run per seed, best-of-N only as a baseline. |
@@ -131,6 +131,7 @@ Newest first.
 
 | Time | To | What and why |
 |---|---|---|
+| 17:02 | Loop 8 | Its rewritten SDXL test passes the design check (stop rule, random and zero controls, comparison prompts fixed in advance, the same two-clear measure as Loop 6; about 7 GPU-hours, inside budget). Its board record goes to you as question 89. |
 | 16:30 | Loop 10 | Its question 78 is decided; its open requests are re-routed. |
 | 16:39 | Loop 8 | The four requests re-routed from Loop 7 take the form Loop 8 proposed: the design text stays as written, and one added section lists what ran differently, line by line with commits. Loop 8 also put this to you in its own session; your answer there governs. |
 | 16:30 | Loop 8 | Four requests re-routed from Loop 7, which has finished. |
@@ -170,4 +171,4 @@ been acted on, 93 asked nothing, and 15 waited. Nine of those were re-routed or 
 
 ## Last tick
 
-2026-11-24 16:58. Next tick about 17:06. The briefing for you is [the briefing page](briefing.md).
+2026-11-24 17:03. Next tick about 17:06. The briefing for you is [the briefing page](briefing.md).
