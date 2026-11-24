@@ -1,28 +1,38 @@
 %%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
 flowchart TB
   classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef done fill:#dcf5dc,stroke:#2e7d32,stroke-width:2px,color:#111111
   classDef now fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px,color:#111111
+  classDef held fill:#ffffff,stroke:#c62828,stroke-width:2px,stroke-dasharray:5 4,color:#111111
   classDef settled fill:#fff3cd,stroke:#b58900,stroke-width:2px,color:#111111
 
-  M1["NOW, M1: does the push beat CO3 alone?<br/>blind count of 288 pictures"]
-  M5["M5: balance the checker's data<br/>cap cat and dog, even across pairs"]
-  D3["D3: what should the checker read?<br/>includes the animals-to-objects test"]
+  M1["M1, done: neither method beats its baseline<br/>Paper 1 ties paste, Paper 2 ties CO3"]
+  M7["NOW, M7: does paste already solve small CLEVR?<br/>4 EDM2 models training, paste rate against 0.906"]
+  M5["M5: balance the checker's data"]
+  D3["D3: what should the checker read?<br/>includes the unseen-category test"]
   M2["M2: pair-aware or one label per subject?"]
-  D5["D5: push on the 2 saved inclusive LoRAs<br/>appendix paragraph only"]
+  D5["D5: push on the 2 saved inclusive LoRAs"]
   M3["M3: tune strength, steps, cap, data size"]
-  M6["M6: small CLEVR test<br/>scores paste first"]
+  M6["M6: small CLEVR test, one network against paste"]
+  M8["M8: Loop 6's checker against Loop 8's"]
   M4["M4: freeze one recipe per paper"]
+  M9["M9, held: give each subject its own region<br/>rung 1 drew 8 of 8 with bootstrapping, all damaged<br/>rung 2 stopped at its masks"]
 
-  Q50["Your answer: two-subject prompts are<br/>the headline, full set reported beside"]
+  Q66["Open question 66:<br/>how to fix the paste window"]
+  Q65["Open question 65:<br/>how rung 2 reads its regions"]
+  Q57["Your answer: the CO3 rows<br/>decide M5 and D3"]
   Q54["Your answer: if paste reaches 7 objects,<br/>stop and design a test paste fails"]
-  Q52["Your answer: Paper 1 stays<br/>until the go or no-go"]
 
-  M1 --> M5 --> D3 --> M2 --> M3 --> M6 --> M4
+  M1 --> M7 --> M5 --> D3 --> M2 --> M3 --> M6 --> M8 --> M4
   M2 --> D5
-  Q50 -.-> M2
-  Q54 -.-> M6
-  Q52 -.-> M4
+  M9 --> M4
+  Q66 -.-> M7
+  Q65 -.-> M9
+  Q57 -.-> M5
+  Q54 -.-> M7
 
-  class M5,D3,M2,D5,M3,M6,M4 plain
-  class M1 now
-  class Q50,Q54,Q52 settled
+  class M5,D3,M2,D5,M3,M6,M8,M4 plain
+  class M1 done
+  class M7 now
+  class M9,Q66,Q65 held
+  class Q57,Q54 settled
