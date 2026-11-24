@@ -20,13 +20,15 @@ def spearman(x, y):
     rx, ry = _ranks(np.asarray(x, float)), _ranks(np.asarray(y, float))
     return float(np.corrcoef(rx, ry)[0, 1])
 
-N_PREDICTORS = 3
-ALPHA_ONE_SIDED = 0.05 / N_PREDICTORS      # 0.0167 per predictor
+N_TESTS = 7                               # text once; attention overlap and score-map similarity in each of 3 windows
+ALPHA_ONE_SIDED = 0.05 / N_TESTS          # 0.0071 per test; rho_threshold() gives 0.706 for these counts
 N_PERMUTATIONS = 100_000
 N_BOOTSTRAP = 10_000
 PICTURE_MATCH_MAX_MEAN_ABS = 3.0          # of 255, against M1's CO3 picture, the limit M9 used
 DAAM_CUT = 0.4                            # of each map's own maximum (DAAM p. 7)
 CORRECTED_STEPS = tuple(range(6))         # CO3's num_ts_to_correct = 6
+READ_STEPS = CORRECTED_STEPS + (10, 15, 20, 25, 30, 35, 40, 45)
+WINDOWS = {"early": CORRECTED_STEPS, "middle": (10, 15, 20), "late": (25, 30, 35, 40, 45)}  # owner's choice, 2026-11-24
 
 # W2d's final calls, borrowed of 8, per tuning pair (part-binding-calls.csv)
 BORROWED = {

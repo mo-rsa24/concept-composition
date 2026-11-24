@@ -4,7 +4,7 @@
 Design: artifacts/notes/progress/leakage/02-what-predicts-borrowing/design.md. Bars: z2_bars.py.
 
 CO3 renders each pair and seed exactly as M1's CO3 row did (seed_everything, then sample_loop from start_noise). At each
-of CO3's 6 corrected steps, when the main two-entry U-Net call arrives with the corrected latent, one extra call with
+read step (CO3's 6 corrected steps, then every 5th step to 45), when the main two-entry U-Net call arrives, one extra call with
 the batch [empty, joint, A, B] runs first on that latent, under no_grad, with attention processors that keep the joint
 prompt's cross-attention for the two nouns, the end-of-text token and the padding. Its output gives d_t(A) and d_t(B)
 and is then discarded, and the sampler's own call runs with the original processors.
@@ -29,7 +29,7 @@ from co3_common import load, load_parser, set_prompt, start_noise  # noqa: E402
 from composers.utils_custom import seed_everything  # noqa: E402
 from disallowed_subjects import is_allowed  # noqa: E402
 from train_readout_pair import joint_prompt  # noqa: E402
-from z2_bars import CORRECTED_STEPS, DAAM_CUT, PICTURE_MATCH_MAX_MEAN_ABS  # noqa: E402
+from z2_bars import DAAM_CUT, PICTURE_MATCH_MAX_MEAN_ABS, READ_STEPS, WINDOWS  # noqa: E402
 
 GRID = 128  # SDXL latent side at 1024 pixels
 COLUMNS = ("A", "B", "eot", "pad")
@@ -88,7 +88,7 @@ class CaptureUNet(torch.nn.Module):
             return getattr(super().__getattr__("inner"), name)
 
     def forward(self, sample, timestep, *args, **kwargs):
-        if self.cols is not None and sample.shape[0] == 2 and self.step in CORRECTED_STEPS and self.step not in self.records:
+        if self.cols is not None and sample.shape[0] == 2 and self.step in READ_STEPS and self.step not in self.records:
             self.records[self.step] = self.capture(sample[:1], timestep)
         return self.inner(sample, timestep, *args, **kwargs)
 
@@ -234,23 +234,26 @@ def main():
                     if reference.exists() else None)
             steps = {s: step_numbers(r) for s, r in sorted(wrapper.records.items())}
             np.savez_compressed(folder / f"seed-{seed}-maps.npz",
-                                maps=np.stack([wrapper.records[s]["maps"].half().numpy() for s in CORRECTED_STEPS]),
-                                dA=np.stack([wrapper.records[s]["dA"].half().numpy() for s in CORRECTED_STEPS]),
-                                dB=np.stack([wrapper.records[s]["dB"].half().numpy() for s in CORRECTED_STEPS]),
+                                maps=np.stack([wrapper.records[s]["maps"].half().numpy() for s in READ_STEPS]),
+                                dA=np.stack([wrapper.records[s]["dA"].half().numpy() for s in READ_STEPS]),
+                                dB=np.stack([wrapper.records[s]["dB"].half().numpy() for s in READ_STEPS]),
+                                steps=np.array(READ_STEPS),
                                 columns=np.array(COLUMNS))
-            mean = {k: float(np.mean([v[k] for v in steps.values()])) for k in next(iter(steps.values()))}
+            keys = next(iter(steps.values()))
+            windows = {w: {k: float(np.mean([steps[s][k] for s in ss])) for k in keys} for w, ss in WINDOWS.items()}
+            mean = windows["early"]
             row = {"pair": pair, "seed": seed, "prompt": prompts[pair], "seconds": round(seconds, 2),
                    "m1_mean_abs_diff": diff, "picture_matches": diff is not None and diff < PICTURE_MATCH_MAX_MEAN_ABS,
-                   "captured_steps": sorted(wrapper.records), "steps": steps, "mean_over_steps": mean,
+                   "captured_steps": sorted(wrapper.records), "steps": steps, "windows": windows,
                    "token_columns": list(wrapper.cols)}
             meta_path.write_text(json.dumps(row, indent=1) + "\n")
             rows.append(row)
-            print(f"{pair} seed={seed} {seconds:.1f}s diff={diff} iou={mean['iou_AB']:.3f} dt_cos={mean['dt_cos']:.3f} "
+            print(f"{pair} seed={seed} {seconds:.1f}s diff={diff} iou early/late={mean['iou_AB']:.3f}/{windows['late']['iou_AB']:.3f} dt_cos={mean['dt_cos']:.3f} "
                   f"text={text['text_joint']:.3f} self_iou={mean['self_iou_A']:.3f}", flush=True)
     summary = {"pictures": len(rows), "pictures_matching_m1": sum(r["picture_matches"] for r in rows),
                "median_seconds": float(np.median([r["seconds"] for r in rows])) if rows else None, "failed": failed}
     run_id = log_wandb(f"loop-12-{args.rung}", {"pairs": pairs, "seeds": seeds, "daam_cut": DAAM_CUT,
-                                                "corrected_steps": list(CORRECTED_STEPS)}, summary)
+                                                "read_steps": list(READ_STEPS), "windows": {k: list(v) for k, v in WINDOWS.items()}}, summary)
     summary["wandb_run"] = run_id
     (args.out / "summary.json").write_text(json.dumps(summary, indent=1) + "\n")
     print(json.dumps(summary), flush=True)
