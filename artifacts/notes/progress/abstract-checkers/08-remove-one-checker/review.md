@@ -1,6 +1,6 @@
 # Review: remove one checker at a time, on digits (step V5)
 
-**Status: table filled; the coded verdict is null, and its label waits on board question 75.** The rerun approved in board question 73 ran 960 canvases per row (W&B run `j4anxfgy`). Removing count or removing order each lowers its own property by far more than the margin, and so does a random push in its place. Each removal also moves one other column by about 7 points, past the 4.2-point limit, so no property meets the whole rule. The code labels that null. The design's words define null as no removal lowering its own column, which is not what happened, so the label is the owner's call. The first run, below the rerun, was inconclusive by the rules and stays as recorded.
+**Status: null by the written rule (board question 75).** The rerun approved in board question 73 ran 960 canvases per row (W&B run `j4anxfgy`). Removing count or removing order each lowers its own property by far more than the margin, and so does a random push in its place. Each removal also moves one other column by about 7 points, past the 4.2-point limit, so no property meets the whole rule. The code labels that null. The design's words define null as no removal lowering its own column, which is not what happened, so the label is the owner's call. The first run, below the rerun, was inconclusive by the rules and stays as recorded.
 
 ## The rerun: 960 canvases per row
 
