@@ -11,7 +11,7 @@ This page records step Y4: the pillar checks run over the 48 pages steps Y2 and 
 context pillar, R for the report pillar, X for cross-references.
 
 **Owner's call** means the formats disagree with each other, or a fix would change how a recorded
-result reads, so the owner decides. Those are asked as board question 81, with a default for each.
+result reads, so the owner decides. Those were asked as board question 81, which the manager session (Loop 13) answered for the owner under the shared rules: all ten defaults. Items 1, 2 and 4 edit this repo's `CLAUDE.md`, so they wait for the owner's own yes.
 
 ## How the checks ran
 
@@ -41,19 +41,19 @@ uses a dash as a clause separator. The discovery routes to both pillars are in p
 | C10 | a file name used as link text | `04/02` line 56 | this loop | fixed, `128e1a30` |
 | C11 | one lookup row covers all eight methods on `context/00-INDEX.md` | line 32 | this loop | fixed, `128e1a30` |
 | C12 | `MASTER_PLAN.md` has no Learning Coverage section | `MASTER_PLAN.md` | outside this loop's files; `/learning-pulse` | reported |
-| R1 | three finding titles use the reviews' own verdict words instead of support, null or inconclusive | the rivals, environment and regions findings | owner's call, item 6 | waiting |
-| R2 | five findings carry two verdicts | rivals, checker learning, five properties, regions, fairness | owner's call, item 7 | waiting |
-| R3 | 26 embedded pictures sit in the loops' progress folders, which have no cards | 12 findings | owner's call, item 8 | waiting |
+| R1 | three finding titles use the reviews' own verdict words instead of support, null or inconclusive | the rivals, environment and regions findings | owner's call, item 6 | settled by question 81 item 6: the reviews' own verdict words stay on the title lines |
+| R2 | five findings carry two verdicts | rivals, checker learning, five properties, regions, fairness | owner's call, item 7 | settled by question 81 item 7: each finding keeps its review's verdicts side by side |
+| R3 | 26 embedded pictures sit in the loops' progress folders, which have no cards | 12 findings | owner's call, item 8 | question 81 item 8: each loop is asked in `requests.md` to card its step folders |
 | R4 | four rungs have a number and neither a figure nor a slot | removal rungs 3 to 5, push rung 5 | this loop | fixed, `eda9d9a4` |
 | R5 | the report index's Figures still missing list carries none of the 20 slots in these findings | `report/00-INDEX.md` | this loop | fixed, `eda9d9a4` |
 | R6 | the question-group rows use folder paths as link text | `report/00-INDEX.md`, the three new rows | this loop | fixed, `eda9d9a4` |
 | R7 | the Cross-references section on one finding has no breadcrumb or contents entry | environment finding | this loop | fixed, `eda9d9a4` |
 | R8 | "(board question 75)" sits in a finding title | removal finding and its index row | this loop | fixed, `eda9d9a4` |
 | R9 | claims run past four sentences | most of the 13 findings | this loop | fixed, `eda9d9a4` |
-| R10 | seven findings cite the board step and design instead of a plan file | seven findings | owner's call, item 9 | waiting |
+| R10 | seven findings cite the board step and design instead of a plan file | seven findings | owner's call, item 9 | settled by question 81 item 9: the board step and its design count as the plan |
 | R11 | most numbers are marked stated because the cluster result files were not opened | 184 stated against 93 verified | this loop, read only on the cluster | fixed, `8f2dea1b`: verified 93 to 198, stated 184 to 93; nine page-against-file mismatches recorded on their pages and sent to the loops |
 | R12 | no finding has a Depends on section, and few link their method pages | 13 findings | the cross-reference pass | fixed, `f3cee98a` |
-| R13 | the repeatability check is filed as a finding rather than an environment fact | environment finding | owner's call, item 10 | waiting |
+| R13 | the repeatability check is filed as a finding rather than an environment fact | environment finding | owner's call, item 10 | settled by question 81 item 10: the repeatability check stays a finding |
 | C13 | a second audit (Loop 4's, line 259 of `requests.md`) found three Cross-references sections on method overviews with no breadcrumb or contents entry | `02/01`, `05/01`, `08/01` | this loop | fixed, `97bbb1c1` |
 | C14 | the same audit names about 15 inferred claims with no Still open row and three diagram slots with no save path | `05/01`, `05/02`, `05/03`, `04/04`, `08/02`, `02/02`, `02/03`, `06/05` and others; slots on `02/01`, `06/02`, `08/03` | owner's call: the claims were judged not load-bearing on 2026-11-24 and are listed in this loop's report; a slot's save path follows question 81 item 8 | waiting |
 | R14 | as C12 | `MASTER_PLAN.md` | outside this loop's files | reported |
