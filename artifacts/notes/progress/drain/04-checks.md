@@ -31,11 +31,11 @@ uses a dash as a clause separator. The discovery routes to both pillars are in p
 |---|---|---|---|---|
 | C1 | `context/methods/` uses an overview-then-parts page shape that CONTEXT_FORMAT does not have | the folder | owner's call, question 81 item 1 | waiting |
 | C2 | seven method pages carry runnable commands, which CONTEXT_FORMAT bans and the worked-example rule asks for | `01/03`, `02/04`, `04/03`, `06/04`, `07/03`, `07/04`, `08/02` | owner's call, item 2 | waiting |
-| C3 | run status (never ran, missed its bar) sits on method pages and in the methods index | `00-INDEX.md` rows 31 to 38, `04/01`, `04/04`, `05/01`, `07/01` | owner's call, item 3 | waiting |
+| C3 | run status (never ran, missed its bar) sits on method pages and in the methods index | `00-INDEX.md` rows 31 to 38, `04/01`, `04/04`, `05/01`, `07/01` | question 81 | fixed, `1f349d62` |
 | C4 | the stated mark is used for numbers copied from a named review without reopening it | 325 marks across the folder | owner's call, item 4 | waiting |
 | C5 | four diagram slots and the load-bearing inferred claims are not listed on `context/00-INDEX.md` | Pictures still missing, Still open | this loop | fixed, `128e1a30` |
 | C6 | the methods row on `context/00-INDEX.md` still says one method is written and seven planned | `context/00-INDEX.md` line 50 | this loop | fixed, `128e1a30` |
-| C7 | opening pictures are embedded at 720 px wide, against the 200 px house thumbnail | all 33 method pages | owner's call, item 5 | waiting |
+| C7 | opening pictures are embedded at 720 px wide, against the 200 px house thumbnail | all 33 method pages | question 81 | fixed, `1f349d62` |
 | C8 | 49 chunks hold more than one bold phrase, mostly name blocks bolding each word on one bullet | 26 method pages | this loop | fixed, `128e1a30` |
 | C9 | step labels (V1 to V3, W1b to W4, X4 to X8) used without saying what the step did | about 200 uses in 15 files | this loop | fixed, `128e1a30` |
 | C10 | a file name used as link text | `04/02` line 56 | this loop | fixed, `128e1a30` |
@@ -55,7 +55,7 @@ uses a dash as a clause separator. The discovery routes to both pillars are in p
 | R12 | no finding has a Depends on section, and few link their method pages | 13 findings | the cross-reference pass | fixed, `f3cee98a` |
 | R13 | the repeatability check is filed as a finding rather than an environment fact | environment finding | owner's call, item 10 | settled by question 81 item 10: the repeatability check stays a finding |
 | C13 | a second audit (Loop 4's, line 259 of `requests.md`) found three Cross-references sections on method overviews with no breadcrumb or contents entry | `02/01`, `05/01`, `08/01` | this loop | fixed, `97bbb1c1` |
-| C14 | the same audit names about 15 inferred claims with no Still open row and three diagram slots with no save path | `05/01`, `05/02`, `05/03`, `04/04`, `08/02`, `02/02`, `02/03`, `06/05` and others; slots on `02/01`, `06/02`, `08/03` | owner's call: the claims were judged not load-bearing on 2026-11-24 and are listed in this loop's report; a slot's save path follows question 81 item 8 | waiting |
+| C14 | the same audit names about 15 inferred claims with no Still open row and three diagram slots with no save path | `05/01`, `05/02`, `05/03`, `04/04`, `08/02`, `02/02`, `02/03`, `06/05` and others; slots on `02/01`, `06/02`, `08/03` | owner's call: the claims were judged not load-bearing on 2026-11-24 and are listed in this loop's report; a slot's save path follows question 81 item 8 | save paths fixed, `1f349d62`; the claims stay off Still open as judged, listed for the owner |
 | R14 | as C12 | `MASTER_PLAN.md` | outside this loop's files | reported |
 
 ## Seen in passing, outside this loop's files
