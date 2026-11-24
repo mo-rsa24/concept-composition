@@ -44,7 +44,11 @@ ARRAYS = ("x", "asked", "holds", "corner", "src", "kind", "target", "n_digits", 
 KINDS = ("apart", "overlaid", "same_half", "single", "wrong")
 WORDS = ("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
 SEEN = range(5)
-STEPS16 = ddim_timesteps(50)[:16]
+# Steps 0 to 25 of the 50-step digit sampler. The judged window is 14 to 25 (timesteps 712 to 480), which keeps as much of
+# the canvas as SDXL's steps 0 to 15 (the V2 review; score-space/03-ideas.md, A2). Steps 0 to 15 are read second.
+STEPS = ddim_timesteps(50)[:26]
+MATCHED = list(range(14, 26))
+EARLY = list(range(16))
 TAU = 0.07
 UPDATES = 8000
 BATCH = 256
@@ -118,7 +122,7 @@ class NoisyDigitEncoder(nn.Module):
 
     def __init__(self, out_dim: int = 768, t_dim: int = 128):
         super().__init__()
-        self.step = nn.Embedding(len(STEPS16), t_dim)
+        self.step = nn.Embedding(len(STEPS), t_dim)
         widths = (64, 128, 256, 256)
         self.blocks = nn.ModuleList(FilmBlock(c_in, c_out, t_dim) for c_in, c_out in zip((1, *widths[:-1]), widths))
         self.out = nn.Linear(256 * (H // 16) * (W // 16), out_dim)
@@ -156,7 +160,7 @@ def to_x(a: np.ndarray, device) -> torch.Tensor:
 
 
 def noised(x0, step_index, noise):
-    bar = ABAR.to(x0.device)[STEPS16.to(x0.device)[step_index]].view(-1, 1, 1, 1)
+    bar = ABAR.to(x0.device)[STEPS.to(x0.device)[step_index]].view(-1, 1, 1, 1)
     return bar.sqrt() * x0 + (1 - bar).sqrt() * noise
 
 
@@ -174,7 +178,7 @@ def train(model, split, bank, bank_index, device, updates, seed=0, log_every=500
     for update in range(1, updates + 1):
         pick = rng.integers(0, len(split["x"]), BATCH)
         x0 = to_x(split["x"][pick], device)
-        step = torch.randint(0, len(STEPS16), (len(pick),), generator=gen, device=device)
+        step = torch.randint(0, len(STEPS), (len(pick),), generator=gen, device=device)
         xt = noised(x0, step, torch.randn(x0.shape, generator=gen, device=device))
         loss = F.cross_entropy(model(xt, step) @ bank.T / TAU, y[torch.from_numpy(pick).to(device)])
         optimiser.zero_grad(set_to_none=True)
@@ -200,8 +204,8 @@ def checker_scores(model, split, full_bank, full_index, device, draws=DRAWS, bat
         right[mask] = full_index[r]
         wrong[np.ix_(mask, [full_index[s] for s in w])] = True
     right_t, wrong_t = torch.from_numpy(right).to(device), torch.from_numpy(wrong).to(device)
-    out = np.zeros((n, len(STEPS16)), np.float32)
-    for s in range(len(STEPS16)):
+    out = np.zeros((n, len(STEPS)), np.float32)
+    for s in range(len(STEPS)):
         total = torch.zeros(n, device=device)
         for d in range(draws):
             gen = torch.Generator().manual_seed(EVAL_SEED + 100 * s + d)
@@ -245,7 +249,11 @@ def summarise(score, split, thresholds, keep=None) -> dict:
     versus = np.isin(kind, [KINDS.index("apart"), KINDS.index("wrong")])
     per = [balanced(d[:, s] > thresholds[s], y) for s in range(d.shape[1])]
     per_v = [balanced(d[versus, s] > thresholds[s], y[versus]) for s in range(d.shape[1])]
-    return {"canvases": int(keep.sum()), "balanced_accuracy": float(np.mean(per)), "apart_vs_wrong": float(np.mean(per_v)),
+    return {"canvases": int(keep.sum()),
+            "balanced_accuracy": float(np.mean([per[s] for s in MATCHED])),
+            "apart_vs_wrong": float(np.mean([per_v[s] for s in MATCHED])),
+            "early_balanced_accuracy": float(np.mean([per[s] for s in EARLY])),
+            "early_apart_vs_wrong": float(np.mean([per_v[s] for s in EARLY])),
             "per_step": per, "apart_vs_wrong_per_step": per_v}
 
 
@@ -269,7 +277,7 @@ def overfit(data, bank, bank_index, device, out: Path) -> dict:
     pick = rng.choice(len(split["x"]), 16, replace=False)
     x0 = to_x(split["x"][pick], device)
     y = torch.from_numpy(targets({k: v[pick] for k, v in split.items()}, bank_index)).to(device)
-    step = torch.arange(16, device=device)
+    step = torch.arange(10, 26, device=device)
     noise = torch.randn(x0.shape, generator=torch.Generator().manual_seed(7)).to(device)
     xt = noised(x0, step, noise)
     torch.manual_seed(0)
@@ -345,7 +353,7 @@ def main() -> int:
               "apart_vs_wrong_at_least_0.75": unseen["apart_vs_wrong"] >= MIN_APART_WRONG}
     result = {"verdict": "support" if all(checks.values()) else "null", "checks": checks, "gap": gap, "seen": seen,
               "unseen": unseen, "thresholds": thresholds, "train_seconds": seconds, "data_hash": data_hash,
-              "timesteps": STEPS16.tolist()}
+              "timesteps": STEPS.tolist()}
     if args.wandb_name:
         try:
             import wandb

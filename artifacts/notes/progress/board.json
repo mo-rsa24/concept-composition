@@ -785,12 +785,13 @@
    "needs": [
     "V2"
    ],
-   "state": "doing",
+   "state": "done",
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-24T08:02:54+02:00",
-   "updated": "2026-11-24T08:02:54+02:00",
-   "note": "Count checker's push alone, by board question 69"
+   "updated": "2026-11-24T08:19:39+02:00",
+   "note": "Push 43 of 320 clean on unseen pairs vs 0 plain (SE 7.58), random 1, best-of-4 0, zero push 0.0; W&B qhusod91",
+   "finished": "2026-11-24T08:19:39+02:00"
   },
   {
    "id": "V5",
@@ -800,9 +801,12 @@
    "needs": [
     "V3"
    ],
-   "state": "todo",
+   "state": "doing",
    "serves": "Paper 2",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "started": "2026-11-24T08:20:13+02:00",
+   "updated": "2026-11-24T08:20:13+02:00",
+   "note": "Digit rehearsal of the remove-one-checker test, by board question 56"
   },
   {
    "id": "V4",
@@ -843,9 +847,9 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-23T19:04:15+02:00",
-   "updated": "2026-11-24T07:52:32+02:00",
-   "finished": "2026-11-24T07:52:32+02:00",
-   "note": "null on all five at steps 0-15 (best mean 0.56, bar 0.75); NoisyCLIP reads prompt match from step 30; W&B 70g3qw2f"
+   "updated": "2026-11-24T08:36:52+02:00",
+   "finished": "2026-11-24T08:36:52+02:00",
+   "note": "null on counting, prompt match and left-right order at steps 0-15 (best mean 0.56, bar 0.75); position and size, and binding, inconclusive (labels failed the eye check); NoisyCLIP reads prompt match from step 30; W&B 70g3qw2f"
   },
   {
    "id": "W3",
@@ -945,12 +949,13 @@
    "owner": "s10",
    "proof": "artifacts/notes/progress/score-space/01-reading/reading-table.md has one row per paper read from its full PDF or marked not read, and records the search for encoders trained on noise predictions",
    "needs": [],
-   "state": "doing",
+   "state": "done",
    "serves": "Both papers",
    "objective": "Know the field",
    "started": "2026-11-24T08:04:53+02:00",
-   "updated": "2026-11-24T08:04:53+02:00",
-   "note": "reading started"
+   "updated": "2026-11-24T08:19:44+02:00",
+   "note": "12 papers read in full, 301 quotes checked; search for score-path encoders recorded, none found",
+   "finished": "2026-11-24T08:19:44+02:00"
   },
   {
    "id": "X2",
@@ -960,9 +965,13 @@
    "needs": [
     "X1"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "Both papers",
-   "objective": "Know the field"
+   "objective": "Know the field",
+   "started": "2026-11-24T08:20:15+02:00",
+   "updated": "2026-11-24T08:27:51+02:00",
+   "note": "five loop pages, each with the five headings and a paragraph per paper",
+   "finished": "2026-11-24T08:27:51+02:00"
   },
   {
    "id": "X3",
@@ -972,9 +981,13 @@
    "needs": [
     "X2"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "Both papers",
-   "objective": "Know the field"
+   "objective": "Know the field",
+   "started": "2026-11-24T08:28:11+02:00",
+   "updated": "2026-11-24T08:32:30+02:00",
+   "note": "every assumption marked; score path repaired to all-ten-label signature; joint path dead on digits, replaced by the count checker's push",
+   "finished": "2026-11-24T08:32:30+02:00"
   },
   {
    "id": "X4",
@@ -984,9 +997,12 @@
    "needs": [
     "X3"
    ],
-   "state": "todo",
+   "state": "doing",
    "serves": "Both papers",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "started": "2026-11-24T08:32:39+02:00",
+   "updated": "2026-11-24T08:32:39+02:00",
+   "note": "design"
   },
   {
    "id": "X5",
@@ -1316,7 +1332,7 @@
    "description": "BEFORE: nothing. It starts by itself when the paper repository (step D1) is done.\n\n1. IT RUNS as the background session 🔬 PhD Loop 5: Reproduce Rivals And Choose Checker, following:\nartifacts/notes/progress/prompts/session-5-reproduce-and-choose.md\n\n2. IT DOES: compares candidate checker architectures on small data, by a selection rule written before any of them trains.\n\n3. YOU DO: answer anything on the waiting picture.\n\nOUTCOME: one chosen architecture, with the comparison saved.\nDONE WHEN: the checker review names the choice and the rule that picked it.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nSCOREBOARD: /home/molef/PhD/concept-composition/artifacts/notes/progress/scoreboard.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: arch",
    "event_id": "l29esd328d9glp7jd5p4fn4ekg",
    "start": "2026-11-22T11:35:00+02:00",
-   "end": "2026-11-24T08:16:27+02:00",
+   "end": "2026-11-24T10:20:15+02:00",
    "synced": "1150295b1faf"
   },
   {
@@ -2367,6 +2383,15 @@
    "asked": "2026-11-24T07:52:41+02:00",
    "answer": "The owner's answer in chat on 2026-11-24: stop W3 and record that W2 found no readable step from 0 to 15; go on to W2b and W4.",
    "answered": "2026-11-24T08:06:54+02:00"
+  },
+  {
+   "id": 71,
+   "question": "Loop 10 X4: may X5 to X8 run as designed in score-space/04-design.md, about 4 GPU-hours on bigbatch (X5 about 0.5)? The digit model's steps 0 to 15 hold at most 8.7% of the canvas, and SDXL's steps 0 to 15 match its steps 14 to 25, so X5 reads both windows. If the brief's bar misses in the early window and holds in the SDXL-matched window, should X6 go ahead in that window?",
+   "holds": "X5",
+   "default": "X5 runs both windows as designed, and X6 goes ahead only in a window where the bar holds",
+   "by": "s10",
+   "state": "open",
+   "asked": "2026-11-24T08:36:05+02:00"
   }
  ]
 }

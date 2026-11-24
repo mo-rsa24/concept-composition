@@ -85,11 +85,13 @@ $$
 
 $f$ is the image encoder, $g$ the frozen text encoder and $c^\star$ the canvas's true caption. The bank holds only captions naming digits 0 to 4, so no unseen digit's name reaches the training loss.
 
-**Training.** 8,000 updates at batch 256 with Adam at learning rate $2\times10^{-4}$. Each example draws a canvas and one of the 16 timesteps `ddim_timesteps(50)[:16]`, then noises the canvas to it. These settings are fixed, and no variation is tried after the unseen split is read.
+**Training.** 8,000 updates at batch 256 with Adam at learning rate $2\times10^{-4}$. Each example draws a canvas and one of the 26 timesteps `ddim_timesteps(50)[:26]`, the digit sampler's steps 0 to 25, then noises the canvas to it. These settings are fixed, and no variation is tried after the unseen split is read.
 
 ## How a canvas is scored
 
-Each test canvas is read at each of the 16 steps with 4 noise draws, and its checker score is averaged over the draws. At each step, the threshold that maximises balanced accuracy is chosen on the even-indexed half of each `seen_test` pair. The seen score is read on the odd-indexed half. The same thresholds are applied once to all of `unseen_test`.
+**The judged window is the digit sampler's steps 14 to 25** (timesteps 712 to 480). These keep as much of the canvas as SDXL's steps 0 to 15, where the push acts ([the V2 review](../../abstract-checkers/05-does-it-learn/review.md)). The digit sampler's own steps 0 to 15 (timesteps 999 to 693) keep at most 8.7% of the canvas ([Loop 10's ideas page](../../score-space/03-ideas.md), assumption A2), so judging there would set a harder test than SDXL poses. The owner chose this window on 2026-11-24, before any W4 run. Steps 0 to 15 are read as well and reported second.
+
+Each test canvas is read at each of the 26 steps with 4 noise draws, and its checker score is averaged over the draws. At each step, the threshold that maximises balanced accuracy is chosen on the even-indexed half of each `seen_test` pair. The seen score is read on the odd-indexed half. The same thresholds are applied once to all of `unseen_test`.
 
 ## The bars
 
@@ -97,7 +99,7 @@ The numbers are the ones step V2 uses, and they are constants in `2-classifier-g
 
 | Result | What it takes |
 |---|---|
-| Support | On `unseen_test` over steps 0 to 15, balanced accuracy is at least 0.75, within 0.05 of the seen score, and at least 0.75 on `apart` against `wrong` |
+| Support | On `unseen_test` over steps 14 to 25, balanced accuracy is at least 0.75, within 0.05 of the seen score, and at least 0.75 on `apart` against `wrong` |
 | Null | The overfit test passes and the frozen model misses any of those three |
 | Inconclusive | The overfit test fails, or the model scores below 0.55 on the seen half at every step, because then it has not learned the task |
 
