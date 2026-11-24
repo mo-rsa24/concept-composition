@@ -81,7 +81,7 @@ def stage_extract(args) -> int:
         except FileNotFoundError:
             missing += 1
     if args.smoke:
-        rows, latents = rows[:32], latents[:32]
+        rows, latents = rows[::120], latents[::120]  # about 34 pictures across all three splits
     Z = torch.cat(latents)
     steps = [0, 15] if args.smoke else STEPS
     scheduler = load_ddim_scheduler("stabilityai/stable-diffusion-xl-base-1.0")
