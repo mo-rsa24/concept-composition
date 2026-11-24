@@ -32,7 +32,7 @@ Job 94085 on `mscluster42` took 49 minutes 54 seconds, from the code snapshot of
 | Count: two digits apart? (11,504 training canvases, 800 test) | map | 0.781 | **0.774** | 0.007, bar 0.05 | 16 | **pass** |
 | | raw | 0.793 | 0.775 | 0.018 | 16 | |
 | Identity: the asked digits? (7,004 training canvases, 500 test) | map | 0.603 | **0.555** | 0.048 | 16 | **miss** |
-| | raw | 0.606 | 0.556 | 0.049 | 16 | |
+| | raw | 0.605 | 0.556 | 0.049 | 16 | |
 
 The count checker's score on the pairs holding digit 4 rises from 0.64 at the noisiest step to 0.91 at the least noisy. By kind it calls 95% of overlaid canvases correctly and 65% of single-digit canvases, its weakest kind.
 
@@ -93,12 +93,12 @@ The 1% run trains on 160 canvases for 1,000 updates, so it checks that the pipel
 
 Job 93702 on `mscluster83` took 2 hours 41 minutes. It trained on the pairs among digits 0 to 3 and scored both those pairs and the pairs holding digit 4, which it never saw. All scores are balanced accuracy over steps 0 to 15, where 0.5 is chance. The full results are in `/datasets/mmolefe/poe_repair_min/loop-8/v2/full/inner.json`.
 
-| Configuration | Trained pairs | Pairs holding 4, bar 0.75 | Gap, bar 0.05 | `apart` against `wrong`, trained pairs | `apart` against `wrong`, pairs holding 4, bar 0.75 | All bars |
+| Configuration | Trained pairs | Pairs holding 4, bar 0.75 | Gap, bar 0.05 | `apart` against `wrong`, trained pairs | `apart` against `wrong`, pairs holding 4, bar 0.75 | All three bars met |
 |---|---|---|---|---|---|---|
-| Base map reader | 0.542 | 0.535 | 0.006 | 0.499 | 0.497 | missed |
-| Log totals added | 0.542 | 0.535 | 0.007 | 0.499 | 0.500 | missed |
-| Signed differences | 0.544 | 0.531 | 0.013 | 0.502 | 0.495 | missed |
-| 12,000 updates | 0.545 | 0.537 | 0.008 | 0.503 | 0.498 | missed |
+| Base map reader | 0.542 | 0.535 | 0.006 | 0.499 | 0.497 | no |
+| Log totals added | 0.542 | 0.535 | 0.007 | 0.499 | 0.500 | no |
+| Signed differences | 0.544 | 0.531 | 0.013 | 0.502 | 0.495 | no |
+| 12,000 updates | 0.545 | 0.537 | 0.008 | 0.503 | 0.498 | no |
 
 No configuration separates `apart` from `wrong`, on the pairs it trained on or on the pairs it never saw. The miss is in learning which digits are present, before any question of carrying over to new digits. Balanced accuracy over all canvas kinds rises from 0.50 at step 0 to between 0.60 and 0.61 at step 15 on the pairs holding digit 4.
 
