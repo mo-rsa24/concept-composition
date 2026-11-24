@@ -25,16 +25,19 @@ case "$LIST" in current|balanced) ;; *) echo "ABORT: unknown list $LIST"; exit 2
 [ -f "$S/rung2/train_readout_pair.py" ] && [ -f "$S/method_search/build_balanced_list.py" ] && [ -x "$PY" ] || { echo "ABORT: snapshot or python missing"; exit 3; }
 USE=$(df --output=pcent "$ROOT" | tail -1 | tr -dc '0-9')
 [ -n "$USE" ] && [ "$USE" -lt 90 ] || { echo "ABORT: $ROOT is ${USE:-unknown}% full"; exit 3; }
-read -r USED UTIL < <(nvidia-smi --query-gpu=memory.used,utilization.gpu --format=csv,noheader,nounits -i 0 | tr -d ',')
+DEV=${GPU:-0}   # the device to use; 0 under Slurm, the approved free card on a shared-device run
+read -r USED UTIL < <(nvidia-smi --query-gpu=memory.used,utilization.gpu --format=csv,noheader,nounits -i "$DEV" | tr -d ',')
 case "$UTIL" in ''|*[!0-9]*) echo "ABORT: gpu faulted, utilisation '$UTIL'"; exit 4;; esac
-APPS=$(nvidia-smi --query-compute-apps=pid --format=csv,noheader -i 0 | wc -l)
-[ "$USED" -lt 1024 ] && [ "$APPS" -eq 0 ] || { echo "ABORT: device 0 in use: ${USED} MiB, ${APPS} processes"; exit 4; }
-export CUDA_VISIBLE_DEVICES=0 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
+APPS=$(nvidia-smi --query-compute-apps=pid --format=csv,noheader -i "$DEV" | wc -l)
+# Under Slurm the card must hold no process. On an approved shared device (SHARED=1) another user's idle context may stay, so only the
+# 1 GB memory limit applies (execution-protocol.md step 3), and the launcher's watchdog covers the rest of the run.
+[ "$USED" -lt 1024 ] && { [ "$APPS" -eq 0 ] || [ "${SHARED:-0}" = 1 ]; } || { echo "ABORT: device $DEV in use: ${USED} MiB, ${APPS} processes"; exit 4; }
+export CUDA_VISIBLE_DEVICES=$DEV HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 export PYTHONPATH="$HUB:$CO3:$REPO/scripts/shared:$REPO"
 # The readout checker's latents, their augmented copies and its evaluation tiles live only under the scratch root, where the kept
 # checker was trained; the trainer writes to --out-root under loop-6, so nothing is written there.
 export POE_REPAIR_MOUNT=/home-mscluster/mmolefe/poe_repair_min_scratch
-echo "[$(date -u +%H:%M:%S)] job=${SLURM_JOB_ID:-none} node=$(hostname -s) gpu=$(nvidia-smi --query-gpu=name --format=csv,noheader -i 0) snap=$SNAP stage=$STAGE list=$LIST"
+echo "[$(date -u +%H:%M:%S)] job=${SLURM_JOB_ID:-none} node=$(hostname -s) device=$DEV gpu=$(nvidia-smi --query-gpu=name --format=csv,noheader -i "$DEV") pid=$$ snap=$SNAP stage=$STAGE list=$LIST"
 mkdir -p "$OUT/lists"
 "$PY" "$S/method_search/build_balanced_list.py" --out "$OUT/lists" --summary "$OUT/lists/composition.json" > /dev/null || { echo "ABORT: lists did not build"; exit 5; }
 cmp -s "$OUT/lists/composition.json" "$REPO/artifacts/notes/progress/method-search/01b-balance-the-checker-data/composition.json" \
