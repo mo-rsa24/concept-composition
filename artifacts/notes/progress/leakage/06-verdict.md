@@ -1,0 +1,29 @@
+# Verdict: where CO3's subjects borrow each other's parts, and what stops it (step Z6)
+
+**CO3 draws two bodies and one borrows the other's parts, and this loop did not find where that starts or a fix that stops it.** Three readings inside SDXL, taken across the whole sampling path, do not predict which pairs borrow; a correction of each animal's region late in sampling, with the regions drawn by hand, leaves the count of clean pictures where CO3 alone has it. Paper 2's next test is a fix in the text encoder, with Bounded Attention run as the rival.
+
+## The mechanism
+
+**Unknown, and three places are ruled out as predictors.** Over CO3's 12 tuning pairs, the similarity of the two nouns in the text encoder, the overlap of their attention maps and the similarity of their pushes on the picture, each read early (steps 0 to 5), in the middle (10 to 20) and late (25 to 45), give a largest Spearman $\rho$ of 0.489 against the borrowed counts, under the bar of 0.706 ([Z2's review](02-what-predicts-borrowing/review.md), W&B `llct9xp0`). Crow × raven reads highest on every reading and never borrows; puma × condor reads low and borrows on 7 of 8 seeds. The readings follow how alike two animals are, and borrowing does not.
+
+**What the recorded cases show (one seed each, inferred).** On cheetah × cougar at seed 6001, plain SDXL draws two cheetahs; CO3 pushes away from the cheetah at steps 4 and 5 and finishes a cougar-shaped animal with cheetah spots ([the capture note](co3-inside/design.md)). CO3's own signal, read cell by cell, marks both bodies as "cheetah" at step 5 ([the free check](03-one-fix/free-check/README.md)). The borrowing there looks like an unfinished change of animal.
+
+## The fix against its bar
+
+**Null.** On the six borrowing pairs (48 pictures per row), CO3 with one corrector pass per step at steps 15 to 30, subtracting the other animal's prediction inside each animal's drawn box, gives 5 pictures with two clear subjects that keep their own parts; CO3's whole-picture weights in the same window give 5, and CO3 alone 5. The bar needed a lead of at least 4 with an exact McNemar p below 0.05; the lead is 0 (p = 0.66). Two blind reviewers agreed on 128 of 144 rungs, and a third settled 16 ([Z3's review](03-one-fix/review.md), W&B `xql3iwpp`). On cheetah × cougar the correction takes the borrowed spots off the cougar's body and the cheetah's tear lines stay on its face, so the pictures still count as borrowed.
+
+## The method chosen
+
+**The text-side fix, tested next, against Bounded Attention as the rival** ([Paper 2's method](04-paper-2-method.md)). The second subject's word vectors in the joint prompt are replaced by its encoding alone, which CO3 already computes; it trains nothing and keeps one trajectory per seed. A word-order check comes first: if borrowing follows the order of the names, the text encoder is where it enters. Per-cell CO3, regions read from $d_t$ and the checker choosing CO3's settings are closed by Z2, Z3 and board question 80. The identity reward LoRA is held, because it trains the diffusion model; it becomes the candidate only if the text-side fix and the rival also fail. The next test costs about 3.4 GPU-hours (0.7 for the word-order check, 0.7 for the text-side fix, about 2 for the rival) and is outside this loop's brief.
+
+## The reruns proposed for Loops 8, 9 and 10
+
+[The design audit](05-design-audit.md) finds 30 design issues: 3 could change a recorded verdict, 16 possibly could and 11 could not. Three reruns, about 0.25 GPU-hours in all, are on board question 97: where the digit sampler settles its digits before Loop 8's next push; an untrained rule against Loop 8's identity checker; and the block-wise form of Loop 10's shared-space idea on CO3's path.
+
+## What it suggests for Paper 1
+
+Paper 1 composes two experts trained apart, each drawing its own region, so each expert's prediction cannot carry the other subject's features. Z3 suggests that this is where borrowing lives on CO3: the correction knew exactly where each animal was and the cougar kept a cheetah's face, as if the "cougar" prediction itself carried cheetah features. If that holds, Paper 1's experts are protected from borrowing by construction, and Paper 1 can say so with Z3 as the contrast: a single model that has seen both subjects borrows even when its regions are given, while experts that never met cannot (inferred; Paper 1's own runs would need a part-binding count to show it).
+
+## Compute
+
+About 3.8 GPU-hours: 1.8 for Z2's four rungs, 0.3 for the CO3 capture run, 1.7 for Z3's three rungs. No API tokens.
