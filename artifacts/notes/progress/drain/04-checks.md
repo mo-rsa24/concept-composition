@@ -11,7 +11,7 @@ This page records step Y4: the pillar checks run over the 48 pages steps Y2 and 
 context pillar, R for the report pillar, X for cross-references.
 
 **Owner's call** means the formats disagree with each other, or a fix would change how a recorded
-result reads, so the owner decides. Those were asked as board question 81, which the manager session (Loop 13) answered for the owner under the shared rules: all ten defaults. Items 1, 2 and 4 edit this repo's `CLAUDE.md`, so they wait for the owner's own yes.
+result reads, so the owner decides. Those were asked as board question 81, which the manager session (Loop 13) answered for the owner under the shared rules: all ten defaults. Items 1, 2 and 4 edit this repo's `CLAUDE.md`, and the owner gave that yes directly on 2026-11-24.
 
 ## How the checks ran
 
@@ -29,10 +29,10 @@ uses a dash as a clause separator. The discovery routes to both pillars are in p
 
 | Id | What is wrong | Where | Who fixes it | State |
 |---|---|---|---|---|
-| C1 | `context/methods/` uses an overview-then-parts page shape that CONTEXT_FORMAT does not have | the folder | owner's call, question 81 item 1 | waiting |
-| C2 | seven method pages carry runnable commands, which CONTEXT_FORMAT bans and the worked-example rule asks for | `01/03`, `02/04`, `04/03`, `06/04`, `07/03`, `07/04`, `08/02` | owner's call, item 2 | waiting |
+| C1 | `context/methods/` uses an overview-then-parts page shape that CONTEXT_FORMAT does not have | the folder | question 81, with the owner's yes for `CLAUDE.md` | fixed, `7f256f18` |
+| C2 | seven method pages carry runnable commands, which CONTEXT_FORMAT bans and the worked-example rule asks for | `01/03`, `02/04`, `04/03`, `06/04`, `07/03`, `07/04`, `08/02` | question 81, with the owner's yes for `CLAUDE.md` | fixed, `7f256f18` |
 | C3 | run status (never ran, missed its bar) sits on method pages and in the methods index | `00-INDEX.md` rows 31 to 38, `04/01`, `04/04`, `05/01`, `07/01` | question 81 | fixed, `1f349d62` |
-| C4 | the stated mark is used for numbers copied from a named review without reopening it | 325 marks across the folder | owner's call, item 4 | waiting |
+| C4 | the stated mark is used for numbers copied from a named review without reopening it | 325 marks across the folder | question 81, with the owner's yes for `CLAUDE.md` | fixed, `7f256f18` |
 | C5 | four diagram slots and the load-bearing inferred claims are not listed on `context/00-INDEX.md` | Pictures still missing, Still open | this loop | fixed, `128e1a30` |
 | C6 | the methods row on `context/00-INDEX.md` still says one method is written and seven planned | `context/00-INDEX.md` line 50 | this loop | fixed, `128e1a30` |
 | C7 | opening pictures are embedded at 720 px wide, against the 200 px house thumbnail | all 33 method pages | question 81 | fixed, `1f349d62` |
@@ -63,3 +63,7 @@ uses a dash as a clause separator. The discovery routes to both pillars are in p
 `report/00-INDEX.md` as a whole has no contents list, breadcrumbs or built-to stamp, and four links
 that were broken before this loop touched it: line 37 (a blend-gallery README), line 134 (the
 energy-penalty folder), and lines 292 and 294 (two figure explainers).
+
+## Outcome
+
+Every one of the 28 findings is fixed or settled. 20 were fixed on Loop 11's pages and C14 in part (its slots name save paths; its 15 inferred claims stay off Still open as judged), 4 were settled by question 81 as kept (R1, R2, R10, R13), R3's cards were requested from the loops that own the folders, and C12 and R14 (a Learning Coverage section in `MASTER_PLAN.md`) sit outside this loop's files and are reported to `/learning-pulse`.
