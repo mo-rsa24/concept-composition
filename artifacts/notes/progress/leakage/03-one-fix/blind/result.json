@@ -1,0 +1,61 @@
+{
+ "agreement_rung": 0.8888888888888888,
+ "agreement_two_clear": 0.8888888888888888,
+ "two_clear": {
+  "co3": 5,
+  "whole": 5,
+  "boxes": 5
+ },
+ "broken": {
+  "co3": 1,
+  "whole": 2,
+  "boxes": 4
+ },
+ "per_pair_two_clear": {
+  "co3": {
+   "a_cheetah__x__a_cougar": 0,
+   "a_duck__x__a_goose": 0,
+   "a_puma__x__a_condor": 1,
+   "a_boar__x__a_pheasant": 0,
+   "a_bobcat__x__a_quail": 2,
+   "a_seal__x__a_gull": 2
+  },
+  "whole": {
+   "a_cheetah__x__a_cougar": 1,
+   "a_duck__x__a_goose": 0,
+   "a_puma__x__a_condor": 1,
+   "a_boar__x__a_pheasant": 0,
+   "a_bobcat__x__a_quail": 1,
+   "a_seal__x__a_gull": 2
+  },
+  "boxes": {
+   "a_cheetah__x__a_cougar": 1,
+   "a_duck__x__a_goose": 0,
+   "a_puma__x__a_condor": 0,
+   "a_boar__x__a_pheasant": 1,
+   "a_bobcat__x__a_quail": 1,
+   "a_seal__x__a_gull": 2
+  }
+ },
+ "call": "null",
+ "detail": {
+  "boxes_vs_co3": {
+   "lead": 0,
+   "b_only": 3,
+   "a_only": 3,
+   "p": 0.65625
+  },
+  "whole_vs_co3": {
+   "lead": 0,
+   "b_only": 2,
+   "a_only": 2,
+   "p": 0.6875
+  },
+  "boxes_vs_whole": {
+   "lead": 0,
+   "b_only": 1,
+   "a_only": 1,
+   "p": 0.75
+  }
+ }
+}
