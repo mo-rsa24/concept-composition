@@ -1,0 +1,212 @@
+{
+  "slug": "reduce-reuse-recycle",
+  "source": "arXiv 2302.11552",
+  "page_url": "https://arxiv.org/pdf/2302.11552",
+  "title": "Reduce, Reuse, Recycle: Compositional Generation with Energy-Based Diffusion Models and MCMC",
+  "role": "Shows the summed score is not the noised product's score for t > 0 and fixes composition with per-step MCMC; the closest prior art for a corrector on top of CO3 and a caution on what the joint-minus-product gap contains.",
+  "pages_read": 23,
+  "reads": "Each component's noise prediction eps(x,t) on the current noisy sample, converted to a score -eps/sigma_t; energy models also give a scalar f(x,t) = -||s(x,t)||^2 used in Metropolis accept steps; at every noise level.",
+  "reads_page": 3,
+  "trains": "Score and energy diffusion models with L_t = E||eps - eps_theta(x_t,t)||^2 (energy: eps = -grad f): 2D MLPs, CLEVR 200k 64x64 images conditioned on one cube location (20k iterations), ImageNet 128 unconditional (1M iterations) plus a noisy classifier, a 64x64 text-to-image energy model on 400M images.",
+  "trains_page": 18,
+  "combines": "Sum of component scores (log p(x) + sum_i (log p(x|y_i) - log p(x)) for CLEVR), then annealed MCMC (ULA, U-HMC, MALA, HMC) for N steps at each noise level after one reverse step, at an equal score-evaluation budget.",
+  "combines_page": 4,
+  "adding": "Summing scores gives the product's score only at t = 0; for t > 0 it differs from the noised product's score, so reverse diffusion with the sum is wrong; same for tempering and CFG with lambda > 1; mixtures need energies; disjoint products fail.",
+  "adding_page": 4,
+  "noise_and_seed": "not addressed; no seed variance or error bars; budgets held equal in score evaluations; ImageNet FID on 50,000 samples.",
+  "noise_page": 7,
+  "timesteps": "not measured per timestep; sum and noised-product score agree only at t = 0; accuracy rises with MCMC steps per timestep (Fig. 5).",
+  "timesteps_page": 7,
+  "unseen": "no: concepts are all seen; held-out combinations of 1 to 5 CLEVR cube locations from a model trained on one location per image; text-to-image binding and counting only qualitative.",
+  "unseen_page": 7,
+  "headline": "CLEVR 5-cube accuracy (% of samples with every cube placed, higher better) 72.7 for energy model with HMC vs 57.4 for score model with reverse diffusion (the Liu et al. 2022 baseline); own 64x64 U-Net.",
+  "headline_page": 6,
+  "suggests": "(inferred) Part of the joint-minus-product gap at noisy steps exists even for an exact product, so the gap-predicts-term test should be read at low noise; repeating the reverse step at fixed noise with sqrt(2) noise is a cheap ULA corrector to try on CO3.",
+  "model": "own pixel U-Nets (2D MLP, CLEVR 64x64, ImageNet 128x128), internal 64x64 energy text-to-image model; Imagen 64x64 base for tapestries",
+  "extra_papers": [
+    {
+      "title": "Should EBMs model the energy or the score?",
+      "arxiv": "",
+      "page": 16,
+      "why": "Trains scalar energies on noisy inputs whose gradient is the score field (DAE, L2, inner-product forms the paper reuses)."
+    },
+    {
+      "title": "Score modeling for simulation-based inference",
+      "arxiv": "2209.14249",
+      "page": 5,
+      "why": "Concurrent use of MCMC to sample products of diffusion models."
+    }
+  ],
+  "disagreements": [
+    {
+      "claim": "The PoE sum drops an interaction term that the joint prompt would have carried",
+      "source": "this brief",
+      "paper_says": "Even for an exact product of the clean distributions, the noised product's score differs from the sum of noised scores at every t > 0, and the paper attributes composition failure to the sampler (not the model). Part of the joint-minus-sum gap at noisy steps is therefore not a property of the joint prompt.",
+      "page": 4
+    },
+    {
+      "claim": "Sign of the energy parameterization",
+      "source": "the paper itself",
+      "paper_says": "p. 5 defines eps(x,t) = -grad f(x,t); Appendix D on p. 16 defines eps(x,t) = grad f(x,t).",
+      "page": 16
+    },
+    {
+      "claim": "Energy parameterization improves results",
+      "source": "the paper itself",
+      "paper_says": "Energy models with plain reverse diffusion score below score models (5 cubes 51.0 vs 57.4; ImageNet FID 33.58 vs 30.46), and the best ImageNet FID is the score model with U-HMC (26.89), not the energy model with HMC (30.52).",
+      "page": 7
+    }
+  ],
+  "quotes": [
+    {
+      "page": 1,
+      "text": "We conclude that the sampler (not the model) is responsible for this failure",
+      "supports": "adding and disagreement",
+      "read_from_image": false
+    },
+    {
+      "page": 3,
+      "text": "we can recover the diffused data distribution score with",
+      "supports": "reads",
+      "read_from_image": false
+    },
+    {
+      "page": 6,
+      "text": "In this study we found it best to parameterize the log probability as",
+      "supports": "reads: energy scalar",
+      "read_from_image": false
+    },
+    {
+      "page": 18,
+      "text": "we generated a dataset of 200,000 64 × 64 images with between 1 to 5 different cubes",
+      "supports": "trains: CLEVR data",
+      "read_from_image": false
+    },
+    {
+      "page": 18,
+      "text": "CLEVR models were trained for 20000 iterations with a batch size of 1024 using the Adam optimizer with step size 1e-4",
+      "supports": "trains: length",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "We train our models to fit p(x|y) where y is the location of one of the shapes in the image.",
+      "supports": "trains and unseen",
+      "read_from_image": false
+    },
+    {
+      "page": 19,
+      "text": "we train models for one week on an internal text/image dataset consisting of 400 million images",
+      "supports": "trains: text-to-image",
+      "read_from_image": false
+    },
+    {
+      "page": 4,
+      "text": "issues arise if the model which reverses the diffusion uses a score estimate obtained by adding the score estimates of the two models",
+      "supports": "combines and adding",
+      "read_from_image": false
+    },
+    {
+      "page": 4,
+      "text": "For t > 0, this quantity is not equal to the sum of the scores of the two models",
+      "supports": "adding",
+      "read_from_image": false
+    },
+    {
+      "page": 4,
+      "text": "We cannot compose scorefunctions to define mixtures (unlike products).",
+      "supports": "adding: mixtures",
+      "read_from_image": false
+    },
+    {
+      "page": 5,
+      "text": "A simple form of MCMC using the ULA sampler can directly be implemented by repeatedly running the diffusion reverse process at the same noise level",
+      "supports": "combines: sampler",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "for each number of combination of cubes, the same number of score function evaluations are used",
+      "supports": "combines and noise_and_seed: equal budget",
+      "read_from_image": false
+    },
+    {
+      "page": 18,
+      "text": "Our approach fails to generate products of distributions with no overlap.",
+      "supports": "adding: disjoint failure",
+      "read_from_image": false
+    },
+    {
+      "page": 19,
+      "text": "we took a weighted sum of their estimated noise vectors, and normalized the resulting vector to have variance 1",
+      "supports": "combines: tapestry",
+      "read_from_image": false
+    },
+    {
+      "page": 15,
+      "text": "it was important to not clip intermediate values of diffusion sampling",
+      "supports": "suggests: CO3",
+      "read_from_image": false
+    },
+    {
+      "page": 6,
+      "text": "while training only conditions on the location of one object per image",
+      "supports": "unseen",
+      "read_from_image": false
+    },
+    {
+      "page": 6,
+      "text": "Reverse 70.8 68.2 66.3 64.1 57.4",
+      "supports": "headline: 57.4",
+      "read_from_image": false
+    },
+    {
+      "page": 6,
+      "text": "HMC 91.6 82.9 80.1 76.5 72.7",
+      "supports": "headline: 72.7",
+      "read_from_image": false
+    },
+    {
+      "page": 6,
+      "text": "We note that this baseline is exactly the approach of Liu et al. (2022).",
+      "supports": "headline: baseline identity",
+      "read_from_image": false
+    },
+    {
+      "page": 5,
+      "text": "implicitly define ϵθ (x, t) = −∇x fθ (x, t)",
+      "supports": "disagreement: sign",
+      "read_from_image": false
+    },
+    {
+      "page": 16,
+      "text": "We then compute the gradient of this function and define ϵθ (x, t) = ∇x fθ (x, t).",
+      "supports": "disagreement: sign",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "Reverse 29.10 30.46 18.64",
+      "supports": "disagreement: FID",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "HMC 33.46 30.52 94.61",
+      "supports": "disagreement: FID",
+      "read_from_image": false
+    },
+    {
+      "page": 8,
+      "text": "can take 5-times longer to generate samples than typical diffusion sampling",
+      "supports": "cost",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "Accuracy vs MCMC Sampling Steps",
+      "supports": "Fig. 5 curve values (about 51% to 66%) read from the plot image",
+      "read_from_image": true
+    }
+  ]
+}

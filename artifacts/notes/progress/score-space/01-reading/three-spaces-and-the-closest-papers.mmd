@@ -1,0 +1,19 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef open fill:#ffffff,stroke:#888888,stroke-width:2px,stroke-dasharray:5 4,color:#555555
+
+  T["Text<br/>'the digit three and<br/>the digit seven, apart'"]:::plain
+  X["Noisy canvas x_t<br/>32 x 64 grey, steps 0 to 15"]:::plain
+  D["Score path<br/>d_t = eps(c) - eps(empty)<br/>stacked over steps 0 to 15"]:::plain
+  S(("Shared space")):::plain
+
+  T -->|"frozen text encoder"| S
+  X -->|"W4 / NoisyCLIP:<br/>trained image encoder"| S
+  D -.->|"no paper trains this leg<br/>(search, 2026-11-24)"| S
+
+  T ---|"Li; Clark and Jaini; DiffusionITM:<br/>caption scored by how much it<br/>lowers the noise error (no encoder)"| D
+  P1["2603.04803; NoiseCLR:<br/>contrastive loss on<br/>noise predictions"]:::plain --> D
+  P2["Sampling Path Tells More:<br/>sum of d_t along the path<br/>as a quality score"]:::plain --> D
+  P3["DIRE:<br/>classifier on the residual left<br/>after a full inversion and<br/>reconstruction path"]:::plain --> D
+  P4["ImageBind; CLIP goes 3D:<br/>a new encoder bound<br/>into an existing space"]:::plain --> S

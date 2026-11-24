@@ -1,0 +1,355 @@
+[
+ {
+  "query": "abs:\"noise prediction\" AND abs:contrastive AND abs:encoder AND abs:diffusion",
+  "total": 4,
+  "hits": [
+   {
+    "id": "2611.07814v1",
+    "title": "CMDiff: Left Atrial Scar Segmentation from 3D LGE MRI Using Conditional Mask Diffusion Model: A Feasibility Study",
+    "abs": "Late gadolinium enhancement (LGE) cardiac MRI enables non-invasive assessment of left atrial (LA) scar, an imaging marker associated with atrial fibrillation ablation outcome. However, automatic scar segmentation is hindered by low contrast, the thin atrial wall, scarce labels, and extreme class imbalance. Conditional diffusion offers iterative mask generation, but its suitability for sparse 3D LA scar segmentation remains unclear. To address this gap, we propose Conditional Mask Diffusion (CMDiff), which predicts clean masks using a dynamic-encoder-conditioned 3D sinusoidal UNet. We compared "
+   },
+   {
+    "id": "2509.25822v4",
+    "title": "Act to See, See to Act: Diffusion-Driven Perception-Action Interplay for Adaptive Policies",
+    "abs": "Existing imitation learning methods decouple perception and action, which overlooks the causal reciprocity between sensory representations and action execution that humans naturally leverage for adaptive behaviors. To bridge this gap, we introduce Action-Guided Diffusion Policy (DP-AG), a unified representation learning that explicitly models a dynamic interplay between perception and action through probabilistic latent dynamics. DP-AG encodes latent observations into a Gaussian posterior via variational inference and evolves them using an action-guided SDE, where the Vector-Jacobian Product ("
+   },
+   {
+    "id": "2510.20819v2",
+    "title": "Towards General Modality Translation with Contrastive and Predictive Latent Diffusion Bridge",
+    "abs": "Recent advances in generative modeling have positioned diffusion models as state-of-the-art tools for sampling from complex data distributions. While these models have shown remarkable success across single-modality domains such as images and audio, extending their capabilities to Modality Translation (MT), translating information across different sensory modalities, remains an open challenge. Existing approaches often rely on restrictive assumptions, including shared dimensionality, Gaussian source priors, and modality-specific architectures, which limit their generality and theoretical groun"
+   },
+   {
+    "id": "2511.05989v1",
+    "title": "A Dual-Mode ViT-Conditioned Diffusion Framework with an Adaptive Conditioning Bridge for Breast Cancer Segmentation",
+    "abs": "In breast ultrasound images, precise lesion segmentation is essential for early diagnosis; however, low contrast, speckle noise, and unclear boundaries make this difficult. Even though deep learning models have demonstrated potential, standard convolutional architectures frequently fall short in capturing enough global context, resulting in segmentations that are anatomically inconsistent. To overcome these drawbacks, we suggest a flexible, conditional Denoising Diffusion Model that combines an enhanced UNet-based generative decoder with a Vision Transformer (ViT) encoder for global feature ex"
+   }
+  ]
+ },
+ {
+  "query": "abs:\"denoising trajectory\" AND abs:contrastive",
+  "total": 13,
+  "hits": [
+   {
+    "id": "2302.08357v3",
+    "title": "Boundary Guided Learning-Free Semantic Control with Diffusion Models",
+    "abs": "Applying pre-trained generative denoising diffusion models (DDMs) for downstream tasks such as image semantic editing usually requires either fine-tuning DDMs or learning auxiliary editing networks in the existing literature. In this work, we present our BoundaryDiffusion method for efficient, effective and light-weight semantic control with frozen pre-trained DDMs, without learning any extra networks. As one of the first learning-free diffusion editing works, we start by seeking a comprehensive understanding of the intermediate high-dimensional latent spaces by theoretically and empirically a"
+   },
+   {
+    "id": "2502.02225v1",
+    "title": "Exploring the latent space of diffusion models directly through singular value decomposition",
+    "abs": "Despite the groundbreaking success of diffusion models in generating high-fidelity images, their latent space remains relatively under-explored, even though it holds significant promise for enabling versatile and interpretable image editing capabilities. The complicated denoising trajectory and high dimensionality of the latent space make it extremely challenging to interpret. Existing methods mainly explore the feature space of U-Net in Diffusion Models (DMs) instead of the latent space itself. In contrast, we directly investigate the latent space via Singular Value Decomposition (SVD) and di"
+   },
+   {
+    "id": "2605.09460v1",
+    "title": "When Few Steps Are Enough: Training-Free Acceleration of Identity-Preserved Generation",
+    "abs": "Identity-preserved image generation is typically built on many-step diffusion backbones, making personalized generation expensive at deployment time. We show that this cost is often unnecessary for identity-conditioned FLUX generation. A frozen InfuseNet identity adapter trained with dev transfers directly to the distilled schnell backbone without retraining. This two-line replacement -- changing the backbone path and disabling classifier-free guidance -- reduces latency by 5.9x while improving ArcFace identity similarity by +0.028 and lpips by -0.016 over the standard 28-step dev baseline. To"
+   },
+   {
+    "id": "2510.06386v1",
+    "title": "Controllable Stylistic Text Generation with Train-Time Attribute-Regularized Diffusion",
+    "abs": "Generating stylistic text with specific attributes is a key problem in controllable text generation. Recently, diffusion models have emerged as a powerful paradigm for both visual and textual generation. Existing approaches can be broadly categorized into classifier-free guidance (CFG) and classifier guidance (CG) methods. While CFG effectively preserves semantic content, it often fails to provide effective attribute control. In contrast, CG modifies the denoising trajectory using classifier gradients, enabling better attribute alignment but incurring high computational costs during sampling a"
+   },
+   {
+    "id": "2605.09433v1",
+    "title": "Offline Preference Optimization for Rectified Flow with Noise-Tracked Pairs",
+    "abs": "Existing preference datasets for text-to-image models typically store only the final winner/loser images. This representation is insufficient for rectified flow (RF) models, whose generation is naturally indexed by a specific prior noise sample and follows a nearly straight denoising trajectory. In contrast, prior DPO-style alignment for diffusion models commonly estimates trajectories using an independent forward noising process, which can be mismatched to the true reverse dynamics and introduces unnecessary variance. We propose Prior Noise-Aware Preference Optimization (PNAPO), an off-policy"
+   },
+   {
+    "id": "2607.14522v2",
+    "title": "A Continuous-Time Reinforcement Learning Framework for Fine-Tuning Discrete Diffusion Models",
+    "abs": "We formulate reinforcement learning (RL) in continuous time with discrete state spaces and possibly arbitrary action spaces via a stochastic control approach, where the state dynamics are modeled as a controlled continuous-time Markov chain (CTMC). We consider policy optimization problems and derive corresponding policy gradient methods, leading to continuous-time variants of proximal policy optimization (PPO) and group relative policy optimization (GRPO). As a primary application, we develop a continuous-time RL framework for fine-tuning score-based discrete diffusion models, which enables re"
+   },
+   {
+    "id": "2603.29239v1",
+    "title": "Diffusion Mental Averages",
+    "abs": "Can a diffusion model produce its own \"mental average\" of a concept-one that is as sharp and realistic as a typical sample? We introduce Diffusion Mental Averages (DMA), a model-centric answer to this question. While prior methods aim to average image collections, they produce blurry results when applied to diffusion samples from the same prompt. These data-centric techniques operate outside the model, ignoring the generative process. In contrast, DMA averages within the diffusion model's semantic space, as discovered by recent studies. Since this space evolves across timesteps and lacks a dir"
+   },
+   {
+    "id": "2611.09096v1",
+    "title": "Trajectory Forcing: Exploiting Diffusion Trajectories for Autoregressive Long Video Generation",
+    "abs": "Autoregressive (AR) modeling is arguably the only way to extend a fixed-length video diffusion model to longer or even streaming videos. However, existing AR diffusion methods use only the previously predicted chunk as context for the next, discarding the intermediate predictions that constitute the chunk's generation history. In contrast, conventional AR models such as LLMs condition on the entire history of preceding tokens. To this end, we propose Trajectory Forcing (TraF), an AR diffusion method that exploits the denoising trajectories of previous video chunks as context. TraF operates und"
+   },
+   {
+    "id": "2501.17670v2",
+    "title": "Distinguished Quantized Guidance for Diffusion-based Sequence Recommendation",
+    "abs": "Diffusion models (DMs) have emerged as promising approaches for sequential recommendation due to their strong ability to model data distributions and generate high-quality items. Existing work typically adds noise to the next item and progressively denoises it guided by the user's interaction sequence, generating items that closely align with user interests. However, we identify two key issues in this paradigm. First, the sequences are often heterogeneous in length and content, exhibiting noise due to stochastic user behaviors. Using such sequences as guidance may hinder DMs from accurately un"
+   },
+   {
+    "id": "2511.06937v1",
+    "title": "Fine-Tuning Diffusion-Based Recommender Systems via Reinforcement Learning with Reward Function Optimization",
+    "abs": "Diffusion models recently emerged as a powerful paradigm for recommender systems, offering state-of-the-art performance by modeling the generative process of user-item interactions. However, training such models from scratch is both computationally expensive and yields diminishing returns once convergence is reached. To remedy these challenges, we propose ReFiT, a new framework that integrates Reinforcement learning (RL)-based Fine-Tuning into diffusion-based recommender systems. In contrast to prior RL approaches for diffusion models depending on external reward models, ReFiT adopts a task-al"
+   },
+   {
+    "id": "2608.19644v1",
+    "title": "When Guidance Goes Off-Scale: Recalibrating Diffusion Transformers under Analog Compute-in-Memory Nonidealities",
+    "abs": "Diffusion Transformers (DiTs) incur high memory traffic and energy costs because sampling repeatedly evaluates large denoisers dominated by linear operations. Analog compute-in-memory (CIM) can alleviate these costs by executing linear operations within weight-storing memory arrays. However, CIM nonidealities perturb effective weights, with errors accumulating along the state-dependent denoising trajectory; their interaction with classifier-free guidance (CFG) remains underexplored. In this paper, we characterize the impact of analog CIM nonidealities on DiT sampling. Although conditional and "
+   },
+   {
+    "id": "2605.07455v1",
+    "title": "EditTransfer++: Toward Faithful and Efficient Visual-Prompt-Guided Image Editing",
+    "abs": "Visual-prompt-guided edit transfer aims to learn image transformations directly from example pairs, offering more precise and controllable editing than purely text-driven approaches. However, existing diffusion transformer-based methods often fail to faithfully reproduce the demonstrated edits due to structural mismatches between the task and the backbone, including a pretrained bias toward textual conditioning and inherent stochastic instability during sampling. To bridge this gap, we present EditTransfer++, a framework that combines progressively structured training with an efficient conditi"
+   },
+   {
+    "id": "2610.03626v1",
+    "title": "Depth as Time in One-Step Generative Models",
+    "abs": "The recent wave of one-step generative models, which compress the multi-step trajectory of diffusion via either distillation or learned flow maps, has reached an inflection point where they can generate high-quality images. Here, we ask a natural question that follows from these advances: what happens to the denoising trajectory of multi-step diffusion when generation is compressed into a single forward pass? We offer an empirical observation we call \\textit{depth as time}: the denoising computation that multi-step diffusion performs across sampling steps appears to unfold across the depth of "
+   }
+  ]
+ },
+ {
+  "query": "abs:\"diffusion trajectory\" AND abs:embedding AND abs:encoder",
+  "total": 5,
+  "hits": [
+   {
+    "id": "2604.02751v3",
+    "title": "Understanding Latent Diffusability via Fisher Geometry",
+    "abs": "Diffusion models often degrade in latent spaces, yet the formal causes remain poorly understood. We quantify latent-space diffusability via the rate of change of the Minimum Mean Squared Error (MMSE) along the diffusion trajectory. Our framework decomposes this MMSE rate into contributions from Fisher Information (FI) and Fisher Information Rate (FIR). We show that isometric embeddings preserve intrinsic FI and establish quantitative intrinsic-FI bounds for a broader class of bi-Lipschitz encoders with controlled weak volume distortion, whereas FIR is governed by the interplay between encoder "
+   },
+   {
+    "id": "2507.15064v1",
+    "title": "StableAnimator++: Overcoming Pose Misalignment and Face Distortion for Human Image Animation",
+    "abs": "Current diffusion models for human image animation often struggle to maintain identity (ID) consistency, especially when the reference image and driving video differ significantly in body size or position. We introduce StableAnimator++, the first ID-preserving video diffusion framework with learnable pose alignment, capable of generating high-quality videos conditioned on a reference image and a pose sequence without any post-processing. Building upon a video diffusion model, StableAnimator++ contains carefully designed modules for both training and inference, striving for identity consistency"
+   },
+   {
+    "id": "2606.31683v1",
+    "title": "Histogram-constrained Image Generation",
+    "abs": "Diffusion models have emerged as a dominant paradigm in generative modeling, enabling high-fidelity sampling from complex data distributions. Despite impressive capabilities, controlling diffusion models to produce outputs aligned with user intent remains an open challenge, especially when balancing global coherence with local precision. Existing control mechanisms vary in the granularity of their conditioning signals. For example, textual prompts guide generation globally through high-level semantics, while ControlNet-like approaches secure precise local structure via dense conditions. In thi"
+   },
+   {
+    "id": "2402.06106v1",
+    "title": "CLR-Face: Conditional Latent Refinement for Blind Face Restoration Using Score-Based Diffusion Models",
+    "abs": "Recent generative-prior-based methods have shown promising blind face restoration performance. They usually project the degraded images to the latent space and then decode high-quality faces either by single-stage latent optimization or directly from the encoding. Generating fine-grained facial details faithful to inputs remains a challenging problem. Most existing methods produce either overly smooth outputs or alter the identity as they attempt to balance between generation and reconstruction. This may be attributed to the typical trade-off between quality and resolution in the latent space."
+   },
+   {
+    "id": "2605.24631v1",
+    "title": "Beyond Generative Priors: Minority Sampling with JEPA-Guided Diffusion",
+    "abs": "Minority sampling aims to generate low-density instances on a data manifold and is of central importance in applications such as medical diagnosis, anomaly detection, and creative AI. Existing approaches, however, define minority samples relative to generative priors learned from training data, confining rarity to model-specific notions that may poorly reflect real-world semantics. In this work, we propose a world-centric perspective on minority sampling, which defines rarity with respect to real-world priors rather than generator-induced densities. To this end, we introduce JEPA guidance, a d"
+   }
+  ]
+ },
+ {
+  "query": "abs:\"sampling trajectory\" AND abs:representation AND abs:diffusion AND abs:encoder",
+  "total": 2,
+  "hits": [
+   {
+    "id": "2608.12829v1",
+    "title": "Semantic Steering for Controllable Generation: Tuning-Free Concept Erasure in Multimodal Diffusion Transformers",
+    "abs": "Multimodal Diffusion Transformers (MM-DiTs) have demonstrated remarkable text-to-image generation performance, surpassing traditional U-Net-based diffusion models. Nevertheless, their powerful generative capabilities also raise significant safety concerns, as they may generate sensitive or inappropriate content. While existing concept erasure methods aim to mitigate such risks, most require modifying model parameters, which are often architecture-specific and impractical for deployed larger models. Several tuning-free approaches face challenges when applied to advanced large-scale MM-DiTs due "
+   },
+   {
+    "id": "2603.12868v1",
+    "title": "Beyond Imitation: Reinforcement Learning Fine-Tuning for Adaptive Diffusion Navigation Policies",
+    "abs": "Diffusion-based robot navigation policies trained on large-scale imitation learning datasets, can generate multi-modal trajectories directly from the robot's visual observations, bypassing the traditional localization-mapping-planning pipeline and achieving strong zero-shot generalization. However, their performance remains constrained by the coverage of offline datasets, and when deployed in unseen settings, distribution shift often leads to accumulated trajectory errors and safety-critical failures. Adapting diffusion policies with reinforcement learning is challenging because their iterativ"
+   }
+  ]
+ },
+ {
+  "query": "abs:\"score function\" AND abs:\"representation learning\" AND abs:encoder AND abs:diffusion",
+  "total": 0,
+  "hits": []
+ },
+ {
+  "query": "abs:\"noise predictions\" AND abs:features AND abs:classifier AND abs:diffusion",
+  "total": 2,
+  "hits": [
+   {
+    "id": "2412.18797v1",
+    "title": "DRDM: A Disentangled Representations Diffusion Model for Synthesizing Realistic Person Images",
+    "abs": "Person image synthesis with controllable body poses and appearances is an essential task owing to the practical needs in the context of virtual try-on, image editing and video production. However, existing methods face significant challenges with details missing, limbs distortion and the garment style deviation. To address these issues, we propose a Disentangled Representations Diffusion Model (DRDM) to generate photo-realistic images from source portraits in specific desired poses and appearances. First, a pose encoder is responsible for encoding pose features into a high-dimensional space to"
+   },
+   {
+    "id": "2602.18936v4",
+    "title": "CRAFT-LoRA: Content-Style Personalization via Rank-Constrained Adaptation and Training-Free Fusion",
+    "abs": "Personalized image generation requires effectively balancing content fidelity with stylistic consistency when synthesizing images based on text and reference examples. Low-Rank Adaptation (LoRA) offers an efficient personalization approach, with potential for precise control through combining LoRA weights on different concepts. However, existing combination techniques face persistent challenges: entanglement between content and style representations, insufficient guidance for controlling elements' influence, and unstable weight fusion that often require additional training. We address these li"
+   }
+  ]
+ },
+ {
+  "query": "abs:\"epsilon prediction\" AND abs:representation AND abs:diffusion",
+  "total": 0,
+  "hits": []
+ },
+ {
+  "query": "abs:\"score field\" AND abs:encoder AND abs:contrastive",
+  "total": 0,
+  "hits": []
+ },
+ {
+  "query": "abs:\"denoising trajectories\" AND abs:features",
+  "total": 49,
+  "hits": [
+   {
+    "id": "2606.16673v2",
+    "title": "MMDiff: Extending Diffusion Transformers for Multi-Modal Generation",
+    "abs": "Diffusion transformers have demonstrated remarkable generative capabilities, yet the rich perceptual representations computed across their denoising trajectory are discarded once the content is rendered. We present MMDiff, a framework that transforms a frozen diffusion transformer into a multi-modal generative system that jointly produces images alongside any combination of dense perceptual modalities using lightweight decoder heads. Our central finding is that perceptual information is temporally distributed along the denoising trajectory, and that multi-timestep feature fusion with spatially"
+   },
+   {
+    "id": "2605.03317v1",
+    "title": "AHPA: Adaptive Hierarchical Prior Alignment for Diffusion Transformers",
+    "abs": "Representation alignment has recently emerged as an effective paradigm for accelerating Diffusion Transformer training. Despite their success, existing alignment methods typically impose a fixed supervision target or a fixed alignment granularity throughout the entire denoising trajectory, whether the guidance is provided by external vision encoders, internal self-representations, or VAE-derived features. We argue that such timestep-agnostic alignment is suboptimal because the useful granularity of representation supervision changes systematically with the signal-to-noise ratio. In high-noise "
+   },
+   {
+    "id": "2609.03563v1",
+    "title": "FlashRender: Few-Step Generative Rendering via Camera-Controlled Video MeanFlow",
+    "abs": "We present FlashRender, a few-step generative rendering framework that retakes a source video along a target camera trajectory in seconds. We identify sampling-step-dependent camera control as a prominent manifestation of discretization error in existing multi-step generative rendering models and show that resolving this inconsistency substantially lowers denoising trajectory curvature, facilitating subsequent step distillation. To this end, we introduce Representation Transformation and Alignment (RETA), which aligns hidden source-video representations with target-video features from a frozen"
+   },
+   {
+    "id": "2401.11949v1",
+    "title": "Feature Denoising Diffusion Model for Blind Image Quality Assessment",
+    "abs": "Blind Image Quality Assessment (BIQA) aims to evaluate image quality in line with human perception, without reference benchmarks. Currently, deep learning BIQA methods typically depend on using features from high-level tasks for transfer learning. However, the inherent differences between BIQA and these high-level tasks inevitably introduce noise into the quality-aware features. In this paper, we take an initial step towards exploring the diffusion model for feature denoising in BIQA, namely Perceptual Feature Diffusion for IQA (PFD-IQA), which aims to remove noise from quality-aware features."
+   },
+   {
+    "id": "2605.25195v2",
+    "title": "Baton: Explicit Semantic Blueprints for Joint Video-Audio Generation",
+    "abs": "Current open-source diffusion models struggle to generate stable and synchronized audio-visual content, particularly in scenarios demanding complex semantic reasoning. The root cause is that existing methods rely on coarse text embeddings from off-the-shelf encoders to guide audio-video denoising, which discards fine-grained semantics and, critically, lacks a shared long-horizon plan, leading to uncoordinated denoising trajectories and fragile cross-modal alignment. We propose Baton, the first framework that introduces explicit semantic planning into joint video-audio generation. Our key insig"
+   },
+   {
+    "id": "2611.28265v1",
+    "title": "DeFlowCritic: Dense Latent Reward Alignment for Text-to-Image Flow Matching Models",
+    "abs": "Online reinforcement learning (RL) has emerged as a powerful paradigm for aligning text-to-image flow matching models with complex user intent. However, existing methods typically rely on sparse rewards computed only from final decoded images. This delays credit assignment across the denoising trajectory and makes training computationally expensive. Moreover, simply combining multiple rewards does not reliably produce a Pareto trade-off, where gains in compositional accuracy often degrade aesthetic quality. In this work, we propose DeFlowCritic, an efficient online RL framework based on Dense "
+   },
+   {
+    "id": "2511.20390v1",
+    "title": "FREE: Uncertainty-Aware Autoregression for Parallel Diffusion Transformers",
+    "abs": "Diffusion Transformers (DiTs) achieve state-of-the-art generation quality but require long sequential denoising trajectories, leading to high inference latency. Recent speculative inference methods enable lossless parallel sampling in U-Net-based diffusion models via a drafter-verifier scheme, but their acceleration is limited on DiTs due to insufficient draft accuracy during verification. To address this limitation, we analyze the DiTs' feature dynamics and find the features of the final transformer layer (top-block) exhibit strong temporal consistency and rich semantic abstraction. Based on "
+   },
+   {
+    "id": "2508.16917v1",
+    "title": "Structural Energy-Guided Sampling for View-Consistent Text-to-3D",
+    "abs": "Text-to-3D generation often suffers from the Janus problem, where objects look correct from the front but collapse into duplicated or distorted geometry from other angles. We attribute this failure to viewpoint bias in 2D diffusion priors, which propagates into 3D optimization. To address this, we propose Structural Energy-Guided Sampling (SEGS), a training-free, plug-and-play framework that enforces multi-view consistency entirely at sampling time. SEGS defines a structural energy in a PCA subspace of intermediate U-Net features and injects its gradients into the denoising trajectory, steerin"
+   },
+   {
+    "id": "2606.02521v3",
+    "title": "Drifting Preference Optimization for One-Step Generative Models",
+    "abs": "One-step text-to-image generators are attractive for deployment because they generate an image with a single forward pass, but preference finetuning them remains difficult: standard alignment methods often rely on policy likelihoods, denoising trajectories, differentiable reward gradients, or test-time optimization. We propose Drifting Preference Optimization (DrPO), an online preference-finetuning method for deterministic one-step generators. For each prompt, DrPO samples candidates from the current generator, ranks them with a target reward, and uses high- and low-scoring samples to synthesi"
+   },
+   {
+    "id": "2603.19939v1",
+    "title": "Timestep-Aware Block Masking for Efficient Diffusion Model Inference",
+    "abs": "Diffusion Probabilistic Models (DPMs) have achieved great success in image generation but suffer from high inference latency due to their iterative denoising nature. Motivated by the evolving feature dynamics across the denoising trajectory, we propose a novel framework to optimize the computational graph of pre-trained DPMs on a per-timestep basis. By learning timestep-specific masks, our method dynamically determines which blocks to execute or bypass through feature reuse at each inference stage. Unlike global optimization methods that incur prohibitive memory costs via full-chain backpropag"
+   },
+   {
+    "id": "2511.14543v1",
+    "title": "MissHDD: Hybrid Deterministic Diffusion for Hetrogeneous Incomplete Data Imputation",
+    "abs": "Incomplete data are common in real-world tabular applications, where numerical, categorical, and discrete attributes coexist within a single dataset. This heterogeneous structure presents significant challenges for existing diffusion-based imputation models, which typically assume a homogeneous feature space and rely on stochastic denoising trajectories. Such assumptions make it difficult to maintain conditional consistency, and they often lead to information collapse for categorical variables or instability when numerical variables require deterministic updates. These limitations indicate tha"
+   },
+   {
+    "id": "2407.19547v4",
+    "title": "Temporal Feature Matters: A Framework for Diffusion Model Quantization",
+    "abs": "The Diffusion models, widely used for image generation, face significant challenges related to their broad applicability due to prolonged inference times and high memory demands. Efficient Post-Training Quantization (PTQ) is crucial to address these issues. However, unlike traditional models, diffusion models critically rely on the time-step for the multi-round denoising. Typically, each time-step is encoded into a hypersensitive temporal feature by several modules. Despite this, existing PTQ methods do not optimize these modules individually. Instead, they employ unsuitable reconstruction obj"
+   },
+   {
+    "id": "2605.11014v1",
+    "title": "Backbone-Equated Diffusion OOD via Sparse Internal Snapshots",
+    "abs": "Fair comparison between diffusion-based OOD detectors is challenging, as conclusions can vary with backbone choice, corruption parameterization, and test-time budget. We address this issue through a Mutualized Backbone-Equated (MBE) protocol that aligns canonical corruption levels and logical test-time cost across diffusion backbones. Within this setting, we introduce Canonical Feature Snapshots (CFS), a family of detectors that probes a frozen diffusion backbone using only a tiny number of native internal activations at canonical low-noise levels. On a controlled CIFAR-scale benchmark, the st"
+   },
+   {
+    "id": "2602.09781v2",
+    "title": "Explainability in Generative Medical Diffusion Models: A Faithfulness-Based Analysis on MRI Synthesis",
+    "abs": "This study investigates the explainability of generative diffusion models in the context of medical imaging, focusing on Magnetic resonance imaging (MRI) synthesis. Although diffusion models have shown strong performance in generating realistic medical images, their internal decision making process remains largely opaque. We present a faithfulness-based explainability framework that analyzes how prototype-based explainability methods like ProtoPNet (PPNet), Enhanced ProtoPNet (EPPNet), and ProtoPool can link the relationship between generated and training features. Our study focuses on underst"
+   },
+   {
+    "id": "2503.05156v2",
+    "title": "Accelerating Diffusion Transformer via Gradient-Optimized Cache",
+    "abs": "Feature caching has emerged as an effective strategy to accelerate diffusion transformer (DiT) sampling through temporal feature reuse. It is a challenging problem since (1) Progressive error accumulation from cached blocks significantly degrades generation quality, particularly when over 50\\% of blocks are cached; (2) Current error compensation approaches neglect dynamic perturbation patterns during the caching process, leading to suboptimal error correction. To solve these problems, we propose the Gradient-Optimized Cache (GOC) with two key innovations: (1) Cached Gradient Propagation: A gra"
+   },
+   {
+    "id": "2609.30840v1",
+    "title": "Aligning One-Step Generative Models with Reward-Weighted Transport Distillation",
+    "abs": "One-step generators enable high-quality visual generation with a single network evaluation, but their post-training is difficult: general implicit generators provide neither tractable likelihoods nor denoising trajectories, and many rewards are non-differentiable. We introduce Reward-Weighted Transport Distillation (RWTD), a post-training method that requires only generated samples and scalar reward evaluations. Rather than aligning solely to the conventional reward-tilted reference distribution, RWTD constructs an adaptive target that mixes separately tilted current and reference distribution"
+   },
+   {
+    "id": "2602.11401v1",
+    "title": "Latent Forcing: Reordering the Diffusion Trajectory for Pixel-Space Image Generation",
+    "abs": "Latent diffusion models excel at generating high-quality images but lose the benefits of end-to-end modeling. They discard information during image encoding, require a separately trained decoder, and model an auxiliary distribution to the raw data. In this paper, we propose Latent Forcing, a simple modification to existing architectures that achieves the efficiency of latent diffusion while operating on raw natural images. Our approach orders the denoising trajectory by jointly processing latents and pixels with separately tuned noise schedules. This allows the latents to act as a scratchpad f"
+   },
+   {
+    "id": "2609.39343v1",
+    "title": "The Golden Path Hypothesis: Reusable Schedules in Diffusion Caching",
+    "abs": "Diffusion caching accelerates generation by replacing transformer computation with cached or predicted features at selected denoising steps. We introduce the Golden Path Hypothesis (GPH): under fixed inference conditions, prompt-independent cache schedules can achieve final-output quality comparable to the best prompt-specific schedules across prompts. We investigate the GPH across ten caching methods, four image and video models, and three cache ratios. Prompt-adaptive methods repeatedly select a small number of schedules, and reusing their most frequent schedules on new prompts closely match"
+   },
+   {
+    "id": "2502.02225v1",
+    "title": "Exploring the latent space of diffusion models directly through singular value decomposition",
+    "abs": "Despite the groundbreaking success of diffusion models in generating high-fidelity images, their latent space remains relatively under-explored, even though it holds significant promise for enabling versatile and interpretable image editing capabilities. The complicated denoising trajectory and high dimensionality of the latent space make it extremely challenging to interpret. Existing methods mainly explore the feature space of U-Net in Diffusion Models (DMs) instead of the latent space itself. In contrast, we directly investigate the latent space via Singular Value Decomposition (SVD) and di"
+   },
+   {
+    "id": "2603.05315v1",
+    "title": "Frequency-Aware Error-Bounded Caching for Accelerating Diffusion Transformers",
+    "abs": "Diffusion Transformers (DiTs) have emerged as the dominant architecture for high-quality image and video generation, yet their iterative denoising process incurs substantial computational cost during inference. Existing caching methods accelerate DiTs by reusing intermediate computations across timesteps, but they share a common limitation: treating the denoising process as uniform across time,depth, and feature dimensions. In this work, we identify three orthogonal axes of non-uniformity in DiT denoising: (1) temporal -- sensitivity to caching errors varies dramatically across the denoising t"
+   },
+   {
+    "id": "2603.01019v1",
+    "title": "BadRSSD: Backdoor Attacks on Regularized Self-Supervised Diffusion Models",
+    "abs": "Self-supervised diffusion models learn high-quality visual representations via latent space denoising. However, their representation layer poses a distinct threat: unlike traditional attacks targeting generative outputs, its unconstrained latent semantic space allows for stealthy backdoors, permitting malicious control upon triggering. In this paper, we propose BadRSSD, the first backdoor attack targeting the representation layer of self-supervised diffusion models. Specifically, it hijacks the semantic representations of poisoned samples with triggers in Principal Component Analysis (PCA) spa"
+   },
+   {
+    "id": "2605.30753v1",
+    "title": "Efficient Diffusion LLMs via Temporal-Spatial Parallel Decoding and Confidence Extrapolation",
+    "abs": "Diffusion-based large language models (dLLMs) support parallel text generation via iterative denoising, yet inference remains latency-heavy because many steps are spent on redundant refinement and repeated remasking of tokens whose final values are already determined. Prior acceleration methods mainly depend on step-local confidence heuristics or fixed schedules, which are sensitive to prompt and task variation and ignore strong positional effects within a sequence. We cast diffusion decoding as a dynamic control problem and show that token-wise denoising trajectories provide the key signal fo"
+   },
+   {
+    "id": "2609.38136v2",
+    "title": "CLeaR: A Unified Framework for Resolving the Leakage-Degradation Dilemma in Style Transfer",
+    "abs": "Style transfer aims to render target content in the style of a reference image, but existing methods often suffer from content leakage, where objects, layouts, or semantics from the style reference appear in the generated output. Although prior data-driven and training-free methods can reduce leakage, they often face a leakage-degradation dilemma: stronger content suppression may weaken style fidelity, while richer style preservation may reintroduce unwanted reference content. We identify this dilemma across the full style-transfer pipeline, including feature separation, feature-space groundin"
+   },
+   {
+    "id": "2611.29480v1",
+    "title": "OnCache: Learning Dynamic Caching Schedules for Efficient Diffusion Inference",
+    "abs": "Diffusion models have revolutionized generative tasks but incur high inference latency due to iterative denoising. Cache-based strategies accelerate inference by reusing intermediate features, yet they largely rely on static, sample-agnostic schedules. Our empirical analysis reveals two factors that these schedules overlook. (i) denoising dynamics and computational requirements vary across prompts, motivating adaptive computation allocation. (ii) sensitivity to caching errors varies across timesteps, so static schedules may reuse features at error-sensitive steps or waste computation at less s"
+   },
+   {
+    "id": "2410.23530v5",
+    "title": "There and Back Again: On the relation between Noise and Image Inversions in Diffusion Models",
+    "abs": "Diffusion Models achieve state-of-the-art performance in generating new samples but lack a low-dimensional latent space that encodes the data into editable features. Inversion-based methods address this by reversing the denoising trajectory, transferring images to their approximated starting noise. In this work, we thoroughly analyze this procedure and focus on the relation between the initial noise, the generated samples, and their corresponding latent encodings obtained through the DDIM inversion. First, we show that latents exhibit structural patterns in the form of less diverse noise predi"
+   }
+  ]
+ },
+ {
+  "query": "abs:\"trajectory\" AND abs:\"text-to-image\" AND abs:contrastive AND abs:\"noise\"  AND abs:embedding",
+  "total": 0,
+  "hits": []
+ },
+ {
+  "query": "abs:\"classifier-free guidance\" AND abs:\"difference\" AND abs:\"representation\" AND abs:encoder",
+  "total": 5,
+  "hits": [
+   {
+    "id": "2609.36014v1",
+    "title": "Persistence Forcing: Exploiting Feature Specialization in Pixel-Space Diffusion",
+    "abs": "Pixel-space diffusion Transformers (DiTs) directly operate on high-dimensional visual data, yet their hidden representations typically undergo uniform refinement across depth. Natural images, however, are inherently organized at different levels of granularity. Global structure can often be represented compactly, whereas local textures and fine details require richer representations. Motivated by this, we introduce heterogeneous refinement in pixel-space DiTs, assigning different feature groups distinct refinement budgets across depth. Consequently, an ordered feature specialization emerges: s"
+   },
+   {
+    "id": "2602.18936v4",
+    "title": "CRAFT-LoRA: Content-Style Personalization via Rank-Constrained Adaptation and Training-Free Fusion",
+    "abs": "Personalized image generation requires effectively balancing content fidelity with stylistic consistency when synthesizing images based on text and reference examples. Low-Rank Adaptation (LoRA) offers an efficient personalization approach, with potential for precise control through combining LoRA weights on different concepts. However, existing combination techniques face persistent challenges: entanglement between content and style representations, insufficient guidance for controlling elements' influence, and unstable weight fusion that often require additional training. We address these li"
+   },
+   {
+    "id": "2209.15352v2",
+    "title": "AudioGen: Textually Guided Audio Generation",
+    "abs": "We tackle the problem of generating audio samples conditioned on descriptive text captions. In this work, we propose AaudioGen, an auto-regressive generative model that generates audio samples conditioned on text inputs. AudioGen operates on a learnt discrete audio representation. The task of text-to-audio generation poses multiple challenges. Due to the way audio travels through a medium, differentiating ``objects'' can be a difficult task (e.g., separating multiple people simultaneously speaking). This is further complicated by real-world recording conditions (e.g., background noise, reverbe"
+   },
+   {
+    "id": "2606.10368v1",
+    "title": "Speech Meets ELF: Audio Conditional Continuous-Target Diffusion for Speech Recognition and Translation",
+    "abs": "Speech-to-text (S2T) systems for recognition (ASR) and translation (S2TT) typically generate discrete text tokens. In contrast, continuous-target language modelling performs generation in a continuous space, yet its potential for S2T remains unexplored. To bridge this gap, we propose ELF-S2T, an audio-conditioned continuous-target generative model for S2T. Built upon the pre-trained Embedded Language Flows (ELF) backbone, ELF-S2T processes speech via a frozen Whisper encoder and a single linear projector, prepending the resulting audio condition to the noisy text latent for in-context, flow-ma"
+   },
+   {
+    "id": "2510.19128v1",
+    "title": "A Cross-Environment and Cross-Embodiment Path Planning Framework via a Conditional Diffusion Model",
+    "abs": "Path planning for a robotic system in high-dimensional cluttered environments needs to be efficient, safe, and adaptable for different environments and hardware. Conventional methods face high computation time and require extensive parameter tuning, while prior learning-based methods still fail to generalize effectively. The primary goal of this research is to develop a path planning framework capable of generalizing to unseen environments and new robotic manipulators without the need for retraining. We present GADGET (Generalizable and Adaptive Diffusion-Guided Environment-aware Trajectory ge"
+   }
+  ]
+ },
+ {
+  "query": "abs:\"diffusion classifier\" AND abs:\"noise\" AND abs:\"learned\" AND abs:\"embedding\"",
+  "total": 1,
+  "hits": [
+   {
+    "id": "2405.00858v1",
+    "title": "Guided Conditional Diffusion Classifier (ConDiff) for Enhanced Prediction of Infection in Diabetic Foot Ulcers",
+    "abs": "To detect infected wounds in Diabetic Foot Ulcers (DFUs) from photographs, preventing severe complications and amputations. Methods: This paper proposes the Guided Conditional Diffusion Classifier (ConDiff), a novel deep-learning infection detection model that combines guided image synthesis with a denoising diffusion model and distance-based classification. The process involves (1) generating guided conditional synthetic images by injecting Gaussian noise to a guide image, followed by denoising the noise-perturbed image through a reverse diffusion process, conditioned on infection status and "
+   }
+  ]
+ }
+]
