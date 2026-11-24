@@ -28,27 +28,31 @@ composition. That is why the paste control is required.
 [CLEVR generator](https://github.com/facebookresearch/clevr-dataset-gen). The second is 128 pixels, Bradley's image size. Blender is
 not on the cluster's path, so the first step is to install it and time one batch of renders.
 
-**A small test before the go or no-go.** Step M7 trains 2 and 3 experts at 64 pixels with 5,000 images per model, on positions
-outside Bradley's 12, and scores sample-and-paste before any tuning. Three experts cannot draw 7 objects, so M7 reads how often each
+**A small test before the go or no-go.** Step M7 trained 2 and 3 experts at 64 pixels with 5,000 images per model, on positions
+outside Bradley's 12, and scored sample-and-paste before any tuning. Three experts cannot draw 7 objects, so M7 reads how often each
 expert's object is right and applies Bradley's rule. [Paste is predicted to reach 7 objects](how-far-sample-and-paste-reaches.png) when
-that rate is at least 90.6%, if objects succeed independently. At that rate object count cannot separate Paper 1 from paste, so M7
-stops and brings the owner a test where pasting fails, such as objects close enough to overlap or shade each other. Otherwise step M6
-runs each paper's method on the same models to tune the CLEVR recipe before step M4 freezes it. Neither step supports a claim.
+that rate is at least 90.6%, if objects succeed independently. Paste placed every object in 1,024 of 1,024 images at both 2 and 3
+experts, a rate of 1.0, and each expert placed its own object in 256 of 256 samples
+([M7's review](../method-search/01c-clevr-paste-first/review.md)). Object count with position-conditioned experts therefore cannot
+separate Paper 1 from paste, so step M6 does not run on these models, and Stage 2 below is Paper 1's test where pasting fails, chosen
+by the owner on 2026-11-24. M7 supports no claim.
 
 **Stage 1: the expert ladder.** Train the background, the one-network control and experts 1 and 2, then test 2 objects. Add one
 expert per rung and test one more object. Earlier experts are never retrained.
 
 **Stage 2: two experts holding several objects.** Model A sees only red objects and model B only blue, each 1, 2 or 3 at a time and
-anywhere in the frame. The 6 models pair into 9 scenes of 2 to 6 objects. Success is x red and y blue objects, all separate. These
-models see real multi-object images, so this is its own table and does not count toward the one-object target. Giving each model
-its own half of the image is not allowed, because that is two pictures pasted side by side.
+anywhere in the frame. Each model takes its count as a class label, so the 2 models pair into 9 scenes of 2 to 6 objects. Success is
+x red and y blue objects, all separate. A third model seeing only green, with scenes up to 9 objects, runs only with the owner's yes and
+only if a row holds every scene up to 6. These models see real multi-object images, so this is its own table and does not count toward
+the one-object target. Giving each model its own half of the image is not allowed, because that is two pictures pasted side by side.
+Sample-and-paste has no row here, because nothing tells it where each object goes. Loop 6's
+[Stage 2 design](../method-search/05-two-experts-by-colour/design.md) holds the bars, the scorer and the cost.
 
 These models are told which objects to draw and not where, as the digit and SDXL models are, so Stage 2 is the like-for-like test of a
 checker. Position-conditioned models already paste their objects, which leaves a checker nothing to add. Beside the plain product, Stage 2
 runs two rows. The first adds Loop 8's count checker, retrained on these models' maps at the noise levels of the sampler's early steps and
 pushing only on those steps, as in [its digit test](../abstract-checkers/06-does-it-compose/review.md). The second samples
-the product with Du et al.'s MCMC corrector, which separates a better sampler from a new mode. Session 6 costs both rows in its Stage 2
-design.
+the product with Du et al.'s MCMC corrector, which separates a better sampler from a new mode.
 
 **Inclusive labels do not run here.** Training a diffusion model on inclusive captions is too heavy for the main results, so they get
 one appendix paragraph, written from the existing toy, MNIST and SDXL results.
@@ -91,7 +95,7 @@ at equal training length:
 
 - more objects that succeed than the one-network control;
 - at least 7 objects on both the automatic scorer and a hand count of 100 images, read with the same rule for K, because Bradley's rule already places all 6 in 97 of 100 images and first clearly fails at 7;
-- for Paper 1, more objects than the sample-and-paste control, or a win on the replacement test if paste reaches 7.
+- for Paper 1, a win on Stage 2 by the bars in its design, because paste places every object with position-conditioned experts.
 
 | Table | Printed context | What we need |
 |---|---|---|
@@ -112,8 +116,9 @@ the full render starts.
 
 | Stage | Models | GPU-hours at a quarter of that length | GPU-hours at the full length |
 |---|---|---|---|
-| Small test before the go or no-go (steps M7 and M6) | 4 | about 15, plus about 37 CPU node-hours for rendering | not run |
+| Small test before the go or no-go (step M7) | 4 | about 8.5, measured | not needed |
 | Ladder, up to 2 experts | 4 | about 15 | about 61 |
 | Ladder, up to 6 experts | 8 | about 30 | about 121 |
 | Ladder, up to 10 experts | 12 | about 46 | about 182 |
-| Two experts holding several objects | 6 | about 23 | about 91 |
+| Two experts holding several objects (Stage 2) | 2, plus M7's empty-scene model | about 7.6, plus about 67 CPU node-hours for rendering, from Loop 6's design | not costed |
+| A green expert and scenes up to 9 objects, only with the owner's yes | 1 more | about 4, plus about 33 CPU node-hours | not costed |
