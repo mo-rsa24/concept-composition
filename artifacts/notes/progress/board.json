@@ -928,14 +928,29 @@
    "updated": "2026-11-24T08:01:41+02:00"
   },
   {
+   "id": "W2d",
+   "label": "W2d Binding read by sentence scores",
+   "owner": "s9",
+   "proof": "noise-text-critic/02d-binding/review.md reports part binding on CO3's 96 pictures (two blind labellers and their agreement) and colour binding on rebuilt labels, at the finished picture and steps 0 to 15, against the bars in its design",
+   "needs": [
+    "W2"
+   ],
+   "state": "todo",
+   "serves": "Both papers",
+   "objective": "Build and test"
+  },
+  {
    "id": "X1",
    "label": "X1 Score-path papers read",
    "owner": "s10",
    "proof": "artifacts/notes/progress/score-space/01-reading/reading-table.md has one row per paper read from its full PDF or marked not read, and records the search for encoders trained on noise predictions",
    "needs": [],
-   "state": "todo",
+   "state": "doing",
    "serves": "Both papers",
-   "objective": "Know the field"
+   "objective": "Know the field",
+   "started": "2026-11-24T08:04:53+02:00",
+   "updated": "2026-11-24T08:04:53+02:00",
+   "note": "reading started"
   },
   {
    "id": "X2",
@@ -1465,7 +1480,8 @@
       "W5",
       "W1b",
       "W2b",
-      "W2c"
+      "W2c",
+      "W2d"
      ]
     },
     {
@@ -2347,8 +2363,10 @@
    "holds": "W3",
    "default": "Stop W3 and record that W2 found no readable step; go on to W2b and W4",
    "by": "s9",
-   "state": "open",
-   "asked": "2026-11-24T07:52:41+02:00"
+   "state": "answered",
+   "asked": "2026-11-24T07:52:41+02:00",
+   "answer": "The owner's answer in chat on 2026-11-24: stop W3 and record that W2 found no readable step from 0 to 15; go on to W2b and W4.",
+   "answered": "2026-11-24T08:06:54+02:00"
   }
  ]
 }
