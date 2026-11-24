@@ -5,7 +5,7 @@ flowchart TB
 
   subgraph NOW["Now: 2,859 training pictures"]
     direction LR
-    N1["1,603 cat and dog<br/>1,256 from 242 other pairs"] --> N2["Clean pair? learned on all 243 pairs<br/>Subject present? learned on cat and dog only"]:::warn --> N3["Small checker on<br/>noisy SDXL features"] --> N4["Push while sampling"]
+    N1["1,603 cat and dog<br/>1,256 from 242 other pairs"] --> N2["Clean pair? learned on the 201 pairs with a clean picture<br/>Subject present? learned on cat and dog only"]:::warn --> N3["Small checker on<br/>noisy SDXL features"] --> N4["Push while sampling"]
   end
 
   subgraph NEXT["Proposed: the VLM labels offline and never enters the sampler"]
