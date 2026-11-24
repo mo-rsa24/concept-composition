@@ -6,7 +6,7 @@
 #SBATCH --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82,mscluster84
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-6/logs/%x-%j.log
 # Step M7: CPU work on the renders. Submit with the code snapshot in SNAP:
-#   sbatch --export=ALL,SNAP=<snapshot> m7_data.sbatch <control|diagnose|scorer|pack> [set]
+#   sbatch --export=ALL,SNAP=<snapshot> m7_data.sbatch <control|diagnose|scorer|pack> [set] [count] [zip name]
 set -uo pipefail
 STAGE=${1:?stage}
 ROOT=/datasets/mmolefe/poe_repair_min/loop-6
@@ -23,7 +23,7 @@ echo "[$(date -u +%H:%M:%S)] job=${SLURM_JOB_ID:-none} node=$(hostname -s) snap=
 case "$STAGE" in
   control)  "$PY" "$S" control --renders "$ROOT/m7/full/renders" --out "$ROOT/m7/full/controls"; rc=$? ;;
   diagnose) "$PY" "$S" diagnose --renders "$ROOT/m7/full/renders" --out "$ROOT/m7/full/controls"; rc=$? ;;
-  pack)     "$PY" "$S" pack --renders "$ROOT/m7/full/renders" --out "$ROOT/m7/full/data" --set "${2:?set}"; rc=$? ;;
+  pack)     "$PY" "$S" pack --renders "$ROOT/m7/full/renders" --out "$ROOT/m7/full/data" --set "${2:?set}" --count "${3:-5000}" --name "${4:-$2}"; rc=$? ;;
   scorer)
     export WANDB__SERVICE_WAIT=300
     "$PY" "$(dirname "$S")/clevr_scorer.py" overfit --renders "$ROOT/m7/full/renders" --out "$ROOT/m7/full/scorer"; rc=$?

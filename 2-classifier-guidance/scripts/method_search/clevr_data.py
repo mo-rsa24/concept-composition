@@ -11,7 +11,7 @@ A pixel counts as changed when any colour channel differs from the mean empty sc
 share is pooled over the position's 256 renders, and every position must reach 95%.
 
 Usage: python clevr_data.py control|diagnose --renders <dir> --out <dir>
-       python clevr_data.py pack --renders <dir> --out <dir> --set <name> [--count 5000]
+       python clevr_data.py pack --renders <dir> --out <dir> --set <name> [--count 5000] [--name <zip name>]
 """
 import argparse
 import io
@@ -132,7 +132,8 @@ def pack(args):
     """Writes one set's renders as a zip of 64 by 64 PNGs, the form EDM2's dataset reader takes, and replaces the file only when complete."""
     args.out.mkdir(parents=True, exist_ok=True)
     paths = first_images(args.renders, args.set, args.count)
-    target, partial = args.out / f"{args.set}.zip", args.out / f"{args.set}.zip.partial"
+    name = args.name or args.set
+    target, partial = args.out / f"{name}.zip", args.out / f"{name}.zip.partial"
     with zipfile.ZipFile(partial, "w", zipfile.ZIP_STORED) as archive:
         for index, path in enumerate(paths):
             buffer = io.BytesIO()
@@ -156,6 +157,7 @@ def main():
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--set")
     ap.add_argument("--count", type=int, default=5000)
+    ap.add_argument("--name", help="the zip's name, when it holds only part of a set")
     args = ap.parse_args()
     {"control": control, "diagnose": diagnose, "pack": pack}[args.stage](args)
 

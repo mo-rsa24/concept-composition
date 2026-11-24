@@ -14,6 +14,7 @@ Outputs are on the cluster under `/datasets/mmolefe/poe_repair_min/loop-6/m7/`, 
 | Positions 1, 2 and 3, first pass | 93718, 93714, 93715 | `8c0c129a-15d8bdd` for position 1, `337d1be4-15d8bdd` for 2 and 3 | `full/renders/` | ended at 1,000, 996 and about 880 pictures, because the generator's visibility check leaves one file open per call and the node's limit is 1,024 |
 | Positions 1, 2 and 3, resumed from those pictures with the handle closed | 93907, 93908, 93909 | `100772b7-15d8bdd` | `full/renders/` | running, and positions 1 and 2 have each rendered past 1,024 new pictures in one process |
 | Scorer subsets s0 to s7, 250 pictures each, one job at a time | 93949 to 93956 | `100772b7-15d8bdd` | `full/renders/` | running |
+| EDM2 smoke test on the empty scenes, 16,384 images seen, then 16 samples | 94044 | `beaf1219-15d8bdd` | `smoke/models/empty/` | passed, 3 minutes 31 seconds |
 | Scorer: overfit on 16 pictures, then 1,600 train and 400 held out, on CPU | 93978 | `a6c06e83-15d8bdd` | `full/scorer/` | queued behind the last subset |
 
 ## The smoke render
@@ -23,6 +24,13 @@ Outputs are on the cluster under `/datasets/mmolefe/poe_repair_min/loop-6/m7/`, 
 All 16 placed objects landed within 0.002 of the image of where they were aimed. A picture took 4.9 to 5.3 seconds with objects and 4.5
 without. Large objects at position 3 reach the edge of the 18-pixel paste window, so the window control in the design decides whether the
 window needs fixing before any sample is scored.
+
+## Training speed
+
+The EDM2 smoke test trained `edm2-img64-xs` at 6.82 seconds per thousand images on one RTX 3090, with 128 images per GPU pass and 22 GB in use.
+At that rate one model takes about 3.8 GPU-hours for 2 million images and the four models take about 15.2, against the design's budget of 8 to
+10. EDM2's learning rate ramps up over its first 10 million images, so a 2-million-image run stays at or below 20% of the full rate. The overfit
+rung tests whether a model still learns under that ramp.
 
 ## The window control
 
