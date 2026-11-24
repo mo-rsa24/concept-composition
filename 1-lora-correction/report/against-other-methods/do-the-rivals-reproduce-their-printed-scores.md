@@ -5,7 +5,7 @@
 Rectify Then Diffuse (RTD), run from its authors' own code at their printed settings, scores an ImageReward of 0.2423 on
 the 988 T2I-CompBench Complex prompts the subject guard allows, against the 0.4661 its paper prints, so it does not reproduce.
 It passes on RareBench Concat, where 33 prompts make the test weak. Feynman-Kac Correctors (FKC) was not rerun, by the owner's
-choice, so its printed 0.78 stays as context. Plain SDXL on FKC's GenEval two-object prompts does reproduce its printed score,
+choice, so its printed 0.78 stays as context. Plain SDXL on FKC's [GenEval two-object](../measuring-composition/what-each-scorer-says-about-two-objects.md#geneval-two-object) prompts does reproduce its printed score,
 and that is the number a Paper 2 win on GenEval must beat.
 
 The numbers come from [the RTD review](../../../artifacts/notes/progress/reproductions/RTD/review.md) and
@@ -103,12 +103,13 @@ review).
 
 Navigation: ⬅️ [Previous](#2-fkcs-plain-sdxl-baseline-on-geneval) | 📋 [TOC](#table-of-contents) | [Next](#what-this-cannot-tell-you) ➡️
 
-**Three places where two records say different things. This page reports both and resolves none.**
+**Four places where two records say different things. This page reports both and resolves none.**
 
 | What | One source | The other source |
 |---|---|---|
 | FKC's verdict word | [the FKC review](../../../artifacts/notes/progress/reproductions/FKC/review.md), line 30: "Not tested, by the owner's choice" | [the FKC rows file](../../../artifacts/notes/progress/reproductions/FKC/rows.json), line 9: `"verdict": "not comparable"` |
 | whether FKC will run | [the FKC design](../../../artifacts/notes/progress/reproductions/FKC/design.md), line 11: "The row is waiting on its run", and FKC "does not run until the owner has seen the measured cost" | [the FKC review](../../../artifacts/notes/progress/reproductions/FKC/review.md), line 3: "FKC is not rerun, by the owner's answer to board question 41" |
+| whether CoMat has a verdict | [the CoMat review](../../../artifacts/notes/progress/reproductions/CoMat/review.md), line 3: "CoMat has no verdict yet" | [the same review](../../../artifacts/notes/progress/reproductions/CoMat/review.md), line 32: "Does CoMat reproduce its published Color score? ✅ Yes. CoMat scores 0.7696 on the 288 allowed prompts at 10 seeds (2,880 pictures), with a pass band of 0.7331 to 0.8060, and the paper prints 0.7827" (scoring job 93588, W&B `dk8g2tpx`) |
 | how many GenEval prompts are rendered | [the guard picture's data](../../../artifacts/notes/progress/reproductions/prompts-the-guard-keeps-out.json), line 111: "all 553 released prompts" under "What we render" | [the FKC review](../../../artifacts/notes/progress/reproductions/FKC/review.md), line 14: plain SDXL on "99 two-object prompts at 4 images" |
 
 ## What this cannot tell you
@@ -126,7 +127,7 @@ is responsible.
 **Anything about the prompts the guard keeps out.** Every number here is on 988 of 1,000 Complex prompts and 33 of 40 Concat
 prompts. The printed scores average all of them, so the comparison is between two slightly different prompt sets.
 
-**The other rivals.** CO3, CoMat and ToMe have no verdict yet, and they are listed under [Still open](#still-open).
+**The other rivals.** CO3 and ToMe have no verdict yet. CoMat's review both says it has none and answers its reproduction question yes; the two readings are under [Where the sources disagree](#where-the-sources-disagree). All three are listed under [Still open](#still-open).
 
 ## Concepts this uses
 
@@ -186,7 +187,7 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 
 - [ ] Why RTD misses on Complex: hardware, the ImageReward package or preprocessing, or the printed number. Nothing run separates them.
 - [ ] CO3: no verdict yet ([the CO3 review](../../../artifacts/notes/progress/reproductions/CO3/review.md)).
-- [ ] CoMat: no verdict yet; it runs on Color only, by the owner's answer to board question 43 ([the CoMat review](../../../artifacts/notes/progress/reproductions/CoMat/review.md)).
+- [ ] CoMat: its review's opening line says no verdict yet, while its line 32 records the Color score reproduced (0.7696 against 0.7827 printed); this page takes neither until the review is settled. It runs on Color only, by the owner's answer to board question 43 ([the CoMat review](../../../artifacts/notes/progress/reproductions/CoMat/review.md)).
 - [ ] ToMe: no verdict yet; it is scored on Shape and Texture only, by the owner's answer to board question 43 ([the ToMe review](../../../artifacts/notes/progress/reproductions/ToMe/review.md)).
 - [ ] The plain SDXL GenEval exemplar sheet in section 2.
 - [ ] The three disagreements under [Where the sources disagree](#where-the-sources-disagree).
