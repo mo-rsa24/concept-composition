@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-24 18:46 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-24 18:52 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -27,6 +27,7 @@ overrule one, answer it again: `python3 scripts/progress_board.py answer <number
 
 | # | The question | Decided | Why |
 |---|---|---|---|
+| 93 | Loop 6's checker cannot see CO3's failure; what happens to its search for the best checker? | **A: read the two checkers being trained now the same way first**, about 2.2 GPU-hours, before the next steps spend about 31 | Reversible, inside budget, no bar changed, and the reviewer's first fix. If neither new checker sees the failure, pausing the search for an identity reader comes to you. |
 | 91 | Which fix should Loop 12 test on CO3's borrowed parts? | **Not the default as written.** A free check on saved records first, then a place-by-place fix at about steps 15 to 30 with boxes drawn by eye as a positive control, beside a whole-canvas control; about 1.7 GPU-hours | The [reviewer](../reviewer/2026-11-24-review.md#loop-12-where-co3-leaks) found the default read its places at steps 0 to 5, where Loop 12's own picture shows both animals' predictions still drawing both bodies, the failure that closed Loop 6's region test. How the pictures are scored is yours, as question 92. |
 | 83 | Should Loop 6 close its test of whether drawing each subject in its own region stops borrowed parts, after three tries missed? | **Close it**, reporting what it found | Loop 6's own [method review](../method-search/04-bind-each-body/method-review.md) and the [reviewer](../reviewer/2026-11-24-review.md#loop-6-find-the-best-method) agree: every try split the picture using a signal that had not yet separated the two subjects, and a fourth would cost about 4.9 GPU-hours without fixing that. Costs nothing. |
 | 78 | Who runs Loop 10's small digit test of whether the experts' vote beats simply pasting their samples, for Paper 1? | **Loop 6**, after its current step | About 0.3 GPU-hours inside Loop 6's budget, and it adds the paste comparison the reviewer finds Paper 1's tests lack. |
@@ -57,7 +58,7 @@ Newest first. A default happens only if you answer with it; nothing changes whil
 
 | # | The question, in one line | Why it is yours | Default | Waiting |
 |---|---|---|---|---|
-| 80 | Should a checker choose CO3's weight-sharpness setting at each of its corrected steps ([design](../score-space/11-the-checker-chooses-on-co3.md))? First read on 6 of 12 pairs | over 3 GPU-hours on one run (about 3.1) | **The read you waited for has landed:** on 75 of 96 trajectories the checker's best balanced accuracy is 0.616 at step 25, under the 0.65 floor at every step, so it does not yet see CO3's failure. Inconclusive by count until the 21 missing trajectories are rerun (about 15 minutes, approved below). Recommendation: decline 80 if the full read stays under 0.65, since a checker that cannot see the failure cannot choose CO3's setting to fix it | since 12:25 |
+| 80 | Should a checker choose CO3's weight-sharpness setting at each of its corrected steps ([design](../score-space/11-the-checker-chooses-on-co3.md))? First read on 6 of 12 pairs | over 3 GPU-hours on one run (about 3.1) | **The full read is in: the checker does not see CO3's failure.** All 96 runs reproduced; its yes-or-no call is right at best 60% of the time (step 5, floor 65%, bar 75%), though it ranks a good picture above a bad one about 7 times in 10 ([review](../method-search/01b-balance-the-checker-data/review.md)). **Recommendation: decline.** A checker that cannot see the failure cannot choose CO3's setting to fix it | since 12:25 |
 
 Your own reading step (confirm the draft statements from your readings) is ready on the board.
 
@@ -70,7 +71,7 @@ The finish range is `session_status.py`'s, from the 52 finished steps: fastest p
 | Loop | Doing now, and why | Steps left | Estimated finish | Session | Held by |
 |---|---|---|---|---|---|
 | 4. Rivals and targets | Keeping every target current. It recorded the CLEVR paste result and placed the two-colour CLEVR test in the CLEVR plan. | 1 | none useful: it ends after the paper tables, which have not started | idle | nothing |
-| 6. Best method | Its read of whether the checker sees CO3's failure landed inconclusive by count (75 of 96 matched; best 0.616 at step 25 against a 0.75 bar and 0.65 floor). It reruns the 21 missing trajectories on card 1 after Loop 8, then trains on its fixed lists. Two-colour CLEVR renders for Paper 1 run beside it. | 9 | 4.4 h to 207.6 h | busy | card 1 after Loop 8 |
+| 6. Best method | Its full read is in: the checker it kept does not see CO3's failure (best 60% right at step 5, floor 65%). By question 93 it now reads its two new checkers the same way (about 2.2 GPU-hours) before choosing an architecture or labels. Training on card 1 and in Slurm job 94622; two-colour CLEVR renders for Paper 1 beside it. | 9 | 4.4 h to 207.6 h | busy | its own runs |
 | 7. Abstract-checker papers | Finished; its session is closed. | 0 | done | closed | nothing |
 | 8. Abstract checkers | Its last two digit checks finished on card 1 (18:24, exit 0, the stop rule never fired). The checker clearly adds to the model's own knowledge: 0.861 against 0.603 for a rule that needs no training (a lead of 0.322, standard error 0.009). But on real sampler states it reads 0.651 at steps 27 to 36, under its 0.75 bar, so the next removal test (V7) is on hold until you decide. | 3 | 1.9 h to 85.5 h | idle soon | your decision on whether the removal test runs, once Loop 8 files it |
 | 11. Drain into the pillars | Stopped by your answer on 88. Its pillar checks are done and its census found every finished verdict on a report page (14 findings, eight method folders). Its final step stays open until Loops 6 and 8 stop. | 1 | when restarted | stopped its loop | waiting for a result worth draining: Loop 8's identity checker or Loop 6's two-colour CLEVR test |
@@ -138,6 +139,7 @@ Newest first.
 | Time | To | What and why |
 |---|---|---|
 | 17:02 | Loop 8 | Its rewritten SDXL test passes the design check (stop rule, random and zero controls, comparison prompts fixed in advance, the same two-clear measure as Loop 6; about 7 GPU-hours, inside budget). Its board record goes to you as question 89. |
+| 18:52 | Loop 6 | Question 93 decided: read the two new checkers first; pausing the search returns to you if both fail. |
 | 18:46 | Loops 12 and 4 | Question 92 decided at your request: Loop 12 counts two clear subjects, drawing ignored; Loop 4 asked to update `targets/leakage-rivals.md` lines 23 and 24 and any Paper 2 row naming faithful pairs. |
 | 18:40 | Loop 12 | **Reviewer verdict: fix**, and question 91 decided against its default; question 92 left with you, so faithful pairs stand until then. |
 | 18:27 | Loop 6 | Card 1 handed over after Loop 8 finished. |

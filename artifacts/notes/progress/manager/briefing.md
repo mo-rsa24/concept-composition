@@ -3,7 +3,7 @@
 The one page to read. Loop 13 rewrites it every 6 hours, and at once when you say "updates", "brief me"
 or "where are we". The full detail is on [the status page](status.md).
 
-**Written:** 2026-11-24 18:41 (UTC+2).
+**Written:** 2026-11-24 18:52 (UTC+2).
 
 ## Contents
 
@@ -39,7 +39,7 @@ Answer with `python3 scripts/progress_board.py answer <number> "<your answer>"`,
 
 | # | The question | Default |
 |---|---|---|
-| 80 | Should a checker choose CO3's sharpness setting at each of its corrected steps (a first read costs about 3.1 GPU-hours)? The read you waited for landed: the checker does not yet see CO3's failure (best 0.616, floor 0.65), pending a 15-minute rerun of 21 trajectories. | Loop 6 runs the first read; Loop 13 recommends declining if the full read stays under 0.65 |
+| 80 | Should a checker choose CO3's sharpness setting at each of its corrected steps (about 3.1 GPU-hours)? The full read shows the checker does not see CO3's failure: right at best 60% of the time against a 65% floor. Loop 13 recommends declining. | Loop 6 runs the first read |
 
 **When Loop 11 restarts.** Loop 13 may not start sessions, so it tells you when Loop 8's identity result
 or Loop 6's two-colour CLEVR test is done; restarting Loop 11 then puts the new result on a report page.

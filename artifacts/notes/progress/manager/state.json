@@ -186,7 +186,8 @@
   "89": "answered",
   "90": "answered",
   "91": "answered",
-  "92": "answered"
+  "92": "answered",
+  "93": "answered"
  },
  "nudges": [
   {
@@ -278,6 +279,10 @@
   {
    "q": 92,
    "choice": "yes, two clear subjects (owner delegated)"
+  },
+  {
+   "q": 93,
+   "choice": "A"
   }
  ],
  "rerouted": {
@@ -341,11 +346,6 @@
    "when": "Loop 8 reports its shared-device checks finished, or at each tick: pgrep on mscluster107 and nvidia-smi card 1",
    "set": "2026-11-24T17:58:00+02:00",
    "host_job_ends": "2026-11-24T23:36:00+02:00"
-  },
-  {
-   "what": "report Loop 6's full 96-trajectory read to the owner for question 80",
-   "when": "the 21-trajectory reread on card 1 finishes",
-   "set": "2026-11-24T18:25:00+02:00"
   }
  ]
 }
