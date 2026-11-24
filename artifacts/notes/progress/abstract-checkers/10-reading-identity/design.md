@@ -46,6 +46,18 @@ V2's identity checker could not tell a canvas holding both asked digits from one
 
 **Cost:** about 1.8 GPU-hours for the grid (the two-map cells at about 11 minutes of training each, the signature cells at about 39 minutes each from eleven model calls per example), and about 0.7 for the read of digits 5 to 9 if a cell passes. Both fit inside Loop 8's remaining 22.7 of 30. **Buys:** whether identity can be read at all on this toy, and if so, at which noise and from which input.
 
+## Robustness checks
+
+The owner chose on 2026-11-24 (option A) to run three checks on the passing cell, the ten-label signature in the later window, before step V7. The bars below are in `identity_grid.py` as `MAX_SHUFFLED_BA` and `MIN_PAIR_LOWER`, written before these runs and before any per-pair score was opened.
+
+| Check | What it rules out | Bar |
+|---|---|---|
+| Second training seed (seed 1 against 0), same pool and recipe | One lucky training run | at least 0.75 on the pairs holding 4 |
+| Labels shuffled across the training pool (seed 8602), true labels at scoring | The signature carrying the answer some way other than which digits are present | at most 0.55 on the pairs holding 4 |
+| Score per pair: mean over pairs, standard error from 10,000 bootstrap draws over pairs | One easy pair carrying the pooled score | mean minus 1.96 standard errors at least 0.75, on digits 5 to 9 (10 pairs); reported for the pairs holding 4 (4 pairs) beside it |
+
+**Robust** means all three bars hold. Any failure goes to the owner before V7. Each retraining costs about 45 minutes (about 1.5 GPU-hours for both); the per-pair scores come from scores the runs already save.
+
 ## What this cannot say
 
 A pass says a checker reads digit identity on pasted canvases. Whether its gradient helps the sampler draw the right digits is V5's rerun. The later window is later in sampling, where the layout may already be fixed, so an identity push there may fix identity without moving the digits apart.

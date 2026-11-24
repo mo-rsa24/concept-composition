@@ -38,6 +38,23 @@ WINDOWS = {"early": v2.SDXL_MATCHED, "later": LATER}
 CELLS = {f"{i}-{w}": {"reader": "map", "input": i, "window": w, "updates": UPDATES}
          for i in ("base", "signature") for w in ("early", "later")}
 APART, WRONG = be.KINDS.index("apart"), be.KINDS.index("wrong")
+# Robustness bars, fixed before the robustness runs and before the per-pair scores were looked at (owner's option A).
+ROBUST_CELL = "signature-later"
+SECOND_SEED = 1
+SHUFFLE_SEED = 8602
+MAX_SHUFFLED_BA = 0.55      # a checker trained on shuffled labels must sit near chance on the pairs holding 4
+MIN_PAIR_LOWER = 0.75       # mean over pairs minus 1.96 standard errors (bootstrap over pairs) must clear the bar
+
+
+def pair_summary(by_pair):
+    """Mean balanced accuracy over pairs, its bootstrap standard error over pairs, and the weakest pair."""
+    vals = np.array([v for v in by_pair.values() if v is not None], float)
+    rng = np.random.default_rng(8603)
+    means = vals[rng.integers(len(vals), size=(10000, len(vals)))].mean(1)
+    se = float(means.std(ddof=1))
+    return {"pairs": len(vals), "mean": float(vals.mean()), "se": se, "lower": float(vals.mean() - 1.96 * se),
+            "weakest": min(by_pair, key=lambda k: by_pair[k]), "weakest_ba": float(vals.min()),
+            "pairs_at_least_bar": int((vals >= MIN_BA).sum())}
 
 
 def build_pool(mnist, digits, scale=1.0):
@@ -108,17 +125,17 @@ def make_head(cfg, dev):
 v2.inputs, v2.make_head = inputs, make_head
 
 
-def run_cell(name, cfg, model, train, tests, dev, updates=None):
+def run_cell(name, cfg, model, train, tests, dev, updates=None, seed=0):
     v2.STEPS16 = WINDOWS[cfg["window"]]
     fit = v2.overfit_one(cfg, model, train, dev)
-    head, info = v2.train(cfg, model, train, dev, updates=updates or cfg["updates"], batch=BATCH)
+    head, info = v2.train(cfg, model, train, dev, updates=updates or cfg["updates"], batch=BATCH, seed=seed)
     scores = {k: v2.evaluate(head, cfg, model, s, dev) for k, s in tests.items()}
     return head, {"cfg": cfg, "timesteps": v2.STEPS16.tolist(), "overfit": fit, **info, **scores}
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("stage", choices=["smoke", "grid", "final"])
+    ap.add_argument("stage", choices=["smoke", "grid", "final", "seed", "shuffled"])
     for flag in ("model", "mnist", "data", "out"):
         ap.add_argument(f"--{flag}", type=Path, required=True)
     ap.add_argument("--cells", default=",".join(CELLS))
@@ -151,6 +168,22 @@ def main():
                               "trained": r["trained"]["balanced_accuracy"], "passes": r["passes"], "seconds": r["seconds"]}), flush=True)
         tag = "smoke" if args.stage == "smoke" else "grid-" + args.cells.replace(",", "+")
         (args.out / f"{tag}.json").write_text(json.dumps(result, indent=1))
+        return 0
+
+    if args.stage in ("seed", "shuffled"):
+        out = args.out / f"robust-{args.stage}.json"
+        pool, pool_hash = build_pool(args.mnist, (0, 1, 2, 3))
+        if args.stage == "shuffled":
+            pool["target"] = np.random.default_rng(SHUFFLE_SEED).permutation(pool["target"])
+        seed = SECOND_SEED if args.stage == "seed" else 0
+        _, r = run_cell(ROBUST_CELL, CELLS[ROBUST_CELL], model, pool, {"holds4": holds4, "trained": trained}, dev, seed=seed)
+        ba = r["holds4"]["balanced_accuracy"]
+        r.update({"stage": args.stage, "training_seed": seed, "pool_hash": pool_hash, "labels_shuffled": args.stage == "shuffled",
+                  "pairs_holds4": pair_summary(r["holds4"]["by_pair"]),
+                  "meets": ba >= MIN_BA if args.stage == "seed" else ba <= MAX_SHUFFLED_BA})
+        out.write_text(json.dumps(r, indent=1))
+        print(json.dumps({"stage": args.stage, "holds4": ba, "trained": r["trained"]["balanced_accuracy"],
+                          "meets": r["meets"], "pairs": r["pairs_holds4"]}), flush=True)
         return 0
 
     out = args.out / "final.json"

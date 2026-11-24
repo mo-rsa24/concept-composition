@@ -6,7 +6,7 @@
 #SBATCH --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-8/logs/%x-%j.log
 # Step V6, reading identity. Submit with the code snapshot in SNAP:
-#   sbatch --export=ALL,SNAP=<snapshot> identity.sbatch <smoke|grid-base|grid-signature|grid-sig-early|grid-sig-later|final>
+#   sbatch --export=ALL,SNAP=<snapshot> identity.sbatch <smoke|grid-base|grid-signature|grid-sig-early|grid-sig-later|final|seed|shuffled>
 set -uo pipefail
 STAGE=${1:?stage}
 ROOT=/datasets/mmolefe/poe_repair_min/loop-8
@@ -45,6 +45,8 @@ case "$STAGE" in
   grid-sig-early) run grid --cells signature-early; rc=$? ;;
   grid-sig-later) run grid --cells signature-later; rc=$? ;;
   final)          run final --wandb-name loop8-v6-identity-final; rc=$? ;;
+  seed)           run seed; rc=$? ;;
+  shuffled)       run shuffled; rc=$? ;;
   *) echo "ABORT: unknown stage $STAGE"; exit 2 ;;
 esac
 echo "[$(date -u +%H:%M:%S)] DONE stage=$STAGE exit=$rc"
