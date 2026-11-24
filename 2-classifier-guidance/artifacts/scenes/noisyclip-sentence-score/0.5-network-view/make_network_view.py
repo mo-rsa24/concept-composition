@@ -614,6 +614,105 @@ def nc10():
 
 ALL = {'nc1': nc1, 'nc2': nc2, 'nc3': nc3, 'nc4': nc4, 'nc5': nc5, 'nc6': nc6, 'nc7': nc7, 'nc8': nc8, 'nc9': nc9, 'nc10': nc10}
 
+
+WC = json.loads(Path('/home/molef/PhD/concept-composition/artifacts/notes/progress/noise-text-critic/02-can-it-read/word-check/word-check.json').read_text())
+
+
+def _cd(model, prop):
+    return next(r for r in WC[model][prop] if r['pair'] == 'cat, dog')
+
+
+def nc11():
+    f = Fig('nc11-the-text-only-word-check', 1760, 1010)
+    f.words(30, 44, 'Average both word orders, and keep only what survives', 28, INK, 700)
+    cards = [('a cat to the left of a dog', 190), ('a dog to the right of a cat', 285), ('a dog to the left of a cat', 455), ('a cat to the right of a dog', 550)]
+    f.words(34, 150, 'same meaning', 18, FROZEN_TEXT, 700)
+    f.words(34, 415, 'nouns swapped', 18, FROZEN_TEXT, 700)
+    f.encoder(540, 160, 250, 430, 'Text Encoder', TEXT, frozen=True, shape='round', size=24, oid='enc')
+    f.pill(665, 138, 'frozen, CLIP ViT-L/14')
+    labels = ['u₁', 'u₂', 'u₃', 'u₄']
+    for i, (t, y) in enumerate(cards):
+        f.rect(34, y - 30, 400, 60, WHITE, INK, 1.1, 6, oid=f'card{i}')
+        f.words(234, y + 7, t, 18, INK, anchor='middle')
+        go(f, (434, y), (540, y))
+        f.strip(870, y - 15, 150, 30, TEXT, oid=f'u{i}')
+        f.words(1045, y + 8, labels[i], 20, INK)
+        go(f, (790, y), (870, y))
+    for k, (a, b, ym, name) in enumerate(((190, 285, 237, 'sum, same meaning'), (455, 550, 502, 'sum, nouns swapped'))):
+        f.circle(1140, ym, 19, WHITE, INK, 1.5, oid=f'plus{k}')
+        f.raw(Ln(1130, ym, 1150, ym, INK, 2) + Ln(1140, ym - 10, 1140, ym + 10, INK, 2))
+        go(f, (1080, a), (1140, a), (1140, ym - 19))
+        go(f, (1080, b), (1140, b), (1140, ym + 19))
+        f.strip(1200, ym - 15, 150, 30, TEXT, oid=f's{k}')
+        f.words(1275, ym - 26, name, 16, FROZEN_TEXT, anchor='middle')
+        go(f, (1159, ym), (1200, ym))
+    ym = 370
+    f.circle(1440, ym, 21, WHITE, INK, 1.5, oid='minus')
+    f.raw(Ln(1429, ym, 1451, ym, INK, 2.2))
+    go(f, (1350, 237), (1440, 237), (1440, ym - 21))
+    go(f, (1350, 502), (1440, 502), (1440, ym + 21))
+    f.strip(1520, ym - 15, 150, 30, TEXT, oid='w')
+    f.maths('w', 1700, ym, 26)
+    go(f, (1461, ym), (1520, ym))
+    f.rect(1150, 620, 580, 210, WHITE, INK, 1.3, 10, oid='ratio')
+    f.maths(r'\text{ratio}=\frac{\lVert w\rVert}{2\,\lVert u_1-u_3\rVert}', 1440, 670, 26)
+    o, b = _cd('trained', 'order')['ratio'], _cd('trained', 'bind')['ratio']
+    f.words(1440, 746, f'cat × dog, order: {o:.2f}     binding: {b:.2f}', 21, INK, 700, 'middle')
+    f.words(1440, 788, '0 for a pure sum of word slots, 1 when the whole swap survives', 15, FROZEN_TEXT, anchor='middle')
+    f.words(34, 650, 'The binding set swaps colours the same way:', 17, FROZEN_TEXT)
+    f.words(34, 678, '"a red cat and a blue dog" and "a blue dog and a red cat"', 17, FROZEN_TEXT)
+    f.words(34, 706, 'against "a blue cat and a red dog" and "a red dog and a blue cat".', 17, FROZEN_TEXT)
+    f.dotted(20, 858, 1740)
+    y = 930
+    f.words(34, 892, 'Control: the same encoder with random weights', 19, FADED_TEXT, 700)
+    f.rect(34, y - 26, 400, 52, '#f7f8f9', FAINT_LINE, 1.0, 6, oid='tcard')
+    f.words(234, y + 7, 'the same four sentences', 18, FADED_TEXT, anchor='middle')
+    f.rect(540, y - 30, 250, 60, FAINT, FAINT_LINE, 1.2, 14, oid='tenc')
+    f.words(665, y + 7, 'random weights', 20, FADED_TEXT, anchor='middle')
+    f.raw(R(870, y - 15, 150, 30, FAINT, FAINT_LINE, 1.0, 0))
+    f.obstacle('tw', 870, y - 15, 150, 30, 'rect')
+    f.maths('w', 1050, y, 22, FADED_TEXT)
+    go(f, (434, y), (540, y), color=FAINT_LINE)
+    go(f, (790, y), (870, y), color=FAINT_LINE)
+    ro, rb = _cd('random_weights', 'order')['ratio'], _cd('random_weights', 'bind')['ratio']
+    f.words(1440, y + 8, f'cat × dog, order: {ro:.2f}     binding: {rb:.2f}', 21, FADED_TEXT, 700, 'middle')
+    f.words(30, 990, "Text only: no image is read, so this says nothing about NoisyCLIP's image side. Values from word-check.json.", 16, FROZEN_TEXT)
+    f.write(HERE, 'Four sentences of one swap set pass the frozen text encoder. The two same-meaning vectors are summed, the two swapped ones are summed, and their difference w is what a sum of word slots cannot make. Cat and dog give 0.33 for order and 0.61 for binding, against 0.08 and 0.11 with random weights.')
+
+
+def nc12():
+    f = Fig('nc12-what-survives-for-six-noun-pairs', 1600, 700)
+    f.words(30, 44, 'Binding survives averaging in trained CLIP, and order survives a little', 26, INK, 700)
+    x0, x1 = 360, 1530
+    px = lambda v: x0 + v * (x1 - x0)
+    rows = [('binding, trained', 'trained', 'bind'), ('binding, random weights', 'random_weights', 'bind'),
+            ('order, trained', 'trained', 'order'), ('order, random weights', 'random_weights', 'order')]
+    for i, (name, m, p) in enumerate(rows):
+        y = 150 + i * 105
+        faded = m == 'random_weights'
+        f.words(x0 - 24, y + 7, name, 19, FADED_TEXT if faded else INK, 400 if faded else 700, 'end')
+        f.raw(Ln(x0, y, x1, y, '#eceff2', 1.0))
+        for r_ in WC[m][p]:
+            v = r_['ratio']
+            cat = r_['pair'] == 'cat, dog'
+            f.raw(f'<circle cx="{px(v):.1f}" cy="{y}" r="{11 if cat else 8}" fill="{FAINT if faded else ("#8d76d1" if cat else TEXT)}" stroke="{FADED_TEXT if faded else INK}" stroke-width="{1.6 if cat else 1}"/>')
+        mean = WC[m][f'{p}_mean_ratio']
+        f.raw(Ln(px(mean), y - 24, px(mean), y + 24, FADED_TEXT if faded else INK, 2.4))
+        f.words(px(mean), y - 32, f'mean {mean:.2f}', 15, FADED_TEXT if faded else INK, 700, 'middle')
+    ya = 150 + 4 * 105 - 40
+    f.raw(Ln(x0, ya, x1, ya, INK, 1.3))
+    for v in (0, .25, .5, .75, 1):
+        f.raw(Ln(px(v), ya, px(v), ya + 7, INK, 1.2))
+        f.words(px(v), ya + 30, f'{v:g}', 16, INK, anchor='middle')
+    f.words(px(0), ya + 58, 'pure sum of word slots', 15, FROZEN_TEXT)
+    f.words(px(1), ya + 58, 'whole swap survives', 15, FROZEN_TEXT, anchor='end')
+    f.words((x0 + x1) / 2, ya + 90, 'ratio ‖w‖ / (2 ‖swap‖), one dot per noun pair, the larger dot is cat × dog', 17, INK, anchor='middle')
+    f.write(HERE, 'Ratio of what survives averaging, from 0 to 1, for six noun pairs: binding near 0.72 and order near 0.28 in trained CLIP, against 0.13 and 0.08 with random weights.')
+
+
+ALL['nc11'] = nc11
+ALL['nc12'] = nc12
+
 if __name__ == '__main__':
     bad = 0
     for key in (sys.argv[1:] or ALL):

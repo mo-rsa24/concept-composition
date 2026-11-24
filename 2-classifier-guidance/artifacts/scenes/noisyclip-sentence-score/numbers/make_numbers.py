@@ -142,7 +142,36 @@ paper = {
     "separation_mark": {"value": "latent 10, against about 20 iterations later for frozen CLIP", "page": 10},
 }
 
-out = {"clip": clip, "parameters": parameters, "checkpoint": compared, "linear_map": linear_map, "preprocess": preprocess,
+nc = json.loads((SRC / "noisyclip-config.json").read_text())
+ncv = nc["vision_config"]
+noisyclip_config = {
+    "kind": "config, asiimo/noisyclip config.json (the published checkpoint's own config, not its weights)",
+    "image_size": ncv["image_size"], "patch_size": ncv["patch_size"], "patch_grid": ncv["image_size"] // ncv["patch_size"],
+    "vision_layers": ncv["num_hidden_layers"], "vision_width": ncv["hidden_size"], "text_layers": nc["text_config"]["num_hidden_layers"],
+    "shared_width": nc["projection_dim"],
+    "matches_base_config": all(ncv[k] == v[k] for k in ("image_size", "patch_size", "num_hidden_layers", "hidden_size")) and nc["projection_dim"] == cfg["projection_dim"],
+}
+
+lc = json.loads((SRC / "latent-vit-b-4-512-plus-config.json").read_text())
+lcv = lc["vision_cfg"]
+latent_side = lcv["image_size"] // lcv["latent_factor"]
+latent_clip = {
+    "kind": "config, wendlerc/latent-clip-b-4-512-plus-34b-80k Latent-ViT-B-4-512-plus.json",
+    "latent_channels": lcv["latent_n_channels"], "latent_side": latent_side, "patch_size": lcv["patch_size"],
+    "patch_grid": latent_side // lcv["patch_size"], "patches": (latent_side // lcv["patch_size"]) ** 2,
+    "vision_layers": lcv["layers"], "vision_width": lcv["width"], "text_layers": lc["text_cfg"]["layers"],
+    "text_width": lc["text_cfg"]["width"], "shared_width": lc["embed_dim"], "unscale_divisor": 0.13025,
+}
+grid = (32, 64)
+w4_design = {
+    "kind": "design, artifacts/notes/progress/noise-text-critic/04-train-our-own/design.md",
+    "canvas": list(grid), "block_widths": [64, 128, 256, 256],
+    "grids_after_each_block": [[grid[0] // 2 ** (k + 1), grid[1] // 2 ** (k + 1)] for k in range(4)],
+    "flattened": 256 * (grid[0] // 16) * (grid[1] // 16), "shared_width": cfg["projection_dim"],
+    "caption_bank": 10 * 3 + 5, "steps": 16, "temperature": 0.07,
+}
+
+out = {"clip": clip, "noisyclip_config": noisyclip_config, "latent_clip": latent_clip, "w4_design": w4_design, "parameters": parameters, "checkpoint": compared, "linear_map": linear_map, "preprocess": preprocess,
        "schedule": schedule, "paper": paper}
 (HERE / "numbers.json").write_text(json.dumps(out, indent=1))
 for sect in ("parameters", "checkpoint"):

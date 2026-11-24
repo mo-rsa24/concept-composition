@@ -79,6 +79,12 @@ The pair "a cat to the left of a dog" and "a dog to the left of a cat" uses the 
 
 **On the toy.** $D = 0.9687 - 0.9995 = -0.0308$, so the toy picture starts closer to the wrong sentence.
 
+**Can the text side tell the two orders apart?** A text-only check answers this before any image is read. If a sentence vector were a sum of one vector per word slot, averaging both word orders would cancel the swap exactly.
+
+<a href="0.5-network-view/nc11-the-text-only-word-check.png"><img src="0.5-network-view/nc11-the-text-only-word-check.png" width="200" alt="Four sentences of one swap set through the frozen text encoder, the two averaged sums and their difference w, with cat and dog's ratios beside a faded random-weights twin."></a> <a href="2-miniature/mm8-one-interaction-term-survives.png"><img src="2-miniature/mm8-one-interaction-term-survives.png" width="200" alt="A toy sum of word slots with one interaction term, giving w = (2, −2, 0), with the real ratios beside the toy's ratio."></a>
+
+What survives the averaging is 0.72 of the colour-binding swap in trained CLIP, against 0.13 with random weights, and 0.28 of the left-right swap, against 0.08. So the text side carries binding and carries order weakly ([the W2 review's word check](../../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md#text-only-word-check)). This check reads no image and says nothing about NoisyCLIP's image side.
+
 ## 6. The gradient walks back to the latent
 
 The chain rule carries the score difference back through every step, and each of the latent's numbers receives its share.
@@ -109,7 +115,7 @@ $$
 
 These are the failure routes the wiring allows. Each is a question for W2 or W3, and none has been measured here.
 
-**The text side cannot tell the two sentences apart.** Identical vectors give a zero difference and a zero push.
+**The text side barely tells the two orders apart.** Identical vectors would give a zero difference and a zero push. The text-only word check finds 0.28 of the left-right swap surviving, so the order checker has a small target (section 5).
 
 **The score moves and the picture does not.** A CLIP checker on the decoded image raised its own score and did not move where the animals were ([the checker loop](../../drips/rung2-pair-aware-discriminator/checker-loop.md)), so a score that rises is not evidence on its own.
 

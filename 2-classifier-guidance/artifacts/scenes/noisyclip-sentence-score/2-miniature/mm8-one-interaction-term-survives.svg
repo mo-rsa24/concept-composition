@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1760 1010" width="1760" height="1010" role="img" aria-label="Add one term that knows which noun is on which side, and w is no longer zero" font-family="IBM Plex Sans, Helvetica, Arial, sans-serif">
+<rect width="1760" height="1010" fill="#ffffff"/>
+<defs><filter id="soft-halo" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="9"/></filter></defs>
+<text font-family="DejaVu Sans" x="30.0" y="44.0" font-size="26" fill="#2b3440" font-weight="700" text-anchor="start">Add one term that knows which noun is on which side, and w is no longer zero</text>
+<text font-family="DejaVu Sans" x="30.0" y="130.0" font-size="20" fill="#2b3440" font-weight="700" text-anchor="start">Word-slot vectors</text>
+<text font-family="DejaVu Sans" x="470.0" y="130.0" font-size="20" fill="#2b3440" font-weight="700" text-anchor="start">Four sentences, as sums</text>
+<text font-family="DejaVu Sans" x="1330.0" y="130.0" font-size="20" fill="#2b3440" font-weight="700" text-anchor="start">Average both orders</text>
+<text font-family="DejaVu Sans" x="30.0" y="196.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="start">cat in the first slot</text>
+<rect x="300.0" y="168.0" width="120.0" height="44.0" rx="8" fill="#e3dcf6" stroke="#b9a7e8" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="360.0" y="195.9" font-size="17" fill="#2b3440" font-weight="400" text-anchor="middle">(2, 1, 0)</text>
+<text font-family="DejaVu Sans" x="30.0" y="262.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="start">dog in the first slot</text>
+<rect x="300.0" y="234.0" width="120.0" height="44.0" rx="8" fill="#e3dcf6" stroke="#b9a7e8" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="360.0" y="261.9" font-size="17" fill="#2b3440" font-weight="400" text-anchor="middle">(0, 1, 2)</text>
+<text font-family="DejaVu Sans" x="30.0" y="328.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="start">cat in the second slot</text>
+<rect x="300.0" y="300.0" width="120.0" height="44.0" rx="8" fill="#e3dcf6" stroke="#b9a7e8" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="360.0" y="327.9" font-size="17" fill="#2b3440" font-weight="400" text-anchor="middle">(1, 0, 1)</text>
+<text font-family="DejaVu Sans" x="30.0" y="394.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="start">dog in the second slot</text>
+<rect x="300.0" y="366.0" width="120.0" height="44.0" rx="8" fill="#e3dcf6" stroke="#b9a7e8" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="360.0" y="393.9" font-size="17" fill="#2b3440" font-weight="400" text-anchor="middle">(0, 2, 1)</text>
+<text font-family="DejaVu Sans" x="30.0" y="460.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="start">&quot;to the left of&quot;</text>
+<rect x="300.0" y="432.0" width="120.0" height="44.0" rx="8" fill="#e3dcf6" stroke="#b9a7e8" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="360.0" y="459.9" font-size="17" fill="#2b3440" font-weight="400" text-anchor="middle">(0, 0, 1)</text>
+<text font-family="DejaVu Sans" x="30.0" y="526.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="start">&quot;to the right of&quot;</text>
+<rect x="300.0" y="498.0" width="120.0" height="44.0" rx="8" fill="#e3dcf6" stroke="#b9a7e8" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="360.0" y="526.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="middle">(1, 0, 0)</text>
+<rect x="30.0" y="580.0" width="390.0" height="196.0" rx="10" fill="#f4f0fc" stroke="#8d76d1" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="48.0" y="610.0" font-size="17" fill="#2b3440" font-weight="700" text-anchor="start">The added interaction term</text>
+<text font-family="DejaVu Sans" x="48.0" y="642.0" font-size="15" fill="#2b3440" font-weight="400" text-anchor="start">c × side × (n first − n second), c = 0.5</text>
+<text font-family="DejaVu Sans" x="48.0" y="672.0" font-size="15" fill="#2b3440" font-weight="400" text-anchor="start">n cat (1, 0, 0), n dog (0, 1, 0)</text>
+<text font-family="DejaVu Sans" x="48.0" y="702.0" font-size="15" fill="#2b3440" font-weight="400" text-anchor="start">side +1 for &quot;left of&quot;, −1 for &quot;right of&quot;</text>
+<text font-family="DejaVu Sans" x="48.0" y="732.0" font-size="15" fill="#5f6b78" font-weight="400" text-anchor="start">It depends on which noun sits on which side.</text>
+<text font-family="DejaVu Sans" x="470.0" y="174.0" font-size="16" fill="#5f6b78" font-weight="700" text-anchor="start">same meaning</text>
+<text font-family="DejaVu Sans" x="470.0" y="220.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="start">a cat to the left of a dog</text>
+<text font-family="DejaVu Sans" x="730.0" y="220.0" font-size="16" fill="#2b3440" font-weight="400" text-anchor="start">(2, 1, 0) + (0, 0, 1) + (0, 2, 1) + (0.5, −0.5, 0)</text>
+<rect x="1150.0" y="194.0" width="120.0" height="40.0" rx="8" fill="#cec1ef" stroke="#8d76d1" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="1210.0" y="219.6" font-size="16" fill="#2b3440" font-weight="400" text-anchor="middle">(2.5, 2.5, 2)</text>
+<text font-family="DejaVu Sans" x="470.0" y="316.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="start">a dog to the right of a cat</text>
+<text font-family="DejaVu Sans" x="730.0" y="316.0" font-size="16" fill="#2b3440" font-weight="400" text-anchor="start">(0, 1, 2) + (1, 0, 0) + (1, 0, 1) + (0.5, −0.5, 0)</text>
+<rect x="1150.0" y="290.0" width="120.0" height="40.0" rx="8" fill="#cec1ef" stroke="#8d76d1" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="1210.0" y="315.6" font-size="16" fill="#2b3440" font-weight="400" text-anchor="middle">(2.5, 0.5, 3)</text>
+<text font-family="DejaVu Sans" x="470.0" y="396.0" font-size="16" fill="#5f6b78" font-weight="700" text-anchor="start">nouns swapped</text>
+<text font-family="DejaVu Sans" x="470.0" y="442.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="start">a dog to the left of a cat</text>
+<text font-family="DejaVu Sans" x="730.0" y="442.0" font-size="16" fill="#2b3440" font-weight="400" text-anchor="start">(0, 1, 2) + (0, 0, 1) + (1, 0, 1) + (−0.5, 0.5, 0)</text>
+<rect x="1150.0" y="416.0" width="120.0" height="40.0" rx="8" fill="#cec1ef" stroke="#8d76d1" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="1210.0" y="441.6" font-size="16" fill="#2b3440" font-weight="400" text-anchor="middle">(0.5, 1.5, 4)</text>
+<text font-family="DejaVu Sans" x="470.0" y="538.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="start">a cat to the right of a dog</text>
+<text font-family="DejaVu Sans" x="730.0" y="538.0" font-size="16" fill="#2b3440" font-weight="400" text-anchor="start">(2, 1, 0) + (1, 0, 0) + (0, 2, 1) + (−0.5, 0.5, 0)</text>
+<rect x="1150.0" y="512.0" width="120.0" height="40.0" rx="8" fill="#cec1ef" stroke="#8d76d1" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="1210.0" y="537.6" font-size="16" fill="#2b3440" font-weight="400" text-anchor="middle">(2.5, 3.5, 1)</text>
+<text font-family="DejaVu Sans" x="1330.0" y="232.0" font-size="16" fill="#5f6b78" font-weight="700" text-anchor="start">sum, same meaning</text>
+<rect x="1330.0" y="244.0" width="150.0" height="44.0" rx="8" fill="#cec1ef" stroke="#8d76d1" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="1405.0" y="272.3" font-size="18" fill="#2b3440" font-weight="400" text-anchor="middle">(5, 3, 5)</text>
+<text font-family="DejaVu Sans" x="1330.0" y="454.0" font-size="16" fill="#5f6b78" font-weight="700" text-anchor="start">sum, nouns swapped</text>
+<rect x="1330.0" y="466.0" width="150.0" height="44.0" rx="8" fill="#cec1ef" stroke="#8d76d1" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="1405.0" y="494.3" font-size="18" fill="#2b3440" font-weight="400" text-anchor="middle">(3, 5, 5)</text>
+<rect x="1330.0" y="610.0" width="400.0" height="120.0" rx="10" fill="#efe9fb" stroke="#8d76d1" stroke-width="1.6"/>
+<text font-family="DejaVu Sans" x="1530.0" y="652.0" font-size="16" fill="#2b3440" font-weight="400" text-anchor="middle">w = sum same meaning − sum swapped</text>
+<text font-family="DejaVu Sans" x="1530.0" y="700.0" font-size="30" fill="#2b3440" font-weight="700" text-anchor="middle">(2, −2, 0)</text>
+<text font-family="DejaVu Sans" x="1530.0" y="770.0" font-size="17" fill="#2b3440" font-weight="700" text-anchor="middle">toy ratio ‖w‖ / (2 ‖u₁ − u₃‖) = 0.47</text>
+<text font-family="DejaVu Sans" x="500.0" y="850.0" font-size="18" fill="#2b3440" font-weight="700" text-anchor="start">What the toy explains: the real ratios for cat × dog, from the word check</text>
+<rect x="500.0" y="874.0" width="290.0" height="52.0" rx="8" fill="#efe9fb" stroke="#8d76d1" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="645.0" y="906.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="middle">order, CLIP: 0.33</text>
+<rect x="810.0" y="874.0" width="290.0" height="52.0" rx="8" fill="#f6f7f9" stroke="#c9d0d7" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="955.0" y="906.0" font-size="17" fill="#9aa3ad" font-weight="400" text-anchor="middle">order, random weights: 0.08</text>
+<rect x="1120.0" y="874.0" width="290.0" height="52.0" rx="8" fill="#efe9fb" stroke="#8d76d1" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="1265.0" y="906.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="middle">binding, CLIP: 0.61</text>
+<rect x="1430.0" y="874.0" width="290.0" height="52.0" rx="8" fill="#f6f7f9" stroke="#c9d0d7" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="1575.0" y="906.0" font-size="17" fill="#9aa3ad" font-weight="400" text-anchor="middle">binding, random weights: 0.11</text>
+<text font-family="DejaVu Sans" x="30.0" y="990.0" font-size="15" fill="#5f6b78" font-weight="400" text-anchor="start">Toy with hand-set 3-number vectors, not made unit length: it explains the cancellation and predicts nothing about CLIP.</text>
+</svg>

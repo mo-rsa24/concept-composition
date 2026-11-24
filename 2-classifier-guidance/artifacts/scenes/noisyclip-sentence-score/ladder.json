@@ -19,11 +19,79 @@
     "push": "2-classifier-guidance/scripts/method_search/co3_push.py"
   },
   "style": {
-    "all levels": "clip-contrastive, approved by the owner with two fixes",
+    "overview": "annotated-explainer, Loop 7's style used as it is: overview/ov0-the-sentence-score-push.png, from ~/.claude/skills/zoom-ladder/scripts/annotated_explainer.py (family sentence-score) with STYLE_SAMPLE_IMAGE=data/pilot/seed_42/a_cat__x__a_dog/monolithic.png",
+    "deep dives": "clip-contrastive: nc1 to nc12, mm0 to mm8 and ni1 to ni6",
     "sample": "style-sample-clip-contrastive.png",
     "reference": "style-reference.md",
-    "generator": "~/.claude/skills/zoom-ladder/scripts/style_samples.py, family contrastive-matrix"
+    "generator": "~/.claude/skills/zoom-ladder/scripts/style_samples.py, families sentence-score and contrastive-matrix"
   },
+  "reading_order": [
+    {
+      "overview part": "what goes in: the two sentences and the text encoder",
+      "deep dives": [
+        "nc11",
+        "nc12",
+        "mm7",
+        "mm8"
+      ],
+      "linked": [
+        "cv2",
+        "cv2b",
+        "cv3"
+      ]
+    },
+    {
+      "overview part": "what goes in: the half-drawn picture",
+      "deep dives": [
+        "nc7"
+      ]
+    },
+    {
+      "overview part": "NoisyCLIP: latent to RGB, no VAE",
+      "deep dives": [
+        "nc3",
+        "nc4"
+      ]
+    },
+    {
+      "overview part": "NoisyCLIP: the vision encoder and its inset",
+      "deep dives": [
+        "nc5",
+        "nc6",
+        "nc1"
+      ],
+      "linked": [
+        "cv3b",
+        "cv6"
+      ]
+    },
+    {
+      "overview part": "compare: the two scores",
+      "deep dives": [
+        "nc8"
+      ],
+      "linked": [
+        "cv7",
+        "cv7b"
+      ]
+    },
+    {
+      "overview part": "third score and push",
+      "deep dives": [
+        "nc9",
+        "nc10"
+      ]
+    },
+    {
+      "overview part": "the whole path with every size",
+      "deep dives": [
+        "nc2"
+      ],
+      "linked": [
+        "cv1"
+      ]
+    }
+  ],
   "network_view_depth": "each input's path and how they join; the ViT is opened once as a tower of blocks in nc5",
   "colour_key": {
     "text": "#b9a7e8",
@@ -33,6 +101,14 @@
     "frozen or fixed": "#6b7a88"
   },
   "colour_concordance": [
+    {
+      "rung": "overview (annotated-explainer) against deep dives (clip-contrastive)",
+      "palette": "text is blue #1f5fd0 in the overview and lilac #b9a7e8 in the deep dives; the green image encoder, the orange push and the grey frozen parts match in both"
+    },
+    {
+      "rung": "overview",
+      "palette": "the overview draws the push returning to the half-drawn picture; the deep dives draw the gradient taken at x_t and subtracted from the noise prediction"
+    },
     {
       "rung": "the linked CLIP ladder figures (cv1 to cv9b)",
       "palette": "blue inputs, green hidden units, red outputs, orange for the shared space, the similarity and the loss, grey for masked or fixed. On this ladder orange means only the push."
@@ -56,6 +132,31 @@
     "/home/molef/goal-setting/learning/deep-learning/generative-models/02-stable-diffusion-and-clip/artifacts/figures/clip/network-view/cv7b-the-two-softmaxes-and-the-loss.png"
   ],
   "rungs": {
+    "overview": {
+      "state": "built: Loop 7's annotated explainer used as it is, input picture checked at full size against the subject guard",
+      "files": [
+        "overview/ov0-the-sentence-score-push.png",
+        "overview/ov0-the-sentence-score-push.svg"
+      ]
+    },
+    "overviews_other_recipes": {
+      "state": "built: annotated-explainer, nothing illustrated as a measured result",
+      "files": [
+        "overview/ov1-latent-clip-push.png",
+        "overview/ov1-latent-clip-push.svg",
+        "overview/ov2-the-linear-probe-on-frozen-vectors.png",
+        "overview/ov2-the-linear-probe-on-frozen-vectors.svg",
+        "overview/ov3-our-own-encoder-on-digits.png",
+        "overview/ov3-our-own-encoder-on-digits.svg"
+      ],
+      "families": [
+        "latent-clip-push",
+        "linear-probe",
+        "digit-encoder"
+      ],
+      "sizes": "numbers.json latent_clip and w4_design, checked against the constants in annotated_explainer.py",
+      "notes": "W2b and W4 read and do not push, so their push lane is dashed grey; W2b's seen and unseen bars are hollow; W4's canvas is a drawn stand-in"
+    },
     "0_system": {
       "state": "linked",
       "urls": [
@@ -76,6 +177,8 @@
       "new": [
         "nc1-one-model-three-uses",
         "nc10-how-the-push-joins-co3",
+        "nc11-the-text-only-word-check",
+        "nc12-what-survives-for-six-noun-pairs",
         "nc2-the-whole-read-and-push-path",
         "nc3-four-latent-channels-to-rgb",
         "nc4-clamping-kills-the-gradient",
@@ -122,6 +225,19 @@
       "subjects": "umbrella, armchair and backpack, which appear in no benchmark pool",
       "note": "drawn by Codex's image tool; every tile is a teaching drawing and none is an SDXL sample"
     },
+    "word_check": {
+      "state": "built",
+      "files": [
+        "0.5-network-view/nc11-the-text-only-word-check.png",
+        "0.5-network-view/nc12-what-survives-for-six-noun-pairs.png",
+        "2-miniature/mm7-a-sum-of-word-slots-cancels.png",
+        "2-miniature/mm8-one-interaction-term-survives.png",
+        "2-miniature/word_check_toy.py",
+        "2-miniature/word_check_toy_key.json"
+      ],
+      "source": "/home/molef/PhD/concept-composition/artifacts/notes/progress/noise-text-critic/02-can-it-read/word-check/word-check.json",
+      "note": "text only; says nothing about NoisyCLIP's image side; plain clip-contrastive, opened from the overview's text encoder"
+    },
     "2_miniature": {
       "state": "built",
       "files": [
@@ -137,7 +253,9 @@
         "mm3-the-gradient-back-to-the-latent",
         "mm4-the-push-joins-the-noise-prediction",
         "mm5-four-ways-the-gradient-dies",
-        "mm6-one-training-step"
+        "mm6-one-training-step",
+        "mm7-a-sum-of-word-slots-cancels",
+        "mm8-one-interaction-term-survives"
       ],
       "design": "2 pixels of 4 channels through the released linear map, a hand-set 2 by 6 image layer and two hand-set sentence vectors; a toy that predicts nothing about SDXL"
     },
@@ -160,7 +278,8 @@
       "files": [
         "read-through-a-small-network.md",
         "noisyclip-ladder.html"
-      ]
+      ],
+      "note": "noisyclip-ladder.html is kept as it is and does not hold the overview"
     }
   }
 }

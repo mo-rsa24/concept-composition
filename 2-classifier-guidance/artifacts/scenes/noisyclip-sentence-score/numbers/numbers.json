@@ -18,6 +18,67 @@
   "vocab": 49408,
   "shared_width": 768
  },
+ "noisyclip_config": {
+  "kind": "config, asiimo/noisyclip config.json (the published checkpoint's own config, not its weights)",
+  "image_size": 224,
+  "patch_size": 14,
+  "patch_grid": 16,
+  "vision_layers": 24,
+  "vision_width": 1024,
+  "text_layers": 12,
+  "shared_width": 768,
+  "matches_base_config": true
+ },
+ "latent_clip": {
+  "kind": "config, wendlerc/latent-clip-b-4-512-plus-34b-80k Latent-ViT-B-4-512-plus.json",
+  "latent_channels": 4,
+  "latent_side": 64,
+  "patch_size": 4,
+  "patch_grid": 16,
+  "patches": 256,
+  "vision_layers": 12,
+  "vision_width": 768,
+  "text_layers": 12,
+  "text_width": 640,
+  "shared_width": 640,
+  "unscale_divisor": 0.13025
+ },
+ "w4_design": {
+  "kind": "design, artifacts/notes/progress/noise-text-critic/04-train-our-own/design.md",
+  "canvas": [
+   32,
+   64
+  ],
+  "block_widths": [
+   64,
+   128,
+   256,
+   256
+  ],
+  "grids_after_each_block": [
+   [
+    16,
+    32
+   ],
+   [
+    8,
+    16
+   ],
+   [
+    4,
+    8
+   ],
+   [
+    2,
+    4
+   ]
+  ],
+  "flattened": 2048,
+  "shared_width": 768,
+  "caption_bank": 35,
+  "steps": 16,
+  "temperature": 0.07
+ },
  "parameters": {
   "kind": "counted from the config on the meta device",
   "vision_model": 303179776,

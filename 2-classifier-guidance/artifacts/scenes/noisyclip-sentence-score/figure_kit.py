@@ -37,6 +37,7 @@ FIXED_FILL = '#e6e9ec'
 FAINT = '#f6f7f9'
 FAINT_LINE = '#c9d0d7'
 FROZEN_TEXT = '#5f6b78'
+FADED_TEXT = '#9aa3ad'
 WHITE = '#ffffff'
 GREY = FIXED
 TOLERANCE = 2.0

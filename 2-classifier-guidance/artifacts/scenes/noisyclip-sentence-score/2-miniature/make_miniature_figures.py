@@ -321,6 +321,84 @@ def mm6():
 
 
 ALL = {'mm0': mm0, 'mm1': mm1, 'mm2': mm2, 'mm3': mm3, 'mm4': mm4, 'mm5': mm5, 'mm6': mm6}
+
+WK = json.loads((HERE / 'word_check_toy_key.json').read_text())
+
+
+def vec(v):
+    return '(' + ', '.join(('0' if abs(x) < 1e-12 else (str(int(x)) if float(x).is_integer() else f'{x:g}')).replace('-', '−') for x in v) + ')'
+
+
+def word_check_figure(stem, title, part, interaction):
+    k = WK[part]
+    sl = WK['slot_vectors']
+    f = Fig(stem, 1760, 1010 if interaction else 900)
+    f.words(30, 44, title, 26, INK, 700)
+    f.words(30, 130, 'Word-slot vectors', 20, INK, 700)
+    f.words(470, 130, 'Four sentences, as sums', 20, INK, 700)
+    f.words(1330, 130, 'Average both orders', 20, INK, 700)
+    rows = [('cat in the first slot', sl['first']['cat']), ('dog in the first slot', sl['first']['dog']),
+            ('cat in the second slot', sl['second']['cat']), ('dog in the second slot', sl['second']['dog']),
+            ('"to the left of"', sl['relation']['left']), ('"to the right of"', sl['relation']['right'])]
+    for i, (name, v) in enumerate(rows):
+        y = 190 + i * 66
+        f.words(30, y + 6, name, 17, INK)
+        f.chip(300, y - 22, 120, 44, vec(v), mix(TEXT, .6), TEXT, 17, oid=f'slot{i}')
+    if interaction:
+        y = 190 + 6 * 66 + 20
+        f.rect(30, y - 26, 390, 196, '#f4f0fc', '#8d76d1', 1.3, 10, oid='inter')
+        f.words(48, y + 4, 'The added interaction term', 17, INK, 700)
+        f.words(48, y + 36, f"c × side × (n first − n second), c = {WK['interaction_weight']:g}", 15, INK)
+        f.words(48, y + 66, f"n cat {vec(sl['noun_read']['cat'])}, n dog {vec(sl['noun_read']['dog'])}", 15, INK)
+        f.words(48, y + 96, 'side +1 for "left of", −1 for "right of"', 15, INK)
+        f.words(48, y + 126, 'It depends on which noun sits on which side.', 15, FROZEN_TEXT)
+    order = [('xLy', 'same meaning'), ('yRx', None), ('yLx', 'nouns swapped'), ('xRy', None)]
+    for i, (key, group) in enumerate(order):
+        s_ = k['sentences'][key]
+        y = 214 + i * 96 + (30 if i > 1 else 0)
+        if group:
+            f.words(470, y - 40, group, 16, FROZEN_TEXT, 700)
+        f.words(470, y + 6, s_['text'], 17, INK)
+        first, rel, second = {'xLy': ('cat', 'left', 'dog'), 'yRx': ('dog', 'right', 'cat'), 'yLx': ('dog', 'left', 'cat'), 'xRy': ('cat', 'right', 'dog')}[key]
+        eq = f"{vec(sl['first'][first])} + {vec(sl['relation'][rel])} + {vec(sl['second'][second])}"
+        if interaction:
+            eq += ' + ' + vec(s_['interaction'])
+        f.words(730, y + 6, eq, 16, INK)
+        f.chip(1150 if not interaction else 1150, y - 20, 120, 40, vec(s_['u']), mix(TEXT, .3), '#8d76d1', 16, oid=f'u{i}')
+    ys = (214 + 48, 214 + 2 * 96 + 30 + 48)
+    for j, (name, v) in enumerate((('sum, same meaning', k['same_meaning_sum']), ('sum, nouns swapped', k['swapped_sum']))):
+        f.words(1330, ys[j] - 30, name, 16, FROZEN_TEXT, 700)
+        f.chip(1330, ys[j] - 18, 150, 44, vec(v), mix(TEXT, .3), '#8d76d1', 18, oid=f'sum{j}')
+    zero = k['w_length'] == 0
+    f.rect(1330, 610, 400, 120, FIXED_FILL if zero else '#efe9fb', FIXED if zero else '#8d76d1', 1.6, 10, oid='w')
+    f.words(1530, 652, 'w = sum same meaning − sum swapped', 16, INK, anchor='middle')
+    f.words(1530, 700, vec(k['w']), 30, INK, 700, 'middle')
+    if zero:
+        f.words(1530, 770, 'Every word slot appears once', 16, INK, anchor='middle')
+        f.words(1530, 794, 'on each side, so all of it cancels.', 16, INK, anchor='middle')
+    else:
+        f.words(1530, 770, f"toy ratio ‖w‖ / (2 ‖u₁ − u₃‖) = {k['ratio']:.2f}", 17, INK, 700, 'middle')
+        rc = WK['real_cat_dog']
+        f.words(30 + 470, 850, 'What the toy explains: the real ratios for cat × dog, from the word check', 18, INK, 700)
+        chips = [('order, CLIP', rc['trained']['order'], '#efe9fb', '#8d76d1', INK), ('order, random weights', rc['random_weights']['order'], FAINT, FAINT_LINE, FADED_TEXT),
+                 ('binding, CLIP', rc['trained']['bind'], '#efe9fb', '#8d76d1', INK), ('binding, random weights', rc['random_weights']['bind'], FAINT, FAINT_LINE, FADED_TEXT)]
+        for i, (name, v, fill, edge, col) in enumerate(chips):
+            f.chip(500 + i * 310, 874, 290, 52, f'{name}: {v:.2f}', fill, edge, 17, col, oid=f'real{i}')
+    f.words(30, (990 if interaction else 870), 'Toy with hand-set 3-number vectors, not made unit length: it explains the cancellation and predicts nothing about CLIP.', 15, FROZEN_TEXT)
+    f.write(HERE, title)
+
+
+def mm7():
+    word_check_figure('mm7-a-sum-of-word-slots-cancels', 'A sentence built as a sum of word slots: averaging both orders cancels the swap', 'sum_of_slots', False)
+
+
+def mm8():
+    word_check_figure('mm8-one-interaction-term-survives', 'Add one term that knows which noun is on which side, and w is no longer zero', 'with_interaction', True)
+
+
+ALL['mm7'] = mm7
+ALL['mm8'] = mm8
+
 if __name__ == '__main__':
     bad = 0
     for k in (sys.argv[1:] or ALL):

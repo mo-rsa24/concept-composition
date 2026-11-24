@@ -1,0 +1,273 @@
+{
+ "note": "Toy with hand-set 3-number vectors, not made unit length. It explains why a sum of word slots cancels and predicts nothing about CLIP.",
+ "slot_vectors": {
+  "first": {
+   "cat": [
+    2.0,
+    1.0,
+    0.0
+   ],
+   "dog": [
+    0.0,
+    1.0,
+    2.0
+   ]
+  },
+  "second": {
+   "cat": [
+    1.0,
+    0.0,
+    1.0
+   ],
+   "dog": [
+    0.0,
+    2.0,
+    1.0
+   ]
+  },
+  "relation": {
+   "left": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "right": [
+    1.0,
+    0.0,
+    0.0
+   ]
+  },
+  "noun_read": {
+   "cat": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "dog": [
+    0.0,
+    1.0,
+    0.0
+   ]
+  }
+ },
+ "interaction_weight": 0.5,
+ "sum_of_slots": {
+  "sentences": {
+   "xLy": {
+    "text": "a cat to the left of a dog",
+    "slots": [
+     2.0,
+     3.0,
+     2.0
+    ],
+    "interaction": [
+     0.0,
+     -0.0,
+     0.0
+    ],
+    "u": [
+     2.0,
+     3.0,
+     2.0
+    ]
+   },
+   "yRx": {
+    "text": "a dog to the right of a cat",
+    "slots": [
+     2.0,
+     1.0,
+     3.0
+    ],
+    "interaction": [
+     0.0,
+     -0.0,
+     -0.0
+    ],
+    "u": [
+     2.0,
+     1.0,
+     3.0
+    ]
+   },
+   "yLx": {
+    "text": "a dog to the left of a cat",
+    "slots": [
+     1.0,
+     1.0,
+     4.0
+    ],
+    "interaction": [
+     -0.0,
+     0.0,
+     0.0
+    ],
+    "u": [
+     1.0,
+     1.0,
+     4.0
+    ]
+   },
+   "xRy": {
+    "text": "a cat to the right of a dog",
+    "slots": [
+     3.0,
+     3.0,
+     1.0
+    ],
+    "interaction": [
+     -0.0,
+     0.0,
+     -0.0
+    ],
+    "u": [
+     3.0,
+     3.0,
+     1.0
+    ]
+   }
+  },
+  "same_meaning_sum": [
+   4.0,
+   4.0,
+   5.0
+  ],
+  "swapped_sum": [
+   4.0,
+   4.0,
+   5.0
+  ],
+  "w": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "w_length": 0.0,
+  "swap": [
+   1.0,
+   2.0,
+   -2.0
+  ],
+  "swap_length": 3.0,
+  "ratio": 0.0
+ },
+ "with_interaction": {
+  "sentences": {
+   "xLy": {
+    "text": "a cat to the left of a dog",
+    "slots": [
+     2.0,
+     3.0,
+     2.0
+    ],
+    "interaction": [
+     0.5,
+     -0.5,
+     0.0
+    ],
+    "u": [
+     2.5,
+     2.5,
+     2.0
+    ]
+   },
+   "yRx": {
+    "text": "a dog to the right of a cat",
+    "slots": [
+     2.0,
+     1.0,
+     3.0
+    ],
+    "interaction": [
+     0.5,
+     -0.5,
+     -0.0
+    ],
+    "u": [
+     2.5,
+     0.5,
+     3.0
+    ]
+   },
+   "yLx": {
+    "text": "a dog to the left of a cat",
+    "slots": [
+     1.0,
+     1.0,
+     4.0
+    ],
+    "interaction": [
+     -0.5,
+     0.5,
+     0.0
+    ],
+    "u": [
+     0.5,
+     1.5,
+     4.0
+    ]
+   },
+   "xRy": {
+    "text": "a cat to the right of a dog",
+    "slots": [
+     3.0,
+     3.0,
+     1.0
+    ],
+    "interaction": [
+     -0.5,
+     0.5,
+     -0.0
+    ],
+    "u": [
+     2.5,
+     3.5,
+     1.0
+    ]
+   }
+  },
+  "same_meaning_sum": [
+   5.0,
+   3.0,
+   5.0
+  ],
+  "swapped_sum": [
+   3.0,
+   5.0,
+   5.0
+  ],
+  "w": [
+   2.0,
+   -2.0,
+   0.0
+  ],
+  "w_length": 2.8284,
+  "swap": [
+   2.0,
+   1.0,
+   -2.0
+  ],
+  "swap_length": 3.0,
+  "ratio": 0.4714
+ },
+ "w_formula_check": "w = 4 c (n_cat - n_dog) = [2.0, -2.0, 0.0]",
+ "real_cat_dog": {
+  "trained": {
+   "order": 0.33,
+   "bind": 0.61
+  },
+  "random_weights": {
+   "order": 0.08,
+   "bind": 0.11
+  }
+ },
+ "real_mean": {
+  "trained": {
+   "order": 0.28,
+   "bind": 0.72
+  },
+  "random_weights": {
+   "order": 0.08,
+   "bind": 0.13
+  }
+ }
+}

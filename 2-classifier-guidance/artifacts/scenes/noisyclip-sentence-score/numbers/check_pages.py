@@ -18,7 +18,9 @@ PAGES = [L / n for n in ('README.md', 'NOTATION.md', 'read-through-a-small-netwo
 NUMBER = re.compile(r'(?<![\w.#/])\d+\.\d+(?![\w.]*\d)')
 sources = [L / 'numbers/numbers.json', L / '2-miniature/miniature_answer_key.json',
            REPO / 'artifacts/notes/progress/noise-text-critic/02-can-it-read/design.md',
-           REPO / 'artifacts/notes/progress/noise-text-critic/01-reading/noisyclip.md']
+           REPO / 'artifacts/notes/progress/noise-text-critic/01-reading/noisyclip.md', L / '2-miniature/word_check_toy_key.json',
+           REPO / 'artifacts/notes/progress/noise-text-critic/02-can-it-read/word-check/word-check.json',
+           REPO / 'artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md']
 text = '\n'.join(p.read_text() for p in sources) + (PAPER.read_text() if PAPER.exists() else '')
 pool = set()
 for tok in re.findall(r'\d+\.\d+', text):

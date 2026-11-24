@@ -88,16 +88,31 @@ The bars plot the toy's score difference after that step: $-0.0984$ with no push
 
 The two latents are the same two pixels in swapped order, each paired with its own sentence. One gradient step of size 0.5 on $M$ takes the loss from 0.9264 to 0.7929. The sentence vectors do not move, because the text side is frozen.
 
+## 9. Work the word check on a toy
+
+This second toy explains the text-only word check. Its sentence vectors are hand-set sums of 3-number word-slot vectors from [the word check toy's key](word_check_toy_key.json), and they are not made unit length.
+
+<a href="mm7-a-sum-of-word-slots-cancels.png"><img src="mm7-a-sum-of-word-slots-cancels.png" width="200" alt="Word-slot vectors build four sentences as sums; the same-meaning pair and the swapped pair both sum to (4, 4, 5), so w is (0, 0, 0)."></a>
+
+Add the slot vectors for each sentence. "a cat to the left of a dog" is $(2,1,0) + (0,0,1) + (0,2,1) = (2,3,2)$. Both pairs sum to $(4,4,5)$, because every word slot appears once on each side, so $w = (0,0,0)$.
+
+<a href="mm8-one-interaction-term-survives.png"><img src="mm8-one-interaction-term-survives.png" width="200" alt="The same sums with an interaction term of 0.5 times side times the noun difference; the pairs now sum to (5, 3, 5) and (3, 5, 5), w is (2, −2, 0), and the real ratios sit beside the toy's ratio."></a>
+
+Now add one term that depends on which noun sits on which side, $c \times \text{side} \times (n_{\text{first}} - n_{\text{second}})$ with $c = 0.5$. The sums become $(5,3,5)$ and $(3,5,5)$, so $w = (2,-2,0)$, which is $4c\,(n_{\text{cat}} - n_{\text{dog}})$. The toy's ratio is 0.47.
+
+**What the toy explains.** Only a term like this one can make $w$ non-zero. Trained CLIP's ratios for cat and dog, 0.33 for order and 0.61 for binding, say its text side carries some such term. The random-weights encoder's 0.08 and 0.11 say an untrained encoder of the same shape mostly does not.
+
 <details>
 <summary>How to rerun this, and what is simplified</summary>
 
 ```bash
 cd /home/molef/PhD/concept-composition/2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/2-miniature
 CUDA_VISIBLE_DEVICES= PYTHONDONTWRITEBYTECODE=1 uv run --no-project --with torch python miniature.py
+PYTHONDONTWRITEBYTECODE=1 python3 word_check_toy.py
 PYTHONDONTWRITEBYTECODE=1 python3 make_miniature_figures.py
 ```
 
-The first command stops with an assertion error if the hand chain rule, finite differences or the classifier identity disagree. The second prints `0 crossings` for all seven figures.
+The first command stops with an assertion error if the hand chain rule, finite differences or the classifier identity disagree. The third stops if the pure sum of word slots does not cancel. The last ends with `all written 0` for all nine figures.
 
 **Simplified on purpose.** The resize and CLIP's normalisation are left out, the 24-block ViT is one linear layer, and the score multiplier in training is 10 where real NoisyCLIP uses 98.86.
 

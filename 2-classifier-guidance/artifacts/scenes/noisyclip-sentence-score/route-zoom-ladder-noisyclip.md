@@ -26,7 +26,7 @@ It worked if the output prints 427,616,513 total parameters and a red clamp shar
 
 ## Step 2: level 0.5, the network view
 
-**Reads:** `numbers/numbers.json`. **Leaves:** figures `nc1` to `nc10` in `0.5-network-view/`.
+**Reads:** `numbers/numbers.json`. **Leaves:** figures `nc1` to `nc12` in `0.5-network-view/`. Figures `nc11` and `nc12` also read the word check's numbers at `artifacts/notes/progress/noise-text-critic/02-can-it-read/word-check/word-check.json`.
 
 ```bash
 cd 0.5-network-view && PYTHONDONTWRITEBYTECODE=1 python3 make_network_view.py
@@ -54,10 +54,11 @@ Re-check every link in /home/molef/PhD/concept-composition/2-classifier-guidance
 
 ## Step 5: level 2, the miniature
 
-**Reads:** nothing outside its folder. **Leaves:** `2-miniature/miniature_answer_key.json` and figures `mm0` to `mm6`.
+**Reads:** nothing outside its folder. **Leaves:** `2-miniature/miniature_answer_key.json`, `2-miniature/word_check_toy_key.json` and figures `mm0` to `mm8`.
 
 ```bash
 cd 2-miniature && CUDA_VISIBLE_DEVICES= PYTHONDONTWRITEBYTECODE=1 uv run --no-project --with torch python miniature.py
+PYTHONDONTWRITEBYTECODE=1 python3 word_check_toy.py
 PYTHONDONTWRITEBYTECODE=1 python3 make_miniature_figures.py
 ```
 
