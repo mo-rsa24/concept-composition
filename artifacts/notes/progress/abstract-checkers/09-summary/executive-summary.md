@@ -57,6 +57,8 @@ Four of five steps are done, using about 7.3 of the loop's 30 GPU-hours. The dig
 
 **Identity read later in sampling.** Loop 9 found NoisyCLIP reads prompt match from about step 30 of 50. An identity checker pushing in a later window, beside the count checker in the early one, is the obvious next design to test. It has no step yet.
 
+**Identity read from more of the model.** Loop 10's probe on all ten digit labels' signed, unscaled noise-prediction differences told two right digits from one wrong digit at 0.655 in the SDXL-matched window, where the two normalised maps Loop 8's checker reads gave 0.511 (`score-space/05-signal/review.md`). That is still under the 0.75 pass mark, and no identity checker fed the full signature has been trained. On SDXL, Loop 9 found the readout checker on SDXL's own features reaches 0.87 by step 15 on the sampler's real states (`noise-text-critic/02c-fair-test/review.md`), so the features V4 reads carry more than the digit toy's maps do.
+
 **V4 judged against CO3, not only plain PoE.** The brief already asks V4 to report both, so a count checker that passes against plain PoE and adds nothing to CO3 will show as such.
 
 **A like-for-like CLEVR test.** Loop 6's CLEVR Stage 2 uses models told *which* objects, not *where*, the same setting as ours. Loop 8 has asked Loop 6 to add a count-checker row and a Du-sampler row there.
