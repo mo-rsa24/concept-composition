@@ -37,6 +37,12 @@
 
 **The diffusion classifier's own readout reads the most and cannot steer.** The per-label error against the true injected noise reads presence at up to 0.746 at t 495, and at 0.61 to 0.66 in the early window where nothing else reads. It needs the noise that made the canvas, so it is a judge of canvases noised from a known picture, never a push (inferred, [the X5 review](05-signal/review.md#what-the-other-inputs-read)).
 
+## Why more tuning will not lift this path
+
+The score path is computed from the noisy canvas: $d_t(c)$ is a function of $x_t$ and $t$. By the data-processing inequality it holds no more information about the clean picture than $x_t$ does. So it cannot be a third source of information beside the picture. It can only be a view of the picture that is easier to read. The signature's lead over the canvas, 0.700 against 0.593, measures how much easier: a frozen U-Net trained on many digits extracts features better than a probe trained on 4,000 canvases. Diffusion models are known to be good noise-aware feature extractors, so this is not a new kind of signal. At the brief's steps 0 to 15 the canvas holds 0.6% to 8.7% of its signal, so no reader of anything computed from it can do much there.
+
+The owner closed the loop on 2026-11-24 on this reading. The questions that replace it go to the sampler and to where the experts' data overlap, which is where both papers' failures sit. [The Paper 1 design that follows from them](10-paper-1-placement-or-sampler.md) carries them forward.
+
 ## What it suggests for Paper 1, the separate-experts paper
 
 Paper 1's checker reads where each expert's label acts on a shared canvas ([the problem statements](../problem-statements.md)). Loop 8's identity checker for that setting missed at 0.555. Its maps were the asked pair's two, made positive and normalised to sum to 1 (the `base` input of `READERS` in `2-classifier-guidance/scripts/abstract_checkers/v2_learn.py`), so they dropped the other labels, the sign and the size. X5 suggests feeding the checker every label's $d_t$, signed and unscaled, at the SDXL-matched noise. On digits that input read the pair against a wrong digit at 0.655, where the normalised maps read 0.511 (inferred). Each expert trained apart has its own null prediction, so each expert's signature subtracts its own (inferred, untested). The suggestion goes to Loop 8 and the classifier-guidance line, which own that checker. It also feeds idea D5 of [the ideas page](03-ideas.md#d-ideas-for-the-two-papers-that-need-no-training), the side vote, which this loop did not run.
