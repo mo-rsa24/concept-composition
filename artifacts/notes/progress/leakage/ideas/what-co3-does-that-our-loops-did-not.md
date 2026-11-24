@@ -1,6 +1,6 @@
 # What CO3's corrector does that our loops' pushes did not
 
-CO3 is the one method in this project that reliably gives two bodies, and its mechanism differs from every push Loops 6 to 10 tried in five ways. Each difference is a candidate design rule for Paper 2's method, and two of them are issues for the Z5 audit. The mechanism is drawn in the [CO3 zoom ladder](../../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/index.md), and every claim about the code cites `attn_utils.py` and `Co3.py` in the replications hub's `co3` checkout. Statements about what follows for Paper 2 are inferences and are marked so.
+CO3 is the one method in this project that reliably gives two bodies, and its mechanism differs from every push Loops 6 to 10 tried in five ways. Each difference is a candidate design rule for Paper 2's method, and three of them are issues for the Z5 audit. The mechanism is drawn in the [CO3 zoom ladder](../../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/index.md), and every claim about the code cites `attn_utils.py` and `Co3.py` in the replications hub's `co3` checkout. Statements about what follows for Paper 2 are inferences and are marked so.
 
 ## The five differences
 
@@ -10,7 +10,7 @@ CO3 is the one method in this project that reliably gives two bodies, and its me
 
 **3. It acts where its failure is decided.** CO3 corrects only steps 0 to 5, where the two bodies' layout is set, and the failure it targets, one subject missing, is a layout failure. The pushes in other loops chose their windows (Loop 6's kept push at steps 0 to 15, Loop 8's at sampler steps 15 to 25) before anyone checked how much of the picture the latent held there, which is the brief's fifth design issue, and none measured where its target failure is decided. Z2's three windows measure where borrowing is decided. (inferred) If borrowing is set late, a fix belongs late, where CO3 never acts.
 
-**4. Its push weakens as it succeeds.** Each pass recomputes the distances on the new latent, so as the joint prediction stops resembling one subject, the two weights move toward equal and the subtraction stops favouring either. The pushes in Loops 6 to 9 had a fixed strength and cap (strength 30, capped at 0.4 of the prediction) with no signal that the target had been reached. (inferred) A push whose size comes from the remaining gap stops itself.
+**4. Its push weakens as it succeeds.** Each pass recomputes the distances on the new latent, so as the joint prediction stops resembling one subject, the two weights move toward equal and the subtraction stops favouring either. The kept push in Loop 6 had a fixed strength and cap (strength 30, capped at 0.4 of the prediction), and Loop 9's sentence push a fixed length with no signal that the target had been reached. (inferred) A push whose size comes from the remaining gap stops itself.
 
 **5. It puts the latent back where a noisy latent belongs.** After each combination CO3 adds back the empty prompt's noise at the size the step expects ($\sqrt{1-\bar\alpha_t}\,\epsilon^{\phi}$) and rescales the result to the input latent's length (`attn_utils.py` line 257). Gradient pushes add a direction and step on. Loop 6's M9 regions gave 8 clear pairs of 8 with every picture damaged. (inferred) Re-noising and rescaling after any edit may be what keeps an edit from damaging the picture.
 
