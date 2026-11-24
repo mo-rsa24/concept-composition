@@ -1,0 +1,145 @@
+# The classifier-guidance line: a trained checker's push added to the product of experts
+
+This line asks whether the gradient of a small trained checker, added to the product of experts at each sampling step with the diffusion models frozen, makes the product draw two separate things where it draws one fused thing ([the route's quick context](../../../../../2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md#quick-context-where-you-are)). It is the proposed method of both papers, on digits for the separate-experts paper and on SDXL for the CO3 paper ([the problem statements](../../problem-statements.md)). It is not one loop and has no owner code on the progress board, so the two tables below give the route's stages, as rows of [the route's outcome board](../../../../../2-classifier-guidance/report/classifier-guided-poe/board.md), and the progress-board steps of Loops 5, 6, 8 and 9 that serve it, with each state as printed by `python3 scripts/progress_board.py show` on 2026-11-24.
+
+| Route stage | Outcome-board row | State on that board |
+|---|---|---|
+| 1: classifier guidance on the authors' released 256 px weights | G0 | done (on the void list) |
+| Repair of the product sampler's push | R0 | done |
+| 2: the exact toy | A1 | done |
+| Beside rung 2: MNIST digits, one model that saw a few pairs | A2b | done |
+| MNIST, two models trained apart, plain product base | A2d | done |
+| MNIST, the same two models composed while sampling | Plan 33 | open (on the void list) |
+| 3: our cat and dog photos, both ways | A2r, A2c | todo |
+| 4, rung 2: SDXL cat × dog on held-out seeds | A3q | issue |
+| 4, rung 3: three pair kinds | K1, K2, K3 | todo |
+| 4, rung 4: more seeds, the v58 pool, unseen pairs | A4, C1, C2 | todo |
+| Head ablations, the paper's table, explaining it | B1 to B7, P1, X1 | open or todo |
+
+The SDXL work after rung 2 ran as plans 25 to 31 and the 128-seed improvement rounds of [the rung 2 checker loop](../../../../../2-classifier-guidance/artifacts/drips/rung2-pair-aware-discriminator/checker-loop.md), whose review files sit beside [the rung 2 review](../../../../../2-classifier-guidance/plans/review/a3q-cat-x-dog-quick-discriminator-test.md). None of them ticks a board row.
+
+| Loop | Progress-board steps and their states |
+|---|---|
+| Loop 5 (`s5`) | D2 Rivals reproduce one published number: done |
+| Loop 6 (`s6`) | M1 Each method beats its simple baseline: done. M7 CLEVR paste test first: doing. M5 Checker data balanced: todo, ready. M9 Regions bind each body: todo, ready. D3, M2, D5, M3, M6, M8 and M4: todo |
+| Loop 8 (`s8`) | V1, V2 and V3: done. V5 Remove-one-checker rehearsal on digits: doing. V4 Abstract checker on SDXL's unseen objects: todo |
+| Loop 9 (`s9`) | W1, W1b and W2: done. W2c Positive control and fair test of W2: doing. W2b, W2d and W4: todo, ready. W3 Sentence score steers CO3 and W5: todo |
+
+## The idea
+
+The product of experts runs SDXL once per prompt and adds each prompt's difference from the empty prompt's prediction, and for "a cat" with "a dog" it draws one fused animal ([the rung 2 review, words](../../../../../2-classifier-guidance/plans/review/a3q-cat-x-dog-quick-discriminator-test.md#words-this-file-uses)). The line trains a small checker that reads a half-drawn picture and answers whether it is heading for two separate things, then adds the checker's gradient to the product's prediction during sampling so the picture is nudged toward the answer "yes".
+
+**One real example.** On cat × dog, the kept early push uses a readout checker that reads SDXL's own features. Its gradient is added on sampling steps 0 to 15 of 50 at strength 30, limited to 0.3 of the size of the product's own prediction, and steps 16 to 49 are the plain product. On seeds 3301 to 3332, which nothing had been tuned on, it drew two separate animals on 28 of 32 seeds, against 1 of 32 for the plain product and 1 of 32 for a random push of the same size ([plan 29's review](../../../../../2-classifier-guidance/plans/review/29-does-the-early-push-hold-on-new-seeds.md#answers)).
+
+The same push runs on 32 by 64 pixel MNIST canvases, where an asked pair such as 7 and 8 fuses into one glyph under the plain product ([the A2b review](../../../../../2-classifier-guidance/plans/review/a2b-mnist-digits-on-a-canvas.md#written-before-the-run-answered-after)).
+
+## The principle
+
+**What the product drops.** Bayes gives $\log p(x \mid \text{cat}, \text{dog}) = \log p(x) + \log p(\text{cat}, \text{dog} \mid x)$ plus a constant. The product samples as if $p(\text{cat}, \text{dog} \mid x) = p(\text{cat} \mid x)\,p(\text{dog} \mid x)$, so it drops the log ratio of the joint caption probability to the two single ones, and the gradient of that ratio is the interaction term ([the route, quick context](../../../../../2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md#quick-context-where-you-are), lines 38 to 41).
+
+**Why the checker must know the pair.** $\epsilon_{\text{cat}} - \epsilon_{\text{null}}$ already equals $-\sigma_t \nabla \log p(\text{cat} \mid x_t)$, so a checker trained on "cat present" and "dog present" separately only re-weights the product. The route therefore requires a pair-aware checker, trained to tell two separate animals from the fused animal the product draws (same source, lines 42 to 45).
+
+**The assumption it rests on.** The checker must read pair-ness from a noisy state early enough to steer, and the product must still give some probability to two-thing pictures. Plan 33's review states the second part: "A push or a sampler only reweights or explores what the target contains" ([plan 33's review, why this is asked](../../../../../2-classifier-guidance/plans/review/33-experts-that-compose-at-inference.md#why-this-is-asked)). On the exact toy the product itself composed and only the sampler failed, so the push there repaired the sampler. On SDXL the gap holds sampler error and model error together, and nothing yet separates them ([A1's page](../../../../../2-classifier-guidance/report/classifier-guided-poe/a1-exact-toy-classifier-push.md#what-it-confirms-and-what-it-doesnt)).
+
+## The theory, with its equation
+
+The route writes the guided prediction as ([the route, quick context](../../../../../2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md#quick-context-where-you-are), lines 41 to 42):
+
+$$
+\epsilon_{\text{fixed}} = \epsilon_{\text{product}} - s\,\sigma_t\,\nabla_{x_t} \log c(x_t), \qquad \sigma_t = \sqrt{1 - \bar\alpha_t}
+$$
+
+The sampler then limits the push to a fraction $\kappa$ of the product's prediction, as the early-push finding writes it ([the cap, concepts](../../../../../2-classifier-guidance/report/classifier-guided-poe/does-an-early-push-separate-the-cat-and-dog.md#concepts-this-uses)):
+
+$$
+\text{push} \leftarrow \text{push} \times \min\!\left(1,\ \frac{\kappa\,\lVert \epsilon_{\text{product}} \rVert}{\lVert \text{push} \rVert}\right)
+$$
+
+For the pair-aware checker on digits, $\log c$ is the log-odds $\log\big(d/(1-d)\big)$ of one output $d$ that reads the noisy canvas, the step and the asked pair ([the A2b review, words](../../../../../2-classifier-guidance/plans/review/a2b-mnist-digits-on-a-canvas.md#words-this-file-uses)).
+
+- $\epsilon_{\text{product}}$ is SDXL's empty-prompt prediction plus the guidance scale times the sum of each prompt's difference from it. In M1 it is CO3's guided prediction, and the push is subtracted from both CO3's guided and unconditional predictions ([the M1 design](../../method-search/01-beat-the-baseline/design.md)). Changing the base changes what the push has to reweight.
+- $s$ is the push strength. Raising it lengthens the push until the cap binds. On rung 2 the cap fired on 2 to 42% of steps at $s = 10$, 80 to 98% at $s = 30$ and 100% at $s = 100$, so 30 and 100 pushed with nearly the same size ([the rung 2 review](../../../../../2-classifier-guidance/plans/review/a3q-cat-x-dog-quick-discriminator-test.md#written-before-the-run-answered-after)).
+- $\sigma_t$ is the noise scale at step $t$. It is near 1 in the early steps and falls toward 0, so the same checker gradient moves early steps more.
+- $c(x_t)$ is the checker's probability that the noisy state $x_t$ becomes two separate, right things. Its log gradient points toward states the checker scores higher, and it carries only what the checker learned to read.
+- $\kappa$ is the cap, a fraction of the product prediction's length: 0.1 in the repaired sampler, 0.3 in the early recipe of plan 29, 0.4 in the kept 128-seed recipe ([the kept-push finding](../../../../../2-classifier-guidance/report/classifier-guided-poe/how-close-the-kept-push-comes-to-the-joint-prompt.md)). Raising it lets a longer push through, and on SDXL a cap of 0.5 gave "more damage" than 0.3 at strength 30 ([how hard and for how long](../../../../../2-classifier-guidance/report/classifier-guided-poe/does-an-early-push-separate-the-cat-and-dog.md#how-hard-and-for-how-long)).
+- The step window (steps 0 to 15 of 50 in the kept recipe) decides when the push acts. Pushing on all 50 steps "burns the colour and turns backgrounds and some animals into flat paint" on SDXL ([plan 31's review](../../../../../2-classifier-guidance/plans/review/31-bodies-and-species-pushes-on-every-step.md#answers)).
+
+## The objective, with its bar
+
+**The measured quantity** is a count of finished pictures called two separate, right things, out of the seeds drawn, and higher is better. The caller changes by stage: crisp pairs of 300 draws on the toy, clean digit pairs of 64 or 320 canvases by the digit judge or by eye on MNIST, and two separate animals or faithful pairs by eye or by the Claude API scorer on SDXL. The whole chain's objective, from the route: "each stage passes or misses a bar written before it runs, and at every stage below SDXL the pair-aware classifier is set against a separate-label one that the maths says cannot help" ([the route, quick context](../../../../../2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md#quick-context-where-you-are)).
+
+Each stage's bar, copied as written before its run:
+
+| Stage | Bar, as recorded | Source |
+|---|---|---|
+| A1, exact toy | "done when the pair-aware push draws at least 150 of 300 crisp pairs at some s with overlays no higher than unguided, and the separate-label push draws at most 15 of 300 at every s on the grid." | [route step 7](../../../../../2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md#7--port-the-push-to-the-exact-toy-separate-label-against-pair-aware) |
+| A2b, MNIST, one model | "On 7 & 8, 64 seeds, on the model where plain product fuses: plain product gives two clear, right digits on at most 8 of 64 (so there is something to fix); the pair-aware push gives at least 32 of 64 at some s; the random push and the separate-label push stay within 6 of plain product; best-of-N at matched compute stays at least 8 below the pair-aware push. On the five held-out pairs, at least 160 of 320." | [the A2b review](../../../../../2-classifier-guidance/plans/review/a2b-mnist-digits-on-a-canvas.md#the-question-written-before-the-run) |
+| Plan 33, MNIST, two models trained apart | "On the final read, one chosen setting, the other 20 pairs, seeds 64 to 127, counted by eye: at least 90% (1,152 of 1,280) clean pairs, and at least 70% (45 of 64) on every pair." | [plan 33's review](../../../../../2-classifier-guidance/plans/review/33-experts-that-compose-at-inference.md#the-bars-written-before-the-run) |
+| A3q, rung 2, SDXL cat × dog | "1. Support. At some s, composed intact on seeds 9 to 12 is at least 2 of 4, and more than best-of-N's composed intact on seeds 9 to 12, and the random push at the same s composes intact on at most 1 of 4 of seeds 9 to 12." | [the rung 2 review](../../../../../2-classifier-guidance/plans/review/a3q-cat-x-dog-quick-discriminator-test.md#the-question-written-before-the-run) |
+| Plan 29, the early push on new seeds | "Support: separate on at least 19 of 32 (60%) and clean or near-clean on at least 10 of 32 (30%), with plain PoE and the size-matched random push each at most 2 of 32 separate." | [plan 29's review](../../../../../2-classifier-guidance/plans/review/29-does-the-early-push-hold-on-new-seeds.md#questions) |
+| M1, Paper 1 row | Support when "row 3 minus row 1 is more than 1.96 standard errors above zero" (row 3 the method with the checker push, row 1 sample alone and paste), on clean digit pairs of 320 | [the M1 design](../../method-search/01-beat-the-baseline/design.md) |
+| M1, Paper 2 row | Support when "row 2 leads row 1 by at least 5 of 96 and by more than 1.96 standard errors" (row 2 CO3 with the push, row 1 CO3 alone), on faithful pairs of 96 | [the M1 design](../../method-search/01-beat-the-baseline/design.md) |
+
+The 128-seed improvement rounds carried no bar for the final count. A change was kept "when faithful pairs rose by at least 4 of 128 and two bodies did not fall" ([the kept-push finding, every improvement round](../../../../../2-classifier-guidance/report/classifier-guided-poe/how-close-the-kept-push-comes-to-the-joint-prompt.md#every-improvement-round)).
+
+## Where it stands
+
+**The route's stages.** Every number is as its review file or finding records it.
+
+| Stage | State | Verdict file | Verdict and numbers as recorded |
+|---|---|---|---|
+| G0, released weights | done | [the released-weights finding](../../../../../2-classifier-guidance/report/classifier-guided-poe/does-classifier-guidance-work-on-the-released-weights.md) | The route records all four targets as reproduced. Scale 0 gives the same picture as unguided on 4 of 4 seeds. At scale 10 the released classifier calls 16, 15 and 15 of 16 samples corgi, tabby and golden retriever, against 2, 2 and 5 at scale 1. By eye at 256 px, 9, 11 and 10 of 16. **On the void list**: the eye count also meets the route's condition for "inconclusive" on three targets ([void list](../../void-list.md)) |
+| R0, sampler repair | done | [the board](../../../../../2-classifier-guidance/report/classifier-guided-poe/board.md) | At strength 0 the repaired sampler renders cat × dog seed 9 with the same md5 as the plain product, 0 pixels differing |
+| A1, exact toy | done, pass | [A1's page](../../../../../2-classifier-guidance/report/classifier-guided-poe/a1-exact-toy-classifier-push.md) | Pair-aware push at w = 1: 172 of 300 draws crisp pairs, against 0 unguided; 300 of 300 at w = 2. Separate-label push: at most 10 of 300 over scales 1 to 10. The closed-form best separate-label classifier reaches 34 of 300 at scale 10. One seed, 300 draws per count |
+| A2b, MNIST one model | done, reading 2 "works on seen pairs only" | [the A2b review](../../../../../2-classifier-guidance/plans/review/a2b-mnist-digits-on-a-canvas.md#the-question-written-before-the-run) | Two clear, right digits of 64 on 7 and 8 at share 0.01, by eye: plain 1, pair-aware push 47 at s = 10, random push 1, best-of-2 at matched cost 1, separate-label push 15 at s = 30. Held-out pairs: 84 of 320 at s = 3 and 82 at s = 10, against 160. **On the void list**: [the A2b finding](../../../../../2-classifier-guidance/report/classifier-guided-poe/24-mnist-one-model.md) prints "84 of 320" after a sentence about strength 10 |
+| A2b follow-on loops | recorded in the same review | [the A2b review, follow-on loops](../../../../../2-classifier-guidance/plans/review/a2b-mnist-digits-on-a-canvas.md#follow-on-loops-written-before-they-run) | Loop 2 support: 217 of 320 held-out canvases by eye (200 by the judge) with the push, against 0 for the same sampler without it. Loop 4: random push 0 and 1, best-of-2 1, separate-label push 58 and 69 of 320 by the judge, so "Two of three lines hold; the separate-label line does not". Loop 5 better: the pair-aware plus separate-label push gives 285 of 320 (89%) on fresh seeds 64 to 127 by eye, against 215 for the earlier setup and 1 without a push |
+| A2d, plan 32 | done, check failed | [plan 32's finding](../../../../../2-classifier-guidance/report/classifier-guided-poe/32-mnist-two-experts.md) | Experts that draw on either side: both pushes give 4 clean pairs of 320, bar 224, plain product 0. Fixed-side experts: 139 of 320 without a push, against a control bar of 256, and 168 with both pushes |
+| Plan 33 | "inconclusive (proposed)" | [the plan 33 finding](../../../../../2-classifier-guidance/report/classifier-guided-poe/can-two-separately-trained-digit-models-compose-while-sampling.md) | With each model on a known half, 1,200 of 1,280 clean pairs by the judge on 20 unseen pairs, weakest pair 56 of 64, and 1,043 without the pushes. By eye 1,201 to 1,208, waiting for the owner. On one shared canvas with no halves, at most 121 of 320 against a bar of 288. Five Langevin extra steps add 41 of 320 against the 64 asked. **On the void list**: the plan counts by eye and the card leads with the judge, and the final seeds are 64 to 127 in one source and 128 to 191 in another |
+| A2r, A2c, our photos | todo | [the photos finding](../../../../../2-classifier-guidance/report/classifier-guided-poe/does-a-pair-aware-push-compose-our-photos.md) | No result: "the runs that would judge this stopped in a storage outage" |
+| A3q, rung 2 | issue | [the rung 2 review](../../../../../2-classifier-guidance/plans/review/a3q-cat-x-dog-quick-discriminator-test.md#the-question-written-before-the-run) | "Draft reading 7, too weak to read, with the measuring tool found unsound." Composed 0 of 4 on held-out seeds 9 to 12 in every column at every strength, by Claude's draft calls. The redesigned discriminators held 0.53 to 0.69 balanced accuracy (0.5 is chance) at every one of the first 20 steps, 0 of 20 at the 0.75 bar. **On the void list**: the alt text of the diagnostics chart in [the A3q finding](../../../../../2-classifier-guidance/report/classifier-guided-poe/a3q-cat-x-dog-quick-discriminator-test.md) |
+| Plan 25, readout checker on the product's own states | Q1 in between, Q3 null | [plan 25's review](../../../../../2-classifier-guidance/plans/review/25-the-readout-checker-on-poes-own-states.md#answers) | Balanced accuracy over steps 0 to 10 on held-out joint runs: 0.730, against 0.677 before and a bar of 0.75. 1,000 more joint runs give 0.724 |
+| Plan 29, the early push on 32 new seeds | support | [plan 29's review](../../../../../2-classifier-guidance/plans/review/29-does-the-early-push-hold-on-new-seeds.md#answers) | Separate: 28 of 32 against 1 for plain and 1 for the random push. Clean or near-clean: 14 of 32 (9 clean) against 0 and 0 |
+| Plan 30, other pairs | lion × meerkat in between, typewriter × cactus support | [plan 30's review](../../../../../2-classifier-guidance/plans/review/30-does-the-recipe-work-on-other-pairs.md#answers) | A separate lion and meerkat on 6 of 16 seeds, against 1 plain. A separate typewriter and cactus on 14 of 16, against 1 plain and 1 random |
+| Plans 26, 27, 28, 31, a second push for species | all null or no change | [26](../../../../../2-classifier-guidance/plans/review/26-two-pushes-bodies-early-species-late.md#answers-so-far), [27](../../../../../2-classifier-guidance/plans/review/27-cat-and-dog-and-not-hybrid.md#answers), [28](../../../../../2-classifier-guidance/plans/review/28-each-animal-toward-its-own-species.md#answers), [31](../../../../../2-classifier-guidance/plans/review/31-bodies-and-species-pushes-on-every-step.md#answers) | 26 Q2 null. 27 Q1 and Q2 null: no separate cat and dog on any held-out seed. 28 Q1 null: clean or near-clean on 4 of 8, the same as the early push alone. 31 Q1 no change: 15 of 32 clean or near-clean against the recipe's 14. **On the void list**: what `result-sheet-catdog-bodies` ran and what `result-sheet-catdog-species` showed, as [the second-push finding](../../../../../2-classifier-guidance/report/classifier-guided-poe/can-a-second-push-name-each-animal.md) states them |
+| The kept push on 128 seeds | no overall verdict recorded | [the kept-push finding](../../../../../2-classifier-guidance/report/classifier-guided-poe/how-close-the-kept-push-comes-to-the-joint-prompt.md) | Faithful pairs of 128 by the scorer, then clean or near-clean by eye: plain product 0 and 0, kept push 35 and 54, joint prompt 57 and 69, CO3 89 and 101. **On the void list**: each round was kept or dropped on these same seeds 6001 to 6128. The cap 0.4 round meets its damage limit under one reading of "damaged" and misses it under the other, and the choice is the owner's |
+| K1 to K3, A4, C1, C2, B1 to B7, P1, X1 | todo or open | [the board](../../../../../2-classifier-guidance/report/classifier-guided-poe/board.md) | No result yet |
+
+**The progress-board steps.**
+
+| Step | State | Verdict file | Verdict and numbers as recorded |
+|---|---|---|---|
+| D2 | done | [the reproductions table](../../reproductions/table.csv) | Board note: 20 rows, 2 reproduced, 3 not reproduced, 13 not comparable, 2 blocked |
+| M1, Paper 1 row | done, null | [the M1 review](../../method-search/01-beat-the-baseline/review.md) | The side-choosing method with the checker push draws 295 clean digit pairs of 320, and sample-and-paste draws 287. The lead of 8 is under the bar of 13.54, which is 1.96 standard errors. Read after the run with no bar: the push leads no push by 36 and the random push by 37 |
+| M1, Paper 2 row | done, null | [the M1 review](../../method-search/01-beat-the-baseline/review.md) | Faithful pairs of 96 on 12 tuning pairs: CO3 with the kept push 7, CO3 alone 11, CO3 with a random push 12. A win needed a lead of at least 5 and more than 10.08. None of the 288 pictures is one subject or a fused hybrid |
+| M7 | doing | [the M7 review](../../method-search/01c-clevr-paste-first/review.md) | "M7 has no verdict yet." |
+| M9 | todo on the board | [the M9 review](../../method-search/04-bind-each-body/review.md) | Rung 1 with bootstrapping: "regions without names". Right boxes reach 8 clear pairs of 8 and random boxes 4, and all 8 right-box pictures are damaged. Rung 2 stopped at its mask check, 11 of 24 reads failing against a limit of 6 |
+| V2 | done | [the V2 review](../../abstract-checkers/05-does-it-learn/review.md) | "Status: null" for the map reader. The count checker reaches 0.791 balanced accuracy on digits 5 to 9, which it never trained on, against a bar of 0.75. The identity checker misses its rehearsal on the pairs holding digit 4 at 0.555 |
+| V3 | done, support | [the V3 review](../../abstract-checkers/06-does-it-compose/review.md) | The count checker's push gives 43 clean pairs of 320 on 10 unseen digit pairs, against 0 for the plain product, 1 for a random push of the same length and 0 for the best of 4 seeds picked by the checker. Standard error 7.58 |
+| W2 | done, null | [the W2 review](../../noise-text-critic/02-can-it-read/review.md) | No sentence score reads any of the five properties at steps 0 to 15: 0.46 to 0.56 mean balanced accuracy against the 0.75 bar |
+| M5, D3, M2, D5, M3, M6, M8, M4, V4, V5, W2b, W2c, W2d, W3, W4, W5 | todo or doing | none yet | No result yet |
+
+**Where the sources disagree.**
+
+| What | One source | The other source |
+|---|---|---|
+| Whether the push has been added to CO3 | [The problem statements](../../problem-statements.md), Paper 2: "No run has added the push to CO3, so the method this statement proposes has no result yet." | [The M1 review](../../method-search/01-beat-the-baseline/review.md): CO3 with the kept push 7 faithful pairs of 96, CO3 alone 11, verdict null |
+| The state of step M9 | The progress board: M9 todo, ready | [The M9 review](../../method-search/04-bind-each-body/review.md): rung 1 run with the verdict "regions without names", rung 2 stopped at its mask check |
+| The headline of V2 | The progress board: V2 done, its note leading with the count checker's 0.791 | [The V2 review](../../abstract-checkers/05-does-it-learn/review.md): "Status: null", with the count checker's pass reported after it |
+
+## The closest papers from the reading
+
+**[Reduce, Reuse, Recycle](../01-reading/reduce-reuse-recycle.md).** For every $t > 0$ the sum of two noised scores differs from the score of the noised product, so reverse diffusion on the sum does not sample the product ([p. 4](https://arxiv.org/pdf/2302.11552#page=4)). This is the sampler failure the push repaired on the exact toy. The paper's fix is per-step MCMC, the same kind of extra step that added 41 of 320 in plan 33 ([Table 2, p. 6](https://arxiv.org/pdf/2302.11552#page=6)), and it fails for products of distributions that do not overlap ([p. 18](https://arxiv.org/pdf/2302.11552#page=18)), the case plan 32's either-side experts appear to be (inferred).
+
+**[Mechanisms of Projective Composition](../../noise-text-critic/01-reading/projective-composition.md)** (read by Loop 9). Summed scores compose exactly when each expert owns its own block over a shared background ([Theorem 5.3, p. 6](https://arxiv.org/pdf/2502.04549#page=6)). This is the condition plan 33 meets by giving each digit model its own half, The paper's Figure 8 groups dog, horse and cat as concepts that may not compose, and its note infers that cat and dog sit inside that group ([p. 11](https://arxiv.org/pdf/2502.04549#page=11)).
+
+**[Composable Diffusion](../01-reading/composable-diffusion.md).** Its conjunction is the product this line pushes, derived under the assumption that the concepts are conditionally independent given the image ([Eq. 10 and 11, p. 7](https://arxiv.org/pdf/2206.01714#page=7)). It names the fused hybrid as its failure and reports "limited success" for models trained on different datasets ([p. 13](https://arxiv.org/pdf/2206.01714#page=13)).
+
+**[Diffusion Sampling Path Tells More](../01-reading/sampling-path-tells-more.md).** Keeping 4 of 50 seeds by the summed squared conditional-minus-unconditional difference over the early steps lifts GenEval two-object on SD1.5 from 0.354 to 0.518, the fraction of prompts with both objects detected ([p. 8](https://arxiv.org/pdf/2505.23343#page=8)). It is a selection baseline with no training, the same kind of control as this line's best-of-N picked by the checker.
+
+## What it suggests for the separate-experts paper
+
+On digits the push earns its place only once the product has somewhere to go: it adds 133 of 320 on fixed halves on plan 33's five tuning pairs, and 36 of 320 over no push in M1 (a lead read after the run, with no bar), while either-side experts stay at 4 of 320 because the product is destroyed before the push acts ([plan 32's finding](../../../../../2-classifier-guidance/report/classifier-guided-poe/32-mnist-two-experts.md)). So the paper should keep the push as the step that lifts a side-choosing method to the level of sample-and-paste, and should drop any claim that the push alone composes experts that never met (inferred). M1 says that level is still a tie with paste (295 against 287 of 320), so the paper needs a placement step that beats paste, which the shared-canvas runs have not reached at 121 of 320 against 288 (inferred). A score-path representation could help the placement step, because plan 33's vote compares two ways of sharing the canvas whose scores at step 4 differ by 1.58 against 1.59 thousandths, and the per-step $d_t$ of each expert in each half is a richer signal for that vote than one scalar (inferred). The same paths give a no-training seed-rejection baseline at matched compute, computed from each expert's $\epsilon - \epsilon_\varnothing$ ([Sampling Path Tells More, p. 8](https://arxiv.org/pdf/2505.23343#page=8)), which any guided result here should be reported against (inferred).
+
+## What it suggests for the CO3 paper
+
+The kept push separates bodies on the plain product (28 of 32 in plan 29), and CO3 already separates them: none of M1's 288 CO3 pictures is one subject or a fused hybrid, and adding the push lowered faithful pairs from 11 to 7 of 96 ([the M1 review](../../method-search/01-beat-the-baseline/review.md)). Every second push aimed at species (plans 26, 27, 28 and 31) gave no gain, and V3's count checker reads where two digits sit and leaves which digits they are to the product's labels ([the V3 review](../../abstract-checkers/06-does-it-compose/review.md)). Together these suggest dropping the bodies push as the CO3 paper's addition and spending the next checker on identity, meaning which body carries which name (inferred). The kept push's two presence outputs never trained on M1's subjects, so M2's test of which outputs drive the push is the next fair read before that drop is final (inferred, from the M1 design). A score path could supply the identity signal, because $d_t(c)$ is the part of the prediction each prompt adds, and DiffusionITM's version of that difference tells "a gray cylinder and a purple sphere" from its colour swap 84.5% of the time on CLEVR, against 53.0% for CLIP ([p. 18, Table 6](https://arxiv.org/pdf/2305.16397#page=18); [its note](../01-reading/diffusion-itm.md)). A checker that reads each subject's score path could then push toward the right name on the body CO3 has already placed (inferred).
