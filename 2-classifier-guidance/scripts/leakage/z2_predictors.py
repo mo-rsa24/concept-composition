@@ -113,12 +113,21 @@ class CaptureUNet(torch.nn.Module):
         return {"maps": maps.cpu(), "dA": (eps[2] - eps[0]).cpu(), "dB": (eps[3] - eps[0]).cpu(), "layers": len(store)}
 
 
+def scaled(m):
+    """Each summed map rescaled to run from 0 to 1. On SDXL the raw sum over layers sits within about a quarter of its
+    peak everywhere (smoke run, eagle at step 0: mean 10.97 against a maximum of 14.32), so DAAM's cut at 0.4 of the
+    raw maximum keeps every cell and every overlap reads 1.0."""
+    return (m - m.min()) / (m.max() - m.min() + 1e-8)
+
+
 def iou(m1, m2):
+    m1, m2 = scaled(m1), scaled(m2)
     a, b = m1 >= DAAM_CUT * m1.max(), m2 >= DAAM_CUT * m2.max()
     return float((a & b).sum() / max(int((a | b).sum()), 1))
 
 
 def soft_overlap(m1, m2):
+    m1, m2 = scaled(m1), scaled(m2)
     return float(torch.minimum(m1 / m1.sum(), m2 / m2.sum()).sum())
 
 
@@ -182,6 +191,8 @@ def main():
     ap.add_argument("--pairs", default="")
     ap.add_argument("--seeds", default="")
     ap.add_argument("--rung", default="z2")
+    ap.add_argument("--plain-check", action="store_true",
+                    help="before the first picture, render it once with the capture off, to tell the capture's effect from the card's")
     args = ap.parse_args()
     if not torch.cuda.is_available():
         raise SystemExit("torch sees no CUDA card")
@@ -218,6 +229,23 @@ def main():
         folder = args.out / pair
         folder.mkdir(parents=True, exist_ok=True)
         (folder / "text.json").write_text(json.dumps(text, indent=1) + "\n")
+        if args.plain_check and not (folder / "plain-check.json").exists():
+            seed, cols = seeds[0], wrapper.cols
+            wrapper.cols = None
+            seed_everything(seed)
+            plain = model.sample_loop(start_noise(model, seed))[0]
+            wrapper.cols, wrapper.records = cols, {}
+            seed_everything(seed)
+            captured = model.sample_loop(start_noise(model, seed))[0]
+            reference = args.m1 / pair / f"seed-{seed}.png"
+            arr = lambda im: np.asarray(im.convert("RGB") if hasattr(im, "convert") else im, np.int16)
+            check = {"pair": pair, "seed": seed, "device": torch.cuda.get_device_name(0),
+                     "plain_vs_captured_mean_abs": float(np.abs(arr(plain) - arr(captured)).mean()),
+                     "plain_vs_m1_mean_abs": float(np.abs(arr(plain) - arr(Image.open(reference))).mean()),
+                     "captured_vs_m1_mean_abs": float(np.abs(arr(captured) - arr(Image.open(reference))).mean())}
+            plain.save(folder / f"plain-check-seed-{seed}.png")
+            (folder / "plain-check.json").write_text(json.dumps(check, indent=1) + "\n")
+            print("plain check", json.dumps(check), flush=True)
         for seed in seeds:
             meta_path = folder / f"seed-{seed}.json"
             if meta_path.exists():

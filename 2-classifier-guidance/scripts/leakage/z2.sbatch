@@ -40,7 +40,7 @@ echo "[$(date -u +%H:%M:%S)] job=${SLURM_JOB_ID:-none} node=$(hostname -s) gpu=$
 export PYTHONPATH="$HUB:$CO3:$REPO/scripts/shared:$REPO"
 mkdir -p "$OUT"
 case "$STAGE" in
-  smoke) "$PY" "$S/z2_predictors.py" --splits "$SPLITS" --m1 "$M1" --out "$OUT" --rung smoke --pairs an_eagle__x__a_fox --seeds 6001; rc=$? ;;
+  smoke) "$PY" "$S/z2_predictors.py" --splits "$SPLITS" --m1 "$M1" --out "$OUT" --rung smoke --pairs an_eagle__x__a_fox --seeds 6001 --plain-check; rc=$? ;;
   small) "$PY" "$S/z2_predictors.py" --splits "$SPLITS" --m1 "$M1" --out "$OUT" --rung small --pairs an_eagle__x__a_fox,a_cheetah__x__a_cougar; rc=$? ;;
   full)  "$PY" "$S/z2_predictors.py" --splits "$SPLITS" --m1 "$M1" --out "$OUT" --rung full; rc=$? ;;
   *) echo "ABORT: unknown stage $STAGE"; exit 2 ;;
