@@ -2,9 +2,10 @@
 
 ## What this asks
 
-Paper 2 adds a push to the product of experts, so that one SDXL model draws two separate subjects where the product fuses
-them. A trained classifier, called the checker here, supplies that push through its gradient. This comparison asks which of
-three ways of reading the half-drawn picture makes the most faithful pairs on subject pairs it never trained on.
+Paper 2 adds a push to CO3 inside one SDXL model. CO3 already draws two separate bodies in all 96 tuning pictures, and its failures
+are identity: borrowed parts, a wrong species or an extra subject. A trained classifier, called the checker here, supplies the push
+through its gradient. This comparison asks which of three ways of reading the half-drawn picture makes the most pictures with two clear
+subjects on subject pairs it never trained on.
 
 ## Words this uses
 
@@ -12,8 +13,9 @@ three ways of reading the half-drawn picture makes the most faithful pairs on su
 
 **Push.** The checker's gradient added to PoE's noise prediction during the early sampling steps.
 
-**Faithful pair.** A picture with two separate bodies, a clear subject A and a clear subject B, no borrowed features, and an
-intact photograph, as judged by the labeller in `2-classifier-guidance/scripts/rung2/api_label.py`.
+**Two clear subjects.** A picture on the `two_clear` rung of the [blind count rubric](../../method-search/01-beat-the-baseline/blind-count-rubric.md):
+one clear subject A and one clear subject B as separate bodies, no borrowed features, drawing style ignored. Damage is called on the same
+picture and reported beside the count.
 
 **Neither-subject picture.** A picture of two other subjects, read by the checker under this pair's prompt. A guiding
 classifier trained without them called a fridge a cat.
@@ -96,18 +98,19 @@ A candidate is eligible only if all four hold:
 2. A zero push reproduces CO3's own loop to the same limit.
 3. It rejects at least 80% of 200 neither-subject pictures, meaning a clean-pair logit below 0 averaged over steps 0, 5, 10 and
    15.
-4. Its size-matched random push on plain PoE makes at most 2 faithful pairs of 96.
+4. Its size-matched random push on plain PoE makes at most 2 pictures with two clear subjects of 96.
 
-Among eligible candidates, the most faithful pairs of 96 on the CO3 row wins. A lead under 5 counts as a tie, because re-rendering the
-same recipe moved the faithful count by about 2. A tie goes to the fewest damaged pictures on the CO3 row, then to the fewest
-parameters. The plain-PoE counts are reported beside it and choose nothing.
+Among eligible candidates, the most pictures with two clear subjects of 96 on the CO3 row wins. A lead under 5 counts as a tie, because
+re-rendering the same recipe moved the count by about 2. A tie goes to the fewest parameters. Damage on each row is reported beside the
+count and decides nothing. The plain-PoE counts are reported beside it and choose nothing. The owner changed this bar on 2026-11-24, on board question 87, before any result of the search existed. It was faithful pairs, which also required an intact photograph; CO3 alone scores 11 of 96 on that and 32 of 96 on two clear subjects.
 
 The chosen candidate beats CO3 alone when it leads by at least 5 of 96 and by more than 1.96 standard errors, from 10,000 bootstrap
 resamples of the 12 pairs. If it does not, D3 still names the best reader and reports that no candidate beat CO3 alone.
 
 **How the CO3 rows are counted.** Step M1's 96 CO3 pictures are reused, and their calls are not, because M1's six reviewers passed
 between 0 and 9 of 48 pictures. CO3 alone and the three CO3-plus-checker rows, 384 pictures, are shuffled together under neutral names
-and called at full size under the [blind count rubric](../../method-search/01-beat-the-baseline/blind-count-rubric.md).
+and called at full size under the [blind count rubric](../../method-search/01-beat-the-baseline/blind-count-rubric.md) by two reviewers,
+whose agreement is reported, with a third blind call deciding each picture they disagree on.
 
 The labeller's calls on the plain-PoE rows are checked by eye on 16 random pictures per row at full size, before any count is believed.
 
@@ -124,7 +127,7 @@ Each rung saves its config, metrics, image sheet and commit under `/datasets/mmo
 
 ## The unseen-category test
 
-**What it asks.** Does a checker trained only on animals still make faithful pairs of objects? A reader that learned "two separate
+**What it asks.** Does a checker trained only on animals still make pictures with two clear objects? A reader that learned "two separate
 things" should carry over, and a reader that learned the species it saw should not.
 
 **Readers.** Candidates A and C, because SDXL's features carry appearance and the word attention maps carry mostly position.
@@ -143,7 +146,7 @@ inconclusive.
 counted blind at full size under the [blind count rubric](../../method-search/01-beat-the-baseline/blind-count-rubric.md), with no API
 tokens.
 
-**The bar, on faithful pairs of 48.** Standard errors come from 10,000 bootstrap resamples of the six pairs. The lead of 3 is the main
+**The bar, on pictures with two clear subjects of 48, set by the owner's answer to board question 87.** Standard errors come from 10,000 bootstrap resamples of the six pairs. The lead of 3 is the main
 comparison's tie rule of 5 of 96, scaled to 48 pictures and rounded up.
 
 | Result, per reader | What it takes |

@@ -2,9 +2,10 @@
 
 ## What this asks
 
-The checker's training batches are about 60% cat and dog, so it may have learned those two animals more than it learned what a separate
+The checker's training batches are about 60% cat and dog, so it may have learned those two animals more than it learned what a correct
 pair looks like. This stage trains the same checker on the current list and on a list balanced across pairs, then compares the pictures
-each one produces on pairs neither has seen. The better list goes to step D3.
+each one produces with CO3 on pairs neither has seen. CO3 already draws two separate bodies, so what the push has to fix is identity. The
+better list goes to step D3.
 
 ## Words this uses
 
@@ -14,8 +15,9 @@ each one produces on pairs neither has seen. The better list goes to step D3.
 
 **Product of experts (PoE).** The sampler that adds SDXL's noise predictions for the two single-subject prompts.
 
-**Faithful pair.** A picture with exactly one clear subject A and one clear subject B as separate bodies, no borrowed features and no
-damage, called under the [blind count rubric](../01-beat-the-baseline/blind-count-rubric.md).
+**Two clear subjects.** A picture on the `two_clear` rung of the [blind count rubric](../01-beat-the-baseline/blind-count-rubric.md):
+exactly one clear subject A and one clear subject B as separate bodies, no borrowed features, drawing style ignored. Damage is called on
+the same picture and reported beside the count.
 
 ## The run
 
@@ -69,7 +71,8 @@ list holds any of those pairs. The 12 held-out pairs and seeds 7001 to 7008 are 
 | 6. CO3, balanced list | the balanced-list push added to CO3 |
 
 The three plain-PoE rows are shuffled together, and the three CO3 rows are shuffled together, under neutral names. All 576 pictures are
-called by eye at full size, with no API tokens. Step M1's calls on CO3 alone are not reused, because its six reviewers passed between 0
+called by eye at full size by two reviewers, with no API tokens. Their agreement is reported, and a third blind call decides each picture
+they disagree on. Step M1's calls on CO3 alone are not reused, because its six reviewers passed between 0
 and 9 of 48 pictures, and a row must be read by the same reviewers as the rows it is compared with. Giraffe and tortoise is counted and
 stays off every sheet, page and message.
 
@@ -102,16 +105,17 @@ area under the curve and a per-pair table are reported beside it.
 **Cost:** about 1.2 GPU-hours, 96 CO3 runs at the 43.2 seconds M1 measured. **Buys:** whether the clean-pair checker can see CO3's failure
 at all, before about 11 GPU-hours go into choosing its training list.
 
-## The bar, on faithful pairs of 96
+## The bar, on pictures with two clear subjects of 96
 
 The standard error comes from 10,000 bootstrap resamples of the 12 pairs. Repeating a pushed render has moved its count by about 2 of 96,
-so a lead under 5 is a tie. The CO3 rows decide, and the plain-PoE rows are reported beside them.
+so a lead under 5 is a tie. The CO3 rows decide, and the plain-PoE rows are reported beside them. Damage on each row is reported beside the
+count and decides nothing. The owner changed this bar on 2026-11-24, on board question 87, before any result of the search existed. It was faithful pairs, which also required an intact photograph; CO3 alone scores 11 of 96 on that and 32 of 96 on two clear subjects.
 
 | Result | What it takes | Which list goes to D3 |
 |---|---|---|
 | Balanced wins | row 6 leads row 5 by at least 5 and by more than 1.96 standard errors | balanced |
 | Current wins | row 5 leads row 6 by at least 5 and by more than 1.96 standard errors | current |
-| Tie | neither lead holds | balanced, because it depends least on cat and dog, unless row 6 has at least 5 more damaged pictures than row 5 |
+| Tie | neither lead holds | balanced, because it depends least on cat and dog |
 | Inconclusive | a zero-push check fails | none until the check passes |
 
 The review also says whether the chosen list's CO3 row beats CO3 alone, by at least 5 of 96 and more than 1.96 standard errors.
