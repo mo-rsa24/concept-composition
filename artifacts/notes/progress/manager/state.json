@@ -193,7 +193,8 @@
   "95": "answered",
   "96": "open",
   "97": "answered",
-  "98": "answered"
+  "98": "answered",
+  "99": "answered"
  },
  "nudges": [
   {
@@ -370,6 +371,11 @@
    "when": "Loop 8 reports its shared-device checks finished, or at each tick: pgrep on mscluster107 and nvidia-smi card 1",
    "set": "2026-11-24T17:58:00+02:00",
    "host_job_ends": "2026-11-27T17:28:00+02:00 (job 94628)"
+  },
+  {
+   "what": "hand mscluster107 card 1 on: Loop 12, then Loop 8, then Loop 6; stop if job 94699 ends",
+   "when": "each loop reports done, or each tick via pgrep and nvidia-smi on mscluster107",
+   "set": "2026-11-25T01:58:00+02:00"
   }
  ]
 }

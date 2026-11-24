@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-25 01:15 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-25 01:58 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -28,6 +28,7 @@ overrule one, answer it again: `python3 scripts/progress_board.py answer <number
 | # | The question | Decided | Why |
 |---|---|---|---|
 | none | Loop 8's method review found the removal test feeds nothing since your answer on 86 | **Close the removal test (V7) as not run** after the cheap visibility check; the full retraining from question 95 is skipped | Reversible, saves about 1.5 GPU-hours, no bar changed; it was option B of question 95. |
+| 99 | May loops use mscluster107's idle card 1 again, inside another user's new job? | yes: one run at a time, Loop 12 then Loop 8 then Loop 6, with the stop rule; it ends when their job ends |
 | 98 | What does Paper 2 test next, now that Loop 12 found neither where borrowed parts start nor a working fix? | **Each animal's own prediction inside its drawn box** at steps 5 to 30, on the same 48 pictures, after a free text-only check, run by Loop 12; about 0.8 GPU-hours, its 48-picture bar written first | The test the first fix never ran, named by both reviews; the text-encoder fix stays held behind the free check. |
 | 97 | Which of three small reruns from Loop 12's audit of Loops 8, 9 and 10 should run? | **Only the first** (when the digit sampler settles which digits it draws), in Loop 8, about 0.04 GPU-hours; the third read free from Loop 12's own records, reopening nothing | The second is already settled by Loop 8's checks; the third needs Loop 10, which is closed. |
 | 95 | Loop 8's identity checker missed twice on the sampler's own states (0.651, then 0.552 with memorised training digits); what next? | **A with three additions**: first check the digits are readable from the sampler's states at all (about 0.1 GPU-hours, and stop if not), hold out seeds of digits 0 to 4 as a control, then train on both data sets and read fresh digits 5 to 9 once; about 1.6 GPU-hours | The [reviewer's second pass](../reviewer/2026-11-24-review.md#loop-8-again-at-2215-two-misses-on-reading-sampler-states) found the second try memorised 2,036 stored states with no fresh noise, and no one has checked the digits are readable there at all. The SDXL test does not wait on this. |
@@ -93,7 +94,7 @@ Read at 01:13 from `squeue`, `sacct` and `sinfo`; down nodes from `sinfo -R` at 
 | Longest wait | the queue as a whole: nothing of ours finished between 00:13 and 01:13 |
 | Nodes out of service | `bigbatch`: 12 down and 5 drained of 48. `biggpu`: 2 down and 2 drained of 7, including mscluster108 and mscluster111, drained at 09:27 and 09:10 today after a failed job kill |
 | Idle capacity | none: at 17:43 every working `bigbatch` and `biggpu` node was allocated. mscluster107 is now another user's `biggpu` job (94610, 6-hour limit, started 17:36); its second card sits idle at 170 MiB, but their process holds it, so it is not ours to use. Your interactive job 83423 on that node no longer appears in the queue |
-| Shared card | **Not in use.** The other user's job on mscluster107 ended early, around 20:00, leaving the node idle in Slurm, so question 90's approval for borrowing a card inside their allocation no longer applies. Loop 6 stopped its shared run within 30 seconds, with nothing written, and resubmitted it through Slurm as its one `biggpu` job (94676, pinned to mscluster107 for the RTX 8000 the six CO3 pairs were first drawn on). Loop 8's run there earlier finished cleanly. A new shared-card run needs a new yes from you |
+| Shared card | **mscluster107 card 1, approved again by you on question 99** at 01:58, for as long as the other user's job 94699 runs (started about 01:33, limit nearly 3 days; its process holds 36.5 GB on card 0 and a 170 MiB start-up slice of card 1). One run at a time, shortest first: Loop 12's free check and smoke run, then Loop 8's readability check, then Loop 6's read of its two new checkers. Every launch carries the three guards and your stop rule; each loop cancels its queued Slurm copy |
 | Compute against budget since 2026-11-21 | Loop 6: 53.4 node-hours of 87 (34.8 were CLEVR renders that may have used no GPU). Loop 8: 11.9 of 30. Loop 12: about 0.4, no total set. Slurm here records no GPU count, so these are node-hours, an upper bound |
 
 **What would make the queue move faster:** little within our control. There is no idle `biggpu` card,
@@ -148,6 +149,7 @@ Newest first.
 | Time | To | What and why |
 |---|---|---|
 | 17:02 | Loop 8 | Its rewritten SDXL test passes the design check (stop rule, random and zero controls, comparison prompts fixed in advance, the same two-clear measure as Loop 6; about 7 GPU-hours, inside budget). Its board record goes to you as question 89. |
+| 01:58 | Loops 12, 8 and 6 | Card 1 on mscluster107 approved again (question 99): Loop 12 first, then Loop 8, then Loop 6; each told the order and the rules. |
 | 00:30 | Loop 12 | Question 98 decided: it runs the own-prediction test as step Z7. Its design passed the check: bar written first, the control re-rendered in the same window so only the box contents differ, about 1.7 GPU-hours. |
 | 23:50 | Loop 12 | Its [method review](../leakage/method-review.md) answered: records corrected to say what the drawn-box test did, the two disagreeing records reconciled, question 97's third rerun read free from its own records. Next, in order: a free text-only check, each animal's own prediction inside its box (about 0.8 GPU-hours), and the text-side swap only if the free check supports it, with a positive control. |
 | 23:35 | Loops 12 and 8 | **Method review request** to Loop 12 after two nulls, with question 97 decided; Loop 8 runs that question's first rerun beside its free check. One line in `requests.md`. |
