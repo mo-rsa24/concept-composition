@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-24 19:00 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-24 19:10 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -76,19 +76,19 @@ The finish range is `session_status.py`'s, from the 52 finished steps: fastest p
 | 7. Abstract-checker papers | Finished; its session is closed. | 0 | done | closed | nothing |
 | 8. Abstract checkers | Its digit identity checker adds to the model's own knowledge (0.861 against 0.539 for a rule that needs no training) but reads the sampler's own states at only 0.651. By question 94 it now retrains the checker on sampler states and re-reads fresh digits 5 to 9 before running its removal test. Its SDXL test is rewritten to your answer on 86. | 3 | 1.9 h to 85.5 h | busy | its own retraining; the SDXL test waits on Loop 6's training list |
 | 11. Drain into the pillars | Stopped by your answer on 88. Its pillar checks are done and its census found every finished verdict on a report page (14 findings, eight method folders). Its final step stays open until Loops 6 and 8 stop. | 1 | when restarted | stopped its loop | waiting for a result worth draining: Loop 8's identity checker or Loop 6's two-colour CLEVR test |
-| 12. Where CO3 leaks | Its predictor pass is null: none of three readings inside the model predicts which pairs borrow parts (best rank correlation 0.49, bar 0.706), and the most alike pair, crow and raven, never borrows ([review](../leakage/02-what-predicts-borrowing/review.md)). Next, by question 91: a free check on saved records, then a place-by-place fix in a later window with boxes drawn by eye as a positive control. | 5 | 2.4 h to 112.6 h | busy | its own free check, then about 1.7 GPU-hours |
+| 12. Where CO3 leaks | Its predictor pass is done and null ([review](../leakage/02-what-predicts-borrowing/review.md)). Now testing one fix for borrowed parts (step Z3) as question 91 set it: a free check on saved records, then a place-by-place fix at about steps 15 to 30 with boxes drawn by eye as a positive control, counted as two clear subjects with drawing ignored (question 92). Loop 4 has updated the bar page to match. | 4 | 2.4 h to 112.6 h | busy | its own free check; then about 1.7 GPU-hours |
 
 ## Resources
 
-Read at 18:06 from `squeue`, `sacct`, `sinfo` and `nvidia-smi` on mscluster107; down nodes from `sinfo -R` at 16:28.
+Read at 19:07 from `squeue`, `sacct`, `sinfo` and `nvidia-smi` on mscluster107; down nodes from `sinfo -R` at 16:28.
 
 | What | Now |
 |---|---|
-| Our jobs against the caps | 4 running on `bigbatch` of 6 allowed (Loop 6's read and two CLEVR renders, Loop 12's predictor pass); 0 on `biggpu`; 11 queued; plus Loop 8 on mscluster107 card 1 outside Slurm |
-| Longest wait | Loop 8's 20-minute check (job 94595): 35 minutes, waiting for a node |
+| Our jobs against the caps | 4 running on `bigbatch` of 6 allowed (Loop 6's read of its new checker, its current-list training and two CLEVR renders); 0 on `biggpu`; 8 queued, including Loop 8's three retraining jobs; plus Loop 6's training on mscluster107 card 1 outside Slurm |
+| Longest wait | Loop 8's 20-minute retraining start (job 94640), waiting for a node |
 | Nodes out of service | `bigbatch`: 12 down and 5 drained of 48. `biggpu`: 2 down and 2 drained of 7, including mscluster108 and mscluster111, drained at 09:27 and 09:10 today after a failed job kill |
 | Idle capacity | none: at 17:43 every working `bigbatch` and `biggpu` node was allocated. mscluster107 is now another user's `biggpu` job (94610, 6-hour limit, started 17:36); its second card sits idle at 170 MiB, but their process holds it, so it is not ours to use. Your interactive job 83423 on that node no longer appears in the queue |
-| Shared card | **mscluster107 card 1, approved by you on question 90.** Loop 8's run finished at 18:24 with exit 0, and its stop rule never fired. The card went to Loop 6 at 18:27, first for the 21-run CO3 reread, then its checker training. The other user's job ends about 23:36 |
+| Shared card | **mscluster107 card 1, approved by you on question 90.** Loop 6's balanced-list checker training runs there (about 10 GB, since 18:43), under `m5_shared_card.sh`, which refuses a card with a foreign process over 1,024 MiB and stops our whole process group every 30 seconds if one appears. Loop 8's run before it finished cleanly. The node now hosts a different job from the same user (94628, started 18:28, limit nearly 3 days), whose process holds 36.5 GB on card 0 and its 166 MiB start-up context on card 1 |
 | Compute against budget since 2026-11-21 | Loop 6: 53.4 node-hours of 87 (34.8 were CLEVR renders that may have used no GPU). Loop 8: 11.9 of 30. Loop 12: about 0.4, no total set. Slurm here records no GPU count, so these are node-hours, an upper bound |
 
 **What would make the queue move faster:** little within our control. There is no idle `biggpu` card,
@@ -109,7 +109,7 @@ Newest first.
 | Loops 6 and 8 | **A run of bad results, now reviewed.** Loop 6's region test missed three times in a row and Loop 8's misses shared a cause. Both answered their reviews within minutes and corrected their records and pictures (Loop 6 commit `f29cf613`, Loop 8 commit `8c310b3a`). | [the review](../reviewer/2026-11-24-review.md) |
 | Loop 6 | **Its CLEVR paste review contradicts itself**, Loop 11 found: line 3 says no verdict yet while lines 95 to 97 give one, and the expert check is both still to run and passed. Sent to Loop 6 in `requests.md` at about 17:00. | `requests.md` |
 | Loop 4 | **The standing step has run 54 hours**, longer than any finished step (23.5 hours). It ends only after the paper tables, by design. | `session_status.py` |
-| Loops 6 and 8 | **Failed jobs in the last 24 hours, each followed by a rerun that finished**: Loop 6, 9 failed and 4 cancelled; Loop 8, 2 failed. No time-outs or out-of-memory ends. | `sacct` |
+| Loops 6 and 8 | **Failed jobs in the last 24 hours, each followed by a rerun that finished or a move to card 1**: Loop 6, 11 failed and 5 cancelled (the two newest, 94603 and 94605, on a training-list bug it fixed); Loop 8, 2 failed. No time-outs or out-of-memory ends. | `sacct` |
 
 Nothing found for: jobs running past twice their estimate, steps in progress with nothing running for
 them, or new rows on the void list (unchanged since 2026-11-22).
@@ -187,4 +187,4 @@ been acted on, 93 asked nothing, and 15 waited. Nine of those were re-routed or 
 
 ## Last tick
 
-2026-11-24 18:08. Next tick about 19:08. The briefing for you is [the briefing page](briefing.md).
+2026-11-24 19:10. Next tick about 20:10. The briefing for you is [the briefing page](briefing.md).

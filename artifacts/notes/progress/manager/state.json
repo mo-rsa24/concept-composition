@@ -1,5 +1,5 @@
 {
- "last_tick": "2026-11-24T18:08:00+02:00",
+ "last_tick": "2026-11-24T19:10:00+02:00",
  "last_alignment_round": "2026-11-24T16:10:00+02:00",
  "steps": {
   "P0": "done",
@@ -52,8 +52,8 @@
   "F1": "todo",
   "F2": "todo",
   "Z1": "done",
-  "Z2": "doing",
-  "Z3": "todo",
+  "Z2": "done",
+  "Z3": "doing",
   "Z4": "todo",
   "Z5": "todo",
   "Z6": "todo",
@@ -68,7 +68,7 @@
   "V3": "done",
   "V5": "done",
   "V4": "todo",
-  "V6": "doing",
+  "V6": "done",
   "V7": "todo",
   "W1": "done",
   "W2": "done",
@@ -350,7 +350,7 @@
    "what": "hand mscluster107 card 1 to Loop 6 and check the watchdog is in each launch script",
    "when": "Loop 8 reports its shared-device checks finished, or at each tick: pgrep on mscluster107 and nvidia-smi card 1",
    "set": "2026-11-24T17:58:00+02:00",
-   "host_job_ends": "2026-11-24T23:36:00+02:00"
+   "host_job_ends": "2026-11-27T17:28:00+02:00 (job 94628)"
   }
  ]
 }
