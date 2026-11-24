@@ -1,4 +1,4 @@
-# Does removing one checker remove its property, and only its property?   ⚪ null by the written rule (board question 75) · read 2026-11-24
+# Does removing one checker remove its property, and only its property?   ⚪ null by the written rule · read 2026-11-24
 
 **The claim**
 
@@ -6,10 +6,7 @@ Three checkers push together on digits 5 to 9: one for two digits apart (count),
 order. Removing the count checker lowers the share of canvases with two digits apart from 38.4% to 10.3%, a fall of 28.1
 percentage points, and removing the order checker lowers the share in the asked order from 88.2% to 47.8%, a fall of 40.4 points.
 A random push of the same length in its place falls about as far, so each fall comes from losing that checker's direction. No
-property meets the whole rule. Removing count raises the order share by 6.8 points and removing order lowers the right-digits
-share by 6.9 points, past the 4.2-point limit, and removing the right-digits checker lowers its own share by only 2.6 points
-`stated`. The owner recorded this as null by the written rule (board question 75). W&B run `j4anxfgy`
-([the removal review](../../../artifacts/notes/progress/abstract-checkers/08-remove-one-checker/review.md), lines 3 and 25 to 29).
+property meets the whole rule.
 
 **What a canvas is.** A canvas is a small black picture 32 pixels tall and 64 wide, with room for one handwritten digit in each
 half. Each canvas asks for two digits in a set order, so it is fully right when it holds both asked digits, clearly, one per
@@ -29,6 +26,7 @@ half, with the asked left digit on the left.
 - [Concepts this uses](#concepts-this-uses)
 - [Where this came from](#where-this-came-from)
 - [Still open](#still-open)
+- [Cross-references](#cross-references)
 
 ## Words this page uses
 
@@ -62,6 +60,11 @@ Navigation: ⬅️ [Previous](#words-this-page-uses) | 📋 [TOC](#table-of-cont
 
 The margins of 6.25 and 4.2 points are the planned SDXL table's 3 and 2 pictures of 48. Standard errors come from 10,000
 bootstrap resamples of the 10 pairs.
+
+Removing count raises the order share by 6.8 points and removing order lowers the right-digits share by 6.9 points, past the
+4.2-point limit, and removing the right-digits checker lowers its own share by only 2.6 points `stated`. The owner recorded this
+as null by the written rule (board question 75). W&B run `j4anxfgy`
+([the removal review](../../../artifacts/notes/progress/abstract-checkers/08-remove-one-checker/review.md), lines 3 and 25 to 29).
 
 > [!IMPORTANT]
 > The result fits none of the four rows as worded. Count and order each lower their own column past the margin, which the null
@@ -120,6 +123,13 @@ Navigation: ⬅️ [Previous](#2-the-removal-table-960-canvases-per-row) | 📋 
 
 **None does: count and order pass on their own column and miss on a side column, and right digits misses on its own.**
 
+> 🖼️ **Figure wanted**: one panel per removal (count, right digits, order), each with three bars in percentage points: the fall
+> in its own column, the fall when a random push takes its place, and the largest move in another column, each with its 1.96
+> standard error whisker, the 6.25-point bar drawn on the first two and the 4.2-point limit on the third, so the reader sees count
+> and order clear their own bar and cross the side limit while right digits stays under its bar. The numbers are the verdict table
+> in the review, lines 25 to 29, from `v5/final3.json` under `/datasets/mmolefe/poe_repair_min/loop-8/`, job 94186. Render into
+> `2-classifier-guidance/artifacts/results/does-removing-one-checker-remove-its-property/`, write its card entry, then embed here.
+
 | Removed | Own column falls by (bar 6.25 points and 1.96 standard errors) | Random in its place falls by | Largest move in another column (limit 4.2 points and 1.96 standard errors) | Meets the whole rule |
 |---|---|---|---|---|
 | Count | 28.1 points, standard error 2.68 | 25.8, standard error 2.02 | order rises 6.8 points, standard error 2.75 | no |
@@ -139,6 +149,13 @@ Navigation: ⬅️ [Previous](#3-which-removal-meets-the-rule) | 📋 [TOC](#tab
 the 5% limit, and several cells held under 40 canvases, so the rules void it.** The owner approved the rerun above with three
 times the seeds and the bars unchanged (board question 73).
 
+> 🖼️ **Figure wanted**: the first run's share of pushed steps where the all-three row's total push passed 0.6 of the product's
+> norm (5.85%) beside the rerun's (2.1%), with the 5% limit drawn, and beside it the canvases left in each removal row's own column
+> against the 40-canvas floor, so the reader sees why the first run is void and the rerun is not. Label the panel as a void run
+> that carries no claim. The numbers are in the review, lines 39 to 57, from `v5/final.json` (job 94172) and `v5/final3.json`
+> (job 94186) under `/datasets/mmolefe/poe_repair_min/loop-8/`. Render into
+> `2-classifier-guidance/artifacts/results/does-removing-one-checker-remove-its-property/`, write its card entry, then embed here.
+
 Read without a verdict, as the review does: removing count lowered the count column from 41.6% to 14.1% (random 10.9%), and
 removing order lowered the order column from 88.9% to 45.2% (random 53.1%). Removing right digits lowered its column from 40.6%
 to 34.2%, and its random replacement left it at 41.4% `stated` (review, lines 39 to 57, job 94172, `v5/final.json`). These carry
@@ -149,6 +166,12 @@ no claim.
 Navigation: ⬅️ [Previous](#4-the-first-run-320-canvases-per-row-was-inconclusive) | 📋 [TOC](#table-of-contents) | [Next](#where-the-sources-disagree) ➡️
 
 **Count and order read well above chance on digits they never saw; right digits reads near chance.**
+
+> 🖼️ **Figure wanted**: balanced accuracy of each of the three checkers on digits 0 to 4 and on digits 5 to 9, as paired bars,
+> with the 0.5 chance line and the 0.75 pass mark, so the reader sees right digits sit near chance while count and order do not.
+> The right-digits and order numbers are in `v5/train.json` under `/datasets/mmolefe/poe_repair_min/loop-8/`, from job 94153;
+> the count checker's are from W&B run `tyhrpyov`. Render into
+> `2-classifier-guidance/artifacts/results/does-removing-one-checker-remove-its-property/`, write its card entry, then embed here.
 
 | Checker | Overfit check, of 16 | Digits 0 to 4 | Digits 5 to 9, never trained on | Source |
 |---|---|---|---|---|
@@ -234,14 +257,17 @@ Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-conten
 
 ## Still open
 
-Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
 
 - [ ] The exemplar sheet in section 2.
+- [ ] The figures in sections 3, 4 and 5.
 - [ ] The design's result rows do not cover a run where removals pass on their own column and miss on a side column; the owner chose to keep the coded label (board question 75).
 - [ ] The five-checker SDXL removal test, decided once the SDXL test passes.
 - [ ] The six disagreements under [Where the sources disagree](#where-the-sources-disagree).
 
 ## Cross-references
+
+Navigation: ⬅️ [Previous](#still-open) | 📋 [TOC](#table-of-contents)
 
 - The mention of **the removal finding** in [the context page on the digit-map checkers, one sampler step, section "Why the checker reads maps"](../../../context/methods/03-the-digit-map-checkers/01-overview.md#why-the-checker-reads-maps).
 

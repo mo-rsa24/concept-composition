@@ -2,16 +2,15 @@
 
 **The claim**
 
-The reading test found no sentence score that reads a cat and dog picture at steps 0 to 15 of a 50-step SDXL run. This test
-asked whether that null is fair in two ways. First, a reader known to work, a small network on SDXL's own features, read the
-same pictures under the same rules as a positive control. It scored a mean balanced accuracy of 0.637 over steps 0 to 15 on
+First, a reader known to work, a small network on SDXL's own features, read the same pictures under the same rules as a
+positive control. It scored a mean balanced accuracy of 0.637 over steps 0 to 15 on
 the clean-pair task, 0.013 under its floor of 0.65, so by the bars fixed beforehand the reading test is inconclusive and not
 null. Second, every sentence score got its best fair chance: five wordings averaged, NoisyCLIP's own training steps, the
 sampler's real states and sentences that name no species. No sentence row reaches the 0.75 bar over steps 0 to 15 in any of
-them; the best is [Latent CLIP](../../../context/methods/05-latent-clip/01-overview.md)'s 0.574 on the real states. W&B run `etbecql0` `stated`
-([the fairness review](../../../artifacts/notes/progress/noise-text-critic/02c-fair-test/review.md), lines 3 to 5).
+them; the best is [Latent CLIP](../../../context/methods/05-latent-clip/01-overview.md)'s 0.574 on the real states.
 
-**Why it was asked.** The push test, which would steer CO3's renders with a sentence score, was to be stopped on the reading
+**Why it was asked.** The reading test found no sentence score that reads a cat and dog picture at steps 0 to 15 of a 50-step
+SDXL run. This test asked whether that null is fair in two ways. The push test, which would steer CO3's renders with a sentence score, was to be stopped on the reading
 test's null. Before stopping it, the owner asked on 2026-11-24 whether anything can read these steps under this protocol, and
 whether the sentence scores still fail at their best
 ([the fairness design](../../../artifacts/notes/progress/noise-text-critic/02c-fair-test/design.md), lines 3 to 7).
@@ -33,6 +32,7 @@ The reading test's own review records a different verdict. Both are quoted under
 - [Concepts this uses](#concepts-this-uses)
 - [Where this came from](#where-this-came-from)
 - [Still open](#still-open)
+- [Cross-references](#cross-references)
 
 ## Words this page uses
 
@@ -91,6 +91,9 @@ standard practice from outside this data, none tuned on it.
 
 There are 24 sentence rows: 6 readers (3 models, plain and averaged) on 3 tasks in group 2 and 1 task in group 3. The design
 expects standard errors of about 0.02 to 0.04 on each mean, so a pass by chance is unlikely, which it marks inferred (line 42).
+
+W&B run `etbecql0` `stated`
+([the fairness review](../../../artifacts/notes/progress/noise-text-critic/02c-fair-test/review.md), lines 3 to 5).
 
 ## 1. On the sampler's real states, only SDXL's own features read early
 
@@ -331,7 +334,7 @@ in the review were read from the result file.**
 
 ## Still open
 
-Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
 
 - [ ] Which verdict the reading test's title line carries: question 79 on [the progress board](../../../artifacts/notes/progress/board.json), open. Each page keeps its own review's verdict until the owner answers.
 - [ ] A control that was not chosen on these pictures, so the floor can be read without the optimism the design names (line 17).
@@ -343,6 +346,8 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] The five disagreements under [Where the sources disagree](#where-the-sources-disagree).
 
 ## Cross-references
+
+Navigation: ⬅️ [Previous](#still-open) | 📋 [TOC](#table-of-contents)
 
 - The mention of **the fairness finding** in [the context page on the sentence-score push, one sampler step, section "What is measured where"](../../../context/methods/04-the-sentence-score-push/01-overview.md#what-is-measured-where).
 

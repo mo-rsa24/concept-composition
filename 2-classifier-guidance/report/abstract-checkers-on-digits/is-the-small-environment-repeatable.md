@@ -22,6 +22,7 @@ the program that builds a canvas knows exactly which digits sit where.
 - [Concepts this uses](#concepts-this-uses)
 - [Where this came from](#where-this-came-from)
 - [Still open](#still-open)
+- [Cross-references](#cross-references)
 
 ## What would have counted
 
@@ -175,12 +176,14 @@ No context entry defines the digit canvas yet, so its meaning lives in the revie
 
 ## Still open
 
-Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
 
 - [ ] The zero-push picture in section 2.
 - [ ] A context entry for the digit canvas, its five kinds and its labels, so the four findings in this group can link one page.
 
 ## Cross-references
+
+Navigation: ⬅️ [Previous](#still-open) | 📋 [TOC](#table-of-contents)
 
 - The mention of **A zero push changes no pixel** in [the context page on the digit-map checkers, the code that runs them](../../../context/methods/03-the-digit-map-checkers/04-the-code.md#how-it-fails-and-how-you-know-it-worked).
 - The mention of **the environment finding** in [the context page on the digit-map checkers, one sampler step, section "What is measured where"](../../../context/methods/03-the-digit-map-checkers/01-overview.md#what-is-measured-where).

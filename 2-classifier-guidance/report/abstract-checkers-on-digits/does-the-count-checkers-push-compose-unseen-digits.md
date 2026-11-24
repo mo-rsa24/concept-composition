@@ -27,6 +27,7 @@ digits at once by multiplying its two one-digit predictions, and on its own that
 - [Concepts this uses](#concepts-this-uses)
 - [Where this came from](#where-this-came-from)
 - [Still open](#still-open)
+- [Cross-references](#cross-references)
 
 ## Words this page uses
 
@@ -157,6 +158,14 @@ Navigation: ⬅️ [Previous](#4-what-the-two-maps-do-while-the-push-acts) | �
 **The push length was chosen on seen digits only, and a rerun on another node gave 41 clean pairs where the recorded run gave
 43.**
 
+> 🖼️ **Figure wanted**: two panels. Left, clean pairs of 320 on the 10 seen pairs against push length b (0, 0.1, 0.2 and 0.4),
+> so the reader sees the count rise with the length up to the frozen b = 0.4. Right, clean pairs per unseen pair in the recorded
+> run (job 94134) against the rerun on another node (job 94161), one dot pair per unseen pair, so the reader sees counts move by up
+> to 4 between nodes. The length ladder is job 94133's, which the review records at line 59 without naming its file; the per-pair
+> counts are in `v3/test-1/final.json` and `v3/trace/trace.json` under `/datasets/mmolefe/poe_repair_min/loop-8/`. Render into
+> `2-classifier-guidance/artifacts/results/does-the-count-checkers-push-compose-unseen-digits/`, write its card entry, then embed
+> here.
+
 On the 10 seen pairs among digits 0 to 4 at seeds 0 to 31 (job 94133), clean pairs of 320 rose with the length: 0 with no push, 8
 at b = 0.1, 20 at b = 0.2 and 40 at b = 0.4. The rule froze b = 0.4, the largest of the three choices, so a longer push was not
 tried `stated` (review, line 59).
@@ -237,13 +246,16 @@ Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-conten
 
 ## Still open
 
-Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
 
 - [ ] The map-trace figure in section 4.
+- [ ] The push-length and two-node figure in section 5.
 - [ ] The same test on SDXL's six unseen object pairs (step V4 on the progress board), which waits on Loop 6's step D3.
 - [ ] A push that also chooses the right digits; no identity checker has passed (the [learning finding](does-a-checker-learn-plurality-on-unseen-digits.md)).
 
 ## Cross-references
+
+Navigation: ⬅️ [Previous](#still-open) | 📋 [TOC](#table-of-contents)
 
 - The mention of **the push finding** in [the context page on the digit-map checkers, one sampler step, section "What one step does"](../../../context/methods/03-the-digit-map-checkers/01-overview.md#what-one-step-does).
 - The mention of **the push finding's table** in [the context page on the digit-map checkers, worked on a four-pixel canvas, section "The same steps on the real runs"](../../../context/methods/03-the-digit-map-checkers/03-the-miniature.md#the-same-steps-on-the-real-runs).

@@ -5,8 +5,8 @@
 A small image encoder trained on noisy digit canvases against CLIP's frozen text encoder learns the digits it was trained on and
 does not carry that to new digits. On seen digits 0 to 4 it reads 0.758 balanced accuracy over the digit sampler's steps 14 to
 25, the window that keeps as much of the picture as SDXL's steps 0 to 15. On digits 5 to 9, whose names never reached its loss,
-it reads 0.590, 0.168 below seen, and on two digits apart against wrong digits it reads 0.502, which is chance. All three of
-the design's checks fail. W&B run `en52x031` `stated`
+it reads 0.590, 0.168 below seen, and on two digits apart against wrong digits it reads 0.502, which is chance.
+W&B run `en52x031` `stated`
 ([the own model review](../../../artifacts/notes/progress/noise-text-critic/04-train-our-own/review.md), line 3).
 
 **Why it was asked.** After the reading test found no sentence score that reads steps 0 to 15
@@ -28,6 +28,7 @@ one, a linear layer on frozen encoders, has [its own finding](does-a-linear-prob
 - [Concepts this uses](#concepts-this-uses)
 - [Where this came from](#where-this-came-from)
 - [Still open](#still-open)
+- [Cross-references](#cross-references)
 
 ## Words this page uses
 
@@ -78,6 +79,8 @@ before the run, with the numbers the digit checkers use, and its bars are consta
 | Support | On the unseen digits over steps 14 to 25, balanced accuracy is at least 0.75, within 0.05 of the seen score, and at least 0.75 on digits apart against wrong digits |
 | Null | The overfit test passes and the trained model misses any of those three |
 | Inconclusive | The overfit test fails, or the model scores below 0.55 on the seen half at every step |
+
+All three of the design's checks fail.
 
 **What would have surprised the design** (line 108): a pass on digits apart against wrong digits for unseen digits, since the
 image encoder never saw a 7 and the loss never named one.
@@ -260,7 +263,7 @@ and the design.**
 
 ## Still open
 
-Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
 
 - [ ] The canvases beside each number, which the design asked the review to carry (line 116), and the figure of them in section 2.
 - [ ] The figure of seen and unseen balanced accuracy by step in section 1.
@@ -268,6 +271,8 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] The four disagreements under [Where the sources disagree](#where-the-sources-disagree).
 
 ## Cross-references
+
+Navigation: ⬅️ [Previous](#still-open) | 📋 [TOC](#table-of-contents)
 
 - The mention of **the own-encoder finding** in [the context page on the sentence-score push, one sampler step, section "What is measured where"](../../../context/methods/04-the-sentence-score-push/01-overview.md#what-is-measured-where).
 - The mention of **the own-encoder finding** in [the context page on the sentence-score push, training our own encoder on digits](../../../context/methods/04-the-sentence-score-push/05-training-our-own-encoder.md).

@@ -5,13 +5,13 @@
 On small canvases of handwritten digits, the digit diffusion model's own noise predictions for all ten digit labels on one
 noisy canvas let a small trained reader say which digits are on the canvas at best 0.700 balanced accuracy, at timestep 480,
 against a bar of 0.75. That is null by the rule written before the run. In the noisier window the brief asked for it reads at
-chance, 0.513 at best. The pipeline works: the reader on [the noisy canvas](../artifacts/scenes/digit-map-checkers/rebuild-from-fundamentals.md#1-the-noisy-canvas) passed its positive control at full size. W&B run
+chance, 0.513 at best. W&B run
 `gq51nl74` `verified` ([the score path review](../../artifacts/notes/progress/score-space/05-signal/review.md), line 3; the
 numbers match [the score path result file](../../artifacts/notes/progress/score-space/05-signal/full.json)).
 
 **What else it shows.** At the noise levels that match SDXL's first 16 steps, those ten predictions say more about which
 digits are present than the canvas they were computed from: 0.700 against 0.593 at timestep 480, with the same reader `stated`
-(review, lines 35, 36 and 42).
+(review, lines 35, 36 and 42). The pipeline works: the reader on [the noisy canvas](../artifacts/scenes/digit-map-checkers/rebuild-from-fundamentals.md#1-the-noisy-canvas) passed its positive control at full size.
 
 **Why it was asked.** The plan was to train an encoder that reads this path of predictions into the same space as a frozen
 text encoder, so a caption could name digits the model never drew together. That is worth building only if the path carries
@@ -34,6 +34,7 @@ reads digits 0 to 4 only.
 - [Concepts this uses](#concepts-this-uses)
 - [Where this came from](#where-this-came-from)
 - [Still open](#still-open)
+- [Cross-references](#cross-references)
 
 ## Words this page uses
 
@@ -291,7 +292,7 @@ from the review.**
 
 ## Still open
 
-Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
 
 - [ ] Whether a reader trained across both windows at once, or a later window, reaches 0.75. Trying it on this data needs a new design (review, line 76).
 - [ ] Whether the signature computed along the sampler's own path, where the noise is not shared across steps, reads the same (review, line 77).
@@ -301,6 +302,8 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] The three disagreements under [Where the sources disagree](#where-the-sources-disagree).
 
 ## Cross-references
+
+Navigation: ⬅️ [Previous](#still-open) | 📋 [TOC](#table-of-contents)
 
 - The mention of **the score-path finding** in [the context page on the score path, one canvas end to end, section "What one canvas goes through"](../../context/methods/07-the-score-path/01-overview.md#what-one-canvas-goes-through).
 - The mention of **the finding's limits** in [the context page on the score path, the network view, section "The system"](../../context/methods/07-the-score-path/02-the-network-view.md#the-system).

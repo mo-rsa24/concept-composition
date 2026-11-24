@@ -6,9 +6,7 @@ At steps 0 to 15 of a 50-step SDXL run, while the picture is still mostly noise,
 a right sentence from a wrong one for any of five properties of a cat and dog picture. NoisyCLIP, frozen CLIP and [Latent CLIP](../../../context/methods/05-latent-clip/01-overview.md)
 each stay between 0.46 and 0.56 mean balanced accuracy against a bar of 0.75, where 0.5 is chance, and none beats frozen CLIP.
 Counting, prompt match and left-right order are null. Position and size, and attribute binding, are inconclusive, because
-their labels failed the eye check. NoisyCLIP does read prompt match once the picture is mostly drawn, at steps 30 to 49, so
-the models and [the input path](../../artifacts/scenes/noisyclip-sentence-score/NOTATION.md#the-input-path) work and the early steps are where reading fails. W&B run `70g3qw2f` `stated`
-([the reading review](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), line 3).
+their labels failed the eye check.
 
 **Why it was asked.** A sentence score was a candidate for steering the sampler toward a clean cat and dog: push the picture
 while it is drawn so the right sentence scores higher. A push acts at steps 0 to 15, so the next step, a push on CO3's
@@ -31,6 +29,7 @@ A later test of whether this null is fair records the step differently. It is qu
 - [Concepts this uses](#concepts-this-uses)
 - [Where this came from](#where-this-came-from)
 - [Still open](#still-open)
+- [Cross-references](#cross-references)
 
 ## Words this page uses
 
@@ -86,6 +85,9 @@ before any score existed, and its bars are constants in `2-classifier-guidance/s
 **What would have surprised the design** (line 54): NoisyCLIP passing on left-right order or colour binding at steps 0 to 9,
 or Latent CLIP reading above chance at steps 0 to 5, since it never trained on a noisy latent.
 
+W&B run `70g3qw2f` `stated`
+([the reading review](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), line 3).
+
 ## 1. No model reads any property at steps 0 to 15
 
 Navigation: ⬅️ [Previous](#what-would-have-counted) | 📋 [TOC](#table-of-contents) | [Next](#2-the-models-do-read-once-the-picture-is-mostly-drawn) ➡️
@@ -129,7 +131,8 @@ from the counts).
 Navigation: ⬅️ [Previous](#1-no-model-reads-any-property-at-steps-0-to-15) | 📋 [TOC](#table-of-contents) | [Next](#3-counting-fails-even-on-the-finished-picture) ➡️
 
 **NoisyCLIP reads prompt match from about step 20, and reaches 0.78 to 0.86 at steps 30 to 49, so the early failure is about
-the early steps.**
+the early steps.** NoisyCLIP does read prompt match once the picture is mostly drawn, at steps 30 to 49, so
+the models and [the input path](../../artifacts/scenes/noisyclip-sentence-score/NOTATION.md#the-input-path) work and the early steps are where reading fails.
 
 > 🖼️ **Figure wanted**: balanced accuracy on the reading half against sampler step 0 to 49 for prompt match and counting, one
 > line per model, with steps 0 to 15 shaded as the push's window, so the reader sees where each model starts to read. The
@@ -322,7 +325,7 @@ Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-conten
 
 ## Still open
 
-Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
 
 - [ ] The fairness test now records a verdict on this step. [The fairness review](../../../artifacts/notes/progress/noise-text-critic/02c-fair-test/review.md), line 3: "**State: W2 is inconclusive by the bars fixed beforehand, and no sentence score reads in any fair setting.**" Its finding is [the fairness finding](is-the-sentence-score-test-fair.md).
 - [ ] Binding has no score: [the binding review](../../../artifacts/notes/progress/noise-text-critic/02d-binding/review.md), line 3, records "no binding score yet".
@@ -332,6 +335,8 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] The three disagreements under [Where the sources disagree](#where-the-sources-disagree).
 
 ## Cross-references
+
+Navigation: ⬅️ [Previous](#still-open) | 📋 [TOC](#table-of-contents)
 
 - The mention of **the reading finding** in [the context page on the sentence-score push, one sampler step, section "The names, taken apart"](../../../context/methods/04-the-sentence-score-push/01-overview.md#the-names-taken-apart).
 - The mention of **the reading finding, section 2** in [the context page on the sentence-score push, the code behind it, section "Catching the half-drawn latents"](../../../context/methods/04-the-sentence-score-push/04-the-code.md#catching-the-half-drawn-latents).

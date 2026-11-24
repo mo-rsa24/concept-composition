@@ -263,7 +263,7 @@ it.**
 | The rows, the bars and the mask rule | [the step's design](../../../artifacts/notes/progress/method-search/04-bind-each-body/design.md), lines 21 to 116 | stated |
 | The three-rung ladder | [the binding design](../../../artifacts/notes/progress/targets/binding-each-body-design.md) | stated |
 | What each picture shows | the four pictures above, opened at full size on 2026-11-24, every label checked with `is_showable` and against the held-pictures list | verified |
-| The plan that owned the step | step M9 of [the two-papers route](../../../plans/route-two-papers.md#the-steps), run under [the Session 6 brief](../../../artifacts/notes/progress/prompts/session-6-find-the-best-method.md) | |
+| The plan that owned the step | step M9 on the progress board, its row "M9 Regions bind each body" in `artifacts/notes/progress/board.json`, designed in [the step's design](../../../artifacts/notes/progress/method-search/04-bind-each-body/design.md) and run under [the Session 6 brief](../../../artifacts/notes/progress/prompts/session-6-find-the-best-method.md). The [two-papers route](../../../plans/route-two-papers.md)'s step list does not carry M9 | |
 | Regenerate with | the step's scripts, launched as in [launching and harvesting a run](../../../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md) | |
 | The cluster and its cards | [the environment overview](../../../environment/overview.md) | |
 

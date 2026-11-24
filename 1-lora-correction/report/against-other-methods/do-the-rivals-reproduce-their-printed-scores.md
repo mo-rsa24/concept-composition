@@ -8,9 +8,6 @@ It passes on RareBench Concat, where 33 prompts make the test weak. Feynman-Kac 
 choice, so its printed 0.78 stays as context. Plain SDXL on FKC's [GenEval two-object](../measuring-composition/what-each-scorer-says-about-two-objects.md#geneval-two-object) prompts does reproduce its printed score,
 and that is the number a Paper 2 win on GenEval must beat.
 
-The numbers come from [the RTD review](../../../artifacts/notes/progress/reproductions/RTD/review.md) and
-[the FKC review](../../../artifacts/notes/progress/reproductions/FKC/review.md).
-
 ## Table of contents
 
 - [What would have counted](#what-would-have-counted)
@@ -21,6 +18,7 @@ The numbers come from [the RTD review](../../../artifacts/notes/progress/reprodu
 - [Concepts this uses](#concepts-this-uses)
 - [Where this came from](#where-this-came-from)
 - [Still open](#still-open)
+- [Cross-references](#cross-references)
 
 ## What would have counted
 
@@ -43,6 +41,9 @@ so a score on fewer of them is a weaker test.
 | The prompts each paper scored and the prompts this rerun renders |
 |---|
 | <a href="../../../artifacts/notes/progress/reproductions/prompts-the-guard-keeps-out.png"><img src="../../../artifacts/notes/progress/reproductions/prompts-the-guard-keeps-out.png" width="200" alt="Two columns of boxes, what each paper scored and what we render after the subject guard, one box per benchmark"></a><br>Left, the prompt count each paper scored. Right, the count left after the subject guard. T2I-CompBench Complex goes from 1,000 to 988 (12 kept out) and RareBench Concat from 40 to 33 (7 kept out) `verified` (read on the picture; matches the RTD design). The GenEval box reads "all 553 released prompts". The FKC baseline below renders only the 99 two-object prompts among them `stated` (FKC review). |
+
+The numbers come from [the RTD review](../../../artifacts/notes/progress/reproductions/RTD/review.md) and
+[the FKC review](../../../artifacts/notes/progress/reproductions/FKC/review.md).
 
 ## 1. RTD on T2I-CompBench Complex and RareBench Concat
 
@@ -183,7 +184,7 @@ Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-conten
 
 ## Still open
 
-Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
 
 - [ ] Why RTD misses on Complex: hardware, the ImageReward package or preprocessing, or the printed number. Nothing run separates them.
 - [ ] CO3: no verdict yet ([the CO3 review](../../../artifacts/notes/progress/reproductions/CO3/review.md)).
@@ -193,6 +194,8 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] The three disagreements under [Where the sources disagree](#where-the-sources-disagree).
 
 ## Cross-references
+
+Navigation: ⬅️ [Previous](#still-open) | 📋 [TOC](#table-of-contents)
 
 - The mention of **the reproduction finding** in [the context page on the BLIP-VQA score, from answers to a target, section "What the number can and cannot tell you"](../../../context/methods/08-the-blip-vqa-score/03-from-answers-to-a-target.md#what-the-number-can-and-cannot-tell-you).
 

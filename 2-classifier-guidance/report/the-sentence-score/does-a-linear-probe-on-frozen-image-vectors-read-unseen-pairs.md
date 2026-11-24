@@ -28,6 +28,7 @@ The larger one trains a whole encoder and has [its own finding](does-our-own-noi
 - [Concepts this uses](#concepts-this-uses)
 - [Where this came from](#where-this-came-from)
 - [Still open](#still-open)
+- [Cross-references](#cross-references)
 
 ## Words this page uses
 
@@ -245,7 +246,7 @@ Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-conten
 
 ## Still open
 
-Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
 
 - [ ] No W&B run id is recorded for this step, though the design logs the vectors to W&B project `prime_lab/poe-repair-animals-compose` (line 65); the board's note and [the loop's summary](../../../artifacts/notes/progress/noise-text-critic/00-executive-summary.md), line 41, name none.
 - [ ] No standard error is recorded for the gaps between encoders, so NoisyCLIP's lead over frozen CLIP is untested.
@@ -254,6 +255,8 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] The three disagreements under [Where the sources disagree](#where-the-sources-disagree).
 
 ## Cross-references
+
+Navigation: ⬅️ [Previous](#still-open) | 📋 [TOC](#table-of-contents)
 
 - The mention of **the linear probe finding** in [the context page on the linear probe on frozen vectors](../../../context/methods/05-latent-clip/04-the-linear-probe-on-frozen-vectors.md).
 

@@ -7,7 +7,7 @@ A small checker that reads only where each asked digit acts on a noisy canvas le
 digits 0 to 4, a gap of 0.009, where the pass mark is 0.75 and the gap may be at most 0.05. W&B run `tyhrpyov` `stated`.
 No checker here learns *which* digits are present. The first design's single checker, which had to read both where and which, is
 null on digits 5 to 9 (W&B run `a562r799`), and a checker trained only on right against wrong digits reads 0.555 on a digit it
-never saw `stated`. Both verdicts are copied from [the learning review](../../../artifacts/notes/progress/abstract-checkers/05-does-it-learn/review.md), line 3.
+never saw `stated`.
 
 **What a canvas is.** A canvas is a small black picture 32 pixels tall and 64 wide, with room for one handwritten MNIST digit in
 each half. The asked pair is the two digits the canvas is judged against. Every asked pair gets five kinds of canvas: `apart`
@@ -28,6 +28,7 @@ shows all five.
 - [Concepts this uses](#concepts-this-uses)
 - [Where this came from](#where-this-came-from)
 - [Still open](#still-open)
+- [Cross-references](#cross-references)
 
 ## Words this page uses
 
@@ -65,6 +66,8 @@ Navigation: ⬅️ [Previous](#words-this-page-uses) | 📋 [TOC](#table-of-cont
 | The same checker at SDXL's noise level, pairs holding digit 4 | the same three bars | [the rehearsal section](../../../artifacts/notes/progress/abstract-checkers/05-does-it-learn/design.md#the-rehearsal-at-sdxls-noise-level-board-question-64), board question 64 |
 | Count and identity checkers, pairs holding digit 4 | count: at least 0.75 and within 0.05 of the trained pairs. Identity: at least 0.75 | [the two-checker section](../../../artifacts/notes/progress/abstract-checkers/05-does-it-learn/design.md#two-checkers-at-sdxls-noise-level-board-question-67), board question 67 |
 | The count checker, digits 5 to 9 | at least 0.75, and within 0.05 of digits 0 to 4 | [the count read section](../../../artifacts/notes/progress/abstract-checkers/05-does-it-learn/design.md#reading-digits-5-to-9-with-the-count-checker-board-question-69), board question 69 |
+
+Both verdicts are copied from [the learning review](../../../artifacts/notes/progress/abstract-checkers/05-does-it-learn/review.md), line 3.
 
 > [!IMPORTANT]
 > The count checker's support is judged on two bars. The `apart` against `wrong` bar cannot apply to it, because it calls both
@@ -254,13 +257,15 @@ Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-conten
 
 ## Still open
 
-Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
 
 - [ ] The two figures wanted in sections 3 and 4.
 - [ ] An identity checker that reads which digits are present at these noise levels. None has passed; the Loop 8 summary names a later push window and the full noise-prediction signature as untested routes.
 - [ ] The four disagreements under [Where the sources disagree](#where-the-sources-disagree).
 
 ## Cross-references
+
+Navigation: ⬅️ [Previous](#still-open) | 📋 [TOC](#table-of-contents)
 
 - The mention of **the learning finding, section 3** in [the context page on the digit-map checkers, one sampler step, section "The names, taken apart"](../../../context/methods/03-the-digit-map-checkers/01-overview.md#the-names-taken-apart).
 - The mention of **the learning finding, section 4** in [the context page on the digit-map checkers, the network view, section "Two checkers, two label sets"](../../../context/methods/03-the-digit-map-checkers/02-the-network-view.md#two-checkers-two-label-sets).

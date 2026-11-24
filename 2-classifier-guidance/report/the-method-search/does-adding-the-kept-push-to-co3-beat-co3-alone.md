@@ -2,9 +2,8 @@
 
 **The claim**
 
-On 12 subject pairs at 8 seeds each, CO3 with the kept push makes 7 faithful pairs of 96 pictures and CO3 alone makes 11. A win
-needed a lead of at least 5 and more than 10.08, which is 1.96 times the standard error of 5.14. The lead is -4, so the verdict is
-null `stated` ([the step's review](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/review.md), lines 87 to 89).
+On 12 subject pairs at 8 seeds each, CO3 with the kept push makes 7 faithful pairs of 96 pictures and CO3 alone makes 11.
+The lead is -4, so the verdict is null `stated` ([the step's review](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/review.md), lines 87 to 89).
 A random push of the same size makes 12, one more than CO3 alone, so the rule that would make the run inconclusive does not fire.
 W&B run `s7o6404z`.
 
@@ -35,6 +34,7 @@ plain product it was tuned on.
 - [Concepts this uses](#concepts-this-uses)
 - [Where this came from](#where-this-came-from)
 - [Still open](#still-open)
+- [Cross-references](#cross-references)
 
 ## Words this page uses
 
@@ -75,7 +75,8 @@ Navigation: ⬅️ [Previous](#words-this-page-uses) | 📋 [TOC](#table-of-cont
 
 The standard error comes from 10,000 bootstrap resamples of the 12 pairs, using each pair's matched difference over its 8 seeds. A
 pushed render is not bit-reproducible and has moved by about 2 of 96 when repeated, so a lead under 5 of 96 counts as a tie
-`stated` (design, lines 130 to 139).
+`stated` (design, lines 130 to 139). A win needed a lead of at least 5 and more than 10.08, which is 1.96 times the standard
+error of 5.14.
 
 | How the three rows feed the blind count |
 |---|
@@ -275,13 +276,13 @@ them, and the 288 full-size renders are on the cluster and were not opened.**
 | The verdict rule in code | `paper2_verdict` and `PAPER2_MIN_LEAD = 5` in `2-classifier-guidance/scripts/method_search/beat_baseline_bars.py`, read 2026-11-24 | verified |
 | What CO3 is | [the two problem statements](../../../artifacts/notes/progress/problem-statements.md#paper-2-restoring-plurality-in-one-model), lines 85 and 118 | stated |
 | What each picture shows | the four pictures above, opened at full size on 2026-11-24, every path and visible label checked with `is_showable` and against the held-pictures list | verified |
-| The plan that owned the step | step M1 of [the two-papers route](../../../plans/route-two-papers.md#the-steps), run under [the Session 6 brief](../../../artifacts/notes/progress/prompts/session-6-find-the-best-method.md) | |
+| The plan that owned the step | step M1 on the progress board, its row "M1 Each method beats its simple baseline" in `artifacts/notes/progress/board.json`, designed in [the step's design](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/design.md) and run under [the Session 6 brief](../../../artifacts/notes/progress/prompts/session-6-find-the-best-method.md). The [two-papers route](../../../plans/route-two-papers.md)'s step list does not carry M1 | |
 | Regenerate with | `m1_paper2.sbatch`, `paper2_rows.py`, `co3_push.py` and `paper2_blind.py` under `2-classifier-guidance/scripts/method_search/`, launched as in [launching and harvesting a run](../../../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md) | |
 | The cluster and its cards | [the environment overview](../../../environment/overview.md) | |
 
 ## Still open
 
-Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
 
 - [ ] The faithful-pairs-per-subject-pair figure in section 3.
 - [ ] The faithful-beside-borrowed-part figure in section 3.
@@ -290,6 +291,8 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] A second caller on a sample of the 288 pictures, so the count carries a measured agreement between callers.
 
 ## Cross-references
+
+Navigation: ⬅️ [Previous](#still-open) | 📋 [TOC](#table-of-contents)
 
 - The mention of **the CO3 finding** in [the context page on the readout checker, the push and its cap, section "How the kept settings were chosen"](../../../context/methods/02-the-readout-checker/03-the-push-and-its-cap.md#how-the-kept-settings-were-chosen).
 - The mention of **the CO3 push finding** in [the context page on the sentence-score push, one sampler step, section "Words this page uses"](../../../context/methods/04-the-sentence-score-push/01-overview.md#words-this-page-uses).

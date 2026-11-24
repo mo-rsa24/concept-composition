@@ -232,7 +232,7 @@ Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-conten
 | The rows, the checker's data, the bar, the prediction of about 285 | [the step's design](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/design.md), lines 38 to 81 | stated |
 | Bradley's rule and the 90.6% threshold | [the CLEVR scaling plan](../../../artifacts/notes/progress/targets/clevr-scaling-plan.md), lines 33 to 34 and 79 to 80 | stated |
 | What each picture shows | the three pictures above, opened at full size on 2026-11-24, frames counted on the four-row sheet, every label checked with `is_showable` and against the held-pictures list | verified |
-| The plan that owned the step | step M1 of [the two-papers route](../../../plans/route-two-papers.md#the-steps), run under [the Session 6 brief](../../../artifacts/notes/progress/prompts/session-6-find-the-best-method.md) | |
+| The plan that owned the step | step M1 on the progress board, its row "M1 Each method beats its simple baseline" in `artifacts/notes/progress/board.json`, designed in [the step's design](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/design.md) and run under [the Session 6 brief](../../../artifacts/notes/progress/prompts/session-6-find-the-best-method.md). The [two-papers route](../../../plans/route-two-papers.md)'s step list does not carry M1 | |
 | Regenerate with | the scripts under `2-classifier-guidance/scripts/method_search/`, launched as in [launching and harvesting a run](../../../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md) | |
 | The cluster and its cards | [the environment overview](../../../environment/overview.md) | |
 
