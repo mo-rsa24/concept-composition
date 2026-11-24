@@ -190,7 +190,8 @@
   "93": "answered",
   "94": "answered",
   "95": "answered",
-  "96": "open"
+  "96": "open",
+  "97": "answered"
  },
  "nudges": [
   {
@@ -242,7 +243,8 @@
  ],
  "patterns_requested": [
   "s6:M9:three-misses-2026-11-24",
-  "s8:sampler-state-reads:two-misses-2026-11-24"
+  "s8:sampler-state-reads:two-misses-2026-11-24",
+  "s12:two-nulls-Z2-Z3-2026-11-24"
  ],
  "void_list_table_lines": 26,
  "last_reviewer_run": {
@@ -295,6 +297,10 @@
   {
    "q": 95,
    "choice": "A with free check, held-out control, disclosure"
+  },
+  {
+   "q": 97,
+   "choice": "rerun 1 only; rerun 3 free from own records"
   }
  ],
  "rerouted": {
