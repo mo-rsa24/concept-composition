@@ -81,7 +81,7 @@ Read at 17:06 from `squeue`, `sacct` and `sinfo`; down nodes from `sinfo -R` at 
 | Our jobs against the caps | 4 running on `bigbatch` of 6 allowed (Loop 6's read and two CLEVR renders, Loop 12's predictor pass); 0 on `biggpu` of 1 allowed; 11 queued |
 | Longest wait | Loop 8's 20-minute check (job 94595): 35 minutes, waiting for a node |
 | Nodes out of service | `bigbatch`: 12 down and 5 drained of 48. `biggpu`: 2 down and 2 drained of 7, including mscluster108 and mscluster111, drained at 09:27 and 09:10 today after a failed job kill |
-| Idle capacity | none on either partition; every working node is allocated |
+| Idle capacity | none: at 17:43 every working `bigbatch` and `biggpu` node was allocated. mscluster107 is now another user's `biggpu` job (94610, 6-hour limit, started 17:36); its second card sits idle at 170 MiB, but their process holds it, so it is not ours to use. Your interactive job 83423 on that node no longer appears in the queue |
 | Compute against budget since 2026-11-21 | Loop 6: 53.4 node-hours of 87 (34.8 were CLEVR renders that may have used no GPU). Loop 8: 11.9 of 30. Loop 12: about 0.4, no total set. Slurm here records no GPU count, so these are node-hours, an upper bound |
 
 **What would make the queue move faster:** little within our control. There is no idle `biggpu` card,
