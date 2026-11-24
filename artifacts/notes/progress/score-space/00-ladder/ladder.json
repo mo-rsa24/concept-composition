@@ -1,0 +1,143 @@
+{
+ "subject": "The score path on digit canvases: the stack of d_t(c) = eps(x_t, t, c) - eps(x_t, t, no digit) over sampler steps 0 to 15 for one canvas and one seed, from the frozen digit U-Net, as Loop 10's candidate third space beside captions and noisy canvases",
+ "kind": "concept on an existing model; the score-path encoder is planned (step X4) and not designed",
+ "landing": "standalone, /home/molef/PhD/concept-composition/artifacts/notes/progress/score-space/00-ladder/",
+ "pace": "unattended (--auto)",
+ "published": "nothing: static PNG and SVG on markdown pages",
+ "open_first": "README.md",
+ "notation": "NOTATION.md",
+ "numbers": "numbers/numbers.json, from numbers/make_numbers.py",
+ "code_checkout": {
+  "repo": "this repository",
+  "commit": "2dcb2bebf268aa7f97783615b23cb17559182976",
+  "note": "read; CanvasUNet built on the CPU with untrained weights only to count weights and trace shapes"
+ },
+ "route": "not written: this loop writes only inside 00-ladder, and the route file belongs under plans/",
+ "style": {
+  "overview": "annotated-explainer, from ~/.claude/skills/zoom-ladder/scripts/annotated_explainer.py helpers, family score-path (score_path_family.py)",
+  "deep dives": "clip-contrastive, drawn with figure_kit.py copied unchanged from the NoisyCLIP ladder",
+  "chosen_in": "2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/ladder.json and style-reference.md",
+  "new_family": "score-path, in score_path_family.py; registers itself into style_samples.FAMILIES on import, the skill's file is not edited",
+  "sample": "style-sample-score-path.png"
+ },
+ "colour_key": {
+  "text": "#b9a7e8",
+  "image": "#a8dcb5",
+  "matching pairs": "#bfe3f5",
+  "the push": "#c86a0a",
+  "frozen or fixed": "#6b7a88",
+  "score path": "#f2b8c6"
+ },
+ "colour_concordance": [
+  {
+   "rung": "overview (annotated-explainer) against deep dives (clip-contrastive)",
+   "palette": "text is blue #1f5fd0 in the overview and lilac #b9a7e8 in the deep dives; canvas green, frozen grey and score-path rose match in both"
+  },
+  {
+   "rung": "the push",
+   "palette": "orange is unused: this loop reads and does not push"
+  },
+  {
+   "rung": "miniature number cells",
+   "palette": "rose cells are negative d values and green cells positive ones; green there marks sign, not the canvas encoder"
+  }
+ ],
+ "reading_order": [
+  "overview/ov0-the-score-path-as-a-third-space",
+  "0.5-network-view/sys0-where-the-score-path-sits",
+  "0.5-network-view/sp1-inside-the-digit-unet",
+  "linked dc2",
+  "0.5-network-view/sp2-sixteen-steps-make-a-score-path",
+  "0.5-network-view/sp3-the-planned-score-path-encoder",
+  "0.5-network-view/sp4-three-spaces-three-matrices",
+  "2-miniature/mm1 to mm4",
+  "3-code/walk-the-digit-environment.md",
+  "read-through-a-small-network.md"
+ ],
+ "reuse": [
+  "2-classifier-guidance/artifacts/scenes/digit-map-checkers/0.5-network-view/dc0-where-the-checkers-sit.png",
+  "2-classifier-guidance/artifacts/scenes/digit-map-checkers/0.5-network-view/dc2-where-the-two-maps-come-from.png",
+  "artifacts/notes/progress/abstract-checkers/05-does-it-learn/review.md"
+ ],
+ "rungs": {
+  "overview": {
+   "state": "built",
+   "files": [
+    "overview/ov0-the-score-path-as-a-third-space.png",
+    "overview/ov0-the-score-path-as-a-third-space.svg",
+    "overview/make_canvas_3_7.py",
+    "overview/canvas-3-7.json"
+   ],
+   "illustrative": "noise draw on the canvas, shared-space dots, hollow test bars"
+  },
+  "0_system": {
+   "state": "built",
+   "files": [
+    "0.5-network-view/sys0-where-the-score-path-sits.png",
+    "0.5-network-view/sys0-where-the-score-path-sits.svg"
+   ],
+   "linked": [
+    "dc0-where-the-checkers-sit"
+   ]
+  },
+  "0_5_network_view": {
+   "state": "built",
+   "files": [
+    "0.5-network-view/make_network_view.py"
+   ],
+   "new": [
+    "sp1-inside-the-digit-unet",
+    "sp2-sixteen-steps-make-a-score-path",
+    "sp3-the-planned-score-path-encoder",
+    "sp4-three-spaces-three-matrices"
+   ],
+   "linked": [
+    "dc2-where-the-two-maps-come-from"
+   ],
+   "illustrative": "every size on the score-path encoder; sp4 cells hold no values; sp2 d_t tiles are empty"
+  },
+  "1_illustrations": {
+   "state": "skipped",
+   "why": "this loop's rule: no Codex image renders, no GPU, no API tokens"
+  },
+  "2_miniature": {
+   "state": "built",
+   "files": [
+    "2-miniature/miniature.py",
+    "2-miniature/miniature_answer_key.json",
+    "2-miniature/make_miniature_figures.py"
+   ],
+   "new": [
+    "mm1-one-step-three-calls",
+    "mm2-two-steps-make-a-score-path",
+    "mm3-the-encoder-and-the-contrastive-score",
+    "mm4-the-two-tests-in-miniature"
+   ],
+   "design": "4 pixels, 2 toy steps x - eps_PoE, eps(x, c) = x + u_c + v_c * x with integer u and v, a 2 x 8 integer encoder, 2-number caption vectors, tau 0.07 from w4_train.py; a hand-set toy that predicts nothing"
+  },
+  "3_code": {
+   "state": "built: read, 16 quotes checked",
+   "files": [
+    "3-code/walk-the-digit-environment.md",
+    "3-code/check_quotes.py"
+   ]
+  },
+  "companion": {
+   "state": "skipped",
+   "why": "not in this loop's hand-back list"
+  },
+  "close": {
+   "state": "built",
+   "files": [
+    "read-through-a-small-network.md"
+   ]
+  }
+ },
+ "open_for_x4": [
+  "the digit models have 11 labels (0 to 9 and no digit), so a joint score path has no definition; the gap test needs one",
+  "which x_t the path reads: the product's own DDIM run, or a test canvas noised once per step",
+  "which window: ddim_timesteps(50)[:16] (t 999 to 693, W4's) or v2_learn's SDXL_MATCHED (t 712 to 480)",
+  "raw d_t or V2's scaled maps",
+  "product_eps returns only the sum under no_grad, so the separate d_t must be taken as v2_learn.maps does"
+ ]
+}

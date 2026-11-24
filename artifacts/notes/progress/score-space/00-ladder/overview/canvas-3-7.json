@@ -1,0 +1,40 @@
+{
+ "built_by": "build_env.make_canvas('apart', 3, 7, digits 0 to 9, MNIST t10k)",
+ "seed": [
+  8001,
+  10,
+  3,
+  7
+ ],
+ "holds_left_to_right": [
+  7,
+  3
+ ],
+ "mnist_t10k_index": [
+  3730,
+  6096
+ ],
+ "corners": [
+  [
+   4,
+   4
+  ],
+  [
+   4,
+   36
+  ]
+ ],
+ "noise": "numpy default_rng(10), illustrative draw",
+ "noised": {
+  "canvas-3-7-step0-t999.png": {
+   "t": 999,
+   "sqrt_abar": 0.0064,
+   "display": "x_t mapped from [-3, 3] to grey"
+  },
+  "canvas-3-7-step15-t693.png": {
+   "t": 693,
+   "sqrt_abar": 0.0871,
+   "display": "x_t mapped from [-3, 3] to grey"
+  }
+ }
+}

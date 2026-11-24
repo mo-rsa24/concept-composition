@@ -1,0 +1,461 @@
+{
+ "source_commit": "2dcb2bebf268aa7f97783615b23cb17559182976",
+ "files": {
+  "model": "2-classifier-guidance/scripts/mnist/canvas_unet.py",
+  "canvases_for_the_models": "2-classifier-guidance/scripts/mnist/canvas_sheet.py",
+  "test_canvases": "2-classifier-guidance/scripts/abstract_checkers/build_env.py",
+  "existing_d_t_maps": "2-classifier-guidance/scripts/abstract_checkers/v2_learn.py, maps()",
+  "text_with_latent": "2-classifier-guidance/scripts/noise_text_critic/w4_train.py"
+ },
+ "canvas": {
+  "height": 32,
+  "width": 64,
+  "digit_side": 28,
+  "pixels": 2048,
+  "pixel_range": "-1 to +1 (training_batch divides by 127.5 and subtracts 1)"
+ },
+ "unet": {
+  "class": "CanvasUNet(ch=64, mults=(1, 2, 2), n_classes=11)",
+  "weights": 6141185,
+  "weights_by_part": {
+   "time_vector_mlp": 82432,
+   "label_table": 2816,
+   "input_conv": 640,
+   "down_path": 1614400,
+   "middle": 723456,
+   "up_path": 3716736,
+   "output": 705
+  },
+  "base_channels": 64,
+  "vector_width": 256,
+  "labels": 11,
+  "null_label": 10,
+  "label_meaning": "0 to 9 are digits, 10 is no digit; a pair has no label of its own",
+  "levels": [
+   [
+    64,
+    32,
+    64
+   ],
+   [
+    128,
+    16,
+    32
+   ],
+   [
+    128,
+    8,
+    16
+   ]
+  ],
+  "attention": "one 4-head self-attention at the 8 x 16 grid, in the middle",
+  "res_blocks": {
+   "down": 6,
+   "middle": 2,
+   "up": 9
+  },
+  "time_and_label_join": "emb = temb(timestep_embedding(t, 64)) + cemb(y), added inside every ResBlock",
+  "shapes_traced": [
+   [
+    "input conv",
+    [
+     64,
+     32,
+     64
+    ]
+   ],
+   [
+    "down ResBlock",
+    [
+     64,
+     32,
+     64
+    ]
+   ],
+   [
+    "down ResBlock",
+    [
+     64,
+     32,
+     64
+    ]
+   ],
+   [
+    "down Conv2d",
+    [
+     64,
+     16,
+     32
+    ]
+   ],
+   [
+    "down ResBlock",
+    [
+     128,
+     16,
+     32
+    ]
+   ],
+   [
+    "down ResBlock",
+    [
+     128,
+     16,
+     32
+    ]
+   ],
+   [
+    "down Conv2d",
+    [
+     128,
+     8,
+     16
+    ]
+   ],
+   [
+    "down ResBlock",
+    [
+     128,
+     8,
+     16
+    ]
+   ],
+   [
+    "down ResBlock",
+    [
+     128,
+     8,
+     16
+    ]
+   ],
+   [
+    "middle ResBlock",
+    [
+     128,
+     8,
+     16
+    ]
+   ],
+   [
+    "middle Attn",
+    [
+     128,
+     8,
+     16
+    ]
+   ],
+   [
+    "middle ResBlock",
+    [
+     128,
+     8,
+     16
+    ]
+   ],
+   [
+    "up ResBlock",
+    [
+     128,
+     8,
+     16
+    ]
+   ],
+   [
+    "up ResBlock",
+    [
+     128,
+     8,
+     16
+    ]
+   ],
+   [
+    "up ResBlock",
+    [
+     128,
+     8,
+     16
+    ]
+   ],
+   [
+    "up Upsample",
+    [
+     128,
+     16,
+     32
+    ]
+   ],
+   [
+    "up Conv2d",
+    [
+     128,
+     16,
+     32
+    ]
+   ],
+   [
+    "up ResBlock",
+    [
+     128,
+     16,
+     32
+    ]
+   ],
+   [
+    "up ResBlock",
+    [
+     128,
+     16,
+     32
+    ]
+   ],
+   [
+    "up ResBlock",
+    [
+     128,
+     16,
+     32
+    ]
+   ],
+   [
+    "up Upsample",
+    [
+     128,
+     32,
+     64
+    ]
+   ],
+   [
+    "up Conv2d",
+    [
+     128,
+     32,
+     64
+    ]
+   ],
+   [
+    "up ResBlock",
+    [
+     64,
+     32,
+     64
+    ]
+   ],
+   [
+    "up ResBlock",
+    [
+     64,
+     32,
+     64
+    ]
+   ],
+   [
+    "up ResBlock",
+    [
+     64,
+     32,
+     64
+    ]
+   ],
+   [
+    "output",
+    [
+     1,
+     32,
+     64
+    ]
+   ]
+  ]
+ },
+ "training_of_the_digit_models": {
+  "T": 1000,
+  "betas": "linear 1e-4 to 0.02",
+  "null_label_rate": 0.1,
+  "steps": 40000,
+  "batch": 128,
+  "lr": 0.0002,
+  "ema": 0.999,
+  "shares": {
+   "share-0.0": "never saw two digits on one canvas",
+   "share-0.01": "1% of canvases hold two digits, from the 40 pairs not held out; each enters once per digit it holds"
+  },
+  "held_out_pairs": [
+   [
+    0,
+    3
+   ],
+   [
+    1,
+    9
+   ],
+   [
+    3,
+    4
+   ],
+   [
+    3,
+    6
+   ],
+   [
+    4,
+    7
+   ]
+  ],
+  "pairs_total": 45,
+  "pairs_seen_by_share_0_01": 40,
+  "pairs_among_5_to_9_held_out": [],
+  "source": "canvas_unet.py argparse defaults and training_batch; canvas_sheet.py HELD_OUT"
+ },
+ "sampler": {
+  "kind": "DDIM",
+  "steps": 50,
+  "eta": 0.0,
+  "window_steps_0_to_15": [
+   {
+    "step": 0,
+    "t": 999,
+    "abar": 4e-05,
+    "sqrt_abar": 0.0064,
+    "sqrt_one_minus_abar": 1.0
+   },
+   {
+    "step": 1,
+    "t": 979,
+    "abar": 6e-05,
+    "sqrt_abar": 0.0078,
+    "sqrt_one_minus_abar": 1.0
+   },
+   {
+    "step": 2,
+    "t": 958,
+    "abar": 9.1e-05,
+    "sqrt_abar": 0.0095,
+    "sqrt_one_minus_abar": 1.0
+   },
+   {
+    "step": 3,
+    "t": 938,
+    "abar": 0.000133,
+    "sqrt_abar": 0.0115,
+    "sqrt_one_minus_abar": 0.9999
+   },
+   {
+    "step": 4,
+    "t": 917,
+    "abar": 0.000198,
+    "sqrt_abar": 0.0141,
+    "sqrt_one_minus_abar": 0.9999
+   },
+   {
+    "step": 5,
+    "t": 897,
+    "abar": 0.000285,
+    "sqrt_abar": 0.0169,
+    "sqrt_one_minus_abar": 0.9999
+   },
+   {
+    "step": 6,
+    "t": 877,
+    "abar": 0.000409,
+    "sqrt_abar": 0.0202,
+    "sqrt_one_minus_abar": 0.9998
+   },
+   {
+    "step": 7,
+    "t": 856,
+    "abar": 0.00059,
+    "sqrt_abar": 0.0243,
+    "sqrt_one_minus_abar": 0.9997
+   },
+   {
+    "step": 8,
+    "t": 836,
+    "abar": 0.000831,
+    "sqrt_abar": 0.0288,
+    "sqrt_one_minus_abar": 0.9996
+   },
+   {
+    "step": 9,
+    "t": 816,
+    "abar": 0.001161,
+    "sqrt_abar": 0.0341,
+    "sqrt_one_minus_abar": 0.9994
+   },
+   {
+    "step": 10,
+    "t": 795,
+    "abar": 0.001634,
+    "sqrt_abar": 0.0404,
+    "sqrt_one_minus_abar": 0.9992
+   },
+   {
+    "step": 11,
+    "t": 775,
+    "abar": 0.002245,
+    "sqrt_abar": 0.0474,
+    "sqrt_one_minus_abar": 0.9989
+   },
+   {
+    "step": 12,
+    "t": 754,
+    "abar": 0.003105,
+    "sqrt_abar": 0.0557,
+    "sqrt_one_minus_abar": 0.9984
+   },
+   {
+    "step": 13,
+    "t": 734,
+    "abar": 0.004195,
+    "sqrt_abar": 0.0648,
+    "sqrt_one_minus_abar": 0.9979
+   },
+   {
+    "step": 14,
+    "t": 714,
+    "abar": 0.005623,
+    "sqrt_abar": 0.075,
+    "sqrt_one_minus_abar": 0.9972
+   },
+   {
+    "step": 15,
+    "t": 693,
+    "abar": 0.00758,
+    "sqrt_abar": 0.0871,
+    "sqrt_one_minus_abar": 0.9962
+   }
+  ],
+  "window_note": "ddim_timesteps(50)[:16], the window w4_train.py calls STEPS16. v2_learn.py also defines SDXL_MATCHED, t = 712 down to 480, used by Loop 8's count checker."
+ },
+ "score_path": {
+  "per_step": [
+   1,
+   32,
+   64
+  ],
+  "steps": 16,
+  "shape": [
+   16,
+   32,
+   64
+  ],
+  "numbers": 32768,
+  "forwards_per_canvas_per_step": "3 for one pair (no digit, a, b), batched by product_eps",
+  "note": "d_t(c) = eps(x_t, t, c) - eps(x_t, t, 10). Stacking it is this ladder's definition from the session note; no code in the repository builds it yet."
+ },
+ "w4_text_with_latent": {
+  "text_model": "openai/clip-vit-large-patch14",
+  "text_width": 768,
+  "text_layers": 12,
+  "temperature": 0.07,
+  "caption_bank": 35,
+  "updates": 8000,
+  "batch": 256,
+  "encoder_widths": [
+   64,
+   128,
+   256,
+   256
+  ],
+  "source": "w4_train.py constants; widths and 768 from noise-text-critic/04-train-our-own/design.md; 12 text layers is openai/clip-vit-large-patch14 text_config.num_hidden_layers, as the NoisyCLIP ladder overview ov3 prints it"
+ },
+ "score_path_encoder": "not designed yet (step X4); every size drawn for it is illustrative"
+}
