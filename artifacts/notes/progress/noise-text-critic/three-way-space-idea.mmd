@@ -1,0 +1,20 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}, 'flowchart': {'nodeSpacing': 30, 'rankSpacing': 40}}}%%
+flowchart LR
+  T["text<br/>a 3 and a 7"]:::input --> TE["text encoder<br/>frozen CLIP"]:::frozen
+  X["latent x_t at step t<br/>a half-drawn canvas"]:::input --> XE["latent encoder<br/>told the step"]:::image
+  S["score over time<br/>the noise predictions<br/>along the path"]:::input --> SE["score encoder<br/>the new third tower"]:::push
+
+  TE --> Z(("one shared space"))
+  XE --> Z
+  SE --> Z
+
+  Z --> Q1{"does text arithmetic<br/>a 3 plus a 7<br/>land where the joint<br/>score lands?"}:::plain
+  Z --> Q2{"does the gap between<br/>the sum and the joint<br/>match the missing<br/>interaction term?"}:::plain
+  Q1 --> O["test on digit pairs<br/>never seen together"]:::plain
+  Q2 --> O
+
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef input fill:#ffffff,stroke:#1f5fd0,stroke-width:2px,color:#111111
+  classDef image fill:#dff3e4,stroke:#2f8a4a,stroke-width:2px,color:#111111
+  classDef frozen fill:#efeaf9,stroke:#8b7fb0,stroke-width:2px,color:#444444
+  classDef push fill:#fff1e0,stroke:#c86a0a,stroke-width:3px,color:#111111
