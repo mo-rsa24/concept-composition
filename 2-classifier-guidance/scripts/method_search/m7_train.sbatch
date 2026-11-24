@@ -43,6 +43,8 @@ M7_NIMG="$NIMG" "$PY" "$SNAP/repo/2-classifier-guidance/scripts/method_search/ed
 rc=$?
 echo "[$(date -u +%H:%M:%S)] TRAIN exit=$rc"
 [ "$rc" -eq 0 ] || exit "$rc"
+WANDB__SERVICE_WAIT=300 "$PY" "$SNAP/repo/2-classifier-guidance/scripts/method_search/edm2_log_wandb.py" "$OUT" "m7-edm2-$RUNG-$SET" \
+  || echo "W&B logging failed; the stats stay in $OUT/stats.jsonl"
 NET=$(ls -t "$OUT"/network-snapshot-*.pkl 2>/dev/null | head -1)
 [ -n "$NET" ] || { echo "ABORT: no network snapshot in $OUT"; exit 7; }
 "$PY" generate_images.py --net="$NET" --outdir="$OUT/samples" --seeds=0-15 --steps=32 --batch=16
