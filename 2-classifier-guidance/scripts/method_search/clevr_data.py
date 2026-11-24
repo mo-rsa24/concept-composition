@@ -5,14 +5,19 @@ The design is artifacts/notes/progress/method-search/01c-clevr-paste-first/desig
 
   control   on 256 real single-object renders per position, the share of changed pixels that fall inside that position's window
   diagnose  how many changed pixels an empty scene has, and how many outside the window sit on the object's own footprint
+  pack      one set's renders as a zip of 64 by 64 PNGs for EDM2
 
 A pixel counts as changed when any colour channel differs from the mean empty scene by more than 0.1 on a 0-to-1 scale. The
 share is pooled over the position's 256 renders, and every position must reach 95%.
 
 Usage: python clevr_data.py control|diagnose --renders <dir> --out <dir>
+       python clevr_data.py pack --renders <dir> --out <dir> --set <name> [--count 5000]
 """
 import argparse
+import io
 import json
+import os
+import zipfile
 from pathlib import Path
 
 import numpy as np
@@ -123,13 +128,36 @@ def diagnose(args):
     print(json.dumps(result), flush=True)
 
 
+def pack(args):
+    """Writes one set's renders as a zip of 64 by 64 PNGs, the form EDM2's dataset reader takes, and replaces the file only when complete."""
+    args.out.mkdir(parents=True, exist_ok=True)
+    paths = first_images(args.renders, args.set, args.count)
+    target, partial = args.out / f"{args.set}.zip", args.out / f"{args.set}.zip.partial"
+    with zipfile.ZipFile(partial, "w", zipfile.ZIP_STORED) as archive:
+        for index, path in enumerate(paths):
+            buffer = io.BytesIO()
+            Image.fromarray(np.uint8(np.rint(to_64(path) * 255))).save(buffer, format="PNG", compress_level=1)
+            archive.writestr(f"{index:05d}/img{index:08d}.png", buffer.getvalue())
+    with zipfile.ZipFile(partial) as archive:
+        written = sum(name.endswith(".png") for name in archive.namelist())
+        with Image.open(io.BytesIO(archive.read(archive.namelist()[0]))) as first:
+            size, mode = first.size, first.mode
+    if written != args.count or size != (SIZE, SIZE) or mode != "RGB":
+        raise SystemExit(f"{args.set}: wrote {written} pictures of {size} {mode}")
+    os.replace(partial, target)
+    print(json.dumps({"set": args.set, "pictures": written, "size": list(size), "mode": mode, "path": str(target),
+                      "mib": round(target.stat().st_size / 2 ** 20, 1)}), flush=True)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("stage", choices=["control", "diagnose"])
+    ap.add_argument("stage", choices=["control", "diagnose", "pack"])
     ap.add_argument("--renders", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
+    ap.add_argument("--set")
+    ap.add_argument("--count", type=int, default=5000)
     args = ap.parse_args()
-    {"control": control, "diagnose": diagnose}[args.stage](args)
+    {"control": control, "diagnose": diagnose, "pack": pack}[args.stage](args)
 
 
 if __name__ == "__main__":
