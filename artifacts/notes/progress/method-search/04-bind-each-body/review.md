@@ -1,9 +1,9 @@
 # Review: does giving each subject its own region fix identity? (step M9)
 
-This file holds what the runs in [the M9 design](design.md) produced. With bootstrapping on, rung 1 reaches 8 clear pairs of 8 on right boxes, and its written verdict is "regions without names". All 8 of those pictures are damaged. Rung 2 stopped at its check on the masks, with 11 of 24 reads failing against a limit of 6, and rendered no picture.
+This file holds what the runs in [the M9 design](design.md) produced. With bootstrapping on, rung 1 reaches 8 clear pairs of 8 on right boxes, and its written verdict is "regions without names". All 8 of those pictures are damaged. Rung 2 stopped at its check on the masks with both readers it tried, 11 of 24 and then 10 of 24 reads failing against a limit of 6, and rendered no picture.
 
 The progress board lists M9 as `todo`. Its proof needs rung 2 compared with CO3 alone on faithful pairs of 96, which has not run, and the board
-lets a loop hold one step in progress, which is M7. Rung 2 waits on board question 65.
+lets a loop hold one step in progress, which is M7. Board question 65 chose the second reader, and it also missed its limit.
 
 ## Runs
 
@@ -99,9 +99,22 @@ bobcat and quail at seed 6001, the second word lights up both bodies, and its la
 condor, the second word's map keeps a background floor, so its box spreads across the frame. This says the box reader could not supply regions. It
 says nothing yet about whether regions would fix identity on CO3.
 
+## Rung 2: the second reader
+
+The owner chose option A on board question 65: each subject's box surrounds the largest connected part of the cells where its word's map is above
+its own Otsu threshold and above the other word's map, checked on fresh seeds 6003 and 6004 with the same limit.
+
+**It misses the limit too, 10 of 24 reads against 6.** Eight reads give one word no cell at all, both seeds of seal and gull, hippopotamus and
+swallow, lighthouse and sailboat, and boar and pheasant, because one word's map is above the other's everywhere it is above its own threshold. Two
+more give a box over 80% of the grid. Several reads that pass give one subject a box under 2% of the grid, such as eagle and fox at seed 6003. The
+reads are in `rung-2-mask-reads-word-beats-other.json`. No rung 2 picture was rendered.
+
+**What this adds.** On four of the twelve pairs, one word's attention covers the other subject's body at step 10, so no comparison of the two maps
+can give each subject a region of its own there.
+
 ## GPU time
 
 Rung 1 used 3.23 GPU-hours against a budget of about 1: 0.27 for the smoke test, 0.40 for the eight seeds, 1.99 for a bootstrapping smoke test
-that ran through a cluster stall, and 0.57 for the eight bootstrapped seeds. Rung 2's two checks used 0.30 GPU-hours, so M9 stands at 3.53 of the
+that ran through a cluster stall, and 0.57 for the eight bootstrapped seeds. Rung 2's three checks used about 0.52 GPU-hours, so M9 stands at about 3.75 of the
 6.3 added for it. Rendering rung 2 would add about 4.8 for its 288 pictures at the budgeted 60 seconds each, and about 5.3 with its smoke test,
 which is the figure the design budgets.
