@@ -35,6 +35,7 @@ from v3_compose import to_uint8  # noqa: E402
 # Fixed before the run (10-reading-identity/design.md, "Retraining on the sampler's own states").
 TRAIN_SEEDS = list(range(2000, 2960))
 READ_SEEDS = list(range(3000, 3096))
+SMOKE_READ_SEEDS = list(range(2960, 2968))   # never used by any step, and outside both ranges above
 MIN_BA = vb.SAMPLER_MIN_BA          # 0.75
 MIN_CLASS = vb.MIN_CLASS            # 40
 UPDATES, BATCH = 4000, 128
@@ -68,7 +69,8 @@ def collect(model, chead, net, pairs, seeds, dev):
                     ys.append(label)
                     prs.append((a, bb))
         print(json.dumps({"pair": f"{a}-{bb}", "kept": len(ys), "label_1": int(sum(ys)), "calls": calls}), flush=True)
-    return {"x": torch.stack(xs).numpy(), "y": np.array(ys, np.uint8), "pair": np.array(prs, np.int64)}, calls
+    x = torch.stack(xs).numpy() if xs else np.zeros((0, len(STEPS), 1, 32, 64), np.float16)
+    return {"x": x, "y": np.array(ys, np.uint8), "pair": np.array(prs, np.int64).reshape(-1, 2)}, calls
 
 
 def batch_inputs(model, data, idx, steps_idx, dev):
@@ -138,7 +140,7 @@ def main():
     start = time.time()
 
     if args.stage in ("smoke", "collect"):
-        pairs, seeds = (v3.SEEN[:1], TRAIN_SEEDS[:8]) if args.stage == "smoke" else (v3.SEEN, TRAIN_SEEDS)
+        pairs, seeds = (v3.SEEN[:2], TRAIN_SEEDS[:32]) if args.stage == "smoke" else (v3.SEEN, TRAIN_SEEDS)
         data, calls = collect(model, chead, net, pairs, seeds, dev)
         name = "smoke-states.npz" if args.stage == "smoke" else "train-states.npz"
         np.savez_compressed(args.out / name, **data)
@@ -161,14 +163,17 @@ def main():
         return 0
     if min(len(pos), len(neg)) >= 8:
         result["overfit"] = overfit(model, data, dev)
-    head, info = fit(model, data, dev, pos, neg, 20 if args.stage == "smoke" else UPDATES, BATCH, seed=0)
+    if min(len(pos), len(neg)) == 0:     # smoke only: nothing to train on, so the read runs on an untrained head
+        head, info = ig.make_head(CFG, dev).eval(), {"note": "a label was empty; head untrained"}
+    else:
+        head, info = fit(model, data, dev, pos, neg, 20 if args.stage == "smoke" else UPDATES, BATCH, seed=0)
     result.update(info)
     if args.stage == "train":
         torch.save({"head": head.state_dict(), "cfg": CFG, "task": "identity", "trained_on": "sampler states",
                     "steps": STEPS, "train_seeds": [TRAIN_SEEDS[0], TRAIN_SEEDS[-1]]}, args.out / "identity-head-sampler.pt")
     for p in head.parameters():
         p.requires_grad_(False)
-    pairs, seeds = (v3.UNSEEN[:1], READ_SEEDS[:8]) if args.stage == "smoke" else (v3.UNSEEN, READ_SEEDS)
+    pairs, seeds = (v3.UNSEEN[:1], SMOKE_READ_SEEDS) if args.stage == "smoke" else (v3.UNSEEN, READ_SEEDS)
     read = vb.stage_sampler(model, head, chead, net, pairs, seeds, dev)
     overfit_ok = result.get("overfit", {}).get("pass", args.stage == "smoke")
     if args.stage == "train" and not overfit_ok:

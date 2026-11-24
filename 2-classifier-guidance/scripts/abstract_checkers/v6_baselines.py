@@ -139,7 +139,7 @@ def stage_sampler(model, ihead, chead, net, pairs, seeds, dev):
                           "labelled_0": sum(r["label"] == 0 for r in rows if r["pair"] == f"{a}-{bb}")}), flush=True)
     kept = [r for r in rows if r["label"] is not None]
     y = np.array([r["label"] for r in kept], np.uint8)
-    pred = np.array([r["logits"] for r in kept]) > 0
+    pred = np.array([r["logits"] for r in kept], float).reshape(-1, len(IDENTITY_STEPS)) > 0
     per_step = [balanced(pred[:, j], y) for j in range(len(IDENTITY_STEPS))]
     ok = [v for v in per_step if v is not None]
     mean = float(np.mean(ok)) if ok else None
