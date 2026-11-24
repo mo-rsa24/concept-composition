@@ -362,4 +362,9 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] A run that holds a random side with everything else the same, to show whether the models' vote helps.
 - [ ] A shared-canvas composition with no fixed halves that reaches the plan's 288 of 320.
 
+## Cross-references
+
+- The mention of **the digit-composition finding, step 7** in [the context page on the product of experts, one sampler step, section "What is measured where"](../../../context/methods/01-the-product-of-experts/01-overview.md#what-is-measured-where).
+- The mention of **the digit-composition finding** in [the context page on the product of experts, the code that runs it, section "How it fails and how you know it worked"](../../../context/methods/01-the-product-of-experts/04-the-code.md#how-it-fails-and-how-you-know-it-worked).
+
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

@@ -22,7 +22,7 @@ step 30,000, on all 50 sampling steps.
 
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#the-comparison-with-a-rule-written-first) ➡️
 
-**The adapter sits above PoE and below ToMe on BLIP-VQA in every set.** It is also below the
+**The adapter sits above PoE and below ToMe on [BLIP-VQA](../../../context/methods/08-the-blip-vqa-score/01-overview.md) in every set.** It is also below the
 joint prompt and CO3 on the two sets with animals, and above both on objects. The first three number
 columns are mean [BLIP-VQA](#blip-vqa), 0 to 1, over four seeds (9 to 12) per prompt. The last is
 the [share of the 264 animal images where a detector counted two or more animals](#the-instance-count) `verified`
@@ -182,5 +182,9 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] A render grid for this table that a reader can open, built without the rows the pair ledger keeps off sheets.
 - [ ] The sampler and guidance labels on the CO3 and ToMe rows of the Table 1 file.
 - [ ] The image list behind ToMe's count, which the saved score file does not hold.
+
+## Cross-references
+
+- The mention of **the Attend-and-Excite finding** in [the context page on the BLIP-VQA score, from answers to a target, section "What the number can and cannot tell you"](../../../context/methods/08-the-blip-vqa-score/03-from-answers-to-a-target.md#what-the-number-can-and-cannot-tell-you).
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

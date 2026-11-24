@@ -180,4 +180,9 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] The zero-push picture in section 2.
 - [ ] A context entry for the digit canvas, its five kinds and its labels, so the four findings in this group can link one page.
 
+## Cross-references
+
+- The mention of **A zero push changes no pixel** in [the context page on the digit-map checkers, the code that runs them](../../../context/methods/03-the-digit-map-checkers/04-the-code.md#how-it-fails-and-how-you-know-it-worked).
+- The mention of **the environment finding** in [the context page on the digit-map checkers, one sampler step, section "What is measured where"](../../../context/methods/03-the-digit-map-checkers/01-overview.md#what-is-measured-where).
+
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

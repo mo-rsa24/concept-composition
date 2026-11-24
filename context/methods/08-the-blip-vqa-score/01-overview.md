@@ -214,4 +214,12 @@ Navigation: ⬅️ [Where this came from](#where-this-came-from) | 📋 [TOC](#t
 
 ⬅️ Previous: [the methods index](../00-INDEX.md) | 📋 [The pages of this method](#the-pages-of-this-method) | Next: [how the question reads the picture](02-how-the-question-reads-the-picture.md) ➡️
 
+## Cross-references
+
+- The mention of **BLIP-VQA** in [the report page "How the adapter scores against other methods on the 276 Attend-and-Excite prompts", section "The scores by method and prompt set"](../../../1-lora-correction/report/against-other-methods/how-does-the-adapter-score-on-the-attend-and-excite-prompts.md#the-scores-by-method-and-prompt-set).
+- The mention of **BLIP-VQA** in [the report page "Captions for the appendix render grids"](../../../1-lora-correction/report/paper-review/captions-showcase-grids.md).
+- The mention of **BLIP-VQA** in [the report page "PRZE-3b: a held-out set big enough for rates", section "Outcomes"](../../../1-lora-correction/report/paper-review/prze-3b-held-out-set.md#outcomes).
+- The mention of **BLIP-VQA** in [the report page "The comparison protocol for the review response", section "What each rule means in practice"](../../../1-lora-correction/report/paper-review/protocol.md#what-each-rule-means-in-practice).
+- The mention of **BLIP-VQA** in [the report index, section "Project 1: the LoRA correction"](../../../report/00-INDEX.md#project-1-the-lora-correction).
+
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

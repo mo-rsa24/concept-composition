@@ -126,13 +126,13 @@ Navigation: ⬅️ [Previous](#1-the-three-rows-on-the-same-seeds) | 📋 [TOC](
 **The push is the gradient of three checker outputs summed, and two of them, the ones asking whether each subject is present, were
 trained only on cat and dog pictures.**
 
-| From the noisy latent to CO3's next step |
+| From [the noisy latent](../../artifacts/scenes/noisyclip-sentence-score/rebuild-from-fundamentals.md#1-the-noisy-latent) to CO3's next step |
 |---|
 | <a href="../../../artifacts/notes/progress/method-search/01-beat-the-baseline/what-the-push-follows.png"><img src="../../../artifacts/notes/progress/method-search/01-beat-the-baseline/what-the-push-follows.png" width="200" alt="Flow from a noisy latent and a joint prompt through the frozen SDXL U-Net and one small checker head to three outputs, clean pair and first and second subject present, summed into one push that enters CO3's next step"></a><br>Left to right: the noisy latent (4 by 128 by 128) and the joint prompt go through the frozen SDXL U-Net, which hands three feature maps (1,280, 1,280 and 640 channels) to one small checker head. The head has three outputs: clean pair, trained on 243 pairs, and first and second subject present, each trained on cat and dog only, the last two boxed in yellow. Their sum gives one push at steps 0 to 15, strength 30, capped at 0.4 of CO3's prediction `verified` (read on the picture; matches the design, lines 97 and 111 to 113). The 243 pairs come from the diagram; the design's text gives no count for that output `stated`. |
 
 **The number.** The two presence outputs trained on the 1,603 cat and dog pictures, because the presence labels file has no label
 for the other 1,256 pictures and the loss masks them, so on the 12 tuning pairs those outputs never trained on the subjects asked
-for `stated` (design, lines 111 to 115). The checkpoint is the kept one, `head_step_002000.pt` of the multi-pair readout checker, and
+for `stated` (design, lines 111 to 115). The checkpoint is the kept one, `head_step_002000.pt` of the multi-pair [readout checker](../../../context/methods/02-the-readout-checker/01-overview.md), and
 none of the 12 tuning pairs is in its training list `stated` (design, lines 106 to 108). The review draws the consequence: this
 result covers the kept push as it stands `stated` (review, line 115). Which outputs should drive the push is a separate later step
 (M2 on the progress board) `stated` (design, lines 114 and 115).
@@ -288,5 +288,10 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] The same comparison with the checker the design step chooses (D3 on the progress board), retrained on the cleaned list.
 - [ ] Whether the smoke run's pushed puma and condor at seed 6001 is the picture the blind count called at line 108 of the calls.
 - [ ] A second caller on a sample of the 288 pictures, so the count carries a measured agreement between callers.
+
+## Cross-references
+
+- The mention of **the CO3 finding** in [the context page on the readout checker, the push and its cap, section "How the kept settings were chosen"](../../../context/methods/02-the-readout-checker/03-the-push-and-its-cap.md#how-the-kept-settings-were-chosen).
+- The mention of **the CO3 push finding** in [the context page on the sentence-score push, one sampler step, section "Words this page uses"](../../../context/methods/04-the-sentence-score-push/01-overview.md#words-this-page-uses).
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

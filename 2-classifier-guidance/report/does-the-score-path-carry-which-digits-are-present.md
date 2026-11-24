@@ -5,7 +5,7 @@
 On small canvases of handwritten digits, the digit diffusion model's own noise predictions for all ten digit labels on one
 noisy canvas let a small trained reader say which digits are on the canvas at best 0.700 balanced accuracy, at timestep 480,
 against a bar of 0.75. That is null by the rule written before the run. In the noisier window the brief asked for it reads at
-chance, 0.513 at best. The pipeline works: the reader on the noisy canvas passed its positive control at full size. W&B run
+chance, 0.513 at best. The pipeline works: the reader on [the noisy canvas](../artifacts/scenes/digit-map-checkers/rebuild-from-fundamentals.md#1-the-noisy-canvas) passed its positive control at full size. W&B run
 `gq51nl74` `verified` ([the score path review](../../artifacts/notes/progress/score-space/05-signal/review.md), line 3; the
 numbers match [the score path result file](../../artifacts/notes/progress/score-space/05-signal/full.json)).
 
@@ -299,5 +299,11 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] The text-aligned encoder and the two arithmetic tests were not run, by the design's rule and the owner's answer to board question 76.
 - [ ] The figure of one canvas and its ten maps in section 3.
 - [ ] The three disagreements under [Where the sources disagree](#where-the-sources-disagree).
+
+## Cross-references
+
+- The mention of **the score-path finding** in [the context page on the score path, one canvas end to end, section "What one canvas goes through"](../../context/methods/07-the-score-path/01-overview.md#what-one-canvas-goes-through).
+- The mention of **the finding's limits** in [the context page on the score path, the network view, section "The system"](../../context/methods/07-the-score-path/02-the-network-view.md#the-system).
+- The mention of **the finding's limits** in [the context page on the score path, the code it is built from, section "The DDIM step that moves the canvas"](../../context/methods/07-the-score-path/04-the-code.md#the-ddim-step-that-moves-the-canvas).
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

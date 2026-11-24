@@ -239,4 +239,11 @@ Navigation: ⬅️ [Where this came from](#where-this-came-from) | 📋 [TOC](#t
 
 ⬅️ Previous: [the methods index](../00-INDEX.md) | 📋 [The pages of this method](#the-pages-of-this-method) | Next: [reading a latent with no VAE](02-reading-a-latent-with-no-vae.md) ➡️
 
+## Cross-references
+
+- The mention of **Latent CLIP** in [the finding "Can a sentence score read the five properties on a half-drawn picture?"](../../../2-classifier-guidance/report/the-sentence-score/can-a-sentence-score-read-the-five-properties.md).
+- The mention of **Latent CLIP** in [the finding "Does a linear probe on frozen image vectors read unseen pairs?"](../../../2-classifier-guidance/report/the-sentence-score/does-a-linear-probe-on-frozen-image-vectors-read-unseen-pairs.md).
+- The mention of **Latent CLIP** in [the finding "Is the sentence-score test fair, and can anything read the half-drawn picture at all?"](../../../2-classifier-guidance/report/the-sentence-score/is-the-sentence-score-test-fair.md).
+- The mention of **Latent CLIP** in [the report index, section "Project 2: classifier guidance"](../../../report/00-INDEX.md#project-2-classifier-guidance).
+
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

@@ -267,4 +267,10 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] The cost of an SDXL version rests on inferred figures; the measured time per update was not used in it.
 - [ ] The four disagreements under [Where the sources disagree](#where-the-sources-disagree).
 
+## Cross-references
+
+- The mention of **the own-encoder finding** in [the context page on the sentence-score push, one sampler step, section "What is measured where"](../../../context/methods/04-the-sentence-score-push/01-overview.md#what-is-measured-where).
+- The mention of **the own-encoder finding** in [the context page on the sentence-score push, training our own encoder on digits](../../../context/methods/04-the-sentence-score-push/05-training-our-own-encoder.md).
+- The mention of **its finding** in [the context page on the linear probe on frozen vectors, section "The names, taken apart"](../../../context/methods/05-latent-clip/04-the-linear-probe-on-frozen-vectors.md#the-names-taken-apart).
+
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

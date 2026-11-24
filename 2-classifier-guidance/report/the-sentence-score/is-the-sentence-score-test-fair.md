@@ -8,7 +8,7 @@ same pictures under the same rules as a positive control. It scored a mean balan
 the clean-pair task, 0.013 under its floor of 0.65, so by the bars fixed beforehand the reading test is inconclusive and not
 null. Second, every sentence score got its best fair chance: five wordings averaged, NoisyCLIP's own training steps, the
 sampler's real states and sentences that name no species. No sentence row reaches the 0.75 bar over steps 0 to 15 in any of
-them; the best is Latent CLIP's 0.574 on the real states. W&B run `etbecql0` `stated`
+them; the best is [Latent CLIP](../../../context/methods/05-latent-clip/01-overview.md)'s 0.574 on the real states. W&B run `etbecql0` `stated`
 ([the fairness review](../../../artifacts/notes/progress/noise-text-critic/02c-fair-test/review.md), lines 3 to 5).
 
 **Why it was asked.** The push test, which would steer CO3's renders with a sentence score, was to be stopped on the reading
@@ -47,7 +47,7 @@ balanced accuracy and the threshold and reading halves are defined on that page 
 **The fairness test.** This page's test, called W2c in the loop's notes. It keeps the reading test's pictures, noise draws,
 halves and scoring code unchanged (design, lines 11 to 13) and adds a control and fairer settings.
 
-**The readout checker.** A small network trained to read SDXL's own inner features at a given step and answer "is this
+**The [readout checker](../../../context/methods/02-the-readout-checker/01-overview.md).** A small network trained to read SDXL's own inner features at a given step and answer "is this
 heading for one clean cat beside one clean dog?". The one used here is the kept iteration 4,
 `readout-catdog-more3-long/head_step_002000.pt` (design, line 17), described with its training under
 [readout checkers on cat and dog](../classifier-guided-poe/can-a-checker-read-a-clean-cat-and-dog.md#readout-checkers-on-cat-and-dog).
@@ -341,5 +341,9 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] The figure of plain against averaged wordings in section 3.
 - [ ] The figure of species-free counting at step 49 in section 4.
 - [ ] The five disagreements under [Where the sources disagree](#where-the-sources-disagree).
+
+## Cross-references
+
+- The mention of **the fairness finding** in [the context page on the sentence-score push, one sampler step, section "What is measured where"](../../../context/methods/04-the-sentence-score-push/01-overview.md#what-is-measured-where).
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

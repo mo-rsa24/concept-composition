@@ -192,4 +192,8 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] The plain SDXL GenEval exemplar sheet in section 2.
 - [ ] The three disagreements under [Where the sources disagree](#where-the-sources-disagree).
 
+## Cross-references
+
+- The mention of **the reproduction finding** in [the context page on the BLIP-VQA score, from answers to a target, section "What the number can and cannot tell you"](../../../context/methods/08-the-blip-vqa-score/03-from-answers-to-a-target.md#what-the-number-can-and-cannot-tell-you).
+
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

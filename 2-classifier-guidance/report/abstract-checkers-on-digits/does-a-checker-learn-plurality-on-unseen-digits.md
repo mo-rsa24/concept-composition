@@ -38,7 +38,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#what-would-have-counted) �
 **Map reader.** The checker under test. For each asked digit it reads a map of where that digit's label changes the frozen digit
 model's noise prediction, scaled to add to 1. It is never told which digits were asked.
 
-**Raw reader.** The comparison checker. It reads the noisy canvas itself and is told the asked pair.
+**Raw reader.** The comparison checker. It reads [the noisy canvas](../../artifacts/scenes/digit-map-checkers/rebuild-from-fundamentals.md#1-the-noisy-canvas) itself and is told the asked pair.
 
 **Count checker.** A map reader trained to answer "two digits sitting apart?", with `apart` and `wrong` as yes and the other three
 kinds as no, so it is not asked which digits they are.
@@ -259,5 +259,13 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] The two figures wanted in sections 3 and 4.
 - [ ] An identity checker that reads which digits are present at these noise levels. None has passed; the Loop 8 summary names a later push window and the full noise-prediction signature as untested routes.
 - [ ] The four disagreements under [Where the sources disagree](#where-the-sources-disagree).
+
+## Cross-references
+
+- The mention of **the learning finding, section 3** in [the context page on the digit-map checkers, one sampler step, section "The names, taken apart"](../../../context/methods/03-the-digit-map-checkers/01-overview.md#the-names-taken-apart).
+- The mention of **the learning finding, section 4** in [the context page on the digit-map checkers, the network view, section "Two checkers, two label sets"](../../../context/methods/03-the-digit-map-checkers/02-the-network-view.md#two-checkers-two-label-sets).
+- The mention of **the learning finding, section 3** in [the context page on the digit-map checkers, worked on a four-pixel canvas, section "One training step on each checker"](../../../context/methods/03-the-digit-map-checkers/03-the-miniature.md#one-training-step-on-each-checker).
+- The mention of **the learning finding, section 2** in [the context page on the digit-map checkers, the code that runs them, section "The schedule and the sixteen timesteps"](../../../context/methods/03-the-digit-map-checkers/04-the-code.md#the-schedule-and-the-sixteen-timesteps).
+- The mention of **the digit checker finding** in [the context page on the sentence-score push, training our own encoder on digits, section "Read more"](../../../context/methods/04-the-sentence-score-push/05-training-our-own-encoder.md#read-more).
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

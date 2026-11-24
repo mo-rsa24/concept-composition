@@ -1,6 +1,6 @@
 # Captions for the appendix render grids
 
-Draft captions and the sentences that point to them, for [route step 13](../../../plans/route-answer-the-iclr-reviews.md#13--revise-the-paper) to place in the paper. Every grid starts each row from the same noise for all methods except where marked, and each caption says how its rows were chosen ([protocol rule 5](protocol.md#what-each-rule-means-in-practice)). The figures live in `artifacts/results/`; the BLIP-VQA values behind the choices are in `scores/scores_long.csv` and stay out of the figures.
+Draft captions and the sentences that point to them, for [route step 13](../../../plans/route-answer-the-iclr-reviews.md#13--revise-the-paper) to place in the paper. Every grid starts each row from the same noise for all methods except where marked, and each caption says how its rows were chosen ([protocol rule 5](protocol.md#what-each-rule-means-in-practice)). The figures live in `artifacts/results/`; the [BLIP-VQA](../../../context/methods/08-the-blip-vqa-score/01-overview.md) values behind the choices are in `scores/scores_long.csv` and stay out of the figures.
 
 ## Where our method does best (two figures)
 

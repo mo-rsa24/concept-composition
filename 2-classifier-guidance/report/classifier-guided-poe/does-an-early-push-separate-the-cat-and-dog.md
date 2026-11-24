@@ -147,4 +147,11 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] Confirm the draft calls on the seeds 9 to 16 sheets. Plan 29's calls are the ones made from full-size tiles.
 - [ ] A figure showing plain product beside the early push on the same seeds, built only from tiles checked at stored size.
 
+## Cross-references
+
+- The mention of **the early push finding** in [the context page on the readout checker, one pushed sampling step, section "What is measured where"](../../../context/methods/02-the-readout-checker/01-overview.md#what-is-measured-where).
+- The mention of **the early push finding** in [the context page on the readout checker, the push and its cap, section "The push, by what moves"](../../../context/methods/02-the-readout-checker/03-the-push-and-its-cap.md#the-push-by-what-moves).
+- The mention of **the early-push report** in [the context page on the word-map checker, one sampler step, section "What is established and what is proposed"](../../../context/methods/06-the-word-map-checker/01-overview.md#what-is-established-and-what-is-proposed).
+- The mention of **the early-push report** in [the context page on the word-map checker, the code that would run it, section "Our sampler: the attention push already run"](../../../context/methods/06-the-word-map-checker/05-the-code.md#our-sampler-the-attention-push-already-run).
+
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

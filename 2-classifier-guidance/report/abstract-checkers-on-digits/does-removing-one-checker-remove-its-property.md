@@ -35,7 +35,7 @@ half, with the asked left digit on the left.
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#what-would-have-counted) ➡️
 
 **The three checkers.** Count (two digits sitting apart?), right digits (are they the two asked digits?) and order (is the asked
-left digit on the left?). Each is a small classifier that reads two maps of where each asked digit acts on the noisy canvas, at
+left digit on the left?). Each is a small classifier that reads two maps of where each asked digit acts on [the noisy canvas](../../artifacts/scenes/digit-map-checkers/rebuild-from-fundamentals.md#1-the-noisy-canvas), at
 the noise levels of SDXL's first 16 steps. The count checker is the one from the [learning finding](does-a-checker-learn-plurality-on-unseen-digits.md).
 
 **Push.** Each active checker's gradient, scaled to a fixed share `b` of the size of the product's noise prediction and added to
@@ -240,5 +240,9 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] The design's result rows do not cover a run where removals pass on their own column and miss on a side column; the owner chose to keep the coded label (board question 75).
 - [ ] The five-checker SDXL removal test, decided once the SDXL test passes.
 - [ ] The six disagreements under [Where the sources disagree](#where-the-sources-disagree).
+
+## Cross-references
+
+- The mention of **the removal finding** in [the context page on the digit-map checkers, one sampler step, section "Why the checker reads maps"](../../../context/methods/03-the-digit-map-checkers/01-overview.md#why-the-checker-reads-maps).
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

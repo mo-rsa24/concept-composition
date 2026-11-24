@@ -2,7 +2,7 @@
 
 **The claim**
 
-At steps 0 to 15 of a 50-step SDXL run, a single trained layer on top of NoisyCLIP, frozen CLIP or Latent CLIP reads counting
+At steps 0 to 15 of a 50-step SDXL run, a single trained layer on top of NoisyCLIP, frozen CLIP or [Latent CLIP](../../../context/methods/05-latent-clip/01-overview.md) reads counting
 and prompt match only a little better than chance on pairs it trained on, and less well on the 7 pairs it never saw. The best
 is NoisyCLIP: 0.637 and 0.644 mean balanced accuracy on seen pairs, 0.560 and 0.586 on unseen pairs, against a bar of 0.75,
 where 0.5 is chance. A probe fitted on random numbers instead of pictures stays at 0.506 and 0.497, so the probe found real but
@@ -148,7 +148,7 @@ with one shared noise draw, with 0 latents missing (review, line 11). The traini
 subject guard removed 28 pictures from 4 pairs (design, lines 27 and 31).
 
 > [!NOTE]
-> The review compares this with the readout checker in [the fairness finding](is-the-sentence-score-test-fair.md), which reads
+> The review compares this with the [readout checker](../../../context/methods/02-the-readout-checker/01-overview.md) in [the fairness finding](is-the-sentence-score-test-fair.md), which reads
 > SDXL's own inner features and reaches 0.87 by step 15 on the sampler's real cat and dog states, and concludes that the early
 > information sits mostly in the diffusion model's features. It marks that reading inferred and mixed, because the two readers
 > differ in their input and in the pictures they read (review, line 26).
@@ -252,5 +252,9 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] The figure of balanced accuracy by step in section 1.
 - [ ] The example pictures beside the probe's calls in section 2, which the design asked the review to carry (line 67).
 - [ ] The three disagreements under [Where the sources disagree](#where-the-sources-disagree).
+
+## Cross-references
+
+- The mention of **the linear probe finding** in [the context page on the linear probe on frozen vectors](../../../context/methods/05-latent-clip/04-the-linear-probe-on-frozen-vectors.md).
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

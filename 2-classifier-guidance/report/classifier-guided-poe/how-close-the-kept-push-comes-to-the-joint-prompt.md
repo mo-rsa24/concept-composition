@@ -162,4 +162,9 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] Repeat the eye calls for all three methods at full size.
 - [ ] Decide whether the kept push's gap to the joint prompt (35 against 57 faithful pairs) is worth more rounds.
 
+## Cross-references
+
+- The mention of **the kept push finding** in [the context page on the readout checker, one pushed sampling step, section "The names, taken apart"](../../../context/methods/02-the-readout-checker/01-overview.md#the-names-taken-apart).
+- The mention of **the kept push finding** in [the context page on the readout checker, the push and its cap, section "The cap, worked"](../../../context/methods/02-the-readout-checker/03-the-push-and-its-cap.md#the-cap-worked).
+
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

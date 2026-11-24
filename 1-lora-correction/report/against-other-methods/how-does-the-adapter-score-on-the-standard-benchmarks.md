@@ -114,4 +114,8 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] A card entry saying how the rows of the benchmark sheet were chosen.
 - [ ] Intervals on these means, if a gap this small is going to be argued from.
 
+## Cross-references
+
+- The mention of **the standard benchmarks finding** in [the context page on the BLIP-VQA score, from answers to a target, section "From pictures to a category's number"](../../../context/methods/08-the-blip-vqa-score/03-from-answers-to-a-target.md#from-pictures-to-a-categorys-number).
+
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

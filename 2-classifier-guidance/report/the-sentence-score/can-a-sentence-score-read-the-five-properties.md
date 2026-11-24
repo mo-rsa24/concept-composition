@@ -3,11 +3,11 @@
 **The claim**
 
 At steps 0 to 15 of a 50-step SDXL run, while the picture is still mostly noise, none of three image-and-text models can tell
-a right sentence from a wrong one for any of five properties of a cat and dog picture. NoisyCLIP, frozen CLIP and Latent CLIP
+a right sentence from a wrong one for any of five properties of a cat and dog picture. NoisyCLIP, frozen CLIP and [Latent CLIP](../../../context/methods/05-latent-clip/01-overview.md)
 each stay between 0.46 and 0.56 mean balanced accuracy against a bar of 0.75, where 0.5 is chance, and none beats frozen CLIP.
 Counting, prompt match and left-right order are null. Position and size, and attribute binding, are inconclusive, because
 their labels failed the eye check. NoisyCLIP does read prompt match once the picture is mostly drawn, at steps 30 to 49, so
-the models and the input path work and the early steps are where reading fails. W&B run `70g3qw2f` `stated`
+the models and [the input path](../../artifacts/scenes/noisyclip-sentence-score/NOTATION.md#the-input-path) work and the early steps are where reading fails. W&B run `70g3qw2f` `stated`
 ([the reading review](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), line 3).
 
 **Why it was asked.** A sentence score was a candidate for steering the sampler toward a clean cat and dog: push the picture
@@ -330,5 +330,12 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] The figure of reading against all 50 steps in section 2.
 - [ ] The figure of the head-only cat region in section 4.
 - [ ] The three disagreements under [Where the sources disagree](#where-the-sources-disagree).
+
+## Cross-references
+
+- The mention of **the reading finding** in [the context page on the sentence-score push, one sampler step, section "The names, taken apart"](../../../context/methods/04-the-sentence-score-push/01-overview.md#the-names-taken-apart).
+- The mention of **the reading finding, section 2** in [the context page on the sentence-score push, the code behind it, section "Catching the half-drawn latents"](../../../context/methods/04-the-sentence-score-push/04-the-code.md#catching-the-half-drawn-latents).
+- The mention of **the reading finding's concepts** in [the context page on the sentence-score push, training our own encoder on digits, section "How it fails and what came out"](../../../context/methods/04-the-sentence-score-push/05-training-our-own-encoder.md#how-it-fails-and-what-came-out).
+- The mention of **the reading finding** in [the context page on Latent CLIP, reading a latent with no VAE, section "How it fails and how you know it worked"](../../../context/methods/05-latent-clip/02-reading-a-latent-with-no-vae.md#how-it-fails-and-how-you-know-it-worked).
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

@@ -216,4 +216,10 @@ Navigation: ⬅️ [Where this came from](#where-this-came-from) | 📋 [TOC](#t
 
 ⬅️ Previous: [the methods index](../00-INDEX.md) | 📋 [The pages of this method](#the-pages-of-this-method) | Next: [inside the kept checker](02-inside-the-kept-checker.md) ➡️
 
+## Cross-references
+
+- The mention of **readout checker** in [the finding "Does adding the kept push to CO3 beat CO3 alone?", section "2. What the push follows"](../../../2-classifier-guidance/report/the-method-search/does-adding-the-kept-push-to-co3-beat-co3-alone.md#2-what-the-push-follows).
+- The mention of **readout checker** in [the finding "Does a linear probe on frozen image vectors read unseen pairs?", section "2. The probe finds something, and the random-number control does not"](../../../2-classifier-guidance/report/the-sentence-score/does-a-linear-probe-on-frozen-image-vectors-read-unseen-pairs.md#2-the-probe-finds-something-and-the-random-number-control-does-not).
+- The mention of **readout checker** in [the finding "Is the sentence-score test fair, and can anything read the half-drawn picture at all?", section "Words this page uses"](../../../2-classifier-guidance/report/the-sentence-score/is-the-sentence-score-test-fair.md#words-this-page-uses).
+
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

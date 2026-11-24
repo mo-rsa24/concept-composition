@@ -113,5 +113,8 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 
 - The mention of **CLIP score** in [the report on the 276 Attend-and-Excite prompts](../against-other-methods/how-does-the-adapter-score-on-the-attend-and-excite-prompts.md).
 - The mention of **GenEval two-object** in [the report on the GenEval and T2I-CompBench benchmarks](../against-other-methods/how-does-the-adapter-score-on-the-standard-benchmarks.md).
+- The mention of **GenEval two-object** in [the finding "Do the rival methods reproduce the scores their papers print?"](../against-other-methods/do-the-rivals-reproduce-their-printed-scores.md).
+- The mention of **GenEval two-object** in [the context page on Latent CLIP, how its push differs from NoisyCLIP's](../../../context/methods/05-latent-clip/03-how-its-push-differs-from-noisyclips.md#beside-how-its-authors-used-the-gradient).
+- The mention of **the scorer probe finding** in [the context page on the BLIP-VQA score, how one picture earns it, section "How it fails and how you know it worked"](../../../context/methods/08-the-blip-vqa-score/01-overview.md#how-it-fails-and-how-you-know-it-worked).
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

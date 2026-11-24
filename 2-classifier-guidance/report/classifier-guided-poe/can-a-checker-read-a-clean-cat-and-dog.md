@@ -176,4 +176,9 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] Decide whether plan 25's Q2 is still worth drawing. Its checker's 128-seed result is on [the 128-seed page](how-close-the-kept-push-comes-to-the-joint-prompt.md).
 - [ ] Write card entries for this grouping's folders. Its card covers 5 of 72.
 
+## Cross-references
+
+- The mention of **the checker finding** in [the context page on the readout checker, one pushed sampling step, section "The names, taken apart"](../../../context/methods/02-the-readout-checker/01-overview.md#the-names-taken-apart).
+- The mention of **the checker finding** in [the context page on the readout checker, inside the kept checker, section "How it fails and how you know it worked"](../../../context/methods/02-the-readout-checker/02-inside-the-kept-checker.md#how-it-fails-and-how-you-know-it-worked).
+
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

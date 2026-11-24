@@ -36,7 +36,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#what-would-have-counted) �
 answers "two digits sitting apart?" from two maps of where each asked digit acts. It is not told which digits were asked.
 
 **Push.** The [gradient](../../../../../Obsidian/Mathematics/Calculus/Gradient.md#where-to-learn-this) of the checker's score
-with respect to the noisy canvas, scaled to a fixed share `b` of the size of the product's noise prediction, and added to it at
+with respect to [the noisy canvas](../../artifacts/scenes/digit-map-checkers/rebuild-from-fundamentals.md#1-the-noisy-canvas), scaled to a fixed share `b` of the size of the product's noise prediction, and added to it at
 each pushed step.
 
 **Clean pair.** A finished canvas the digit judge calls "two clear, right, apart": two blobs, each a confident single digit read
@@ -242,5 +242,11 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] The map-trace figure in section 4.
 - [ ] The same test on SDXL's six unseen object pairs (step V4 on the progress board), which waits on Loop 6's step D3.
 - [ ] A push that also chooses the right digits; no identity checker has passed (the [learning finding](does-a-checker-learn-plurality-on-unseen-digits.md)).
+
+## Cross-references
+
+- The mention of **the push finding** in [the context page on the digit-map checkers, one sampler step, section "What one step does"](../../../context/methods/03-the-digit-map-checkers/01-overview.md#what-one-step-does).
+- The mention of **the push finding's table** in [the context page on the digit-map checkers, worked on a four-pixel canvas, section "The same steps on the real runs"](../../../context/methods/03-the-digit-map-checkers/03-the-miniature.md#the-same-steps-on-the-real-runs).
+- The mention of **the push finding, section 1** in [the context page on the digit-map checkers, the code that runs them, section "How it fails and how you know it worked"](../../../context/methods/03-the-digit-map-checkers/04-the-code.md#how-it-fails-and-how-you-know-it-worked).
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->
