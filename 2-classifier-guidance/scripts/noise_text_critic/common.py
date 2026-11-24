@@ -136,7 +136,23 @@ def load_latent_clip(device, dtype=torch.float32):
     import latent_clip
 
     model = latent_clip.create_model(LATENT_CLIP_NAME, pretrained=None, device="cpu")
-    checkpoint = torch.load(LATENT_CLIP_WEIGHTS, map_location="cpu", weights_only=True)
+    # Safe loading stays on. The checkpoint stores numpy numbers (its training step and the like), so numpy's scalar
+    # and data-type classes are allowed by name, and any other class still refuses to load.
+    # The checkpoint was saved under numpy 1, which names these classes numpy.core.*; numpy 2 files them under
+    # numpy._core.*, so each is registered under its old name through a function that only forwards to numpy.
+    import numpy as np
+    from numpy._core import multiarray
+
+    def numpy_alias(target, name):
+        def forward(*args):
+            return target(*args)
+        forward.__module__, forward.__name__, forward.__qualname__ = "numpy.core.multiarray", name, name
+        return forward
+
+    allowed = [numpy_alias(multiarray.scalar, "scalar"), numpy_alias(multiarray._reconstruct, "_reconstruct"),
+               np.ndarray, np.dtype, *[getattr(np.dtypes, n) for n in dir(np.dtypes) if n.endswith("DType")]]
+    with torch.serialization.safe_globals(allowed):
+        checkpoint = torch.load(LATENT_CLIP_WEIGHTS, map_location="cpu", weights_only=True)
     state = checkpoint["state_dict"] if "state_dict" in checkpoint else checkpoint
     state = {(k[7:] if k.startswith("module.") else k): v for k, v in state.items()}
     model.load_state_dict(state, strict=True)
