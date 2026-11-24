@@ -1,0 +1,29 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+    M7["M7 CLEVR paste test<br/>paste placed 1,024 of 1,024 objects"]:::done
+    M6["M6 small CLEVR test<br/>not run: replaced by M10<br/>closes once M3 is done"]:::closed
+    M10["M10 Stage 2: red and blue experts<br/>9 scenes of 2 to 6 objects<br/>about 7.6 GPU-h + 67 CPU node-h"]:::todo
+    M5["M5 checker data balanced"]:::doing
+    D3["D3 checker architecture"]:::todo
+    M2["M2 checker labels"]:::todo
+    M3["M3 winning method tuned"]:::todo
+    M8["M8 Loop 6 and Loop 8<br/>checkers compared"]:::todo
+    M9["M9 regions bind each body"]:::todo
+    M4["M4 one recipe frozen per paper"]:::todo
+    D4{"D4 go or no-go<br/>per paper (you)"}:::todo
+
+    M7 -.->|question 54: stops| M6
+    M7 --> M10
+    M5 --> D3 --> M2 --> M3
+    M3 --> M6
+    M3 --> M4
+    M8 --> M4
+    M9 --> M4
+    M6 --> M4
+    M10 -.->|question 84: before M4,<br/>held by a request to Loop 6,<br/>not wired on the board| M4
+    M4 --> D4
+
+    classDef done fill:#d3f9d8,stroke:#2b8a3e,stroke-width:2px,color:#111111
+    classDef doing fill:#ffe8cc,stroke:#e8590c,stroke-width:2px,color:#111111
+    classDef todo fill:#f1f3f5,stroke:#868e96,stroke-width:2px,color:#111111
+    classDef closed fill:#ffffff,stroke:#868e96,stroke-width:2px,stroke-dasharray: 5 5,color:#555555
