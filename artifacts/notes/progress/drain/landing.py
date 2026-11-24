@@ -46,6 +46,7 @@ RULES = [
     (P + "abstract-checkers/04-environment/", R2 + "abstract-checkers-on-digits/is-the-small-environment-repeatable.md", ""),
     (P + "abstract-checkers/05-does-it-learn/", R2 + "abstract-checkers-on-digits/does-a-checker-learn-plurality-on-unseen-digits.md", ""),
     (P + "abstract-checkers/06-does-it-compose/", R2 + "abstract-checkers-on-digits/does-the-count-checkers-push-compose-unseen-digits.md", ""),
+    (P + "abstract-checkers/10-reading-identity/", R2 + "abstract-checkers-on-digits/can-a-checker-read-which-digits-are-present.md", "lands once step V6 is done on the board"),
     (P + "abstract-checkers/08-remove-one-checker/", R2 + "abstract-checkers-on-digits/does-removing-one-checker-remove-its-property.md", ""),
     (P + "abstract-checkers/remove-one-checker", R2 + "abstract-checkers-on-digits/does-removing-one-checker-remove-its-property.md", "the design picture for V5"),
     (P + "abstract-checkers/", "", PROC),

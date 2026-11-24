@@ -54,6 +54,8 @@ uses a dash as a clause separator. The discovery routes to both pillars are in p
 | R11 | most numbers are marked stated because the cluster result files were not opened | 184 stated against 93 verified | this loop, read only on the cluster | fixed, `8f2dea1b`: verified 93 to 198, stated 184 to 93; nine page-against-file mismatches recorded on their pages and sent to the loops |
 | R12 | no finding has a Depends on section, and few link their method pages | 13 findings | the cross-reference pass | fixed, `f3cee98a` |
 | R13 | the repeatability check is filed as a finding rather than an environment fact | environment finding | owner's call, item 10 | waiting |
+| C13 | a second audit (Loop 4's, line 259 of `requests.md`) found three Cross-references sections on method overviews with no breadcrumb or contents entry | `02/01`, `05/01`, `08/01` | this loop | fixed, `97bbb1c1` |
+| C14 | the same audit names about 15 inferred claims with no Still open row and three diagram slots with no save path | `05/01`, `05/02`, `05/03`, `04/04`, `08/02`, `02/02`, `02/03`, `06/05` and others; slots on `02/01`, `06/02`, `08/03` | owner's call: the claims were judged not load-bearing on 2026-11-24 and are listed in this loop's report; a slot's save path follows question 81 item 8 | waiting |
 | R14 | as C12 | `MASTER_PLAN.md` | outside this loop's files | reported |
 
 ## Seen in passing, outside this loop's files
