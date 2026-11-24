@@ -46,6 +46,16 @@ On the real states, the readout checker reaches 0.87 by step 15 and beats frozen
 - **The real trajectory states** read no better than noise added to finished pictures.
 - **The finished-picture check, step 49.** Every sentence model passes the clean pair, and NoisyCLIP and frozen CLIP pass prompt match. Counting fails for all of them (0.71, 0.67 and 0.54), as W2 found. The species-free counting sentences, still to run, test whether the wording causes that.
 
+**Group 4, counting with sentences that name no species.** The right sentence is "a photo of two animals", against "a photo of one animal" and "a photo of one animal with mixed features". It is scored on W2's saved image vectors, so the image side is exactly W2's. The run is job 94210, and its numbers are in `loop-9/w2c/species-free/result.json`.
+
+| Reader | 0 to 15 | Step 49 | W2's sentences at step 49, for comparison |
+|---|---|---|---|
+| NoisyCLIP, plain / ensembled | 0.553 / 0.522 | 0.517 / 0.729 | 0.71 / 0.65 |
+| frozen CLIP, plain / ensembled | 0.477 / 0.498 | 0.704 / **0.750** | 0.67 / not read |
+| Latent CLIP, plain / ensembled | 0.503 / 0.499 | 0.538 / 0.538 | 0.54 / 0.53 |
+
+Dropping the species words fixes neither result. No row reads over steps 0 to 15. On the finished picture only frozen CLIP with ensembled wordings reaches 0.75, exactly at the bar, and plain NoisyCLIP falls from 0.71 to 0.517. So the plurality failure on finished pictures belongs to the models' image side as much as to W2's wording. "Two cats" lost to "one animal" half the time in W2, and it still does without species words.
+
 **What this means for W3 (read by the owner, not decided here).** Board question 70 says to stop W3 if W2c leaves the null standing. The rule gives a third outcome, inconclusive, because the control finished 0.013 under its floor. No sentence row's mean over steps 0 to 15 reaches 0.6 in any setting. The highest single step on the reading half is 0.67, Latent CLIP's counting score at step 10 on W2's pictures. The control shows SDXL's own features read these pictures at steps 5 to 15 better than any sentence score does.
 
 ## Runs
