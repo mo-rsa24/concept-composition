@@ -1,6 +1,28 @@
 # Review: remove one checker at a time, on digits (step V5)
 
-**Status: open.** The three checkers are trained and the push length is calibrated. The eleven rows on the unseen pairs have not run, so step V5's proof is not met.
+**Status: inconclusive.** The eleven rows ran on the unseen pairs (W&B run `fsbuivcs`). By the written rules the verdict is inconclusive: the all-three-checkers row is void, and several cells the verdict needs hold fewer than 40 canvases. Board question 73 asks the owner whether to rerun with more seeds.
+
+## The removal table
+
+Job 94172 on `mscluster60` took 7 minutes 18 seconds and wrote `/datasets/mmolefe/poe_repair_min/loop-8/v5/final.json`: 320 canvases per row on the 10 pairs among digits 5 to 9 at seeds 1000 to 1031, each checker's push length 0.229. Each column after the first is scored only on canvases that passed the column before it; the canvas counts are in brackets.
+
+| Row | Count: two digits apart | Right digits, of those | Order, of those | Fully right, of all | Total push, mean share | Pushed steps over 0.6 |
+|---|---|---|---|---|---|---|
+| Plain product | 0.9% (3) | 0.0% (0) | none | 0.0% | 0 | 0% |
+| All three | 41.6% (133) | 40.6% (54) | 88.9% (48) | 15.0% | 0.408 | **5.85%, void** |
+| Minus count | **14.1%** (45) | 40.0% (18) | 88.9% (16) | 5.0% | 0.322 | 0% |
+| Minus count, random in its place | **10.9%** (35) | 45.7% (16) | 93.8% (15) | 4.7% | 0.399 | 0% |
+| Count alone | 33.8% (108) | 31.5% (34) | 52.9% (18) | 5.6% | 0.229 | 0% |
+| Minus right digits | 37.5% (120) | **34.2%** (41) | 92.7% (38) | 11.9% | 0.331 | 0% |
+| Minus right digits, random in its place | 34.7% (111) | **41.4%** (46) | 95.7% (44) | 13.8% | 0.406 | 0% |
+| Right digits alone | 5.9% (19) | 31.6% (6) | 83.3% (5) | 1.6% | 0.229 | 0% |
+| Minus order | 44.1% (141) | 44.0% (62) | **45.2%** (28) | 8.8% | 0.319 | 0% |
+| Minus order, random in its place | 46.9% (150) | 32.7% (49) | **53.1%** (26) | 8.1% | 0.395 | 0% |
+| Order alone | 11.9% (38) | 28.9% (11) | 72.7% (8) | 2.5% | 0.229 | 0% |
+
+**Why the verdict is inconclusive.** The design voids a row whose total push passes 0.6 of the product's norm on more than 5% of pushed steps, and the all-three row does so on 5.85%. The three unit gradients sum to 0.408 of the norm on average, near the 0.4 the calibration aimed at, and occasionally line up enough to pass 0.6. The design also needs at least 40 canvases in every cell its verdict reads; removing count leaves 45 canvases that pass count, 18 with the right digits and 16 in the order column, and removing order leaves 28 in its own column.
+
+**Read without a verdict.** These descriptions carry no claim, because the rules above void them. Removing count lowers the count column from 41.6% to 14.1%, a random push in its place gives 10.9%, and the right-digits and order columns hold at 40.0% and 88.9%. Removing order lowers the order column from 88.9% to 45.2%, a random push gives 53.1%, and count holds at 44.1%. Removing right digits lowers its column only from 40.6% to 34.2%, and the random replacement leaves it at 41.4%, which fits a checker reading near chance (0.556). On this reading, two of the three checkers each control their own property, and the one that cannot read its property does not.
 
 ## The three checkers
 
@@ -25,6 +47,6 @@ Job 94154 measured the three checkers' gradients on the 10 seen pairs at seeds 0
 | Smoke test, every stage on pair 0 and 1 at 4 seeds with 50-update checkers | 94137 | every row ran, zero push 0.0, no row void |
 | The two trainings | 94153 | as the table above |
 | Calibration | 94154 | b = 0.229 |
-| The eleven rows on the unseen pairs, once | | not run |
+| The eleven rows on the unseen pairs, once | 94172 | inconclusive: the all-three row is void and cells hold under 40 canvases |
 
-GPU-hours spent so far: about 6.8 of 30 (5.76 through step V3, 0.15 on the smoke test and about 0.9 on the trainings and calibration).
+GPU-hours spent so far: about 6.9 of 30 (5.76 through step V3, 0.15 on the smoke test, about 0.9 on the trainings and calibration, and 0.12 on the eleven rows).
