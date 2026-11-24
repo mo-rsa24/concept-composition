@@ -243,8 +243,9 @@ at the bar, and plain NoisyCLIP falls from 0.71 to 0.517. "Two cats" still loses
 
 Navigation: ⬅️ [Previous](#4-counting-with-sentences-that-name-no-species) | 📋 [TOC](#table-of-contents) | [Next](#what-this-cannot-tell-you) ➡️
 
-**Five places where two records say different things. This page reports both and resolves none; the first is open as
-question 79 on [the progress board](../../../artifacts/notes/progress/board.json).**
+**Five places where two records say different things. This page reports both and resolves none. For the first, the owner chose
+on 2026-11-24 (question 79 on [the progress board](../../../artifacts/notes/progress/board.json)) that each page keeps its own
+test's verdict on its title line, as these two pages do.**
 
 | What | One source | The other source |
 |---|---|---|
@@ -344,7 +345,6 @@ settings table, the runs and the design are copied from the review and the desig
 
 Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
 
-- [ ] Which verdict the reading test's title line carries: question 79 on [the progress board](../../../artifacts/notes/progress/board.json), open. Each page keeps its own review's verdict until the owner answers.
 - [ ] A control that was not chosen on these pictures, so the floor can be read without the optimism the design names (line 17).
 - [ ] The runs table (review, lines 63 to 67) lists the species-free rescore as job 94131, cancelled, while the group 4 numbers come from job 94210 (line 49), which the table does not list.
 - [ ] The species-free result file is on the cluster's data disk only.

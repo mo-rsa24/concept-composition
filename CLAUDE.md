@@ -137,6 +137,12 @@ through `context/00-INDEX.md`), and `report/` for pre-registrations, instrument 
 results summaries per `~/.claude/EXPERIMENT_CONVENTIONS.md`. Both are staples here; neither is a
 filing mistake.
 
+**`context/methods/` is a fourth context theme.** Each folder explains one method the research
+loops use, as numbered pages that climb one zoom ladder (overview, network view, miniature, code)
+in place of CONTEXT_FORMAT's one-file-per-thing shape. A method page may carry the command that
+rebuilds its worked example, and on these pages ✍️ means a number copied from a named review or
+design without reopening it, while ✅ means the file was opened.
+
 **The five project folders.** The repo holds five research questions as top-level folders,
 `1-lora-correction/`, `2-classifier-guidance/`, `3-understanding-compositionality/`,
 `4-inclusive-captions/` and `5-text-embedding-third-expert/`. Each has its own `README.md`,
