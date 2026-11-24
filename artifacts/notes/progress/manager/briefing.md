@@ -28,14 +28,16 @@ or "where are we". The full detail is on [the status page](status.md).
    Its SDXL test against CO3 does not wait on this.
 4. **The cluster** still has no idle node; 5 of our 6 `bigbatch` slots run, and the borrowed card on
    mscluster107 is no longer in use because the other user's job ended.
-5. **Waiting on you:** nothing. Since the last briefing you answered 79, 80, 86, 87, 88, 89 and 90, and
+5. **Waiting on you:** one question, 96, on how Paper 2's checkers are judged. Since the last briefing you answered 79, 80, 86, 87, 88, 89 and 90, and
    Loop 13 decided 91 to 95 for you; each can be overruled by answering it again.
 
 ## For you to decide
 
 Answer with `python3 scripts/progress_board.py answer <number> "<your answer>"`, or in this session.
 
-Nothing is open.
+| # | The question | Default |
+|---|---|---|
+| 96 | Should Paper 2's checkers be judged on ranking good pictures above bad ones (what actually steers the push) instead of their yes-or-no call at zero? Both loops' checkers rank moderately but miss at zero. | keep the recorded gate, report ranking beside it, and bring a pass on ranking alone back to you |
 
 **When Loop 11 restarts.** Loop 13 may not start sessions, so it tells you when Loop 8's identity result
 or Loop 6's two-colour CLEVR test is done; restarting Loop 11 then puts the new result on a report page.

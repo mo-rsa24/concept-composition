@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-24 22:20 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-24 22:31 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -27,6 +27,7 @@ overrule one, answer it again: `python3 scripts/progress_board.py answer <number
 
 | # | The question | Decided | Why |
 |---|---|---|---|
+| none | Loop 8's method review found the removal test feeds nothing since your answer on 86 | **Close the removal test (V7) as not run** after the cheap visibility check; the full retraining from question 95 is skipped | Reversible, saves about 1.5 GPU-hours, no bar changed; it was option B of question 95. |
 | 95 | Loop 8's identity checker missed twice on the sampler's own states (0.651, then 0.552 with memorised training digits); what next? | **A with three additions**: first check the digits are readable from the sampler's states at all (about 0.1 GPU-hours, and stop if not), hold out seeds of digits 0 to 4 as a control, then train on both data sets and read fresh digits 5 to 9 once; about 1.6 GPU-hours | The [reviewer's second pass](../reviewer/2026-11-24-review.md#loop-8-again-at-2215-two-misses-on-reading-sampler-states) found the second try memorised 2,036 stored states with no fresh noise, and no one has checked the digits are readable there at all. The SDXL test does not wait on this. |
 | 94 | Loop 8's digit identity checker reads pasted digits (0.861) but not the sampler's own states (0.651 against 0.75); does its removal test run? | **A: retrain it on sampler states from digits 0 to 4, read digits 5 to 9 again on freshly drawn canvases, and run the removal test only if it passes**, about 1.5 GPU-hours | It answers the reviewer's main point on Loop 8 and tells its SDXL test whether to train on CO3's states. Reversible, inside budget, no bar changed. |
 | 93 | Loop 6's checker cannot see CO3's failure; what happens to its search for the best checker? | **A: read the two checkers being trained now the same way first**, about 2.2 GPU-hours, before the next steps spend about 31 | Reversible, inside budget, no bar changed, and the reviewer's first fix. If neither new checker sees the failure, pausing the search for an identity reader comes to you. |
@@ -61,6 +62,7 @@ Newest first. A default happens only if you answer with it; nothing changes whil
 
 | # | The question, in one line | Why it is yours | Default | Waiting |
 |---|---|---|---|---|
+| 96 | Paper 2's checkers are gated on their yes-or-no call at zero (75% right), but the push follows only the direction of the checker's gradient, so ranking good pictures above bad ones is what steers it. Loop 6's checker ranks at about 0.70 but calls 0.602 right; Loop 8's ranks at 0.78 but calls 0.651. Keep the recorded gate, or switch to ranking? | changes a recorded bar after seeing which one passes on similar checkers | keep the recorded gate, report ranking beside it, and bring a pass on ranking alone back to you | just filed |
 
 Your own reading step (confirm the draft statements from your readings) is ready on the board.
 
@@ -143,6 +145,7 @@ Newest first.
 | Time | To | What and why |
 |---|---|---|
 | 17:02 | Loop 8 | Its rewritten SDXL test passes the design check (stop rule, random and zero controls, comparison prompts fixed in advance, the same two-clear measure as Loop 6; about 7 GPU-hours, inside budget). Its board record goes to you as question 89. |
+| 22:30 | Loops 8 and 6 | Loop 8's method review answered (`method-review.md`): the first checker ranks but its cut drifts, the second memorised. Its removal test closes after the visibility check; the gate question is yours as 96, and both loops keep their recorded gate until then. |
 | 22:20 | Loop 8 | **Method review request** after two misses on sampler states, with question 95 decided; one line in `requests.md`. |
 | 19:00 | Loop 8 | Question 94 decided: retrain on sampler states and re-read fresh digits 5 to 9 before the removal test. |
 | 18:56 | Loop 8 | Idle since 18:25 with its removal test on hold for you but no question filed; asked to file it with its recommendation, and to close its identity-digits step if its proof is met. |
