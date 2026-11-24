@@ -1,0 +1,2 @@
+{"task": "count", "reader": "map", "overfit": 16, "seen_ba": 0.7813341403634624, "holding_4_ba": 0.773953125, "gap": 0.007381015363462362, "share_called_1": 0.55619140625, "all": true}
+{"task": "count", "reader": "raw", "overfit": 16, "seen_ba": 0.7933252879403794, "holding_4_ba": 0.775046875, "gap": 0.01827841294037935, "share_called_1": 0.50474609375, "all": true}

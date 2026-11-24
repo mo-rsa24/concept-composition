@@ -1,0 +1,101 @@
+{
+  "subject": "The two Loop 8 digit-map checkers: a count checker and an identity checker, one PixelHead each, reading two maps made by the frozen share-0.0 canvas U-Net",
+  "kind": "model (our own code)",
+  "landing": "standalone, /home/molef/PhD/concept-composition/2-classifier-guidance/artifacts/scenes/digit-map-checkers/",
+  "pace": "unattended (--auto), built by a subagent",
+  "published": "nothing: local files only",
+  "notation": "NOTATION.md",
+  "numbers": "numbers/numbers.json, from numbers/make_numbers.py",
+  "page_check": "numbers/check_pages.py",
+  "route": "route-zoom-ladder-digit-map-checkers.md",
+  "shape": "one ladder: canvas, noise, maps, network and forward pass shared; labels, loss, training backprop and the push per branch (count, identity)",
+  "data": {
+    "hash": "f70b0fb362e13e255ad332ba14ca93dfb5cf051a5dfd3c86eb30482931d5a5f3",
+    "rebuilt_by": "2-classifier-guidance/scripts/abstract_checkers/build_env.py --mnist /home/molef/PhD/replications/original-superdiff/data/MNIST/raw --out numbers/env",
+    "note": "numbers/env/dataset.npz is 7.3 MB and regenerates exactly; leave it out of git"
+  },
+  "code_checkout": {
+    "repo": "this repository",
+    "commit": "a737766d",
+    "run_snapshot": "6c3f8a16 (job 94085), the four quoted files unchanged between the two",
+    "files": [
+      "2-classifier-guidance/scripts/abstract_checkers/v2_learn.py",
+      "2-classifier-guidance/scripts/mnist/pixel_checker.py",
+      "2-classifier-guidance/scripts/mnist/checker.py",
+      "2-classifier-guidance/scripts/mnist/canvas_unet.py"
+    ],
+    "push_design": "artifacts/notes/progress/abstract-checkers/03-design.md, section 'How the push is computed'"
+  },
+  "style": {
+    "all levels": "clean cheat-sheet, journey 13's and the word-map ladder's choice, carried over as the default; the style gate was not asked because the ladder was built unattended"
+  },
+  "network_view_depth": "inputs and how they join: canvas, noise, the three U-Net calls and the maps, the timestep's features; the U-Net's own levels stay closed",
+  "colour_key": {
+    "inputs": "#1f5fd0",
+    "hidden units": "#1d7a3e",
+    "network outputs": "#c0262d",
+    "backward signals and the push": "#c86a0a",
+    "off, fixed or frozen": "#6b7a88",
+    "count branch": "#7b3fa0",
+    "identity branch": "#0f7f86"
+  },
+  "reuse": [
+    "2-classifier-guidance/artifacts/scenes/mnist-guidance-explained/1-the-sampler-step/nv7b-1-one-sampler-step.png (the toy sampler step, linked from level 0)",
+    "artifacts/notes/progress/abstract-checkers/05-does-it-learn/two-noise-levels.png (linked from the closing page)",
+    "the word-map ladder's companion links, reused in rebuild-from-fundamentals.md"
+  ],
+  "rungs": {
+    "0_system": {
+      "state": "built",
+      "files": ["0.5-network-view/dc0-where-the-checkers-sit.png"],
+      "linked": ["../mnist-guidance-explained/1-the-sampler-step/nv7b-1-one-sampler-step.png"],
+      "note": "the push in dc0 is step V3's design; no pushed run exists"
+    },
+    "0_5_network_view": {
+      "state": "built",
+      "files": ["0.5-network-view/README.md", "0.5-network-view/make_network_view.py"],
+      "new": ["dc0", "dc1", "dc2", "dc3", "dc4", "dc5", "dc6", "dc7"],
+      "shared": ["dc0", "dc1", "dc2", "dc3", "dc4"],
+      "branch": ["dc5 (the two label sets)", "dc6 (training backprop, either branch)", "dc7 (the push, either branch)"],
+      "real": "canvases, schedule, time features, layer sizes, weight counts, branch counts",
+      "illustrative": "the display noise draw (numpy seed 0)",
+      "owed": "dc2's two map tiles are empty slots"
+    },
+    "1_illustrations": {
+      "state": "prompts written, 0 of 3 rendered",
+      "files": ["1-illustrations/diagram-prompts.md"],
+      "next": "/render-diagrams on that file"
+    },
+    "2_miniature": {
+      "state": "built",
+      "files": ["2-miniature/README.md", "2-miniature/miniature.py", "2-miniature/miniature_answer_key.json", "2-miniature/make_miniature_figures.py"],
+      "new": ["mm1", "mm2", "mm3"],
+      "design": "4-pixel canvas, hand-set frozen expert and head, real t = 480 and time features; hand backprop matches finite differences to 1.4e-09; one step of 0.05: count raises both logits, identity lowers both and leaves the gap at 0.42"
+    },
+    "3_code": {
+      "state": "built: one walk, read and not run",
+      "files": ["3-code/walk-v2-learn.md"]
+    },
+    "companion": {
+      "state": "built, 17 rungs, 4 marked Gap and worked in place",
+      "files": ["rebuild-from-fundamentals.md"]
+    },
+    "close": {
+      "state": "built",
+      "files": ["read-through-a-small-network.md", "numbers/results-so-far.png"]
+    },
+    "results": {
+      "state": "partial",
+      "combined_checker": "job 94080, printed in the V2 review: 0.704 all kinds, 0.511 apart against wrong, pairs holding 4",
+      "count": "job 94085 log, 07:19 on 2026-11-24: map reader 0.774 on pairs holding 4, 0.781 trained pairs, gap 0.007, overfit 16 of 16, all bars met; raw reader 0.775 and 0.793",
+      "identity": "owed: not printed when the ladder was built; split.json not yet written",
+      "to_fill": "copy /datasets/mmolefe/poe_repair_min/loop-8/v2/sdxl-split/split.json to numbers/split.json, rerun numbers/make_numbers.py and numbers/make_results_figure.py, then update section 8 of the closing page"
+    },
+    "owed_real_maps_and_gradients": {
+      "state": "owed",
+      "why": "stage_split never saves the trained count and identity heads",
+      "needs": "one short GPU job after the owner approves V2's final read: save both heads (retrain with the split stage's settings on snapshot 6c3f8a16, or add torch.save to stage_split), then for canvases apart_1_3, wrong_1_3, apart_3_4, wrong_3_4 at timesteps 712, 616, 539, 480 with numbers/examples/display-noise.npy, save m_a, m_b, each head's logit and g = grad of the logit with respect to x_t with the maps built outside torch.no_grad",
+      "then": "redraw dc2's map tiles and real versions of mm1 and mm3"
+    }
+  }
+}
