@@ -1,0 +1,31 @@
+{
+ "min_in_place": 0.9,
+ "experts": {
+  "p1": {
+   "samples": 256,
+   "in_place": 1.0,
+   "exactly_its_object": 1.0,
+   "objects_elsewhere": 0,
+   "passes": true
+  },
+  "p2": {
+   "samples": 256,
+   "in_place": 1.0,
+   "exactly_its_object": 1.0,
+   "objects_elsewhere": 0,
+   "passes": true
+  },
+  "p3": {
+   "samples": 256,
+   "in_place": 1.0,
+   "exactly_its_object": 1.0,
+   "objects_elsewhere": 0,
+   "passes": true
+  },
+  "empty": {
+   "samples": 256,
+   "share_with_no_object": 1.0
+  }
+ },
+ "passes": true
+}
