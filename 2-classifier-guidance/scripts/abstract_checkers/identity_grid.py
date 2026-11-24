@@ -68,7 +68,11 @@ def apart_wrong(split, mask=None):
 
 def signature(model, xt, t, pair):
     """d_a, d_b, the mean of the other eight differences, and their largest absolute value, divided by the canvas's
-    mean absolute difference over all ten labels."""
+    mean absolute difference over all ten labels. Scoring passes batches of 512, so the eleven U-Net calls run in
+    pieces of 128, the size training uses."""
+    if xt.shape[0] > 128:
+        return torch.cat([signature(model, xt[i:i + 128], t[i:i + 128], pair[i:i + 128])
+                          for i in range(0, xt.shape[0], 128)])
     n = xt.shape[0]
     y = torch.cat([torch.full((n,), NULL, device=xt.device)] + [torch.full((n,), c, device=xt.device) for c in range(10)])
     out = model(xt.repeat(11, 1, 1, 1), t.repeat(11), y).chunk(11)
