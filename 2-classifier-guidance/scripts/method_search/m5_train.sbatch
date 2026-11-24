@@ -31,6 +31,9 @@ APPS=$(nvidia-smi --query-compute-apps=pid --format=csv,noheader -i 0 | wc -l)
 [ "$USED" -lt 1024 ] && [ "$APPS" -eq 0 ] || { echo "ABORT: device 0 in use: ${USED} MiB, ${APPS} processes"; exit 4; }
 export CUDA_VISIBLE_DEVICES=0 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 export PYTHONPATH="$HUB:$CO3:$REPO/scripts/shared:$REPO"
+# The readout checker's latents, their augmented copies and its evaluation tiles live only under the scratch root, where the kept
+# checker was trained; the trainer writes to --out-root under loop-6, so nothing is written there.
+export POE_REPAIR_MOUNT=/home-mscluster/mmolefe/poe_repair_min_scratch
 echo "[$(date -u +%H:%M:%S)] job=${SLURM_JOB_ID:-none} node=$(hostname -s) gpu=$(nvidia-smi --query-gpu=name --format=csv,noheader -i 0) snap=$SNAP stage=$STAGE list=$LIST"
 mkdir -p "$OUT/lists"
 "$PY" "$S/method_search/build_balanced_list.py" --out "$OUT/lists" --summary "$OUT/lists/composition.json" > /dev/null || { echo "ABORT: lists did not build"; exit 5; }
