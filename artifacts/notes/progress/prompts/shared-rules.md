@@ -39,6 +39,7 @@ The [two-paper route](../../../../plans/route-two-papers.md) says what the work 
 | 10. The score path as a third space | `s10` | `artifacts/notes/progress/score-space/`, `2-classifier-guidance/scripts/score_space/`, `/datasets/mmolefe/poe_repair_min/loop-10/` |
 | 11. Drain the loops into the pillars | `s11` | each project's `report/`, `context/methods/`, `artifacts/notes/progress/drain/`, the drain ledger, `held-pictures.md` |
 | 12. Where CO3 leaks | `s12` | `artifacts/notes/progress/leakage/`, `2-classifier-guidance/scripts/leakage/`, `/datasets/mmolefe/poe_repair_min/loop-12/` |
+| 13. Manager | `s13` | `artifacts/notes/progress/manager/`, and nudges to other loops; no other loop's files |
 
 Sessions 2 and 3 have finished their steps and are not running, so Session 11 holds `report/` and the drain ledger in Session 2's place, and writes `context/methods/` beside Session 3's other `context/` pages.
 
