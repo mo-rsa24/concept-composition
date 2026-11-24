@@ -18,5 +18,5 @@ This folder holds Loop 12's work, run by [the session 12 brief](../prompts/sessi
 
 ## What waits on what
 
-- Z2's run waits on the owner's answer to board question 82.
-- **A zoom ladder on CO3 runs after Z2's smoke rung,** chosen by the owner on 2026-11-24: `/zoom-ladder` on CO3, from the whole sampler to one corrected step to where $d_t$ and the attention maps come from to the code lines, with each rung's equation typeset, one line per symbol, and one worked case using the smoke run's real numbers (eagle × fox, seed 6001). It runs in the background once `/datasets/mmolefe/poe_repair_min/loop-12/z2/smoke/` holds its numbers.
+- Z2's run waits on the owner's answer to board question 82. The owner chose on 2026-11-24 to read the whole sampling path in three windows (early 0 to 5, middle 10 to 20, late 25 to 45), and the design, bars and runner were changed to that before any run.
+- **A zoom ladder on CO3 is being built** in `2-classifier-guidance/artifacts/scenes/co3-sampler/`, as the owner chose on 2026-11-24: an annotated overview of CO3's sampling loop, one in-depth figure each for the resampler, the corrector, equation 15's weights and the co3-hybrid schedule, and the authors' code under each equation, in the style of the owner's three reference figures in that folder's `reference/`. Its one worked case with a real latent waits for Z2's smoke run at `/datasets/mmolefe/poe_repair_min/loop-12/z2/smoke/`.
