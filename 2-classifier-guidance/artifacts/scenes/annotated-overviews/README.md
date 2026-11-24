@@ -8,12 +8,22 @@ One figure per loop, each following one real picture from input to result in the
 | <a href="loop-6.png"><img src="loop-6.png" width="260" alt="Loop 6 overview"></a> | **Loop 6, Paper 2's current method.** A puma and condor picture goes through CO3 on frozen SDXL, and a second SDXL pass hands the middle block and up blocks 0 and 1 to the kept checker. The inset opens the checker: each tap pooled to 32 x 32 and projected to 128 channels, summed, two stride-2 convolutions to 8 x 8, 64 tokens plus one mean token, attention pooling with 8 heads, then 3 logits. The box at the lower right gives step M1's measured counts. |
 | <a href="loop-4.png"><img src="loop-4.png" width="260" alt="Loop 4 overview"></a> | **Loop 4, how a picture earns its BLIP-VQA score.** A CoMat picture for "a blue bench and a green bowl" is split into one question per noun phrase, BLIP-VQA answers each one, and the yes-probabilities multiply. The inset opens BLIP's image transformer: 480 pixels in 30 x 30 patches, 12 layers, 901 vectors of 768. The targets come from rows 1 to 3 of `artifacts/notes/progress/scoreboard.json`. |
 
+## Deeper figures
+
+Each opens one part of an overview, in the CLIP contrastive palette: lilac for text, green for image features, pale blue for what is matched, orange only for the push and grey for frozen parts.
+
+| Figure | What it shows |
+|---|---|
+| <a href="loop-6-kept-checker.png"><img src="loop-6-kept-checker.png" width="260" alt="Inside the kept checker"></a> | **Inside Loop 6's kept checker.** The frozen SDXL U-Net with its three tapped outputs, then the trained head step by step down to its three logits, and the push's gradient running back to $x_t$. The head has 780,675 trained weights, counted from its layers in `train_readout_pair.py`, and takes no step number. |
+| <a href="loop-4-question-transformer.png"><img src="loop-4-question-transformer.png" width="260" alt="How BLIP's question reads the picture"></a> | **How Loop 4's BLIP question reads the picture.** The question as tokens, one of the 12 question layers (self-attention, cross-attention to the 901 image vectors, feed-forward), and the answer word read from a softmax over 30,524 words, keeping only yes (word 2748) and no (word 2053), from `models/blip_vqa.py`. The attention weights, where the word looks, and the word bars are illustrative. |
+
 ## How these were made
 
 Each figure is drawn by `make_overviews.py` from the devices in `~/.claude/skills/zoom-ladder/scripts/annotated_explainer.py`. Each function's docstring names the code its sizes come from. Rebuild with:
 
 ```bash
 ~/.claude/venvs/figures/bin/python make_overviews.py loop-8 loop-6 loop-4
+~/.claude/venvs/figures/bin/python make_deep_dives.py
 ```
 
 **Sources of the pictures.** Loop 8's canvas is the fourth tile of the `apart` row in `artifacts/notes/progress/abstract-checkers/04-environment/canvas-kinds.png`. Loop 6's picture is the middle panel of `artifacts/notes/progress/method-search/01-beat-the-baseline/smoke-puma-and-condor-seed-6001.png`. Loop 4's picture is the top middle tile of `artifacts/notes/progress/reproductions/CoMat/comat-one-percent-seed42.png`.
