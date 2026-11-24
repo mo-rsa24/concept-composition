@@ -7,7 +7,8 @@
 # each run; every 30 seconds the watchdog reads the card and stops our run, logging why, once a process not ours passes 1 GB there.
 set -uo pipefail
 : "${SNAP:?SNAP must name the code snapshot}"; : "${GPU:?GPU must name the approved card}"
-JOB=$SNAP/repo/2-classifier-guidance/scripts/method_search/m5_train.sbatch
+D=$SNAP/repo/2-classifier-guidance/scripts/method_search
+STEPS=${STEPS:-"train:overfit:current train:tiny:current train:overfit:balanced train:tiny:balanced"}   # "read:reread" reruns the CO3 read
 STATUS=/datasets/mmolefe/poe_repair_min/loop-6/m5/shared-card-status.txt
 LIMIT_MIB=1024
 echo "[$(date -u +%H:%M:%S)] shared-device run node=$(hostname -s) device=$GPU wrapper_pid=$$ snap=$SNAP"
@@ -23,12 +24,13 @@ foreign_over_limit() {  # prints "pid MiB" for any process on the card outside o
 
 export SHARED=1
 failed=""
-for step in "overfit current" "tiny current" "overfit balanced" "tiny balanced"; do
-  set -- $step
+for item in $STEPS; do
+  IFS=: read -r kind stage list <<< "$item"; set -- "$stage" "${list:-}"; step="$stage $list"
+  JOB=$D/m5_$kind.sbatch
   # a failed overfit stops that list's 1% rung, as the Slurm dependency would
   if [ "$1" = tiny ] && [ "$failed" = "$2" ]; then echo "[$(date -u +%H:%M:%S)] skipped tiny $2: its overfit failed"; continue; fi
   # the guard at the start of m5_train.sbatch refuses a card holding any process or more than 1 GB
-  setsid bash "$JOB" "$1" "$2" &
+  setsid bash "$JOB" "$1" ${2:+"$2"} &
   child=$!
   sleep 2
   pgid=$(ps -o pgid= -p "$child" | tr -d ' ')

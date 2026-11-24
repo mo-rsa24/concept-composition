@@ -19,9 +19,25 @@ RUNG2 = paths.MOUNT_ROOT / "outputs/classifier_guidance_ladder/rung2"   # the tr
 PER_LABEL = 8
 
 
+AUG = "outputs/classifier_guidance_ladder/rung2/dataset-v4/aug"
+
+
 def has_latents(t, rung2):
+    """Training reads the three augmented copies. The check reads `latent`; benchmark-pool tiles carry none, and use their first copy."""
+    if not all((rung2 / "dataset-v4/aug" / f"{t['id']}__a{k}.pt").exists() for k in range(3)):
+        return False
+    if "latent" not in t:
+        return True
     latent = paths.MOUNT_ROOT / t["latent"] if "/" in t["latent"] else rung2 / "training_set/latents" / f"{t['latent']}.pt"
-    return latent.exists() and all((rung2 / "dataset-v4/aug" / f"{t['id']}__a{k}.pt").exists() for k in range(3))
+    return latent.exists()
+
+
+def for_check(t):
+    t = dict(t, check=True)
+    if "latent" not in t:
+        t["latent"] = f"{AUG}/{t['id']}__a0.pt"
+        t.pop("state_index", None)
+    return t
 
 
 def main():
@@ -40,7 +56,7 @@ def main():
         picked += rng.sample(group, PER_LABEL)
     args.out.mkdir(parents=True, exist_ok=True)
     train = {k: v for k, v in data.items() if k != "tiles"} | {"tiles": [dict(t, check=False) for t in picked]}
-    check = {k: v for k, v in data.items() if k != "tiles"} | {"tiles": [dict(t, check=True) for t in picked]}
+    check = {k: v for k, v in data.items() if k != "tiles"} | {"tiles": [for_check(t) for t in picked]}
     (args.out / "overfit-train.json").write_text(json.dumps(train, indent=1))
     (args.out / "overfit-check.json").write_text(json.dumps(check, indent=1))
     print(json.dumps({"tiles": len(picked), "pairs": len({t["pair"] for t in picked}),

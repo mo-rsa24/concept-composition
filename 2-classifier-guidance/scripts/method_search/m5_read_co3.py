@@ -9,8 +9,11 @@ match M1's within 3 of 255, and the labels are M1's blind calls on CO3 alone.
   read   the 96 runs, writing reads.jsonl and the pictures
   score  balanced accuracy, area under the curve and a per-pair table per step, against the bar
 
-Usage: python m5_read_co3.py read --head <pt> --splits <json> --m1-co3 <dir> --out <dir>
-       python m5_read_co3.py score --out <dir> --calls <csv> --key <json>
+Usage: python m5_read_co3.py read --head <pt> --splits <json> --m1-co3 <dir> --out <dir> [--redo-from <reads.jsonl>]
+       python m5_read_co3.py score --out <dir> [--also <dir> ...] --calls <csv> --key <json>
+
+M1 drew half its pairs on a Quadro RTX 8000 and half on an RTX 3090, and a CO3 run reproduces only on the card type that drew it, so the
+rerun of the non-reproduced trajectories runs on an RTX 8000 into its own folder and the score merges the two.
 """
 import argparse
 import csv
@@ -79,6 +82,10 @@ def read(args):
 
     model.denoise_step = denoise_step
     args.out.mkdir(parents=True, exist_ok=True)
+    redo = None
+    if args.redo_from:   # rerun only what an earlier read could not reproduce, into this new folder
+        redo = {r["key"] for r in map(json.loads, args.redo_from.read_text().splitlines()) if not r["reproduced"]}
+        print(f"rerunning {len(redo)} trajectories not reproduced in {args.redo_from}", flush=True)
     done = {json.loads(l)["key"] for l in (args.out / "reads.jsonl").read_text().splitlines()} if (args.out / "reads.jsonl").exists() else set()
     with open(args.out / "reads.jsonl", "a") as log:
         for pair in pairs:
@@ -86,7 +93,7 @@ def read(args):
             point_checker(model, checker, prompts[pair])
             for seed in seeds:
                 key = f"{pair}|{seed}"
-                if key in done:
+                if key in done or (redo is not None and key not in redo):
                     continue
                 if args.limit is not None and len(done) >= args.limit:
                     return
@@ -122,7 +129,12 @@ def score(args):
         k = key[row["id"]]
         if k["row"] == "co3":
             clear[f"{k['pair']}|{k['seed']}"] = row["rung"] == "two_clear"
-    rows = [json.loads(l) for l in (args.out / "reads.jsonl").read_text().splitlines()]
+    best = {}
+    for folder in [args.out] + list(args.also or []):
+        for r in map(json.loads, (folder / "reads.jsonl").read_text().splitlines()):
+            if r["key"] not in best or (r["reproduced"] and not best[r["key"]]["reproduced"]):
+                best[r["key"]] = r
+    rows = list(best.values())
     kept = [r for r in rows if r["reproduced"] and r["key"] in clear]
     per_step = {}
     for step in READ_STEPS:
@@ -150,7 +162,7 @@ def score(args):
         verdict = "inconclusive"
     result = {"runs": len(rows), "reproduced_and_labelled": len(kept), "clear": sum(clear[r["key"]] for r in kept),
               "bar": BAR, "floor": FLOOR, "best_step": best, "best_balanced_accuracy": top, "verdict": verdict, "per_step": per_step}
-    (args.out / "read-score.json").write_text(json.dumps(result, indent=1) + "\n")
+    (args.out / ("read-score-merged.json" if args.also else "read-score.json")).write_text(json.dumps(result, indent=1) + "\n")
     print(json.dumps({k: result[k] for k in ("runs", "reproduced_and_labelled", "clear", "best_step", "best_balanced_accuracy", "verdict")}))
     print({s: (v["balanced_accuracy"], v["area_under_curve"]) for s, v in per_step.items()})
 
@@ -164,6 +176,8 @@ def main():
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--calls", type=Path)
     ap.add_argument("--key", type=Path)
+    ap.add_argument("--redo-from", type=Path, help="an earlier reads.jsonl; rerun only its trajectories that did not reproduce")
+    ap.add_argument("--also", type=Path, nargs="*", help="score: further read folders, merged, a reproduced row winning")
     ap.add_argument("--limit", type=int, help="stop after this many runs, for the smoke rung")
     args = ap.parse_args()
     {"read": read, "score": score}[args.stage](args)
