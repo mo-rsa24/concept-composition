@@ -79,6 +79,8 @@ A session that needs a change in another session's area writes one line to
 
 Session 13 reads every loop on a timer and keeps `artifacts/notes/progress/manager/status.md`. It may send a loop a **method review request** after a run of bad results. A loop that receives one pauses new runs, writes a short review in its own folder before its next run (what the failures share, which unread papers bear on them, whether another loop's results already explain them, whether the step is still worth its cost, and what it would change in its design), and replies to the manager with the review's path. Any change of direction that follows is the owner's call.
 
+The manager also decides open board questions for the owner when every option is reversible, inside the loop's budget, and changes no recorded bar or verdict (its prompt lists the rest, which stay the owner's). A loop treats such a decision, marked "Decided by Loop 13 for the owner", as the owner's answer, unless the owner answers again. Write every question so the owner, as the head of the project, can follow it without the loop's internal step codes: say what the work is and why it matters.
+
 ## When to stop and ask the user
 
 Stop that step and ask one question, then carry on with any other ready step, when:
