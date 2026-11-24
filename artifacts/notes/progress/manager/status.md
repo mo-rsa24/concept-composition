@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-25 00:30 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-25 01:15 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -85,12 +85,12 @@ The finish range is `session_status.py`'s, from the 63 finished steps: fastest p
 
 ## Resources
 
-Read at 21:07 from `squeue`, `sacct` and `sinfo`; down nodes from `sinfo -R` at 16:28.
+Read at 01:13 from `squeue`, `sacct` and `sinfo`; down nodes from `sinfo -R` at 16:28.
 
 | What | Now |
 |---|---|
-| Our jobs against the caps | 5 running on `bigbatch` of 6 allowed (Loop 6's two checker trainings and two CLEVR renders, Loop 8's retraining); 0 on `biggpu` of 1, since Loop 6's state save there finished, though `biggpu` has no idle node; 6 queued, including Loop 6's scoring read (94700) and Loop 12's next fix run (94678) |
-| Longest wait | Loop 6's scoring read (94700) and Loop 12's next fix run (94678), both waiting on `bigbatch` priority |
+| Our jobs against the caps | 2 running on `bigbatch` of 6 allowed (Loop 6's two CLEVR renders, 10-hour limit); 0 on `biggpu`; 22 queued, waiting on cluster priority rather than our caps, including Loop 6's checker read, Loop 8's next check and Loop 12's free text-only check |
+| Longest wait | the queue as a whole: nothing of ours finished between 00:13 and 01:13 |
 | Nodes out of service | `bigbatch`: 12 down and 5 drained of 48. `biggpu`: 2 down and 2 drained of 7, including mscluster108 and mscluster111, drained at 09:27 and 09:10 today after a failed job kill |
 | Idle capacity | none: at 17:43 every working `bigbatch` and `biggpu` node was allocated. mscluster107 is now another user's `biggpu` job (94610, 6-hour limit, started 17:36); its second card sits idle at 170 MiB, but their process holds it, so it is not ours to use. Your interactive job 83423 on that node no longer appears in the queue |
 | Shared card | **Not in use.** The other user's job on mscluster107 ended early, around 20:00, leaving the node idle in Slurm, so question 90's approval for borrowing a card inside their allocation no longer applies. Loop 6 stopped its shared run within 30 seconds, with nothing written, and resubmitted it through Slurm as its one `biggpu` job (94676, pinned to mscluster107 for the RTX 8000 the six CO3 pairs were first drawn on). Loop 8's run there earlier finished cleanly. A new shared-card run needs a new yes from you |
