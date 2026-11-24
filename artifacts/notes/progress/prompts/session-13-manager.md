@@ -27,25 +27,35 @@ Each loop's intent is the paragraph for it in `artifacts/notes/progress/score-sp
 
 1. **For you to answer.** Every open board question (`state` open), newest first, one row each: the question number, the loop that asked, the question in one plain line, its default if unanswered, and how long it has been open. This is the section the owner reads first, so it is never longer than it needs to be.
 2. **Where each loop is.** One row per watched loop: its current step and what it is doing, steps left, its estimated finish from `session_status.py`, whether its session is busy or idle from `ListAgents`, and what blocks it, named (a question number, another loop's step, a running job).
-3. **Alignment.** One row per loop: still working towards its intent (yes, partly, no), with the one fact that shows it, cited to a review file.
-4. **Nudges sent.** The last ten messages this loop sent to other loops, with time and reason.
-5. **Requests waiting.** Lines in `requests.md` addressed to a loop that has not acted on them, oldest first.
-6. **Last tick** and, when stopped, why.
+3. **Things that may be wrong.** One row per finding, newest first, each with its source and the loop it concerns:
+   - a cluster job of a watched loop that failed, was cancelled, timed out or ran out of memory in the last 24 hours (`sacct`);
+   - slow compute: a job queued more than 2 hours, or running more than twice its design's time estimate, with the node and GPU it landed on;
+   - a step marked in progress with nothing running for it (`python3 scripts/plan_pulse.py`'s stale check, the queue, and the session's state);
+   - a step that has run more than twice its estimated finish, or a loop whose detours keep growing;
+   - GPU-hours spent by a loop against the budget in its prompt;
+   - a new row on `artifacts/notes/progress/void-list.md`, or two records that give different numbers for one result;
+   - **a pattern of bad results**: two or more nulls, misses or inconclusive verdicts in a row from one loop, or a positive control that failed. Each such row names the request this loop sent, as below.
+4. **Alignment.** One row per loop: still working towards its intent (yes, partly, no), with the one fact that shows it, cited to a review file.
+5. **Nudges and requests sent.** The last ten messages this loop sent to other loops, with time and reason.
+6. **Requests waiting.** Lines in `requests.md` addressed to a loop that has not acted on them, oldest first.
+7. **Last tick** and, when stopped, why.
 
 ## One tick
 
 1. Read `shared-rules.md`. Run `python3 scripts/progress_board.py show`, `python3 scripts/progress_board.py line` and `python3 -I ~/.claude/skills/session-status/scripts/session_status.py --repo "$PWD" --line`. Read the open questions from `board.json`, the newest lines of `requests.md`, and `ListAgents` for which loop sessions are alive, busy or idle.
 2. Rewrite `manager/status.md` from what was read. Re-read any file before quoting a number from it, because other loops edit them.
 3. Nudge a loop with one `SendMessage` only when one of these holds: a step it waits on turned done, the owner answered one of its questions, a request addressed to it has waited more than 6 hours, or it has been idle for more than 2 hours with a ready step. Say what changed and where it is recorded. Send the same nudge at most once.
-4. Every 6 hours, run the alignment round: for each watched loop, compare its latest review files and board notes with its intent paragraph, and update the Alignment section. Ask a loop directly with `SendMessage` only when its files cannot settle the question, with the same five questions as the 2026-11-24 check.
-5. Send the owner one `PushNotification` only when the "For you to answer" list gains a question, when a loop has been idle more than 4 hours with nothing blocking it, or when a loop's alignment turns to "no". Begin it with `Loop 13:`. Never repeat a notification for the same thing.
-6. Commit only `artifacts/notes/progress/manager/` by named paths under the shared lock. Print the board line and the session-status line. Wake again in 3,600 seconds.
+4. Check for things that may be wrong. Read the cluster only, through `ssh mscluster107` with a 300-second timeout: `squeue -u mmolefe` and `sacct -u mmolefe -S now-24hours -o JobID,JobName,State,Elapsed,NodeList,Submit,Start`. Match each job to its loop by its job name. Read each watched loop's newest review files for their verdict lines. Add or clear rows in the "Things that may be wrong" section.
+5. When a loop shows a pattern of bad results, send it one **method review request**, by `SendMessage` and as one line in `requests.md`. The request asks the loop to pause new runs and write a short review in its own folder before the next run. The review answers: what the failures have in common, which papers it has not read that bear on them (searched and named), whether another loop's results already explain them (this loop names the ones it has seen, such as Loop 9's finding that SDXL's own features read where sentence scores do not), whether the step is still worth its cost for its paper, and what in its design or method it would change. The loop decides what to do with its review; the owner decides any change of direction. Send at most one such request per loop per pattern, and list it on the page.
+6. Every 6 hours, run the alignment round: for each watched loop, compare its latest review files and board notes with its intent paragraph, and update the Alignment section. Ask a loop directly with `SendMessage` only when its files cannot settle the question, with the same five questions as the 2026-11-24 check.
+7. Send the owner one `PushNotification` only when the "For you to answer" list gains a question, when a method review request is sent, when a loop has been idle more than 4 hours with nothing blocking it, or when a loop's alignment turns to "no". Begin it with `Loop 13:`. Never repeat a notification for the same thing.
+8. Commit only `artifacts/notes/progress/manager/` by named paths under the shared lock. Print the board line and the session-status line. Wake again in 3,600 seconds.
 
 ## Rules
 
 - Change no file outside `artifacts/notes/progress/manager/`, except one line in `requests.md` when a loop's area needs something a nudge cannot carry.
 - Answer no board question, choose no default, set no bar, and change no other loop's step state. Relay the owner's answers given in chat only when the owner asks this loop to.
-- Start, stop or restart no session. Run no GPU or cluster job.
+- Start, stop or restart no session. Run no GPU or cluster job, cancel no job, and read the cluster only through `squeue` and `sacct`.
 - A disagreement between two loops' records goes on the page and to the owner, never resolved here.
 - Use the owner's names for the papers: Paper 1 for experts that never met, Paper 2 for doing better than CO3 inside one model.
 - Follow the writing rules in `~/.claude/CLAUDE.md` and `~/.claude/WRITING_STYLE_DETAIL.md` on the page and in every message.

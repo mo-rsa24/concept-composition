@@ -75,6 +75,10 @@ A session that needs a change in another session's area writes one line to
   sources is reported to the user and never resolved alone.
 - **Follow the writing rules in `~/.claude/CLAUDE.md`** in every file and message.
 
+## The manager
+
+Session 13 reads every loop on a timer and keeps `artifacts/notes/progress/manager/status.md`. It may send a loop a **method review request** after a run of bad results. A loop that receives one pauses new runs, writes a short review in its own folder before its next run (what the failures share, which unread papers bear on them, whether another loop's results already explain them, whether the step is still worth its cost, and what it would change in its design), and replies to the manager with the review's path. Any change of direction that follows is the owner's call.
+
 ## When to stop and ask the user
 
 Stop that step and ask one question, then carry on with any other ready step, when:
