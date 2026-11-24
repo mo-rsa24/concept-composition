@@ -4,7 +4,7 @@
 The design is artifacts/notes/progress/method-search/04-bind-each-body/design.md.
 
   check   the zero-binding check, in one process on one card
-  read    the step-10 boxes on 12 pairs at 2 seeds, with no picture rendered, against the bar on the masks
+  read    the step-10 boxes on 12 pairs at seeds 6003 and 6004, with no picture rendered, against the bar on the masks
   render  the three rows for each pair and seed, skipping finished pictures
 
 Usage: python m9_rung2.py check --splits <json> --m1-co3 <dir> --out <dir>
@@ -32,7 +32,7 @@ from train_readout_pair import joint_prompt  # noqa: E402
 
 ZERO_BINDING_MAX_ABS = 1e-5
 ROWS = ("own", "swapped", "random")
-READ_SEEDS = 2
+READ_SEEDS = (6003, 6004)  # fresh tuning seeds for the reader chosen on board question 65; 6001 and 6002 judged the first reader
 MAX_BOX_SHARE = 0.8         # a box over this share of the grid gives its subject no region of its own
 MAX_READ_IOU = 0.8          # two boxes overlapping this much are one region
 MAX_DEGENERATE_SHARE = 0.25 # the most reads that may fail either limit before rung 2 stops at its masks
@@ -122,7 +122,10 @@ def is_degenerate(record):
 
 def read(args):
     """Read the step-10 boxes on 12 pairs at 2 seeds, with no picture rendered, and apply the bar on the masks."""
-    pairs, seeds = tuning(args.splits, seeds_limit=READ_SEEDS)
+    pairs, seeds = tuning(args.splits)
+    if not set(READ_SEEDS) <= set(seeds):
+        raise SystemExit(f"read seeds {READ_SEEDS} are not tuning seeds")
+    seeds = list(READ_SEEDS)
     parser_nlp = load_parser()
     prompts = {pair: joint_prompt(pair) for pair in pairs}
     refused = [p for p in prompts.values() if not is_allowed(p)]
@@ -144,11 +147,13 @@ def read(args):
                 final_latent(model, start_noise(model, seed))
                 raise SystemExit("the render finished without reading the masks")
             except MasksRead:
-                pass
+                rows.append({"pair": pair, "seed": seed, **binder.record, "degenerate": is_degenerate(binder.record)})
+            except ValueError as error:   # a word that wins no cell gives its subject no region, which fails the read
+                rows.append({"pair": pair, "seed": seed, "no_region": str(error), "degenerate": True})
             finally:
                 wrapper.binder = None
-            rows.append({"pair": pair, "seed": seed, **binder.record, "degenerate": is_degenerate(binder.record)})
-            maps[f"{pair}|{seed}|a"], maps[f"{pair}|{seed}|b"] = binder.maps
+            if binder.maps is not None:
+                maps[f"{pair}|{seed}|a"], maps[f"{pair}|{seed}|b"] = binder.maps
             print(json.dumps(rows[-1]), flush=True)
     degenerate = sum(r["degenerate"] for r in rows)
     result = {"reads": len(rows), "degenerate": degenerate, "max_degenerate_share": MAX_DEGENERATE_SHARE,

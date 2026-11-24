@@ -9,7 +9,8 @@ where eps_A and eps_B are the predictions for CO3's two concept prompts on the s
 cell. CO3's guided prediction u + g * (c - u) is then the regional formula in the M9 design.
 
 The masks are read once, at step 10, from the joint prompt's word attention on that step's latent. Each word's 32 by 32 map is
-smoothed, cut with Otsu's threshold, and reduced to the box around its largest connected part. The two boxes become soft
+smoothed, and its box surrounds the largest connected part of the cells where it is above its own Otsu threshold and above the
+other word's map, the reader chosen on board question 65. The two boxes become soft
 masks through poe_repair/composers/_regional_masks.py. The attention read is a separate UNet call whose output is discarded,
 so the sampler's own predictions are computed by the original attention processors.
 """
@@ -66,6 +67,23 @@ def box_from_map(attention):
     ys, xs = np.where(parts == sizes.argmax())
     scale = LATENT_CELLS_PER_GRID_CELL
     return int(xs.min()) * scale, int(ys.min()) * scale, (int(xs.max()) + 1) * scale, (int(ys.max()) + 1) * scale
+
+
+def boxes_where_each_word_wins(map_a, map_b):
+    """The reader chosen on board question 65: each subject's box surrounds the largest connected part of the cells where its
+    smoothed map is above its own Otsu threshold and above the other word's smoothed map."""
+    smooth_a, smooth_b = gaussian_filter(map_a, SMOOTH_SIGMA), gaussian_filter(map_b, SMOOTH_SIGMA)
+    boxes = []
+    for mine, other in ((smooth_a, smooth_b), (smooth_b, smooth_a)):
+        parts, _ = label((mine > otsu_threshold(mine)) & (mine > other))
+        sizes = np.bincount(parts.ravel())
+        sizes[0] = 0
+        if sizes.max() == 0:
+            raise ValueError("a word wins no cell")
+        ys, xs = np.where(parts == sizes.argmax())
+        scale = LATENT_CELLS_PER_GRID_CELL
+        boxes.append((int(xs.min()) * scale, int(ys.min()) * scale, (int(xs.max()) + 1) * scale, (int(ys.max()) + 1) * scale))
+    return boxes[0], boxes[1]
 
 
 def box_iou(a, b):
@@ -135,7 +153,8 @@ class Binder:
         words = words / words.sum(-1, keepdim=True)
         map_a = words[:, [i - 1 for i in self.tokens_a]].sum(-1).reshape(GRID, GRID).cpu().numpy()
         map_b = words[:, [i - 1 for i in self.tokens_b]].sum(-1).reshape(GRID, GRID).cpu().numpy()
-        read_a, read_b = box_from_map(map_a), box_from_map(map_b)
+        self.maps = (map_a, map_b)
+        read_a, read_b = boxes_where_each_word_wins(map_a, map_b)
         box_a, box_b = read_a, read_b
         if self.mode == "random":
             box_a, box_b = random_boxes_like(read_a, read_b, np.random.default_rng(self.box_seed))
@@ -149,7 +168,6 @@ class Binder:
                        "box_b_share_of_grid": round((read_b[2] - read_b[0]) * (read_b[3] - read_b[1]) / 128 ** 2, 4),
                        "max_sum_deviation": float(masks.max_sum_deviation)}
         if self.stop_after_read:
-            self.maps = (map_a, map_b)
             raise MasksRead
 
     def __call__(self, x, timestep, eps, unet):
