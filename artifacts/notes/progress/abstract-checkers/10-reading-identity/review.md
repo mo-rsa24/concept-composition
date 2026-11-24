@@ -9,6 +9,8 @@
 - [The grid](#the-grid)
 - [What the grid shows](#what-the-grid-shows)
 - [Digits 5 to 9](#digits-5-to-9)
+- [The robustness checks](#the-robustness-checks)
+- [Two checks before V7](#two-checks-before-v7)
 - [The runs](#the-runs)
 - [What this cannot say](#what-this-cannot-say)
 
@@ -50,7 +52,21 @@ Job 94383 (55 minutes on mscluster87, W&B run `cnvjjrh2`) retrained the passing 
 |---|---|---|---|---|---|---|---|---|---|---|
 | Balanced accuracy | 0.878 | 0.846 | 0.852 | 0.833 | 0.876 | 0.850 | 0.824 | 0.858 | 0.922 | 0.868 |
 
-The second training seed (job 94471) and the shuffled-label control (job 94472) are queued on `bigbatch`; their results complete the robustness checks.
+## The robustness checks
+
+The bars were fixed in [the design's robustness checks](design.md#robustness-checks) before these runs and before the per-pair scores were opened, and after the 0.888 on digit 4 was known. All three hold.
+
+| Check | Job | Result | Bar |
+|---|---|---|---|
+| Second training seed (1 against 0), pairs holding 4 | 94471, 44 min | 0.877 (trained pairs 0.907); every pair 0.853 to 0.905 | at least 0.75 |
+| Labels shuffled in training, pairs holding 4 | 94472, 47 min | 0.500 on every pair | at most 0.55 |
+| Per pair on digits 5 to 9 | from job 94383 | mean 0.861, minus 1.96 standard errors 0.844 | at least 0.75 |
+
+**The shuffled checker ignores the canvas.** It calls "the asked pair" on 56.25% of reads, which is 9 of the 16 timesteps on every canvas, so its answer depends on the timestep alone. That rules out a pipeline that hands the label to the checker. It does not test whether the frozen model's own ten predictions already carry identity; [the two checks before V7](#two-checks-before-v7) test that.
+
+## Two checks before V7
+
+Job 94595 smoke-tests both, then job 94596 scores the rule that needs no training and job 94597 reads V6's checker on the sampler's own states, as set in [the design](design.md#two-checks-before-v7). Their results fill this section.
 
 ## The runs
 
@@ -62,6 +78,8 @@ The second training seed (job 94471) and the shuffled-label control (job 94472) 
 | 94352 | signature, early window | mscluster60 | 44 min | 0.612 |
 | 94353 | signature, later window | mscluster87 | 48.5 min | 0.888 |
 | 94383 | the passing cell retrained on digits 0 to 4, read on digits 5 to 9 | mscluster87 | 55 min | 0.861 |
+| 94471 | second training seed | mscluster60 | 44 min | 0.877 |
+| 94472 | labels shuffled | mscluster88 | 47 min | 0.500 |
 
 Commit `ba6d84da` scores the signature's U-Net calls in pieces of 128, the size training uses, and gives each signature cell its own job. The grid used 2.66 GPU-hours, the failed job included, and the read of digits 5 to 9 0.92. Loop 8 has used about 10.9 of its 30.
 

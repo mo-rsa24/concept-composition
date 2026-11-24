@@ -8,14 +8,18 @@ flowchart TB
   R1["1. Layout cannot give the answer<br/>every test canvas has two digits apart<br/>done: built into the test"]:::pass
   R2["2. Not one lucky noise draw<br/>4 draws x 16 steps = 32,000 reads<br/>done"]:::pass
   R3["3. Not only digit 4<br/>read 5 to 9 once: 0.861, bar 0.75<br/>done: job 94383"]:::pass
-  R4["4. Not one lucky training run<br/>second seed, bar 0.75<br/>queued: job 94471"]:::run
-  R5["5. Not a pipeline bug<br/>labels shuffled in training, bar at most 0.55<br/>queued: job 94472, after job 94383"]:::wait
+  R4["4. Not one lucky training run<br/>second seed: 0.877, bar 0.75<br/>done: job 94471"]:::pass
+  R5["5. Not a pipeline bug<br/>labels shuffled: 0.500, bar at most 0.55<br/>done: job 94472"]:::pass
   R6["6. Not one easy pair<br/>mean over 10 pairs minus 1.96 SE: 0.844<br/>done: weakest pair 0.824"]:::pass
+  B7["7. More than the model already knows<br/>beat the untrained best-fit rule by 1.96 SE<br/>running: job 94596"]:::run
+  S8["8. Reads the sampler's own states<br/>at least 0.75 at steps 27 to 36<br/>running: job 94597"]:::run
   V7["V7: the push test<br/>count early, identity later"]:::wait
   C --> R1 --> R2 --> R3
   R3 --> R4
   R3 --> R5
   R3 --> R6
-  R4 -.-> V7
-  R5 -.-> V7
-  R6 -.-> V7
+  R4 --> B7
+  R5 --> B7
+  R6 --> S8
+  B7 -.-> V7
+  S8 -.-> V7
