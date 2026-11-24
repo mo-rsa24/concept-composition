@@ -128,6 +128,23 @@ Navigation: ⬅️ [The layout vote and the hold](#the-layout-vote-and-the-hold)
 
 The blank canvas is −1 everywhere (black, on the canvas's −1 to 1 scale), so its noised version at signal level ᾱ is −√ᾱ plus noise of size √(1 − ᾱ). ✅
 
+**What each symbol of the hiding and the joining does, on a canvas of four pixels.** Orange is the mask, blue the noisy canvas, grey the noised blank and green the predictions. ✅
+
+$$
+\tilde{x}_A = \textcolor{#c8680a}{\underbrace{m}_{\text{1 on A's half}}} \odot \textcolor{#1f5fd0}{\underbrace{x}_{\text{the noisy canvas}}} + \textcolor{#c8680a}{(1-m)} \odot \textcolor{#6b7a88}{\underbrace{\text{blank}_t}_{\text{black, noised to step } t}}
+\qquad
+\varepsilon = \textcolor{#c8680a}{m} \odot \textcolor{#1d6b3a}{\underbrace{\varepsilon_A}_{\text{A's guess}}} + \textcolor{#c8680a}{(1-m)} \odot \textcolor{#1d6b3a}{\underbrace{\varepsilon_B}_{\text{B's guess}}}
+$$
+
+| Symbol | What it does | On the four-pixel toy |
+|---|---|---|
+| ⊙ | multiplies pixel by pixel, with no sum, so each pixel keeps its own place | (1, 1, 0, 0) ⊙ (0.3, −0.5, 0.9, 0.1) = (0.3, −0.5, 0, 0) |
+| m | picks which pixels the expert sees as they are | with m = (1, 1, 0, 0) and a blank of (−0.7, −0.9, −0.6, −0.8), A is shown (0.3, −0.5, −0.6, −0.8); flip m to (0, 0, 1, 1), as the layout vote does when it puts A on the other side, and A is shown (−0.7, −0.9, 0.9, 0.1) |
+| blank_t | fills the hidden half with what an empty canvas looks like at this step | its middle value is −0.72 at signal level 0.52 and −0.995 at 0.99, under noise of size 0.693 and 0.1, so late in the run the hidden half reads as plain black |
+| the joining | keeps each guess only on its owner's half | A's guess (0.2, 0.4, 0.6, 0.8) and B's (−0.1, −0.3, −0.5, −0.7) join into (0.2, 0.4, −0.5, −0.7) |
+
+Toy numbers, computed this session; the four pixels are invented, and the blank's values are −√ᾱ and √(1 − ᾱ) at the two signal levels.
+
 <a href="../../../2-classifier-guidance/artifacts/scenes/product-of-experts-interaction-term/figures/real-run/e0e-3-hide-the-other-half-and-join.png"><img src="../../../2-classifier-guidance/artifacts/scenes/product-of-experts-interaction-term/figures/real-run/e0e-3-hide-the-other-half-and-join.png" width="200" alt="What each expert is shown with the other half blanked, each expert's clean guess with and without hiding, and the two guesses joined with the pushes added"></a>
 
 *One real step, sampler step 26 of 50, timestep 489, with the held layout giving the 0 to 4 expert the left half. Middle row, left pair: without hiding, the 0 to 4 expert's clean guess from the whole canvas shows a faint 4 on the left and a second 4 on the right, where the 7 belongs. Middle row, right pair: with hiding, a single 4 on the left and a single 7 on the right. Bottom: the two guesses kept on their own halves and joined, with the pushes added.* ✅ *The picture's own note explains the left pair: the expert is shown a digit it never saw in training and tries to erase it or turn it into one of its own.* ✍️
@@ -187,6 +204,25 @@ $$
 $$
 
 On the toy, at the overview's worked point (the two-apart canvas noised to step 25, signal level 0.52, so its 1s read 0.721), the clean guess for "how much 4 in the left cell" is (0.721 − 0.693 × 0.646) / 0.721 = 0.379 from the product, and (0.721 − 0.693 × 0.108) / 0.721 = 0.896 from the joint. ✅ The product's guess has already lost most of the 4 it is standing on; the joint's has kept it. Computed with the scene's `poe_toy.py`, unchanged.
+
+**The move to the next step, by what moves.** The colours carry on from the equation above, with grey for the fresh noise. ✅
+
+$$
+x_{t'} = \textcolor{#c0262d}{\underbrace{\sqrt{\bar\alpha_{t'}}\;x_0}_{\text{the clean guess, at the next level}}}
++ \textcolor{#1d6b3a}{\underbrace{\sqrt{1-\bar\alpha_{t'}-\sigma^2}\;\varepsilon}_{\text{the predicted noise, kept}}}
++ \textcolor{#6b7a88}{\underbrace{\sigma\,z}_{\text{fresh noise}}}
+$$
+
+On the toy's step from 25 to 26 (signal level 0.52 to 0.55), on "how much 4 in the left cell":
+
+| Symbol | Moved | Product | Joint |
+|---|---|---|---|
+| √ᾱ_t′ x_0 | the clean guess, times 0.743 | 0.379 becomes 0.282 | 0.896 becomes 0.666 |
+| √(1 − ᾱ_t′ − σ²) ε | the predicted noise, times 0.670 at eta 0 or 0.628 at eta 1 | 0.646 becomes 0.433 or 0.406 | 0.108 becomes 0.072 or 0.068 |
+| σ z | eta 0 sets σ to 0; eta 1 sets it to 0.232 | fresh noise of size 0 or 0.232 | the same |
+| all three added, z at its middle value 0 | the next canvas | 0.714 at eta 0, 0.687 at eta 1 | 0.738 at eta 0, 0.733 at eta 1 |
+
+The product's next value is close to the joint's on this one coordinate only because its smaller clean guess is made up by its larger noise guess; its clean guess, 0.379 against 0.896, is where the two part. Toy numbers, computed this session from the toy's schedule. ✅ What DDIM and eta mean is taken apart on [the miniature](03-the-miniature.md#the-toy).
 
 ## How it fails and how you know it worked
 

@@ -30,6 +30,8 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#what-one-training-example-d
 
 **Caption bank**: every training sentence, each embedded once by CLIP ViT-L/14's frozen text encoder into 768 numbers.
 
+**Embed**: to turn a sentence, a word or a step number into a fixed list of numbers, its vector. The caption bank's sentences are embedded by the frozen text encoder; the step is embedded by a learned table, `nn.Embedding`, one row of 128 numbers per step. [The embedding card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Embedding.md#where-to-learn-this) holds worked examples.
+
 **True caption**: the one sentence that describes a canvas, such as "the digit three and the digit four, apart". The lower digit is always named first, so a caption says nothing about left and right.
 
 **Checker score**: the true caption's cosine with the canvas minus the highest cosine among the wrong sentences, as in [the code page's score](04-the-code.md#the-score-difference-in-our-code).
@@ -56,6 +58,16 @@ Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#t
 | the test | digits 5 to 9 read once with the checker score and each step's threshold from the seen half ✍️ the design, line 94 | none: the paper tests no held-out concepts ✍️ the reading note |
 
 The caption counts are computed from `all_captions`: 5 single-digit captions plus 3 for each of the 10 pairs of seen digits make 35; over all ten digits, 10 plus 3 × 45 make 145, of which the test's `pair_sentences` uses one right and 20 wrong for each asked pair. ✅ Counted this session from lines 80 to 103.
+
+**The encoder's row, one term at a time.** "Four blocks of convolution, group norm, a scale and shift from the step, SiLU and halving" stacks five operations, and each block runs them in this order. Every number below is a toy computed this session ✅, not a value from the run.
+
+1. Convolution slides a 3 by 3 window of weights over the grid and writes the weighted sum under it at each place. With the weights (−1, 2, −1) on each row, a vertical stroke one pixel wide scores 6, a blank patch 0, and the same stroke one pixel to the left −3.
+2. Group norm splits a block's channels into 8 groups and shifts and scales each group to mean 0 and spread 1. The four numbers (1, 2, 3, 4), mean 2.5 and spread 1.118, become (−1.342, −0.447, 0.447, 1.342).
+3. The scale and shift from the step is h (1 + γ) + β, with γ and β read from the step's row, as under [noise-aware](#the-names-taken-apart). The code names the block `FilmBlock` after FiLM, feature-wise linear modulation: feature-wise because each channel gets its own γ and β, linear because it is one multiply and one add, modulation because the step adjusts a signal passing through. A value of 2 with γ = 0.5 and β = 0.3 becomes 3.3, and a step whose row gives γ = −0.5 makes it 1.3.
+4. SiLU, the sigmoid-weighted linear unit, multiplies each number by its own sigmoid, a share from 0 to 1. 2 becomes 1.762, 0 stays 0 and −2 becomes −0.238, so most of a negative number is shut off.
+5. Halving averages each 2 by 2 square into one number (`avg_pool2d`). The square (1, 2, 3, 4) becomes 2.5, and the 32 × 64 canvas becomes 16 × 32.
+
+Read whole again: each block weighs small windows, evens out each group of channels, lets the step rescale them, shuts off most negatives and halves the grid, and four blocks take 32 × 64 down to 2 × 4.
 
 ## The names, taken apart
 
@@ -93,7 +105,7 @@ $$
 \underbrace{\mathcal{L}}_{\text{the loss}} = -\log \frac{\exp\!\big(\cos(\textcolor{#1d6b3a}{f(x_t, t)},\ \textcolor{#6b4fbb}{g(c^\star)}) / \tau\big)}{\sum_{c\,\in\,\text{bank}} \exp\!\big(\cos(\textcolor{#1d6b3a}{f(x_t, t)},\ \textcolor{#6b4fbb}{g(c)}) / \tau\big)}
 $$
 
-f (green) is our encoder, read at the noisy canvas x_t and told the step t; g (lilac) is the frozen text encoder; c* is the true caption.
+f (green) is our encoder, read at [the noisy canvas](../../../2-classifier-guidance/artifacts/scenes/digit-map-checkers/rebuild-from-fundamentals.md#1-the-noisy-canvas) x_t and told the step t; g (lilac) is the frozen text encoder; c* is the true caption.
 
 The worked case borrows the miniature's two cosines from [its training step](03-the-miniature.md#one-training-step): its first latent has cosine 0.96865 with its own sentence and 0.99946 with the other, a two-caption bank. ✅ The miniature key's `logits_before`, divided by its multiplier of 10; the shares computed this session.
 
@@ -154,6 +166,11 @@ Lines 106 to 134. Each block halves the grid: 32 × 64 becomes 16 × 32, 8 × 16
 ```
 
 Lines 180 to 183, inside `train`. Every canvas in a batch of 256 gets its own random step from the 26, its own noise (`noised`, lines 162 to 164, x_t = √ᾱ x_0 + √(1 − ᾱ) ε), and one row of 35 cosines divided by τ; `bank` is the 35 seen captions' frozen vectors. 8,000 updates with Adam at 2 × 10⁻⁴ ✅ (lines 53 to 55 and 173).
+
+🔤 **The name:** Adam, adaptive moment estimation
+- **moment**: a running average, here of each weight's recent slopes (the first moment) and of their squares (the second). **adaptive**: each weight's step is divided by the root of its own second moment, so its size adapts to that weight's slopes. **estimation**: the averages are estimates built up update by update.
+- **Formula, in those words:** step = learning rate × (average slope) / √(average squared slope), per weight.
+- **Consequence:** on the very first update the two averages are the slope and its square, so every weight moves by about the learning rate, 2 × 10⁻⁴, whatever its slope. A weight with slope 0.149 and one with slope 0.001 both move 0.0002, where a plain step at the same rate would move them 0.0000298 and 0.0000002. ✅ Computed this session with PyTorch's default Adam settings.
 
 ## How it fails and what came out
 

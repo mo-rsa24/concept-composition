@@ -126,6 +126,12 @@ Navigation: ⬅️ [Stage 2: the head reads a relation](#stage-2-the-head-reads-
 
 *Top, three chain-rule steps: loss to hidden units (∂L/∂Δ_u = 4, ∂L/∂Δ_v = 0); hidden units to pooled map (∂Δ_u/∂Ā_s[p] = u_p, and −u_p for the dog); pooled map to latent (∂A[p]/∂x_p = k A[p](1 − A[p]), largest near A = 0.5). Bottom: the slope of layer 1's map, 0.0353 on the saturated top row and 0.2100 on the undecided bottom row; the gradient on the cat channel, (−0.0938, 0.0938, −0.3715, 0.3715), and the mirror on the dog channel; gradient norm 0.7664.* ✅
 
+🔤 **The name:** saturated
+- **saturated**: soaked so full it can take no more, like a sponge that has stopped absorbing.
+- **On the picture:** the top row, whose share for "cat" is already 0.9820, so its slope is 0.0353 against 0.2100 on the bottom row at 0.1192.
+- **Formula, in those words:** the slope of a share is k × the share × what is left of it, k A (1 − A), so it is largest when the share is half and the rest half.
+- **Consequence:** with layer 1's key of 2, raise the top-left cat-ness from 2 to 3 and the share goes from 0.9820 to 0.9975 while the slope falls from 0.0353 to 0.0049. Lower it to 0 and the share is 0.5 and the slope 0.5, its largest. A push lands where the map is still undecided because a saturated patch barely answers. ✅ Computed this session.
+
 $$
 \textcolor{#c86a0a}{\frac{\partial \mathcal L}{\partial x_p}}
 = \underbrace{\frac{\partial \mathcal L}{\partial \Delta_u}}_{=\,4}\;
@@ -134,6 +140,12 @@ $$
 $$
 
 For the cat channel's bottom-left number (u = −1), both layers add up: −4 × (0.75 × 0.209987 / 2.202433 + 0.25 × 0.196612 / 2.299477) = −4 × (0.071507 + 0.021376) = −0.3715. A finite difference on all 8 numbers agrees to 1.2 × 10⁻¹⁰. ✅ The answer key, recomputed this session.
+
+🔤 **The name:** finite difference
+- **difference**: one value minus another. **finite**: of a real, measurable size, against the infinitely small change a derivative takes.
+- **On the picture:** a check beside the orange lane: nudge one latent number, run the whole forward pass again, and see how far the loss moved.
+- **Formula, in those words:** slope ≈ (loss after a nudge of h − loss before) / h.
+- **Consequence:** for the cat's bottom-left number a nudge of h = 1 gives −0.3156, h = 0.1 gives −0.3798, and h = 0.001 gives −0.3716, closing on the chain rule's −0.3715 as the nudge shrinks. A finite difference agreeing with the chain rule is what shows the hand-worked slopes have no slip. ✅ Computed this session with a reimplementation of the miniature from the formulas on this page, which reproduces the key's loss 1.6094 and gradient length 0.7664. The chain rule itself is on [the chain rule card](../../../../../Obsidian/Mathematics/Calculus/Chain%20Rule.md#where-to-learn-this).
 
 🔤 **The name:** gradient
 - **gradient**: a slope, how steeply something rises. Here a list of 8 slopes, one per latent number: how much the loss changes per unit change in that number.
@@ -179,6 +191,12 @@ Navigation: ⬅️ [Stage 4: two ways to apply it](#stage-4-two-ways-to-apply-it
 <a href="../../../2-classifier-guidance/artifacts/scenes/word-map-checker/2-miniature/mm5-three-ways-it-breaks.png"><img src="../../../2-classifier-guidance/artifacts/scenes/word-map-checker/2-miniature/mm5-three-ways-it-breaks.png" width="200" alt="Three panels. It reads the word: true captions weight on the map 1.63 and on the word 5.59, both captions 11.90 and 0.00; a cat truly on the left with a prompt saying right of gets 0.9929 against 0.0085. A correlation loss has no pull: gradient norm 0.0000 on the fused body against 0.7664 for the head, 0.000382 after a nudge of 0.1. No class for fused: 0.2 on each of five classes"></a>
 
 *Panel 1, "It reads the word": two small heads learn from h (a weak spatial reading of the map) and τ (the trace of the prompt's relation word). True captions only: weight 1.63 on h, 5.59 on τ. Both captions: 11.90 on h, 0.00 on τ. Test, truly left with the prompt saying "right of": chance of "right of" 0.9929 against 0.0085. Panel 2, "A correlation loss has no pull": on the fused body the correlation's gradient length is 0.0000 and the head's 0.7664; nudging the cat's top-left number by 0.1 gives the correlation a gradient of only 0.000382. Panel 3, "No class for fused": 0.2 on each of above, below, left, right and neutral.* ✅
+
+🔤 **The name:** correlation of the two maps
+- **co-relation**: how two lists rise and fall together. 1 means they rise and fall in step, 0 means no pattern, −1 means one is high exactly where the other is low.
+- **On the picture:** panel 2, the hand-written loss that replaces the head.
+- **Formula, in those words:** take each map's mean off every cell, multiply the two maps cell by cell, add, and divide by the two maps' lengths. The hand-written loss scores minus this.
+- **Consequence:** on the fused body the two pooled maps are both (0.4302, 0.4302, 0.0698, 0.0698), so the correlation is 1, its largest, and the slope there is flat. After one of Learn-to-Steer's updates the cat map is (0.3582, 0.3382, 0.2973, 0.0063) and the dog's is its mirror, and the correlation is −0.0489. A cat map of (0.5, 0, 0.5, 0) against a dog map of (0, 0.5, 0, 0.5), each animal down one column, gives −1. ✅ Computed this session. Textbook pages are on [the correlation coefficient card](../../../../../Obsidian/Mathematics/Statistics/Correlation%20Coefficient.md#where-to-learn-this).
 
 💥 **Broken run (without):** the head trained on true captions only.
 - **Predict:** shown a cat truly on the left whose prompt says "right of", what chance does it give "right of"?

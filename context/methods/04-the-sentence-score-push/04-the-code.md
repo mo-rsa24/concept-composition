@@ -39,6 +39,8 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#the-blocks-and-where-they-l
 
 **CO3's two-entry prediction**: CO3 calls the U-Net on a batch of 2, the unconditional entry ε_u and the conditional entry ε_c, and combines them as ε_u + w (ε_c − ε_u).
 
+**U-Net**: the network SDXL calls at every step to predict the noise. It shrinks the latent's grid in stages and grows it back, joining each shrunk stage to the grown stage of the same size, and drawn that way it looks like a U. [The U-Net card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/U-Net.md#where-to-learn-this) holds worked examples.
+
 ## The blocks and where they live
 
 Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#table-of-contents) | [Next](#catching-the-half-drawn-latents) ➡️
@@ -70,6 +72,12 @@ Navigation: ⬅️ [The blocks and where they live](#the-blocks-and-where-they-l
 ```
 
 Released `src/generate_latents.py`, lines 41 to 42; lines 75 to 84 register the hook, run the pipeline and save the list. The pipeline scales its Euler latent before the U-Net sees it, so the saved tensor is z_t / √(σ_Euler² + 1) = √ᾱ_t z_0 + √(1 − ᾱ_t) ε, the same scale as our DDIM latent x_t ✍️ ([the code walk, block 1](../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/3-code/walk-noisyclip.md#1-catching-the-half-drawn-latents)).
+
+🔤 **The name:** Euler latent, and its scaling
+- **Euler**: Leonhard Euler, the eighteenth-century mathematician whose method follows a changing quantity in straight steps along its current slope. The released pipeline samples with a step of that kind (`EulerDiscreteScheduler` ✍️ the ladder's numbers file), and that sampler keeps its latent as the clean latent plus σ_Euler times noise, the clean part never shrunk.
+- **On the picture:** the noisy input x_t at the left of the figure; the scaling happens before it.
+- **Formula, in those words:** divide by √(σ_Euler² + 1), and the clean part's weight becomes the signal scale √ᾱ_t while the noise's weight becomes σ_t.
+- **Consequence:** at step 0, σ_Euler = 13.12, the divisor is 13.158, and the weights come out as 0.0760 and 0.9971, the numbers in [the noise-level table](02-the-network-view.md#the-half-drawn-picture-and-its-noise-levels); at step 15, σ_Euler = 3.093 gives 0.3076 and 0.9515. Leave the division out at step 0 and red's spread on a latent of unit spread grows from 112.81 to 1484, so the clamp holds 93% of red values instead of 26.8%. ✅ Computed this session from the numbers file's `euler_sigma`.
 
 > [!WARNING]
 > A raw Euler latent has a spread near σ_Euler, 13.12 at step 0 and 3.09 at step 15 ✅ (the ladder's numbers file). Fed to the colour map without that scaling it would push almost every pixel past the clamp. The reading test checked its own path against the authors' on this point: image vectors from the two paths agreed at cosine 0.995 at steps 0 and 15 for NoisyCLIP, against a bar of 0.99 ✍️ ([the reading finding, section 2](../../../2-classifier-guidance/report/the-sentence-score/can-a-sentence-score-read-the-five-properties.md#2-the-models-do-read-once-the-picture-is-mostly-drawn)).
@@ -107,6 +115,8 @@ Navigation: ⬅️ [Four channels become three colours](#four-channels-become-th
 ```
 
 Released `src/latent_to_image.py`, lines 18 to 20. `[0]` takes the first of the two classifier-free guidance copies, which are identical ✍️ (the code walk, block 3). The released path ends in a PNG on disk, built for ranking seeds, which is all the paper does with the score ✍️ ([the NoisyCLIP reading note](../../../artifacts/notes/progress/noise-text-critic/01-reading/noisyclip.md)).
+
+The two classifier-free guidance copies are the unconditional and conditional entries named under [CO3's two-entry prediction](#words-this-page-uses): guidance because w in ε_u + w (ε_c − ε_u) steers toward the prompt, classifier-free because no separate classifier supplies the steer. It is worked with numbers at [how the push joins CO3](02-the-network-view.md#how-the-push-joins-co3), and [the classifier-free guidance card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Diffusion%20Models/Classifier-Free%20Guidance.md#where-to-learn-this) holds its textbook pages.
 
 🔤 **The name:** `.byte()`
 - **byte**: 8 bits, enough for a whole number from 0 to 255.
@@ -195,6 +205,13 @@ Released `src/train_model_classic.py`, lines 14 to 20. The loss is the one taken
 | base model | `openai/clip-vit-base-patch32` | ViT-L/14 |
 
 ✍️ The code walk, block 6, with the default lines it quotes (286 to 287, 304 to 306, 314 to 315). The script adds no noise and picks no step: the window of latents 20 to 29 exists only in the paper (p. 6) and in a dataset that is not released ✍️ (the code walk, block 7).
+
+**The four settings, one at a time.**
+
+- An epoch is one pass over every training example: the paper's 50,000 latents in batches of 128 make 390.6 batches per epoch, about 3,906 updates over its 10 epochs ✅ computed. [The epoch card](../../../../../Obsidian/Artificial%20Intelligence/Machine%20Learning/Epoch.md#where-to-learn-this) holds worked examples.
+- The batch size is how many examples one update averages over. In this loss it also sets how many wrong captions each latent is scored against, 127 at the paper's 128.
+- The learning rate is the size of each update's step against the slope. In [the miniature's training step](03-the-miniature.md#one-training-step) it is 0.5, and the first weight moves from 2 to 1.9255, a slope of 0.149; at 0.25 the same slope would move it only to 1.9628 ✅ computed. [The learning rate card](../../../../../Obsidian/Artificial%20Intelligence/Machine%20Learning/Learning%20Rate.md#where-to-learn-this) holds worked examples.
+- Weight decay pulls every weight a little toward 0 at each update, in proportion to its size, and 0.0 switches it off.
 
 ## The score difference in our code
 

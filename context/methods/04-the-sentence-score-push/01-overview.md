@@ -47,6 +47,8 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#what-one-step-does) ➡️
 
 **The miniature**: the ladder's toy of 2 pixels with 4 channels each, worked in full on [the miniature page](03-the-miniature.md). Its colour map is the released one; every other weight is set by hand.
 
+**Where these words are taught with worked examples**: the gradient on [the gradient card](../../../../../Obsidian/Mathematics/Calculus/Gradient.md#where-to-learn-this), CLIP on [the CLIP card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Contrastive%20Image-Text%20Training.md#where-to-learn-this), and the sentence score's cosine on [the cosine similarity card](../../../../../Obsidian/Mathematics/Linear%20Algebra/Cosine%20Similarity.md#where-to-learn-this).
+
 ## What one step does
 
 Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#table-of-contents) | [Next](#the-names-taken-apart) ➡️
@@ -131,6 +133,8 @@ The worked case is the miniature's one step: σ_t = 0.8 going to 0.6, signal 0.6
 | ε̂ = ε_base − push | A (0.468, 0.1838, −0.0784, −0.3867), B (−0.4349, 0.4946, 0.0163, −0.0542) | |
 
 **What the push does to the next latent.** One DDIM step multiplies ε̂ by 0.6 − 0.8 × 0.8 / 0.6 = −0.4667, so taking the push off ε̂ adds 0.4667 times the push to the next latent: a step along g, the way D rises. ✅ The answer key's `coefficient_on_eps`.
+
+DDIM, the name of this step, is taken apart word by word on [the miniature's sampler step](03-the-miniature.md#the-push-and-one-sampler-step), with what changes when the step draws fresh noise; [the DDIM card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Diffusion%20Models/DDIM.md#where-to-learn-this) holds its textbook pages.
 
 > [!NOTE]
 > λ stands in for a factor a classifier would supply. Treat the two sentences as two classes with the score multiplier e^{t_s}, and the gradient of log p(right) is (1 − p) e^{t_s} g, so it points along g. On the miniature, at its multiplier of 10, p(right) = 0.4236 and the factor is 5.7643 ✅ (the key). The same cosines at NoisyCLIP's real multiplier of 98.86 give p(right) = 0.0454 and a factor of 94.37 ✅ (computed this session). The factor shrinks as the classifier grows sure; a fixed λ does not. The derivation is [the ladder's rebuild, section 6](../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/rebuild-from-fundamentals.md#6-the-score-difference-is-a-two-sentence-classifier).

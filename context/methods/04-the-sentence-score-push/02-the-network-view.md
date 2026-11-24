@@ -32,6 +32,8 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#the-two-sentences-and-the-t
 
 **ViT-L/14**: a vision transformer, large size, that cuts a 224-pixel picture into patches of 14 by 14 pixels (16 by 16 of them, 256 in all) and runs them through 24 blocks of attention and MLP.
 
+**Vision transformer and attention, with worked examples**: [the vision transformer card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Vision%20Transformer.md#where-to-learn-this) and [the attention card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Attention.md#where-to-learn-this); CLIP's own blocks are drawn on the CLIP ladder linked at the top of this page.
+
 **Summary token**: one extra slot added to the 256 patches; its 1024 numbers after the last block are what the encoder hands on.
 
 **Projection**: a fixed matrix that maps the encoder's output into the shared 768-number space where pictures and sentences are compared.
@@ -81,6 +83,13 @@ Navigation: ⬅️ [The two sentences and the text encoder](#the-two-sentences-a
 | 29 | 401 | 0.6503 | 0.7597 |
 
 ✅ The ladder's numbers file, `schedule`.
+
+🔤 **The name:** timestep, from scaled-linear betas with leading spacing (the left figure's footer)
+- **timestep**: one tick of the clock SDXL was trained on, numbered 0 (almost clean) to 999 (almost all noise). On the table, the second column: each of the 50 sampler steps sits on one tick.
+- **betas**: β, the small amount of noise the training clock adds at each tick. **scaled-linear**: √β rises in a straight line from √0.00085 = 0.0292 at tick 0 to √0.012 = 0.1095 at tick 999, and β is that line squared.
+- **leading spacing**: the 50 steps take every 20th tick counted up from the start, 1, 21, 41 and on to 981, so step k sits at tick 981 − 20k: step 15 at 681 and step 29 at 401, as in the table.
+- **Formula, in those words:** ᾱ at a tick is the product of (1 − β) over every tick up to it, the signal scale is √ᾱ and the noise scale is √(1 − ᾱ).
+- **Consequence:** step 0 sits at tick 981, with signal scale 0.076 and noise scale 0.9971. Start the 50 steps at the clock's very end instead, tick 999, and the signal scale at step 0 falls to 0.0683. ✅ Computed this session from the two beta ends, which give back the table's 0.076 at tick 981 and 0.3076 at tick 681.
 
 🔤 **The name:** signal scale
 - **signal**: the part of the latent that is the picture. **scale**: the number it is multiplied by.
@@ -164,6 +173,8 @@ $$
 
 s is the matrix of cosines, e^{t_s} the score multiplier (98.86 in NoisyCLIP, 10 in the miniature), and CE the cross-entropy: minus the log of the share a softmax gives the right cell.
 
+Both are worked with numbers on [the cross-entropy card](../../../../../Obsidian/Mathematics/Statistics/Information%20Theory/Cross-Entropy.md#where-to-learn-this) and [the softmax card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Softmax.md#where-to-learn-this).
+
 🔤 **The name:** CLIP, contrastive language-image pre-training
 - **contrastive**: judged by comparison. Each latent is scored against every caption in the batch, and only beating the others counts. On the picture, the diagonal against the rest of its row and column.
 - **language-image**: the two lanes, sentences and pictures, each with its own encoder.
@@ -200,6 +211,8 @@ Navigation: ⬅️ [Compare: right minus wrong](#compare-right-minus-wrong) | �
 
 *Forward row: the latent (4 × 128 × 128), linear map (fixed weights), clamp (0 to 255), resize (to 224), normalise (CLIP mean, std), ViT (weights held, green), projection (to 768), unit length (gives I), two scores (S right, S wrong), difference (one number). Backward row, orange, right to left: start +1 from S right and −1 from S wrong; one dot product per sentence; cosine similarity; frozen, gradient flows; weights held, gradient flows; ÷ CLIP std; spreads over nearby pixels; 0 on any clamped colour; each latent channel gets its colours back; g, same shape as the latent. Left box: `.byte()` cuts values to 8-bit integers (127.9 becomes 127), so no gradient passes; a clamped colour passes zero; the push needs a copy of the map without `.byte()`. Right box: every weight stays fixed while the push is computed; only the gradient at the latent is read.* ✅ *Read at full size.*
 
+The chain rule is taken apart on the miniature's four links on [the miniature's gradient](03-the-miniature.md#the-gradient-back-to-the-latent), and [the chain rule card](../../../../../Obsidian/Mathematics/Calculus/Chain%20Rule.md#where-to-learn-this) holds its textbook pages.
+
 🔤 **The name:** the gradient of a cosine
 - **gradient**: the direction in which a number rises fastest, one slope per input. **cosine**: the dot product of two length-1 vectors.
 - **On the picture:** the backward dot labelled "unit length", where the vector h is divided by its own length to give I.
@@ -220,6 +233,8 @@ Navigation: ⬅️ [The gradient walks back to the latent](#the-gradient-walks-b
 *Left: x_t goes through "frozen SDXL U-Net, CO3's main call, batch of 2" to ε_uncond and ε_cond; the orange box p = λ σ_t g is subtracted from both; the guided prediction reads (ε_u − p) + w[(ε_c − p) − (ε_u − p)] = ε_u + w(ε_c − ε_u) − p and goes to "CO3's next step, with the pushed prediction". Lower left, "what the existing push code does": on CO3's main call only, it subtracts p from both entries; the push length is capped at c times the length of the guided prediction; a random direction of matched length is the control; zero strength must reproduce the plain sampler. Lower right, "what is proposed here": the checker is swapped for S right minus S wrong, its gradient taken at the latent, the strength, cap and window left to step W3, and "No sentence score has been run on our pictures. Steps W2 and W3 measure whether it reads or steers".* ✅ *Right: the illustration, ε base, the orange −λσg from its tip, and ε̂ to their sum, with "gradient taken here" at the x_t tile.* ✅ *Both read at full size. W2, the reading test, has since run and W3, the push, was stopped; see [where the sources disagree](01-overview.md#where-the-sources-disagree).*
 
 **The guided prediction, by what moves.** Take one number of each, ε_u = 1, ε_c = 2, CO3's guidance w = 0.8 and a push p = 0.1 (invented to show the arithmetic). Unpushed, ε_u + w(ε_c − ε_u) = 1 + 0.8 = 1.8. With p off both entries, (1 − 0.1) + 0.8[(2 − 0.1) − (1 − 0.1)] = 0.9 + 0.8 = 1.7 = 1.8 − 0.1. The push's own w-weighted part cancels inside the bracket, so the guided prediction falls by p whatever w is. Subtract p from ε_c alone and the guided prediction would fall by w p = 0.08 instead. CO3's guidance of 0.8 is from [the push step's design](../../../artifacts/notes/progress/noise-text-critic/03-does-it-steer/design.md), line 37 ✍️.
+
+Mixing an unconditional and a conditional prediction as ε_u + w(ε_c − ε_u) is classifier-free guidance: guidance because w steers the prediction toward the prompt, classifier-free because no separate classifier supplies the steer. [The classifier-free guidance card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Diffusion%20Models/Classifier-Free%20Guidance.md#where-to-learn-this) holds its textbook pages.
 
 ## All of it at once
 

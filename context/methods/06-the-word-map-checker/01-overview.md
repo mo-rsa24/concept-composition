@@ -62,6 +62,8 @@ Navigation: ⬅️ [What is established and what is proposed](#what-is-establish
 
 **At each pushed step the U-Net's own attention weights for "cat" and "dog" are kept, the head turns them into a chance for each relation, and the gradient of the asked relation's log chance is shortened and taken off the product's noise prediction.** ✍️ The ladder's [sampler code walk](../../../2-classifier-guidance/artifacts/scenes/word-map-checker/3-code/walk-our-sampler.md), whose push code is checked on [the code page](05-the-code.md#our-sampler-the-push-and-the-cap).
 
+The word gradient is taken apart on the 8-number latent on [the miniature page](04-the-miniature.md#stage-3-the-gradient-back-to-the-latent): one slope per latent number, saying how much the head's log chance changes when that number moves. Textbook pages and videos are on [the gradient card](../../../../../Obsidian/Mathematics/Calculus/Gradient.md#where-to-learn-this). ✅
+
 Each box of the opening picture has a twin in the miniature, in Learn-to-Steer and in the SDXL proposal:
 
 | Box | In the miniature | In Learn-to-Steer | On SDXL, proposed |
@@ -70,6 +72,8 @@ Each box of the opening picture has a twin in the miniature, in Learn-to-Steer a
 | the word maps | 2 attention layers, keys 2 and 1, each patch sharing one unit with a background token ✅ | every layer's and head's map, each resized to 16 × 16 and divided by its sum: 195 per word on SD 2.1 (inferred), 1,368 on FLUX ✍️ | 1,300 per word, from 70 layers ✅ counted from SDXL's config by the ladder |
 | the head | two hidden units that compare the maps' centres of mass, five logits at scale 4 ✅ | a trained network of 1,964,581 weights on its SD 2.1 settings ✍️ | not trained |
 | the push | one push of 2 × 0.8 × the gradient, capped at 0.4 of the product's length ✅ | no push on the prediction: the latent itself is moved, up to 16 times per step at step size 5 ✍️ | one capped push per step on steps 0 to 15 of 50 ✍️ the ladder's numbers file |
+
+"Head" means two things in this table. In "every layer's and head's map" it is an attention head, one of the parallel attention computations inside one U-Net layer, each giving its own map per word. In the row "the head" it is the checker. [The network view's word list](02-the-network-view.md#words-this-page-uses) keeps the two apart, and these pages call only the checker "the head". ✅ Read on that page.
 
 ## The names, taken apart
 
@@ -126,6 +130,21 @@ The worked case is the miniature's fused body, one push then one DDIM step, with
 
 **How much reaches the latent.** The DDIM step carries a change in the prediction into the next latent at the rate √(1 − ᾱ_{t−1}) − √(1 − ᾱ_t) √(ᾱ_{t−1}/ᾱ_t) = 0.6 − 0.8 × 0.8/0.6 = −0.4667, so the capped push of length 0.5657 moves the latent by 0.264. Learn-to-Steer's 16 updates at step size 5 move the same latent by 6.0072 and take "left of" to 0.9936. ✅ The answer key. The weights are hand-set, so the size of the gap says nothing about SDXL; its direction is why a head that fails at our dose has not been tested at theirs.
 
+🔤 **The name:** DDIM step
+- **DDIM**: denoising diffusion implicit model. **Denoising**: taking noise out. **Diffusion**: the noise was spread into the picture the way ink spreads in water, and the sampler runs that spreading backwards. **Implicit**: each step follows a fixed rule from the current latent and the prediction, with no fresh random noise, so the same starting noise always gives the same picture.
+- **On the picture:** the last blue arrow, from the circle where the push is taken off to the next latent x_{t−1}.
+- **Formula, in those words:** guess the clean latent from the prediction, then put back noise at the next, smaller level using the same prediction. The two noise numbers are ᾱ_t, the share of the latent that is still signal, and σ_t = √(1 − ᾱ_t), the noise level: ᾱ_t = 0.36 gives σ_t = 0.8 on the miniature.
+
+$$
+\textcolor{#1f5fd0}{\underbrace{x_{t-1}}_{\text{the next latent}}}
+= \sqrt{\bar\alpha_{t-1}}\;\textcolor{#1d7a3e}{\underbrace{\hat x_0}_{\text{the clean guess}}}
++ \sqrt{1-\bar\alpha_{t-1}}\;\textcolor{#c0262d}{\underbrace{\varepsilon'}_{\text{the pushed prediction}}},
+\qquad
+\textcolor{#1d7a3e}{\hat x_0} = \frac{\textcolor{#1f5fd0}{x_t} - \sigma_t\,\textcolor{#c0262d}{\varepsilon'}}{\sqrt{\bar\alpha_t}}
+$$
+
+- **Consequence:** the rate −0.4667 above holds for this one pair of noise levels. Move the step later, to ᾱ_t = 0.64 and ᾱ_{t−1} = 0.81 (toy values, not the sampler's schedule), and the rate becomes √0.19 − 0.6 × √(0.81/0.64) = −0.2391, so the same capped push of length 0.5657 moves the latent 0.1353 instead of 0.264. ✅ Computed this session. Textbook pages and videos are on [the DDIM card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Diffusion%20Models/DDIM.md#where-to-learn-this).
+
 ## How it fails and how you know it worked
 
 Navigation: ⬅️ [The push, by what moves](#the-push-by-what-moves) | 📋 [TOC](#table-of-contents) | [Next](#what-is-measured-where) ➡️
@@ -145,6 +164,18 @@ Navigation: ⬅️ [The push, by what moves](#the-push-by-what-moves) | 📋 [TO
 
 **How you would know it worked.** The design's bar for the spatial checker on SDXL is a balanced accuracy over steps 0 to 15 of at least 0.75, within 0.05 of held-out animal pairs, and at least 0.75 on right against wrong relation. ✍️ [Loop 7's checker design](../../../artifacts/notes/progress/abstract-checkers/03-design.md#the-design-on-one-page), row 2. In the sampler, a push at strength 0 never calls the head, so the run is byte-identical to the plain product; that is the check a new head must keep. ✅ [The code page](05-the-code.md#our-sampler-the-push-and-the-cap).
 
+🔤 **The name:** balanced accuracy
+- **accuracy**: the share of answers that are right. **balanced**: each true class counts equally, however many test cases it has, so the score is the average of the share right within each class.
+- **On a toy:** 20 test pairs of word maps, 16 truly "left of" and 4 truly "right of", with the truth down the side and the checker's answer across the top.
+
+| Truth | checker says "left of" | checker says "right of" | right within the class |
+|---|---|---|---|
+| left of, 16 pairs | 16 | 0 | 16/16 = 1 |
+| right of, 4 pairs | 4 | 0 | 0/4 = 0 |
+
+- **Formula, in those words:** the mean of the last column, (16/16 + 0/4) / 2 = 0.50, where plain accuracy is (16 + 0) / 20 = 0.80.
+- **Consequence:** this checker always answers "left of" and knows nothing, yet it passes a plain-accuracy bar of 0.75 at 0.80 and fails the balanced one at 0.50, which is chance for two classes. A checker that gets 14 of the 16 and 3 of the 4 scores 0.85 plain and 0.8125 balanced, and passes both. ✅ Computed this session; the toy's counts are invented.
+
 ## What is measured where
 
 Navigation: ⬅️ [How it fails and how you know it worked](#how-it-fails-and-how-you-know-it-worked) | 📋 [TOC](#table-of-contents) | [Next](#where-the-sources-disagree) ➡️
@@ -160,6 +191,8 @@ Navigation: ⬅️ [How it fails and how you know it worked](#how-it-fails-and-h
 | the top 10% of the two maps overlap by 0.506 to 0.814 under the product and 0.225 to 0.394 under "a cat and a dog" | SDXL, 8 seeds, steps 2 to 40, median per step | ✍️ [the early-push report](../../../2-classifier-guidance/report/classifier-guided-poe/does-an-early-push-separate-the-cat-and-dog.md#which-kind-of-push-moves-the-animals) |
 | the leakage fix lifts GenEval position from 0.425 to 0.57 | FLUX.1-schnell validation | ✅ the paper's text, p. 8, in the ladder's saved copy |
 | a trained word-map head steers SDXL's product | not measured | open |
+
+The leakage fix in the table is training on a wrong relation word as well as the true one, taken apart as [relation leakage on the network view](02-the-network-view.md#training-on-the-right-and-the-wrong-word). ✅ Read on that page.
 
 ## Where the sources disagree
 

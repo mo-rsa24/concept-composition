@@ -49,11 +49,18 @@ The picture's own footer calls these rows "step 6 of 50" and "step 26 of 50", co
 - **Formula, in those words:** s(x) = ∇ log p(x), the direction of steepest rise of the log density, evaluated at every x on the plane.
 - **Consequence:** move from the top row to the bottom row and the right column darkens: the median share of the term rises from 0.07 to 0.76, because the green and the red fields stop agreeing.
 
+The ∇ in the formula is the gradient, the arrow of steepest rise, taught with worked examples on [the gradient card](../../../../../Obsidian/Mathematics/Calculus/Gradient.md#where-to-learn-this); the score itself is on [the score function card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Score%20Function.md#where-to-learn-this).
+
 🔤 **The name:** signal level
 - **signal**: the part of the canvas that carries the picture. On the toy, the 1 that marks a drawn digit.
 - **level**: how much of it is present. On the toy, the noised canvas is √ᾱ_t times the clean one plus √(1 − ᾱ_t) times fresh noise.
 - **Formula, in those words:** x_t = √ᾱ_t · x_clean + σ_t · noise.
 - **Consequence:** at step 5 (ᾱ 0.028) a drawn digit shows as √0.028 ≈ 0.17 under noise of size 0.99; at step 25 (ᾱ 0.52) it shows as 0.72 under noise of size 0.69, so the digit is readable and the layout can start to settle. ✅
+
+🔤 **The name:** cosine schedule
+- **schedule**: a timetable. Here, the signal level ᾱ set for each of the 50 steps.
+- **cosine**: the timetable is the square of a cosine, ᾱ = cos²(π/2 · u), with u running from 0.995 at step 0 down to 0 at step 49, so ᾱ climbs slowly, then steeply, then slowly again.
+- **Consequence:** set beside a straight line from the same start to 1, the cosine keeps the canvas noisier early and cleans it faster late: at step 5 it leaves 0.028 of the signal where the line leaves 0.102, at step 25 the two sit together at 0.52 and 0.51, and at step 40 the cosine is at 0.92 against the line's 0.82. The straight line is a reference drawn for this comparison; no run uses it. Toy numbers, computed this session from the toy's schedule. ✅
 
 ## Picture to equation
 
@@ -78,6 +85,11 @@ Navigation: ⬅️ [Picture to equation](#picture-to-equation) | 📋 [TOC](#tab
 <a href="../../../2-classifier-guidance/artifacts/scenes/product-of-experts-interaction-term/figures/level05-the-interaction-term-against-the-sampler-step.png"><img src="../../../2-classifier-guidance/artifacts/scenes/product-of-experts-interaction-term/figures/level05-the-interaction-term-against-the-sampler-step.png" width="200" alt="Orange curve of the term's size on a log scale rising from about 0.004 to a peak at step 46, green curve of how settled the joint's layout is rising from 0.5 to 1 and crossing 0.9 at step 29"></a>
 
 *Across: the sampler step, 0 the noisiest and 49 clean. Left axis, orange, log scale: |r_t| = σ_t |I_t|, the root mean square over 4000 canvases drawn from the joint's own noised pictures at that step. Right axis, green: the joint's belief in its likelier layout, averaged over the same canvases, from 0.5 (undecided) to 1 (decided). The grey band marks steps 0 to 9; the green dashed line is where the layout reaches 0.9; the orange dashed line is where |r_t| peaks.* ✅
+
+🔤 **The name:** root mean square
+- Read right to left: **square** each canvas's size of the term, take the **mean** of the squares, then the square **root** of that mean.
+- **On a three-canvas toy:** sizes 0.1, 0.2 and 0.5 give √((0.01 + 0.04 + 0.25) / 3) = 0.316, where the plain mean is 0.267.
+- **Consequence:** raise the largest size from 0.5 to 1.0 and the root mean square jumps to 0.592 while the plain mean reaches 0.433, so the orange curve's height follows the canvases where the term is large. Toy numbers, computed this session. ✅
 
 | Step | Signal level ᾱ | Size of the term, \|r_t\| | How settled the layout is |
 |---|---|---|---|

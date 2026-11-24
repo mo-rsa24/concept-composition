@@ -45,6 +45,13 @@ Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#t
 
 Neither expert ever draws two digits, which is the situation of the two real digit experts. ✅ The sampler is the project's: 50 steps, DDIM with eta 1, a cosine schedule. ✅
 
+A Gaussian of width 0.1 is a bell around each canvas a density can draw, whose log falls by d² / (2 × 0.1²) at distance d from it: by 0.5 at d = 0.1 and by 50 at d = 1, which is where the −50 in the table below comes from. ✅ The Gaussian in more than one number is taught on [the multivariate normal card](../../../../../Obsidian/Mathematics/Statistics/Distributions/Multivariate%20Normal%20Distribution/Multivariate%20Normal%20Distribution.md#where-to-learn-this).
+
+🔤 **The name:** DDIM with eta 1
+- **DDIM**, Denoising Diffusion Implicit Model: **denoising**, taking the speckle out; **diffusion**, the speckle was put in a little at a time, the way ink spreads through water; **implicit**, each step is a fixed rule from the current canvas and its clean guess, which needs no fresh randomness.
+- **eta**: the dial for how much fresh randomness each step adds back. At 0 it adds none, so one starting noise always ends on the same canvas; at 1 it adds the full amount DDPM, the sampler DDIM was built from, adds.
+- **Consequence:** on the toy's step from 25 to 26, eta 0 adds no fresh noise; eta 1 adds fresh noise of size 0.232 to each of the four numbers and lowers the weight on the noise prediction from 0.670 to 0.628, so two draws standing on the same canvas at step 25 can still end on different canvases. Toy numbers, computed this session from the toy's schedule. ✅ The step's equation is drawn on [the code page's sampler step](04-the-code.md#the-sampler-step), and DDIM is taught with textbook pages on [the DDIM card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Diffusion%20Models/DDIM.md#where-to-learn-this).
+
 🧸 **Toy:** the four densities above, 4000 draws from one fixed starting noise. Expected before running: the product rarely puts a 4 and a 7 in different cells, because neither expert has seen that canvas; the joint always does.
 
 ## What the product puts its mass on
@@ -62,6 +69,11 @@ Natural log of each density at the clean canvas, up to one shared constant. The 
 | 4 left and 7 right (two apart) | −50.7 | −50.7 | −50.7 | −50.7 | −0.7 |
 | 4 and 7 both in the left cell | −50.7 | −50.7 | −50.7 | −50.7 | −100.0 |
 | empty | −50.0 | −50.0 | −50.0 | −50.0 | −100.0 |
+
+🔤 **The name:** mass
+- **mass**: how much of something sits in one place. For a density, the share of all its draws that it sends to a region of canvases.
+- **On the table:** the gap between two log densities says how many times more mass one canvas gets than another. The product's log at the empty canvas, −50.0, sits 0.7 above its log at the two-apart canvas, −50.7, so the product sends e^0.7 ≈ 2.01 times as much mass to the empty canvas as to the one we want.
+- **Consequence:** read the same two rows under the joint and the order flips: two apart at −0.7 and empty at −100.0, a gap of 99.3, so the joint favours two apart by a factor of about 10^43. ✅
 
 🔤 **The name:** tails
 - **tail**: the thin end of something, far from its body. For a density, the region far from where it puts its mass.

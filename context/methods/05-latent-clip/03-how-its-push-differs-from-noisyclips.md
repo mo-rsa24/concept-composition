@@ -102,6 +102,29 @@ Navigation: ⬅️ [The names, taken apart](#the-names-taken-apart) | 📋 [TOC]
 > [!NOTE]
 > W3's code chooses the clamp only for NoisyCLIP and records "Latent CLIP reads the latent directly" when Latent CLIP is chosen. ✅ `stage_clamp` in `w3_steer.py`, lines 189 to 190. The soft clamp is `soft_clamp`, lines 100 to 102, at β = 0.05.
 
+🔤 **The name:** soft clamp
+- **clamp**: cut a value off at a limit, here a colour at 0 and at 255.
+- **soft**: with the corners rounded, so a value near or past a limit is bent toward it instead of cut flat, and some slope always gets through.
+- **Formula, in those words:** start from the value, take off a smooth "how far past 255" and add back a smooth "how far below 0". The smooth version of max(z, 0) is softplus, log(1 + e^z). ✅ `soft_clamp`, `w3_steer.py` lines 100 to 102.
+
+$$
+\textcolor{#1d6b3a}{\underbrace{\text{soft}(v)}_{\text{the clamped colour}}}
+= \textcolor{#1f5fd0}{\underbrace{v}_{\text{the colour}}}
+- \textcolor{#6b7a88}{\underbrace{\tfrac{1}{\beta}\,\mathrm{softplus}\big(\beta\,(v-255)\big)}_{\text{how far past 255, smoothed}}}
++ \textcolor{#6b7a88}{\underbrace{\tfrac{1}{\beta}\,\mathrm{softplus}(-\beta\,v)}_{\text{how far below 0, smoothed}}}
+$$
+
+| The colour v | Hard clamp | Soft clamp at β = 0.05 | Slope passed back, hard | Slope passed back, soft |
+|---|---|---|---|---|
+| −50 | 0 | 1.58 | 0 | 0.076 |
+| 128 | 128 | 128.00 | 1 | 0.997 |
+| 255 | 255 | 241.14 | none, a corner | 0.5 |
+| 300 | 255 | 253.00 | 0 | 0.095 |
+
+✅ Computed this session from the formula; the colour values are the toy's.
+
+- **Consequence:** at a colour of 300 the hard clamp passes a slope of 0, so no push reaches the latent values behind it, and the soft clamp passes 0.095. The price is that colours near a limit move: 255 comes out as 241.14. Raise β from 0.05 to 0.5 and the soft clamp moves closer to the hard one: 255 comes out as 253.61, and the slope at 300 falls to about 1.7 × 10⁻¹⁰. ✅ Computed.
+
 ## Beside how its authors used the gradient
 
 Navigation: ⬅️ [Beside NoisyCLIP's road](#beside-noisyclips-road) | 📋 [TOC](#table-of-contents) | [Next](#how-it-fails-and-how-you-would-know-it-worked) ➡️
@@ -115,9 +138,23 @@ Navigation: ⬅️ [Beside NoisyCLIP's road](#beside-noisyclips-road) | 📋 [TO
 | what the gradient changes | the starting noise | the noise prediction at that step |
 | how many times | 50 gradient steps of SGD at learning rate 5.0, momentum 0.9, gradient length clipped to 0.1 | once per pushed step, at a fixed length |
 | what it steers toward | the prompt (a CLIPScore reward), human preference, or away from a negative sentence | the right sentence over the highest wrong one |
-| result | GenEval two-object 0.66 to 0.82 and counting 0.45 to 0.60 for B/4-plus; spatial relation 0.24 to 0.24 | not run |
+| result | [GenEval two-object](../../../1-lora-correction/report/measuring-composition/what-each-scorer-says-about-two-objects.md#geneval-two-object) 0.66 to 0.82 and counting 0.45 to 0.60 for B/4-plus; spatial relation 0.24 to 0.24 | not run |
 
 The ReNO column is ✍️ the reading note's account of the paper (p. 3 to 7) and of its released code; the W3 column is ✅ read in `w3_steer.py` and the W3 design.
+
+**The ReNO "how many times" cell stacks four settings; here they are one at a time.** A **gradient step** moves the starting noise a little along the gradient of the reward. **SGD**, stochastic gradient descent, is the rule that takes those steps; it descends the negative reward, which raises the reward, and [the gradient descent card](../../../../../Obsidian/Artificial%20Intelligence/Machine%20Learning/Gradient%20Descent.md#where-to-learn-this) works it. **Clipped to 0.1** means a gradient longer than 0.1 is shrunk to length 0.1 before it is used. The **learning rate** 5.0 multiplies it into the step, so a clipped step is 5.0 × 0.1 = 0.5 long; [the learning rate card](../../../../../Obsidian/Artificial%20Intelligence/Machine%20Learning/Learning%20Rate.md#where-to-learn-this) shows what a larger or smaller one does. **Momentum** 0.9 adds 0.9 of the previous step to each new one, so steps in a steady direction grow.
+
+🧸 **Toy:** a gradient of length 1 pointing the same way at every step (illustrative). Expected before computing: clipping shrinks it to 0.1, and the steps then grow under momentum.
+
+| Step | Without momentum | With momentum 0.9 | Distance moved so far, with momentum |
+|---|---|---|---|
+| 1 | 0.5 | 0.5 | 0.5 |
+| 2 | 0.5 | 0.95 | 1.45 |
+| 3 | 0.5 | 1.355 | 2.805 |
+| 4 | 0.5 | 1.720 | 4.524 |
+| 5 | 0.5 | 2.048 | 6.572 |
+
+✅ Computed this session: momentum stored as the running sum v ← 0.9 v + g, the step 5.0 × v. After 5 steps the noise has moved 6.572 with momentum against 2.5 without, and a steady step tends to 0.5 / (1 − 0.9) = 5.0. Remove the clip and the first step is 5.0 × 1 = 5.0, ten times longer. The toy's gradient is invented; 5.0, 0.9 and 0.1 are ReNO's settings as the reading note gives them.
 
 🔤 **The name:** ReNO (reward-based noise optimisation)
 - **reward**: a score the method tries to raise, here Latent CLIP's similarity to the prompt.

@@ -4,6 +4,8 @@
 
 Latent CLIP is a CLIP model whose picture side reads SDXL's latent directly, the small 4-channel code SDXL draws in, so no decoder has to turn the latent into a picture first. Loop 9 proposed it as a second reader for the sentence-score push. The idea was to read the half-drawn latent, score it against a right and a wrong sentence, and subtract the gradient of the difference from the sampler's noise prediction. The push never ran. Loop 9's reading test found no step from 0 to 15 at which Latent CLIP (or any other sentence score) could tell the right sentence from the wrong one, and the owner stopped the push on that result. This folder explains the method as designed, what Loop 9 measured about it, and a second test Loop 9 ran on the same encoders: a linear probe that asks whether their vectors carry counting and prompt match at all. NoisyCLIP's own version of the push is explained in [the sentence-score push](../04-the-sentence-score-push/01-overview.md) and drawn in section 1 of [the sentence-score ladder](../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/README.md#1-noisyclips-sentence-score-push). What product-of-experts composition means is on [PoE composition](../../world/poe-composition.md#what-poe-composition-is).
 
+*Three words this paragraph leans on are taught elsewhere with pictures and worked numbers:* CLIP's two towers on [the CLIP card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Contrastive%20Image-Text%20Training.md#where-to-learn-this), the gradient on [the gradient card](../../../../../Obsidian/Mathematics/Calculus/Gradient.md#where-to-learn-this), and the noise prediction on [the product-of-experts overview](../01-the-product-of-experts/01-overview.md#words-this-page-uses).
+
 <a href="../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/overview/ov1-latent-clip-push.png"><img src="../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/overview/ov1-latent-clip-push.png" width="720" alt="Latent CLIP's push, left to right: a half-drawn cat and dog latent divided by 0.13025 and pooled to 4 by 64 by 64 with no RGB map and no clamp, Latent CLIP's vision encoder ViT-B/4-plus with 12 layers trained on clean latents only, its own frozen text encoder for a right and a wrong sentence, two dot products as right and wrong bars, the third score S right minus S wrong, and an orange push running back to the noise prediction; an inset opens the vision encoder from a 64 by 64 latent in 16 by 16 patches through 12 layers to one vector of 640 numbers"></a>
 
 *One proposed sampling step, read left to right in five columns. What goes in: two sentences (right, "a cat and a dog, two animals"; wrong, "one animal, part cat, part dog") and the half-drawn latent x_t, outlined blue. The grey box divides the latent by 0.13025 and pools it to 4 × 64 × 64, with "no RGB, no clamp" beneath. Latent CLIP: the grey text encoder ("its own, 12 layers, frozen") and the green vision encoder ("ViT-B/4-plus, 12 layers, clean latents only, no step input"). Embeddings: one strip per sentence and one for the picture. Compare: two dot products, drawn as a blue "right" bar and a grey "wrong" bar. Third score and push: S_right − S_wrong (green box), its gradient taken at x_t (orange), and the orange arrow back to the noise prediction ε̂. The box at the top right writes the step as ε̂ = ε_cat + ε_dog − ε_∅ − λ σ_t ∇_{x_t}(S_right − S_wrong), and says "the same push and CO3 join as NoisyCLIP; only the reader of x_t changes". The inset opens the vision encoder: a 64 × 64 latent cut into 16 × 16 patches, 12 layers, one vector of 640 numbers.* ✅ *Read on the picture at full size. The noise on the latent and both bar heights are illustrative, and no run of Loop 9 produced a number on it* ✍️ *([the overviews' card](../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/overview/README.md)). The equation's form, with a strength λ and the plain product, differs from the push Loop 9 wrote into code; see [where the sources disagree](#where-the-sources-disagree).*
@@ -28,6 +30,8 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#what-one-step-would-do) ➡
 **Half-drawn latent x_t**: the latent at sampler step t of 50, a block of 4 × 128 × 128 numbers that SDXL's decoder turns into a 1,024 × 1,024 picture once sampling ends. Step 0 is the noisiest and step 49 the last.
 
 **Sentence score S**: how close the picture's vector lands to one sentence's vector, as the cosine of two vectors of length 1, from −1 to 1.
+
+A cosine reads the angle between two arrows: 1 when they point the same way, 0.5 at 60°, 0 at right angles and −1 when they point opposite ways. ✅ Computed. [The cosine similarity card](../../../../../Obsidian/Mathematics/Linear%20Algebra/Cosine%20Similarity.md#where-to-learn-this) works it by hand on two short vectors.
 
 **Checker score D**: the right sentence's score minus the highest score among the wrong sentences. Positive means the right sentence won.
 
@@ -104,6 +108,26 @@ $$
 
 ε_g is CO3's guided prediction, ε_u + 0.8 (ε_c − ε_u), and ε_u its unconditional one. ✅ `w3_steer.py`, line 167.
 
+**The guided prediction starts at the no-prompt prediction and walks a set share of the way toward the prompt's.** ε_c is the joint prompt's prediction. ✍️ [The readout checker's push page](../02-the-readout-checker/03-the-push-and-its-cap.md#where-the-push-enters-the-sampler). The idea, guiding by the gap between a prompted and an unprompted prediction, is classifier-free guidance, worked on [the classifier-free guidance card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Diffusion%20Models/Classifier-Free%20Guidance.md#where-to-learn-this).
+
+$$
+\textcolor{#c0262d}{\underbrace{\varepsilon_g}_{\text{the guided prediction}}}
+= \textcolor{#c0262d}{\underbrace{\varepsilon_u}_{\text{no prompt}}}
++ \textcolor{#6b7a88}{\underbrace{0.8}_{\text{the guidance}}}\,
+\big(\textcolor{#c0262d}{\underbrace{\varepsilon_c}_{\text{the joint prompt}}} - \textcolor{#c0262d}{\varepsilon_u}\big)
+$$
+
+On one number, with the illustrative values ε_u = 1.0 and ε_c = 2.0 the readout checker's page also uses:
+
+| Move the guidance | ε_g | What it shows |
+|---|---|---|
+| 0 | 1.0 | the prompt is ignored |
+| 0.8, as CO3 runs | 1.8 | four fifths of the way from no prompt to the joint prompt |
+| 1 | 2.0 | exactly the joint prompt's prediction |
+| 2 | 3.0 | past the joint prompt, by as much again as the gap |
+
+✅ Computed this session; the values are the toy's, not a run's.
+
 A worked case. b = 0.4 and the 0.6 gate are the design's. The prediction length 100 and the gradient lengths are illustrative, because the push never ran and no run recorded them.
 
 | Move | ‖∇D‖ | b | ‖ε_g‖ | Push length | What it shows |
@@ -112,6 +136,19 @@ A worked case. b = 0.4 and the 0.6 gate are the design's. The prediction length 
 | the gradient ten times longer | 0.2 | 0.4 | 100 | 40 | only the gradient's direction is used, so how sure Latent CLIP is never changes the length |
 | b doubled | 0.02 | 0.8 | 100 | 80 | the length follows b alone, which is why W3 had no strength to tune |
 | a step outside the gate | any | 0.4 | 100 | 0 | a step whose reading on W2's threshold half was under 0.6 gets no push |
+
+🔤 **The name:** threshold half and reading half
+- **threshold**: the line a value has to cross to count as a yes, here the cut-off on D above which a picture is called "two separate animals".
+- **half**: W2 splits the seeds in two. On the **threshold half** it chooses each step's cut-off and which steps pass the 0.6 gate; on the **reading half** it applies those choices once and reads the score.
+- **Formula, in those words:** a step's score is the balanced accuracy on the reading half, with the cut-off chosen on the threshold half.
+- **Consequence:** read Latent CLIP's 7 gated counting steps on the half that chose them and they score a mean of 0.622; read them on the other half and the mean falls to 0.538.
+
+| Step | 3 | 4 | 5 | 6 | 10 | 11 | 12 | Mean |
+|---|---|---|---|---|---|---|---|---|
+| threshold half | 0.623 | 0.600 | 0.601 | 0.615 | 0.605 | 0.680 | 0.633 | 0.622 |
+| reading half | 0.579 | 0.473 | 0.519 | 0.444 | 0.673 | 0.540 | 0.538 | 0.538 |
+
+✅ Computed from `balanced_accuracy_threshold_half` and `balanced_accuracy_reading_half` under `counting.latent_clip` in the [W2 result file](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/result.json); each cell is that step's balanced accuracy.
 
 > [!NOTE]
 > Subtracting the push lowers both predictions by the same p_t, so the step's guided direction ε_c − ε_u is unchanged and the whole prediction shifts toward where D rises. 🔍 This follows from the two subtractions above; [the readout checker's push page](../02-the-readout-checker/03-the-push-and-its-cap.md#where-the-push-enters-the-sampler) shows the same place in `co3_push.py`.
@@ -125,6 +162,8 @@ Navigation: ⬅️ [The push, by what moves](#the-push-by-what-moves) | 📋 [TO
 <a href="../../../artifacts/notes/progress/noise-text-critic/who-reads-early.png"><img src="../../../artifacts/notes/progress/noise-text-critic/who-reads-early.png" width="200" alt="Balanced accuracy against sampler step 0 to 20 on 195 real cat and dog runs: a small trained reader on SDXL's own features climbs from 0.50 to 0.87 and crosses the dashed 0.75 bar at step 11, while the Latent CLIP, NoisyCLIP and frozen CLIP sentence scores stay between about 0.42 and 0.63"></a>
 
 *Up: balanced accuracy for telling a clean cat and dog from a failed picture, from 0.35 to 1.0, where 0.5 is chance. Across: the sampler step from 0 (pure noise) to 20 of SDXL's 50; steps 0 to 15, where a push would act, are shaded. One line per reader: SDXL's own features read by a small trained reader (green, the readout checker), Latent CLIP's sentence score (purple), NoisyCLIP's (blue) and frozen CLIP's (grey). Dashed red: the 0.75 bar. Dotted: chance. Footer: 195 held-out cat and dog runs, 105 clean, cut-off set on half the seeds and read on the other half, W&B `etbecql0`. Latent CLIP's line stays between 0.53 and 0.63; the green line crosses the bar at step 11.* ✅ *Read on the picture at full size. These are measured, on the sampler's real states.*
+
+Balanced accuracy is the share of clean pictures called clean and the share of failed pictures called failed, averaged, so a reader that guesses or says the same thing every time scores 0.5. It is taken apart on a worked count on [the linear probe page](04-the-linear-probe-on-frozen-vectors.md#the-names-taken-apart).
 
 **It would have worked** if, on W3's 12 tuning pairs, CO3 with the push drew more faithful pairs than CO3 alone and than a random push of the same length. ✍️ [The W3 design](../../../artifacts/notes/progress/noise-text-critic/03-does-it-steer/design.md). That comparison was never rendered.
 

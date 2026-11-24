@@ -105,12 +105,56 @@ Navigation: ⬅️ [From pictures to a category's number](#from-pictures-to-a-ca
 
 **Three rules decide which number is the bar.** A number counts only when the run matches the rival's protocol. A number the papers dispute cannot set a target: ToMe quotes CoMat's Color score as 0.7774, CoMat's own page prints 0.7827, and the target uses CoMat's own page. A win must beat the best finished rerun by more than 1.96 standard errors of the matched difference, same prompt and seed for both methods, with prompts resampled. ✍️ the protocol, lines 18, 58 to 62 and 87 to 89.
 
+🔤 **The name:** 1.96 standard errors of the matched difference, with prompts resampled
+
+The last rule stacks four terms, so here they are one at a time on an ordinary toy: two coffee machines, A and B, each brewing the same five coffees, scored 0 to 1 by a taster. The scores are invented; every other number below is ✅ computed this session by a short script.
+
+| Coffee | Machine A | Machine B | Gap, B minus A |
+|---|---|---|---|
+| 1 | 0.90 | 0.95 | 0.05 |
+| 2 | 0.30 | 0.36 | 0.06 |
+| 3 | 0.75 | 0.80 | 0.05 |
+| 4 | 0.10 | 0.18 | 0.08 |
+| 5 | 0.60 | 0.66 | 0.06 |
+| mean | 0.53 | 0.59 | 0.06 |
+
+- **matched**: each coffee is scored on both machines, as each prompt and seed is rendered by both methods. The coffees differ a lot, and B beats A on every one, by the gaps in the last column.
+- **difference**: the gap is taken coffee by coffee first, the last column, so how hard each coffee is cancels out of it.
+- **resampled**: draw five coffees from the five, any one each time, so some repeat and some are missed. One such draw is coffees 4, 4, 1, 3 and 5, whose mean gap is 0.064. Do it 10,000 times and you have 10,000 mean gaps.
+- **standard error**: the spread of those 10,000 mean gaps, how far the mean gap would move with another set of coffees. Here it is 0.0049.
+- **1.96**: on a bell curve, 95% of draws land within 1.96 spreads of the middle, so a gap more than 1.96 standard errors from 0 would turn up by luck about 1 time in 20 if the machines were equal.
+
+$$
+\textcolor{#c0262d}{\underbrace{\bar d}_{\text{mean gap}}} \;>\; 1.96 \times \underbrace{\mathrm{SE}}_{\text{spread of the resampled mean gaps}},
+\qquad
+\mathrm{SE} \approx \frac{\textcolor{#1f5fd0}{\underbrace{\mathrm{sd}(d_1,\dots,d_n)}_{\text{how much the gaps differ}}}}{\underbrace{\sqrt{n}}_{\text{root of the prompt count}}}
+$$
+
+| The same five coffees | Standard error of the gap | 1.96 of them | Is 0.06 a win? |
+|---|---|---|---|
+| matched: resample coffees, keep each coffee's two scores together | 0.0049 | 0.0096 | yes, 0.06 is six times the margin |
+| unmatched: resample A's coffees and B's coffees separately | 0.1838 | 0.3603 | no, 0.06 is well inside the margin |
+
+**The moves.** Matching leaves both means where they were and shrinks the margin, because the coffees' own spread no longer enters. The formula on the right says what else moves it:
+
+| Move | Standard error of the gap |
+|---|---|
+| matched, as in the table (formula, which divides by n − 1) | 0.0055 |
+| gaps twice as uneven: 0.04, 0.06, 0.04, 0.10, 0.06 | 0.011, doubled |
+| four times as many coffees with the same gaps | 0.0027, halved |
+
+The resampling gives 0.0049 where the formula gives 0.0055 on five coffees; with 288 prompts the two agree closely. Taught with worked examples on [the bootstrap card](../../../../../Obsidian/Mathematics/Statistics/Bootstrap.md#where-to-learn-this) and [the paired difference card](../../../../../Obsidian/Mathematics/Statistics/Paired%20Difference.md#where-to-learn-this).
+
+> 🖼️ **Diagram wanted**: the coffee toy's 10,000 resampled mean gaps as two histograms on one shared x axis (mean gap, B minus A, from −0.5 to 0.6): matched in blue #1f5fd0, a narrow spike at 0.06 with standard error 0.0049, and unmatched in grey, a wide hump with standard error 0.1838; a red #c0262d marker at the mean gap 0.06 and a shaded band of ±1.96 standard errors around 0 for each, 0.0096 matched and 0.3603 unmatched, so the eye sees 0.06 outside one band and inside the other. Data: the five coffees in the table above, resampled with random seed 0.
+
 🔤 **The name:** one step past
 
 - **step**: the smallest move the table is read in; 0.01 for a score printed between 0 and 1. On the flow picture, "best rival moved one step".
 - **past**: on the better side, here higher.
 - **Formula, in those words:** target = printed number + 0.01.
 - **Consequence:** a step of 0.01 sits well inside a rerun's noise. On Color's two-subject prompts, CoMat's gain over plain SDXL carries a standard error of 0.0212, so 1.96 standard errors of a difference that size is 1.96 × 0.0212 = 0.0416, four times the step ✍️ [the CoMat review](../../../artifacts/notes/progress/reproductions/CoMat/review.md), line 44; ✅ arithmetic. The fairness audit makes the same point with the Complex margin of about 0.03 ✍️ [the fairness audit](../../../artifacts/notes/progress/targets/fairness-audit.md#the-16-judging-rules). That is why the win is read against the rerun's margin and the printed bar is reported beside it as reached or not.
+
+Where a smaller number wins, "past" means lower. The flow picture's example is FID, a distance between a method's pictures and real photos where smaller is closer: 25 becomes 24 ✅ read on the picture, and the protocol's own example is 4.11 becoming 3.11 ✍️ [the comparison protocol](../../../artifacts/notes/progress/targets/comparison-protocol.md#words-this-uses), line 9.
 
 ## What the number can and cannot tell you
 

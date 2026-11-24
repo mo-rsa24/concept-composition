@@ -2,7 +2,7 @@
 
 ⬅️ Previous: [the network view](02-the-network-view.md) | 📋 [The pages of this method](01-overview.md#the-pages-of-this-method) | Next: [the code](04-the-code.md) ➡️
 
-This page shrinks the whole push until every number fits on paper: a latent of 2 pixels with 4 channels each, NoisyCLIP's real colour map, a hand-set 2 × 6 layer standing in for the 24-block vision encoder, and two hand-set sentence vectors. It runs the forward pass, the gradient back, the push and one sampler step, breaks the push four ways, trains the layer one step, and then works the toy behind the text-only word check. Its weights were never trained on data, so a number here shows what a part computes and says nothing about whether NoisyCLIP reads or steers a real picture. Everything here comes from [the ladder's miniature](../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/2-miniature/README.md) and its two answer keys.
+This page shrinks the whole push until every number fits on paper: a latent of 2 pixels with 4 channels each, NoisyCLIP's real colour map, a hand-set 2 × 6 layer standing in for the 24-block vision encoder, and two hand-set sentence vectors. It runs the forward pass, the gradient back, the push and one sampler step, breaks the push four ways, trains the layer one step, and then works the toy behind the [text-only word check](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md#text-only-word-check). Its weights were never trained on data, so a number here shows what a part computes and says nothing about whether NoisyCLIP reads or steers a real picture. Everything here comes from [the ladder's miniature](../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/2-miniature/README.md) and its two answer keys.
 
 <a href="../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/2-miniature/mm0-the-whole-miniature.png"><img src="../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/2-miniature/mm0-the-whole-miniature.png" width="720" alt="The whole method on 2 pixels: eight latent circles for pixel A and pixel B feed six colour circles, with pixel B's red grey at 255; two image-layer circles 0.6373 and 0.7941, two unit-length circles 0.6259 and 0.7799, a blue S right box 0.9687 for sentence vector 0.8, 0.6, a grey S wrong box 0.9995 for 0.6, 0.8, and S right minus S wrong minus 0.0308, with an orange backward lane to the latent"></a>
 
@@ -143,6 +143,12 @@ x_{\text{next}} = \underbrace{0.8}_{\text{next signal}}\ \frac{x_t - \underbrace
 \quad\Rightarrow\quad \text{coefficient on } \hat\epsilon_t = 0.6 - \frac{0.8 \times 0.8}{0.6} = -0.4667
 $$
 
+🔤 **The name:** DDIM, denoising diffusion implicit model
+- **denoising**: taking noise out. **diffusion**: noise spreading into a picture tick by tick during training, which the sampler runs backwards. On the picture, the "DDIM step" box at the lower left.
+- **implicit**: the DDIM paper's word for a model whose samples are a fixed function of the starting noise, with no fresh noise drawn on the way. In the step above, ε̂ is used twice: once to guess the clean latent, and once to put back the noise the next level should hold.
+- **Formula, in those words:** guess the clean latent as (x_t − 0.8 ε̂) / 0.6, scale it by the next signal 0.8, and add the next noise level 0.6 times the same ε̂.
+- **Consequence:** on pixel A's z₀ (x_t = 1, ε̂ = 0.468) the clean guess is 1.0427 and the next value 1.1149, the same on every run. Make the step draw fresh noise instead (the paper's setting η = 1): a new random number times 0.4961 joins, the reused ε̂ keeps a weight of only 0.3375, and the value becomes 0.9921 plus the draw, 1.4882 for a draw of +1 and 0.4960 for −1. The coefficient on ε̂ moves from −0.4667 to −0.7292, so the same push would move the next latent 0.7292 times its size instead of 0.4667. ✅ Computed this session from the step's four settings. [The DDIM card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Diffusion%20Models/DDIM.md#where-to-learn-this) holds its textbook pages.
+
 | λ | push length | D after the step |
 |---|---|---|
 | 0 | 0 | −0.0984 |
@@ -236,6 +242,13 @@ PYTHONDONTWRITEBYTECODE=1 python3 word_check_toy.py
 ```
 
 The first prints the colours, h, I, both scores, D = −0.0308, g and the two checks (hand against automatic differentiation 2.8e-17, finite differences 1.4e-10, both in the key); the second stops if the pure sum of word slots does not cancel (`word_check_toy.py`, line 44). Different numbers mean a weight, a sentence vector or the step settings changed.
+
+**The checks, one at a time.** The sentences above name four ways of getting g, and each is one idea.
+
+- The hand chain rule is the four-link product worked [above](#the-gradient-back-to-the-latent), written out by hand in the script.
+- Automatic differentiation is PyTorch recording every step of the forward pass and multiplying the links back on its own, the `torch.autograd.grad` call in [the code page's words](04-the-code.md#words-this-page-uses).
+- Finite differences use no calculus: nudge one latent number up and down a little and divide the change in D by the size of the nudge. Nudge pixel A's z₁ up by 0.001 and D goes to −0.030927, down by 0.001 and it goes to −0.030697; the change of −0.000230 over 0.002 is a slope of −0.1149, the chain rule's number. The same nudge on pixel B's z₀ gives −0.0407. ✅ Computed this session with a fresh copy of the toy's forward pass.
+- The classifier identity is the equation in [why this is a classifier's gradient](#why-this-is-a-classifiers-gradient).
 
 > [!WARNING]
 > Both scripts rewrite their answer keys inside the ladder folder (`miniature.py` line 170, `word_check_toy.py` line 60). Run them on a copy of the folder, or expect changed files in `git status`. They were not re-run for these pages; the numbers were read from the keys as they stand.

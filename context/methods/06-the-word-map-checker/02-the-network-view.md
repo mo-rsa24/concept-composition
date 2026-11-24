@@ -57,6 +57,14 @@ Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#t
 
 ✅ Read on wm1; the per-grid counts match `word_maps.sdxl` in [the ladder's numbers file](../../../2-classifier-guidance/artifacts/scenes/word-map-checker/numbers/numbers.json).
 
+🔤 **The name:** query, key and value
+- **query**: a question. Each patch of the latent sends one, a list of numbers made from what is drawn at that patch.
+- **key**: the label on a drawer. Each of the 77 word vectors carries one, and a query scores high against a key it matches.
+- **value**: what is in the drawer. Each word vector also carries one, and the patch takes back a mix of the values.
+- **On the picture:** the left figure's arrows. The patch is the query, the 77 word vectors hold the keys and values, and the arrow thicknesses are the weights.
+- **Formula, in those words:** a patch's score with word i is its query times word i's key; the softmax turns the 77 scores into weights adding to 1; the patch takes back that weighted mix of the values. A word map is one word's weight at every patch, so it is made from queries and keys alone.
+- **Consequence:** on the miniature a patch's query is its cat-ness, "cat" has key k and the background token key 0. At cat-ness 2, key 2 gives "cat" a share of 0.9820, key 1 gives 0.8808, and key 0 gives 0.5, an even split with the background. Changing the values changes what the patch takes back and leaves every map as it was. ✅ The shares computed this session; the last sentence follows from the formula. Textbook pages and videos are on [the cross-attention card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Cross-Attention.md#where-to-learn-this).
+
 ## From one layer to a word's stack
 
 Navigation: ⬅️ [Three inputs, and where the maps are read](#three-inputs-and-where-the-maps-are-read) | 📋 [TOC](#table-of-contents) | [Next](#the-head-reads-the-two-stacks) ➡️
@@ -104,6 +112,17 @@ Navigation: ⬅️ [From one layer to a word's stack](#from-one-layer-to-a-words
 
 *Top two rows, the aggregator, run once per word with shared weights: 1,300 maps of 16 × 16 (SDXL, our proposal) each become one token of 256 numbers; a transformer of 2 layers and 2 heads mixes them, with the step vector added at every layer; a learned query (one attention layer, 2 heads) pools the 1,300 tokens to 1; a linear layer reshapes it to one 16 × 16 map, red for "cat", blue for "dog". Bottom row, the classifier: the pair is stacked (2 × 16 × 16), flattened to 512, projected to 256, passed through a 2-layer, 4-head transformer that sees a single token, joined with a 16-number step vector (256 + 16), and an MLP (256 → 128 → 5) gives logits for above, below, left, right and neutral. Trained weights: 1,964,581 on the authors' SD settings, 4,860,965 on their FLUX.1-dev settings.* ✅ *Read on the figure at full size; the counts match the numbers file.*
 
+**The head's sentence, one term at a time, on the miniature.** The bold line above stacks five words that each hide a picture, so here they are one by one before the sentence is read again. ✅ The miniature's values computed this session.
+
+- **Aggregator**: to aggregate is to gather many into one total. The aggregator gathers a word's stack of maps into one map.
+- **Token**: here a map, flattened to a list of numbers and treated as one item for a transformer to read. It is the same word as a piece of the prompt, borrowed because a transformer reads any list of items the way it reads words.
+- **Pools**: puts many into one shared pool. On the miniature the cat's two layer maps are pooled at 3/4 and 1/4, so the top-left cell becomes 0.75 × 0.4459 + 0.25 × 0.3830 = 0.4302, and the pooled cat map is (0.4302, 0.4302, 0.0698, 0.0698).
+- **Flattened**: laid out in one row. The pooled cat map and the pooled dog map, two 2 × 2 grids, become one row of 8 numbers, (0.4302, 0.4302, 0.0698, 0.0698, 0.4302, 0.4302, 0.0698, 0.0698); on SDXL two 16 × 16 maps become 512.
+- **Joined with a step vector**: a short list of numbers saying which step bucket this is is added to the end of the row, 256 + 16 = 272 numbers on the authors' head. The miniature has no step vector; its scale κ stands in for it.
+- **Read into five logits**: one score per class, above, below, left of, right of and neutral. On the miniature's fused body all five are 0.
+
+Read whole again: one shared network pools each word's stack into a single 16 × 16 map; the pair is then flattened into one vector, joined with a step vector, and read into five logits. The transformer and the MLP (a few layers of weighted sums with a bend between them) are on [the transformer card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Transformer.md#where-to-learn-this) and [the multilayer perceptron card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Multilayer%20Perceptron.md#where-to-learn-this).
+
 | Part | SD 2.1 settings | FLUX.1-dev settings | Trained weights, SD 2.1 settings |
 |---|---|---|---|
 | aggregator: transformer layers, attention heads, pooling heads | 2, 2, 2 | 4, 4, 4 | 1,068,032 |
@@ -138,6 +157,12 @@ Navigation: ⬅️ [The head reads the two stacks](#the-head-reads-the-two-stack
 <a href="../../../2-classifier-guidance/artifacts/scenes/word-map-checker/0.5-network-view/wm4-training-on-the-right-and-wrong-word.png"><img src="../../../2-classifier-guidance/artifacts/scenes/word-map-checker/0.5-network-view/wm4-training-on-the-right-and-wrong-word.png" width="200" alt="A training picture of a dog left of a cat goes two ways: the right caption a dog to the left of a cat and the wrong caption a dog above a cat; each is inverted and its word maps read, and both are labelled left of before the head's cross-entropy against the picture"></a>
 
 *One training picture (blue), a dog left of a cat, goes up to the right caption "a dog to the left of a cat" and down to the wrong caption "a dog above a cat". Each is inverted and its word maps read (grey), and both get the label "left of" (red) before the head's cross-entropy (green). Footer: with the wrong caption added, GenEval position (the fraction of images with the right relation, 0 to 1) rose from 0.425 to 0.57 on FLUX.1-schnell's validation set, and the paper reports no direct measure of leakage after the fix.* ✅
+
+🔤 **The name:** cross-entropy
+- **entropy**: surprise, how unexpected an outcome is. **cross**: the surprise is measured with the head's chances against the label's answer, two different sources crossed.
+- **On the picture:** the green box between the label "left of" and the head.
+- **Formula, in those words:** with one true class, the loss is minus the log of the chance the head gave the true class, −log p̂[true]. It is the same quantity as the loss L_t in the update further down this page.
+- **Consequence:** on the miniature's fused body the head gives "left of" 0.2, and the loss is −log 0.2 = 1.6094. After one of Learn-to-Steer's updates the head gives 0.7961, and the loss falls to 0.2280. A head that gave the true class only 0.05 would pay 2.9957, so a confident wrong answer costs much more than an unsure one. ✅ Computed this session. Textbook pages are on [the cross-entropy card](../../../../../Obsidian/Mathematics/Statistics/Information%20Theory/Cross-Entropy.md#where-to-learn-this).
 
 🔤 **The name:** relation leakage
 - **relation**: the spatial word in the caption, here "above" or "left of".
@@ -185,6 +210,14 @@ Navigation: ⬅️ [Two ways the gradient enters](#two-ways-the-gradient-enters)
 
 *Left panel, one joint prompt "a cat to the left of a dog": the cat map (red) and the dog map (blue) sit apart, because both words share one softmax at each patch, so where one wins the other loses. Right panel, our product, "a cat" and "a dog", one U-Net pass each: both maps sit in the middle, because each word has a softmax to itself and nothing stops both filling one body. The heat maps are drawn. Bottom: the overlap of the top 10% of the cat and dog maps (intersection over union; 1 means the same places), median over 8 seeds at each of steps 2 to 40: 0.506 to 0.814 for the product, 0.225 to 0.394 for the joint prompt. These were measured on SDXL with "a cat and a dog" as the joint prompt, not the panel's "a cat to the left of a dog".* ✅ *Read on the figure at full size; the medians* ✍️ *the early-push report, which computed them from its `overlap.json`.*
 
+🔤 **The name:** the overlap of the top 10%, intersection over union
+- **top 10%**: the brightest tenth of a map's patches, where the word is read most. **intersection**: the patches in both words' top tenth. **union**: the patches in either.
+- **On a toy:** two maps of 100 patches each, so each word's top 10% is 10 patches. Draw the cat's 10 as one circle and the dog's 10 as another; the overlap is the patches both share.
+- **Formula, in those words:** shared patches over patches in either, so 6 shared gives 6 / (10 + 10 − 6) = 6/14 = 0.4286.
+- **Consequence:** share 8 patches and it rises to 8/12 = 0.6667; share all 10 and it is 1, the same places; share none and it is 0. The figure's 0.506 to 0.814 for the product and 0.225 to 0.394 for the joint prompt are this same share, measured on SDXL's maps. ✅ The toy computed this session; its counts are invented.
+
+> 🖼️ **Diagram wanted**: two overlapping circles, the cat's top 10 patches in red (#c0262d) and the dog's top 10 in blue (#1f5fd0), the 6 shared patches in the overlap in purple, with "intersection 6", "union 14" and "6 / 14 = 0.4286" on the circles; a second pair beside it with 8 shared and 8 / 12 = 0.6667. Toy counts from this section.
+
 🔤 **The name:** two prompts that never compete
 - **compete**: share one fixed total, so one's gain is the other's loss. Each patch's weights over the tokens of one prompt add to 1.
 - **On the picture:** left panel, the two words in one prompt; right panel, each word in its own.
@@ -214,6 +247,7 @@ Navigation: ⬅️ [Where this came from](#where-this-came-from) | 📋 [TOC](#t
 | The network view's own reading order, with the journey figures it reuses | [the ladder's network view](../../../2-classifier-guidance/artifacts/scenes/word-map-checker/0.5-network-view/README.md) |
 | Softmax, the dot product, bilinear resizing, renormalising and the learned query, each linked to the page that teaches it | [the ladder's rebuild companion, sections 1 to 3](../../../2-classifier-guidance/artifacts/scenes/word-map-checker/rebuild-from-fundamentals.md#1-the-cross-attention-softmax) |
 | The symbols, beside the ones the paper prints | [the ladder's notation](../../../2-classifier-guidance/artifacts/scenes/word-map-checker/NOTATION.md) |
+| Softmax, logits and cross-entropy, with textbook pages and videos | [the softmax card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Softmax.md#where-to-learn-this), [the logit card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Logit.md#where-to-learn-this) and [the cross-entropy card](../../../../../Obsidian/Mathematics/Statistics/Information%20Theory/Cross-Entropy.md#where-to-learn-this) |
 
 ⬅️ Previous: [one sampler step](01-overview.md) | 📋 [The pages of this method](01-overview.md#the-pages-of-this-method) | Next: [the illustrations](03-the-illustrations.md) ➡️
 

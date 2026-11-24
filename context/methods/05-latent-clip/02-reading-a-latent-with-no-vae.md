@@ -25,6 +25,8 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#the-path-stage-by-stage) �
 
 **VAE**: the variational autoencoder SDXL uses at both ends. Its encoder squeezes a 1,024 × 1,024 picture into a 4 × 128 × 128 latent, and its decoder turns a latent back into a picture. "No VAE" means the latent is read as it stands, never decoded.
 
+The encoder, the decoder and the squeeze between them are drawn and worked on [the VAE card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Variational%20Autoencoders/Variational%20Autoencoders.md#where-to-learn-this).
+
 **Scaling factor 0.13025**: the number SDXL multiplies the VAE's latent by before sampling, so the sampler works on values of a convenient size. The sampler's x_t is on that scaled footing.
 
 **Patch**: a small square cut from the input; a vision transformer reads one patch as one token.
@@ -47,6 +49,14 @@ Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#t
 | cut into patches of 4 × 4 | 16 × 16 = 256 patches of 4 × 4 × 4 = 64 numbers | each patch becomes one token of 768 numbers | ✅ config: `patch_size` 4, `width` 768; `numbers.json`: `patches` 256 |
 | 12 transformer layers | 256 tokens and one summary token, 768 each | the tokens read each other | ✅ config: `layers` 12; ✍️ the position table holds 257 entries, per the reading note, line 111 |
 | project and normalise | 640 | one vector, set to length 1 | ✅ config: `embed_dim` 640; `encode_image(..., normalize=True)`, `common.py` line 170 |
+
+🔤 **The name:** summary token and position table
+- **summary token**: one extra token put in front of the 256 patch tokens. It is the same for every picture when it goes in; the 12 layers let it read every patch, and its row is what comes out as the picture's vector. On the overview's inset, the step from the 16 × 16 grid to the one vector of 640 numbers.
+- **position**: where a token sits in the sequence, first, second and so on. **table**: one stored row per place. The position table holds one learned row per place, which is added to the token in that place, so the layers can tell the top-left patch from the bottom-right one.
+- **Formula, in those words:** rows needed = patches + 1 summary token = 256 + 1 = 257, the 257 entries the table above quotes.
+- **Consequence:** change what goes in and the rows needed change while the table stays at 257. A 64 × 64 latent cut into 4 × 4 patches needs 16 × 16 + 1 = 257 rows, a fit. The unpooled 128 × 128 latent needs 32 × 32 + 1 = 1,025, which is why the pooling below exists. The B/8 model on a 64 × 64 latent needs 8 × 8 + 1 = 65. ✅ Computed from the sizes.
+
+The CLIP code walk draws the same two steps on CLIP's own picture side in [a class row in front, a position row added](https://claude.ai/artifact/4yYMLJMJZUdLM2vKzrjMn6#cls_pos), and [the vision transformer card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Vision%20Transformer.md#where-to-learn-this) lists where patches and the summary token are taught.
 
 The model is the authors' library at commit `716e61a`, copied under the loop's `vendor/` folder, with the B/4-plus checkpoint `epoch_34.pt` loaded in safe mode with a strict key match. ✅ `common.py`, lines 27 to 30 and 128 to 161.
 

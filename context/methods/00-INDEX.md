@@ -2,6 +2,13 @@
 
 Each folder here explains one method the loops use, from the whole system down to its parts: an overview page first, then one page per part, in the order of that method's zoom ladder under `2-classifier-guidance/artifacts/scenes/`. What the project's own words mean (product-of-experts composition, the interaction term, a [compose rate](../world/compose-rate.md)) stays on the world pages listed in [the context index](../00-INDEX.md#the-themes). A method page links those for the meaning and adds what they do not carry: the ladder's pictures, a small worked example with real numbers, and the code.
 
+The two project words have their own pages: product-of-experts composition is on [PoE composition](../world/poe-composition.md#what-poe-composition-is), and the interaction term is on [the interaction term page](../world/interaction-term.md#what-the-interaction-term-is).
+
+🔤 **The name:** zoom ladder
+- **zoom**: moving a camera in so that one part fills the frame. Here each page shows one part of the page before it at a larger size: one sampler step of the whole system, then one network, then a miniature small enough to work by hand, then the lines of code.
+- **ladder**: rungs climbed one at a time, in order. Each rung is one zoom level, from the whole system down to the code, and the method's scene folder numbers the rungs in that order, as the rungs table in [the NoisyCLIP ladder's README](../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/README.md#the-rungs) lists them.
+- **Consequence:** a rung with nothing drawn gets no page, so a folder's page count says which rungs exist. Folder 06 drew its illustrations rung and holds five pages; folder 01 drew no rung 1 and holds four. ✅
+
 ## Table of contents
 
 - [The methods, in reading order](#the-methods-in-reading-order)

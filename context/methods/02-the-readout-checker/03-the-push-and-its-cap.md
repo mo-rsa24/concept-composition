@@ -6,7 +6,7 @@ This page follows the checker's three outputs to the sampler: what the push is t
 
 <a href="../../../artifacts/notes/progress/method-search/01-beat-the-baseline/what-the-push-follows.png"><img src="../../../artifacts/notes/progress/method-search/01-beat-the-baseline/what-the-push-follows.png" width="720" alt="Flow from a noisy latent and the joint prompt a puma and a condor through the frozen SDXL U-Net and one small checker head to three outputs, clean pair and first and second subject present, summed into one push that enters CO3's next step"></a>
 
-*Left to right: the noisy latent (4 × 128 × 128) and the joint prompt "a puma and a condor" go into the frozen SDXL U-Net, which hands three feature maps (1,280, 1,280 and 640 channels) to one small checker head. The head has three outputs: clean pair, trained on 243 pairs (blue box), and first and second subject present, each trained on cat and dog only (yellow boxes). Their sum gives one push: its gradient, on steps 0 to 15, at strength 30, capped at 0.4 of CO3's prediction. The push enters CO3's next step.* ✅ read on the picture at full size; matches [the M1 design](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/design.md#paper-2-co3-with-the-push-against-co3-alone), lines 97 and 111 to 113.
+*Left to right: [the noisy latent](../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/rebuild-from-fundamentals.md#1-the-noisy-latent) (4 × 128 × 128) and the joint prompt "a puma and a condor" go into the frozen SDXL U-Net, which hands three feature maps (1,280, 1,280 and 640 channels) to one small checker head. The head has three outputs: clean pair, trained on 243 pairs (blue box), and first and second subject present, each trained on cat and dog only (yellow boxes). Their sum gives one push: its gradient, on steps 0 to 15, at strength 30, capped at 0.4 of CO3's prediction. The push enters CO3's next step.* ✅ read on the picture at full size; matches [the M1 design](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/design.md#paper-2-co3-with-the-push-against-co3-alone), lines 97 and 111 to 113.
 
 ## Table of contents
 
@@ -24,6 +24,11 @@ This page follows the checker's three outputs to the sampler: what the push is t
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#what-the-push-follows) ➡️
 
 **Gradient**: for a score that depends on many numbers, the list of how much the score rises when each number is nudged up a little. Here it has one entry for each of the 65,536 numbers of the latent x_t.
+
+🔤 **The name:** gradient
+- **gradient**: a slope, as in a road's gradient, taken in every direction at once. On the push's formula below, the green ∇_{x_t} L.
+- **On a toy score of two numbers**, L = 2 x₁ − x₂: nudge x₁ up by 0.1 and L rises by 0.2; nudge x₂ up by 0.1 and L falls by 0.1. So the gradient is (2, −1), one entry per number, the way the real one has 65,536.
+- **Consequence:** move the toy's two numbers by 0.1 × (2, −1) and L rises by 0.5; move them the opposite way and L falls by 0.5. No other move of the same length raises L more, which is why the push follows this direction. ✅ computed this session; the [gradient card](../../../../../Obsidian/Mathematics/Calculus/Gradient.md#where-to-learn-this) teaches it with worked examples.
 
 **Signal level ᾱ_t and noise level σ_t**: ᾱ_t is the share of the clean latent's variance still present at step t, from near 0 at step 0 to near 1 at the end; σ_t = √(1 − ᾱ_t) is the matching noise size.
 
@@ -50,6 +55,12 @@ The colours are the picture's: blue for the output trained on every pair, yellow
 **Each term is a logit, the raw output before any sigmoid.** For a yes-or-no output, the logit is the log of the odds: a logit of 0 is even odds, +2 is odds of e² ≈ 7.4 to 1. So raising L raises the log-odds of all three answers at once, each with slope 1. [The digit derivation's step 7](../../../2-classifier-guidance/artifacts/scenes/mnist-guidance-explained/4-the-derivation.md#step-7-the-checkers-outputs-are-logits) works the same reading for the pair-aware digit checker. ✍️
 
 A worked case with illustrative logits: a picture with logits +1, −1 and +0.5 has L = 0.5. A nudge that raises only the clean-pair logit by 0.2 raises L by 0.2 whatever the other two are; with a sigmoid in front (log σ(ℓ)) the same nudge would raise the score by only (1 − σ(1)) × 0.2 = 0.27 × 0.2 = 0.054, because a confident output's push fades. Summing raw logits means no output's pull fades as the checker grows sure. ✅ arithmetic; 🔍 the reading of what this does to a render is inferred and untested.
+
+🔤 **The name:** sigmoid
+- **sigmoid**: S-shaped, after the Greek letter sigma. The sigmoid squashes any logit into a probability between 0 and 1: σ(ℓ) = 1 / (1 + e^−ℓ).
+- **On the worked case:** logits −2, 0, 1 and 2 become 0.119, 0.5, 0.731 and 0.881, so 1 − σ(1) = 0.269, the 0.27 above.
+- **Consequence:** the slope of log σ(ℓ) is 1 − σ(ℓ), which is 0.5 at a logit of 0 and 0.119 at a logit of 2. With a sigmoid in front, a confident output's pull shrinks to about a quarter of an unsure one's; the summed raw logits keep a slope of 1 at every logit. ✅ computed this session.
+- **One letter, two meanings:** σ(ℓ) in this block is the sigmoid; σ_t everywhere else on this page is the noise level. They share only the letter. The [logit card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Logit.md#where-to-learn-this) teaches logits and the sigmoid together.
 
 > [!NOTE]
 > The code calls the summed logits `log_prob_both`, and the sampler's docstring describes the head as giving "log p(cat) + log p(dog)" (`poe_repair/methods/_classifier_guided.py`, line 14). For the kept checker the quantity differentiated is the sum of three raw logits, which is a sum of log-odds, as above. The names fit an older presence head whose outputs were log-probabilities. 🔍
@@ -80,7 +91,7 @@ $$
 🔤 **The name:** noise level, as the push's scale
 - **noise**: the random part of the latent. On the table, σ_t, near 1 at step 0.
 - **level**: how much of it there is at this step.
-- **Formula, in those words:** the push is scaled by how much noise the latent still holds, because a noise prediction is the score scaled by −σ_t. ✍️ derived in [step 1 of the digit derivation](../../../2-classifier-guidance/artifacts/scenes/mnist-guidance-explained/4-the-derivation.md).
+- **Formula, in those words:** the push is scaled by how much noise the latent still holds, because a [noise prediction is the score](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/08-noise-prediction-is-the-score.md) scaled by −σ_t. ✍️ derived in [step 1 of the digit derivation](../../../2-classifier-guidance/artifacts/scenes/mnist-guidance-explained/4-the-derivation.md).
 - **Consequence:** the same gradient pushed at step 40 (timestep 181, σ_t 0.4662) would give a raw push less than half as long as at step 0 (0.9971). The window keeps the push where σ_t is near 1. ✅ computed from the same schedule.
 
 🔤 **The name:** window
@@ -99,6 +110,8 @@ $$
 $$
 
 On CO3, ε here is CO3's guided prediction ε_u + 0.8 (ε_c − ε_u), with ε_u its unconditional prediction and ε_c the joint prompt's. ✅ line 70.
+
+The guidance 0.8, with the words "unconditional" and "CFG++" taken apart and the guidance moved from 0 to 7.5 on one number, is on [the overview's words](01-overview.md#words-this-page-uses).
 
 🔤 **The name:** cap
 - **cap**: a ceiling on how high something may go. On the picture, "capped at 0.4 of CO3's prediction".
@@ -141,6 +154,11 @@ $$
 **On the plain product**, the push is subtracted from ε_PoE = ε_cat + ε_dog − ε_empty, each expert's prediction first guided against the empty prompt at the run's guidance scale, and the ordinary DDIM step with one prediction follows. The cap is 0.4 of ε_PoE's length. ✅ `_classifier_guided.py`, lines 149 to 158 and 228 to 232. The project's default guidance scale is 7.5 (`DEFAULT_GUIDANCE`, `poe_repair/config.py` line 15), and the older ladder page gives 7.5 for these runs. ✍️ What the product is and why it fuses the two animals is on [PoE composition](../../world/poe-composition.md#what-poe-composition-is).
 
 **A zero push is the canary.** At strength 0 the push code still runs its path and multiplies by 0, and the final latent must match CO3's own loop to within 1e-5; it matched with a largest absolute difference of 0.0. ✍️ the M1 review, line 39.
+
+🔤 **The name:** canary
+- **canary**: the bird miners carried underground, which reacted to bad air before they did, so a live canary meant the air was safe. Here, a run whose answer is known before it starts, so any difference is a fault.
+- **Where it sits:** the whole push path run at strength 0, compared with CO3's own loop from the same starting noise.
+- **Consequence:** at strength 0 the largest difference in the final latent was 0.0 against a mark of 1e-5; at strength 30 it was 3.79. ✍️ the M1 review, lines 39 to 43, as tabled on [the code page](04-the-code.md#how-it-fails-and-how-you-know-it-worked). A strength-0 run that moved the latent would mean the wrapper changes the render with no push at all.
 
 ## How the kept settings were chosen
 
@@ -186,6 +204,7 @@ Navigation: ⬅️ [Where this came from](#where-this-came-from) | 📋 [TOC](#t
 |---|---|
 | Why a guidance term carries √(1 − ᾱ_t), and why a checker's outputs are logits | [the digit guidance derivation](../../../2-classifier-guidance/artifacts/scenes/mnist-guidance-explained/4-the-derivation.md) |
 | The gradient, taught with worked examples | [the gradient card](../../../../../Obsidian/Mathematics/Calculus/Gradient.md#where-to-learn-this) |
+| The DDIM step and classifier-free guidance, with textbook pages | [the DDIM card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Diffusion%20Models/DDIM.md#where-to-learn-this) and [the classifier-free guidance card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Diffusion%20Models/Classifier-Free%20Guidance.md#where-to-learn-this) |
 | Readout Guidance's own push, one fresh Adam step on the latent | [chapter 6, section 6.5, of the classifier-guidance-by-hand textbook](../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/06-readout-guidance-on-one-small-network.md#65-the-push-back-to-the-latent-one-fresh-adam-step) |
 
 ⬅️ Previous: [inside the kept checker](02-inside-the-kept-checker.md) | 📋 [The pages of this method](01-overview.md#the-pages-of-this-method) | Next: [the code](04-the-code.md) ➡️

@@ -28,7 +28,19 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#what-one-pushed-step-does) 
 
 **CO3**: a published sampler correction for composing two prompts. It combines one model's predictions for each subject as a product and corrects each step with the joint prompt's and the single subjects' predictions. Here it runs at its released settings: CFG++ at guidance 0.8, 50 steps, 6 corrected steps.
 
+🔤 **The name:** CFG++ at guidance 0.8
+- **conditional and unconditional**: a prediction is *conditional* when the model is told the prompt (ε_c) and *unconditional* when it is told nothing, the empty prompt (ε_u). The `un-` removes the prompt.
+- **CFG**: classifier-free guidance. *Guidance* is steering; *classifier-free* says the steering comes from the model's own two predictions, ε_c and ε_u, with no separate checker network. The [classifier-free guidance card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Diffusion%20Models/Classifier-Free%20Guidance.md#where-to-learn-this) teaches it with worked examples.
+- **Formula, in those words:** start at the unconditional prediction and lean toward the prompt's by the guidance: ε_u + 0.8 (ε_c − ε_u).
+- **++**: the published variant (Chung et al. 2024, arXiv 2406.08070) that keeps the guidance between 0 and 1 and, when it adds noise back for the next step, adds it with ε_u in place of the guided prediction. That is the √(1 − ᾱ_{t−1}) ε_u term of CO3's step on [the push page](03-the-push-and-its-cap.md#where-the-push-enters-the-sampler). ✍️ stated by [the review of the three inference-time fixes](../../../1-lora-correction/plans/01-showcase-the-trained-lora/review/23-three-inference-time-fixes-for-the-soft-corrected-render.md), line 92.
+- **Consequence:** on one number with ε_u = 1.0 and ε_c = 2.0 (illustrative), a guidance of 0 gives 1.0, the prompt ignored; 0.8 gives 1.8; 1 gives 2.0, the prompt's own prediction; and 7.5, the plain product's scale on [the push page](03-the-push-and-its-cap.md#where-the-push-enters-the-sampler), gives 8.5, far past it. So CFG++'s 0.8 and plain guidance's 7.5 sit on different scales and are not compared as numbers. ✅ arithmetic on the toy.
+
 **Half-drawn picture x_t**: the latent at sampler step t, a block of 4 × 128 × 128 numbers that SDXL's decoder turns into a 1,024 × 1,024 picture once sampling ends. Step 0 is the noisiest and step 49 the last.
+
+🔤 **The name:** latent
+- **latent**: present but hidden, the way a talent nobody has seen yet is latent. On the opening picture, x_t is a latent: a block of numbers that holds the picture without being one anyone can look at.
+- **Where it sits:** the 4 × 128 × 128 block on the left of the opening picture. SDXL's decoder, the decoding half of a [variational autoencoder](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Variational%20Autoencoders/Variational%20Autoencoders.md#where-to-learn-this), turns the finished block into the 1,024 × 1,024 picture.
+- **Consequence:** the block holds 65,536 numbers where the finished picture holds 3,145,728 (1,024 × 1,024 × 3 colours), 48 times fewer, and the gradient on these pages has one entry per latent number, 65,536 of them. ✅ arithmetic.
 
 **Noise prediction ε**: what the U-Net outputs at each step, its guess at the noise in x_t. The sampler steps x_t toward a cleaner picture using it.
 
@@ -70,6 +82,21 @@ Navigation: ⬅️ [What one pushed step does](#what-one-pushed-step-does) | �
 - **Formula, in those words:** L = ℓ_pair + ℓ_first + ℓ_second, the three logits the head reads off SDXL's features, added.
 - **Consequence:** take the "readout" away and the checker would have to see the finished picture, which does not exist yet at step 0. A checker trained on finished pictures read the first 10 steps' guesses at about chance (balanced accuracy 0.50 to 0.51 at steps 0 to 10), while a readout checker read noised finished pictures at 0.63 at step 0 and 0.78 at step 10. ✍️ [the checker finding](../../../2-classifier-guidance/report/classifier-guided-poe/can-a-checker-read-a-clean-cat-and-dog.md#finished-pictures-and-half-drawn-guesses).
 
+🔤 **The name:** balanced accuracy, the reading quoted just above
+- **accuracy**: the share of calls that are right.
+- **balanced**: each side weighs the same however many pictures it holds. The checker's hit rate on clean pairs and its hit rate on rejects are averaged half and half.
+- **Where it sits, on a toy of 20 pictures** (illustrative counts, computed): 8 clean pairs and 12 rejects by eye, with the checker's call across the top and the by-eye call down the side.
+
+| | checker says clean | checker says reject | hit rate on this row |
+|---|---|---|---|
+| by eye: clean, 8 | 6 | 2 | 6 / 8 = 0.75 |
+| by eye: reject, 12 | 3 | 9 | 9 / 12 = 0.75 |
+
+- **Formula, in those words:** (hit rate on the clean row + hit rate on the reject row) / 2 = (0.75 + 0.75) / 2 = 0.75, the pass mark [the deep dive](02-inside-the-kept-checker.md#how-it-fails-and-how-you-know-it-worked) quotes.
+- **Consequence:** on a lopsided set of 2 clean pairs and 18 rejects, a lazy checker that calls every picture a reject is right on 18 of 20, a plain accuracy of 0.90, and its balanced accuracy is (0 / 2 + 18 / 18) / 2 = 0.50, the coin flip. ✅ arithmetic on the toy.
+
+> 🖼️ **Diagram wanted**: two overlapping circles over the 20-picture toy above: the by-eye clean circle (8 pictures) in blue, the checker's clean circle (9 pictures) in green, their overlap of 6 in a darker shade, and the 9 pictures outside both in grey. Beside it the same toy's table, the clean row's hit rate drawn as overlap over blue (6 / 8) and the reject row's as grey over everything outside blue (9 / 12), with the two averaged to 0.75. A second panel shows the lazy checker on 2 clean and 18 rejects: an empty green circle, plain accuracy 0.90, balanced accuracy 0.50.
+
 🔤 **The name:** kept checker
 - **kept**: chosen and held onto after the others were dropped. On the picture, the label "2,000 updates, 243 pairs" under the trapezoid: the multi-pair checkpoint that survived the cat and dog improvement rounds.
 - **Consequence:** a run that trained the same checker for 4,000 updates in place of 2,000 dropped the faithful pairs on 128 cat and dog seeds from 29 to 13, so 2,000 stayed. ✍️ [the kept push finding](../../../2-classifier-guidance/report/classifier-guided-poe/how-close-the-kept-push-comes-to-the-joint-prompt.md#every-improvement-round).
@@ -101,6 +128,14 @@ $$
 | window | which steps are pushed | steps 0 to 15 of 50; steps 16 to 49 are CO3 alone | pushing on steps 0 to 24 dropped faithful pairs from 25 to 24 of 128 on cat and dog ✍️ |
 
 The σ_t values are computed from SDXL's shipped scheduler (scaled linear betas from 0.00085 to 0.012, 1,000 training steps, leading spacing with offset 1), whose 50 timesteps put steps 0 and 15 at timesteps 981 and 681. ✅ computed this session from `sdxl-scheduler.json` in [the word-map checker scene's sources](../../../2-classifier-guidance/artifacts/scenes/word-map-checker/numbers/sources/configs/sdxl-scheduler.json). That CO3 steps through the same 50 timesteps is 🔍 inferred: CO3 loads a DDIM scheduler from SDXL's own scheduler folder (`Co3.py`, line 85 of the CO3 clone).
+
+**The scheduler sentence above, one term at a time.** ✅ computed this session from the same config.
+- **Training steps and timestep**: SDXL was trained on a clock of 1,000 noise levels, numbered 0, almost clean, to 999, almost pure noise. A *timestep* is a position on that clock. A *step* on these pages is one of the sampler's 50 moves, so step 0 sits at timestep 981.
+- **Betas**: β is the share of variance swapped for fresh noise at one tick of that clock, 0.00085 at the first tick and 0.012 at the last. ᾱ_t is what survives every tick up to t, the product of (1 − β) over them: 0.00578 at timestep 981.
+- **Scaled linear**: the square roots of the betas rise in a straight line between those two ends, so the betas themselves curve upward.
+- **Leading spacing**: the 50 timesteps are taken every 1,000 / 50 = 20 ticks counting from the start, 0, 20 and so on to 980, then run in reverse.
+- **Offset 1**: one tick is added to each, giving 981, 961, 941 and so on to 681 at step 15 and 1 at step 49. Without the offset, step 0 would sit at timestep 980, where ᾱ is 0.00584 in place of 0.00578.
+- **DDIM**: the scheduler CO3 loads; its step is written out on [the push page](03-the-push-and-its-cap.md#where-the-push-enters-the-sampler), and the [DDIM card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Diffusion%20Models/DDIM.md#where-to-learn-this) teaches it.
 
 The worked case with numbers, the ceiling and where the push enters CO3 are on [the push page](03-the-push-and-its-cap.md).
 
@@ -177,6 +212,7 @@ Navigation: ⬅️ [Where this came from](#where-this-came-from) | 📋 [TOC](#t
 | Readout Guidance's own head, taught on one small network | [chapter 6 of the classifier-guidance-by-hand textbook](../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/06-readout-guidance-on-one-small-network.md) |
 | The older interactive ladder for the cat and dog checker, one output and cap 0.1 | [the cat and dog guidance ladder](../../../2-classifier-guidance/artifacts/scenes/classifier-guidance-on-poe/guidance-ladder.html) |
 | The figures these pages are built from | [the annotated overviews](../../../2-classifier-guidance/artifacts/scenes/annotated-overviews/README.md) |
+| The gradient, taught with worked examples | [the gradient card](../../../../../Obsidian/Mathematics/Calculus/Gradient.md#where-to-learn-this) |
 
 ⬅️ Previous: [the methods index](../00-INDEX.md) | 📋 [The pages of this method](#the-pages-of-this-method) | Next: [inside the kept checker](02-inside-the-kept-checker.md) ➡️
 

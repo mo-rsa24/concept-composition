@@ -6,7 +6,7 @@ This page opens the green trapezoid of [the overview's picture](01-overview.md):
 
 <a href="../../../2-classifier-guidance/artifacts/scenes/annotated-overviews/loop-6-kept-checker.png"><img src="../../../2-classifier-guidance/artifacts/scenes/annotated-overviews/loop-6-kept-checker.png" width="720" alt="Three bands: the frozen SDXL U-Net with three tapped blocks; the trained head pooling each tap to 32 by 32, projecting to 128 channels, summing, two stride-2 convolutions to 8 by 8, an attention pool over 65 tokens, a linear layer to three outputs; and the push's gradient running back to x_t"></a>
 
-*Top band: frozen SDXL's U-Net, read once on each pushed step, with the noisy latent x_t (4 × 128 × 128) and the joint prompt "a puma and a condor" going in. Of its seven blocks (down 0 to 2, middle, up 0 to 2) three are tapped, marked by green dots: the middle output (1,280 channels, 32 × 32), up 0's output after its upsampler (1,280 channels, 64 × 64) and up 1's output (640 channels, 128 × 128). Middle band: the trained head. Each tap is pooled to 32 × 32, then a 1 × 1 convolution to 128 channels with GroupNorm and SiLU; the three are added into one 128 × 32 × 32 stack; two 3 × 3 convolutions of stride 2 shrink it to 128 × 16 × 16 and then 128 × 8 × 8; the 64 cells become 64 tokens of 128 numbers, a mean token (pale blue) is put in front, and each gets a learned position; an attention pool with 8 heads, asked by the mean token, gives one vector; a linear layer turns its 128 numbers into 3: clean pair, first subject present, second subject present, summed into L. Bottom band: the push, 30 σ_t ∇_{x_t} L, shortened to at most 0.4 of the size of CO3's prediction on steps 0 to 15 of 50; the gradient runs back through the head and the frozen U-Net to x_t and no weight changes. The footer: 780,675 trained weights, and the head takes no step number.* ✅ read on the picture at full size; every size matches the code.
+*Top band: frozen SDXL's U-Net, read once on each pushed step, with [the noisy latent](../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/rebuild-from-fundamentals.md#1-the-noisy-latent) x_t (4 × 128 × 128) and the joint prompt "a puma and a condor" going in. Of its seven blocks (down 0 to 2, middle, up 0 to 2) three are tapped, marked by green dots: the middle output (1,280 channels, 32 × 32), up 0's output after its upsampler (1,280 channels, 64 × 64) and up 1's output (640 channels, 128 × 128). Middle band: the trained head. Each tap is pooled to 32 × 32, then a 1 × 1 convolution to 128 channels with GroupNorm and SiLU; the three are added into one 128 × 32 × 32 stack; two 3 × 3 convolutions of stride 2 shrink it to 128 × 16 × 16 and then 128 × 8 × 8; the 64 cells become 64 tokens of 128 numbers, a mean token (pale blue) is put in front, and each gets a learned position; an attention pool with 8 heads, asked by the mean token, gives one vector; a linear layer turns its 128 numbers into 3: clean pair, first subject present, second subject present, summed into L. Bottom band: the push, 30 σ_t ∇_{x_t} L, shortened to at most 0.4 of the size of CO3's prediction on steps 0 to 15 of 50; the gradient runs back through the head and the frozen U-Net to x_t and no weight changes. The footer: 780,675 trained weights, and the head takes no step number.* ✅ read on the picture at full size; every size matches the code.
 
 ## Table of contents
 
@@ -33,6 +33,12 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#the-three-taps) ➡️
 **Convolution**: a small window of weights slid over a grid; a 1 × 1 convolution mixes the channels at each cell on its own, and a 3 × 3 one also mixes each cell's eight neighbours. Stride 2 means the window jumps two cells at a time, halving the grid.
 
 **GroupNorm and SiLU**: GroupNorm rescales each group of 8 channels (16 groups of the 128) to a common spread; SiLU is a smooth bend that lets small negative numbers through and passes large positive ones almost unchanged.
+
+🔤 **The name:** GroupNorm and SiLU
+- **group**: a set of channels handled together, here 8 of the head's 128 at a time.
+- **norm**, short for normalise: shift and rescale a set of numbers to mean 0 and spread 1. On a toy group holding 1, 3, 5 and 7 (mean 4, variance 5), GroupNorm gives −1.342, −0.447, 0.447 and 1.342. Then the learned scale and shift, the 2 × 128 numbers counted below, set the size the head wants.
+- **SiLU**: sigmoid linear unit, x × sigmoid(x). *Sigmoid* is the S-curve 1 / (1 + e^−x) that squashes any number into 0 to 1; *linear* is the x it multiplies; *unit* is one neuron's output. On toy inputs −3, −1, 0, 1 and 3 it gives −0.142, −0.269, 0, 0.731 and 2.858: large positives pass nearly unchanged, small negatives come through small, large negatives are squashed toward 0.
+- **Consequence:** feed GroupNorm the toy group ten times louder, 10, 30, 50 and 70, and it gives the same −1.342, −0.447, 0.447 and 1.342. So a tap whose numbers run ten times larger reaches the add at the same size as the others; without the norm it would enter ten times larger. ✅ computed on the toy; 🔍 what that would do to the head is inferred, no run removed the norm.
 
 **Token**: one cell's vector of numbers, treated as one item in a list.
 
@@ -157,10 +163,34 @@ Navigation: ⬅️ [The weights, counted](#the-weights-counted) | 📋 [TOC](#ta
 
 Each training picture's finished latent is noised to one of the 50 sampler steps, the U-Net reads it under that pair's joint prompt, and the head's three outputs are scored with binary cross-entropy: the clean-pair output against 1 or 0, and the two presence outputs against the presence labels, counted twice as heavily and skipped where no label exists. Each pass draws 4 clean and 4 reject pictures, every source equally likely on each side. ✅ lines 143 to 152 and 448 to 466.
 
+**Noising a finished latent, by what moves.** The blue term is what is left of the finished latent x_0, the grey term is fresh noise ε; the colours are this block's own. ✍️ the formula of the scheduler's `add_noise`, not reread this session.
+
+$$
+\underbrace{x_t}_{\text{the noised latent}}
+= \textcolor{#1f5fd0}{\underbrace{\sqrt{\bar\alpha_t}\,x_0}_{\text{what is left of the finished latent}}}
++ \textcolor{#6b7a88}{\underbrace{\sqrt{1-\bar\alpha_t}\,\varepsilon}_{\text{fresh noise}}}
+$$
+
+On one number of the latent, with a finished value x_0 = 1.0 and a noise draw ε = 0.5 (illustrative), at the schedule's real ᾱ_t:
+
+| Step of 50 | ᾱ_t | Finished part | Noise part | x_t |
+|---|---|---|---|---|
+| 0 | 0.00578 | 0.076 | 0.499 | 0.575 |
+| 15 | 0.09464 | 0.308 | 0.476 | 0.783 |
+| 49 | 0.99830 | 0.999 | 0.021 | 1.020 |
+
+✅ computed this session from SDXL's scheduler config. Move ᾱ_t up and the blue part grows while the grey part shrinks; the head trains on all 50 steps, while the push uses it on steps 0 to 15, where at most 0.308 of the finished value is left.
+
 > [!WARNING]
 > The trainer has four switches that change the batch: the share of noise levels drawn from the 20 noisiest steps, the share of rejects drawn from wrong pairs such as two cats, augmented copies of each latent, and passes per update. Which of them the kept run set is not recorded in any source read for this page, so the step choice above is the trainer's default (uniform over 50) and the run may have differed. 🔍
 
 A worked case for the loss, with illustrative logits: a clean picture given a clean-pair logit of +2 costs log(1 + e^−2) = 0.127; a reject given the same +2 costs log(1 + e^2) = 2.127. Training lowers the second far more than the first.
+
+🔤 **The name:** binary cross-entropy
+- **binary**: two answers, yes or no. Each of the head's three outputs is its own yes or no.
+- **cross-entropy**: the cost of a belief measured against the true answer, −log of the probability the belief gave the true answer. The [cross-entropy card](../../../../../Obsidian/Mathematics/Statistics/Information%20Theory/Cross-Entropy.md#where-to-learn-this) works it with numbers.
+- **Formula, in those words:** turn the logit into a probability p with the sigmoid, 1 / (1 + e^−logit); a yes costs −log p and a no costs −log(1 − p). That is the log(1 + e^−2) and log(1 + e^2) of the worked case above.
+- **Consequence:** move a clean picture's clean-pair logit from +2 to 0 to −2 and its cost goes 0.127, 0.693, 2.127; a reject's cost runs the same numbers in reverse. ✅ computed this session.
 
 > [!NOTE]
 > The pair list behind those 243 pairs holds 54 pictures over 27 pairs naming a subject on the subject guard's decision list, so this checkpoint can answer the CO3 test and cannot be frozen as a recipe. A retrained checker on a cleaned list is a later step. ✍️ [the M1 design](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/design.md#paper-2-co3-with-the-push-against-co3-alone), lines 106 to 109.

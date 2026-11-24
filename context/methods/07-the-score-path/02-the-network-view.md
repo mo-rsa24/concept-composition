@@ -74,6 +74,8 @@ Navigation: ⬅️ [The system](#the-system) | 📋 [TOC](#table-of-contents) | 
 - **Net**: network. Each box is a few layers of it.
 - **Consequence:** each stride-2 step halves the grid, 32 × 64 to 16 × 32 to 8 × 16, so the attention at the bottom compares 128 patches that each cover 4 × 4 pixels of the canvas. The skips carry the full-size detail across, which the bottom has lost. ✅ The shapes in `numbers.json`.
 
+The U-Net, the attention at its bottom and the MLP that lifts the step to 256 numbers are taught with worked examples on [the U-Net card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/U-Net.md#where-to-learn-this), [the attention card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Attention.md#where-to-learn-this) and [the multilayer perceptron card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Multilayer%20Perceptron.md#where-to-learn-this).
+
 🔤 **The name:** label table (an embedding)
 - **label**: the name tag the model is told, here a digit 0 to 9 or 10 for none.
 - **table**: rows looked up by number. Row c holds 256 learned numbers. The literature calls such a table an embedding: each label is placed, or embedded, as a point in a 256-number space.
@@ -116,6 +118,24 @@ Navigation: ⬅️ [Where d_t comes from](#where-d_t-comes-from) | 📋 [TOC](#t
 | √(1 − ᾱ_t), weight on the noise | 1.0000 | 0.9999 | 0.9997 | 0.9989 | 0.9962 |
 
 ✅ `numbers.json`, `sampler.window_steps_0_to_15`.
+
+**The noising equation, by what moves.** The two weights in the table are the two coefficients of the equation that makes every noisy canvas, coloured as the figure colours them: green for the clean canvas's weight, grey for the noise's.
+
+$$
+\underbrace{x_t}_{\text{the noisy canvas}}
+= \textcolor{#5fa877}{\underbrace{\sqrt{\bar\alpha_t}}_{\text{weight on the clean canvas}}}\,x_0
++ \textcolor{#6b7a88}{\underbrace{\sqrt{1-\bar\alpha_t}}_{\text{weight on the noise}}}\,\epsilon
+$$
+
+The worked case is one ink pixel (x₀ = +1) and one background pixel (x₀ = −1) with the same noise draw ε = 0.5, the case the overview page uses. ✅ Computed this session from the same linear schedule.
+
+| Move | Ink pixel in x_t | Background pixel in x_t | What the picture does |
+|---|---:|---:|---|
+| t at 999, step 0 | 0.506 | 0.494 | the two pixels are 0.013 apart, so the digit is invisible under the noise |
+| t to 693, step 15 | 0.585 | 0.411 | the green weight grows to 0.0871 and the gap to 0.174 |
+| t to 100, where step X5 checked its reader | 1.108 | −0.784 | the green weight is 0.946 and the digit stands out |
+
+**When the two are combined.** The squares of the two weights add to 1 at every t (0.0064² + 1.000² and 0.946² + 0.324² both give 1), so as t falls the green weight's square gains exactly what the grey one's loses, and x_t keeps the same overall size while the share that is canvas grows. ✅ Computed this session.
 
 🔤 **The name:** window
 - **window**: an opening that shows some of what is behind it and hides the rest. Here, the run of sampler steps whose differences are kept.
@@ -168,6 +188,8 @@ $$
 $$
 
 The worked case is the [miniature's 3 × 3 matrix](03-the-miniature.md#the-encoder-and-the-contrastive-score), where every term has a number.
+
+CE stands for cross-entropy: for one row, minus the log of the share the row's softmax gives the row's own partner, so a row that gives its partner 0.961 costs 0.039 and one that gives 1/3 costs 1.099. ✅ Computed this session. Both words are taken apart on that miniature matrix, and taught with worked numbers on [the cross-entropy card](../../../../../Obsidian/Mathematics/Statistics/Information%20Theory/Cross-Entropy.md#where-to-learn-this) and [the softmax card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Softmax.md#where-to-learn-this).
 
 > [!NOTE]
 > The summed three-way loss is the ladder's illustration ✍️ (README, "Illustrative"). The design planned "all three" as the score-path encoder trained against W4's frozen canvas encoder and the frozen text encoder, the way ImageBind and CLIP goes 3D add an encoder, and only after text with score path passed. It never ran, and W4 had no result when Loop 10 closed ✍️ ([the design](../../../artifacts/notes/progress/score-space/04-design.md#run-group-2-step-x6-a-text-aligned-reader-of-the-signature)).

@@ -37,6 +37,8 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#the-picture-as-901-vectors)
 
 **BERT**: Bidirectional Encoder Representations from Transformers, a widely used text transformer from 2018. *Bidirectional*: each word reads the words on both sides of it. BLIP's question and answer transformers have BERT's shape and vocabulary.
 
+The transformer and the logit are taught with textbook pages and videos on [the transformer card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Transformer.md#where-to-learn-this) and [the logit card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Logit.md#where-to-learn-this).
+
 ## The picture, as 901 vectors
 
 Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#table-of-contents) | [Next](#the-question-as-tokens) ➡️
@@ -59,6 +61,8 @@ The arithmetic: 480 / 16 = 30 patches per side, 30 × 30 = 900, and one summary 
 - **B**: base, the smaller of the two sizes the code allows: 12 layers of width 768. The other, large, has 24 layers of width 1,024 (`models/blip.py`, lines 203 to 206).
 - **/16**: the patch side in pixels.
 - **Consequence:** halve the patch to 8 pixels and the same 480-pixel picture becomes 60 × 60 = 3,600 patches, four times as many vectors for every question token to look over. ✅ arithmetic; no such model is used here.
+
+The vision transformer is taught with textbook pages and videos on [the vision transformer card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Vision%20Transformer.md#where-to-learn-this).
 
 ## The question, as tokens
 
@@ -88,6 +92,31 @@ Navigation: ⬅️ [The question, as tokens](#the-question-as-tokens) | 📋 [TO
 | feed-forward | each token alone, widened to 3,072 numbers and back to 768 | `intermediate_size: 3072` |
 
 ✅ the sizes are `hidden_size: 768`, `num_hidden_layers: 12`, `num_attention_heads: 12` and `add_cross_attention: true` in `configs/med_config.json`; 768 / 12 = 64 numbers per head is arithmetic. Cross-attention runs in every layer because the layer's `mode` defaults to `multimodal` (lines 357 to 368, defaults at lines 405 and 686).
+
+🔤 **The name:** adds its input back, then normalises (`LayerNorm(hidden_states + input_tensor)`)
+
+- **adds its input back**: the token's vector coming into a sub-step is added to what the sub-step computed, so the sub-step only has to supply a change and the token keeps what it already carried. The usual name is a residual connection, *residual* meaning what is left to add.
+- **normalises**: shifts and stretches the token's numbers so they average 0 with a spread of 1, before a learned scale and shift. *Layer* in LayerNorm says it is done across one token's own numbers, here all 768 of them.
+- **Where it sits:** on the picture's question layer, the step after each of self-attention, cross-attention and feed-forward.
+
+$$
+\text{out} = \mathrm{LayerNorm}\big(
+\textcolor{#7d68c2}{\underbrace{x}_{\text{the token coming in}}}
++ \underbrace{f(x)}_{\text{what the sub-step computed}}
+\big)
+$$
+
+A toy token of 4 numbers in place of 768, ✅ computed this session by a short script (before the learned scale and shift):
+
+| | The 4 numbers | After normalising |
+|---|---|---|
+| x, the token coming in | 1, 2, 3, 4 | |
+| f(x), what the sub-step computed | 0.5, −1, 0, 2.5 | |
+| x + f(x), added back | 1.5, 1, 3, 6.5 | −0.697, −0.930, 0, 1.627 |
+| f(x) alone, with no adding back | 0.5, −1, 0, 2.5 | 0, −1.177, −0.392, 1.569 |
+| x + f(x) with every number times 10 | 15, 10, 30, 65 | −0.697, −0.930, 0, 1.627 |
+
+**The moves.** Drop the adding back and the output is the sub-step's own pattern, so the token's third number goes from 0 to −0.392 and nothing of x is left. Multiply the sum by 10 and the normalised token does not change at all, which keeps 12 stacked layers from growing their numbers without bound 🔍 inferred, not checked on BLIP. Taught with textbook pages on [the layer normalisation card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Layer%20Normalization.md#where-to-learn-this) and in [the residual connection plan](../../../../../goal-setting/learning/deep-learning/transformers/plans/38-show-why-a-residual-connection-keeps-gradients.md).
 
 ## Cross-attention, by what moves
 
@@ -120,6 +149,8 @@ This is one head; the 768 numbers are split into 12 heads of 64, each head does 
 - **Formula, in those words:** each question token's new vector is a weighted average of the picture's vectors, weighted by how well each one answers that token.
 - **Consequence:** without cross-attention the question layers never see the picture, and every picture would get the same answer to "a blue bench?". 🔍 inferred from the layer's code, where the picture enters only through `encoder_hidden_states` in the cross-attention call (lines 361 to 368).
 
+Cross-attention is taught with textbook pages, videos and a worked SDXL notebook frame on [the cross-attention card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Cross-Attention.md#where-to-learn-this).
+
 ## The answer word, by what moves
 
 Navigation: ⬅️ [Cross-attention, by what moves](#cross-attention-by-what-moves) | 📋 [TOC](#table-of-contents) | [Next](#the-code) ➡️
@@ -147,6 +178,8 @@ The first form is what the code computes: p_yes and p_no are entries 2748 and 20
 - **soft**: not all or nothing; every word keeps some share. **max**: the largest logit takes the largest share. On the picture, the grey bars with the two pale blue ones, yes and no, standing out.
 - **Formula, in those words:** raise e to each word's logit and divide by the total, so the shares add to 1.
 - **Consequence:** the scorer's renormalisation over yes and no hides how sure BLIP was that the answer is a yes or a no at all. A question the model would rather answer "blue" still gets a confident-looking 0.80, as the worked case shows.
+
+The softmax is taught with textbook pages and videos on [the softmax card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Softmax.md#where-to-learn-this).
 
 ## The code
 

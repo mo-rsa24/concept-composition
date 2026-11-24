@@ -149,6 +149,17 @@ for neg_rel_name in neg_rel_names:
 
 `prompt_generator.py`, from lines 54 to 66 (one comment line dropped). The third field of each tuple, `rel_name`, is the true relation, so the wrong-word sample is labelled with the truth. Maps are cached at sampler steps 5, 10, 15, 20, 25 and 49. ✍️ Block 10. Training on the SD 2.1 settings: batch 64, learning rate 10⁻⁴, weight decay 0.05, at most 100 epochs with early stopping after 10. ✍️ Block 11. Why the wrong word is there is on [the network view](02-the-network-view.md#training-on-the-right-and-the-wrong-word).
 
+**The training sentence, one setting at a time.** The settings above stack six training words, so here they are one per sentence. ✅ The arithmetic computed this session.
+
+- **Batch 64**: the head sees 64 training examples, averages their losses, and makes one update from that average.
+- **Learning rate 10⁻⁴**: the size of each update's step on the weights. Textbook pages are on [the learning rate card](../../../../../Obsidian/Artificial%20Intelligence/Machine%20Learning/Learning%20Rate.md#where-to-learn-this).
+- **AdamW**: the rule that makes each update. Adam scales each weight's step by how large and how steady that weight's recent gradients have been; the W is weight decay kept as a separate step.
+- **Weight decay 0.05**: at every update each weight is also shrunk toward 0 by the learning rate × 0.05, a factor of 1 − 10⁻⁴ × 0.05 = 0.999995. With no gradient pushing back, a weight of 1 would be 0.9512 after 10,000 updates, so only weights the loss keeps needing stay large.
+- **Epoch**: one full pass over the training set; "at most 100" caps training at 100 passes. Textbook pages are on [the epoch card](../../../../../Obsidian/Artificial%20Intelligence/Machine%20Learning/Epoch.md#where-to-learn-this).
+- **Early stopping after 10**: training ends early once 10 epochs in a row bring no improvement on the held-out check. 🔍 Read from the setting's usual meaning; the code walk's block 11 holds the rule.
+
+Read whole again: batch 64, learning rate 10⁻⁴, weight decay 0.05, at most 100 epochs with early stopping after 10.
+
 ## Our sampler: the product and the head call
 
 Navigation: ⬅️ [Learn-to-Steer: training data and training](#learn-to-steer-training-data-and-training) | 📋 [TOC](#table-of-contents) | [Next](#our-sampler-the-attention-push-already-run) ➡️
@@ -163,6 +174,18 @@ return poe_eps(eps_a, eps_b, eps_uncond)
 ```
 
 Lines 155 to 158 of `product_eps` (lines 149 to 158). Each subject's guided prediction is ε_∅ + g (ε_subject − ε_∅), and the product is their sum minus ε_∅ once. ✅ What the product is and why the empty prompt is taken off once is on [PoE composition](../../world/poe-composition.md#what-poe-composition-is).
+
+🔤 **The name:** classifier-free guidance, the guidance scale g
+- **guidance**: steering the sampler toward what the prompt asks. **classifier-free**: it needs no separate classifier, because the gap between the prediction with the prompt and the prediction with the empty prompt already points toward the prompt.
+- **On the code:** `guided_eps(eps_a_raw, eps_uncond, guidance_scale)`, once per subject.
+
+$$
+\textcolor{#c0262d}{\underbrace{\varepsilon^{g}_{\text{cat}}}_{\text{the guided prediction}}}
+= \textcolor{#6b7a88}{\underbrace{\varepsilon_\varnothing}_{\text{the empty prompt}}}
++ \underbrace{g}_{\text{guidance scale}}\,\big(\textcolor{#1f5fd0}{\underbrace{\varepsilon_{\text{cat}}}_{\text{told "a cat"}}} - \textcolor{#6b7a88}{\varepsilon_\varnothing}\big)
+$$
+
+- **Consequence, on one latent number** (toy values): ε_∅ = 0.2 and ε_cat = 0.5. At g = 0 the guided prediction is 0.2, the empty prompt alone; at g = 1 it is 0.5, the prompt's own prediction; at g = 7.5 it is 0.2 + 7.5 × 0.3 = 2.45, the gap stretched 7.5 times. With ε_dog = 0.1 the guided dog is 0.2 + 7.5 × (−0.1) = −0.55, and the product on that number is 2.45 + (−0.55) − 0.2 = 1.70. ✅ Computed this session. Textbook pages and videos are on [the classifier-free guidance card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Diffusion%20Models/Classifier-Free%20Guidance.md#where-to-learn-this).
 
 ```python
 elif head is not None and strength != 0.0 and in_window:
@@ -245,6 +268,17 @@ def capped_push(push: torch.Tensor, eps: torch.Tensor, cap: float | None):
 Lines 49 to 61 without the docstring; `PUSH_CAP_FRACTION = 0.1` at line 46 is the default cap, and 0.4 is the proposed value for the abstract checkers. ✅ The file; ✍️ the numbers file for the proposal. On the miniature, the raw push of length 1.2262 is over the limit 0.4 × 1.4142 = 0.5657, so it is scaled by 0.4613. ✅ [The overview's worked push](01-overview.md#the-push-by-what-moves).
 
 After the subtraction, line 246 forms the clean-latent estimate from the pushed prediction, `x0 = tweedie_mean(latents, alpha_bar_t, eps_p)`, and the DDIM step follows. The latent itself is never edited, which is the difference from Learn-to-Steer's loop. ✅
+
+🔤 **The name:** Tweedie's estimate, `tweedie_mean`
+- **Tweedie**: the statistician Maurice Tweedie, after whom the formula for the average clean value behind a noisy one is named. 🔍 Not rechecked against the original paper this session.
+- **mean**: the average. Many clean latents could have been noised into this one, and the estimate is their average, the model's best single guess of where the step is heading.
+- **Formula, in those words:** take the predicted noise, scaled by the noise level σ_t, off the latent, then divide by √ᾱ_t to undo the shrinking of the signal.
+
+$$
+\textcolor{#1d7a3e}{\underbrace{\hat x_0}_{\text{the clean guess}}} = \frac{\textcolor{#1f5fd0}{\underbrace{x_t}_{\text{the latent}}} - \sigma_t\,\textcolor{#c0262d}{\underbrace{\varepsilon_p}_{\text{the pushed prediction}}}}{\sqrt{\bar\alpha_t}}
+$$
+
+- **Consequence, on one latent number** (toy values, at the miniature's ᾱ_t = 0.36, σ_t = 0.8): x_t = 2 and ε_p = 0.5 give (2 − 0.8 × 0.5) / 0.6 = 2.6667. A push that lowers ε_p by 0.1 to 0.4 raises the guess to 2.8, so taking the push off the prediction moves the clean guess the opposite way, by σ_t / √ᾱ_t = 1.3333 times the push. ε_p = 0 gives 3.3333, the latent only unshrunk. ✅ Computed this session. What the estimate is used for across the project is on [where the data comes from](../../data/01-where-it-comes-from.md#the-journey).
 
 🔤 **The name:** the canary
 - **canary**: the bird miners carried underground, whose distress warned of bad air before the people noticed. Here, a check that fails loudly if a head changes what it should not.

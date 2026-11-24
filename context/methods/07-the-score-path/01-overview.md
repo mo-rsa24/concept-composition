@@ -4,6 +4,8 @@
 
 The score path is Loop 10's idea for a third kind of input beside a caption and a noisy canvas. At each early sampler step the frozen digit model is asked about one noisy canvas once with a digit label and once with no label, and the difference says what that label adds. Kept for sixteen steps, those differences form a path that a planned encoder would place in one space with caption vectors and canvas vectors, matched the way CLIP matches pictures to captions. What the product of experts is, and the interaction term it leaves out, are on [PoE composition](../../world/poe-composition.md#what-poe-composition-is) and [the interaction term](../../world/interaction-term.md#what-the-interaction-term-is); the sampler step the differences come from is on [the product-of-experts overview](../01-the-product-of-experts/01-overview.md). This folder adds the ladder's pictures, a four-pixel miniature, and the code. Every picture comes from [the score-path ladder](../../../artifacts/notes/progress/score-space/00-ladder/README.md) unless its caption names another source.
 
+CLIP, the model whose way of matching pictures to captions the planned encoder borrows, is taught with worked examples on [the CLIP card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Contrastive%20Image-Text%20Training.md#where-to-learn-this).
+
 <a href="../../../artifacts/notes/progress/score-space/00-ladder/overview/ov0-the-score-path-as-a-third-space.png"><img src="../../../artifacts/notes/progress/score-space/00-ladder/overview/ov0-the-score-path-as-a-third-space.png" width="720" alt="Left to right: a real canvas of a 7 and a 3 and its noised version at step 0; the frozen digit U-Net called with label 7, label 3 and label 10 for no digit; two rose stacks d_t(3) and d_t(7) over steps 0 to 15, adding to S(3)+S(7); three encoders, CLIP-L text frozen, W4 canvas trained, and a dashed score-path encoder marked planned; a dashed shared space with hand-placed dots; four hollow test bars marked with question marks; an inset opens the U-Net"></a>
 
 *One canvas and one caption, end to end. Left: the clean canvas x₀, a real 7 and 3 from MNIST's test images, and the same canvas noised to step 0, where the clean canvas is multiplied by 0.0064 inside x_t. Second column: the frozen digit U-Net, 6,141,185 weights, called three times on that x_t, with label 7, label 3 and label 10 (no digit), giving three noise guesses ε₇, ε₃ and ε_∅. Third column: the rose stacks are d_t(3) and d_t(7), each label's guess minus the no-label guess, kept for steps 0 to 15; one stack is 16 × 32 × 64 = 32,768 numbers, and S(3) + S(7) is what the product adds. Fourth column: the CLIP-L text encoder (frozen), Loop 9's W4 canvas encoder (trained), and the score-path encoder, dashed and marked "illustrative, not yet designed". Right: the shared space, whose dots are placed by hand, and four hollow bars for the two tests, which never ran. The inset opens the U-Net from 64 × 32 × 64 down to 128 × 8 × 16 with attention at 8 × 16.* ✅ *Read on the figure at full size. The canvas is real; the noise on it is one numpy draw, the dots and the bars are illustrative.* ✍️ *(the ladder's README, "Which numbers are real")*
@@ -78,6 +80,12 @@ Navigation: ⬅️ [What one canvas goes through](#what-one-canvas-goes-through)
 - **Formula, in those words:** ask the model about every digit, subtract the no-digit guess from each, keep all ten. A **signature path** is those ten stacked over a window of steps.
 - **Consequence:** with only the canvas's own labels (3 and 7), the labels pick which differences are computed, so a reader is handed the answer. With all ten, a 3 on the canvas has to show up as a larger or differently shaped d_t(3) than d_t(5). ✍️ [The ideas page, A1](../../../artifacts/notes/progress/score-space/03-ideas.md#a-the-score-path-itself). On the real model one signature path is 10 × 16 × 2,048 = 327,680 numbers before pooling. ✅ Computed.
 
+🔤 **The name:** pooling
+- **pool**: in everyday speech, putting many things into one shared pot. Here, a block of neighbouring pixels of one d_t map is replaced by their mean, so many numbers become one.
+- **On the miniature's canvas:** pool the four pixels in pairs, the left pair (L1, L2) and the right pair (R1, R2). d(3) = (−1, −1, 0, 0) becomes (−1, 0) and d(7) = (0, 0, −1, −2) becomes (0, −1.5): which half each label acts on survives, which pixel inside the half does not. ✅ Computed this session.
+- **Formula, in those words:** each pooled number is the mean of one k × k block; with 2 × 2 blocks one signature step shrinks from 10 × 32 × 64 = 20,480 numbers to 10 × 16 × 32 = 5,120. ✅ Computed.
+- **Consequence:** the d_t maps keep their sign, so a block holding +1 beside −1 pools to 0: a pixel the label pushes up next to one it pushes down vanishes from the pooled map. Pool d(3) with that change, (1, −1, 0, 0), and its left half reads 0 in place of −1. ✅ Computed this session on the miniature's numbers.
+
 🔤 **The name:** third space
 - **third**: one more after two. The first two here are captions and noisy canvases, which Loop 9 already matched (CLIP-L's text side and W4).
 - **space**: a set of points where distance means something. On the picture, the dashed box at the right, where every input becomes one 768-number vector and nearby vectors are meant to mean the same thing.
@@ -89,6 +97,8 @@ Navigation: ⬅️ [What one canvas goes through](#what-one-canvas-goes-through)
 - **On the [miniature's matrix](03-the-miniature.md#the-encoder-and-the-contrastive-score):** a 3 × 3 table of cosines, the pale blue diagonal holding each path beside its own caption.
 - **Formula, in those words:** divide each cosine by a temperature τ, turn each row and each column into shares with a softmax, and the loss is how little share the diagonal gets, averaged over rows and columns.
 - **Consequence:** with W4's τ = 0.07 the miniature's loss is 0.0456 and the product path's own caption takes 0.961 of its row; at τ = 1 the same cosines give a loss of 0.806 and a share of 0.397. ✅ Recomputed this session from the answer key's cosines.
+
+The three pieces this loss is built from are taught with worked numbers on [the cosine similarity card](../../../../../Obsidian/Mathematics/Linear%20Algebra/Cosine%20Similarity.md#where-to-learn-this), [the softmax card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Softmax.md#where-to-learn-this) and [the cross-entropy card](../../../../../Obsidian/Mathematics/Statistics/Information%20Theory/Cross-Entropy.md#where-to-learn-this), and the softmax and the cross-entropy are taken apart on the miniature's own matrix in [the encoder and the contrastive score](03-the-miniature.md#the-encoder-and-the-contrastive-score).
 
 ## The difference, by what moves
 
@@ -145,6 +155,18 @@ Navigation: ⬅️ [Two ways to define the path](#two-ways-to-define-the-path) |
 <a href="../../../artifacts/notes/progress/score-space/05-signal/presence-by-timestep.png"><img src="../../../artifacts/notes/progress/score-space/05-signal/presence-by-timestep.png" width="200" alt="Two panels of presence accuracy against timestep. Early window: every input sits near 0.5 except the error readout near 0.61 to 0.66. SDXL-matched window: the signature rises from 0.50 to 0.70, above the path length at 0.62 and the noisy canvas at 0.59; raw noise and shuffled labels stay at 0.50; nothing reaches the dashed 0.75 bar"></a>
 
 *From the finding. Up: presence accuracy, the balanced accuracy of calling "this digit is on the canvas", averaged over digits 0 to 4 on 2,000 canvases, 0.5 is chance. Across: the timestep, noisier at the left. Left panel: the early window, t 999 to 693. Right panel: t 712 to 480, which carries the same share of signal as SDXL's steps 0 to 15. The thick red line is the signature; the dashed line is the bar of 0.75.* ✅ *Read on the picture at full size.*
+
+🔤 **The name:** balanced accuracy
+- **accuracy**: the share of calls that were right. **balanced**: each side weighed equally, as on a pair of scales, however many items sit on each side.
+- **The picture, a table of an ordinary toy (not the finding's data):** 100 canvases, 10 holding a 3 and 90 without. The reader's call runs across the top and the truth down the side.
+
+| | reader says "a 3 is here" | reader says "no 3" |
+|---|---:|---:|
+| **a 3 is on the canvas** (10) | 9 | 1 |
+| **no 3 on the canvas** (90) | 45 | 45 |
+
+- **Formula, in those words:** take the share right in each row and average the two rows: ½ × (9/10 + 45/90) = ½ × (0.9 + 0.5) = 0.7. Plain accuracy counts every canvas once, (9 + 45)/100 = 0.54, so the 90 canvases without a 3 outweigh the 10 with one. ✅ Computed this session.
+- **Consequence:** a reader that always says "no 3" is right on 90 of 100 canvases, plain accuracy 0.90, yet its balanced accuracy is ½ × (0/10 + 90/90) = 0.5, which is chance. That is why 0.5 is the chance line in the picture above, whatever the mix of canvases. ✅ Computed this session. The card is [the accuracy card](../../../../../Obsidian/Artificial%20Intelligence/Machine%20Learning/Accuracy.md#where-to-learn-this).
 
 💥 **Broken run (without):** the early window the ladder draws, steps 0 to 15.
 - **Predict:** does a trained reader of the signature tell which digits are present?

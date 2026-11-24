@@ -107,6 +107,8 @@ $$
 
 BCE is the binary cross-entropy, −log σ(z) for a yes picture and −log(1 − σ(z)) for a no picture.
 
+On the fruit toy, fruit A comes out at σ = 0.668. If A is ripe, its BCE is −log 0.668 = 0.403; if A is in fact not ripe, the same call costs −log(1 − 0.668) = 1.103, so the same σ costs more than twice as much when the call is wrong. ✅ Computed. [The cross-entropy card](../../../../../Obsidian/Mathematics/Statistics/Information%20Theory/Cross-Entropy.md#where-to-learn-this) works the loss by hand.
+
 | Symbol | On the counting fit, every encoder | If it moved |
 |---|---|---|
 | c_yes = 0.5 / (share of yes) | 0.5 / (785 / 3,268) = 2.082 | the yes pictures' total weight, 785 × 2.082 = 1,634, equals the no pictures', 2,483 × 0.658 = 1,634; set both weights to 1 and a probe that always says no scores 0.760 plain accuracy on the fit set, at 0.5 balanced |
@@ -115,6 +117,13 @@ BCE is the binary cross-entropy, −log σ(z) for a yes picture and −log(1 −
 | the call | yes when w · v + b > 0 | the threshold is fixed at σ = 0.5 and never tuned on the test pictures |
 
 ✅ The weights and totals computed from the result file's counts; the λ choices read in `latent_clip.counting.l2`; the grid and folds read in `L2_GRID` and `FOLDS`, lines 37 to 38, and `choose_l2`.
+
+🔤 **The name:** 5-fold cross-validation, grouped by pair and seed
+- **validation**: checking a choice on pictures the fit did not use.
+- **cross**: across the folds, each part taking its turn on the checking side. The fit set is cut into 5 **folds**; for each λ, 5 probes are fitted, each on 4 folds and scored on the fifth, and the λ with the best mean balanced accuracy on the held-out folds is kept. ✅ `choose_l2`, `w2b_probe.py` lines 144 to 157.
+- **grouped by pair and seed**: every picture of one pair and seed goes in the same fold, chosen by a hash of the group's name. ✅ Line 145.
+- **Formula, in those words:** a λ's score is the mean, over the 5 folds, of the balanced accuracy on the fold it was not fitted on.
+- **Consequence:** 🧸 a toy of 10 groups with 2 near-identical pictures each, labelled at random, read by a reader that copies the label of its nearest training picture. Cut the folds by file order and each held-out picture's twin sits in training, so the held-out score is 1.0. Group the folds and the twins stay together, and the same reader scores 0.6, close to the 0.5 a guess gets. ✅ Computed this session; the toy is invented. That grouping guards the λ choice against near-copies in this way is 🔍 inferred from the code; the design gives no reason.
 
 ## What the probes read
 

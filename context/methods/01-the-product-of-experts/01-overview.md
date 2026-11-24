@@ -31,6 +31,11 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#what-one-step-does) ➡️
 
 **Noise prediction (ε) and score (s)**: two views of one arrow. The score points toward pictures the model finds more likely; the noise prediction is the same arrow scaled and flipped, ε = −σ_t s, where σ_t is how much noise the canvas still holds at step t.
 
+🔤 **The name:** noise prediction
+- **noise**: the random speckle mixed into the canvas. **prediction**: a guess at it. On the toy, the model's guess at how much speckle sits in each of the canvas's four numbers.
+- **Formula, in those words:** the guessed speckle is the score's pull, flipped and multiplied by the noise still in the canvas: ε = −σ_t s.
+- **Consequence:** at step 25, where σ_t is 0.693, the product's pull of −0.932 on "how much 4 in the left cell" is a noise prediction of +0.646, and the joint's pull of −0.156 is +0.108. Move σ_t to 0.986, its value at step 5, and the same pull of −0.932 would be a noise prediction of 0.919, so one pull reads as a bigger noise guess on a noisier canvas. Toy numbers, computed this session. ✅ The score is taught with textbook pages on [the score function card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Score%20Function.md#where-to-learn-this), and [the plan that shows noise prediction is the score](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/08-noise-prediction-is-the-score.md) derives the sign and the scale.
+
 **Sampler step**: one move of the canvas from noisier to cleaner, using the noise prediction. The project's sampler takes 50 of them, step 0 the noisiest and step 49 clean.
 
 **The toy**: the scene's miniature, a canvas of two cells where every score is exact, worked in full on [the miniature page](03-the-miniature.md).
@@ -51,6 +56,8 @@ Each box in the picture above has a twin in the toy and in the real digit runs:
 | base, told nothing | the four single-digit canvases, a quarter each ✅ | chosen per run: the mean of the two experts' no-digit predictions for the full-canvas product, a model trained on both digit ranges, or a blank canvas with some spread in the earlier runs ✅ |
 | the interaction term | exact, from the joint's own bumps ✅ | never available; the correction, the pushes and the held layout each stand in for it ✍️ |
 
+A U-Net, the network each real expert is, shrinks the canvas a few times to read it whole, then grows it back to full size while passing each size's detail across, so its drawing has the shape of a U. It is taught with textbook pages on [the U-Net card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/U-Net.md#where-to-learn-this).
+
 On SDXL the base is the empty prompt's prediction, and the code that sums the two guided predictions is quoted on [PoE composition](../../world/poe-composition.md#in-pictures-code-and-further-reading).
 
 ## The names, taken apart
@@ -64,6 +71,8 @@ Navigation: ⬅️ [What one step does](#what-one-step-does) | 📋 [TOC](#table
 - **experts**: models that each know one thing well. On the toy, expert A has only ever drawn a single 4 and expert B a single 7; the green boxes in the picture.
 - **Formula, in those words:** multiply what each expert allows and divide by the base once. On the canvas with a 4 left and a 7 right, both experts give −50.7 and the base −50.7, so the product gives −50.7 + (−50.7) − (−50.7) = −50.7, while the joint (a model told "a 4 and a 7") gives −0.7.
 - **Consequence:** neither expert has seen that canvas, so the product's value there is whatever their tails leave. If expert A had seen it and gave −0.7, the product would rise by 50 to −0.7. That is a what-if on the table's own arithmetic, not a run.
+
+The product of experts is taught with textbook pages and a plan that composes two Gaussians on [the product of experts card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Product%20Of%20Experts.md#where-to-learn-this).
 
 🔤 **The name:** interaction term
 - **interaction**: how two things act on each other when they share a space. On the toy, whether the 4 and the 7 end up in different cells instead of on top of each other or one replacing the other.
@@ -95,12 +104,19 @@ The worked case is one point on the toy, computed this session with the scene's 
 | s_J | the joint, told a 4 and a 7 | −0.156 | the joint is nearly at rest here, because this is one of its two canvases |
 | I_t | the term, s_J minus the product | +0.776 | it cancels most of the product's pull |
 
+The signal level ᾱ and the noise level σ_t are taken apart on [the network view](02-the-network-view.md#the-three-fields): at step 25 a drawn 1 has shrunk to √0.52 ≈ 0.72 and sits under noise of size 0.693.
+
 The same point at step 5 (ᾱ 0.03), early in the run, gives a term of only +0.045 on that coordinate, so early on the product and the joint point almost the same way. ✅
 
 As a noise prediction the term is r_t = −σ_t I_t, which at step 25 is −0.693 × 0.776 = −0.538 on that coordinate. ✅ What `r_t` means in the SDXL pipeline is on [the interaction term](../../world/interaction-term.md#what-the-interaction-term-is).
 
 > [!NOTE]
 > The scene's `r_t` comes from unguided scores, and the digit runs use no guidance. The SDXL pipeline computes `r_t` from guided predictions, ε_cond guided = ε_empty + w (ε_cond − ε_empty). Subtracting the guided product from the guided joint leaves w times the unguided gap, so for the same model and step the SDXL `r_t` is the guidance scale (7.5 in the runs the world page quotes) times the scene's `r_t`. 🔍 This follows from the two code lines quoted on the world pages and has not been checked on a run.
+
+🔤 **The name:** guidance scale
+- **guidance**: steering toward something. **scale**: how far. On SDXL, how far each prediction is pushed from the empty prompt's toward its own prompt's: the w in ε_cond guided = ε_empty + w (ε_cond − ε_empty).
+- **On a one-number toy:** an empty-prompt prediction of 0.2 and a prompted one of 0.5. At w = 0 the guided prediction is 0.2, the prompt ignored; at w = 1 it is 0.5, the prompt as the model gave it; at w = 7.5 it is 2.45, carried past the prompt in the same direction.
+- **Consequence:** beside that empty 0.2, take two experts at 0.5 and 0.4 and a joint at 0.6. Unguided, the joint minus the product is 0.6 − (0.5 + 0.4 − 0.2) = −0.1. Guide each at w = 7.5 first (2.45, 1.70 and 3.20) and the gap becomes 3.20 − (2.45 + 1.70 − 0.2) = −0.75, which is 7.5 times −0.1: the arithmetic the note above rests on. Toy numbers, computed this session. ✅ Guidance is taught with textbook pages on [the classifier-free guidance card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Diffusion%20Models/Classifier-Free%20Guidance.md#where-to-learn-this).
 
 ## How it fails and how you know it worked
 
@@ -122,6 +138,8 @@ Navigation: ⬅️ [How it fails and how you know it worked](#how-it-fails-and-h
 </tr></table>
 
 *Left: one row per way of composing, eight seeds per row, for the asked pairs 4 and 7, 1 and 9, and 2 and 8. A green outline means the digit-reading judge calls two clear, right digits, and the count at the end of each row label is clean pairs of 64. With each expert on the whole canvas and a model of both digit ranges as the base, the rows read 0 of 64 for all three pairs. With each expert shown only its own half and both pushes added, they read 47, 53 and 48 of 64.* ✅ *Right: Loop 4's diagram of the same product with more experts. The top box is Bradley et al.'s CLEVR setup, one location model asked at each position, whose most objects composed is 4. The bottom box is a proposal, ten experts each trained on one position, any five picked for five objects. Nothing in the bottom box has been run.* ✍️
+
+The digit-reading judge is a 10-way digit classifier, with a hand-written rule before it that finds the digit blobs and one after it that turns the readings into a call, as [the judge scene's build record](../../../2-classifier-guidance/artifacts/scenes/mnist-judge/README.md) states. ✍️
 
 ## What is measured where
 

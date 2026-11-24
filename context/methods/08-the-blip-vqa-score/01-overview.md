@@ -36,6 +36,10 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#what-one-scoring-pass-does)
 
 **Frozen**: used as released, with no weight changed.
 
+**Seed**: the number that fixes a render's starting noise, so the same prompt at seed 42 always gives the same picture and at ten seeds gives ten pictures.
+
+**LoRA**, in CoMat's line above, is taught with textbook pages and videos on [the LoRA card](../../../../../Obsidian/Artificial%20Intelligence/Large%20Language%20Models/LoRA.md#where-to-learn-this).
+
 ## What one scoring pass does
 
 Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#table-of-contents) | [Next](#the-names-taken-apart) ➡️
@@ -69,11 +73,15 @@ Navigation: ⬅️ [What one scoring pass does](#what-one-scoring-pass-does) | �
 - **Formula, in those words:** ask BLIP one question per thing the prompt names, read how strongly its answer starts with "yes", and multiply.
 - **Consequence:** take away the yes reading and BLIP writes its answer as text. The same model class has a `generate` mode that returns words (`models/blip_vqa.py`, lines 93 to 113) ✅, which would give each question 0 or 1 and each picture 0 or 1. The probability is T2I-CompBench's reading of BLIP, not BLIP's own output ✍️ [the scoring sources page](../../../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/sources/scoring-and-benchmarks/SOURCES.md#blip).
 
+Visual question answering is taught with textbook pages on [the visual question answering card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Visual%20Question%20Answering.md#where-to-learn-this), and the whole name on [the BLIP-VQA subject note](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Evaluating%20Text-To-Image%20Models/BLIP-VQA.md#words-the-name-uses).
+
 🔤 **The name:** noun phrase
 
 - **noun**: a word naming a thing, such as "bench". **phrase**: a few words that work as one unit. A noun phrase is the noun with the words that describe it: "a blue bench". On the picture, the two blue cards under "Split the prompt".
 - **Found by spaCy**: spaCy is an English-parsing library; its `noun_chunks` returns the noun phrases of a sentence. The environment pins spaCy 3.5.3 with the `en_core_web_sm` 3.5.0 model ✅ [the scorer's install script](../../../1-lora-correction/scripts/review_install_t2icomp.sh), lines 9 and 10. That "a blue bench and a green bowl" splits into exactly "a blue bench" and "a green bowl" is ✍️ stated by the picture; the parser was not run for this page.
 - **Consequence:** the colour rides inside the question, so "a green bowl?" asks about a green bowl and not about any bowl. A picture with the colours swapped is asked about two things it does not hold. On "a yellow bow and a pink bowl", CO3's render with the colours swapped scored 0.1899 where PoE's render with both drawn scored 0.9540 ✍️ [the Attend-and-Excite finding](../../../1-lora-correction/report/against-other-methods/how-does-the-adapter-score-on-the-attend-and-excite-prompts.md#what-a-high-and-a-low-cell-look-like); the finding marks the swap as the reason 🔍 inferred, because the per-question answers were not kept.
+
+Noun phrases are taught with textbook pages on [the noun phrase card](../../../../../Obsidian/Artificial%20Intelligence/Noun%20Phrase.md#where-to-learn-this).
 
 🔤 **The name:** yes-probability
 
@@ -120,6 +128,12 @@ $$
 Ripen the banana in photo 2 so its question reads 0.90 and photo 2 scores 0.81; the mean rises from 0.3513 to 1.684 / 3 = 0.5613. ✅ arithmetic.
 
 **Run back on the project's numbers.** No per-question answer was kept for any picture this page quotes, so only products are known. A product still bounds its factors: each factor is at most 1, so each is at least the product, and the smaller is at most its square root. On "a mug and a wine glass" at seed 11 the plain product's picture scored 0.0044 ✅ [the probe's BLIP-VQA file](../../../1-lora-correction/artifacts/results/measuring-composition/the-scorers/what-each-scorer-says-about-two-objects/probe_blipvqa.csv), so its weaker answer was at most √0.0044 = 0.066. At the category level, CoMat's 2,880 Color pictures average 0.7696 ✍️ [the CoMat review](../../../artifacts/notes/progress/reproductions/CoMat/review.md), line 32. The opening picture itself has no score on record: the CoMat trial rung that made it computed none ✍️ the same review, line 30.
+
+🔤 **The name:** trial rung
+
+- **rung**: one step of a ladder, which you stand on only after the one below holds. Loop 5's CoMat rerun climbs in rungs, each passing before the next starts: a control check, a smoke test of 2 Shape prompts at seed 42, then 1% of the data, 9 prompts at 10 seeds ✍️ [the CoMat review](../../../artifacts/notes/progress/reproductions/CoMat/review.md#runs), its runs table.
+- **trial**: a small run made to look at before committing to the full one. The trial rung is the 1% rung, and its sheet at seed 42 is [the CoMat trial sheet](../../../artifacts/notes/progress/reproductions/CoMat/comat-one-percent-seed42.png), whose top middle tile opens this page.
+- **Consequence:** the rung made 9 × 10 = 90 pictures and scored none of them, so the sheet's 9 tiles are checked by eye only; the full run after it, 288 prompts at 10 seeds, made the 2,880 pictures behind 0.7696. ✅ arithmetic.
 
 ## How it fails and how you know it worked
 

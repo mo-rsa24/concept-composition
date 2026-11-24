@@ -168,6 +168,13 @@ Navigation: ⬅️ [From logits to one score](#from-logits-to-one-score) | 📋 
 
 The dots mark the presence-only checker's loss (lines 460 to 461, and the choice between the two at the start of line 462), which the kept checker does not use. A picture with no presence label gets `[-1, -1]`, so its mask is 0 and it adds nothing to the presence term. The optimiser is AdamW at learning rate 3e-4 with weight decay 0.01 (line 310). The `batch` function noises each picture's finished latent with the scheduler's own `add_noise` at a sampler timestep (lines 147 to 151). ✅
 
+**The training sentence above, one term at a time.**
+- **Optimiser**: the rule that turns each update's gradient into a change of the head's weights.
+- **AdamW**: Adam, short for adaptive moment estimation, scales each weight's step by running averages of that weight's own past gradients, so every weight moves at a similar pace whatever the size of its gradient. The W says the weight decay below is applied on its own, outside that scaling.
+- **Learning rate 3e-4**: the size of that step, so a weight moves by roughly 0.0003 per update. 🔍 "roughly" because Adam's scaling makes the step only close to the rate. The [learning rate card](../../../../../Obsidian/Artificial%20Intelligence/Machine%20Learning/Learning%20Rate.md#where-to-learn-this) teaches it.
+- **Weight decay 0.01**: each update also shrinks every weight by the learning rate times the decay, 3 × 10⁻⁶ of itself, so a weight no gradient pushes keeps 0.994 of its size after the kept checker's 2,000 updates. ✅ computed this session.
+- **add_noise**: the scheduler's noising, x_t = √ᾱ_t x_0 + √(1 − ᾱ_t) ε, worked on one number at steps 0, 15 and 49 on [the deep dive](02-inside-the-kept-checker.md#what-the-head-learned-from).
+
 ## The push
 
 Navigation: ⬅️ [Training the head](#training-the-head) | 📋 [TOC](#table-of-contents) | [Next](#slipping-the-push-into-co3) ➡️

@@ -30,6 +30,8 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#the-blocks-and-where-they-l
 
 **`@torch.no_grad()`**: a decorator that tells PyTorch to keep no record of the arithmetic inside the function, so no gradient can flow back through it. Reading a score path needs no gradient, so it does no harm here.
 
+The gradient is taught with worked examples on [the gradient card](../../../../../Obsidian/Mathematics/Calculus/Gradient.md#where-to-learn-this).
+
 **`.chunk(n)`**: splits a batch into n equal parts in order, so one forward pass over a stacked batch of three gives back three separate predictions.
 
 **`avg_pool2d(d, k)`**: replaces each k × k block of a map with its mean, so a 32 × 64 map becomes 16 × 32 at k = 2 and 8 × 16 at k = 4.
@@ -71,6 +73,23 @@ ABAR = torch.cumprod(1 - BETAS, 0).float()
 
 The canvas U-Net script, lines 35 to 38. ᾱ_t is the share of the clean canvas's power left at t, and x_t = √ᾱ_t x₀ + √(1 − ᾱ_t) ε. ✅ Recomputed from these lines this session: √ᾱ is 0.0064 at t 999, 0.0871 at t 693, 0.308 at t 480 and 0.946 at t 100, where step X5 put its positive control.
 
+**The schedule, by what moves.** ᾱ_t is a running product: each timestep s keeps a share 1 − β_s of the clean canvas's power and hands β_s to the noise, and ᾱ_t multiplies those kept shares from step 0 up to t. Green is the clean canvas's share, as on [the network view's sixteen steps](02-the-network-view.md#sixteen-steps-make-a-path).
+
+$$
+\textcolor{#5fa877}{\underbrace{\bar\alpha_t}_{\text{share of the clean canvas left at } t}}
+= \prod_{s=0}^{t}\big(1 - \underbrace{\beta_s}_{\text{share handed to noise at step } s}\big),
+\qquad
+\beta_s \text{ runs in a straight line from } 0.0001 \text{ to } 0.02
+$$
+
+| Move | ᾱ at t 999 | √ᾱ at t 999 | What the canvas looks like at the noisiest step |
+|---|---:|---:|---|
+| the schedule as written | 0.0000404 | 0.0064 | pure noise, the digit 0.0064 of its size |
+| hold every β_s at its first value, 0.0001 | 0.905 | 0.951 | the digit almost untouched after all 1,000 steps |
+| hold every β_s at its last value, 0.02 | 0.0000000017 | 0.000041 | noise even sooner than the real schedule |
+
+✅ Computed this session from the linear schedule. Because ᾱ is a product over every timestep up to t, by t 693 it has multiplied in 694 kept shares and is down to 0.0076 (√ᾱ 0.0871), so the first 16 sampler steps, t 999 to 693, all sit at or under that.
+
 ## How the step and the label enter
 
 Navigation: ⬅️ [The schedule and the no-digit label](#the-schedule-and-the-no-digit-label) | 📋 [TOC](#table-of-contents) | [Next](#training-one-label-per-call) ➡️
@@ -94,6 +113,12 @@ def timestep_embedding(t, dim):
 ```
 
 Lines 44 to 48, 110 and 62. `self.cemb` is the 11 × 256 label table (2,816 weights) and line 62 adds the sum inside each ResBlock after its first convolution. `y` holds one label per canvas, so ε_θ(x_t, t, c) takes a digit or no digit and never a pair. ✅
+
+🔤 **The name:** timestep embedding (the 64 sines and cosines)
+- **timestep**: the t the U-Net is told, 999 down to 0. **embedding**: placing it as a point among many numbers, here 64, so the network can read it.
+- **On the code:** `freqs` holds 32 speeds, from 1 down to 10000^(−31/32) ≈ 0.000133; `args` is t times each speed, and the 64 numbers are the cosine and the sine of each.
+- **Formula, in those words:** entry i is cos(t × speed_i) or sin(t × speed_i), so as t runs from 999 to 0 the fastest entry turns about 159 full circles and the slowest about a fiftieth of one. ✅ Computed this session.
+- **Consequence:** move t from 999 to 979, the next sampler step. The fastest cosine goes from 0.9996 to 0.3838, a jump of 0.616, while the slowest goes from 0.9911 to 0.9915, a change of 0.0004. Neighbouring steps are told apart by the fast entries and distant ones by the slow entries. ✅ Computed this session from the four lines above. Videos that teach it are listed under [timestep embedding in the video lessons index](../../../../../Obsidian/Mathematics/references/videos/Video%20Lessons.md#timestep-embedding).
 
 ## Training: one label per call
 
@@ -119,6 +144,11 @@ Navigation: ⬅️ [How the step and the label enter](#how-the-step-and-the-labe
 ```
 
 Lines 140 to 144, 161 and 293 to 294. With `share` 0.01, one canvas in a hundred holds two digits from the 40 pairs not held out; with `share` 0.0, which step X5 used, none does. A tenth of labels are replaced by 10, which is how the no-digit guess is learned. ✅ The script's docstring, lines 3 to 5, says the same in words: "the expert for 7 means 'a canvas with a 7 on it, sometimes beside another digit'". This is why the joint path is dead on digits ✍️ ([the ideas page, C2a](../../../artifacts/notes/progress/score-space/03-ideas.md#c-the-two-arithmetic-tests)).
+
+🔤 **The name:** mean squared error (`F.mse_loss`)
+- **error**: the gap between the guess and the truth, here the noise guess `pred` and the noise actually added. **squared**: each gap times itself, so a miss either way counts as positive. **mean**: averaged over every pixel.
+- **Toy, two pixels:** real noise (1, −1), guess (0.5, −1). The gaps are −0.5 and 0, squared 0.25 and 0, mean 0.125. ✅ Computed this session.
+- **Consequence:** a model that guesses 0 everywhere scores (1 + 1) / 2 = 1.0 on the same pixels, eight times worse, so training moves the weights toward guesses that match the noise. ✅ Computed this session. The card is [the mean squared error card](../../../../../Obsidian/Artificial%20Intelligence/Machine%20Learning/Mean%20Squared%20Error.md#where-to-learn-this).
 
 ## The product: three calls and two subtractions
 
@@ -197,6 +227,11 @@ Navigation: ⬅️ [The sixteen steps](#the-sixteen-steps) | 📋 [TOC](#table-o
 ```
 
 Lines 231 to 233 and 239. The step is taken apart term by term on [the product-of-experts code page](../01-the-product-of-experts/04-the-code.md#the-sampler-step). ✅
+
+🔤 **The name:** eta
+- **eta**: the Greek letter η, which the sampler code uses for how much fresh random noise each step adds. At 0 the step takes the `else` branch quoted above and adds none; above 0 it takes the branch shown on [the product-of-experts code page](../01-the-product-of-experts/04-the-code.md#the-sampler-step), which draws new noise z.
+- **Formula, in those words:** the fresh noise's weight is η × √((1 − ᾱ_next)/(1 − ᾱ_t)) × √(1 − ᾱ_t/ᾱ_next), and the guessed noise's weight shrinks so the two together keep the canvas the same size.
+- **Consequence:** on the step from t 999 to t 979, η = 0 puts weight 1.000 on the guessed noise and 0 on fresh noise; η = 1 puts 0.819 on the guessed noise and 0.574 on fresh noise. With η = 0 the whole run is fixed once its starting noise is drawn, which is why a path read along it is fixed by its seed. ✅ Computed this session from the schedule. The sampler is taught on [the DDIM card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Diffusion%20Models/DDIM.md#where-to-learn-this).
 
 🔤 **The name:** the product's own path
 - **own**: belonging to this run. Each x_t is the one the previous step made, from the product's prediction.
@@ -305,6 +340,11 @@ MIN_OVER_NOISE = 0.10        # and at least this much above the raw-noise probe 
 ```
 
 The X5 script, lines 37 and 38, with `MIN_CONTROL = 0.90` at line 40 and `CONTROL_T = 100` at line 39. Line 294 says that in the full read only the canvas row gates the control, on board question 74. ✅ The script's docstring, line 11, still says the signature and the noisy canvas "must each reach presence accuracy 0.9"; the gate in the code is the canvas row alone.
+
+🔤 **The name:** positive control
+- **control**: a check run beside the real test to show the instrument works. **positive**: a case where the answer is known to be yes, so a working instrument must say yes.
+- **On the schedule:** t 100, where the clean canvas's weight √ᾱ is 0.946 against 0.0064 at t 999, about 149 times larger. An ink pixel and a background pixel with the same noise draw 0.5 read 1.108 and −0.784 there, against 0.506 and 0.494 at t 999. ✅ Computed this session from block 1.
+- **Consequence:** if the reader on the noisy canvas missed `MIN_CONTROL`, 0.90, at t 100, where the digits are plain, a miss at t 999 would say only that the reader is broken. Passing it, 0.950 by the finding ✍️, is what lets a miss in the early window be read as the signature carrying too little. Presence accuracy is the balanced accuracy taken apart on [the overview's result](01-overview.md#how-it-fails-and-how-you-know-it-worked).
 
 **How you know a path was read.** The finding's reader on the noisy canvas reached 0.950 at t 100, so the pipeline reads digits when they are there to read. The signature then missed 0.75 in both windows, so the encoder steps did not run ✍️ ([the finding, section 3](../../../2-classifier-guidance/report/does-the-score-path-carry-which-digits-are-present.md#3-the-checks-that-the-reader-works)).
 
