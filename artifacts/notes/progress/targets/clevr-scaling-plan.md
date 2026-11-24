@@ -43,6 +43,13 @@ anywhere in the frame. The 6 models pair into 9 scenes of 2 to 6 objects. Succes
 models see real multi-object images, so this is its own table and does not count toward the one-object target. Giving each model
 its own half of the image is not allowed, because that is two pictures pasted side by side.
 
+These models are told which objects to draw and not where, as the digit and SDXL models are, so Stage 2 is the like-for-like test of a
+checker. Position-conditioned models already paste their objects, which leaves a checker nothing to add. Beside the plain product, Stage 2
+runs two rows. The first adds Loop 8's count checker, retrained on these models' maps at the noise levels of the sampler's early steps and
+pushing only on those steps, as in [its digit test](../abstract-checkers/06-does-it-compose/review.md). The second samples
+the product with Du et al.'s MCMC corrector, which separates a better sampler from a new mode. Session 6 costs both rows in its Stage 2
+design.
+
 **Inclusive labels do not run here.** Training a diffusion model on inclusive captions is too heavy for the main results, so they get
 one appendix paragraph, written from the existing toy, MNIST and SDXL results.
 
