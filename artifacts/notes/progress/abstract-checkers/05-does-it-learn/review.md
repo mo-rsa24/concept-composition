@@ -1,6 +1,25 @@
 # Review: does a checker learn plurality on unseen digits (step V2)
 
-**Status: null.** The map reader misses two of V2's three bars on digits 5 to 9. W&B run `a562r799`. Steps V3, V5 and V4 wait on the owner's answer to board question 64.
+**Status: null.** The map reader misses two of V2's three bars on digits 5 to 9 (W&B run `a562r799`), and the rehearsal at SDXL's noise level misses the same two on the pairs holding digit 4. Steps V3, V5 and V4 wait on the owner's answer to board question 67.
+
+## The rehearsal at SDXL's noise level
+
+<a href="two-noise-levels.png"><img src="two-noise-levels.png" width="600" alt="Balanced accuracy on pairs holding digit 4 across the 16-step window. At SDXL's noise, all canvas kinds rise from 0.59 to 0.81; at the toy's own early noise they rise from 0.50 to 0.60. Right digits against a wrong digit stays near 0.5 at both noise levels"></a>
+
+Job 94080 on `mscluster42` took 32 minutes 48 seconds, from the code snapshot of commit `6ad01702`, and wrote `/datasets/mmolefe/poe_repair_min/loop-8/v2/sdxl-window/rehearse.json`. Both readers trained on the pairs among digits 0 to 3 at the 16 toy timesteps that match SDXL's noise (712 down to 480), as the design's section on board question 64 sets out. Digits 5 to 9 were not read. Solid lines are this run and dashed lines are the base map reader at the toy's own early noise.
+
+| Score over the 16 steps, pairs holding digit 4, 0.5 is chance | Bar | Map reader | Raw reader |
+|---|---|---|---|
+| Overfit check, 16 fixed examples | at least 15 right | 16 | 16 |
+| Balanced accuracy, all canvas kinds | at least 0.75 | **0.704** | 0.713 |
+| Gap to the trained pairs | at most 0.05 | 0.029 | 0.037 |
+| `apart` against `wrong` | at least 0.75 | **0.511** | 0.514 |
+| Share of reads called label 1 | between 0.01 and 0.99 | 0.636 | 0.554 |
+| Wrong-digit canvases called label 0 | none | 0.18 | 0.26 |
+
+The verdict is a miss by the written rule. Both readers trained, and both learned where the digits sit: the map reader rises from 0.59 at the noisiest step to 0.81 at the least noisy. Neither learned which digits are present. They call 82% and 74% of wrong-digit canvases label 1, and the raw reader is told the asked digits and still scores 0.514 on `apart` against `wrong`, so the maps are not what blocks it. Wrong-digit canvases are 1 in 8 of the training mix, and the other three label-0 kinds can be told apart by layout alone.
+
+**Read afterwards as a two-digits-apart counter**, with `apart` and `wrong` as label 1 and the other three kinds as label 0, the map reader's balanced accuracy is 0.766 on the pairs holding digit 4 and the raw reader's is 0.776. This reading was not planned before the run, so it supports no claim and only shows that the count half of the task is within reach at this noise level.
 
 ## The result
 
@@ -49,4 +68,4 @@ No configuration separates `apart` from `wrong`, on the pairs it trained on or o
 
 The written rule freezes the configuration with the highest smaller value of the two scores on the pairs holding 4, which is **log totals added** at 0.4999. The four values span 0.4946 to 0.4999, so this choice separates configurations that are all at chance.
 
-GPU-hours spent so far: 3.78 of 30 (0.14 on step V1, 0.30 on this ladder, 2.68 on the inner test and 0.66 on the final read).
+GPU-hours spent so far: 4.33 of 30 (0.14 on step V1, 0.30 on this ladder, 2.68 on the inner test, 0.66 on the final read and 0.55 on the rehearsal at SDXL's noise level).
