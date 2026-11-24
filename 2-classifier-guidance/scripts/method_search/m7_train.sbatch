@@ -34,7 +34,9 @@ export CUDA_VISIBLE_DEVICES=0 HF_HUB_OFFLINE=1
 echo "[$(date -u +%H:%M:%S)] job=${SLURM_JOB_ID:-none} node=$(hostname -s) gpu=$(nvidia-smi --query-gpu=name --format=csv,noheader -i 0) memory=${TOTAL}MiB batch_gpu=$BATCH_GPU python=$PY snap=$SNAP rung=$RUNG set=$SET nimg=$NIMG"
 mkdir -p "$OUT"
 cd "$E" || exit 3
-STATUS=$((NIMG / 8)); [ "$STATUS" -lt 2048 ] && STATUS=2048
+# EDM2 needs every interval to be a whole number of 2,048-image batches.
+[ $((NIMG % 2048)) -eq 0 ] || { echo "ABORT: $NIMG is not a multiple of the 2,048-image batch"; exit 2; }
+STATUS=$((NIMG / 8 / 2048 * 2048)); [ "$STATUS" -lt 2048 ] && STATUS=2048
 "$PY" train_edm2.py --outdir="$OUT" --data="$DATA" --cond=False --preset=edm2-img64-xs --duration="$NIMG" --batch-gpu="$BATCH_GPU" \
   --status="$STATUS" --snapshot="$NIMG" --checkpoint="$NIMG" --seed=20261124
 rc=$?
