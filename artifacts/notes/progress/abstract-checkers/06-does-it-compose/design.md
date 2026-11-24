@@ -24,7 +24,7 @@ The model in the first test never saw two digits in one picture, so a failed pus
 
 **Model and sampler.** `/home-mscluster/mmolefe/poe_repair_min_scratch/mnist-canvas/models/share-0.0/unet.pt`; DDIM with 50 steps and eta 0, the product of the two asked digit labels at guidance 1 (`canvas_unet.sample`), with `cap=1.0` so the sampler's own cap never fires.
 
-**Push window.** The sampler steps whose timestep lies between 480 and 712, the noise levels the checker trained on: sampler steps 14 to 25, 12 steps. The original design pushed on steps 0 to 15, where V2 showed a checker reads at chance, and board question 64 moved the checker to these noise levels.
+**Push window.** The sampler steps whose timestep lies between 480 and 712, the noise levels the checker trained on: sampler steps 15 to 25, timesteps 693 down to 489, 11 steps. The original design pushed on steps 0 to 15, where V2 showed a checker reads at chance, and board question 64 moved the checker to these noise levels.
 
 **Push.** $\hat\epsilon_t = \epsilon_{\text{product}} - \lVert\epsilon_{\text{product}}\rVert\, b\, g/\lVert g\rVert$, with $g = \nabla_{x_t}\ell$, the gradient of the checker's logit through the checker, the two maps and the frozen model's three calls. Norms are per canvas.
 
