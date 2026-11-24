@@ -39,7 +39,6 @@ Answer with `python3 scripts/progress_board.py answer <number> "<your answer>"`,
 
 | # | The question | Default |
 |---|---|---|
-| 80 | Should a checker choose CO3's sharpness setting at each of its corrected steps (about 3.1 GPU-hours)? The full read shows the checker does not see CO3's failure: right at best 60% of the time against a 65% floor. Loop 13 recommends declining. | Loop 6 runs the first read |
 
 **When Loop 11 restarts.** Loop 13 may not start sessions, so it tells you when Loop 8's identity result
 or Loop 6's two-colour CLEVR test is done; restarting Loop 11 then puts the new result on a report page.

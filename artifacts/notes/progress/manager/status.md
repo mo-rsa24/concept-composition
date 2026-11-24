@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-24 18:52 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-24 18:55 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -46,6 +46,7 @@ At 16:55, in chat, recorded on the board and sent to each loop:
 |---|---|---|
 | 88 | Should Loop 11 stop after its last two steps until a research loop has something new? | yes, the default |
 | 87 | Should Loop 6's checker search be judged on two clear subjects, drawing style ignored? | yes; damage reported beside it, two reviewers per picture |
+| 80 | Should a checker choose CO3's sharpness setting at each corrected step? | declined: the checker does not see CO3's failure (60% right against a 65% floor); the design stays on file to reopen if a checker that sees it is found |
 | 92 | Should Loop 12's fix test count two clear subjects with their own parts, drawing style ignored? | you asked Loop 13 to decide: yes, with broken anatomy as a guard and faithful pairs reported beside it, so every Paper 2 result is counted one way; Loop 4 is bringing the bar's page in line |
 | 90 | May loops run queued work on mscluster107's idle card 1, inside another user's allocation? | yes: one run at a time, Loop 8 then Loop 6, with a watchdog that stops ours if their process starts using the card |
 | 89 | May Loop 13 add an edit command to the board script and fix the three records that disagreed with your answers? | yes: Loop 8's SDXL test now needs Loop 6's training list and names CO3 alone as its rival; the small CLEVR test is closed without running and the recipe freeze waits on the two-colour CLEVR test; Loop 10's skipped steps are closed. Commit `88b787c9`; the board before the change is kept at `/home/molef/.claude/jobs/3c51301e/tmp/board-before-q89.json` |
@@ -58,7 +59,6 @@ Newest first. A default happens only if you answer with it; nothing changes whil
 
 | # | The question, in one line | Why it is yours | Default | Waiting |
 |---|---|---|---|---|
-| 80 | Should a checker choose CO3's weight-sharpness setting at each of its corrected steps ([design](../score-space/11-the-checker-chooses-on-co3.md))? First read on 6 of 12 pairs | over 3 GPU-hours on one run (about 3.1) | **The full read is in: the checker does not see CO3's failure.** All 96 runs reproduced; its yes-or-no call is right at best 60% of the time (step 5, floor 65%, bar 75%), though it ranks a good picture above a bad one about 7 times in 10 ([review](../method-search/01b-balance-the-checker-data/review.md)). **Recommendation: decline.** A checker that cannot see the failure cannot choose CO3's setting to fix it | since 12:25 |
 
 Your own reading step (confirm the draft statements from your readings) is ready on the board.
 
