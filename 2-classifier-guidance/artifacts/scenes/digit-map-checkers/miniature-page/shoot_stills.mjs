@@ -16,6 +16,14 @@ fs.mkdirSync(OUT, { recursive: true });
 
 // [file name, frame id, setup run in the page, what it shows]
 const SHOTS = [
+  ["00a-real-input", "real-system", "__real('apart_1_3', 480, 0)", "opening frame, red box on the noisy canvas: apart 1|3 at t = 480, clean and noisy side by side"],
+  ["00b-real-maps", "real-system", "__real('apart_1_3', 480, 2)", "opening frame, red box on the two real maps"],
+  ["00c-real-conv1", "real-system", "__real('apart_1_3', 480, 3)", "opening frame, conv 1: 8 channels before and after SiLU"],
+  ["00d-real-film", "real-system", "__real('apart_1_3', 480, 7)", "opening frame, the timestep's scale and shift, with the 128 gammas and betas"],
+  ["00e-real-pool", "real-system", "__real('apart_1_3', 480, 9)", "opening frame, the 256 pooled numbers as two strips and the 16 time features"],
+  ["00f-real-logit-wrong", "real-system", "__real('wrong_1_3', 616, 10)", "opening frame, the logit on wrong 3|2 at t = 616: -1.115, the checker says no"],
+  ["00g-real-push", "real-system", "__real('apart_3_4', 539, 11)", "opening frame, the real push gradient on apart 3|4 at t = 539"],
+  ["00h-real-unet-712", "real-system", "__real('wrong_3_4', 712, 1)", "opening frame, three noise guesses on wrong 2|3 at the noisiest level"],
   ["01-forward-mid-convolution", "logit", "__seek(3, 0.55)", "forward pass, packets travelling from the maps into the convolution"],
   ["02-forward-at-rest", "logit", "", "forward pass complete, logit 0.772 on the apart canvas"],
   ["03-training-into-the-kernel", "training", "__seek(12, 0.5)", "training backward pass, orange packets running back into the kernel's weights"],
@@ -26,6 +34,15 @@ const SHOTS = [
   ["08-noise-sweep-at-712", "noise", "__seek(0, 0)", "noise sweep at its first timestep, t = 712"],
   ["09-push-length-at-1", "push-length", "__seek(20, 0)", "push-length sweep at b = 1.00"],
   ["10-identity-training", "training", "document.getElementById('br-identity').click()", "identity branch after one step: both logits fall, gap 0.4205 to 0.4192"],
+  ["11-noise-real-scores", "noise", "", "noise frame at t = 480: the real count checker's 0.63 and 0.92 ends and its 0.791 average"],
+  ["12-convolution-hover", "convolution", "(() => { const h = document.querySelector('.hit[data-edge=k0000]'); const r = h.getBoundingClientRect(); h.dispatchEvent(new PointerEvent('pointerenter', {clientX: r.left + r.width * 0.6, clientY: r.top + r.height * 0.6, bubbles: true})); })()", "convolution frame with the kernel lines bare and one weight's hover label open"],
+];
+// phone width: the opening frame and the network, where crowding would show first
+const PHONE = [
+  ["p1-real-conv1", "real-system", "__real('apart_1_3', 480, 3)"],
+  ["p2-real-logit", "real-system", "__real('wrong_1_3', 616, 10)"],
+  ["p3-network-forward", "logit", ""],
+  ["p4-training-end", "training", "__seek(14, 0)"],
 ];
 
 const browser = await chromium.launch({ executablePath: "/usr/bin/google-chrome", args: ["--no-sandbox"] });
@@ -48,6 +65,19 @@ for (const theme of ["light", "dark"]) {
   }
   if (errors.length) report.push({ theme, errors });
   await ctx.close();
+  const phone = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, colorScheme: theme, hasTouch: true });   // no isMobile: the page has no viewport meta until the host wraps it
+  const pp = await phone.newPage();
+  await pp.route(/fonts\.(googleapis|gstatic)\.com/, r => r.abort());
+  for (const [name, frame, setup] of PHONE) {
+    await pp.goto(PAGE + "?shot=" + name + "-" + theme + "#" + frame, { waitUntil: "load" });
+    await pp.waitForTimeout(150);
+    if (setup) await pp.evaluate(setup);
+    await pp.waitForTimeout(120);
+    const file = path.join(OUT, `${name}-${theme}.png`);
+    await pp.screenshot({ path: file, fullPage: true });
+    report.push({ file: path.relative(HERE, file), phone: true, scrollWidth: await pp.evaluate(() => document.documentElement.scrollWidth) });
+  }
+  await phone.close();
 }
 await browser.close();
 console.log(JSON.stringify(report, null, 1));

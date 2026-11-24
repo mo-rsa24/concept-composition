@@ -1,0 +1,235 @@
+{
+  "_about": "Every equation and math symbol on the page, as TeX. build_page.py renders each with KaTeX 0.16.11 at build time; the page reads the rendered HTML from EQ by name. 'd' = display (own line), 'i' = inline.",
+  "xt_d": [
+    "d",
+    "x_t = \\sqrt{\\bar\\alpha_t}\\,x_0 + \\sqrt{1-\\bar\\alpha_t}\\,\\varepsilon"
+  ],
+  "map_d": [
+    "d",
+    "m_a = 2048 \\cdot \\frac{|\\varepsilon_a - \\varepsilon_\\varnothing|}{\\sum_{\\text{pixels}} |\\varepsilon_a - \\varepsilon_\\varnothing|}"
+  ],
+  "map_mini_d": [
+    "d",
+    "m_a = 4 \\cdot \\frac{|\\varepsilon_a - \\varepsilon_\\varnothing|}{\\sum_{i=1}^{4} |\\varepsilon_a - \\varepsilon_\\varnothing|_i}"
+  ],
+  "expert_mini_d": [
+    "d",
+    "\\varepsilon_\\varnothing = 0.9\\,x, \\qquad \\varepsilon_y - \\varepsilon_\\varnothing = -0.5\\,T_y\\,\\sigma(3x)"
+  ],
+  "convsize_d": [
+    "d",
+    "n_{\\text{out}} = \\left\\lfloor \\frac{n_{\\text{in}} + 2p - k}{s} \\right\\rfloor + 1"
+  ],
+  "conv_real_d": [
+    "d",
+    "h_{c} = \\operatorname{SiLU}\\Big(b_c + \\sum_{c'} \\sum_{3\\times 3} W_{c,c'} \\, h^{\\text{in}}_{c'}\\Big)"
+  ],
+  "conv_mini_d": [
+    "d",
+    "\\text{pre}_c = \\text{bias}_c + \\sum_{m \\in \\{a,b\\}} \\sum_{k=1}^{2} K_{c,m,k}\\, m_k"
+  ],
+  "silu_d": [
+    "d",
+    "\\operatorname{SiLU}(z) = z\\,\\sigma(z) = \\frac{z}{1+e^{-z}}"
+  ],
+  "film_d": [
+    "d",
+    "h \\leftarrow h\\,(1+\\gamma) + \\beta"
+  ],
+  "film_mini_d": [
+    "d",
+    "\\begin{gathered} h = \\operatorname{SiLU}(\\text{pre})\\,(1+\\gamma) + \\beta \\\\ \\gamma = W_\\gamma\\,\\phi, \\qquad \\beta = W_\\beta\\,\\phi \\end{gathered}"
+  ],
+  "phi_mini_d": [
+    "d",
+    "\\phi = \\Big(\\sin\\tfrac{\\lambda}{10},\\ \\cos\\tfrac{\\lambda}{10}\\Big), \\qquad \\lambda = \\log\\frac{\\bar\\alpha_t}{1-\\bar\\alpha_t}"
+  ],
+  "phi_d": [
+    "d",
+    "\\phi_{2k},\\ \\phi_{2k+1} = \\sin,\\ \\cos\\Big(e^{3k/7}\\,\\tfrac{\\lambda}{10}\\Big)"
+  ],
+  "lambda_def": [
+    "i",
+    "\\lambda = \\log\\frac{\\bar\\alpha_t}{1-\\bar\\alpha_t}"
+  ],
+  "pool_d": [
+    "d",
+    "\\begin{gathered} \\text{mean}_c = \\frac{1}{8 \\cdot 16} \\sum_{i} h_{c,i} \\\\ \\text{max}_c = \\max_i h_{c,i} \\end{gathered}"
+  ],
+  "readout_d": [
+    "d",
+    "\\begin{aligned} \\ell &= v \\cdot (\\text{mean}_1, \\text{mean}_2, \\text{max}_1, \\text{max}_2) \\\\ &\\quad + u \\cdot \\phi + c \\end{aligned}"
+  ],
+  "mlp_d": [
+    "d",
+    "\\ell = W_2\\, \\operatorname{SiLU}\\big(W_1 [\\text{pooled};\\, \\phi] + b_1\\big) + b_2"
+  ],
+  "sigma_d": [
+    "d",
+    "\\sigma(\\ell) = \\frac{1}{1+e^{-\\ell}}"
+  ],
+  "bce_d": [
+    "d",
+    "L = -\\big[\\,y \\log \\sigma(\\ell) + (1-y) \\log(1-\\sigma(\\ell))\\,\\big]"
+  ],
+  "chain_d": [
+    "d",
+    "\\begin{gathered} \\frac{\\partial L}{\\partial K} = \\frac{\\partial L}{\\partial \\ell}\\, \\frac{\\partial \\ell}{\\partial h}\\, \\frac{\\partial h}{\\partial\\, \\text{pre}}\\, \\frac{\\partial\\, \\text{pre}}{\\partial K} \\\\ \\frac{\\partial L}{\\partial \\ell} = \\sigma(\\ell) - y \\end{gathered}"
+  ],
+  "step_d": [
+    "d",
+    "K \\leftarrow K - 0.05\\, \\frac{\\partial L}{\\partial K}"
+  ],
+  "push_g_d": [
+    "d",
+    "g = \\nabla_{x_t} \\ell"
+  ],
+  "product_d": [
+    "d",
+    "\\varepsilon_{\\text{product}} = \\varepsilon_a + \\varepsilon_b - \\varepsilon_\\varnothing"
+  ],
+  "push_d": [
+    "d",
+    "\\hat\\varepsilon = \\varepsilon_{\\text{product}} - \\lVert \\varepsilon_{\\text{product}} \\rVert \\, b \\, \\frac{g}{\\lVert g \\rVert}"
+  ],
+  "x0hat_d": [
+    "d",
+    "\\begin{gathered} \\hat x_0 = \\frac{x_t - \\sqrt{1-\\bar\\alpha_t}\\,\\hat\\varepsilon}{\\sqrt{\\bar\\alpha_t}} \\\\[4pt] \\Delta \\hat x_0 = \\frac{\\sqrt{1-\\bar\\alpha_t}}{\\sqrt{\\bar\\alpha_t}}\\,\\text{push} \\end{gathered}"
+  ],
+  "ba_d": [
+    "d",
+    "\\text{balanced accuracy} = \\tfrac12\\,(r_1 + r_0)"
+  ],
+  "r1": [
+    "i",
+    "r_1"
+  ],
+  "r0": [
+    "i",
+    "r_0"
+  ],
+  "l": [
+    "i",
+    "\\ell"
+  ],
+  "sig_l": [
+    "i",
+    "\\sigma(\\ell)"
+  ],
+  "sig_l_y": [
+    "i",
+    "\\sigma(\\ell) - y"
+  ],
+  "y": [
+    "i",
+    "y"
+  ],
+  "L": [
+    "i",
+    "L"
+  ],
+  "t": [
+    "i",
+    "t"
+  ],
+  "x0": [
+    "i",
+    "x_0"
+  ],
+  "xt": [
+    "i",
+    "x_t"
+  ],
+  "eps": [
+    "i",
+    "\\varepsilon"
+  ],
+  "abar": [
+    "i",
+    "\\bar\\alpha_t"
+  ],
+  "sqrt_abar": [
+    "i",
+    "\\sqrt{\\bar\\alpha_t}"
+  ],
+  "sqrt_1m_abar": [
+    "i",
+    "\\sqrt{1-\\bar\\alpha_t}"
+  ],
+  "eps_null": [
+    "i",
+    "\\varepsilon_\\varnothing"
+  ],
+  "eps_a": [
+    "i",
+    "\\varepsilon_a"
+  ],
+  "eps_b": [
+    "i",
+    "\\varepsilon_b"
+  ],
+  "ma": [
+    "i",
+    "m_a"
+  ],
+  "mb": [
+    "i",
+    "m_b"
+  ],
+  "phi": [
+    "i",
+    "\\phi(t)"
+  ],
+  "gamma": [
+    "i",
+    "\\gamma"
+  ],
+  "beta": [
+    "i",
+    "\\beta"
+  ],
+  "K": [
+    "i",
+    "K"
+  ],
+  "dLdK": [
+    "i",
+    "\\partial L / \\partial K"
+  ],
+  "g": [
+    "i",
+    "g"
+  ],
+  "norm_g": [
+    "i",
+    "\\lVert g \\rVert"
+  ],
+  "b": [
+    "i",
+    "b"
+  ],
+  "eps_prod": [
+    "i",
+    "\\varepsilon_{\\text{product}}"
+  ],
+  "norm_eps_prod": [
+    "i",
+    "\\lVert \\varepsilon_{\\text{product}} \\rVert"
+  ],
+  "eps_hat": [
+    "i",
+    "\\hat\\varepsilon"
+  ],
+  "gain": [
+    "i",
+    "\\sqrt{1-\\bar\\alpha_t} / \\sqrt{\\bar\\alpha_t}"
+  ],
+  "film_i": [
+    "i",
+    "h \\leftarrow h\\,(1+\\gamma) + \\beta"
+  ],
+  "film_box": [
+    "i",
+    "\\times(1+\\gamma)+\\beta"
+  ]
+}
