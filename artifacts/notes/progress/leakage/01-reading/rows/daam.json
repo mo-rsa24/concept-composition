@@ -1,0 +1,176 @@
+{
+  "slug": "daam",
+  "source": "arXiv 2210.04885",
+  "page_url": "https://arxiv.org/pdf/2210.04885",
+  "title": "What the DAAM: Interpreting Stable Diffusion Using Cross Attention",
+  "role": "Read-out method and the one pooled measurement linking same-category noun pairs to cross-attention overlap and to one object going missing; supports cross-attention overlap as a predictor, offers no fix",
+  "pages_read": 13,
+  "enters": "cross-attention: the two nouns' summed attention maps overlap more for same-category (WordNet cohyponym) pairs and for failed images",
+  "enters_evidence": "correlational measurement on 1,000 'a(n) X and a(n) Y' prompts: DAAM map mIoU 46.7 cohyponym vs 22.9 non-cohyponym; overlap read from the same image whose failure is scored, summed over all 30 steps, so cause is argued, not tested",
+  "enters_page": 7,
+  "changes": "nothing; DAAM sums bicubically upscaled cross-attention maps over heads, all layers (16, 32, 64 resolution) and all 30 steps, then thresholds at 0.4 of the max; adjective probe fixes attention maps to a seed prompt (Prompt-to-Prompt)",
+  "changes_page": 3,
+  "training": "nothing trained; needs only the prompt and the word index; no boxes, masks, LLM or reference image (WordNet ontology and CoreNLP parser used only to choose word pairs for the studies)",
+  "training_page": 4,
+  "model": "SD2.0 base, 512x512, 30 steps, DPM solver, guidance 7.5 (no other model tested)",
+  "similar_subjects": "both objects present in 52% of cohyponym-pair images vs 61% of non-cohyponym (1,000 prompts, exact test 99%); map mIoU 46.7 vs 22.9 (0-100); within cohyponyms 71.7% correct at low overlap vs 9.75% at high; failure scored is omission, not attribute borrowing; no per-pair numbers",
+  "similar_page": 7,
+  "which_pairs": "same WordNet category raises map overlap (correct images 43.5 vs 5.43 mIoU) and failure; within a category, low attention overlap (IoU at most 0.4) predicts success (71.7% vs 9.75% at IoU at least 0.6); text embeddings, appearance, token position not measured",
+  "which_pairs_page": 7,
+  "when": "not measured for the cohyponym study; segmentation ablation shows the first 15 of 30 steps give about 60.3 of the full 60.7 mIoU80 and the first step alone about 46.5 (read from Figure 11; direction of 'first' not stated)",
+  "when_page": 11,
+  "cost": "no extra passes or timings printed; maps are read from the ordinary forward pass (inferred)",
+  "cost_page": 3,
+  "headline": "SD2.0 base: 52% vs 61% both-objects-present for cohyponym vs non-cohyponym pairs, with DAAM map mIoU 46.7 vs 22.9; low-overlap cohyponym pairs succeed 71.7% vs 9.75% at high overlap",
+  "headline_page": 7,
+  "suggests": "(inferred) use cross-attention overlap as the leading predictor but read it at CO3's early corrected steps so it precedes the outcome; DAAM's IoU recipe (threshold 0.4, bins 0.4 and 0.6) is ready to copy; its accuracy numbers score omission and do not transfer to borrowing",
+  "extra_papers": [],
+  "disagreements": [
+    {
+      "claim": "DAAM segmentation range",
+      "source": "the paper itself (p. 1 against p. 4 and Table 1)",
+      "paper_says": "abstract and introduction give 58.9-64.8 mIoU; results text and Table 1 give 57.9-64.8 mIoU80",
+      "page": 1
+    },
+    {
+      "claim": "overlap of 'and'-joined nouns",
+      "source": "the paper itself (p. 6 text against Table 2)",
+      "paper_says": "text says 38.7 mIoU; Table 2 row 5 (nconj:and) gives 38.2",
+      "page": 6
+    },
+    {
+      "claim": "size of the cohyponym vocabulary",
+      "source": "the paper itself (p. 7 against appendix C)",
+      "paper_says": "text says 28 objects with a cohyponym across 16 hypernyms; the printed ontology lists 42 leaf nouns under 15 lowest-level categories",
+      "page": 7
+    },
+    {
+      "claim": "full-sum segmentation score",
+      "source": "the paper itself (Figure 11 against Table 1)",
+      "paper_says": "Figure 11's full-sum line is about 60.7 on an axis labelled mIoU80 COCO-Gen; Table 1 gives DAAM-0.4 mIoU80 64.8 and mIoU-infinity 60.7 on COCO-Gen",
+      "page": 11
+    },
+    {
+      "claim": "which Table 1 rows are DAAM",
+      "source": "the paper itself (p. 4)",
+      "paper_says": "text says DAAM (rows 5-7); Table 1 lists DAAM as rows 8-10",
+      "page": 4
+    }
+  ],
+  "quotes": [
+    {
+      "page": 2,
+      "text": "We observe that cohyponym status and generation incorrectness each increases the amount of overlap between the heat maps.",
+      "supports": "enters: cross-attention overlap",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "the mIoU for cohyponyms and non-cohyponyms are 46.7 and 22.9, suggesting entangled attention and composition",
+      "supports": "enters_evidence and headline: 46.7 vs 22.9",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "finding that incorrectness and cohyponymy independently increase the overlap",
+      "supports": "enters_evidence and which_pairs",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "we hypothesize that semantically similar words in a prompt have worse generation quality, where only one of the words is generated in the image, not all",
+      "supports": "similar_subjects: failure is omission",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "We considered generations correct if both words in the prompt were present in the image.",
+      "supports": "similar_subjects: correctness definition",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "we used WordNet (Miller, 1995) to construct a hierarchical ontology expressing semantic fields over COCO’s 80 visual objects",
+      "supports": "similar_subjects: similarity defined by WordNet",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "we randomly sampled two cohyponyms 50% of the time and two non-cohyponyms other times, producing 1,000 prompts from the template",
+      "supports": "similar_subjects: 1,000 prompts",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "Overall, the non-cohyponym set attains a generation accuracy of 61% and the cohyponym set 52%, statistically significant at the 99% level according to the exact test",
+      "supports": "headline and similar_subjects: 61% vs 52%, 99%",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "We observe accuracy to be much better on pairs with low overlap (71.7–77.5%) than those with high overlap (9.8–36%).",
+      "supports": "which_pairs and similar_subjects: 71.7 low vs 9.8 high",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "with the low, mid, and high cutoff points set at ≤ 0.4, 0.4–0.6, and ≥ 0.6, following statistics in Section 4",
+      "supports": "which_pairs: IoU bins 0.4 and 0.6",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "36 56.1 77.5 50 9.75 19.3 71.7",
+      "supports": "similar_subjects and headline: Figure 6 accuracy cells, cohyponym 9.75 high, 71.7 low",
+      "read_from_image": true
+    },
+    {
+      "page": 7,
+      "text": "5.43 29.5 Noncohyponym Cohyponym 43.5 60.9",
+      "supports": "which_pairs: Figure 6 overlap cells, correct images 43.5 vs 5.43",
+      "read_from_image": true
+    },
+    {
+      "page": 7,
+      "text": "we compute binarized DAAM maps (τ = 0.4, the best value from Sec. 3.1) for both words",
+      "supports": "enters_evidence: threshold 0.4 and IoU",
+      "read_from_image": false
+    },
+    {
+      "page": 3,
+      "text": "we upscale all intermediate attention score arrays to the original image size using bicubic interpolation, then sum them over the heads, layers, and time steps",
+      "supports": "changes: DAAM aggregation",
+      "read_from_image": false
+    },
+    {
+      "page": 8,
+      "text": "we fix all cross-attention maps to those of the seed prompt, which Hertz et al. (2022) show to equalize layout",
+      "supports": "changes: adjective probe",
+      "read_from_image": false
+    },
+    {
+      "page": 4,
+      "text": "our attention maps should arguably align with the image segmentation labels for these tasks—despite not having been trained to perform this task",
+      "supports": "training: nothing trained",
+      "read_from_image": false
+    },
+    {
+      "page": 11,
+      "text": "we ran the Stable Diffusion 2.0 base model (512 by 512 pixels) with 30 inference steps, the default 7.5 classifier guidance score",
+      "supports": "model",
+      "read_from_image": false
+    },
+    {
+      "page": 11,
+      "text": "We present our results in Fig. 11, which suggests that all time steps and layers contribute positively to segmentation quality.",
+      "supports": "when: step ablation (values 46.5, 60.3 read from Figure 11)",
+      "read_from_image": true
+    },
+    {
+      "page": 3,
+      "text": "gradient methods prove intractable due to needing a backpropagation pass for every pixel for all T time steps",
+      "supports": "cost: no gradient passes",
+      "read_from_image": false
+    }
+  ]
+}

@@ -1,0 +1,497 @@
+{
+ "ids": [
+  {
+   "id": "2403.16990v1",
+   "title": "Be Yourself: Bounded Attention for Multi-Subject Text-to-Image Generation"
+  },
+  {
+   "id": "2505.21488v1",
+   "title": "Be Decisive: Noise-Induced Layouts for Multi-Subject Generation"
+  },
+  {
+   "id": "2312.06059v1",
+   "title": "CONFORM: Contrast is All You Need For High-Fidelity Text-to-Image Diffusion Models"
+  },
+  {
+   "id": "2307.10864v3",
+   "title": "Divide &amp; Bind Your Attention for Improved Generative Semantic Nursing"
+  },
+  {
+   "id": "2212.05032v3",
+   "title": "Training-Free Structured Diffusion Guidance for Compositional Text-to-Image Synthesis"
+  }
+ ],
+ "queries": [
+  {
+   "query": "abs:\"semantic leakage\" AND abs:diffusion",
+   "total": 20,
+   "hits": [
+    {
+     "id": "2510.15015v1",
+     "title": "DeLeaker: Dynamic Inference-Time Reweighting For Semantic Leakage Mitigation in Text-to-Image Models",
+     "abs": "Text-to-Image (T2I) models have advanced rapidly, yet they remain vulnerable to semantic leakage, the unintended transfer of semantically related features between distinct entities. Existing mitigation strategies are often optimization-based or dependent on external inputs. We introduce DeLeaker, a lightweight, optimization-free inference-time approach that mitigates leakage by directly intervening on the model's attention maps. Throughout the diffusion process, DeLeaker dynamically reweights attention maps to suppress excessive cross-entity interactions while strengthening the identity of each entity. To support systematic evaluation, we introduce SLIM (Semantic Leakage in IMages), the firs"
+    },
+    {
+     "id": "2508.06543v2",
+     "title": "MILD: Multi-Layer Diffusion Strategy for Complex and Precise Multi-IP Aware Human Erasing",
+     "abs": "Recent years have witnessed the success of diffusion models in image customization tasks. However, existing mask-guided human erasing methods still struggle in complex scenarios such as human-human occlusion, human-object entanglement, and human-background interference, mainly due to the lack of large-scale multi-instance datasets and effective spatial decoupling to separate foreground from background. To bridge these gaps, we curate the MILD dataset capturing diverse poses, occlusions, and complex multi-instance interactions. We then define the Cross-Domain Attention Gap (CAG), an attention-gap metric to quantify semantic leakage. On top of these, we propose Multi-Layer Diffusion (MILD), wh"
+    },
+    {
+     "id": "2511.06365v3",
+     "title": "Transfer the Style, Not the Semantics: Mitigating Semantic Leakage in Image-Guided Stylization",
+     "abs": "Image-guided zero-shot style transfer enables training-free stylization of arbitrary content images using a reference style. Despite recent progress, existing methods commonly rely on self-attention manipulation to inject style information, which may transfer semantic content from the style image, leading to semantic leakage. In this work, we revisit this phenomenon from the perspective of key--value coupling in the self-attention of diffusion models. Our analysis shows that the native correspondence between style keys and values plays an important role in transferring semantic information from the style image. Motivated by this observation, we propose SuRe, a timestep-aware key--value regul"
+    },
+    {
+     "id": "2505.24086v2",
+     "title": "ComposeAnything: Composite Object Priors for Text-to-Image Generation",
+     "abs": "Layout-based compositional methods improve text-to-image generation by specifying where objects should appear, but most rely on sparse 2D constraints with limited appearance, occlusion, and depth-aware cues. We show that compositional generation can be substantially improved by replacing purely geometric guidance with an editable visual prior for diffusion initialization. We introduce ComposeAnything, an inference-time framework built around a 2.5D Composite Object Prior, an editable RGB image that specifies object appearance, layout, scale, and depth-aware ordering. We transfer this prior through Prior-Guided Diffusion, which combines Object Prior Reinforcement (OPR) to preserve object stru"
+    },
+    {
+     "id": "2512.16443v3",
+     "title": "Geometric Disentanglement of Text Embeddings for Subject-Consistent Text-to-Image Generation using A Single Prompt",
+     "abs": "Text-to-image diffusion models excel at generating high-quality images from natural language descriptions but often fail to preserve subject consistency across multiple outputs, limiting their use in visual storytelling. Existing approaches rely on model fine-tuning or image conditioning, which are computationally expensive and require per-subject optimization. 1Prompt1Story, a training-free approach, concatenates all scene descriptions into a single prompt and rescales token embeddings, but it suffers from semantic leakage, where embeddings across frames become entangled, causing text misalignment. In this paper, we propose a simple yet effective training-free approach that addresses semant"
+    },
+    {
+     "id": "2610.32390v1",
+     "title": "PASTA: Prompt-Aware Annealed Diffusion Sampling",
+     "abs": "While Diffusion models produce high-quality images, real-world visual design requires intentionally preserving clean regions for headlines, logos, or UI elements. Existing layout-aware text-to-image methods struggle to strictly preserve reserved regions, often introducing unwanted content that complicates downstream editing. Existing approaches either manipulate attention to displace content or suppress conditioning via noise-level interventions. However, these methods sacrifice visual coherence, producing flat regions or noticeable style inconsistencies between reserved and non-reserved areas. To address this limitation, we propose a Prompt-Aware Shared-Latent Training-Free Annealed Diffusi"
+    },
+    {
+     "id": "2508.16644v5",
+     "title": "CountLoop: Training-Free High-Instance Image Generation via Iterative Agent Guidance",
+     "abs": "Diffusion models excel at photorealistic synthesis but struggle with object count fidelity, especially in high-density settings. We introduce COUNTLOOP, a training-free framework that achieves structured instance and count control through iterative, structured feedback. Our method alternates between synthesis and evaluation: a VLM-based planner generates structured scene layouts, while a VLM-based critic provides explicit feedback on object counts, spatial arrangements, and visual quality to refine the layout iteratively. Instance-driven attention masking and cumulative attention composition further prevent semantic leakage, ensuring clear object separation even in densely occluded scenes. E"
+    },
+    {
+     "id": "2403.16990v1",
+     "title": "Be Yourself: Bounded Attention for Multi-Subject Text-to-Image Generation",
+     "abs": "Text-to-image diffusion models have an unprecedented ability to generate diverse and high-quality images. However, they often struggle to faithfully capture the intended semantics of complex input prompts that include multiple subjects. Recently, numerous layout-to-image extensions have been introduced to improve user control, aiming to localize subjects represented by specific tokens. Yet, these methods often produce semantically inaccurate images, especially when dealing with multiple semantically or visually similar subjects. In this work, we study and analyze the causes of these limitations. Our exploration reveals that the primary issue stems from inadvertent semantic leakage between su"
+    },
+    {
+     "id": "2509.22244v6",
+     "title": "FlashEdit: Decoupling Speed, Structure, and Semantics for Precise Image Editing",
+     "abs": "Text-guided image editing with diffusion models has achieved remarkable quality but often suffers from prohibitive latency. We introduce \\textbf{FlashEdit}, a real-time localized image editing framework for the standard inversion-based editing setting. Its efficiency and precision stem from three key innovations: (1) a \\textbf{Cycle-Consistent One-Step Inversion (COSI)} pipeline that encourages manifold-aligned one-step inversion through cycle consistency; (2) a \\textbf{Background Shield (BG-Shield)} technique that improves preservation of non-edited regions via structural self-attention intervention; and (3) a \\textbf{Sparsified Spatial Cross-Attention (SSCA)} mechanism that promotes precis"
+    },
+    {
+     "id": "2510.15783v1",
+     "title": "ReCon: Region-Controllable Data Augmentation with Rectification and Alignment for Object Detection",
+     "abs": "The scale and quality of datasets are crucial for training robust perception models. However, obtaining large-scale annotated data is both costly and time-consuming. Generative models have emerged as a powerful tool for data augmentation by synthesizing samples that adhere to desired distributions. However, current generative approaches often rely on complex post-processing or extensive fine-tuning on massive datasets to achieve satisfactory results, and they remain prone to content-position mismatches and semantic leakage. To overcome these limitations, we introduce ReCon, a novel augmentation framework that enhances the capacity of structure-controllable generative models for object detect"
+    },
+    {
+     "id": "2609.21242v1",
+     "title": "SafeStyle: Calibrated Style Residual Injection for Controllable Style-Leakage Trade-off in Diffusion Stylization",
+     "abs": "Reference-guided diffusion stylization aims to transfer visual style from a reference image while preserving the semantics specified by a text prompt. However, image conditioning often entangles transferable style cues with reference-specific content, leading to an inherent trade-off: stronger conditioning improves style fidelity but increases content leakage, whereas aggressive suppression reduces leakage at the cost of style expression. This challenge is further complicated by the distinct spatial organization of texture- and geometry-dominant styles. To address these issues, we propose SafeStyle, a training-free framework for calibrated style residual injection in frozen diffusion models."
+    },
+    {
+     "id": "2601.00535v1",
+     "title": "FreeText: Training-Free Text Rendering in Diffusion Transformers via Attention Localization and Spectral Glyph Injection",
+     "abs": "Large-scale text-to-image (T2I) diffusion models excel at open-domain synthesis but still struggle with precise text rendering, especially for multi-line layouts, dense typography, and long-tailed scripts such as Chinese. Prior solutions typically require costly retraining or rigid external layout constraints, which can degrade aesthetics and limit flexibility. We propose \\textbf{FreeText}, a training-free, plug-and-play framework that improves text rendering by exploiting intrinsic mechanisms of \\emph{Diffusion Transformer (DiT)} models. \\textbf{FreeText} decomposes the problem into \\emph{where to write} and \\emph{what to write}. For \\emph{where to write}, we localize writing regions by rea"
+    },
+    {
+     "id": "2610.04922v1",
+     "title": "TRACE: Time-Adaptive Residual Attention Control with Content-Style Decomposition for Training-Free Diffusion Style Transfer",
+     "abs": "Reference-guided style transfer aims to preserve the semantic structure of a content image while transferring the visual appearance of a style reference. Recent diffusion-based methods achieve impressive stylization quality by exploiting strong pretrained generative priors. However, training-free approaches still face a difficult trade-off among style fidelity, content preservation, and content leakage. Direct style injection may unintentionally transfer semantic content from the style image, while fixed guidance schedules often ignore the time- and state-dependent nature of diffusion sampling. To address these limitations, we propose TRACE, a training-free diffusion style transfer framework"
+    },
+    {
+     "id": "2506.19886v3",
+     "title": "Diffusion-aided Task-oriented Semantic Communications with Model Inversion Attack",
+     "abs": "Semantic communication enhances transmission efficiency by conveying semantic information rather than raw input symbol sequences. Task-oriented semantic communication further aims to retain only task-specific information, thereby achieving greater bandwidth savings. However, these neural-network-based communication systems are vulnerable to model inversion attacks, in which adversaries attempt to recover sensitive input information from intercepted semantic features. The key challenge is therefore to preserve privacy while maintaining task accuracy and robustness. We consider a task-confidential setting in which the adversary attempts to reconstruct the original input from intercepted featur"
+    },
+    {
+     "id": "2609.13823v1",
+     "title": "Semantic Privacy Protection with Utility Preservation for 3D Point Clouds",
+     "abs": "Point cloud data face serious semantic privacy risks during acquisition, transmission, and cross-institutional sharing. Existing methods mostly rely on geometric perturbation or destructive encryption, which can reduce the recognizability of the original class but often impair downstream usability. This paper proposes a class-transfer-based semantic encryption framework for point clouds, aiming to conceal original class information while preserving task utility and supporting authorized recovery. Specifically, we construct a unified latent space with a shared-backbone Normalizing Flow, and combine LoRA and FiLM to achieve parameter-efficient class-conditional adaptation. We further introduce"
+    },
+    {
+     "id": "2303.09535v3",
+     "title": "FateZero: Fusing Attentions for Zero-shot Text-based Video Editing",
+     "abs": "The diffusion-based generative models have achieved remarkable success in text-based image generation. However, since it contains enormous randomness in generation progress, it is still challenging to apply such models for real-world visual content editing, especially in videos. In this paper, we propose FateZero, a zero-shot text-based editing method on real-world videos without per-prompt training or use-specific mask. To edit videos consistently, we propose several techniques based on the pre-trained models. Firstly, in contrast to the straightforward DDIM inversion technique, our approach captures intermediate attention maps during inversion, which effectively retain both structural and "
+    },
+    {
+     "id": "2609.03586v1",
+     "title": "The Attention Triangle in Audio-Video Models",
+     "abs": "Audio-video diffusion models rely on cross-modal attention to coordinate text, sound, and visual content, yet this same mechanism can introduce subtle and systematic semantic leakage. We study these models by probing and analyzing the ``attention triangle,'' comprising the three cross-attention edges connecting the text, audio, and video streams, and examine how semantic information is routed across modalities during generation. Our analysis reveals that routing along the audio-video edge is bidirectional: audio can influence video generation, while video can influence audio generation. This edge is shaped by biases encoded in the model's parameters and emerges as a major contributor to leak"
+    },
+    {
+     "id": "2606.22945v2",
+     "title": "Controllable Texture Tiling with Transformed RoPE-Enhanced Diffusion Models",
+     "abs": "Realistic integration of user-specified textures into scene images is a fundamental task in computer graphics and image editing. While existing material transfer and reference-guided inpainting methods can edit surface appearances, they often fail to address the specific requirements of texture tiling. This task necessitates precisely repeating a reference pattern according to user-defined parameters such as frequency, orientation, and scale. Furthermore, current generative approaches often struggle to maintain the structural fidelity of the reference texture, limited by either destructive pixel-level resampling or the lack of fine-grained spatial information in semantic image encoders, and "
+    },
+    {
+     "id": "2611.22157v1",
+     "title": "Active Contrast-Dissipation All-Optical Encryption",
+     "abs": "Optical encryption is meant to place secrecy in physical structure, yet adversaries can readily construct imperfect physical keys to probe the encryption system via trial-and-error iterations. Such systems inevitably leak target plaintext information and preserve invertible residual structural features, rendering the entire encryption scheme vulnerable to adversarial inversion attacks. Here, we report an active contrast-dissipation all-optical encryption architecture, which partitions wavefront modulation into M wavelength-private encryption layers and N shared decoding layers. Security rests on multi-dimensional physical keys that must match simultaneously, including illumination wavelength"
+    },
+    {
+     "id": "2607.23631v1",
+     "title": "PathSelect: Sequential Token Selection for Whole Slide Pathology",
+     "abs": "Gigapixel Whole-Slide Images (WSIs) present a fundamental computational bottleneck for vision-language models (VLMs) due to extreme sequence lengths. Existing approaches predominantly rely on spatial sampling or training-free pruning, which risk diluting weak but informative signals, leading to the loss of critical diagnostic evidence due to the spatially diffuse nature of pathological cues. We reformulate WSI token pruning as a sequential selection process, enabling the model to autonomously learn an optimal routing strategy rather than relying on static heuristics. We herein propose a decoupled routing framework integrated as an active plugin into the fully pre-trained SlideChat base model"
+    }
+   ]
+  },
+  {
+   "query": "abs:\"attribute leakage\" AND abs:diffusion",
+   "total": 16,
+   "hits": [
+    {
+     "id": "2412.04715v4",
+     "title": "Addressing Text Embedding Leakage in Diffusion-based Image Editing",
+     "abs": "Text-based image editing, powered by generative diffusion models, lets users modify images through natural-language prompts and has dramatically simplified traditional workflows. Despite these advances, current methods still suffer from a critical problem: attribute leakage, where edits meant for specific objects unintentionally affect unrelated regions or other target objects. Our analysis reveals the root cause as the semantic entanglement inherent in End-of-Sequence (EOS) embeddings generated by autoregressive text encoders, which indiscriminately aggregate attributes across prompts. To address this issue, we introduce Attribute-Leakage-free Editing (ALE), a framework that tackles attribu"
+    },
+    {
+     "id": "2504.03292v1",
+     "title": "FaR: Enhancing Multi-Concept Text-to-Image Diffusion via Concept Fusion and Localized Refinement",
+     "abs": "Generating multiple new concepts remains a challenging problem in the text-to-image task. Current methods often overfit when trained on a small number of samples and struggle with attribute leakage, particularly for class-similar subjects (e.g., two specific dogs). In this paper, we introduce Fuse-and-Refine (FaR), a novel approach that tackles these challenges through two key contributions: Concept Fusion technique and Localized Refinement loss function. Concept Fusion systematically augments the training data by separating reference subjects from backgrounds and recombining them into composite images to increase diversity. This augmentation technique tackles the overfitting problem by miti"
+    },
+    {
+     "id": "2608.15583v1",
+     "title": "PoseAdapter: Dual-Stream 2.5D Controllable Image Generation for Complex Multi-Object Scenes",
+     "abs": "While Text-to-Image (T2I) diffusion models have achieved remarkable success, precise spatial and orientational control in multi-object scenes remains a persistent challenge. Existing methods either rely on computationally expensive dense 3D maps or suffer from severe attribute leakage and \"cut-and-paste\" artifacts. To address these limitations, we propose PoseAdapter, a lightweight framework for high-fidelity 2.5D controllable image generation. Instead of dense spatial maps, it establishes precise spatial-angular anchors using an efficient condition layout: individual object captions, 2D bounding boxes, and 3D angles. To resolve the generative trade-off between strict instance isolation and "
+    },
+    {
+     "id": "2608.13820v1",
+     "title": "SDO: Subspace Deconflicting Operator for Multi-Adapter Composition",
+     "abs": "Composing independently trained adapters within a shared diffusion backbone provides a modular approach to multi-character generation, but naive joint deployment often causes identity mixing, cross-character attribute leakage, and unstable scene composition. We study this interference from a parameter-space perspective and hypothesize that it arises partly from conflicts between overlapping dominant subspaces in shared layers. To address this issue, we propose \\textbf{SDO}, a \\textbf{S}ubspace \\textbf{D}econflicting \\textbf{O}perator for multi-adapter composition. SDO reconstructs layer-wise low-rank updates from the selected adapters, extracts compact subspace signatures, measures pairwise "
+    },
+    {
+     "id": "2510.02315v2",
+     "title": "FOCUS: Optimal Control for Multi-Entity World Modeling in Text-to-Image Generation",
+     "abs": "Text-to-image (T2I) models excel on single-entity prompts but struggle with multi-entity scenes, often exhibiting attribute leakage, identity entanglement, and subject omissions. We present a principled theoretical framework that steers sampling toward multi-subject fidelity by casting flow matching (FM) as stochastic optimal control (SOC), yielding a single hyperparameter controlled trade-off between fidelity and object-centric state separation / binding consistency. Within this framework, we derive two architecture-agnostic algorithms: (i) a training-free test-time controller that perturbs the base velocity with a single-pass update, and (ii) Adjoint Matching, a lightweight fine-tuning rul"
+    },
+    {
+     "id": "2505.16915v3",
+     "title": "DetailMaster: Can Your Text-to-Image Model Handle Long Prompts?",
+     "abs": "While recent Text-to-Image (T2I) models show impressive capabilities in synthesizing images from brief descriptions, they struggle with the long, detailed prompts required for professional applications. We present DetailMaster, a comprehensive benchmark for evaluating T2I capabilities on long prompts with complex compositional requirements, accompanied by an automated data construction pipeline and an evaluation workflow. Comprising expert-validated prompts averaging 284.89 tokens, our benchmark introduces four critical evaluation dimensions: Character Attributes, Structured Character Locations, Multi-Dimensional Scene Attributes, and Spatial/Interactive Relationships. Evaluations on various"
+    },
+    {
+     "id": "2606.31278v1",
+     "title": "Editing Everything Everywhere All at Once",
+     "abs": "Editing multiple elements of an image in a single forward pass is a practical alternative to multi-turn image manipulation, offering improved efficiency and potentially better harmonization. However, when several instructions target different regions, semantic interference often leads to attribute leakage and poor edit disentanglement, especially as the number of edits increases. In this work, we propose MICE (Multi-Instance Concurrent Editing), a training-free strategy for scalable multi-instance image editing with Multimodal Diffusion Transformers. MICE modifies the additive bias of joint attention to regulate interactions between instance-specific edit instructions, latent, and context to"
+    },
+    {
+     "id": "2602.18282v1",
+     "title": "DEIG: Detail-Enhanced Instance Generation with Fine-Grained Semantic Control",
+     "abs": "Multi-Instance Generation has advanced significantly in spatial placement and attribute binding. However, existing approaches still face challenges in fine-grained semantic understanding, particularly when dealing with complex textual descriptions. To overcome these limitations, we propose DEIG, a novel framework for fine-grained and controllable multi-instance generation. DEIG integrates an Instance Detail Extractor (IDE) that transforms text encoder embeddings into compact, instance-aware representations, and a Detail Fusion Module (DFM) that applies instance-based masked attention to prevent attribute leakage across instances. These components enable DEIG to generate visually coherent mul"
+    },
+    {
+     "id": "2305.13921v2",
+     "title": "Compositional Text-to-Image Synthesis with Attention Map Control of Diffusion Models",
+     "abs": "Recent text-to-image (T2I) diffusion models show outstanding performance in generating high-quality images conditioned on textual prompts. However, they fail to semantically align the generated images with the prompts due to their limited compositional capabilities, leading to attribute leakage, entity leakage, and missing entities. In this paper, we propose a novel attention mask control strategy based on predicted object boxes to address these issues. In particular, we first train a BoxNet to predict a box for each entity that possesses the attribute specified in the prompt. Then, depending on the predicted boxes, a unique mask control is applied to the cross- and self-attention maps. Our "
+    },
+    {
+     "id": "2603.00607v2",
+     "title": "IdGlow: Dynamic Identity Modulation for Multi-Subject Generation",
+     "abs": "Multi-subject image generation requires seamlessly harmonizing multiple reference identities within a coherent scene. However, existing methods relying on rigid spatial masks or localized attention often struggle with the \"stability-plasticity dilemma,\" particularly failing in tasks that require complex structural deformations, such as identity-preserving age transformation. To address this, we present IdGlow, a mask-free, progressive two-stage framework built upon Flow Matching diffusion models. In the supervised fine-tuning (SFT) stage, we introduce task-adaptive timestep scheduling aligned with diffusion generative dynamics: a linear decay schedule that progressively relaxes constraints f"
+    },
+    {
+     "id": "2503.01667v1",
+     "title": "ToLo: A Two-Stage, Training-Free Layout-To-Image Generation Framework For High-Overlap Layouts",
+     "abs": "Recent training-free layout-to-image diffusion models have demonstrated remarkable performance in generating high-quality images with controllable layouts. These models follow a one-stage framework: Encouraging the model to focus the attention map of each concept on its corresponding region by defining attention map-based losses. However, these models still struggle to accurately follow layouts with significant overlap, often leading to issues like attribute leakage and missing entities. In this paper, we propose ToLo, a two-stage, training-free layout-to-image generation framework for high-overlap layouts. Our framework consists of two stages: the aggregation stage and the separation stage,"
+    },
+    {
+     "id": "2506.00596v3",
+     "title": "Seg2Any: Open-set Segmentation-Mask-to-Image Generation with Precise Shape and Semantic Control",
+     "abs": "Despite recent advances in diffusion models, top-tier text-to-image (T2I) models still struggle to achieve precise spatial layout control, i.e. accurately generating entities with specified attributes and locations. Segmentation-mask-to-image (S2I) generation has emerged as a promising solution by incorporating pixel-level spatial guidance and regional text prompts. However, existing S2I methods fail to simultaneously ensure semantic consistency and shape consistency. To address these challenges, we propose Seg2Any, a novel S2I framework built upon advanced multimodal diffusion transformers (e.g. FLUX). First, to achieve both semantic and shape consistency, we decouple segmentation mask cond"
+    },
+    {
+     "id": "2605.12088v3",
+     "title": "UniCustom: Unified Visual Conditioning for Multi-Reference Image Generation",
+     "abs": "Multi-reference image generation aims to synthesize images from textual instructions while faithfully preserving subject identities from multiple reference images. Existing VLM-enhanced diffusion models commonly rely on decoupled visual conditioning: semantic ViT features are processed by the VLM for instruction understanding, whereas appearance-rich VAE features are injected later into the diffusion backbone. Despite its intuitive design, this separation makes it difficult for the model to associate each semantically grounded subject with visual details from the correct reference image. As a result, the model may recognize which subject is being referred to, but fail to preserve its identit"
+    },
+    {
+     "id": "2610.35756v1",
+     "title": "VidEdit3D: Flexible 3D Gaussian Editing with Video Diffusion",
+     "abs": "Recent advancements in text-guided 3D editing, particularly with 3D Gaussian Splatting (3DGS), have shown promise but still lag behind the flexibility of 2D editing tools. Existing methods face a critical trade-off between preserving multi-view consistency and allowing structural modifications. Image-based editors can also struggle to apply the intended edit to objects viewed from unusual angles. To address these limitations, we introduce VidEdit3D, a framework that reformulates 3D scene editing as a trajectory-based video editing task. By drawing a parallel between camera movement in static 3D scenes and temporal dynamics in video, we leverage the robust spatiotemporal priors of pre-trained"
+    },
+    {
+     "id": "2509.01107v2",
+     "title": "FICGen: Frequency-Inspired Contextual Disentanglement for Layout-driven Degraded Image Generation",
+     "abs": "Layout-to-image (L2I) generation has exhibited promising results in natural domains, but suffers from limited generative fidelity and weak alignment with user-provided layouts when applied to degraded scenes (i.e., low-light, underwater). We primarily attribute these limitations to the \"contextual illusion dilemma\" in degraded conditions, where foreground instances are overwhelmed by context-dominant frequency distributions. Motivated by this, our paper proposes a new Frequency-Inspired Contextual Disentanglement Generative (FICGen) paradigm, which seeks to transfer frequency knowledge of degraded images into the latent diffusion space, thereby facilitating the rendering of degraded instance"
+    },
+    {
+     "id": "2610.07337v1",
+     "title": "Compositional Concept Erasure in Text-to-Image Diffusion Models via Hierarchically Grounded Semantic Surgery",
+     "abs": "Removing copyrighted, unsafe, or user-specified concepts from a deployed text-to-image diffusion model is now a practical requirement. Weight-editing methods can suppress fixed targets, but they require per-target retraining and modify the model checkpoint. Training-free methods, on the other hand, are deployment-friendly, but they suffer from text-side routing failures on compositional prompts. In such prompts, the erase target may be invoked through a related class rather than its lexical name, and its modifiers may migrate onto preserved objects. This paper proposes Hierarchically Grounded Semantic Surgery (HGSS), a training-free framework for compositional concept erasure. The framework "
+    }
+   ]
+  },
+  {
+   "query": "abs:\"subject leakage\" OR abs:\"feature leakage\" AND abs:\"text-to-image\"",
+   "total": 5,
+   "hits": [
+    {
+     "id": "2508.08812v1",
+     "title": "TARA: Token-Aware LoRA for Composable Personalization in Diffusion Models",
+     "abs": "Personalized text-to-image generation aims to synthesize novel images of a specific subject or style using only a few reference images. Recent methods based on Low-Rank Adaptation (LoRA) enable efficient single-concept customization by injecting lightweight, concept-specific adapters into pre-trained diffusion models. However, combining multiple LoRA modules for multi-concept generation often leads to identity missing and visual feature leakage. In this work, we identify two key issues behind these failures: (1) token-wise interference among different LoRA modules, and (2) spatial misalignment between the attention map of a rare token and its corresponding concept-specific region. To address"
+    },
+    {
+     "id": "2511.13399v1",
+     "title": "TripleFDS: Triple Feature Disentanglement and Synthesis for Scene Text Editing",
+     "abs": "Scene Text Editing (STE) aims to naturally modify text in images while preserving visual consistency, the decisive factors of which can be divided into three parts, i.e., text style, text content, and background. Previous methods have struggled with incomplete disentanglement of editable attributes, typically addressing only one aspect - such as editing text content - thus limiting controllability and visual consistency. To overcome these limitations, we propose TripleFDS, a novel framework for STE with disentangled modular attributes, and an accompanying dataset called SCB Synthesis. SCB Synthesis provides robust training data for triple feature disentanglement by utilizing the \"SCB Group\","
+    },
+    {
+     "id": "2505.01428v1",
+     "title": "Multi-party Collaborative Attention Control for Image Customization",
+     "abs": "The rapid advancement of diffusion models has increased the need for customized image generation. However, current customization methods face several limitations: 1) typically accept either image or text conditions alone; 2) customization in complex visual scenarios often leads to subject leakage or confusion; 3) image-conditioned outputs tend to suffer from inconsistent backgrounds; and 4) high computational costs. To address these issues, this paper introduces Multi-party Collaborative Attention Control (MCA-Ctrl), a tuning-free method that enables high-quality image customization using both text and complex visual conditions. Specifically, MCA-Ctrl leverages two key operations within the "
+    },
+    {
+     "id": "2505.21488v1",
+     "title": "Be Decisive: Noise-Induced Layouts for Multi-Subject Generation",
+     "abs": "Generating multiple distinct subjects remains a challenge for existing text-to-image diffusion models. Complex prompts often lead to subject leakage, causing inaccuracies in quantities, attributes, and visual features. Preventing leakage among subjects necessitates knowledge of each subject's spatial location. Recent methods provide these spatial locations via an external layout control. However, enforcing such a prescribed layout often conflicts with the innate layout dictated by the sampled initial noise, leading to misalignment with the model's prior. In this work, we introduce a new approach that predicts a spatial layout aligned with the prompt, derived from the initial noise, and refin"
+    },
+    {
+     "id": "2611.27585v2",
+     "title": "Leakage-Free Is Not Confounder-Free: What a Patient-Level Split Cannot Certify About a Medical Imaging Benchmark",
+     "abs": "Patient-level splitting is the standard safeguard against subject leakage in medical imaging evaluation, but it cannot remove a confounder that every fold inherits: an acquisition variable aligned with the diagnosis across the whole cohort. We present a five-question audit of a candidate confounder: how well it predicts the diagnosis, whether it can be decoded from the images, whether diagnostic scores depend on it, whether the image adds predictive value beyond it and how much discrimination survives once it is controlled. We apply it to DMR-IR, the public dataset on which most machine-learning results in breast thermography rest. On 236 patients under a strict patient-disjoint protocol, th"
+    }
+   ]
+  },
+  {
+   "query": "abs:\"similar subjects\" AND abs:\"text-to-image\"",
+   "total": 5,
+   "hits": [
+    {
+     "id": "2411.18301v1",
+     "title": "Enhancing MMDiT-Based Text-to-Image Models for Similar Subject Generation",
+     "abs": "Representing the cutting-edge technique of text-to-image models, the latest Multimodal Diffusion Transformer (MMDiT) largely mitigates many generation issues existing in previous models. However, we discover that it still suffers from subject neglect or mixing when the input text prompt contains multiple subjects of similar semantics or appearance. We identify three possible ambiguities within the MMDiT architecture that cause this problem: Inter-block Ambiguity, Text Encoder Ambiguity, and Semantic Ambiguity. To address these issues, we propose to repair the ambiguous latent on-the-fly by test-time optimization at early denoising steps. In detail, we design three loss functions: Block Align"
+    },
+    {
+     "id": "2504.03292v1",
+     "title": "FaR: Enhancing Multi-Concept Text-to-Image Diffusion via Concept Fusion and Localized Refinement",
+     "abs": "Generating multiple new concepts remains a challenging problem in the text-to-image task. Current methods often overfit when trained on a small number of samples and struggle with attribute leakage, particularly for class-similar subjects (e.g., two specific dogs). In this paper, we introduce Fuse-and-Refine (FaR), a novel approach that tackles these challenges through two key contributions: Concept Fusion technique and Localized Refinement loss function. Concept Fusion systematically augments the training data by separating reference subjects from backgrounds and recombining them into composite images to increase diversity. This augmentation technique tackles the overfitting problem by miti"
+    },
+    {
+     "id": "2404.04243v3",
+     "title": "Identity Decoupling for Multi-Subject Personalization of Text-to-Image Models",
+     "abs": "Text-to-image diffusion models have shown remarkable success in generating personalized subjects based on a few reference images. However, current methods often fail when generating multiple subjects simultaneously, resulting in mixed identities with combined attributes from different subjects. In this work, we present MuDI, a novel framework that enables multi-subject personalization by effectively decoupling identities from multiple subjects. Our main idea is to utilize segmented subjects generated by a foundation model for segmentation (Segment Anything) for both training and inference, as a form of data augmentation for training and initialization for the generation process. Moreover, we"
+    },
+    {
+     "id": "2403.16990v1",
+     "title": "Be Yourself: Bounded Attention for Multi-Subject Text-to-Image Generation",
+     "abs": "Text-to-image diffusion models have an unprecedented ability to generate diverse and high-quality images. However, they often struggle to faithfully capture the intended semantics of complex input prompts that include multiple subjects. Recently, numerous layout-to-image extensions have been introduced to improve user control, aiming to localize subjects represented by specific tokens. Yet, these methods often produce semantically inaccurate images, especially when dealing with multiple semantically or visually similar subjects. In this work, we study and analyze the causes of these limitations. Our exploration reveals that the primary issue stems from inadvertent semantic leakage between su"
+    },
+    {
+     "id": "2510.23515v3",
+     "title": "FreeFuse: Multi-Subject LoRA Fusion via Adaptive Token-Level Routing at Test Time",
+     "abs": "This paper proposes FreeFuse, a training-free framework for multi-subject text-to-image generation through automatic fusion of multiple subject LoRAs. In contrast to prior studies that focus on retraining LoRAs to alleviate feature conflicts, our analysis shows that spatially routing LoRA residuals to their intended semantic regions provides an effective mechanism for suppressing direct cross-region LoRA interference while preserving the base model's global contextual reasoning. Accordingly, we implement Adaptive Token-Level Routing during the inference phase. However, obtaining reliable routing regions remains challenging. Existing methods that rely on text-image latent association, such as"
+    }
+   ]
+  },
+  {
+   "query": "abs:\"subject mixing\" AND abs:diffusion",
+   "total": 1,
+   "hits": [
+    {
+     "id": "2411.18936v2",
+     "title": "Self-Cross Diffusion Guidance for Text-to-Image Synthesis of Similar Subjects",
+     "abs": "Diffusion models achieved unprecedented fidelity and diversity for synthesizing image, video, 3D assets, etc. However, subject mixing is an unresolved issue for diffusion-based image synthesis, particularly for synthesizing multiple similar-looking subjects. We propose Self-Cross Diffusion Guidance to penalize the overlap between cross-attention maps and the aggregated self-attention map. Compared to previous methods based on self-attention or cross-attention alone, our guidance is more effective in eliminating subject mixing. What's more, our guidance addresses subject mixing for all relevant patches beyond the most discriminant one, e.g., the beak of a bird. For each subject, we aggregate "
+    }
+   ]
+  },
+  {
+   "query": "abs:\"multi-subject\" AND abs:\"text-to-image\" AND abs:leakage",
+   "total": 5,
+   "hits": [
+    {
+     "id": "2510.02315v2",
+     "title": "FOCUS: Optimal Control for Multi-Entity World Modeling in Text-to-Image Generation",
+     "abs": "Text-to-image (T2I) models excel on single-entity prompts but struggle with multi-entity scenes, often exhibiting attribute leakage, identity entanglement, and subject omissions. We present a principled theoretical framework that steers sampling toward multi-subject fidelity by casting flow matching (FM) as stochastic optimal control (SOC), yielding a single hyperparameter controlled trade-off between fidelity and object-centric state separation / binding consistency. Within this framework, we derive two architecture-agnostic algorithms: (i) a training-free test-time controller that perturbs the base velocity with a single-pass update, and (ii) Adjoint Matching, a lightweight fine-tuning rul"
+    },
+    {
+     "id": "2403.16990v1",
+     "title": "Be Yourself: Bounded Attention for Multi-Subject Text-to-Image Generation",
+     "abs": "Text-to-image diffusion models have an unprecedented ability to generate diverse and high-quality images. However, they often struggle to faithfully capture the intended semantics of complex input prompts that include multiple subjects. Recently, numerous layout-to-image extensions have been introduced to improve user control, aiming to localize subjects represented by specific tokens. Yet, these methods often produce semantically inaccurate images, especially when dealing with multiple semantically or visually similar subjects. In this work, we study and analyze the causes of these limitations. Our exploration reveals that the primary issue stems from inadvertent semantic leakage between su"
+    },
+    {
+     "id": "2505.21488v1",
+     "title": "Be Decisive: Noise-Induced Layouts for Multi-Subject Generation",
+     "abs": "Generating multiple distinct subjects remains a challenge for existing text-to-image diffusion models. Complex prompts often lead to subject leakage, causing inaccuracies in quantities, attributes, and visual features. Preventing leakage among subjects necessitates knowledge of each subject's spatial location. Recent methods provide these spatial locations via an external layout control. However, enforcing such a prescribed layout often conflicts with the innate layout dictated by the sampled initial noise, leading to misalignment with the model's prior. In this work, we introduce a new approach that predicts a spatial layout aligned with the prompt, derived from the initial noise, and refin"
+    },
+    {
+     "id": "2502.11079v2",
+     "title": "Phantom: Subject-consistent video generation via cross-modal alignment",
+     "abs": "The continuous development of foundational models for video generation is evolving into various applications, with subject-consistent video generation still in the exploratory stage. We refer to this as Subject-to-Video, which extracts subject elements from reference images and generates subject-consistent videos following textual instructions. We believe that the essence of subject-to-video lies in balancing the dual-modal prompts of text and image, thereby deeply and simultaneously aligning both text and visual content. To this end, we propose Phantom, a unified video generation framework for both single- and multi-subject references. Building on existing text-to-video and image-to-video a"
+    },
+    {
+     "id": "2603.26078v1",
+     "title": "When Identities Collapse: A Stress-Test Benchmark for Multi-Subject Personalization",
+     "abs": "Subject-driven text-to-image diffusion models have achieved remarkable success in preserving single identities, yet their ability to compose multiple interacting subjects remains largely unexplored and highly challenging. Existing evaluation protocols typically rely on global CLIP metrics, which are insensitive to local identity collapse and fail to capture the severity of multi-subject entanglement. In this paper, we identify a pervasive \"Illusion of Scalability\" in current models: while they excel at synthesizing 2-4 subjects in simple layouts, they suffer from catastrophic identity collapse when scaled to 6-10 subjects or tasked with complex physical interactions. To systematically expose"
+    }
+   ]
+  },
+  {
+   "query": "abs:\"cross-attention\" AND abs:\"attribute binding\" AND abs:\"text encoder\"",
+   "total": 1,
+   "hits": [
+    {
+     "id": "2505.05505v1",
+     "title": "Apply Hierarchical-Chain-of-Generation to Complex Attributes Text-to-3D Generation",
+     "abs": "Recent text-to-3D models can render high-quality assets, yet they still stumble on objects with complex attributes. The key obstacles are: (1) existing text-to-3D approaches typically lift text-to-image models to extract semantics via text encoders, while the text encoder exhibits limited comprehension ability for long descriptions, leading to deviated cross-attention focus, subsequently wrong attribute binding in generated results. (2) Occluded object parts demand a disciplined generation order and explicit part disentanglement. Though some works introduce manual efforts to alleviate the above issues, their quality is unstable and highly reliant on manual information. To tackle above proble"
+    }
+   ]
+  },
+  {
+   "query": "abs:\"text encoder\" AND abs:\"information\" AND abs:\"mix\" AND abs:\"text-to-image\"",
+   "total": 1,
+   "hits": [
+    {
+     "id": "2306.02236v1",
+     "title": "Detector Guidance for Multi-Object Text-to-Image Generation",
+     "abs": "Diffusion models have demonstrated impressive performance in text-to-image generation. They utilize a text encoder and cross-attention blocks to infuse textual information into images at a pixel level. However, their capability to generate images with text containing multiple objects is still restricted. Previous works identify the problem of information mixing in the CLIP text encoder and introduce the T5 text encoder or incorporate strong prior knowledge to assist with the alignment. We find that mixing problems also occur on the image side and in the cross-attention blocks. The noisy images can cause different objects to appear similar, and the cross-attention blocks inject information at"
+    }
+   ]
+  },
+  {
+   "query": "abs:\"semantically similar\" AND abs:\"objects\" AND abs:\"text-to-image\" AND abs:\"attention\"",
+   "total": 3,
+   "hits": [
+    {
+     "id": "2407.13609v1",
+     "title": "Training-free Composite Scene Generation for Layout-to-Image Synthesis",
+     "abs": "Recent breakthroughs in text-to-image diffusion models have significantly advanced the generation of high-fidelity, photo-realistic images from textual descriptions. Yet, these models often struggle with interpreting spatial arrangements from text, hindering their ability to produce images with precise spatial configurations. To bridge this gap, layout-to-image generation has emerged as a promising direction. However, training-based approaches are limited by the need for extensively annotated datasets, leading to high data acquisition costs and a constrained conceptual scope. Conversely, training-free methods face challenges in accurately locating and generating semantically similar objects "
+    },
+    {
+     "id": "2508.15124v3",
+     "title": "Side Effects of Erasing Concepts from Diffusion Models",
+     "abs": "Concerns about text-to-image (T2I) generative models infringing on privacy, copyright, and safety have led to the development of concept erasure techniques (CETs). The goal of an effective CET is to prohibit the generation of undesired \"target\" concepts specified by the user, while preserving the ability to synthesize high-quality images of other concepts. In this work, we demonstrate that concept erasure has side effects and CETs can be easily circumvented. For a comprehensive measurement of the robustness of CETs, we present the Side Effect Evaluation (SEE) benchmark that consists of hierarchical and compositional prompts describing objects and their attributes. The dataset and an automate"
+    },
+    {
+     "id": "2504.12100v1",
+     "title": "Generalized Visual Relation Detection with Diffusion Models",
+     "abs": "Visual relation detection (VRD) aims to identify relationships (or interactions) between object pairs in an image. Although recent VRD models have achieved impressive performance, they are all restricted to pre-defined relation categories, while failing to consider the semantic ambiguity characteristic of visual relations. Unlike objects, the appearance of visual relations is always subtle and can be described by multiple predicate words from different perspectives, e.g., ``ride'' can be depicted as ``race'' and ``sit on'', from the sports and spatial position views, respectively. To this end, we propose to model visual relations as continuous embeddings, and design diffusion models to achie"
+    }
+   ]
+  },
+  {
+   "query": "abs:\"self-attention\" AND abs:\"leakage\" AND abs:\"diffusion\"",
+   "total": 16,
+   "hits": [
+    {
+     "id": "2510.06827v1",
+     "title": "StyleKeeper: Prevent Content Leakage using Negative Visual Query Guidance",
+     "abs": "In the domain of text-to-image generation, diffusion models have emerged as powerful tools. Recently, studies on visual prompting, where images are used as prompts, have enabled more precise control over style and content. However, existing methods often suffer from content leakage, where undesired elements of the visual style prompt are transferred along with the intended style. To address this issue, we 1) extend classifier-free guidance (CFG) to utilize swapping self-attention and propose 2) negative visual query guidance (NVQG) to reduce the transfer of unwanted contents. NVQG employs negative score by intentionally simulating content leakage scenarios that swap queries instead of key an"
+    },
+    {
+     "id": "2606.18906v1",
+     "title": "BindEdit: Taming Attention Leakage for Precise Multi-Object Image Editing",
+     "abs": "Real image editing enables precise manipulation of visual content, yet existing methods often fail in complex multi-object scenarios, causing semantic blending, object duplication, or incomplete edits. We attribute these failures to attention leakage, where signals across spatial regions and text tokens become entangled during the denoising process. Specifically, we identify two distinct forms of leakage: Edit-Token Leakage, where ambiguous token-region alignment leads to object blending, and Source Dominance Leakage, where tokens of unchanged source objects overwhelm the attention intended for target entities. To resolve these leakages, we propose \\textbf{BindEdit}, which enforces attention"
+    },
+    {
+     "id": "2504.05800v1",
+     "title": "Storybooth: Training-free Multi-Subject Consistency for Improved Visual Storytelling",
+     "abs": "Training-free consistent text-to-image generation depicting the same subjects across different images is a topic of widespread recent interest. Existing works in this direction predominantly rely on cross-frame self-attention; which improves subject-consistency by allowing tokens in each frame to pay attention to tokens in other frames during self-attention computation. While useful for single subjects, we find that it struggles when scaling to multiple characters. In this work, we first analyze the reason for these limitations. Our exploration reveals that the primary-issue stems from self-attention-leakage, which is exacerbated when trying to ensure consistency across multiple-characters. "
+    },
+    {
+     "id": "2605.26460v1",
+     "title": "AnchorDiff: Training-Free Concept Grounding for MM-DiTs via Anchor-Based Graph Propagation",
+     "abs": "Multi-Modal Diffusion Transformers (MM-DiTs) encode rich representations for training-free concept grounding, but existing attention-based methods often produce overlapping activations on visually confusable concepts, a failure mode we call concept leakage, where target responses spill over to non-target objects. To address this issue, we propose AnchorDiff, a training-free grounding method that decouples semantic localization from structural refinement. AnchorDiff selects a high-confidence anchor from concept-to-image attention map and propagates it as a one-hot seed over a hybrid graph derived from image-to-image self-attention. The graph uses output-space similarity for dense within-objec"
+    },
+    {
+     "id": "2511.06365v3",
+     "title": "Transfer the Style, Not the Semantics: Mitigating Semantic Leakage in Image-Guided Stylization",
+     "abs": "Image-guided zero-shot style transfer enables training-free stylization of arbitrary content images using a reference style. Despite recent progress, existing methods commonly rely on self-attention manipulation to inject style information, which may transfer semantic content from the style image, leading to semantic leakage. In this work, we revisit this phenomenon from the perspective of key--value coupling in the self-attention of diffusion models. Our analysis shows that the native correspondence between style keys and values plays an important role in transferring semantic information from the style image. Motivated by this observation, we propose SuRe, a timestep-aware key--value regul"
+    },
+    {
+     "id": "2505.01428v1",
+     "title": "Multi-party Collaborative Attention Control for Image Customization",
+     "abs": "The rapid advancement of diffusion models has increased the need for customized image generation. However, current customization methods face several limitations: 1) typically accept either image or text conditions alone; 2) customization in complex visual scenarios often leads to subject leakage or confusion; 3) image-conditioned outputs tend to suffer from inconsistent backgrounds; and 4) high computational costs. To address these issues, this paper introduces Multi-party Collaborative Attention Control (MCA-Ctrl), a tuning-free method that enables high-quality image customization using both text and complex visual conditions. Specifically, MCA-Ctrl leverages two key operations within the "
+    },
+    {
+     "id": "2404.13899v1",
+     "title": "Towards Better Text-to-Image Generation Alignment via Attention Modulation",
+     "abs": "In text-to-image generation tasks, the advancements of diffusion models have facilitated the fidelity of generated results. However, these models encounter challenges when processing text prompts containing multiple entities and attributes. The uneven distribution of attention results in the issues of entity leakage and attribute misalignment. Training from scratch to address this issue requires numerous labeled data and is resource-consuming. Motivated by this, we propose an attribution-focusing mechanism, a training-free phase-wise mechanism by modulation of attention for diffusion model. One of our core ideas is to guide the model to concentrate on the corresponding syntactic components o"
+    },
+    {
+     "id": "2606.30003v1",
+     "title": "GeoEdit: Geometry-Aware Object Editing via Dual-Branch Denoising",
+     "abs": "Precisely manipulating objects in a single photograph (translation, rotation, scaling) while obeying 3D physical constraints remains unsolved for diffusion-based editors. Current 2D methods lack spatial awareness and produce perspective violations. Forcing structural proxies into the latent space also disrupts variance homogeneity, and the resulting self-attention leakage leads to ghosting and background blur. The core difficulty is asymmetric: the relocated object must follow a rigid geometry, yet the uncovered background needs freedom to synthesize plausible content. We present GeoEdit, a training-free Lift-Manipulate-Render-Denoise pipeline that satisfies both constraints. We decouple sce"
+    },
+    {
+     "id": "2403.16111v1",
+     "title": "EVA: Zero-shot Accurate Attributes and Multi-Object Video Editing",
+     "abs": "Current diffusion-based video editing primarily focuses on local editing (\\textit{e.g.,} object/background editing) or global style editing by utilizing various dense correspondences. However, these methods often fail to accurately edit the foreground and background simultaneously while preserving the original layout. We find that the crux of the issue stems from the imprecise distribution of attention weights across designated regions, including inaccurate text-to-attribute control and attention leakage. To tackle this issue, we introduce EVA, a \\textbf{zero-shot} and \\textbf{multi-attribute} video editing framework tailored for human-centric videos with complex motions. We incorporate a Sp"
+    },
+    {
+     "id": "2305.13921v2",
+     "title": "Compositional Text-to-Image Synthesis with Attention Map Control of Diffusion Models",
+     "abs": "Recent text-to-image (T2I) diffusion models show outstanding performance in generating high-quality images conditioned on textual prompts. However, they fail to semantically align the generated images with the prompts due to their limited compositional capabilities, leading to attribute leakage, entity leakage, and missing entities. In this paper, we propose a novel attention mask control strategy based on predicted object boxes to address these issues. In particular, we first train a BoxNet to predict a box for each entity that possesses the attribute specified in the prompt. Then, depending on the predicted boxes, a unique mask control is applied to the cross- and self-attention maps. Our "
+    },
+    {
+     "id": "2509.22244v6",
+     "title": "FlashEdit: Decoupling Speed, Structure, and Semantics for Precise Image Editing",
+     "abs": "Text-guided image editing with diffusion models has achieved remarkable quality but often suffers from prohibitive latency. We introduce \\textbf{FlashEdit}, a real-time localized image editing framework for the standard inversion-based editing setting. Its efficiency and precision stem from three key innovations: (1) a \\textbf{Cycle-Consistent One-Step Inversion (COSI)} pipeline that encourages manifold-aligned one-step inversion through cycle consistency; (2) a \\textbf{Background Shield (BG-Shield)} technique that improves preservation of non-edited regions via structural self-attention intervention; and (3) a \\textbf{Sparsified Spatial Cross-Attention (SSCA)} mechanism that promotes precis"
+    },
+    {
+     "id": "2402.12974v2",
+     "title": "Visual Style Prompting with Swapping Self-Attention",
+     "abs": "In the evolving domain of text-to-image generation, diffusion models have emerged as powerful tools in content creation. Despite their remarkable capability, existing models still face challenges in achieving controlled generation with a consistent style, requiring costly fine-tuning or often inadequately transferring the visual elements due to content leakage. To address these challenges, we propose a novel approach, \\ours, to produce a diverse range of images while maintaining specific style elements and nuances. During the denoising process, we keep the query from original features while swapping the key and value with those from reference features in the late self-attention layers. This "
+    },
+    {
+     "id": "2303.09535v3",
+     "title": "FateZero: Fusing Attentions for Zero-shot Text-based Video Editing",
+     "abs": "The diffusion-based generative models have achieved remarkable success in text-based image generation. However, since it contains enormous randomness in generation progress, it is still challenging to apply such models for real-world visual content editing, especially in videos. In this paper, we propose FateZero, a zero-shot text-based editing method on real-world videos without per-prompt training or use-specific mask. To edit videos consistently, we propose several techniques based on the pre-trained models. Firstly, in contrast to the straightforward DDIM inversion technique, our approach captures intermediate attention maps during inversion, which effectively retain both structural and "
+    },
+    {
+     "id": "2511.04123v1",
+     "title": "Text to Sketch Generation with Multi-Styles",
+     "abs": "Recent advances in vision-language models have facilitated progress in sketch generation. However, existing specialized methods primarily focus on generic synthesis and lack mechanisms for precise control over sketch styles. In this work, we propose a training-free framework based on diffusion models that enables explicit style guidance via textual prompts and referenced style sketches. Unlike previous style transfer methods that overwrite key and value matrices in self-attention, we incorporate the reference features as auxiliary information with linear smoothing and leverage a style-content guidance mechanism. This design effectively reduces content leakage from reference sketches and enha"
+    },
+    {
+     "id": "2506.00596v3",
+     "title": "Seg2Any: Open-set Segmentation-Mask-to-Image Generation with Precise Shape and Semantic Control",
+     "abs": "Despite recent advances in diffusion models, top-tier text-to-image (T2I) models still struggle to achieve precise spatial layout control, i.e. accurately generating entities with specified attributes and locations. Segmentation-mask-to-image (S2I) generation has emerged as a promising solution by incorporating pixel-level spatial guidance and regional text prompts. However, existing S2I methods fail to simultaneously ensure semantic consistency and shape consistency. To address these challenges, we propose Seg2Any, a novel S2I framework built upon advanced multimodal diffusion transformers (e.g. FLUX). First, to achieve both semantic and shape consistency, we decouple segmentation mask cond"
+    },
+    {
+     "id": "2606.07569v2",
+     "title": "TriHead-GAN: A Generative Adversarial Network with Triple-Head Discriminator for Carbon Emission Time Series Generation",
+     "abs": "Accurate carbon emission monitoring is critical for climate policy and emerging regulatory mechanisms such as the EU Carbon Border Adjustment Mechanism, yet city-level high-frequency monitoring data remain extremely scarce, severely limiting data-hungry deep learning models. Time series generation is a natural remedy, but existing GAN and diffusion-based generators often provide limited explicit supervision for the domain structure of carbon emission data: they may match marginal distributional statistics while insufficiently preserving cross-variable correlations between CO$_2$ and co-emitted pollutants and meteorological factors, and tend to collapse the first-difference statistics of atmo"
+    }
+   ]
+  },
+  {
+   "query": "abs:\"catastrophic neglect\" AND abs:\"similar\"",
+   "total": 0,
+   "hits": []
+  },
+  {
+   "query": "abs:\"entity\" AND abs:\"leakage\" AND abs:\"text-to-image\"",
+   "total": 7,
+   "hits": [
+    {
+     "id": "2510.15015v1",
+     "title": "DeLeaker: Dynamic Inference-Time Reweighting For Semantic Leakage Mitigation in Text-to-Image Models",
+     "abs": "Text-to-Image (T2I) models have advanced rapidly, yet they remain vulnerable to semantic leakage, the unintended transfer of semantically related features between distinct entities. Existing mitigation strategies are often optimization-based or dependent on external inputs. We introduce DeLeaker, a lightweight, optimization-free inference-time approach that mitigates leakage by directly intervening on the model's attention maps. Throughout the diffusion process, DeLeaker dynamically reweights attention maps to suppress excessive cross-entity interactions while strengthening the identity of each entity. To support systematic evaluation, we introduce SLIM (Semantic Leakage in IMages), the firs"
+    },
+    {
+     "id": "2404.13899v1",
+     "title": "Towards Better Text-to-Image Generation Alignment via Attention Modulation",
+     "abs": "In text-to-image generation tasks, the advancements of diffusion models have facilitated the fidelity of generated results. However, these models encounter challenges when processing text prompts containing multiple entities and attributes. The uneven distribution of attention results in the issues of entity leakage and attribute misalignment. Training from scratch to address this issue requires numerous labeled data and is resource-consuming. Motivated by this, we propose an attribution-focusing mechanism, a training-free phase-wise mechanism by modulation of attention for diffusion model. One of our core ideas is to guide the model to concentrate on the corresponding syntactic components o"
+    },
+    {
+     "id": "2305.13921v2",
+     "title": "Compositional Text-to-Image Synthesis with Attention Map Control of Diffusion Models",
+     "abs": "Recent text-to-image (T2I) diffusion models show outstanding performance in generating high-quality images conditioned on textual prompts. However, they fail to semantically align the generated images with the prompts due to their limited compositional capabilities, leading to attribute leakage, entity leakage, and missing entities. In this paper, we propose a novel attention mask control strategy based on predicted object boxes to address these issues. In particular, we first train a BoxNet to predict a box for each entity that possesses the attribute specified in the prompt. Then, depending on the predicted boxes, a unique mask control is applied to the cross- and self-attention maps. Our "
+    },
+    {
+     "id": "2210.10606v1",
+     "title": "DALLE-2 is Seeing Double: Flaws in Word-to-Concept Mapping in Text2Image Models",
+     "abs": "We study the way DALLE-2 maps symbols (words) in the prompt to their references (entities or properties of entities in the generated image). We show that in stark contrast to the way human process language, DALLE-2 does not follow the constraint that each word has a single role in the interpretation, and sometimes re-use the same symbol for different purposes. We collect a set of stimuli that reflect the phenomenon: we show that DALLE-2 depicts both senses of nouns with multiple senses at once; and that a given word can modify the properties of two distinct entities in the image, or can be depicted as one object and also modify the properties of another object, creating a semantic leakage of"
+    },
+    {
+     "id": "2507.07079v1",
+     "title": "Evaluating Attribute Confusion in Fashion Text-to-Image Generation",
+     "abs": "Despite the rapid advances in Text-to-Image (T2I) generation models, their evaluation remains challenging in domains like fashion, involving complex compositional generation. Recent automated T2I evaluation methods leverage pre-trained vision-language models to measure cross-modal alignment. However, our preliminary study reveals that they are still limited in assessing rich entity-attribute semantics, facing challenges in attribute confusion, i.e., when attributes are correctly depicted but associated to the wrong entities. To address this, we build on a Visual Question Answering (VQA) localization strategy targeting one single entity at a time across both visual and textual modalities. We "
+    },
+    {
+     "id": "2506.00596v3",
+     "title": "Seg2Any: Open-set Segmentation-Mask-to-Image Generation with Precise Shape and Semantic Control",
+     "abs": "Despite recent advances in diffusion models, top-tier text-to-image (T2I) models still struggle to achieve precise spatial layout control, i.e. accurately generating entities with specified attributes and locations. Segmentation-mask-to-image (S2I) generation has emerged as a promising solution by incorporating pixel-level spatial guidance and regional text prompts. However, existing S2I methods fail to simultaneously ensure semantic consistency and shape consistency. To address these challenges, we propose Seg2Any, a novel S2I framework built upon advanced multimodal diffusion transformers (e.g. FLUX). First, to achieve both semantic and shape consistency, we decouple segmentation mask cond"
+    },
+    {
+     "id": "2510.02315v2",
+     "title": "FOCUS: Optimal Control for Multi-Entity World Modeling in Text-to-Image Generation",
+     "abs": "Text-to-image (T2I) models excel on single-entity prompts but struggle with multi-entity scenes, often exhibiting attribute leakage, identity entanglement, and subject omissions. We present a principled theoretical framework that steers sampling toward multi-subject fidelity by casting flow matching (FM) as stochastic optimal control (SOC), yielding a single hyperparameter controlled trade-off between fidelity and object-centric state separation / binding consistency. Within this framework, we derive two architecture-agnostic algorithms: (i) a training-free test-time controller that perturbs the base velocity with a single-pass update, and (ii) Adjoint Matching, a lightweight fine-tuning rul"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  Z1["Z1 read the leakage papers<br/>12 papers, 6 readers running"]:::doing
+  Z2["Z2 what predicts borrowing<br/>text cosine, attention overlap, d_t cosine<br/>on 12 pairs"]:::todo
+  Z3["Z3 one fix on leaking pairs<br/>default: Bounded Attention"]:::todo
+  Z4["Z4 Paper 2 method"]:::todo
+  Z5["Z5 audit Loops 8, 9, 10"]:::todo
+  Z6["Z6 verdict and hand-off"]:::todo
+  Z1 --> Z2 --> Z3 --> Z4 --> Z6
+  Z1 --> Z5 --> Z6
+  Z2 -. "owner's yes on cost" .-> Z2
+  Z3 -. "owner's yes on cost;<br/>needs a box source (M9's reader failed 11 of 24)" .-> Z3
+  classDef done fill:#d3f9d8,stroke:#2b8a3e,stroke-width:2px
+  classDef doing fill:#ffe8cc,stroke:#e8590c,stroke-width:2px
+  classDef todo fill:#f1f3f5,stroke:#868e96,stroke-width:2px

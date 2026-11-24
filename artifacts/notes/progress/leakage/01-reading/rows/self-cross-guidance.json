@@ -1,0 +1,243 @@
+{
+  "slug": "self-cross-guidance",
+  "source": "arXiv 2411.18936",
+  "page_url": "https://arxiv.org/pdf/2411.18936",
+  "title": "Self-Cross Diffusion Guidance for Text-to-Image Synthesis of Similar Subjects",
+  "role": "A box-free, training-free latent guidance that places subject mixing in the overlap of one subject's self-attention region with the other's cross-attention map; a candidate fourth predictor and a box-free alternative fix.",
+  "pages_read": 17,
+  "enters": "a combination: self-attention (a subject's patches attending to the other subject's region) measured against cross-attention",
+  "enters_evidence": "Argument plus qualitative figures: Fig. 2 shows one bear-and-elephant seed where cross map of one subject overlaps the aggregated self map of the other; Fig. 7 shows mixing persists with 1 or 16 patches on 3 prompts. No number ties overlap size to mixing.",
+  "enters_page": 2,
+  "changes": "Gradient steps on the latent against g(i,j) = sum min(A^s_i, A^c_j) + sum min(A^c_i, A^s_j) plus Attend-and-Excite's existence term, over the first 25 of 50 steps, refinement at steps 10 and 20, plus INITNO starting-noise search",
+  "changes_page": 4,
+  "training": "Nothing trained; needs the subject token indices in the prompt; no boxes, masks or LLM",
+  "training_page": 12,
+  "model": "SD1.4, SD2.1, SD3-medium (PNDM, CFG, 50 steps, native resolution); SDXL not tested",
+  "similar_subjects": "SD1.4 GPT-4o not-a-mixture rate (0-100, higher better): SSD-2 similar pairs 86.45 vs 79.70 INITNO vs 77.47 plain; Animal-Animal 92.94 vs 84.22 CONFORM. SD2.1 alone loses to CONFORM (78.79 vs 92.49 Animal-Animal); SD3 SSD-3 77.15 vs 70.08",
+  "similar_page": 7,
+  "which_pairs": "Not measured per pair; argued that similar-looking subjects with shared structure and different details (leopard and tiger) mix more, and that mixing survives in hair, teeth and feet when only the peak patch is guided",
+  "which_pairs_page": 5,
+  "when": "Not measured; guidance limited to the first half (25 of 50 steps) because early attention maps are 'known to be semantically meaningful'",
+  "when_page": 4,
+  "cost": "No timings printed; at least one backward pass per step over the first 25 of 50 steps, plus refinement iterations and the INITNO noise search (inferred from Algorithm 1)",
+  "cost_page": 5,
+  "headline": "SD1.4 Animal-Animal: 92.94% of images judged not a mixture by GPT-4o vs 84.22% for CONFORM and 72.24% for plain SD1.4 (65 seeds x 66 prompts)",
+  "headline_page": 7,
+  "suggests": "(inferred) Add g(i,j) as a fourth per-pair predictor beside cross-attention overlap at CO3's corrected steps, using the whole thresholded region; keep Self-Cross as a box-free fix if Bounded Attention's boxes are the obstacle, expecting one backward pass per guided step.",
+  "extra_papers": [
+    {
+      "title": "INITNO: Boosting text-to-image diffusion models via initial noise optimization",
+      "arxiv": "",
+      "page": 3,
+      "why": "Self-attention conflict score between subjects plus starting-noise optimisation, training-free; closest prior to this loss"
+    },
+    {
+      "title": "A-STAR: Test-time attention segregation and retention for text-to-image synthesis",
+      "arxiv": "",
+      "page": 3,
+      "why": "Training-free segregation loss on subjects' cross-attention overlap"
+    },
+    {
+      "title": "Separate-and-Enhance: Compositional finetuning for text2image diffusion models",
+      "arxiv": "",
+      "page": 3,
+      "why": "Penalises cross-attention overlap between subjects, by fine-tuning"
+    },
+    {
+      "title": "Grounded text-to-image synthesis with attention refocusing",
+      "arxiv": "",
+      "page": 15,
+      "why": "Attention-based mixing fix with an LLM layout; 93.80 not-a-mixture vs Self-Cross 92.94 on Animal-Animal"
+    }
+  ],
+  "disagreements": [
+    {
+      "claim": "SSD second-best not-a-mixture score",
+      "source": "the paper itself",
+      "paper_says": "Text on p. 8 gives INITNO's SSD score as 70.70% and calls the set SSD-1; Table 4 (p. 7) gives INITNO 79.70 on SSD-2, and the stated 6.7-point gap matches 79.70",
+      "page": 8
+    },
+    {
+      "claim": "SSD causes more mixing than the original sets for each method",
+      "source": "the paper itself",
+      "paper_says": "p. 5 says each method mixes more on SSD, but plain SD1.4 scores 77.47 not-a-mixture on SSD-2 against 72.24 on Animal-Animal (Table 4, p. 7), partly because plain SD1.4 often drops a subject (Ext 30.77)",
+      "page": 7
+    },
+    {
+      "claim": "Method boosts any UNet or transformer model",
+      "source": "the paper itself",
+      "paper_says": "p. 1 claims it boosts any model, but on SD2.1 Self-Cross alone scores 77.08 not-a-mixture on SSD-2 against 84.932 for plain SD2.1 and 89.76 for CONFORM (Table 5, p. 7); only CONFORM followed by Self-Cross wins",
+      "page": 7
+    },
+    {
+      "claim": "Text-text similarity is state of the art on all benchmarks",
+      "source": "the paper itself",
+      "paper_says": "p. 8 claims this, but Table 3 (p. 6) has CONFORM at 85.21 above Self-Cross at 84.02 on SD2.1 Animal-Animal; only the combination is best",
+      "page": 6
+    }
+  ],
+  "quotes": [
+    {
+      "page": 1,
+      "text": "patches from a subject should not show large similarity to patches from other subjects at least for some timesteps and layers",
+      "supports": "enters",
+      "read_from_image": false
+    },
+    {
+      "page": 2,
+      "text": "The overlap between self-attention and cross-attention leads to subject mixing, while Self-Cross guidance reduces overlapping.",
+      "supports": "enters evidence (Fig. 2)",
+      "read_from_image": false
+    },
+    {
+      "page": 6,
+      "text": "The mixing is less severe but not eliminated with 16 patches, for example mixing in terms of hair, teeth, and feet.",
+      "supports": "enters evidence (Fig. 7) and which_pairs",
+      "read_from_image": false
+    },
+    {
+      "page": 4,
+      "text": "we propose to penalize the overlap between the aggregated self-attention map of one subject and cross-attention maps of other similar subjects",
+      "supports": "changes",
+      "read_from_image": false
+    },
+    {
+      "page": 12,
+      "text": "We apply Self-Cross Diffusion Guidance to the first half(25 steps) of the sampling process(50 steps in total).",
+      "supports": "changes, when",
+      "read_from_image": false
+    },
+    {
+      "page": 12,
+      "text": "we apply refinements at the 10th and 20th steps of the sampling process with thresholds of 0.2",
+      "supports": "changes",
+      "read_from_image": false
+    },
+    {
+      "page": 12,
+      "text": "Our method is training-free. Following the setting from Attend&Excite",
+      "supports": "training",
+      "read_from_image": false
+    },
+    {
+      "page": 5,
+      "text": "Input: A text prompt P and indices Ω of subjects",
+      "supports": "training (needs subject indices)",
+      "read_from_image": false
+    },
+    {
+      "page": 5,
+      "text": "Figure 6 using SD1.4, SD2.1, and SD3-medium respectively",
+      "supports": "model",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "Self-Cross(Ours) 94.55 87.79 92.94 99.60 75.17 98.30 98.95 93.19 98.65 77.67 70.92 86.45",
+      "supports": "headline 92.94, similar_subjects 86.45",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "CONFORM [31] 89.63 78.00 84.22 98.37 75.09 97.16 78.58 73.12 97.48 67.54 59.90 79.50",
+      "supports": "headline 84.22",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "INITNO [17] 89.39 77.09 82.26 98.37 78.00 95.97 96.20 90.42 95.17 61.34 55.53 79.70",
+      "supports": "similar_subjects 79.70",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "SD1.4 [41] 39.51 29.70 72.24 67.84 53.72 90.36 34.15 31.89 94.22 30.77 28.09 77.47",
+      "supports": "headline 72.24, similar_subjects 77.47",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "Self-Cross(Ours) 89.53 55.03 78.79 77.35 45.36 77.08",
+      "supports": "similar_subjects SD2.1 78.79",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "CONFORM [31] 96.88 70.19 92.49 83.71 53.90 89.76",
+      "supports": "similar_subjects SD2.1 92.49",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "vanilla SD2.1 usually generates only one subject of the prompt so its ‘w/o M’ score is high",
+      "supports": "metric caveat",
+      "read_from_image": false
+    },
+    {
+      "page": 6,
+      "text": "Self-Cross(Ours) 57.92 53.08 77.15 74.96",
+      "supports": "similar_subjects SD3 77.15",
+      "read_from_image": false
+    },
+    {
+      "page": 6,
+      "text": "SD3 Medium 33.54 30.31 70.08 73.82",
+      "supports": "similar_subjects SD3 70.08",
+      "read_from_image": false
+    },
+    {
+      "page": 12,
+      "text": "For each prompt, we generated 65 images with consistent random seeds for each method.",
+      "supports": "headline 65 seeds",
+      "read_from_image": false
+    },
+    {
+      "page": 1,
+      "text": "This is more prominent when synthesizing multiple similar-looking subjects, e.g., a photo of a leopard and a tiger",
+      "supports": "which_pairs",
+      "read_from_image": false
+    },
+    {
+      "page": 5,
+      "text": "subjects usually share similar structures with distinguishable details, e.g., different textures for leopards and tigers",
+      "supports": "which_pairs",
+      "read_from_image": false
+    },
+    {
+      "page": 4,
+      "text": "We define the guidance only for early timestamps in the reverse process. Because attention maps from early timestamps are known to be semantically meaningful.",
+      "supports": "when",
+      "read_from_image": false
+    },
+    {
+      "page": 8,
+      "text": "our w/o M score of 86.45% is 6.7% better than the secondbest score (70.70% INITNO)",
+      "supports": "disagreement 1",
+      "read_from_image": false
+    },
+    {
+      "page": 5,
+      "text": "Qualitative and quantitative results show more subject mixing for each method with the new dataset than the original ones.",
+      "supports": "disagreement 2",
+      "read_from_image": false
+    },
+    {
+      "page": 8,
+      "text": "our approach, including the combined one, reaches SOTA performances on all benchmarks",
+      "supports": "disagreement 4",
+      "read_from_image": false
+    },
+    {
+      "page": 6,
+      "text": "CONFORM 85.21 73.87 - - CONFORM+Ours 85.88 74.91",
+      "supports": "disagreement 4",
+      "read_from_image": false
+    },
+    {
+      "page": 15,
+      "text": "86.99 64.45 93.80 94.55 87.79 92.94",
+      "supports": "extra paper Attention Refocusing 93.80",
+      "read_from_image": false
+    }
+  ]
+}

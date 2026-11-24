@@ -1,0 +1,22 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  P["prompt<br/>'a cheetah and a cougar'"]:::plain
+  subgraph TE["1. text encoder (CLIP L + bigG)"]
+    T["one vector per word<br/>'cougar' can carry 'cheetah';<br/>end-of-text and padding tokens<br/>blend both (Magnet, p. 3)"]:::plain
+  end
+  N["starting noise<br/>seed 6001..6008"]:::plain
+  subgraph UNET["SDXL U-Net, one step"]
+    L["4. layout<br/>where each body goes,<br/>set in the early steps"]:::plain
+    CA["2. cross-attention<br/>each word's map over the canvas;<br/>maps can overlap"]:::plain
+    SA["3. self-attention<br/>pixels share features,<br/>cheetah spots reach the cougar"]:::plain
+  end
+  S["5. sum of predictions<br/>CO3 mixes joint and single-subject<br/>noise predictions at 6 corrected steps"]:::plain
+  IMG[("picture<br/>two bodies, borrowed parts")]:::plain
+  P --> T --> CA
+  N --> L --> CA --> SA --> S --> IMG
+  T -. "Z2 reads: CLIP name cosine<br/>(A Cat Is A Cat, Magnet, Follow the Flow, ToMe)" .-> T
+  CA -. "Z2 reads: map overlap at corrected steps<br/>(DAAM, Conform, Divide & Bind,<br/>DeLeaker, Self-Cross, MMDiT)" .-> CA
+  SA -. "Bounded Attention, Self-Cross<br/>(Z3's default fix acts here and at 2)" .-> SA
+  L -. "Be Decisive" .-> L
+  S -. "Z2 reads: d_t map cosine<br/>(this project's own question)" .-> S
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
