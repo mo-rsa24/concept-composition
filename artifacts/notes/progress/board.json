@@ -535,8 +535,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-24T14:31:20+02:00",
-   "updated": "2026-11-24T22:15:55+02:00",
-   "note": "scoring now labels a checker that reaches 0.75 on ranking only (question 96), gate unchanged; current full training in its final check, balanced at 900 of 2,000; control 94704 waits for a node"
+   "updated": "2026-11-24T22:37:33+02:00",
+   "note": "current full training done (held-out tiles 0.571); balanced at 1,300 of 2,000; control 94704 waits for a node; then all three checkers scored on CO3's saved states"
   },
   {
    "id": "D3",
