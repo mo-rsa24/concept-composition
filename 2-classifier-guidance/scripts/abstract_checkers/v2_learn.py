@@ -334,6 +334,65 @@ def stage_split(args, model, data, dev):
     save(args.out / "split.json", result)
 
 
+EXAMPLES = ("apart_1_3", "wrong_1_3", "apart_3_4", "wrong_3_4")
+EXPLAIN_TS = (712, 616, 539, 480)
+
+
+def explain(head, model, folder, dev):
+    """Real maps, logits and push gradients for the zoom ladder's example canvases, with the ladder's own noise draw."""
+    noise = torch.from_numpy(np.load(folder / "display-noise.npy")).float().to(dev)[None, None]
+    out = {"names": list(EXAMPLES), "timesteps": list(EXPLAIN_TS), "x_t": [], "maps": [], "logit": [], "grad": []}
+    for name in EXAMPLES:
+        a, b = (int(v) for v in name.split("_")[-2:])
+        x0 = torch.from_numpy(np.load(folder / f"{name}-clean.npy")).float().to(dev)[None, None]
+        pair = torch.tensor([[a, b]], device=dev)
+        rows = {k: [] for k in ("x_t", "maps", "logit", "grad")}
+        for step in EXPLAIN_TS:
+            t = torch.tensor([step], device=dev)
+            ab = ABAR.to(dev)[t][:, None, None, None]
+            with torch.enable_grad():
+                xt = (ab.sqrt() * x0 + (1 - ab).sqrt() * noise).requires_grad_(True)
+                m = maps(model, xt, t, pair, "base")
+                logit = head(m, t, pair)[:, 0]
+                g, = torch.autograd.grad(logit.sum(), xt)
+            for k, v in (("x_t", xt), ("maps", m), ("logit", logit), ("grad", g)):
+                rows[k].append(v.detach().cpu().numpy()[0])
+        for k in rows:
+            out[k].append(np.stack(rows[k]))
+    return {k: (np.stack(v) if k not in ("names", "timesteps") else np.array(v)) for k, v in out.items()}
+
+
+def stage_final_count(args, model, data, dev, data_hash):
+    """Board question 69: retrain the count checker on digits 0 to 4 at the given window, save it, and read digits 5 to 9 once."""
+    out = args.out / "final-count.json"
+    if out.exists():
+        raise SystemExit(f"{out} exists: digits 5 to 9 are read once")
+    split = {s: relabel(data[s], "count") for s in ("train", "seen_test", "unseen_test")}
+    result = {"task": "count", "window": args.window, "timesteps": STEPS16.tolist(), "data_hash": data_hash, "model": str(args.model)}
+    for name, cfg in READERS.items():
+        fit = overfit_one(cfg, model, split["train"], dev)
+        head, info = train(cfg, model, split["train"], dev)
+        torch.save({"head": head.state_dict(), "cfg": cfg, "task": "count", "window": args.window,
+                    "timesteps": STEPS16.tolist(), "data_hash": data_hash}, args.out / f"count-head-{name}.pt")
+        s, u = evaluate(head, cfg, model, split["seen_test"], dev), evaluate(head, cfg, model, split["unseen_test"], dev)
+        gap = abs(s["balanced_accuracy"] - u["balanced_accuracy"])
+        checks = {"unseen_ba_at_least_0.75": u["balanced_accuracy"] >= MIN_BA, "gap_at_most_0.05": gap <= MAX_GAP}
+        result[name] = {"cfg": cfg, "overfit": fit, **info, "seen_test": s, "unseen_test": u, "gap": gap, "checks": checks,
+                        "all": all(checks.values()), "trained": 0.01 < u["share_called_1"] < 0.99}
+        print(json.dumps({"reader": name, "overfit": fit["right_of_16"], "seen_ba": s["balanced_accuracy"],
+                          "unseen_ba": u["balanced_accuracy"], "gap": gap, "all": result[name]["all"]}), flush=True)
+        if name == "map" and args.examples:
+            np.savez_compressed(args.out / "count-explained.npz", **explain(head, model, args.examples, dev))
+    m = result["map"]
+    result["verdict"] = "inconclusive" if not m["overfit"]["pass"] else "support" if m["all"] else "null"
+    if args.wandb_name:
+        result["wandb_run"] = log_wandb(args.wandb_name, {"task": "count", "window": args.window, "data_hash": data_hash}, {
+            "verdict": result["verdict"], "map_seen_ba": m["seen_test"]["balanced_accuracy"],
+            "map_unseen_ba": m["unseen_test"]["balanced_accuracy"], "map_gap": m["gap"],
+            "raw_unseen_ba": result["raw"]["unseen_test"]["balanced_accuracy"]})
+    save(out, result)
+
+
 def stage_final(args, model, data, dev, data_hash):
     out = args.out / "final.json"
     if out.exists():
@@ -363,7 +422,8 @@ def stage_final(args, model, data, dev, data_hash):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("stage", choices=["smoke", "overfit", "small", "inner", "final", "rehearse", "split"])
+    ap.add_argument("stage", choices=["smoke", "overfit", "small", "inner", "final", "rehearse", "split", "final-count"])
+    ap.add_argument("--examples", type=Path, help="the zoom ladder's example canvases, for the final-count stage")
     ap.add_argument("--window", choices=sorted(WINDOWS), default="early",
                     help="early: the toy's sampler steps 0 to 15; sdxl: the toy timesteps matching SDXL's steps 0 to 15")
     ap.add_argument("--model", type=Path, required=True)
@@ -384,6 +444,9 @@ def main():
         if args.ladder is None:
             raise SystemExit("final needs --ladder")
         stage_final(args, model, data, dev, data_hash)
+        return 0
+    if args.stage == "final-count":
+        stage_final_count(args, model, data, dev, data_hash)
         return 0
     return {"smoke": stage_smoke, "overfit": stage_overfit, "small": stage_small, "inner": stage_inner,
             "rehearse": stage_rehearse, "split": stage_split}[args.stage](

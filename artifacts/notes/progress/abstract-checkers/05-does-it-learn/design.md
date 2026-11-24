@@ -110,6 +110,28 @@ The rehearsal at SDXL's noise level showed one checker learning where digits are
 
 **What would surprise.** The identity checker staying at chance when it trains only on `apart` against `wrong`. Each wrong canvas swaps one asked digit for another, and at timestep 480 about 31% of the signal amplitude remains, so a reader blind to identity there would mean these noise levels hide which digit is which.
 
+## Reading digits 5 to 9 with the count checker (board question 69)
+
+The count checker passed its rehearsal and the identity checker missed. The owner approved one read of digits 5 to 9 with the count checker.
+
+**Group.** Runs that try a new idea (group 2).
+
+**Varied axis.** None against the rehearsal: the same count checker, now trained on all 10 pairs among digits 0 to 4 (the full `train` split) and scored on `seen_test` and `unseen_test`.
+
+**Settings.** The count labels (`apart` and `wrong` are label 1; `overlaid`, `same_half` and `single` are label 0), the 16 timesteps matching SDXL's noise, the base map reader, 4,000 updates. The raw reader trains beside it for comparison. Both trained checkers are saved, because step V3 pushes with the map reader.
+
+**The ladder's owed rung.** The same job computes the saved map reader's real maps, logit and push gradient on the zoom ladder's example canvases (`apart_1_3`, `wrong_1_3`, `apart_3_4`, `wrong_3_4`) at timesteps 712, 616, 539 and 480, with the ladder's own noise draw, into `count-explained.npz`.
+
+**Cost:** about 0.6 GPU-hours: 21 minutes of map-reader training, about 8 minutes of scoring 4,000 canvases, and a few minutes for the raw reader. **Buys:** step V2's count verdict on digits the checker never saw, and the checker V3 pushes with.
+
+| Result | What it takes | Next |
+|---|---|---|
+| Support | The map reader on `unseen_test`: balanced accuracy at least 0.75, and within 0.05 of `seen_test` | V2 is done and V3 runs with the count push alone |
+| Null | The overfit check passes and either bar is missed | The chain stops and goes to the owner |
+| Inconclusive | The overfit check fails | Find the cause before anything else runs |
+
+The script refuses to run this stage twice, so digits 5 to 9 are read once.
+
 ## What this cannot say
 
 These canvases are pasted MNIST digits, so a pass says the checker reads pasted digits under noise. Step V3 tests whether its gradient helps on what the sampler draws. The steps are very noisy (at timestep 999 about 0.6% of the signal amplitude remains), so the per-step scores matter as much as the pooled one.

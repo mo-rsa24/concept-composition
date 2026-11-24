@@ -10,6 +10,7 @@
 # ladder: smoke test, overfit 16 examples, and 1% of the data. inner: the rehearsal on digits 0 to 4. final: reads unseen_test once.
 # rehearse-sdxl: the base map reader and the raw reader on the rehearsal split at SDXL's noise level (board question 64).
 # split-sdxl: a count checker and a digit-identity checker on the rehearsal split at SDXL's noise level (board question 67).
+# final-count-sdxl: retrain and save the count checker on digits 0 to 4, read digits 5 to 9 once (board question 69).
 set -uo pipefail
 STAGE=${1:?stage}
 ROOT=/datasets/mmolefe/poe_repair_min/loop-8
@@ -54,6 +55,11 @@ case "$STAGE" in
     rc=$? ;;
   split-sdxl)
     run split --data "$FULL" --out "$OUT/sdxl-split" --window sdxl
+    rc=$? ;;
+  final-count-sdxl)
+    [ -f "$OUT/count-final/examples/display-noise.npy" ] || { echo "ABORT: example canvases missing"; exit 3; }
+    run final-count --data "$FULL" --out "$OUT/count-final" --window sdxl --examples "$OUT/count-final/examples" \
+      --wandb-name loop8-v2-count-final
     rc=$? ;;
   final)
     run final --data "$FULL" --out "$OUT/full" --ladder "$OUT/ladder" --wandb-name loop8-v2-final
