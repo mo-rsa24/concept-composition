@@ -40,7 +40,7 @@ export PYTHONPATH="$HUB:$CO3:$REPO/scripts/shared:$REPO"
 mkdir -p "$OUT"
 case "$STAGE" in
   check)  "$PY" "$S/m9_rung2.py" check --splits "$SPLITS" --m1-co3 "$M1" --out "$OUT/controls"; rc=$? ;;
-  read)   "$PY" "$S/m9_rung2.py" read --splits "$SPLITS" --out "$OUT/mask-read"; rc=$? ;;
+  read)   "$PY" "$S/m9_rung2.py" read --splits "$SPLITS" --out "$OUT/mask-read-word-beats-other"; rc=$? ;;
   smoke)  "$PY" "$S/m9_rung2.py" render --splits "$SPLITS" --out "$OUT/smoke" --pairs-limit 1 --seeds-limit 1; rc=$? ;;
   render) "$PY" "$S/m9_rung2.py" render --splits "$SPLITS" --out "$OUT/full" --shard "$SHARD" --num-shards "$NUM"; rc=$? ;;
   *) echo "ABORT: unknown stage $STAGE"; exit 2 ;;
