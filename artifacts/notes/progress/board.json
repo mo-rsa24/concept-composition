@@ -535,8 +535,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-24T14:31:20+02:00",
-   "updated": "2026-11-24T20:02:12+02:00",
-   "note": "all four rungs passed; full trainings 94638 (running) and 94662 (queued); states: 3090 half saved, RTX 8000 half running 94676 on biggpu; then one scoring pass of three checkers"
+   "updated": "2026-11-24T21:04:51+02:00",
+   "note": "states saved for all 96 (both card types, exact); control 94700 checks scoring from saved states; full trainings 94638 at 1,200 of 2,000 and 94662 at 100"
   },
   {
    "id": "D3",
