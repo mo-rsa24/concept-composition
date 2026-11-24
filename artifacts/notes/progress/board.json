@@ -535,8 +535,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-24T14:31:20+02:00",
-   "updated": "2026-11-24T18:06:32+02:00",
-   "note": "smoke passed for both lists; CO3 read running (94594); overfit and 1% rungs ready for mscluster107 card 1 under question 90, after Loop 8, launcher m5_shared_card.sh; Slurm copies 94603 to 94606 cancelled once it starts"
+   "updated": "2026-11-24T18:12:15+02:00",
+   "note": "CO3 read inconclusive by count (75 of 96 reproduce; best 0.616 at step 25); 21 reruns on RTX 8000 card 1 after Loop 8 (Loop 13 for the owner); overfit fixed and resubmitted 94622 to 94625"
   },
   {
    "id": "D3",
