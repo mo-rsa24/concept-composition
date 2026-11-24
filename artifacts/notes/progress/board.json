@@ -535,8 +535,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-24T14:31:20+02:00",
-   "updated": "2026-11-24T14:31:20+02:00",
-   "note": "Loop 6 started M5 after M7: method-search/01b-balance-the-checker-data/design.md, CO3 rows decide (question 57)"
+   "updated": "2026-11-24T16:52:19+02:00",
+   "note": "smoke passed for both lists (jobs 94579, 94580); CO3 read queued (94593 then 94594); overfit then 1% rungs queued (94603 to 94606); bar is two clear subjects by question 87"
   },
   {
    "id": "D3",
@@ -1320,12 +1320,13 @@
     "Y2",
     "Y3"
    ],
-   "state": "doing",
+   "state": "done",
    "serves": "Both papers",
    "objective": "Absorb and check the record",
    "started": "2026-11-24T12:50:57+02:00",
-   "updated": "2026-11-24T12:50:57+02:00",
-   "note": "context-pulse, report-pulse, xref-pillar over Y2 and Y3"
+   "updated": "2026-11-24T16:47:28+02:00",
+   "note": "28 audit findings fixed or settled in drain/04-checks.md; CLAUDE.md declares context/methods/ (owner's yes)",
+   "finished": "2026-11-24T16:47:28+02:00"
   },
   {
    "id": "Y5",
@@ -1335,9 +1336,12 @@
    "needs": [
     "Y4"
    ],
-   "state": "todo",
+   "state": "doing",
    "serves": "Both papers",
-   "objective": "Absorb and check the record"
+   "objective": "Absorb and check the record",
+   "started": "2026-11-24T16:47:41+02:00",
+   "updated": "2026-11-24T16:47:41+02:00",
+   "note": "final census and drain, then the loop stops (question 88)"
   }
  ],
  "blocks": [
@@ -1869,7 +1873,7 @@
    "name": "Loop 3"
   },
   "s4": {
-   "id": "38bc00f5",
+   "id": "f3676c33",
    "name": "Loop 4"
   },
   "s5": {
@@ -2791,8 +2795,10 @@
    "holds": "Y2",
    "default": "Keep W2's own verdict on its finding's title line, and give the fairness test its own finding that states the inconclusive reading beside it",
    "by": "s11",
-   "state": "open",
-   "asked": "2026-11-24T11:17:47+02:00"
+   "state": "answered",
+   "asked": "2026-11-24T11:17:47+02:00",
+   "answer": "Owner, in chat, 2026-11-24: the default. Loop 9's sentence-score test keeps its own verdict on its finding's title line (null on counting, prompt match and left-right order; inconclusive on position and size and on binding), and the fairness test gets its own finding stating its inconclusive reading beside it.",
+   "answered": "2026-11-24T16:46:33+02:00"
   },
   {
    "id": 80,
@@ -2864,8 +2870,10 @@
    "holds": null,
    "default": "Loop 8 continues unchanged",
    "by": "s13",
-   "state": "open",
-   "asked": "2026-11-24T16:24:37+02:00"
+   "state": "answered",
+   "asked": "2026-11-24T16:24:37+02:00",
+   "answer": "Owner, in chat, 2026-11-24: yes. Loop 8 rewrites its SDXL test before it runs: an identity checker in signature form, its set of other prompts fixed in advance, pushing on CO3's own single run per seed, judged against CO3 alone by Paper 2's bar (a lead of at least 5 of 96 and more than 1.96 standard errors), first checking how well identity reads at SDXL steps 0 to 15 and 16 to 31 on CO3's states. It starts from Loop 6's training list without waiting for the architecture choice. About 6 GPU-hours, inside Loop 8's budget.",
+   "answered": "2026-11-24T16:45:15+02:00"
   },
   {
    "id": 87,
@@ -2873,8 +2881,21 @@
    "holds": null,
    "default": "the search keeps faithful pairs as its bar",
    "by": "s13",
-   "state": "open",
-   "asked": "2026-11-24T16:27:05+02:00"
+   "state": "answered",
+   "asked": "2026-11-24T16:27:05+02:00",
+   "answer": "Owner, in chat, 2026-11-24: yes. Loop 6's search for the best Paper 2 checker is judged on two clear subjects with drawing style ignored (CO3 alone: 32 of 96), with damage reported beside it, two reviewers per picture, their agreement reported and a third for disagreements. The bar changes before any result of the search exists.",
+   "answered": "2026-11-24T16:45:15+02:00"
+  },
+  {
+   "id": 88,
+   "question": "Is Loop 11 still worth running hourly? It moves the research loops' results onto the report and context pages, uses no GPU, and has two steps left: finish its pillar checks (unblocked by question 81) and one final drain. While Loops 6, 8 and 12 are mid-run, little new arrives to drain, and its requests (cards for 26 pictures, backlinks) cost the busy loops time. Recommendation: let it finish both steps, then stop, and restart it when a research loop reports a result worth draining.",
+   "holds": null,
+   "default": "Loop 11 finishes its pillar checks and final drain, then stops until a loop reports a new result",
+   "by": "s13",
+   "state": "answered",
+   "asked": "2026-11-24T16:41:11+02:00",
+   "answer": "Owner, in chat, 2026-11-24: the default. Loop 11 finishes its pillar checks and its final drain, then stops until a research loop reports a new result worth draining.",
+   "answered": "2026-11-24T16:45:15+02:00"
   }
  ]
 }
