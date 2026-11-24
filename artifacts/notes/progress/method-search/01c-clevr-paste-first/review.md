@@ -102,7 +102,7 @@ in-place rate does not measure.
 <a href="paste-three-experts-first-32.png"><img src="paste-three-experts-first-32.png" width="420" alt="Thirty-two pasted images, each with three objects at the three positions, several on a faintly lighter square around the object"></a>
 
 **What follows from the design and from the owner's answer on board question 54.** Object count on separated CLEVR positions cannot separate Paper 1
-from pasting, so step M6 does not run on these models, and under the owner's answer to question 84 the board closes it as not run once M3, which it waits on, is done. The test where pasting fails is the one the owner chose on 2026-11-24: two experts trained on
+from pasting, so step M6 does not run on these models, and the board marks it closed, not run, under the owner's answer to question 84. The test where pasting fails is the one the owner chose on 2026-11-24: two experts trained on
 one colour each, told what to draw and not where, in [the Stage 2 design](../05-two-experts-by-colour/design.md).
 
 **GPU time.** M7 used about 8.5 GPU-hours against the 9 to 12 approved on board question 48: about 2.9 for the smoke, overfit and 1% rungs, about

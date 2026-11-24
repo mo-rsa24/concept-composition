@@ -656,13 +656,14 @@
    "id": "M10",
    "label": "M10 CLEVR Stage 2: two experts by colour",
    "owner": "s6",
-   "proof": "method-search/05-two-experts-by-colour/review.md reports the plain product, the count-checker row and the MCMC-corrector row on the 9 cells of 2 to 6 objects, with each expert's 90% check and the scorer's 95% check",
+   "proof": "method-search/05-two-experts-by-colour/review.md reports the plain product, the count-checker row, the MCMC-corrector row and the mask-paste row on the 9 cells of 2 to 6 objects, with each expert's 90% check, the scorer's 95% check and the count checker's training set",
    "needs": [
     "M7"
    ],
    "state": "todo",
    "serves": "Paper 1",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "updated": "2026-11-24T17:43:12+02:00"
   },
   {
    "id": "D4",
