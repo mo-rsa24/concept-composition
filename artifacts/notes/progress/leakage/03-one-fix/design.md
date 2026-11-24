@@ -66,8 +66,8 @@ A lead of 4 of 48 is about twice the change a repeated pushed render showed on 9
 
 ## Controls
 
-1. **The region rule reduces to the whole-canvas rule.** With both boxes empty, row 3's code must reproduce row 2's latent to a largest absolute difference under 1e-5, in one process on one card.
-2. **The correction leaves steps 0 to 14 alone.** The latent at step 15, before the first added pass, must equal Z2's CO3 latent for the same seed on the same card type, or the picture-match check of Z2's design is applied.
+1. **The region rule reduces to the whole-canvas rule.** With both boxes empty, row 3's code must give row 2's picture pixel for pixel, in one process on one card.
+2. **The correction leaves steps 0 to 14 alone.** In one process, the latent entering step 15 with the added passes switched on must equal the latent entering step 15 of a plain CO3 render of the same seed, to a largest absolute difference under 1e-5. Both controls run on the first smoke picture (`z3_regions.py --control`).
 
 ## Cost and what it buys
 
@@ -81,7 +81,7 @@ Each rung saves its config, numbers and commit under `/datasets/mmolefe/poe_repa
 
 1. **Smoke.** Cheetah × cougar, seed 6001, rows 2 and 3, and control 1. Seconds per picture.
 2. **Small.** Cheetah × cougar and duck × goose, all 8 seeds, rows 2 and 3; the pictures are looked at, with no count.
-3. **Controls.** Control 2 on every picture.
+3. **Controls.** Both controls on the smoke picture; every new picture's difference from Z2's CO3 picture of the same seed is reported, and any over 10 of 255 is looked at by eye.
 4. **The comparison.** All 48 per row, then the blind calls and the bar.
 
 ## What this cannot say
