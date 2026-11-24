@@ -894,9 +894,13 @@
     "W3",
     "W4"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "Paper 2",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "started": "2026-11-24T11:04:33+02:00",
+   "updated": "2026-11-24T11:04:41+02:00",
+   "finished": "2026-11-24T11:04:41+02:00",
+   "note": "drop sentence scores as the push's reader; read SDXL's own features instead (0.87 by step 15 on real states)"
   },
   {
    "id": "W1b",
@@ -922,11 +926,13 @@
    "needs": [
     "W2"
    ],
-   "state": "doing",
+   "state": "done",
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-24T10:46:17+02:00",
-   "updated": "2026-11-24T10:46:17+02:00"
+   "updated": "2026-11-24T11:04:26+02:00",
+   "finished": "2026-11-24T11:04:26+02:00",
+   "note": "null: NoisyCLIP probe best, seen 0.637/0.644, unseen 0.560/0.586 (bar 0.75); random control at chance"
   },
   {
    "id": "W2c",
@@ -1117,9 +1123,12 @@
    "needs": [
     "Y1"
    ],
-   "state": "todo",
+   "state": "doing",
    "serves": "Both papers",
-   "objective": "Absorb and check the record"
+   "objective": "Absorb and check the record",
+   "started": "2026-11-24T10:51:35+02:00",
+   "updated": "2026-11-24T10:51:35+02:00",
+   "note": "first finding: do the rivals reproduce their printed scores (RTD, FKC)"
   },
   {
    "id": "Y3",
@@ -2568,6 +2577,15 @@
    "asked": "2026-11-24T10:36:33+02:00",
    "answer": "The owner's answer in chat on 2026-11-24: wrap up Loop 9; stop W3 because no sentence score reads steps 0 to 15 in any setting.",
    "answered": "2026-11-24T10:49:03+02:00"
+  },
+  {
+   "id": 78,
+   "question": "Loop 10 is closed. Its follow-up for Paper 1 is a short ablation on the digit toy (score-space/10-paper-1-placement-or-sampler.md, about 0.3 GPU-hours): the experts' vote against a random held side, with and without the corrector, and with no held side, beside sample-and-paste. Who runs it? It sits in Paper 1's digit line (plan 33's settings), and Loop 6 owns the Paper 1 method search.",
+   "holds": null,
+   "default": "Loop 6 adds it as one Paper 1 step after M7, using plan 33's step 7 settings on seeds 192 to 255",
+   "by": "s10",
+   "state": "open",
+   "asked": "2026-11-24T10:50:02+02:00"
   }
  ]
 }
