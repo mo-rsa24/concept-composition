@@ -55,6 +55,9 @@ case "$STAGE" in
          case "$SHARD:$CARD" in 0:*"RTX 8000"*|1:*"RTX 3090"*) ;; *) echo "ABORT: shard $SHARD must run on the card type M1 used, not $CARD"; exit 7 ;; esac
          "$PY" "$S/m5_read_co3.py" read --head "$HEAD" --splits "$SPLITS" --m1-co3 "$M1" --out "$OUT-states-shard$SHARD" \
            --shard "$SHARD" --num-shards 2 --save-latents; rc=$? ;;
+  control) # the kept checker alone on the saved states: its scores must match those recorded in the read
+         "$PY" "$S/m5_read_co3.py" heads --heads "kept=$HEAD" --latents-from "$OUT-states-shard0" "$OUT-states-shard1" \
+           --out "$ROOT/m5/heads-read-control" --calls "$CALLS" --key "$KEY"; rc=$? ;;
   heads)  # score the kept checker (the control) and M5's two trained checkers on the saved states
          F=$ROOT/m5/full
          "$PY" "$S/m5_read_co3.py" heads --heads "kept=$HEAD" "current=$F/current/head_step_002000.pt" "balanced=$F/balanced/head_step_002000.pt" \
