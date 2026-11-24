@@ -20,8 +20,10 @@ number reported beside it.
 
 ## What this means for Loop 12
 
-**The bar stays CO3 alone on the same pictures.** A fix wins by Loop 6's M1 rule on faithful pairs of 96: a lead of at least 5 and more than
-1.96 standard errors.
+**The bar stays CO3 alone on the same pictures.** A fix wins by a lead of at least 5 pictures of 96 and more than 1.96 standard errors, the
+margin of Loop 6's M1 rule. What is counted is two clear subjects with their own parts, drawing style ignored, with broken anatomy as a
+guard, called by two blind reviewers with their agreement reported and a third for disagreements, by the answers to board questions 87
+and 92. Faithful pairs and damage are reported beside it.
 
 **Bounded Attention is the one rival we can rerun on SDXL.** It is both Loop 12's default fix and the rival Loop 12's Paper 2 method must
 beat. It needs a box per subject, so its row must say where the boxes came from. Boxes taken from finished renders make it an upper bound,

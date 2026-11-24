@@ -97,7 +97,8 @@ A side-by-side call is made only when both methods ran on the same prompts and s
 3. Open each pair at full resolution, because downscaled sheets make fused creatures look like two clear ones.
 4. Place each picture on the ladder: one thing, a fused hybrid, two bodies or heads, two clear things.
 5. Write the call and its reason for the pair: `better` when ours sits higher on the ladder, `worse` when lower, and `tied`
-   when both sit on the same rung with no visible difference in faithfulness.
+   when both sit on the same rung with no visible difference in whether each subject keeps its own parts. Drawing style is
+   ignored and broken anatomy is named in the reason, as Paper 2's pictures are counted by the answers to board questions 87 and 92.
 6. Only then reveal which picture came from which method.
 
 Each call is one row in [the side-by-side table](side-by-side.csv), with the columns `paper`, `dataset`, `rival`, `pair`,
