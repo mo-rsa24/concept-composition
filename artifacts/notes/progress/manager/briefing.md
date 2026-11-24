@@ -29,8 +29,9 @@ or "where are we". The full detail is on [the status page](status.md).
    finished result on a report page; Loops 4 and 6 fixed the contradictions Loop 11 found.
 4. **The cluster** has no idle node (17 of 48 `bigbatch` nodes down or drained); 4 of our 6 slots run
    and 11 jobs wait, the longest a 20-minute Loop 8 check, queued about an hour.
-5. **Waiting on you:** one question, 89, whether the manager may fix three board records that disagree
-   with your answers.
+5. **Waiting on you:** nothing new. You said yes to 89 at 17:47, so the board now matches your answers:
+   Loop 10 counts as finished, the recipe freeze waits on the two-colour CLEVR test, and Loop 8's SDXL
+   test no longer waits on Loop 6's architecture choice. Question 80 stays on hold as you chose.
 
 ## For you to decide
 
@@ -38,7 +39,6 @@ Answer with `python3 scripts/progress_board.py answer <number> "<your answer>"`,
 
 | # | The question | Default |
 |---|---|---|
-| 89 | The board script cannot change a step once it exists, so three records disagree with your answers: Loop 8's SDXL test points at the old prerequisite and proof, the closed small CLEVR test still holds up the recipe freeze, and Loop 10's skipped steps keep a closed loop unfinished. May Loop 13 add an edit command to the board script and fix exactly these, including making the recipe freeze wait on the two-colour CLEVR test as your answer to question 84 meant? | the records stay as they are |
 | 80 | Should a checker choose CO3's sharpness setting at each of its corrected steps (a first read costs about 3.1 GPU-hours)? | on hold by your choice until Loop 6's read lands; it comes back to you then |
 
 **When Loop 11 restarts.** Loop 13 may not start sessions, so it tells you when Loop 8's identity result

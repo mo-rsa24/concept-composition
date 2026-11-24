@@ -1,5 +1,5 @@
 {
- "last_tick": "2026-11-24T17:08:00+02:00",
+ "last_tick": "2026-11-24T17:52:00+02:00",
  "last_alignment_round": "2026-11-24T16:10:00+02:00",
  "steps": {
   "P0": "done",
@@ -41,7 +41,7 @@
   "M2": "todo",
   "D5": "todo",
   "M3": "todo",
-  "M6": "todo",
+  "M6": "done",
   "M8": "todo",
   "M4": "todo",
   "M9": "done",
@@ -84,10 +84,10 @@
   "X3": "done",
   "X4": "done",
   "X5": "done",
-  "X6": "todo",
-  "X7": "todo",
-  "X8": "todo",
-  "X9": "todo",
+  "X6": "done",
+  "X7": "done",
+  "X8": "done",
+  "X9": "done",
   "Y1": "done",
   "Y2": "done",
   "Y3": "done",
@@ -183,7 +183,7 @@
   "86": "answered",
   "87": "answered",
   "88": "answered",
-  "89": "open"
+  "89": "answered"
  },
  "nudges": [
   {
