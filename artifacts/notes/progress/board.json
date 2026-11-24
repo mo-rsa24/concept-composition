@@ -535,8 +535,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-24T14:31:20+02:00",
-   "updated": "2026-11-24T21:04:51+02:00",
-   "note": "states saved for all 96 (both card types, exact); control 94700 checks scoring from saved states; full trainings 94638 at 1,200 of 2,000 and 94662 at 100"
+   "updated": "2026-11-24T22:15:55+02:00",
+   "note": "scoring now labels a checker that reaches 0.75 on ranking only (question 96), gate unchanged; current full training in its final check, balanced at 900 of 2,000; control 94704 waits for a node"
   },
   {
    "id": "D3",
@@ -995,12 +995,11 @@
    "needs": [
     "V6"
    ],
-   "state": "doing",
+   "state": "todo",
    "serves": "Paper 2",
    "objective": "Build and test",
-   "started": "2026-11-24T19:27:14+02:00",
-   "updated": "2026-11-24T19:27:14+02:00",
-   "note": "Gate first (board question 94, option A): the identity checker retrained on sampler states must read fresh digits 5 to 9 at 0.75 or more; jobs 94640 to 94642 queued"
+   "updated": "2026-11-24T21:09:57+02:00",
+   "note": "Not run: its gate failed. The identity checker retrained on sampler states reads fresh digits 5 to 9 at 0.552 (bar 0.75); see 10-reading-identity/review.md. Board question on what next."
   },
   {
    "id": "W1",
@@ -1636,7 +1635,7 @@
    "description": "BEFORE: nothing. It starts by itself when the paper repository (step D1) is done.\n\n1. IT RUNS as the background session 🔬 PhD Loop 5: Reproduce Rivals And Choose Checker, following:\nartifacts/notes/progress/prompts/session-5-reproduce-and-choose.md\n\n2. IT DOES: compares candidate checker architectures on small data, by a selection rule written before any of them trains.\n\n3. YOU DO: answer anything on the waiting picture.\n\nOUTCOME: one chosen architecture, with the comparison saved.\nDONE WHEN: the checker review names the choice and the rule that picked it.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nSCOREBOARD: /home/molef/PhD/concept-composition/artifacts/notes/progress/scoreboard.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: arch",
    "event_id": "l29esd328d9glp7jd5p4fn4ekg",
    "start": "2026-11-22T11:35:00+02:00",
-   "end": "2026-11-24T21:18:16+02:00",
+   "end": "2026-11-24T23:35:22+02:00",
    "synced": "1150295b1faf"
   },
   {
@@ -2990,6 +2989,26 @@
    "asked": "2026-11-24T18:54:21+02:00",
    "answer": "Decided by Loop 13 for the owner: A. Retrain the identity checker on the sampler's own states from digits 0 to 4, labelled by the judge on each finished picture, read digits 5 to 9 again with the same 0.75 bar, and run V7 only if it passes; about 1.5 GPU-hours. It answers the reviewer's main point on Loop 8 (reviewer/2026-11-24-review.md: V6 was read on noised pasted canvases while V7 pushes on sampler states) and tells V4 whether to train on CO3's states. One condition from the same review: the digits 5 to 9 canvases for this read are freshly drawn on seeds not used before, since that set has been read in V2, V3, V5 and V6; the bar is unchanged. Reversible, inside Loop 8's 30-hour budget (about 12 used), no recorded bar changed. The owner may overrule by answering again.",
    "answered": "2026-11-24T18:54:57+02:00"
+  },
+  {
+   "id": 95,
+   "question": "Loop 8, step V7 (the removal test with an identity checker). V7 needs a checker that reads which digits are present on the sampler's own states, where it would push. Two recipes have missed the 0.75 bar on digits 5 to 9: V6's checker, trained on 15,000 pasted digits with noise added, reads those states at 0.651; the same checker retrained on 2,036 sampler states from digits 0 to 4 reads fresh digits 5 to 9 at 0.552 and memorised its training digits (loss 0.0014). The same gap matters for V4 on SDXL, whose checker trains on finished pictures with noise added and must read CO3's states. Options: (A) train on both together, the 15,000 pasted canvases and the 2,036 sampler states, then read digits 5 to 9 once on new fresh seeds 3100 to 3195 with the same 0.75 bar, and run V7 only if it passes; about 1.5 GPU-hours, and its answer tells V4 whether to mix CO3 states into its training; (B) close V7 as not run, record V6 as reading pasted digits only, and go to V4 when M5 lands; no cost; (C) run V7 with V6's original checker and record its 0.651 on sampler states as the known weakness; about 1.5 GPU-hours. All stay inside Loop 8's 30 GPU-hours (about 13.5 used) and change no recorded bar.",
+   "holds": "V7",
+   "default": "A: train on pasted canvases and sampler states together, read digits 5 to 9 once on new fresh seeds 3100 to 3195 with the same 0.75 bar, run V7 only if it passes",
+   "by": "s8",
+   "state": "answered",
+   "asked": "2026-11-24T21:10:05+02:00",
+   "answer": "Decided by Loop 13 for the owner: option A with three additions and no bar changed, after the reviewer's second pass (reviewer/2026-11-24-review.md, 'Loop 8 again, at 22:15'). (a) First a free check that identity is visible at all: the digit judge on the sampler's one-step clean estimate at steps 27 to 36 of the saved digits 0 to 4 states, as a diagnostic only, about 0.1 GPU-hours; if it reads under 0.75, option B follows with no further training. (b) A positive control: hold out about 10% of seeds 2000 to 2959 by seed, read digits 0 to 4 on them, and stop training on that split. (c) Report the area under the curve beside the balanced accuracy and state how pasted and sampler examples mix in each batch. Then train on both sets and read fresh seeds 3100 to 3195 once at 0.75; V7 runs only if that passes, as recorded. About 1.6 GPU-hours in all. The SDXL test (V4) does not wait on any of this: it needs only Loop 6's training list. The owner may overrule by answering again.",
+   "answered": "2026-11-24T22:12:04+02:00"
+  },
+  {
+   "id": 96,
+   "question": "Paper 2's checkers are gated on their yes-or-no call at the zero point (balanced accuracy of at least 0.75). The push, though, follows only the direction of the checker's gradient, so what steers it is ranking good pictures above bad ones (the area under the curve), not where the cut sits. Both loops show the split: Loop 6's checker on CO3 ranks at about 0.70 but calls only 0.602 right; Loop 8's on digits ranks at 0.78 but calls 0.651. Should the gate for Loop 8's SDXL test (step 2, reading CO3's states) and Loop 6's checker reads stay balanced accuracy at zero, or become the area under the curve? Swapping now changes a recorded bar after seeing which one passes on similar checkers. Recommendation: keep the recorded gate, report the area under the curve beside it, and bring any read that passes on ranking but fails at zero back to you as its own outcome.",
+   "holds": null,
+   "default": "keep balanced accuracy at zero as the gate; the area under the curve is reported beside it; a read that passes only on ranking comes back to the owner",
+   "by": "s13",
+   "state": "open",
+   "asked": "2026-11-24T22:15:25+02:00"
   }
  ]
 }
