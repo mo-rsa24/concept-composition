@@ -1,0 +1,38 @@
+{
+ "a_cheetah__x__a_cougar": {
+  "1": {
+   "share_first_closer": 0.905,
+   "p98_abs": 0.0034
+  },
+  "3": {
+   "share_first_closer": 0.233,
+   "p98_abs": 0.011
+  },
+  "4": {
+   "share_first_closer": 0.69,
+   "p98_abs": 0.0316
+  },
+  "5": {
+   "share_first_closer": 0.801,
+   "p98_abs": 0.0267
+  }
+ },
+ "an_eagle__x__a_fox": {
+  "1": {
+   "share_first_closer": 0.705,
+   "p98_abs": 0.0116
+  },
+  "3": {
+   "share_first_closer": 0.25,
+   "p98_abs": 0.0507
+  },
+  "4": {
+   "share_first_closer": 0.402,
+   "p98_abs": 0.0694
+  },
+  "5": {
+   "share_first_closer": 0.621,
+   "p98_abs": 0.0942
+  }
+ }
+}
