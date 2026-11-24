@@ -58,6 +58,29 @@ The owner chose on 2026-11-24 (option A) to run three checks on the passing cell
 
 **Robust** means all three bars hold. Any failure goes to the owner before V7. Each retraining costs about 45 minutes (about 1.5 GPU-hours for both); the per-pair scores come from scores the runs already save.
 
+## Two checks before V7
+
+The owner chose on 2026-11-24 (option A, after Loop 13's review) to run two more checks before step V7. The bars are in `v6_baselines.py` as `MIN_LEAD_SE` and `SAMPLER_MIN_BA`, written before either run.
+
+**A rule that needs no training.** The signature holds the frozen model's noise predictions for all ten digits. The model alone can classify a canvas with them: the digit whose prediction is closest to the noise actually added fits best ([Diffusion Classifier](https://arxiv.org/abs/2303.16203)). The rule calls a canvas "the asked pair" when both asked digits fit better than the best of the other eight, where a label's fit is the mean squared difference between its noise prediction and the added noise. It reads the same 1,250 canvases of digits 5 to 9 as V6's final read, at the same 16 later-window timesteps with the same 4 noise draws. It is scored two ways: per read, one canvas at one timestep with one noise draw, as the checker reads; and with each label's fit summed over all 64 reads of a canvas, as Diffusion Classifier does, which the push never has.
+
+| Result | What it takes |
+|---|---|
+| The checker adds to the model's own knowledge | the checker's balanced accuracy beats the per-read rule's by more than 1.96 standard errors of the paired difference, resampling the 10 pairs 10,000 times |
+| It does not | the lead is at most 1.96 standard errors; reported to the owner before V7 |
+
+The summed rule is reported beside it.
+
+**A read on the sampler's own states.** V6 read forward-noised pasted canvases; V7 pushes on the sampler's states. This check renders V3's pushed row (the count checker's push, length 0.4, sampler steps 15 to 25) on the 10 pairs among digits 5 to 9 at seeds 1000 to 1095, records each state at sampler steps 27 to 36, and reads it with V6's saved checker. Each canvas is labelled by the judge on its finished picture: 1 when the call is "two clear, right, apart", 0 when there are two blobs, one per half, each read at 0.9 or more, and they are not the asked pair; any other canvas is left out.
+
+| Result | What it takes |
+|---|---|
+| Reads sampler states | balanced accuracy over the 10 steps at least 0.75 |
+| Does not | below 0.75; reported to the owner before V7 |
+| Inconclusive | fewer than 40 canvases in either label |
+
+**Cost:** about 0.4 GPU-hours. **Buys:** whether the trained checker knows more than the model already does, and whether it still reads on the states V7 will push.
+
 ## What this cannot say
 
 A pass says a checker reads digit identity on pasted canvases. Whether its gradient helps the sampler draw the right digits is V5's rerun. The later window is later in sampling, where the layout may already be fixed, so an identity push there may fix identity without moving the digits apart.
