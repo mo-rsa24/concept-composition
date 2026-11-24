@@ -26,6 +26,8 @@ At the corrected steps the latent is 0.6% to 1.7% picture on SDXL's schedule. Th
 
 Slurm job 94450, code snapshot `44b51af4`, outputs under `/datasets/mmolefe/poe_repair_min/loop-12/co3-inside/`. The control passed on both pairs: recomputing each pass from the records reproduces the next latent to a relative difference of at most 0.00073 (eagle × fox) and 0.00077 (cheetah × cougar), against the 0.01 limit. For cheetah × cougar the two distances stay close on every corrected step (for example 0.8 and 1.0 at steps 1 to 3), so the weights stay near −0.55 and −0.45; for eagle × fox they spread further (2.4 and 4.1 at step 5, weights −0.82 and −0.18).
 
+**On cheetah × cougar at seed 6001, the borrowing looks like an unfinished change of animal (inferred, one seed).** With CO3's correction off, the same seed draws two cheetahs and no cougar (`plain-joint.png`). At steps 4 and 5 CO3 measures the joint prediction much closer to the cheetah's than to the cougar's (distances 0.89 and 1.85, then 0.88 and 1.72) and weights the cheetah's subtraction at −0.70 and −0.68. The finished CO3 picture holds a cheetah and a cougar-shaped animal carrying cheetah spots, the picture W2d labelled `borrowed`. The figures are in the CO3 ladder's [exact-plane rung](../../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/exact-plane/).
+
 ## Cost and what it buys
 
 **Cost:** about 0.3 GPU-hours on one 48 GB card: 2 CO3 renders, 6 renders with the correction off, and about 110 VAE decodes. Outputs about 150 MB under `/datasets/mmolefe/poe_repair_min/loop-12/co3-inside/`. No API tokens.
