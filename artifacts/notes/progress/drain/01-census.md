@@ -22,9 +22,9 @@ The drain's sweep (`/artifacts-drain . --dry-run`) found 8 new and 4 changed fil
 | Loop 6 | 11 | 0 | 1 |
 | Loop 7 | 12 | 0 | 0 |
 | Loop 8 | 3 | 0 | 0 |
-| Loop 9 | 8 | 2 | 0 |
+| Loop 9 | 7 | 0 | 0 |
 | Loop 10 | 18 | 0 | 0 |
-| scenes in `2-classifier-guidance/artifacts/scenes/` | 200 | 0 | 0 |
+| scenes in `2-classifier-guidance/artifacts/scenes/` | 198 | 0 | 0 |
 | older results and scenes, made before the loops | 406 | not counted | not counted |
 
 ## Results with a verdict, for step Y2
@@ -33,8 +33,6 @@ Each row is a review file whose verdict is recorded. The verdict column quotes t
 
 | File | Loop | What the review records | Lands on |
 |---|---|---|---|
-| [review.md](../../../../artifacts/notes/progress/noise-text-critic/02b-linear-probe/review.md) `02b-linear-probe` | Loop 9 | State: null for all three encoders. A logistic regression trained on each encoder's image vectors, one per step from 0 to 15, reads both properties a little better than chance on seen pairs, at best 0.637 and 0.644 for NoisyCLIP |  |
-| [review.md](../../../../artifacts/notes/progress/noise-text-critic/04-train-our-own/review.md) `04-train-our-own` | Loop 9 | State: null. The encoder learns the digit pairs it was trained on: 0.758 balanced accuracy on held-back seen canvases in the SDXL-matched window, steps 14 to 25 |  |
 
 ## Reviews with no verdict yet
 
@@ -120,7 +118,7 @@ Folders with more than ten files are folded; open one to see every file.
 | [how-loops-6-7-8-connect.png](../../../../artifacts/notes/progress/method-search/how-loops-6-7-8-connect.png) | how-loops-6-7-8-connect.png | none: a picture of the route's own plan, which stays beside the plan it explains |
 | [how-the-checker-could-scale.png](../../../../artifacts/notes/progress/method-search/how-the-checker-could-scale.png) | how-the-checker-could-scale.png | `context/methods/02-the-readout-checker/01-overview.md` (to write) |
 | [loop-6-route.png](../../../../artifacts/notes/progress/method-search/loop-6-route.png) | loop-6-route.png | none: a picture of the route's own plan, which stays beside the plan it explains |
-| [loop-6-scoreboard.png](../../../../artifacts/notes/progress/method-search/loop-6-scoreboard.png) | loop 6 scoreboard *(file name)* | none: a picture of the route's own plan, which stays beside the plan it explains |
+| [loop-6-scoreboard.png](../../../../artifacts/notes/progress/method-search/loop-6-scoreboard.png) | loop-6-scoreboard.png | none: a picture of the route's own plan, which stays beside the plan it explains |
 
 **`artifacts/notes/progress/method-search/01c-clevr-paste-first/`: 6 files**
 
@@ -171,7 +169,7 @@ Folders with more than ten files are folded; open one to see every file.
 
 ### Loop 9
 
-**`artifacts/notes/progress/noise-text-critic/`: 6 files**
+**`artifacts/notes/progress/noise-text-critic/`: 5 files**
 
 | File | What it shows | Lands on |
 |---|---|---|
@@ -179,7 +177,6 @@ Folders with more than ten files are folded; open one to see every file.
 | [three-way-space-idea.png](../../../../artifacts/notes/progress/noise-text-critic/three-way-space-idea.png) | Text through frozen CLIP, a half-drawn canvas through a latent encoder told the step, and the noise predictions along the path through a new score encoder all meet in one shared space, which is tested on digit pairs never seen together by… | `context/methods/07-the-score-path/01-overview.md` (to write) |
 | [way-1-noisyclip-push.png](../../../../artifacts/notes/progress/noise-text-critic/way-1-noisyclip-push.png) | way-1-noisyclip-push.png | `context/methods/04-the-sentence-score-push/01-overview.md` (to write) |
 | [way-2-latent-clip-push.png](../../../../artifacts/notes/progress/noise-text-critic/way-2-latent-clip-push.png) | way-2-latent-clip-push.png | `context/methods/05-latent-clip/01-overview.md` (to write) |
-| [way-3-train-our-own.png](../../../../artifacts/notes/progress/noise-text-critic/way-3-train-our-own.png) | way-3-train-our-own.png | `context/methods/04-the-sentence-score-push/01-overview.md` (to write), the third way, training our own, as a section of the overview |
 | [where-the-pieces-sit.png](../../../../artifacts/notes/progress/noise-text-critic/where-the-pieces-sit.png) | where-the-pieces-sit.png | none: a picture of the route's own plan, which stays beside the plan it explains |
 
 **`artifacts/notes/progress/noise-text-critic/01-reading/`: 2 files**
@@ -481,14 +478,12 @@ Folders with more than ten files are folded; open one to see every file.
 | [mm7-a-sum-of-word-slots-cancels.png](../../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/2-miniature/mm7-a-sum-of-word-slots-cancels.png) | Word-slot vectors build four sentences as sums; the same-meaning pair and the swapped pair both sum to (4, 4, 5), so w is (0, 0, 0). | `context/methods/04-the-sentence-score-push/` (to write), one page per rung, overview first; Latent CLIP's overview goes to 05-latent-clip |
 | [mm8-one-interaction-term-survives.png](../../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/2-miniature/mm8-one-interaction-term-survives.png) | The same sums with an interaction term of 0.5 times side times the noun difference; the pairs now sum to (5, 3, 5) and (3, 5, 5), w is (2, −2, 0), and the real ratios sit beside the toy's ratio. | `context/methods/04-the-sentence-score-push/` (to write), one page per rung, overview first; Latent CLIP's overview goes to 05-latent-clip |
 
-**`2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/overview/`: 5 files**
+**`2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/overview/`: 3 files**
 
 | File | What it shows | Lands on |
 |---|---|---|
 | [ov0-the-sentence-score-push.png](../../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/overview/ov0-the-sentence-score-push.png) | One half-drawn picture and two sentences followed through NoisyCLIP's text and vision encoders, two scores, the third score and the push, with the vision encoder opened in an inset. | `context/methods/04-the-sentence-score-push/` (to write), one page per rung, overview first; Latent CLIP's overview goes to 05-latent-clip |
 | [ov1-latent-clip-push.png](../../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/overview/ov1-latent-clip-push.png) | The same picture as a half-drawn latent, divided by 0.13025 and pooled to 4 by 64 by 64 with no RGB map and no clamp, read by Latent CLIP ViT-B/4-plus and its own text encoder, with the same push. | `context/methods/04-the-sentence-score-push/` (to write), one page per rung, overview first; Latent CLIP's overview goes to 05-latent-clip |
-| [ov2-the-linear-probe-on-frozen-vectors.png](../../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/overview/ov2-the-linear-probe-on-frozen-vectors.png) | A noised training picture through a frozen image encoder to one vector, one logistic regression per step against labels from each picture's kind, and hollow result bars for seen and unseen pairs beside a random-number control. | `context/methods/04-the-sentence-score-push/` (to write), one page per rung, overview first; Latent CLIP's overview goes to 05-latent-clip |
-| [ov3-our-own-encoder-on-digits.png](../../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/overview/ov3-our-own-encoder-on-digits.png) | A real 32 by 64 MNIST canvas of a 4 and a 3 through a small encoder of four convolution blocks told the step, 35 captions through CLIP's frozen text encoder, the true caption picked out of 35, and a test on digits 5 to 9. | `context/methods/04-the-sentence-score-push/` (to write), one page per rung, overview first; Latent CLIP's overview goes to 05-latent-clip |
 | [w4-input-canvas.png](../../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/overview/w4-input-canvas.png) | w4-input-canvas.png | `context/methods/04-the-sentence-score-push/` (to write), one page per rung, overview first; Latent CLIP's overview goes to 05-latent-clip |
 
 **`2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/reference/`: 3 files**
