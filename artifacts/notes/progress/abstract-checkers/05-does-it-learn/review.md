@@ -1,6 +1,23 @@
 # Review: does a checker learn plurality on unseen digits (step V2)
 
-**Status: null.** The map reader misses two of V2's three bars on digits 5 to 9 (W&B run `a562r799`), and the rehearsal at SDXL's noise level misses the same two on the pairs holding digit 4. Trained apart at SDXL's noise level, the count checker passes its rehearsal and the identity checker misses. Steps V3, V5 and V4 wait on the owner's answer to board question 69, which asks to read digits 5 to 9 once with the count checker.
+**Status: null.** The map reader misses two of V2's three bars on digits 5 to 9 (W&B run `a562r799`), and the rehearsal at SDXL's noise level misses the same two on the pairs holding digit 4. Trained apart at SDXL's noise level, the count checker passes its rehearsal and the identity checker misses. **The count checker then passes on digits 5 to 9**, which it never trained on (W&B run `tyhrpyov`). By the owner's answer to board question 69, step V3 runs with the count checker's push alone.
+
+## The count checker on digits 5 to 9
+
+Job 94108 on `mscluster79` took 27 minutes 32 seconds, from the code snapshot of commit `0974c41e`. It trained the count checker on all 10 pairs among digits 0 to 4 at the 16 timesteps matching SDXL's noise, read `seen_test` and `unseen_test` once, and saved both checkers to `/datasets/mmolefe/poe_repair_min/loop-8/v2/count-final/`.
+
+| Score over the 16 steps, 0.5 is chance | Bar | Map reader | Raw reader |
+|---|---|---|---|
+| Digits 0 to 4, `seen_test` | none | 0.782 | 0.787 |
+| Digits 5 to 9, `unseen_test` | at least 0.75 | **0.791** | 0.754 |
+| Gap | at most 0.05 | **0.009** | 0.033 |
+| Overfit check, of 16 | at least 15 | 16 | 16 |
+
+The verdict is support. The map reader's score on digits 5 to 9 rises from 0.63 at the noisiest step to 0.92 at the least noisy, and every one of the 10 unseen pairs scores between 0.77 and 0.81. By kind it calls 96% of overlaid canvases correctly and 65% of single-digit canvases, again its weakest kind.
+
+The raw reader, which is told the asked digits, loses 0.033 moving to digits it never saw, while the map reader loses nothing. On this one read, reading where each asked digit acts carries over better than reading the pixels with the digit names.
+
+The same job wrote `count-explained.npz`: the saved map reader's real maps, score and push gradient on the zoom ladder's four example canvases at timesteps 712, 616, 539 and 480.
 
 ## Two checkers at SDXL's noise level
 
@@ -83,4 +100,4 @@ No configuration separates `apart` from `wrong`, on the pairs it trained on or o
 
 The written rule freezes the configuration with the highest smaller value of the two scores on the pairs holding 4, which is **log totals added** at 0.4999. The four values span 0.4946 to 0.4999, so this choice separates configurations that are all at chance.
 
-GPU-hours spent so far: 5.16 of 30 (0.14 on step V1, 0.30 on this ladder, 2.68 on the inner test, 0.66 on the final read, 0.55 on the rehearsal at SDXL's noise level and 0.83 on the two checkers).
+GPU-hours spent so far: 5.62 of 30 (0.14 on step V1, 0.30 on this ladder, 2.68 on the inner test, 0.66 on the final read, 0.55 on the rehearsal at SDXL's noise level, 0.83 on the two checkers and 0.46 on the count checker's read of digits 5 to 9).
