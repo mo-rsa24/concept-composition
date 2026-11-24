@@ -8,12 +8,12 @@ each stay between 0.46 and 0.56 mean balanced accuracy against a bar of 0.75, wh
 Counting, prompt match and left-right order are null. Position and size, and attribute binding, are inconclusive, because
 their labels failed the eye check. NoisyCLIP does read prompt match once the picture is mostly drawn, at steps 30 to 49, so
 the models and the input path work and the early steps are where reading fails. W&B run `70g3qw2f` `stated`
-([the reading review](../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), line 3).
+([the reading review](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), line 3).
 
 **Why it was asked.** A sentence score was a candidate for steering the sampler toward a clean cat and dog: push the picture
 while it is drawn so the right sentence scores higher. A push acts at steps 0 to 15, so the next step, a push on CO3's
 renders, was allowed only on steps where the score can read the property at all
-([the reading design](../../artifacts/notes/progress/noise-text-critic/02-can-it-read/design.md), line 3).
+([the reading design](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/design.md), line 3).
 
 A later test of whether this null is fair records the step differently. It is quoted under
 [Where the sources disagree](#where-the-sources-disagree) and listed under [Still open](#still-open).
@@ -56,7 +56,7 @@ chosen on the threshold half, and balanced accuracy is measured on the reading h
 that chose its cut-off.
 
 **The five properties**, each a right sentence against wrong ones
-([the reading design](../../artifacts/notes/progress/noise-text-critic/02-can-it-read/design.md), lines 84 to 90):
+([the reading design](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/design.md), lines 84 to 90):
 
 | Property | Right sentence | Wrong sentences | Pictures (design, lines 60 to 66) |
 |---|---|---|---|
@@ -73,7 +73,7 @@ noised back to each step from the finished latent.
 
 Navigation: ⬅️ [Previous](#words-this-page-uses) | 📋 [TOC](#table-of-contents) | [Next](#1-no-model-reads-any-property-at-steps-0-to-15) ➡️
 
-**The rule was written in [the reading design](../../artifacts/notes/progress/noise-text-critic/02-can-it-read/design.md#the-run)
+**The rule was written in [the reading design](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/design.md#the-run)
 before any score existed, and its bars are constants in `2-classifier-guidance/scripts/noise_text_critic/w2_read.py`.**
 
 | Result, per property | What it takes (design, lines 45 to 50) |
@@ -92,7 +92,7 @@ Navigation: ⬅️ [Previous](#what-would-have-counted) | 📋 [TOC](#table-of-c
 
 **Every model sits near chance on every property, step by step, far under the 0.75 bar.**
 
-<a href="../../artifacts/notes/progress/noise-text-critic/02-can-it-read/balanced-accuracy-by-step.png"><img src="../../artifacts/notes/progress/noise-text-critic/02-can-it-read/balanced-accuracy-by-step.png" width="200" alt="Five panels, one per property, of balanced accuracy on the reading half against sampler step 0 to 15 for NoisyCLIP, frozen CLIP and Latent CLIP, every line near the 0.5 chance line and under the dashed 0.75 bar"></a>
+<a href="../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/balanced-accuracy-by-step.png"><img src="../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/balanced-accuracy-by-step.png" width="200" alt="Five panels, one per property, of balanced accuracy on the reading half against sampler step 0 to 15 for NoisyCLIP, frozen CLIP and Latent CLIP, every line near the 0.5 chance line and under the dashed 0.75 bar"></a>
 
 Five panels, one per property. Up the side is balanced accuracy on the reading half, from 0.2 to 1.0; along the bottom is the
 sampler step from 0 (noise) to 15. One line per model: NoisyCLIP green, frozen CLIP grey, Latent CLIP purple, with the dashed
@@ -103,7 +103,7 @@ the lines swing from below 0.2 to past 0.75 at single steps, because each half h
 turns on whether that one picture is called right `verified` (read on the picture; the count is in the table below).
 
 **The number.** Mean balanced accuracy over steps 0 to 15 on the reading half, with the cut-off chosen on the threshold half
-`verified` (each cell read from `mean_steps_0_to_15` in [the reading result file](../../artifacts/notes/progress/noise-text-critic/02-can-it-read/result.json)
+`verified` (each cell read from `mean_steps_0_to_15` in [the reading result file](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/result.json)
 on 2026-11-24; the table is the review's, lines 11 to 17):
 
 | Property | NoisyCLIP | Frozen CLIP | Latent CLIP | Pictures per half (right, wrong) | Verdict |
@@ -133,7 +133,7 @@ the early steps.**
 
 > 🖼️ **Figure wanted**: balanced accuracy on the reading half against sampler step 0 to 49 for prompt match and counting, one
 > line per model, with steps 0 to 15 shaded as the push's window, so the reader sees where each model starts to read. The
-> numbers are in `balanced_accuracy_reading_half` of [the reading result file](../../artifacts/notes/progress/noise-text-critic/02-can-it-read/result.json).
+> numbers are in `balanced_accuracy_reading_half` of [the reading result file](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/result.json).
 > Render into `2-classifier-guidance/artifacts/results/can-a-sentence-score-read-the-five-properties/`, write its card entry,
 > then embed here.
 
@@ -147,7 +147,7 @@ the early steps.**
 NoisyCLIP leads frozen CLIP on prompt match by 0.15 at step 20 and 0.16 at step 30, so its noise training moves reading
 earlier, to about step 20 of 50, and not into steps 0 to 15 `stated` (review, line 28).
 
-**The checks before any score was believed** all ran `verified` (read from [the reading result file](../../artifacts/notes/progress/noise-text-critic/02-can-it-read/result.json),
+**The checks before any score was believed** all ran `verified` (read from [the reading result file](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/result.json),
 `published_behaviour` and `input_path`):
 
 | Check | Bar | NoisyCLIP | Latent CLIP | Frozen CLIP |
@@ -164,7 +164,7 @@ Navigation: ⬅️ [Previous](#2-the-models-do-read-once-the-picture-is-mostly-d
 **At step 49 NoisyCLIP calls two cats "one animal" half the time, because the wrong sentence "part cat and part dog" scores
 almost as high as the right one.**
 
-<a href="../../artifacts/notes/progress/noise-text-critic/02-can-it-read/example/noisyclip-counting-on-six-finished-pictures.png"><img src="../../artifacts/notes/progress/noise-text-critic/02-can-it-read/example/noisyclip-counting-on-six-finished-pictures.png" width="200" alt="Six finished cat and dog pictures, each above three bars of NoisyCLIP cosine to the three counting sentences at step 49, three called right in green and three called wrong in red"></a>
+<a href="../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/example/noisyclip-counting-on-six-finished-pictures.png"><img src="../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/example/noisyclip-counting-on-six-finished-pictures.png" width="200" alt="Six finished cat and dog pictures, each above three bars of NoisyCLIP cosine to the three counting sentences at step 49, three called right in green and three called wrong in red"></a>
 
 Six finished pictures, each above three bars: NoisyCLIP's cosine at step 49 to the right sentence (blue) and to the two wrong
 ones (grey), along a scale from 0.10 to 0.25. A picture is called "two animals" when the right sentence minus the best wrong
@@ -197,7 +197,7 @@ colour labels built from it fail the eye check.**
 > 🖼️ **Figure wanted**: two of the 64 relation pictures with the cat and dog regions drawn on them, one where the cat region
 > covers the whole cat and one where it covers only the head, beside the recoloured copy of the second, so the reader sees why
 > the size and colour labels fail. The label sheets are from job 94093; the calls are in
-> [the eye-check calls](../../artifacts/notes/progress/noise-text-critic/02-can-it-read/label-check/eye-labels.csv). Check each
+> [the eye-check calls](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/label-check/eye-labels.csv). Check each
 > picture against the subject guard, render into
 > `2-classifier-guidance/artifacts/results/can-a-sentence-score-read-the-five-properties/`, write its card entry, then embed here.
 
@@ -223,9 +223,9 @@ Navigation: ⬅️ [Previous](#4-why-two-properties-are-inconclusive-the-labels)
 
 | What | One source | The other source |
 |---|---|---|
-| The step's verdict | [the reading review](../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), line 3: "null on counting, prompt match and left-right order, and inconclusive on position and size and on binding" | [the fairness review](../../artifacts/notes/progress/noise-text-critic/02c-fair-test/review.md), line 3: "W2 is inconclusive by the bars fixed beforehand", because a reader on SDXL's own features, run as a positive control, read the clean pair at 0.637 over steps 0 to 15 against its floor of 0.65 (line 4). [The loop's summary](../../artifacts/notes/progress/noise-text-critic/00-executive-summary.md), line 38, also calls the step "formally inconclusive" |
-| Latent CLIP's counting mean over steps 0 to 15 | [the reading review](../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), line 13: 0.560 | [the loop verdict](../../artifacts/notes/progress/noise-text-critic/05-verdict.md), line 13: "0.561, Latent CLIP", the value the fairness review's rerun prints at line 24 |
-| Whether position and size, and binding, were scored | [the reading review](../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), lines 16 and 17: scores for all three models, with the verdict inconclusive | [the loop's summary](../../artifacts/notes/progress/noise-text-critic/00-executive-summary.md), line 39: "Position and size, and binding, were not scored, because their labels failed the eye check" |
+| The step's verdict | [the reading review](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), line 3: "null on counting, prompt match and left-right order, and inconclusive on position and size and on binding" | [the fairness review](../../../artifacts/notes/progress/noise-text-critic/02c-fair-test/review.md), line 3: "W2 is inconclusive by the bars fixed beforehand", because a reader on SDXL's own features, run as a positive control, read the clean pair at 0.637 over steps 0 to 15 against its floor of 0.65 (line 4). [The loop's summary](../../../artifacts/notes/progress/noise-text-critic/00-executive-summary.md), line 38, also calls the step "formally inconclusive" |
+| Latent CLIP's counting mean over steps 0 to 15 | [the reading review](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), line 13: 0.560 | [the loop verdict](../../../artifacts/notes/progress/noise-text-critic/05-verdict.md), line 13: "0.561, Latent CLIP", the value the fairness review's rerun prints at line 24 |
+| Whether position and size, and binding, were scored | [the reading review](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), lines 16 and 17: scores for all three models, with the verdict inconclusive | [the loop's summary](../../../artifacts/notes/progress/noise-text-critic/00-executive-summary.md), line 39: "Position and size, and binding, were not scored, because their labels failed the eye check" |
 
 ## What this cannot tell you
 
@@ -269,7 +269,7 @@ the same say: the good row's share called good is 8 / 8 = 1, the bad row's share
 pictures, so a score that calls every picture "two animals" would have plain accuracy 77 / 92, about 0.84, and balanced
 accuracy 0.5 (worked here from the review's counts, not a recorded result). On position and size the right row holds 1
 picture, so its share is 0 or 1 and a single step can only jump; that is the swing in section 1's fifth panel. The chapter on
-[balanced accuracy in the readout guidance textbook](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/06-readout-guidance-on-one-small-network.md#balanced-accuracy-the-hit-rate-on-each-class-averaged)
+[balanced accuracy in the readout guidance textbook](../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/06-readout-guidance-on-one-small-network.md#balanced-accuracy-the-hit-rate-on-each-class-averaged)
 teaches it on a small network.
 
 **The sentence score, a cosine**
@@ -279,9 +279,9 @@ lengths: (1 + 2) / (1.414 × 2.236) = 0.949 for the first, and (2 - 1) / (1.414 
 sentence minus the wrong one is 0.633, so the first sentence wins. Run back on the clean pair at seed 239 in section 3: the
 right sentence scores 0.260 and the best wrong one 0.235, so right minus best wrong is +0.025 `verified` (read on the picture),
 and it is called two animals because +0.025 is above the cut-off of +0.0023. Read more in the
-[cosine similarity card](../../../../Obsidian/Mathematics/Linear%20Algebra/Cosine%20Similarity.md#where-to-learn-this),
-the [contrastive image-text card](../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Contrastive%20Image-Text%20Training.md#where-to-learn-this)
-for how CLIP is trained, and the [CLIP score chapter](../../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/textbook/01-clip-score.md#how-the-number-is-made).
+[cosine similarity card](../../../../../Obsidian/Mathematics/Linear%20Algebra/Cosine%20Similarity.md#where-to-learn-this),
+the [contrastive image-text card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Contrastive%20Image-Text%20Training.md#where-to-learn-this)
+for how CLIP is trained, and the [CLIP score chapter](../../../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/textbook/01-clip-score.md#how-the-number-is-made).
 
 **A cut-off chosen on one half and read on the other**
 
@@ -298,8 +298,8 @@ Here the seeds alternate between halves in SHA-256 order within each label, and 
 Resample the reading half's seeds with replacement many times, recompute each model's mean each time, and the spread of the
 gap between two models is its standard error. A gap of more than 1.96 of those counts as a lead. NoisyCLIP's 0.056 lead on
 position and size is 3.7 standard errors of 0.015 (worked here), and it does not count because it rests on 2 right pictures.
-The [bootstrap card](../../../../Obsidian/Mathematics/Statistics/Bootstrap.md#standard-error) and
-[the chapter on the bootstrap standard error](../../../../goal-setting/learning/mathematics/statistics/sampling/textbook/08-the-percentile-bootstrap.md#84-why-with-replacement-and-the-bootstrap-standard-error)
+The [bootstrap card](../../../../../Obsidian/Mathematics/Statistics/Bootstrap.md#standard-error) and
+[the chapter on the bootstrap standard error](../../../../../goal-setting/learning/mathematics/statistics/sampling/textbook/08-the-percentile-bootstrap.md#84-why-with-replacement-and-the-bootstrap-standard-error)
 teach it.
 
 ## Where this came from
@@ -310,22 +310,22 @@ Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-conten
 
 | What | Source | Mark |
 |---|---|---|
-| Means over steps 0 to 15, pictures per half, the step 49 check, the input path cosines, W&B `70g3qw2f` | [the reading result file](../../artifacts/notes/progress/noise-text-critic/02-can-it-read/result.json), read 2026-11-24, matching [the reading review](../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), lines 11 to 17 and 28 to 34 | verified |
-| The verdicts, the gaps against frozen CLIP, the late steps, the counting calls at step 49 | [the reading review](../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), lines 3, 16 to 30 and 36 | stated |
-| The eye check of the labels and the text-only check | review lines 51 to 78, with [the eye-check calls](../../artifacts/notes/progress/noise-text-critic/02-can-it-read/label-check/eye-labels.csv) and [the word check](../../artifacts/notes/progress/noise-text-critic/02-can-it-read/word-check/word-check.json) | stated |
+| Means over steps 0 to 15, pictures per half, the step 49 check, the input path cosines, W&B `70g3qw2f` | [the reading result file](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/result.json), read 2026-11-24, matching [the reading review](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), lines 11 to 17 and 28 to 34 | verified |
+| The verdicts, the gaps against frozen CLIP, the late steps, the counting calls at step 49 | [the reading review](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), lines 3, 16 to 30 and 36 | stated |
+| The eye check of the labels and the text-only check | review lines 51 to 78, with [the eye-check calls](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/label-check/eye-labels.csv) and [the word check](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/word-check/word-check.json) | stated |
 | The runs | review lines 40 to 49: Slurm jobs 93753 to 94105, full scoring by job 94105 at commit `385dae85` | stated |
-| The rule, the sentences and the pictures | [the reading design](../../artifacts/notes/progress/noise-text-critic/02-can-it-read/design.md), lines 33 to 116 | stated |
+| The rule, the sentences and the pictures | [the reading design](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/design.md), lines 33 to 116 | stated |
 | What each picture shows | the two pictures above, opened at full size on 2026-11-24 and passed through `is_showable` in `scripts/shared/disallowed_subjects.py` with their labels | verified |
-| The plan that owned the step | step W2 on [the progress board](../../artifacts/notes/progress/board.json), run under [the Session 9 brief](../../artifacts/notes/progress/prompts/session-9-turn-abstract-concepts-into-scores.md), described in [the sentence score loop page](../../artifacts/notes/progress/score-space/02-the-loops/loop-9-turn-concepts-into-scores.md) | |
-| Regenerate with | the step's scripts under `2-classifier-guidance/scripts/noise_text_critic/`, launched as in [launching and harvesting a run](../../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md) | |
-| The cluster and its cards | [the environment overview](../../environment/overview.md) | |
+| The plan that owned the step | step W2 on [the progress board](../../../artifacts/notes/progress/board.json), run under [the Session 9 brief](../../../artifacts/notes/progress/prompts/session-9-turn-abstract-concepts-into-scores.md), described in [the sentence score loop page](../../../artifacts/notes/progress/score-space/02-the-loops/loop-9-turn-concepts-into-scores.md) | |
+| Regenerate with | the step's scripts under `2-classifier-guidance/scripts/noise_text_critic/`, launched as in [launching and harvesting a run](../../../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md) | |
+| The cluster and its cards | [the environment overview](../../../environment/overview.md) | |
 
 ## Still open
 
 Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
 
-- [ ] The fairness test now records a verdict on this step. [The fairness review](../../artifacts/notes/progress/noise-text-critic/02c-fair-test/review.md), line 3: "**State: W2 is inconclusive by the bars fixed beforehand, and no sentence score reads in any fair setting.**" Its finding is not written yet.
-- [ ] Binding has no score: [the binding review](../../artifacts/notes/progress/noise-text-critic/02d-binding/review.md), line 3, records "no binding score yet".
+- [ ] The fairness test now records a verdict on this step. [The fairness review](../../../artifacts/notes/progress/noise-text-critic/02c-fair-test/review.md), line 3: "**State: W2 is inconclusive by the bars fixed beforehand, and no sentence score reads in any fair setting.**" Its finding is [the fairness finding](is-the-sentence-score-test-fair.md).
+- [ ] Binding has no score: [the binding review](../../../artifacts/notes/progress/noise-text-critic/02d-binding/review.md), line 3, records "no binding score yet".
 - [ ] Position and size needs labels that pass the eye check and at least 8 right pictures per half before it can be read.
 - [ ] The figure of reading against all 50 steps in section 2.
 - [ ] The figure of the head-only cat region in section 4.

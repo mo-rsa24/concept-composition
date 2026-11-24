@@ -16,7 +16,7 @@ This test runs it on handwritten digits, where pasting is the cheapest thing a r
 > [!NOTE]
 > The step behind this page (step M1 on the progress board) asked the same question of both papers, with a separate bar, data and
 > verdict for each. This page holds Paper 1's answer. Paper 2's answer, whether adding the kept push to CO3 beats CO3 alone on SDXL,
-> is in the same review at lines 87 to 115 and has no finding page yet.
+> is in [the SDXL-half finding](does-adding-the-kept-push-to-co3-beat-co3-alone.md).
 
 ## Table of contents
 
@@ -240,9 +240,9 @@ Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-conten
 
 Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
 
-- [ ] Paper 2's half of the step: CO3 with the kept push drew 7 faithful pairs of 96 against 11 for CO3 alone, null by its own bar,
+- [x] Paper 2's half of the step: CO3 with the kept push drew 7 faithful pairs of 96 against 11 for CO3 alone, null by its own bar,
       W&B `s7o6404z` ([the step's review](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/review.md), lines 87 to
-      115). It needs its own finding page.
+      115). It has its own page, [the SDXL-half finding](does-adding-the-kept-push-to-co3-beat-co3-alone.md).
 - [ ] The matched-leads figure in section 2.
 - [ ] The eye-against-judge figure in section 3.
 - [ ] The same comparison on the 20 digit pairs kept out of tuning, and on CLEVR with more objects, where pasting may fail.
