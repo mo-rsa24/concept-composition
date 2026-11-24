@@ -3,7 +3,7 @@
 The one page to read. Loop 13 rewrites it every 6 hours, and at once when you say "updates", "brief me"
 or "where are we". The full detail is on [the status page](status.md).
 
-**Written:** 2026-11-24 18:52 (UTC+2).
+**Written:** 2026-11-24 22:22 (UTC+2).
 
 ## Contents
 
@@ -17,28 +17,25 @@ or "where are we". The full detail is on [the status page](status.md).
 
 1. **Paper 1** (experts that never met) is level with simply pasting the two experts' samples (295
    clean digit pairs of 320 against 287). Loop 6's CLEVR test where neither expert is told where to
-   draw is rendering, with a paste comparison beside it, to see whether paste can be beaten when it
-   is not given positions.
-2. **Paper 2** (better than CO3): CO3 draws both subjects in 96 of 96 tuning pictures and fails on
-   borrowed parts. Loop 6 is now reading whether its checker can see that failure at all, the result
-   question 80 waits on. Loop 8's identity checker reads unseen digits at 0.861 against a 0.75 bar,
-   and its SDXL test is re-aimed at identity against CO3. Loop 12's main pass on which pairs borrow
-   parts is running.
-3. **Since the last briefing:** you answered five questions (79, 86, 87, 88, and the hold on 80);
-   Loops 6 and 8 applied your answers before any new result existed; Loop 11 stopped with every
-   finished result on a report page; Loops 4 and 6 fixed the contradictions Loop 11 found.
-4. **The cluster** has no idle node (17 of 48 `bigbatch` nodes down or drained); 4 of our 6 slots run
-   and 11 jobs wait, the longest a 20-minute Loop 8 check, queued about an hour.
-5. **Waiting on you:** nothing new. You said yes to 89 at 17:47, so the board now matches your answers:
-   Loop 10 counts as finished, the recipe freeze waits on the two-colour CLEVR test, and Loop 8's SDXL
-   test no longer waits on Loop 6's architecture choice. Question 80 stays on hold as you chose.
+   draw is still rendering, with a paste comparison beside it.
+2. **Paper 2** (better than CO3) has its first sign of a fix: Loop 12 corrected one animal's place in
+   the picture later in the run, and on one seed the cougar lost the cheetah's spots; the blind count
+   on 48 pictures is running. The checkers are weaker: Loop 6's kept checker does not see CO3's
+   failure (right 60% of the time against a 65% floor), and its two new checkers are being read.
+3. **Loop 8** missed twice at reading digits from the sampler's own states (0.651, then 0.552 after
+   memorising its training digits). The reviewer read it again, Loop 13 sent a method review request,
+   and a free check now asks whether the digits are readable there at all before any more training.
+   Its SDXL test against CO3 does not wait on this.
+4. **The cluster** still has no idle node; 5 of our 6 `bigbatch` slots run, and the borrowed card on
+   mscluster107 is no longer in use because the other user's job ended.
+5. **Waiting on you:** nothing. Since the last briefing you answered 79, 80, 86, 87, 88, 89 and 90, and
+   Loop 13 decided 91 to 95 for you; each can be overruled by answering it again.
 
 ## For you to decide
 
 Answer with `python3 scripts/progress_board.py answer <number> "<your answer>"`, or in this session.
 
-| # | The question | Default |
-|---|---|---|
+Nothing is open.
 
 **When Loop 11 restarts.** Loop 13 may not start sessions, so it tells you when Loop 8's identity result
 or Loop 6's two-colour CLEVR test is done; restarting Loop 11 then puts the new result on a report page.
