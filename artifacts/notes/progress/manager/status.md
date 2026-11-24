@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-24 18:11 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-24 18:15 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -69,7 +69,7 @@ The finish range is `session_status.py`'s, from the 52 finished steps: fastest p
 | 4. Rivals and targets | Keeping every target current. It recorded the CLEVR paste result and placed the two-colour CLEVR test in the CLEVR plan. | 1 | none useful: it ends after the paper tables, which have not started | idle | nothing |
 | 6. Best method | Checking whether its checker can tell CO3's clean pictures from its borrowed-part ones at each step (job 94594, 1 h 04 min of 2 h 30 min), before choosing which training list Paper 2's checker uses (step M5). Two-colour CLEVR renders for Paper 1 run beside it (1 h 35 min of 10 h). | 9 | 4.4 h to 208.0 h | busy | its own read; question 80 waits on this read; next on card 1 after Loop 8 |
 | 7. Abstract-checker papers | Finished; its session is closed. | 0 | done | closed | nothing |
-| 8. Abstract checkers | Its digit identity checker passed every robustness bar (second seed 0.877 against 0.75, shuffled labels 0.500, weakest pair 0.844). Its last two checks, a rule that needs no training and a read on real sampler states, failed their first launch on mscluster107 card 1 on a code error and wait on its fix. Its SDXL test is rewritten to your answer on 86. | 3 | 1.9 h to 85.5 h | busy | its own fix; the SDXL test waits on Loop 6's training list |
+| 8. Abstract checkers | Its digit identity checker passed every robustness bar (second seed 0.877 against 0.75, shuffled labels 0.500, weakest pair 0.844). Its last two checks run on mscluster107 card 1: the rule that needs no training now, the read on real sampler states next. Its SDXL test is rewritten to your answer on 86. | 3 | 1.9 h to 85.5 h | busy | its own run; the SDXL test waits on Loop 6's training list |
 | 11. Drain into the pillars | Stopped by your answer on 88. Its pillar checks are done and its census found every finished verdict on a report page (14 findings, eight method folders). Its final step stays open until Loops 6 and 8 stop. | 1 | when restarted | stopped its loop | waiting for a result worth draining: Loop 8's identity checker or Loop 6's two-colour CLEVR test |
 | 12. Where CO3 leaks | Measuring what predicts which animal pairs borrow each other's parts under CO3: the main predictor pass (job 94591) is at 1 h 17 min of its 4-hour limit. | 5 | 2.4 h to 112.6 h | busy | its own job |
 
@@ -83,7 +83,7 @@ Read at 18:06 from `squeue`, `sacct`, `sinfo` and `nvidia-smi` on mscluster107; 
 | Longest wait | Loop 8's 20-minute check (job 94595): 35 minutes, waiting for a node |
 | Nodes out of service | `bigbatch`: 12 down and 5 drained of 48. `biggpu`: 2 down and 2 drained of 7, including mscluster108 and mscluster111, drained at 09:27 and 09:10 today after a failed job kill |
 | Idle capacity | none: at 17:43 every working `bigbatch` and `biggpu` node was allocated. mscluster107 is now another user's `biggpu` job (94610, 6-hour limit, started 17:36); its second card sits idle at 170 MiB, but their process holds it, so it is not ours to use. Your interactive job 83423 on that node no longer appears in the queue |
-| Shared card | **mscluster107 card 1, approved by you on question 90.** Loop 8's first launch (18:05) failed in its smoke stage on a code error, not the stop rule: a GPU tensor passed to numpy in `judge_sheet.py` line 71 (log `/datasets/mmolefe/poe_repair_min/loop-8/logs/l8-v6-shared.log`). Its queued Slurm copies were already cancelled, so its two checks wait on its fix. The other user's job runs one evaluation after another; each stage holds about 36 GB on card 0 and opens card 1 with 170 MiB, which the stop rule allows. The launch script holds all three guards. Loop 6 goes next. The host job ends about 23:36 |
+| Shared card | **mscluster107 card 1, approved by you on question 90.** Loop 8's second launch (18:07, `launch-2.sh`, same three guards) passed its smoke stage after a one-line fix (commit `13c68afd`) and is running the untrained-rule check at about 15.6 GB; the sampler-state read follows. The first launch had failed on that code error, not on the stop rule. The other user's job runs one evaluation after another, each holding about 36 GB on card 0 and 170 MiB on card 1. Loop 6 goes next. The host job ends about 23:36 |
 | Compute against budget since 2026-11-21 | Loop 6: 53.4 node-hours of 87 (34.8 were CLEVR renders that may have used no GPU). Loop 8: 11.9 of 30. Loop 12: about 0.4, no total set. Slurm here records no GPU count, so these are node-hours, an upper bound |
 
 **What would make the queue move faster:** little within our control. There is no idle `biggpu` card,
@@ -97,7 +97,6 @@ Newest first.
 
 | Concerns | Finding | Source |
 |---|---|---|
-| Loop 8 | **Its shared-card launch failed in the smoke stage** with exit 1 (a GPU tensor passed to numpy, `judge_sheet.py` line 71), and its Slurm copies were already cancelled, so the two checks are not queued anywhere until it relaunches. Told at 18:10. | Loop 8's shared-run log |
 | Loop 6 | **Design note, not a problem.** The new check scores whether the checker's score lands on the right side of zero, a fixed cut. If its area under the curve, reported beside, is high while that accuracy is low, the checker separates CO3's clean pictures from its borrowed-part ones and only its cut is off. Read the two numbers together when the check lands. | `method-search/01b-balance-the-checker-data/design.md`, the check section |
 | Loop 6 | **The checker training failed twice in 3 minutes** (jobs 94473 and 94474); the reruns (94579 and 94580) finished in 11 and 12 minutes. | `sacct` |
 | Loops 6 and 8 | **A run of bad results, now reviewed.** Loop 6's region test missed three times in a row and Loop 8's misses shared a cause. Both answered their reviews within minutes and corrected their records and pictures (Loop 6 commit `f29cf613`, Loop 8 commit `8c310b3a`). | [the review](../reviewer/2026-11-24-review.md) |
