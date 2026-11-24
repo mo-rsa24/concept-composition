@@ -149,16 +149,18 @@ Navigation: ⬅️ [Still open](#still-open) | 📋 [TOC](#table-of-contents)
       and check against its faithfulness note before embedding, per that file's own instructions.
 - [ ] 🖼️ [Readout checker § The names, taken apart](methods/02-the-readout-checker/01-overview.md#the-names-taken-apart):
       balanced accuracy on the 20-picture toy as two overlapping circles, the pictures called clean
-      by eye and by the checker, beside a panel for a checker that calls everything a reject. The
-      slot names no save path yet.
+      by eye and by the checker, beside a panel for a checker that calls everything a reject. Save
+      as `context/images/methods/02-the-readout-checker/balanced-accuracy-on-the-twenty-picture-toy.png`.
 - [ ] 🖼️ [The linear probe § What the probes read](methods/05-latent-clip/04-the-linear-probe-on-frozen-vectors.md#what-the-probes-read):
       balanced accuracy against step 0 to 15, one panel per property and one line per reader. The
       linear probe finding owns the slot and its data path; render it there, then embed it here.
 - [ ] 🖼️ [Word-map checker's network view § One joint prompt against two prompts](methods/06-the-word-map-checker/02-the-network-view.md#one-joint-prompt-against-two-prompts):
       two words' brightest patches as overlapping circles, with the overlap over the union written
-      on them, from the section's toy counts. The slot names no save path yet.
+      on them, from the section's toy counts. Save as
+      `context/images/methods/06-the-word-map-checker/overlap-over-union-of-two-words-patches.png`.
 - [ ] 🖼️ [From answers to a target § From a printed number to a target](methods/08-the-blip-vqa-score/03-from-answers-to-a-target.md#from-a-printed-number-to-a-target):
       the coffee toy's resampled mean gaps as two histograms, matched and unmatched, each with its
-      band of ±1.96 standard errors. The slot names no save path yet.
+      band of ±1.96 standard errors. Save as
+      `context/images/methods/08-the-blip-vqa-score/resampled-mean-gaps-matched-and-unmatched.png`.
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

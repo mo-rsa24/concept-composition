@@ -6,9 +6,9 @@ The score path is Loop 10's idea for a third kind of input beside a caption and 
 
 CLIP, the model whose way of matching pictures to captions the planned encoder borrows, is taught with worked examples on [the CLIP card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Contrastive%20Image-Text%20Training.md#where-to-learn-this).
 
-<a href="../../../artifacts/notes/progress/score-space/00-ladder/overview/ov0-the-score-path-as-a-third-space.png"><img src="../../../artifacts/notes/progress/score-space/00-ladder/overview/ov0-the-score-path-as-a-third-space.png" width="720" alt="Left to right: a real canvas of a 7 and a 3 and its noised version at step 0; the frozen digit U-Net called with label 7, label 3 and label 10 for no digit; two rose stacks d_t(3) and d_t(7) over steps 0 to 15, adding to S(3)+S(7); three encoders, CLIP-L text frozen, W4 canvas trained, and a dashed score-path encoder marked planned; a dashed shared space with hand-placed dots; four hollow test bars marked with question marks; an inset opens the U-Net"></a>
+<a href="../../../artifacts/notes/progress/score-space/00-ladder/overview/ov0-the-score-path-as-a-third-space.png"><img src="../../../artifacts/notes/progress/score-space/00-ladder/overview/ov0-the-score-path-as-a-third-space.png" width="200" alt="Left to right: a real canvas of a 7 and a 3 and its noised version at step 0; the frozen digit U-Net called with label 7, label 3 and label 10 for no digit; two rose stacks d_t(3) and d_t(7) over steps 0 to 15, adding to S(3)+S(7); three encoders, CLIP-L text frozen, W4 canvas trained, and a dashed score-path encoder marked planned; a dashed shared space with hand-placed dots; four hollow test bars marked with question marks; an inset opens the U-Net"></a>
 
-*One canvas and one caption, end to end. Left: the clean canvas x₀, a real 7 and 3 from MNIST's test images, and the same canvas noised to step 0, where the clean canvas is multiplied by 0.0064 inside x_t. Second column: the frozen digit U-Net, 6,141,185 weights, called three times on that x_t, with label 7, label 3 and label 10 (no digit), giving three noise guesses ε₇, ε₃ and ε_∅. Third column: the rose stacks are d_t(3) and d_t(7), each label's guess minus the no-label guess, kept for steps 0 to 15; one stack is 16 × 32 × 64 = 32,768 numbers, and S(3) + S(7) is what the product adds. Fourth column: the CLIP-L text encoder (frozen), Loop 9's W4 canvas encoder (trained), and the score-path encoder, dashed and marked "illustrative, not yet designed". Right: the shared space, whose dots are placed by hand, and four hollow bars for the two tests, which never ran. The inset opens the U-Net from 64 × 32 × 64 down to 128 × 8 × 16 with attention at 8 × 16.* ✅ *Read on the figure at full size. The canvas is real; the noise on it is one numpy draw, the dots and the bars are illustrative.* ✍️ *(the ladder's README, "Which numbers are real")*
+*One canvas and one caption, end to end. Left: the clean canvas x₀, a real 7 and 3 from MNIST's test images, and the same canvas noised to step 0, where the clean canvas is multiplied by 0.0064 inside x_t. Second column: the frozen digit U-Net, 6,141,185 weights, called three times on that x_t, with label 7, label 3 and label 10 (no digit), giving three noise guesses ε₇, ε₃ and ε_∅. Third column: the rose stacks are d_t(3) and d_t(7), each label's guess minus the no-label guess, kept for steps 0 to 15; one stack is 16 × 32 × 64 = 32,768 numbers, and S(3) + S(7) is what the product adds. Fourth column: the CLIP-L text encoder (frozen), Loop 9's W4 canvas encoder (trained), and the score-path encoder, dashed and marked "illustrative, not yet designed". Right: the shared space, whose dots are placed by hand, and four hollow bars for the two tests, left empty. The inset opens the U-Net from 64 × 32 × 64 down to 128 × 8 × 16 with attention at 8 × 16.* ✅ *Read on the figure at full size. The canvas is real; the noise on it is one numpy draw, the dots and the bars are illustrative.* ✍️ *(the ladder's README, "Which numbers are real")*
 
 ## Table of contents
 
@@ -63,10 +63,10 @@ Each box of the picture has a twin in the miniature and in the real code:
 | the three calls | ε(x, c) = x + u_c + v_c ⊙ x, with u and v hand-set integers ✅ | the U-Net with labels a, b and 10 ✅ | yes |
 | one difference d_t(c) | four numbers, d(3) = (−1, −1, 0, 0) at step 0 ✅ | 1 × 32 × 64 per label per step ✅ | yes; Loop 10 computed it in step X5 ✍️ |
 | the score path S(c) | two steps laid end to end, 8 numbers ✅ | 16 steps, 32,768 numbers per label ✅ | computed only in step X5's form, see [two ways to define the path](#two-ways-to-define-the-path) ✍️ |
-| the score-path encoder | a 2 × 8 integer matrix E ✅ | not designed ✅ | planned, never built |
-| the shared space and the two tests | a 2-number space, the tests worked by hand ✅ | no cell has a value ✅ | planned, never run |
+| the score-path encoder | a 2 × 8 integer matrix E ✅ | not designed ✅ | planned |
+| the shared space and the two tests | a 2-number space, the tests worked by hand ✅ | no cell has a value ✅ | planned |
 
-The "exists" column is read from [the score-path finding](../../../2-classifier-guidance/report/does-the-score-path-carry-which-digits-are-present.md#still-open), which says the text-aligned encoder and the two arithmetic tests were not run, by the design's rule and the owner's answer to board question 76. ✍️
+The "exists" column is read from [the score-path finding](../../../2-classifier-guidance/report/does-the-score-path-carry-which-digits-are-present.md#still-open), which holds what became of the text-aligned encoder and the two arithmetic tests. ✍️
 
 ## The names, taken apart
 
@@ -156,7 +156,7 @@ Navigation: ⬅️ [The difference, by what moves](#the-difference-by-what-moves
 
 Navigation: ⬅️ [Two ways to define the path](#two-ways-to-define-the-path) | 📋 [TOC](#table-of-contents) | [Next](#where-the-idea-came-from) ➡️
 
-**The design built the encoder only if the signature first carried which digits are on the canvas; it carried them below the bar, so no encoder was trained.** ✍️ [The score-path finding](../../../2-classifier-guidance/report/does-the-score-path-carry-which-digits-are-present.md), null by the written rule.
+**The design builds the encoder only if the signature first carries which digits are on the canvas.** ✍️ Whether it does is measured in [the score-path finding](../../../2-classifier-guidance/report/does-the-score-path-carry-which-digits-are-present.md).
 
 <a href="../../../artifacts/notes/progress/score-space/05-signal/presence-by-timestep.png"><img src="../../../artifacts/notes/progress/score-space/05-signal/presence-by-timestep.png" width="200" alt="Two panels of presence accuracy against timestep. Early window: every input sits near 0.5 except the error readout near 0.61 to 0.66. SDXL-matched window: the signature rises from 0.50 to 0.70, above the path length at 0.62 and the noisy canvas at 0.59; raw noise and shuffled labels stay at 0.50; nothing reaches the dashed 0.75 bar"></a>
 
@@ -212,7 +212,7 @@ Navigation: ⬅️ [Where the idea came from](#where-the-idea-came-from) | 📋 
 | the U-Net has 6,141,185 weights; a path is 16 × 32 × 64 = 32,768 numbers | the code, built on the CPU with untrained weights | ✅ the ladder's `numbers.json`; the weights by part re-added this session |
 | the timesteps 999 to 693 and their signal scales 0.0064 to 0.0871 | the schedule in `canvas_unet.py` | ✅ `numbers.json`, and recomputed from the schedule this session |
 | the signature reads presence at best 0.700 at t 480 and 0.513 in the early window, against a 0.75 bar | the real digit model, step X5, W&B `gq51nl74` | ✍️ [the score-path finding](../../../2-classifier-guidance/report/does-the-score-path-carry-which-digits-are-present.md), null |
-| the score-path encoder, the shared space, the two arithmetic tests | nothing | planned in [the design](../../../artifacts/notes/progress/score-space/04-design.md#run-group-2-step-x6-a-text-aligned-reader-of-the-signature), not run, per the finding's still-open list ✍️ |
+| the score-path encoder, the shared space, the two arithmetic tests | nothing | planned in [the design](../../../artifacts/notes/progress/score-space/04-design.md#run-group-2-step-x6-a-text-aligned-reader-of-the-signature); their state is on [the finding's still-open list](../../../2-classifier-guidance/report/does-the-score-path-carry-which-digits-are-present.md#still-open) ✍️ |
 
 ## Where the sources disagree
 
@@ -252,7 +252,7 @@ Navigation: ⬅️ [The pages of this method](#the-pages-of-this-method) | 📋 
 | The signal gaps 0.0128, 0.174 and 0.616 | Computed from √ᾱ_t, the schedule recomputed from `BETAS` (linear 1e-4 to 0.02) | 2026-11-24 |
 | 327,680 numbers per signature path | Computed, 10 × 16 × 2,048 | 2026-11-24 |
 | The A1 repair and the joint path being dead on digits | Stated by the ideas page, A1 and C2a | 2026-11-24 |
-| The result, its verdict and that X6 to X8 did not run | Stated by the score-path finding | 2026-11-24 |
+| The result, its verdict and the state of X6 to X8 | Stated by the score-path finding | 2026-11-24 |
 | The window in `w4_train.py` | Read in the file and in `git diff 2dcb2beb` on it | 2026-11-24 |
 | Every picture passed `is_showable` on its path and its visible labels, and none is on the held-pictures list | Run with `scripts/shared/disallowed_subjects.py` | 2026-11-24 |
 

@@ -4,9 +4,9 @@
 
 The push formula is the same for both readers: the gradient of the right-minus-wrong score, set to a fixed length and subtracted from CO3's predictions. What differs is the road the gradient takes back to the latent. NoisyCLIP's road passes a clamp and a rounding step that block it in places; Latent CLIP's passes only a division and a pooling, so it reaches every latent value, though in identical 2 × 2 blocks. This page follows that road backward, then sets Loop 9's proposed use beside the one Latent CLIP's authors published. The push equation itself is on [the overview](01-overview.md#the-push-by-what-moves), and NoisyCLIP's own backward road is drawn in [the sentence-score ladder](../../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/README.md#the-deep-dives-in-the-overviews-order).
 
-<a href="../../../artifacts/notes/progress/noise-text-critic/way-2-latent-clip-push.png"><img src="../../../artifacts/notes/progress/noise-text-critic/way-2-latent-clip-push.png" width="360" alt="Flowchart top to bottom: a half-drawn SDXL latent of 4 by 128 by 128 at steps 0 to 15, divided by 0.13025 and average-pooled by 2 to 4 by 64 by 64 with no RGB step and no clamp, Latent CLIP's image encoder ViT-B/4-plus trained on clean latents only with no step input, the right sentence a photo of a puma and a condor and wrong ones through Latent CLIP's own text encoder, the checker D as S right minus highest S wrong, then in orange the gradient of D with respect to x_t straight through the pooling and a push of length 0.4 times CO3's prediction only on steps that read at 0.6 or better, ending at CO3's next step using its prediction minus the push"></a>
+<a href="../../../artifacts/notes/progress/noise-text-critic/way-2-latent-clip-push.png"><img src="../../../artifacts/notes/progress/noise-text-critic/way-2-latent-clip-push.png" width="200" alt="Flowchart top to bottom: a half-drawn SDXL latent of 4 by 128 by 128 at steps 0 to 15, divided by 0.13025 and average-pooled by 2 to 4 by 64 by 64 with no RGB step and no clamp, Latent CLIP's image encoder ViT-B/4-plus trained on clean latents only with no step input, the right sentence a photo of a puma and a condor and wrong ones through Latent CLIP's own text encoder, the checker D as S right minus highest S wrong, then in orange the gradient of D with respect to x_t straight through the pooling and a push of length 0.4 times CO3's prediction only on steps that read at 0.6 or better, ending at CO3's next step using its prediction minus the push"></a>
 
-*Loop 9's design for this push, top to bottom. Blue boxes are inputs: the latent ("4 x 128 x 128, steps 0 to 15 of 50") and the sentences ("right: a photo of a puma and a condor; wrong: a photo of two pumas, ..."). Grey: "divide by 0.13025, average-pool by 2; 4 x 64 x 64, no RGB step, no clamp". Green: the image encoder, joined to the checker by a dotted arrow, "never tested on a noisy latent". Lilac: "Latent CLIP's own text encoder". The diamond is the checker D and the question W2 had to answer first. The two orange boxes are this page: "gradient of D with respect to x_t, straight through the pooling" and "push length 0.4 x size of CO3's prediction, only on steps that read at 0.6 or better".* ✅ *Read on the picture at full size and in `way-2-latent-clip-push.mmd`; a design drawing, never run.*
+*Loop 9's design for this push, top to bottom. Blue boxes are inputs: the latent ("4 x 128 x 128, steps 0 to 15 of 50") and the sentences ("right: a photo of a puma and a condor; wrong: a photo of two pumas, ..."). Grey: "divide by 0.13025, average-pool by 2; 4 x 64 x 64, no RGB step, no clamp". Green: the image encoder, joined to the checker by a dotted arrow, "never tested on a noisy latent". Lilac: "Latent CLIP's own text encoder". The diamond is the checker D and the question W2 had to answer first. The two orange boxes are this page: "gradient of D with respect to x_t, straight through the pooling" and "push length 0.4 x size of CO3's prediction, only on steps that read at 0.6 or better".* ✅ *Read on the picture at full size and in `way-2-latent-clip-push.mmd`; a design drawing.*
 
 ## Table of contents
 
@@ -142,7 +142,7 @@ Navigation: ⬅️ [Beside NoisyCLIP's road](#beside-noisyclips-road) | 📋 [TO
 | what the gradient changes | the starting noise | the noise prediction at that step |
 | how many times | 50 gradient steps of SGD at learning rate 5.0, momentum 0.9, gradient length clipped to 0.1 | once per pushed step, at a fixed length |
 | what it steers toward | the prompt (a CLIPScore reward), human preference, or away from a negative sentence | the right sentence over the highest wrong one |
-| result | [GenEval two-object](../../../1-lora-correction/report/measuring-composition/what-each-scorer-says-about-two-objects.md#geneval-two-object) 0.66 to 0.82 and counting 0.45 to 0.60 for B/4-plus; spatial relation 0.24 to 0.24 | not run |
+| result | [GenEval two-object](../../../1-lora-correction/report/measuring-composition/what-each-scorer-says-about-two-objects.md#geneval-two-object) 0.66 to 0.82 and counting 0.45 to 0.60 for B/4-plus; spatial relation 0.24 to 0.24 | gated on the reading test, whose result is in [the reading finding](../../../2-classifier-guidance/report/the-sentence-score/can-a-sentence-score-read-the-five-properties.md) |
 
 The ReNO column is ✍️ the reading note's account of the paper (p. 3 to 7) and of its released code; the W3 column is ✅ read in `w3_steer.py` and the W3 design.
 
@@ -176,9 +176,9 @@ The ReNO column is ✍️ the reading note's account of the paper (p. 3 to 7) an
 
 Navigation: ⬅️ [Beside how its authors used the gradient](#beside-how-its-authors-used-the-gradient) | 📋 [TOC](#table-of-contents) | [Next](#where-this-came-from) ➡️
 
-**W3's design wrote three checks to run before any picture was judged, and none ran, because W3 was stopped.** ✍️ [The W3 design](../../../artifacts/notes/progress/noise-text-critic/03-does-it-steer/design.md), lines 101 to 103; [the W3 review](../../../artifacts/notes/progress/noise-text-critic/03-does-it-steer/review.md), line 7.
+**W3's design writes three checks to run before any picture is judged.** ✍️ [The W3 design](../../../artifacts/notes/progress/noise-text-critic/03-does-it-steer/design.md), lines 101 to 103. Whether the push acts at all rests on the reading test, in [the reading finding](../../../2-classifier-guidance/report/the-sentence-score/can-a-sentence-score-read-the-five-properties.md); [the W3 review](../../../artifacts/notes/progress/noise-text-critic/03-does-it-steer/review.md), line 7, records the step.
 
-| Check | What would have shown it worked |
+| Check | What shows it worked |
 |---|---|
 | zero push | the push path multiplied by 0 reproduces CO3's own run, with a largest latent difference under 1e-5 |
 | the push acts | the real push changes the final latent, and its length equals 0.4 × ‖ε_g‖ on every pushed step |
@@ -203,7 +203,7 @@ Navigation: ⬅️ [How it fails and how you would know it worked](#how-it-fails
 | The toy's gradient values and the moves | Computed this session; the slopes are illustrative | 2026-11-24 |
 | NoisyCLIP's road: colour map, clamp shares, `.byte()`, resize | Stated by the NoisyCLIP reading note, lines 78 to 91 | 2026-11-23 |
 | ReNO's settings and results | Stated by the Latent CLIP reading note, lines 33 to 39 and 164 to 186 | 2026-11-23 |
-| The three checks and that none ran | Stated by the W3 design and review | 2026-11-24 |
+| The three checks | Stated by the W3 design and review | 2026-11-24 |
 | The opening picture's labels | Read on the picture at full size and in its `.mmd` source; checked with `is_showable` | 2026-11-24 |
 
 ## Read more

@@ -4,7 +4,7 @@
 
 This page reads the digit runs' own code block by block, where it lives, and ties each block to a box of [the overview's picture](01-overview.md) and to the toy's twin in the scene's `poe_toy.py`. The code computes four things: the product of the two experts, the layout each expert is held to, the hidden half of each expert's input, and the sampler step with its capped pushes. Line numbers are as the files stand on 2026-11-24.
 
-<a href="../../../2-classifier-guidance/artifacts/scenes/product-of-experts-interaction-term/figures/real-run/one-sampler-step.png"><img src="../../../2-classifier-guidance/artifacts/scenes/product-of-experts-interaction-term/figures/real-run/one-sampler-step.png" width="720" alt="One real sampler step on the digit canvas asked for 4 and 7: the noisy canvas, what each expert is shown, each expert's clean guess with and without the crop, the two pushes as orange and blue maps, and the same seed from noise to a finished 4 and 7"></a>
+<a href="../../../2-classifier-guidance/artifacts/scenes/product-of-experts-interaction-term/figures/real-run/one-sampler-step.png"><img src="../../../2-classifier-guidance/artifacts/scenes/product-of-experts-interaction-term/figures/real-run/one-sampler-step.png" width="200" alt="One real sampler step on the digit canvas asked for 4 and 7: the noisy canvas, what each expert is shown, each expert's clean guess with and without the crop, the two pushes as orange and blue maps, and the same seed from noise to a finished 4 and 7"></a>
 
 *One step of a real run, asked for 4 and 7, seed 0, step 26 of 50 counting from 1, using the crop recipe, in which each expert is shown only its own half. Row 1: the 32 × 64 noisy canvas and the half each expert is shown. Row 2, left: each expert's clean guess when it sees the whole canvas, both putting their digit on the right half. Row 2, right: each expert's guess for its own half, stitched. Row 3: the two pushes, orange where they make a pixel brighter and blue where they make it darker. Row 4: the same seed at steps 1, 11, 21, 31, 41 and 50, ending on a clean 4 and 7. The footer gives the sizes at this step: the experts' prediction 44.8, the two pushes together 23.6, cut to 4.5 by the cap.* ✅
 
@@ -233,7 +233,7 @@ Navigation: ⬅️ [The sampler step](#the-sampler-step) | 📋 [TOC](#table-of-
 With `--compose inferred-occ` (no hold) that fraction is 0.0 and the five tuning pairs read 56 of 320 with both pushes; with `--compose inferred-lock` it is 1.0 and they read 310 of 320. The toy shows the same break: re-voting at every step draws two apart in 1810 of 4000 against 3840 when the layout is held. ✅
 
 > [!NOTE]
-> This page does not re-run the real code. The counts 56, 310 and 1,200 of 1,280 are read from [the digit-composition finding](../../../2-classifier-guidance/report/classifier-guided-poe/can-two-separately-trained-digit-models-compose-while-sampling.md#step-7-the-side-is-chosen-early-and-held), whose verdict stays inconclusive while the by-eye count of the 1,200 waits for the owner.
+> This page does not re-run the real code. The counts 56, 310 and 1,200 of 1,280 are read from [the digit-composition finding](../../../2-classifier-guidance/report/classifier-guided-poe/can-two-separately-trained-digit-models-compose-while-sampling.md#step-7-the-side-is-chosen-early-and-held), which holds the verdict on them.
 
 ## Where this came from
 
