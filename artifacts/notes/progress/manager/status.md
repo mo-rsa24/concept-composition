@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-24 21:08 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-24 22:12 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -71,12 +71,12 @@ The finish range is `session_status.py`'s, from the 52 finished steps: fastest p
 
 | Loop | Doing now, and why | Steps left | Estimated finish | Session | Held by |
 |---|---|---|---|---|---|
-| 4. Rivals and targets | Keeping every target current. It recorded the CLEVR paste result and placed the two-colour CLEVR test in the CLEVR plan. | 1 | none useful: it ends after the paper tables, which have not started | idle | nothing |
-| 6. Best method | Its full read is in: the checker it kept does not see CO3's failure (best 60% right at step 5, floor 65%). By question 93 it now reads its two new checkers the same way (about 2.2 GPU-hours) before choosing an architecture or labels. Training on card 1 and in Slurm job 94622; two-colour CLEVR renders for Paper 1 beside it. | 9 | 4.4 h to 207.6 h | busy | its own runs |
+| 4. Rivals and targets | yes | next pass | Paper 2's bar page now counts two clear subjects with their own parts, by questions 87 and 92, so every Paper 2 result is judged one way ([leakage rivals](../targets/leakage-rivals.md), commit `a437cb86`). |
+| 6. Best method | partly, re-aimed | **fix** | It now tests whether a checker can see CO3's failure before choosing one: the kept checker cannot (best 0.602 against a 0.65 floor, [review](../method-search/01b-balance-the-checker-data/review.md)), and its two new checkers are read next. |
 | 7. Abstract-checker papers | Finished; its session is closed. | 0 | done | closed | nothing |
 | 8. Abstract checkers | On its removal test (step V7), whose first gate, from question 94, is retraining the identity checker on sampler states and reading fresh digits 5 to 9 at 0.75 or more. The retraining jobs wait for a node; the first try failed in 12 seconds and was resubmitted. Its SDXL test is rewritten to your answer on 86. | 3 | 1.9 h to 85.5 h | busy | a free node |
 | 11. Drain into the pillars | Stopped by your answer on 88. Its pillar checks are done and its census found every finished verdict on a report page (14 findings, eight method folders). Its final step stays open until Loops 6 and 8 stop. | 1 | when restarted | stopped its loop | waiting for a result worth draining: Loop 8's identity checker or Loop 6's two-colour CLEVR test |
-| 12. Where CO3 leaks | Its predictor pass is done and null ([review](../leakage/02-what-predicts-borrowing/review.md)). Now testing one fix for borrowed parts (step Z3) as question 91 set it: a free check on saved records, then a place-by-place fix at about steps 15 to 30 with boxes drawn by eye as a positive control, counted as two clear subjects with drawing ignored (question 92). Loop 4 has updated the bar page to match. | 4 | 2.4 h to 112.6 h | busy | its own free check; then about 1.7 GPU-hours |
+| 12. Where CO3 leaks | yes, re-aimed | **fix** | The first sign of a Paper 2 fix: its free check found the per-place signal marks the borrowing body on the recorded seed, and on seed 6001 the drawn-box run's cougar lost the cheetah's spots (commits `abd25540`, `31664cb4`); the 48-picture blind count is running. |
 
 ## Resources
 
@@ -116,14 +116,14 @@ them, or new rows on the void list (unchanged since 2026-11-22).
 
 ## Alignment
 
-Round 1, 2026-11-24 16:10, against the intents in [the alignment check](../score-space/13-alignment-check.md).
+Round 2, 2026-11-24 22:10 (round 1 at 16:10), against the intents in [the alignment check](../score-space/13-alignment-check.md).
 
 | Loop | Still working towards its intent? | Reviewer | The fact that shows it |
 |---|---|---|---|
 | 4. Rivals and targets | yes | next pass | It said Paper 1 needs a test where pasting fails; the two-colour CLEVR test is now in [the CLEVR plan](../targets/clevr-scaling-plan.md). |
 | 6. Best method | partly, now re-aimed | **fix** | The checker search still aims at drawing two separate bodies, which CO3 already does in 96 of 96 pictures, while CO3's real failure is borrowed parts ([review](../reviewer/2026-11-24-review.md#loop-6-find-the-best-method)). |
 | 7. Abstract-checker papers | yes, finished | not reviewed | Its three steps are done; the five-checker design is in `abstract-checkers/03-design.md`. |
-| 8. Abstract checkers | partly, now re-aimed | **fix** | The digit half holds (0.861 on unseen digits 5 to 9 against 0.75), but its SDXL test counts bodies against the plain product, not identity against CO3 ([review](../reviewer/2026-11-24-review.md#loop-8-test-abstract-checkers)). |
+| 8. Abstract checkers | partly | **being re-reviewed** | Two misses in a row on reading identity from the sampler's own states (0.651, then 0.552 with memorised training digits); the reviewer is reading it before question 95 and a method review request. |
 | 11. Drain into the pillars | yes | **continue** | [Its checks page](../drain/04-checks.md) covers all 48 pages it wrote, with 15 of 28 findings fixed. |
 | 12. Where CO3 leaks | partly, now re-aimed | **fix** | Its measurement was sound and null; the fix it proposed would have read places too early, so it now tests the idea later in the run with a drawn-box control first ([review](../reviewer/2026-11-24-review.md#loop-12-where-co3-leaks)). |
 
