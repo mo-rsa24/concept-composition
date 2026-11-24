@@ -15,7 +15,6 @@ repository commit, then the replications hub commit.
 | Overfit, both lists | 94603, 94605 | `ee84f4aa-15d8bdd` | `overfit/`, no checkpoint | failed before training: the tile picker read a `latent` field that benchmark-pool tiles do not carry |
 | Overfit, then 1% of the data, current list | 94622, 94623 | `9df9dc5b-15d8bdd` | `overfit/current/`, `tiny/current/` | overfit passed: 16 of 16 right (balanced accuracy 1.0, bar 0.9375) from sampler step 2; 1% rung passed, the logged loss falling from 0.694 to 0.000 over 400 updates. The picker now reads a pool tile's first augmented copy for its check |
 | CO3 reread of the 21, then overfit and 1% of the data, balanced list, one after another | shared card: mscluster107 card 1, wrapper process 87714 | `9df9dc5b-15d8bdd` | `co3-read-rtx8000/`, `overfit/balanced/`, `tiny/balanced/` | started 16:25:47 UTC on a Quadro RTX 8000 under board question 90, the Slurm copies 94624 and 94625 cancelled; the reread finished at 16:42:53 UTC with all 21 matching M1 exactly (difference 0.0 of 255); balanced overfit passed, 16 of 16 from sampler step 0 |
-
 | Full training, current list: 2,000 updates | 94638 | `09f8256b-15d8bdd` | `full/current/` | running under Slurm on mscluster89 |
 | Saved states, the six pairs M1 drew on an RTX 3090, for scoring new checkers (question 93) | 94637 | `09f8256b-15d8bdd` | `co3-read-states-shard1/` | done: 48 of 48 match M1 exactly, 43 MB of states, 33 minutes on mscluster60 |
 
