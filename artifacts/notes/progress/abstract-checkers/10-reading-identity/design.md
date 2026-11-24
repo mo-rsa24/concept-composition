@@ -81,6 +81,26 @@ The summed rule is reported beside it.
 
 **Cost:** about 0.4 GPU-hours. **Buys:** whether the trained checker knows more than the model already does, and whether it still reads on the states V7 will push.
 
+## Retraining on the sampler's own states
+
+V6's checker reads the sampler's own states at 0.651, under the 0.75 bar for that check, while V7 pushes on those states. Board question 94, decided for the owner by Loop 13 on 2026-11-24 (option A), retrains it on sampler states and reads digits 5 to 9 again with the same bar, on seeds no earlier step used. V7 runs only if this read passes. The constants are in `v6_resample.py`, written before the run.
+
+**The states.** Each canvas is rendered by the plain product with V3's count push (length 0.4, sampler steps 15 to 25), so most finished pictures hold two separate digits. Its state is recorded at each of sampler steps 27 to 36 (timesteps 449 to 265), where V7's identity push acts. The judge labels the finished picture: 1 when its call is "two clear, right, apart", 0 when it holds two blobs, one per half, each read at 0.9 or more, that are not the asked pair (this includes the same asked digit twice); every other canvas is left out.
+
+**Seeds.** Earlier steps used seeds 0 to 31 and 1000 to 1095 (and 100,000 upward for V3's best of 4). Training uses the 10 pairs among digits 0 to 4 at seeds 2000 to 2959, 9,600 renders. The read uses the 10 pairs among digits 5 to 9 at seeds 3000 to 3095, 960 renders, drawn fresh for this read and used once.
+
+**The checker.** V6's form: the ten-label signature computed on each recorded state, a `PixelHead` with four input channels, 4,000 updates of 128 with half label 1 and half label 0, each example one canvas at one of its 10 recorded steps. The 16-example overfit check runs first.
+
+| Result | What it takes |
+|---|---|
+| Reads sampler states | balanced accuracy over the 10 steps at least 0.75 on the fresh digits 5 to 9 |
+| Does not | below 0.75; V7 does not run, and the result goes to the owner |
+| Inconclusive | the overfit check fails, or fewer than 40 canvases in either label in training or in the read |
+
+Its read of V1's pasted digits 5 to 9 (the 1,250 canvases V6 read at 0.861) is reported beside it, to show what retraining costs there.
+
+**Cost:** about 1.5 GPU-hours: 9,600 training renders with states (the sampler read rendered 960 in under 4 minutes), the training with eleven model calls per example, and the read. **Buys:** a checker V7 can push with, or the answer that this form of checker cannot read the sampler's own states.
+
 ## What this cannot say
 
 A pass says a checker reads digit identity on pasted canvases. Whether its gradient helps the sampler draw the right digits is V5's rerun. The later window is later in sampling, where the layout may already be fixed, so an identity push there may fix identity without moving the digits apart.
