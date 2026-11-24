@@ -535,8 +535,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-24T14:31:20+02:00",
-   "updated": "2026-11-24T19:44:39+02:00",
-   "note": "both overfits pass 16 of 16; current 1% passes, full current running (94638); balanced 1% on card 1; shard-1 states saved, 48 of 48 exact"
+   "updated": "2026-11-24T20:02:12+02:00",
+   "note": "all four rungs passed; full trainings 94638 (running) and 94662 (queued); states: 3090 half saved, RTX 8000 half running 94676 on biggpu; then one scoring pass of three checkers"
   },
   {
    "id": "D3",
