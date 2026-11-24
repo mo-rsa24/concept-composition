@@ -106,7 +106,8 @@ def grid(rows, title, path, per_pair=8):
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
     keys = list(rows)
-    fig, axs = plt.subplots(len(keys), per_pair, figsize=(per_pair * 1.6, len(keys) * 0.95))
+    per_pair = min(per_pair, min(len(rows[k][0]) for k in keys))
+    fig, axs = plt.subplots(len(keys), per_pair, figsize=(per_pair * 1.6, len(keys) * 0.95 + 0.6), squeeze=False)
     for r, key in enumerate(keys):
         canv, calls = rows[key]
         for c in range(per_pair):
