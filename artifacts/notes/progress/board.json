@@ -598,9 +598,14 @@
     "M3",
     "M7"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "Both papers",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "closed": true,
+   "started": "2026-11-24T17:41:43+02:00",
+   "finished": "2026-11-24T17:41:43+02:00",
+   "note": "closed, not run: the owner's answer to question 84 puts the two-colour CLEVR test (M10) in its place",
+   "updated": "2026-11-24T17:41:43+02:00"
   },
   {
    "id": "M8",
@@ -621,14 +626,15 @@
    "proof": "recipe-paper-1.json and recipe-paper-2.json exist in method-search/, each naming its commit, checkpoint, settings and evidence",
    "needs": [
     "M3",
-    "M6",
     "M8",
     "M9",
+    "M10",
     "M11"
    ],
    "state": "todo",
    "serves": "Both papers",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "updated": "2026-11-24T17:41:55+02:00"
   },
   {
    "id": "M9",
@@ -952,14 +958,15 @@
    "id": "V4",
    "label": "V4 Abstract checker on SDXL's unseen objects",
    "owner": "s8",
-   "proof": "abstract-checkers/07-sdxl/review.md reports faithful pairs of 48 on the six unseen object pairs against plain PoE and its bar",
+   "proof": "abstract-checkers/07-sdxl/review.md reports two clear subjects of 96 (drawing style ignored, two blind reviewers and a third for disagreements) for the identity push on CO3's own run against CO3 alone, judged by Paper 2's bar: a lead of at least 5 and more than 1.96 standard errors",
    "needs": [
     "V3",
-    "D3"
+    "M5"
    ],
    "state": "todo",
    "serves": "Paper 2",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "updated": "2026-11-24T17:41:35+02:00"
   },
   {
    "id": "V6",
@@ -1217,11 +1224,14 @@
     "X5",
     "W4"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "Both papers",
    "objective": "Build and test",
-   "updated": "2026-11-24T10:35:31+02:00",
-   "note": "skipped: X5 missed its bar; the brief skips X6 to X8, confirmed by the owner on question 76"
+   "updated": "2026-11-24T17:42:05+02:00",
+   "note": "closed, not run: X5 missed its bar and the owner skipped X6 to X8 on question 76",
+   "closed": true,
+   "started": "2026-11-24T17:42:05+02:00",
+   "finished": "2026-11-24T17:42:05+02:00"
   },
   {
    "id": "X7",
@@ -1230,12 +1240,15 @@
    "needs": [
     "X6"
    ],
-   "state": "todo",
+   "state": "done",
    "proof": "artifacts/notes/progress/score-space/07-figures/README.md shows, for each trained variation, one annotated-explainer overview and its clip-contrastive deep dives as PNG and SVG, each looked at full size",
    "serves": "Both papers",
    "objective": "Build and test",
-   "updated": "2026-11-24T10:35:31+02:00",
-   "note": "skipped: X5 missed its bar; the brief skips X6 to X8, confirmed by the owner on question 76"
+   "updated": "2026-11-24T17:42:14+02:00",
+   "note": "closed, not run: skipped by the owner on question 76",
+   "closed": true,
+   "started": "2026-11-24T17:42:14+02:00",
+   "finished": "2026-11-24T17:42:14+02:00"
   },
   {
    "id": "X8",
@@ -1245,11 +1258,14 @@
    "needs": [
     "X7"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "Both papers",
    "objective": "Build and test",
-   "updated": "2026-11-24T10:35:31+02:00",
-   "note": "skipped: X5 missed its bar; the brief skips X6 to X8, confirmed by the owner on question 76"
+   "updated": "2026-11-24T17:42:23+02:00",
+   "note": "closed, not run: skipped by the owner on question 76",
+   "closed": true,
+   "started": "2026-11-24T17:42:23+02:00",
+   "finished": "2026-11-24T17:42:23+02:00"
   },
   {
    "id": "X9",
@@ -1259,11 +1275,13 @@
    "needs": [
     "X8"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "Both papers",
    "objective": "Build and test",
-   "updated": "2026-11-24T10:35:45+02:00",
-   "note": "verdict written (score-space/09-verdict.md, proof met); the board holds X9 behind X8, which the owner skipped on question 76"
+   "updated": "2026-11-24T17:42:34+02:00",
+   "note": "verdict written in score-space/09-verdict.md from X5, as the owner chose on question 76",
+   "started": "2026-11-24T17:42:34+02:00",
+   "finished": "2026-11-24T17:42:34+02:00"
   },
   {
    "id": "Y1",
@@ -2902,8 +2920,10 @@
    "holds": null,
    "default": "the three records stay as they are, and the page keeps listing them",
    "by": "s13",
-   "state": "open",
-   "asked": "2026-11-24T16:55:12+02:00"
+   "state": "answered",
+   "asked": "2026-11-24T16:55:12+02:00",
+   "answer": "Owner, in chat, 2026-11-24: yes. Loop 13 adds an edit command to scripts/progress_board.py and fixes exactly these records: Loop 8's SDXL test (V4) needs M5 instead of D3 and its proof names two clear subjects of 96 against CO3 alone; the small CLEVR test (M6) is closed as not run and the recipe freeze (M4) waits on the two-colour CLEVR test (M10) in its place, per question 84; Loop 10's skipped steps X6 to X8 are closed as skipped on question 76 and X9 as done, its verdict written.",
+   "answered": "2026-11-24T17:41:04+02:00"
   }
  ]
 }

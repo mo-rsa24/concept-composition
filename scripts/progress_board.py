@@ -19,6 +19,8 @@ overwrite each other. The progress map (map.mmd, map.png) is drawn from that fil
                                                          which live session works an owner's steps
     python3 scripts/progress_board.py add C5 "C5 New step" --owner s3 --needs C4 --proof "..." --serves "Paper 1" --objective "Know the field"
     python3 scripts/progress_board.py serve C5 --serves "Paper 1" --objective "Know the field"
+    python3 scripts/progress_board.py edit M4 --needs M3 M8 M10 --proof "..."
+    python3 scripts/progress_board.py edit M6 --close "closed, not run: the owner's answer to question 84"
     python3 scripts/progress_board.py brief may_decide "reversible choices with a recommended default"
     python3 scripts/progress_board.py ask "Which split?" --holds "E1" --default "the rival's split" --by s3
     python3 scripts/progress_board.py answer 1 "the rival's split"
@@ -374,6 +376,35 @@ def cmd_serve(args):
     print(f"{args.id}: serves {args.serves or step.get('serves')}, objective {args.objective or step.get('objective')}")
 
 
+def cmd_edit(args):
+    if args.needs is None and args.proof is None and args.close is None:
+        sys.exit("give --needs, --proof or --close")
+    with locked() as board:
+        steps = by_id(board)
+        step = steps.get(args.id)
+        if step is None:
+            sys.exit(f"no step {args.id}")
+        if args.needs is not None:
+            unknown = [n for n in args.needs if n not in steps]
+            if unknown:
+                sys.exit(f"no step {', '.join(unknown)}")
+            step["needs"] = list(args.needs)
+        if args.proof is not None:
+            step["proof"] = args.proof
+        moment = now().isoformat()
+        if args.close is not None:
+            step["state"] = "done"
+            step["closed"] = True
+            step.setdefault("started", moment)
+            step["finished"] = moment
+            step["note"] = args.close
+        step["updated"] = moment
+        line = status_line(board)
+    render()
+    print(f"{args.id}: needs {', '.join(step['needs']) or 'nothing'}; {step['state']}{' (closed, not run)' if step.get('closed') else ''}")
+    print(line)
+
+
 def cmd_brief(args):
     with locked() as board:
         board.setdefault("brief", {})[args.key] = args.value
@@ -452,6 +483,12 @@ def main():
     serve.add_argument("--serves")
     serve.add_argument("--objective")
     serve.set_defaults(run=cmd_serve)
+    edit = sub.add_parser("edit", help="change an existing step's needs or proof, or close it without running it")
+    edit.add_argument("id")
+    edit.add_argument("--needs", nargs="*", help="replaces the step's needs")
+    edit.add_argument("--proof")
+    edit.add_argument("--close", metavar="NOTE", help="mark the step done as closed without running, with the reason")
+    edit.set_defaults(run=cmd_edit)
     brief = sub.add_parser("brief")
     brief.add_argument("key")
     brief.add_argument("value")
