@@ -1,0 +1,23 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TB
+  subgraph L8["Loop 8 on digits"]
+    direction TB
+    V1["V1 test bed<br/>PASS"]:::good --> V2["V2 checker on unseen digits<br/>count PASS 0.791<br/>identity MISS 0.555"]:::mixed
+    V2 --> V3["V3 push composes unseen pairs<br/>PASS: 43 of 320 vs 0"]:::good
+    V3 --> V5["V5 remove one checker<br/>NULL by the rule<br/>count, order control their own"]:::mixed
+    V5 --> V4["V4 on SDXL's unseen objects<br/>NOT RUN: waits on Loop 6's D3"]:::todo
+  end
+  L9["Loop 9: sentence scores read<br/>no identity at early steps"]:::other
+  L10["Loop 10: score path 0.700<br/>at SDXL's noise, 0.513 early"]:::other
+  L6["Loop 6: CO3 already draws two bodies<br/>in 96 of 96; misses are identity"]:::risk
+  R["Paper 2 rivals on SDXL<br/>no comparison yet"]:::todo
+  L9 -. "agrees: identity<br/>unreadable early" .-> V2
+  L10 -. "agrees: more signal<br/>at SDXL's noise" .-> V2
+  L6 -. "risk: count is what<br/>the rival already does" .-> V4
+  V4 -.-> R
+  classDef good fill:#b7f0b1,stroke:#222222,stroke-width:2px,color:#111111
+  classDef mixed fill:#fff1c2,stroke:#b58900,stroke-width:2px,color:#111111
+  classDef todo fill:#e9ecef,stroke:#222222,stroke-width:2px,stroke-dasharray:6 4,color:#111111
+  classDef other fill:#ffffff,stroke:#3b6fd4,stroke-width:2px,color:#111111
+  classDef risk fill:#ffd9a8,stroke:#e8590c,stroke-width:2px,color:#111111
+  style L8 fill:#f7f7f7,stroke:#999999,stroke-width:1px
