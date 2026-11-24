@@ -45,14 +45,18 @@ anywhere in the frame. Each model takes its count as a class label, so the 2 mod
 x red and y blue objects, all separate. A third model seeing only green, with scenes up to 9 objects, runs only with the owner's yes and
 only if a row holds every scene up to 6. These models see real multi-object images, so this is its own table and does not count toward
 the one-object target. Giving each model its own half of the image is not allowed, because that is two pictures pasted side by side.
-Sample-and-paste has no row here, because nothing tells it where each object goes. Loop 6's
-[Stage 2 design](../method-search/05-two-experts-by-colour/design.md) holds the bars, the scorer and the cost.
+Loop 6's [Stage 2 design](../method-search/05-two-experts-by-colour/design.md) holds the bars, the scorer and the cost.
 
 These models are told which objects to draw and not where, as the digit and SDXL models are, so Stage 2 is the like-for-like test of a
 checker. Position-conditioned models already paste their objects, which leaves a checker nothing to add. Beside the plain product, Stage 2
-runs two rows. The first adds Loop 8's count checker, retrained on these models' maps at the noise levels of the sampler's early steps and
-pushing only on those steps, as in [its digit test](../abstract-checkers/06-does-it-compose/review.md). The second samples
-the product with Du et al.'s MCMC corrector, which separates a better sampler from a new mode.
+runs three rows. The first adds Loop 8's count checker, retrained at the noise levels of the sampler's early steps on mask pastes of the
+two experts' own samples, labelled with the counts asked for, and pushing only on those steps, as in
+[its digit test](../abstract-checkers/06-does-it-compose/review.md). No real scene holding both colours trains it. The second samples
+the product with Du et al.'s MCMC corrector, which separates a better sampler from a new mode. The third is mask paste: the red expert's
+sample with the blue expert's foreground laid over it, the pixels that differ from the mean empty scene by more than 0.1 on a 0-to-1
+scale. It needs no positions, because each sample shows where its objects are, and it fails where a blue object lands on or touches a red
+one. A Paper 1 win needs the checker row to lead all three by the design's bar. If mask paste matches or beats the checker row, Paper 1
+needs scenes whose objects overlap or shade each other.
 
 **Inclusive labels do not run here.** Training a diffusion model on inclusive captions is too heavy for the main results, so they get
 one appendix paragraph, written from the existing toy, MNIST and SDXL results.
