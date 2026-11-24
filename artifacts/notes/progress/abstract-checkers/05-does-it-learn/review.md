@@ -1,6 +1,8 @@
 # Review: does a checker learn plurality on unseen digits (step V2)
 
-**Status: null.** The map reader misses two of V2's three bars on digits 5 to 9 (W&B run `a562r799`), and the rehearsal at SDXL's noise level misses the same two on the pairs holding digit 4. Trained apart at SDXL's noise level, the count checker passes its rehearsal and the identity checker misses. **The count checker then passes on digits 5 to 9**, which it never trained on (W&B run `tyhrpyov`). By the owner's answer to board question 69, step V3 runs with the count checker's push alone.
+**Status: done, by the count checker.** The count checker passes on digits 5 to 9, which it never trained on (W&B run `tyhrpyov`), and by the owner's answer to board question 69 step V3 runs with its push alone. The first design's single checker, which had to tell both layout and digit identity, is null on digits 5 to 9 (W&B run `a562r799`), and the identity checker trained apart misses its rehearsal; both verdicts stay as recorded below.
+
+**Noise levels.** The board's proof for V2 names steps 0 to 15. The single checker was read at the toy's own sampler steps 0 to 15 (timesteps 999 to 693). After board question 64, every later checker here was read at the 16 timesteps 712 down to 480 that match SDXL's first 16 steps, which lie between the toy's sampler steps 14 and 25.
 
 ## The count checker on digits 5 to 9
 

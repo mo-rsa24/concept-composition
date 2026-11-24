@@ -10,7 +10,7 @@ flowchart LR
   end
 
   N["Scale each gradient<br/>to a fixed length,<br/>so the other four<br/>can't take its share"]
-  K["Add them and cap<br/>at 0.4 of the<br/>prediction's length"]
+  K["Add them, with no<br/>shared cap; a row is void<br/>if the total passes 0.6<br/>of the prediction's length"]
   G["Sampler:<br/>product of A and B<br/>plus the push"]
   J["Five scorers<br/>that never steer"]
   Q{"Which scores<br/>fell?"}
