@@ -33,6 +33,12 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#the-canvas-and-its-noise) �
 
 **SiLU**: the bend after each convolution, SiLU(z) = z · σ(z), which keeps large positive values and pulls negative ones toward 0.
 
+**SiLU, the name**: sigmoid linear unit. *Linear* is the z, *sigmoid* is the σ(z) it is multiplied by, and *unit* is the old word for one neuron. In the miniature it turns 0.457 into 0.280 on the left half. On the right half it pulls −0.647 to −0.222, as the [miniature page's convolution frame](https://claude.ai/artifact/MX2hKBUWBXSzPQSbaxysKC#convolution) shows. ✅ The miniature's answer key.
+
+**Stem, c1 and c2**: the stem is the first run of layers, which brings the input to the size the rest of the network works at, the way a plant's stem carries what grows above it. Here it is the first three convolutions in [the layer table](#the-network-layer-by-layer). c1 and c2 are the code's names for the two convolutions after the stem, which keep the size the stem made. ✅ `PixelHead` in the pixel checker script.
+
+**MLP**: a multilayer perceptron. A *perceptron* is an early name for one artificial neuron, which weighs its inputs, adds them and passes the sum through a bend; *multilayer* means one row of them feeds the next row. The [multilayer perceptron card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Multilayer%20Perceptron.md#where-to-learn-this) teaches it, and its weights are counted under [the network, layer by layer](#the-network-layer-by-layer).
+
 ## The canvas and its noise
 
 Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#table-of-contents) | [Next](#the-two-maps) ➡️
@@ -114,11 +120,28 @@ Navigation: ⬅️ [The two maps](#the-two-maps) | 📋 [TOC](#table-of-contents
 
 ✅ The ladder's numbers file, added up again this session. The map reader never gets the asked pair; the raw-canvas reader it is compared with in the findings keeps one input channel and is told the pair through a learned embedding. ✅ `make_head` in `v2_learn.py`.
 
+The MLP's hidden row has 256 units, and each weighs all 272 inputs and adds one bias. Its output weighs those 256 and adds one more. Without the hidden row the logit would be a weighted sum of the 272 numbers. ✅ Counted this session.
+
+| Readout | Weights |
+|---|---|
+| this MLP: 272 → 256, SiLU, 256 → 1 | 272 × 256 + 256 = 69,888, then 256 + 1 = 257, together 70,145 |
+| no hidden row: 272 → 1 | 273 |
+| the miniature's readout: 4 pooled numbers and 2 time features → 1 | 7 |
+
+A learned embedding is a lookup table with one row of trained numbers per digit, so a digit label becomes numbers the network can use. The raw reader's table has 10 rows of 64, and the two asked digits' rows are added. ✅ `PixelHead` in the pixel checker script. The [embedding card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Embedding.md#where-to-learn-this) draws it.
+
 🔤 **The name:** stride-2 convolution
 - **convolution**: rolling one small pattern over a grid and writing down how well each spot matches it. On the picture, each arrow between two green volumes: a 3 × 3 kernel per output channel, slid over every cell.
 - **stride**: the length of each step. Stride 2 jumps two cells at a time, so it writes half as many cells across and half as many down.
 - **Formula, in those words:** n_out = ⌊(n_in + 2p − k) / s⌋ + 1, with kernel k = 3, padding p = 1 and stride s = 2: ⌊(32 + 2 − 3) / 2⌋ + 1 = 16 down the height, ⌊(64 + 2 − 3) / 2⌋ + 1 = 32 across.
 - **Consequence:** at stride 1 the same layer would keep 32 × 64. Two stride-2 layers take the grid from 32 × 64 to 8 × 16, so each of c1's 128 positions summarises a patch of the canvas, and the checker can compare the two halves at that coarse scale. ✅ The figure's box at the lower left.
+
+**Padding** puts a border of zeros round the grid, one cell wide here (p = 1), so the kernel can be centred on an edge cell too. Without it each stride-2 layer loses one more row and one more column. ✅ Computed this session with the formula above; `padding=1` read in `PixelHead`.
+
+| Padding | After the first stride-2 layer | After the second |
+|---|---|---|
+| p = 1, as here | 16 × 32 | 8 × 16 |
+| p = 0 | 15 × 31 | 7 × 15 |
 
 🔤 **The name:** scale and shift (FiLM)
 - **scale**: multiply. **shift**: add. **FiLM** is the name the literature gives this, feature-wise linear modulation: each channel ("feature-wise") gets its own multiply and add ("linear modulation").
@@ -161,6 +184,8 @@ Navigation: ⬅️ [Two checkers, two label sets](#two-checkers-two-label-sets) 
 </tr></table>
 
 *Left: one training update. The orange lane starts at the loss with ∂L/∂ℓ = σ(ℓ) − y and sends a slope up into the stem (112,000 weights), c1, the scale and shift, c2 and the MLP; the pool has no weights; the lane stops before the maps, which were computed with gradients off. Adam at learning rate 0.001 moves each weight against its slope, on 256 canvases per update (128 label 1), 4,000 updates.* ✅ *Right: the push. With the weights fixed, the lane starts at the logit (∂ℓ/∂ℓ = 1), passes ∂ℓ/∂m (2 × 32 × 64), the absolute value and the scaling, and all three U-Net calls, and ends at g = ∇_{x_t}ℓ, one number per pixel. The tile at the upper right is the saved count checker's real g on the apart canvas (1 | 3) at t = 480: red pixels raise ℓ and blue lower it, on a colour scale of ±0.24 per pixel, with ‖g‖ = 2.46 and ℓ = 6.31. It is red along the 3's strokes and blue along the 1's. The footer places the push at sampler steps 15 to 25 of 50 (job 94134) and takes g from `numbers/real/count-explained.npz` (job 94108).* ✅ *Read on the figure at full size; ‖g‖ = 2.459 and ℓ = 6.308 checked in `count-explained.npz`, where g sums to +25.6 over the right half and −11.8 over the left.*
+
+Adam, short for adaptive moment estimation, gives each weight its own step size from running averages of that weight's recent slopes and of their squares; *moment* is the statistician's word for such an average. [The rebuild companion, rung 13](../../../2-classifier-guidance/artifacts/scenes/digit-map-checkers/rebuild-from-fundamentals.md#rung-13-adam-scales-each-weights-step-by-its-own-running-gradient-size), links the textbook page that teaches it. The loss L and its slope σ(ℓ) − y are taken apart on [the miniature page](03-the-miniature.md#one-training-step-on-each-checker), and the [backpropagation card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Backpropagation.md#where-to-learn-this) teaches the backward pass both lanes run.
 
 | | Training | Push |
 |---|---|---|

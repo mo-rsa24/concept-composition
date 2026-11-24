@@ -8,6 +8,8 @@ The digit-map checkers are two small classifiers Loop 8 trains on noisy digit ca
 
 *One sampling step of Loop 8's method, left to right. The blue tile is a half-drawn canvas x_t of 32 × 64 pixels, asked for the digits 5 and 9. The grey box is the frozen canvas U-Net, called three times per step: with label 5, with label 9, and empty. The two green tiles are the maps, where asking for 5 (top) and for 9 (bottom) changes the noise guess, each scaled to a mean of 1 over the pixels. The green trapezoid is the map reader, a small CNN that gets no digit label. The bars ask "both asked digits, apart?". The orange box and arrow are the push, a fixed length b of the product's size along the gradient, sent back to the canvas. The inset opens the reader: 2 maps of 32 × 64, then 64, 64 and 128 channels down to 8 × 16, mean and max pooling to 256 numbers, then 1 logit.* ✅ *The noise on the canvas, the two maps and the bar heights are drawn to show the shape of each step, and no run produced them.* ✍️ *(the overview's card). The figure's labels "steps 0 to 15 of 50" and "b is 0.1, 0.2 or 0.4" are the design as first written; the run pushed at steps 15 to 25 with b frozen at 0.4, see [where the sources disagree](#where-the-sources-disagree).*
 
+A CNN, a convolutional neural network, is a network built from convolutions. Convolution, stride, and the mean and max pooling in the inset are each taken apart on [the network view](02-the-network-view.md#the-network-layer-by-layer).
+
 ## Table of contents
 
 - [Words this page uses](#words-this-page-uses)
@@ -32,11 +34,15 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#what-one-step-does) ➡️
 
 **Frozen digit U-Net**: one trained digit model, the share-0.0 canvas U-Net, which takes a noisy canvas, a timestep and a label (a digit 0 to 9, or 10 for no digit) and returns a noise guess ε of the canvas's shape. It drew one digit per canvas in training and never saw two together. "Frozen" means no weight of it changes here.
 
+**U-Net, and share 0.0**: a U-Net is an image network named for the U its layers draw, down to a small grid and back up to full size, so its answer has the canvas's shape. The [U-Net card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/U-Net.md#where-to-learn-this) teaches it. "Share 0.0" names the training run: the canvas U-Net script trains one U-Net per share of two-digit canvases among its training draws, and at a share of 0.0 none of them held two digits. ✅ Read in `canvas_unet.py`, lines 3 and 140.
+
 **Product**: the digit product of experts, ε_product = ε_a + ε_b − ε_∅, where ε_∅ is the guess with label 10. The same U-Net is asked twice, once per digit, and each answer acts as one expert.
 
 **Logit ℓ**: the checker's one output number. σ(ℓ) = 1 / (1 + e^(−ℓ)) is its chance that the answer is yes, so ℓ = 0 is a coin toss.
 
 **Push**: the extra arrow subtracted from the product's noise prediction at a step, built from the checker's gradient.
+
+**Gradient g**: one number per pixel, saying how fast the logit rises when that pixel alone is nudged up; together they point the way the logit rises fastest. The [gradient card](../../../../../Obsidian/Mathematics/Calculus/Gradient.md#where-to-learn-this) teaches it with worked examples, and the miniature's g is worked in [the push, by what moves](#the-push-by-what-moves).
 
 **The miniature**: the ladder's four-pixel toy, worked in full on [the miniature page](03-the-miniature.md). Its weights are set by hand; its noise level is the real one at timestep 480.
 
@@ -49,6 +55,8 @@ Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#t
 <a href="../../../2-classifier-guidance/artifacts/scenes/digit-map-checkers/0.5-network-view/dc0-where-the-checkers-sit.png"><img src="../../../2-classifier-guidance/artifacts/scenes/digit-map-checkers/0.5-network-view/dc0-where-the-checkers-sit.png" width="200" alt="One sampler step: a noisy canvas feeds three grey frozen U-Net calls, which give the red product box and the green two-maps box; the maps feed a green checker of 481,665 weights, then a red logit; an orange lane runs back to the canvas gradient, then the push formula with b = 0.4, then the red box for what the sampler uses and a DDIM step; the footer gives the push's sampler steps 15 to 25 of 50 and its 43 clean pairs of 320 against 0 for the plain product"></a>
 
 *The ladder's level-0 picture. Grey is frozen, green is the trained checker, red is what a network outputs, orange is the backward signal and the push. The top row makes the product, the middle row runs the checker from the two maps (2 × 32 × 64) to one logit, and the bottom row carries ∇_{x_t}ℓ back to a canvas-shaped gradient, scales it to b = 0.4 of the product's length, and subtracts it before the DDIM step. The footer says the push acts at sampler steps 15 to 25 of 50 (timesteps 693 to 489) and, on digits 5 to 9, gives 43 clean pairs of 320 against 0 for the plain product (job 94134).* ✅ *Read on the figure at full size; the count is the [push finding's](../../../2-classifier-guidance/report/abstract-checkers-on-digits/does-the-count-checkers-push-compose-unseen-digits.md#1-the-push-separates-the-fused-digit).* ✍️
+
+The DDIM step is the sampler's own move from x_t to the next, less noisy canvas, adding no fresh noise here (eta 0). DDIM stands for denoising diffusion implicit models; the [DDIM card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Diffusion%20Models/DDIM.md#where-to-learn-this) teaches it, and this project's step is read on [the product-of-experts code page](../01-the-product-of-experts/04-the-code.md#the-sampler-step).
 
 Each box has a twin in the miniature and in the real runs:
 
@@ -89,6 +97,21 @@ Navigation: ⬅️ [What one step does](#what-one-step-does) | 📋 [TOC](#table
 - **Formula, in those words:** take the direction in which the logit rises fastest at the noisy canvas, g = ∇_{x_t}ℓ, set its length to b times the product's length, and subtract it from the product's noise prediction.
 - **Consequence:** with no push the plain product drew 0 clean pairs of 320 on the ten pairs among digits 5 to 9; with the count checker's push it drew 43. ✍️ [The push finding, section 1](../../../2-classifier-guidance/report/abstract-checkers-on-digits/does-the-count-checkers-push-compose-unseen-digits.md#1-the-push-separates-the-fused-digit).
 
+🔤 **The name:** logit
+- **logit**: short for "logistic unit", the log of the odds. **odds**: the chance of yes divided by the chance of no. **log**: the natural logarithm, which turns "times e" into "plus 1".
+- **On the picture:** the red number at the end of the green trapezoid, before any chance is taken from it.
+- **Formula, in those words:** ℓ = log(σ / (1 − σ)), the log of the odds, and the sigmoid σ(ℓ) in [the words this page uses](#words-this-page-uses) turns it back into a chance.
+- **Consequence:** adding 1 to a logit multiplies the odds by e, about 2.72, wherever it starts. The table runs it on this page's two logits. ✅ Computed this session from the miniature's key and the saved count checker's logit.
+
+| Logit ℓ | Chance σ(ℓ) | Odds σ / (1 − σ) | Where it comes from |
+|---|---|---|---|
+| 0 | 0.500 | 1 | a coin toss |
+| 0.772 | 0.684 | 2.16 | the miniature's apart canvas |
+| 1.772 | 0.855 | 5.88 | the same canvas with 1 added |
+| 6.308 | 0.998 | 549 | the saved count checker on the real apart canvas at t = 480 |
+
+The log-probability form of the push takes the slope of log σ(ℓ) in place of the slope of ℓ, and that slope is (1 − σ(ℓ)) times g. On the miniature's apart canvas 1 − σ(ℓ) is 0.316. That shrinks g from length 1.441 to 0.455, and divided by its own length it is the same unit arrow as g, so the two forms give the same push. ✅ Computed this session from the key's g. The [Logit card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Logit.md#where-to-learn-this), [the rebuild companion, rung 9](../../../2-classifier-guidance/artifacts/scenes/digit-map-checkers/rebuild-from-fundamentals.md#rung-9-one-logit-through-the-sigmoid-is-a-chance-between-0-and-1), [the miniature page's logit frame](https://claude.ai/artifact/MX2hKBUWBXSzPQSbaxysKC#logit) and [the score view, step 5](../../../artifacts/notes/progress/abstract-checkers/02-score-view.md#step-5-log-probability-against-log-odds) take it further.
+
 ## The push, by what moves
 
 Navigation: ⬅️ [The names, taken apart](#the-names-taken-apart) | 📋 [TOC](#table-of-contents) | [Next](#how-it-fails-and-how-you-know-it-worked) ➡️
@@ -103,6 +126,8 @@ $$
 \textcolor{#c86a0a}{\underbrace{\frac{g}{\lVert g\rVert}}_{\text{the checker's direction, length 1}}}
 $$
 
+Two things on these pages are written b: the push's length share in this equation, 0.4, and the second asked digit in ε_b. The V3 script keeps them apart as `b` and `bb` (see [the push in the sampler](04-the-code.md#the-push-in-the-sampler)). ✅ Read in `make_push`'s arguments.
+
 The worked case is the miniature's apart canvas (it shows 1 | 3, asked 1 and 3) at t = 480, with the hand-set, untrained head. The values are per pixel, p₁ p₂ | p₃ p₄. ✅ The miniature's answer key, and the arithmetic redone this session.
 
 | Symbol | On the miniature's apart canvas | If it grew |
@@ -114,6 +139,22 @@ The worked case is the miniature's apart canvas (it shows 1 | 3, asked 1 and 3) 
 | ε̂ = ε_product − push | (0.094, −0.411, −0.160, −0.779) | |
 
 **What the push does to the clean-canvas guess.** The sampler's guess of the clean canvas is x̂₀ = (x_t − √(1 − ᾱ_t) ε̂) / √ᾱ_t. Subtracting the push from ε̂ adds √(1 − ᾱ_t) / √ᾱ_t = 0.951 / 0.308 = 3.09 times the push to x̂₀, so at t = 480 the guess moves by (−0.98, +0.37, +0.37, −0.16): along g, the way the logit rises. ✅ On the real canvas at the same timestep the product's length is 45.79, so a push of b = 0.4 has length 18.3. ✅ Computed from the saved stages of the apart canvas asked 1 and 3, `count-stages.npz`.
+
+The clean-canvas guess is [the network view's noising line](02-the-network-view.md#the-canvas-and-its-noise) run backwards: take the guessed noise off the noisy canvas, then scale what is left back up. ᾱ_t, the signal share, is the share of the clean canvas's variance left at t.
+
+$$
+\textcolor{#1f5fd0}{\underbrace{\hat x_0}_{\text{the clean-canvas guess}}}
+= \frac{\textcolor{#1f5fd0}{\underbrace{x_t}_{\text{the noisy canvas}}} - \underbrace{\sqrt{1-\bar\alpha_t}}_{\text{weight on the noise}}\;\textcolor{#c0262d}{\underbrace{\hat\varepsilon}_{\text{what the sampler uses}}}}{\underbrace{\sqrt{\bar\alpha_t}}_{\text{weight on the picture}}}
+$$
+
+| Timestep t | Signal share ᾱ_t | √(1 − ᾱ_t) / √ᾱ_t, how far x̂₀ moves per unit of push |
+|---|---|---|
+| 693, the first pushed step | 0.0076 | 11.44 |
+| 591, the middle of the window | 0.0285 | 5.84 |
+| 489, the last pushed step | 0.0869 | 3.24 |
+| 480, the worked case above | 0.0949 | 3.09 |
+
+Move from the worked case to the first pushed step and a push of the same length moves the clean-canvas guess 3.7 times as far, because less of the picture is left to divide by. ✅ Computed this session from the schedule in `canvas_unet.py`, lines 35 to 38. The [miniature page's push-length frame](https://claude.ai/artifact/MX2hKBUWBXSzPQSbaxysKC#push-length) shows the share and the shift on four pixels.
 
 > [!NOTE]
 > Only g's direction is used. The checker's gradient can be large where it is sure and small where it is not, and dividing by ‖g‖ throws that size away. The reason is Loop 7's: a fixed length per checker means removing one checker leaves the others' pushes unchanged, and it makes the log-probability and log-odds forms of the push identical (see [why the checker reads maps](#why-the-checker-reads-maps)). 🔍 A fixed length also means a checker reading near chance still pushes at full length.
@@ -148,6 +189,8 @@ Navigation: ⬅️ [How it fails and how you know it worked](#how-it-fails-and-h
 
 **Why the gradient can reach the canvas.** The maps are computed by the frozen model from the noisy canvas itself, so the chain rule runs from the logit through the maps and the model to x_t. A judge outside the model, reading a decoded picture, gives labels for training and no gradient. ✍️ [Where each model can reach the latent](../../../artifacts/notes/progress/abstract-checkers/01-reading/where-each-model-can-reach-the-latent.png), drawn for SDXL.
 
+The chain rule passes a slope back through each stage in turn, multiplying the stage slopes along the way; the [chain rule card](../../../../../Obsidian/Mathematics/Calculus/Chain%20Rule.md#where-to-learn-this) teaches it.
+
 <table><tr>
 <td><a href="../../../artifacts/notes/progress/abstract-checkers/01-reading/where-each-model-can-reach-the-latent.png"><img src="../../../artifacts/notes/progress/abstract-checkers/01-reading/where-each-model-can-reach-the-latent.png" width="200" alt="A noisy latent at steps 0 to 15 feeds word maps and U-Net features inside SDXL, whose small heads send a gradient to the product; outside SDXL a decoded guess goes to a VLM or VQA model that gives labels for training and no gradient"></a><br>Inside the model the gradient reaches x_t</td>
 <td><a href="../../../artifacts/notes/progress/abstract-checkers/01-reading/removal-test.png"><img src="../../../artifacts/notes/progress/abstract-checkers/01-reading/removal-test.png" width="200" alt="Left: five removals each predicted to drop only their own property. Right: with one shared 0.4 cap, switching count off makes each surviving push grow to 1.12 to 1.25; the fix gives each checker its own fixed length so survivors stay at 1.00"></a><br>Why each push has its own fixed length</td>
@@ -155,7 +198,11 @@ Navigation: ⬅️ [How it fails and how you know it worked](#how-it-fails-and-h
 
 *Left: inside SDXL, word maps and U-Net features feed small heads whose gradient is added to the product; outside SDXL, a decoded guess blurred on early steps goes to a VLM or VQA model that only labels training pictures.* ✅ *Right: under one shared cap of 0.4, switching the count checker off makes each surviving push grow from 1.00 to 1.12 (perpendicular gradients) or 1.25 (aligned gradients); giving each checker its own fixed length keeps the survivors at 1.00. Labelled "predicted, no run yet".* ✅ *The digit removal test has since run, with three checkers: see [the removal finding](../../../2-classifier-guidance/report/abstract-checkers-on-digits/does-removing-one-checker-remove-its-property.md#2-the-removal-table-960-canvases-per-row).* ✍️
 
+A VLM, a vision-language model, reads a picture and writes text about it. VQA, visual question answering, is the task of answering a question about a picture, taught on the [visual question answering card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Visual%20Question%20Answering.md#where-to-learn-this).
+
 **Why the count checker comes first.** Adding two checkers' log-probabilities is exact only when their labels are independent given the noisy picture, and "right order" cannot hold without "two subjects". On Loop 7's small worked example the summed gradient is 2.619 where the true one is 2.048, 27.9% too large; training the later checker only on pictures the count checker passes recovers 2.048 by the chain rule. ✍️ [The score view, steps 6 and 7](../../../artifacts/notes/progress/abstract-checkers/02-score-view.md#step-7-the-chain-rule-removes-the-assumption), with the chain drawn in [five checkers as a chain](../../../artifacts/notes/progress/abstract-checkers/01-reading/five-checkers-as-a-chain.png).
+
+Two labels are **independent given the noisy picture** when, once that picture is fixed, learning one label tells you nothing more about the other. "Two subjects" and "right order" fail this, because a picture in the right order always has two subjects. The [conditional independence card](../../../../../Obsidian/Mathematics/Statistics/Probability/Conditional%20Independence.md#where-to-learn-this) teaches it, and [the score view, step 6](../../../artifacts/notes/progress/abstract-checkers/02-score-view.md#step-6-when-logs-may-be-added) says when two checkers' logs may be added.
 
 ## What is measured where
 
@@ -166,6 +213,8 @@ Navigation: ⬅️ [Why the checker reads maps](#why-the-checker-reads-maps) | �
 <a href="../../../2-classifier-guidance/artifacts/scenes/digit-map-checkers/numbers/results-so-far.png"><img src="../../../2-classifier-guidance/artifacts/scenes/digit-map-checkers/numbers/results-so-far.png" width="200" alt="Three panels. Left: balanced accuracy, count checker 0.791 on digits 5 to 9 and 0.782 on 0 to 4, identity checker 0.555, right-digits checker 0.556, against chance 0.5 and the bar 0.75. Middle: clean pairs of 320 on digits 5 to 9, plain 0, random push 1, best of 4 seeds 0, the count checker's push 43 with a rerun at 41. Right: the fall in each checker's own column when it is removed, count 28.1, right digits 2.6, order 40.4 points, against 25.8, 10.8 and 45.9 with a random push in its place"></a>
 
 *The ladder's results figure, three panels. Left: across, balanced accuracy over the 16 SDXL-matched timesteps (0.5 is chance, dashed line at the bar 0.75); one bar per checker and test set: the count checker 0.791 on digits 5 to 9 and 0.782 on digits 0 to 4, the pairs it trained on (job 94108); the identity checker 0.555 on the pairs holding 4 (job 94085); the right-digits checker 0.556 on digits 5 to 9 (job 94153). Middle: up, clean pairs out of 320 canvases on the 10 pairs among digits 5 to 9 (two clear, right digits, one per half): plain product 0, a random push of the same length 1, the best of 4 seeds 0, the count checker's push at b = 0.4 43, with whiskers of ±1.96 standard errors (14.9) and a rerun on another node at 41. Right: up, how far each checker's own column falls when that checker is removed from the three pushing together, in percentage points over 960 canvases per row; solid bars for the removal (count 28.1, right digits 2.6, order 40.4) and hatched bars for a random push in its place (25.8, 10.8, 45.9), with the 6.25-point bar dashed and the largest move in another column under each pair (order rises 6.8, order rises 3.0, right digits falls 6.9). A column is the share of canvases with a property, each scored only on canvases that passed the one before: two separate digits, then right digits, then the asked order.* ✅ *Read on the figure at full size; the ladder's `numbers/numbers.json` records every value under `results_final`, quoted from the stage reviews and, for the count checker, from `numbers/real/count-final.json`. The verdicts are the findings' in the table below.* ✍️
+
+A standard error is how far a count would typically move if the whole run were repeated with fresh seeds; ±1.96 of them spans the middle 95% of a normal curve. The [bootstrap card](../../../../../Obsidian/Mathematics/Statistics/Bootstrap.md#where-to-learn-this) teaches it.
 
 | Statement | Measured on | Mark and source |
 |---|---|---|

@@ -48,6 +48,40 @@ Navigation: ⬅️ [Words this page uses](#words-this-page-uses) | 📋 [TOC](#t
 
 ✅ Read in `miniature.py`, lines 26 to 48 and 63 to 87, and the ladder's miniature card.
 
+**The hand-set expert, by what moves.** One line of arithmetic stands in for each of the U-Net's three calls. Colours are the ladder's: blue the canvas, red a noise guess, grey a setting fixed by hand.
+
+$$
+\textcolor{#c0262d}{\underbrace{\varepsilon_\varnothing}_{\text{no digit asked}}} = \textcolor{#6b7a88}{0.9}\,\textcolor{#1f5fd0}{x_t},
+\qquad
+\textcolor{#c0262d}{\underbrace{\varepsilon_y - \varepsilon_\varnothing}_{\text{what asking for } y \text{ adds}}}
+= -\,\textcolor{#6b7a88}{\underbrace{0.5}_{\text{strength}}}\;\textcolor{#6b7a88}{\underbrace{T_y}_{\text{where } y \text{ has ink}}}\;\underbrace{\sigma(\textcolor{#6b7a88}{3}\,\textcolor{#1f5fd0}{x_t})}_{\text{how bright the pixel is}}
+$$
+
+| Move, on pixel 2 of the apart canvas | What asking for digit 1 adds | What it shows |
+|---|---|---|
+| none: x_t = 0.023, T₁ = 1 | −0.259 | the largest change on the canvas, where a "1" has ink |
+| T₁ set to 0.2, as if a "1" had no ink there | −0.052 | the ink pattern sets where the map is bright |
+| the pixel brighter, x_t = 0.9 | −0.469 | a brighter pixel reacts more, through σ(3x) |
+| the pixel dark, x_t = −0.9 | −0.032 | a dark pixel barely reacts |
+| the sharpness 3 set to 0 | the map for 1 becomes (0.33, 1.67, 0.33, 1.67) | σ(0) = 0.5 on every pixel, so the map is T₁'s shape alone and ignores the canvas |
+
+Adding both digits' changes to ε_∅ gives the product. On pixel 1 of the apart canvas:
+
+$$
+0.151 + (-0.062) + (-0.312) = -0.223
+$$
+
+That is the first entry of ε_product in [the push on four pixels](#the-push-on-four-pixels). ✅ Computed this session from the key's noisy pixels; the two changes match the key's `d_a` and `d_b`. The [miniature page's U-Net frame](https://claude.ai/artifact/MX2hKBUWBXSzPQSbaxysKC#unet) plays the three guesses on both canvases.
+
+A **plain step** moves each weight against its slope by 0.05 times that slope, w ← w − 0.05 ∂L/∂w, with none of Adam's per-weight scaling. It is gradient descent, drawn on the [gradient descent card](../../../../../Obsidian/Artificial%20Intelligence/Machine%20Learning/Gradient%20Descent.md#where-to-learn-this). The readout's added constant c starts at −1 and feeds straight into both logits, so its slope is the mean of the two canvases' logit slopes:
+
+| Branch | Slope of the batch loss in c | c after one plain step |
+|---|---|---|
+| count | −0.3645 | −1 − 0.05 × (−0.3645) = −0.982 |
+| identity | +0.1355 | −1 − 0.05 × 0.1355 = −1.007 |
+
+✅ The slopes are the key's `grad.c`; the steps computed this session.
+
 🧸 **Toy:** the two canvases above, the hand-set head, t = 480. Expected before running: the map for digit 1 is largest where a "1" has ink and the pixel is bright, and the two canvases get different logits only because their noisy pixels differ, since the head is untrained.
 
 ## The forward pass with every number
@@ -134,6 +168,18 @@ Navigation: ⬅️ [One training step on each checker](#one-training-step-on-eac
 - **Formula, in those words:** raising one pixel's |difference| raises that pixel's map value and lowers every other pixel's a little, because the total grew: ∂m_i / ∂|d_j| = 4 ([i = j] / S − |d_i| / S²), with S the total (2,048 in place of 4 on the real canvas).
 - **Consequence:** on the apart canvas, raising pixel 2's |difference| by a small amount δ changes the map for digit 1 by (−1.31, +3.73, −1.72, −0.70) times δ. So the push's gradient reaches every pixel through every other pixel's map value, and a checker that wants more ink in one place also asks for less ink elsewhere. ✅ Computed this session from the key's differences; the formula is the ladder's [rebuild companion, rung 14](../../../2-classifier-guidance/artifacts/scenes/digit-map-checkers/rebuild-from-fundamentals.md#rung-14-the-slope-through-dsumd-has-a-quotient-rule-term), whose code check matches finite differences to 1.4e-09.
 
+[i = j] is 1 when i and j are the same pixel and 0 otherwise. So only the pixel that was raised gets the 1 / S term.
+
+**Finite differences** check a slope without the chain rule: nudge the input by a small step h, run the forward pass again, and divide the change in the output by h. The build nudges each input both ways by a step of one millionth and divides the difference by twice the step. That is `numeric` in `miniature.py`, lines 131 to 144. On the apart canvas, stepping along g's own direction:
+
+| Step h along g / ‖g‖ | (ℓ after − ℓ before) / h |
+|---|---|
+| 0.01 | 1.451 |
+| 0.001 | 1.442 |
+| 10⁻⁶ | 1.441, which is ‖g‖ |
+
+As h shrinks the estimate settles on the chain rule's answer, which is the match the build checks. ✅ Computed this session with the miniature's forward pass rebuilt from the key's weights; it reproduces the key's logit 0.7721 and g.
+
 💥 **Broken run (without):** the maps detached, as training builds them under `torch.no_grad`.
 - **Predict:** what is g on the apart canvas?
 - **Wrong:** (0, 0, 0, 0): the logit has no path back to the pixels, so the push is empty.
@@ -153,6 +199,8 @@ Navigation: ⬅️ [The push on four pixels](#the-push-on-four-pixels) | 📋 [T
 <a href="../../../2-classifier-guidance/artifacts/scenes/digit-map-checkers/miniature-page/stills/15-two-digits-push-acting-light.png"><img src="../../../2-classifier-guidance/artifacts/scenes/digit-map-checkers/miniature-page/stills/15-two-digits-push-acting-light.png" width="200" alt="Frame 14 of the miniature page at sampler step 20 for digits 6 and 8, seed 1000: the plain lane above shows a fused 6 and 8 with maps 3.1 pixels apart and a logit of minus 1.08; the pushed lane below shows a 6 on the left and an 8 on the right with maps 9.1 pixels apart and a logit of 3.78; three curves of means over 320 canvases are shaded over steps 15 to 25"></a>
 
 *The page's frame 14 at sampler step 20 (t = 591), digits 6 and 8, seed 1000, one seed sampled twice from the same noise. Plain lane, top: the clean guess is a 6 and an 8 drawn over each other, the two maps (purple for 6, green for 8) sit 3.1 pixels apart, the logit is −1.08, and the run ends as one blob. Pushed lane, bottom, pushed at steps 15 to 25: a 6 on the left and an 8 on the right, maps 9.1 pixels apart, logit 3.78, push length 17.9, ending as two clear, right digits apart. Right: means over all 320 canvases at each of the 50 steps, grey plain and orange pushed, with steps 15 to 25 shaded: the centres' separation in pixels, the overlap of the two maps, and the logit.* ✅ *Read on the still at full size.*
+
+A **map's centre** is where its mass balances across the canvas: each column's position, weighted by how much of the map sits in that column. The **overlap** is the map mass the two share: take the smaller of the two map values at each pixel, add them up, and divide by the 2,048 pixels. So 0 is no shared mass and 1 is two identical maps. ✅ Read in `trace_push.py`, lines 51 to 55. On this page's apart canvas the two four-pixel maps share 0.41 of their mass. ✅ Computed this session from the key's maps.
 
 | Mean over 320 canvases, job 94161 | Step 15 | Step 20 | Step 25 | Step 49 |
 |---|---|---|---|---|

@@ -66,6 +66,25 @@ WINDOWS = {"early": STEPS16, "sdxl": SDXL_MATCHED}
 
 The V2 learning script, lines 46 to 47. `STEPS16` starts as the toy sampler's own first 16 steps (999 down to 693, line 43), and `main` replaces it with `WINDOWS[args.window]` at line 436. The runs this folder describes pass `--window sdxl`, so ᾱ runs from 0.0058 at t = 712 to 0.0949 at t = 480. ✅ The saved count checker's scores file records `"window": "sdxl"`. Why the window moved from the toy's own early steps, and what that did to the scores, is in [the learning finding, section 2](../../../2-classifier-guidance/report/abstract-checkers-on-digits/does-a-checker-learn-plurality-on-unseen-digits.md#2-at-sdxls-noise-level-it-learns-where-the-digits-are-and-still-not-which). ✍️
 
+🔤 **The name:** the schedule, and ᾱ_t ("alpha bar")
+- **schedule**: a timetable. Here, how much noise each of the 1,000 steps adds, β_s at step s. It rises in a straight line from 0.0001 at the first step to 0.02 at the last.
+- **alpha bar**: α_s = 1 − β_s is the share of the variance one step keeps, and the bar marks the running product of every α up to t.
+- **On the picture:** the ᾱ printed above each column of [the canvas and its noise](../../../2-classifier-guidance/artifacts/scenes/digit-map-checkers/0.5-network-view/dc1-the-canvas-and-its-noise.png).
+- **Formula, in those words:** the signal share left at t is what survives every step's small loss, one after another.
+
+$$
+\underbrace{\bar\alpha_t}_{\text{signal share left at } t} = \prod_{s=0}^{t}\big(1 - \textcolor{#6b7a88}{\underbrace{\beta_s}_{\text{noise added at step } s}}\big)
+$$
+
+- **Consequence:** halve the top of the line and about three times as much picture is left at t = 480, so the same timestep would mean a different noise level, and the 16 training timesteps would no longer match SDXL's. ✅ Computed this session from the schedule above.
+
+| Schedule | ᾱ at t = 480 | ᾱ at t = 712 |
+|---|---|---|
+| β rising to 0.02, as here | 0.0949 | 0.0058 |
+| β rising to 0.01 instead | 0.303 | 0.075 |
+
+The [one-jump card](../../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Diffusion%20Models/From%20Many%20Steps%20To%20One%20Jump.md#many-steps-collapse-into-one-jump) works the running product step by step on a cosine schedule. The β here is the schedule's; the β of the scale and shift on [the network view](02-the-network-view.md#the-network-layer-by-layer) is a different number.
+
 ## Noising a canvas and making the two maps
 
 Navigation: ⬅️ [The schedule and the sixteen timesteps](#the-schedule-and-the-sixteen-timesteps) | 📋 [TOC](#table-of-contents) | [Next](#one-training-update) ➡️
@@ -130,6 +149,8 @@ Navigation: ⬅️ [Noising a canvas and making the two maps](#noising-a-canvas-
 
 The V2 learning script, lines 119 to 129; the optimiser is `torch.optim.Adam(head.parameters(), 1e-3)` at line 116, and 4,000 updates is the base setting. `binary_cross_entropy_with_logits` is L = −[y log σ(ℓ) + (1 − y) log(1 − σ(ℓ))], taken apart on [the miniature page](03-the-miniature.md#one-training-step-on-each-checker). ✅ The pair is passed to the head, which for the map reader ignores it (`pair_aware=False` in `make_head`). ✅
 
+Adam, short for adaptive moment estimation, gives each weight its own step size from running averages of that weight's recent slopes and of their squares. [The rebuild companion, rung 13](../../../2-classifier-guidance/artifacts/scenes/digit-map-checkers/rebuild-from-fundamentals.md#rung-13-adam-scales-each-weights-step-by-its-own-running-gradient-size), links the textbook page that teaches it.
+
 ## The two label sets
 
 Navigation: ⬅️ [One training update](#one-training-update) | 📋 [TOC](#table-of-contents) | [Next](#the-push-in-the-sampler) ➡️
@@ -192,6 +213,8 @@ The V3 compose script, line 33 and lines 50 to 66. The window holds the 11 sampl
 
 The canvas U-Net script, lines 214 to 220. `product_eps` (lines 172 to 177) is ε_∅ + g · Σ (ε_label − ε_∅), which at g = 1 is ε_a + ε_b − ε_∅. The V3 runs call `sample` with `g=1.0` and `cap=1.0`, so the sampler's own cap would fire only on a push longer than the whole prediction, and a push of 0.4 never reaches it. ✅ The step itself is DDIM with eta 0, read on [the product-of-experts code page](../01-the-product-of-experts/04-the-code.md#the-sampler-step).
 
+The g in `product_eps` is the code's guidance weight, one number, set to 1.0 here. It is a different thing from the checker's gradient g on the other pages, which has one value per pixel. ✅ Read in `product_eps`'s signature and the V3 runs' `sample` call.
+
 🔤 **The name:** window
 - **window**: an opening that lets some things through and keeps others out. Here, a set of 11 timesteps at which the push is let through.
 - **On the picture:** the orange shading over steps 15 to 25 in the [miniature page's frame 14](03-the-miniature.md#the-same-steps-on-the-real-runs).
@@ -223,6 +246,8 @@ Navigation: ⬅️ [Saving the head and its real gradients](#saving-the-head-and
 **[A zero push changes no pixel](../../../2-classifier-guidance/report/abstract-checkers-on-digits/is-the-small-environment-repeatable.md#2-a-zero-push-changes-no-pixel).** The V3 script renders a row with b = 0 and compares it with the plain product; the largest pixel difference was 0.0, against a bar of under 1e-5. ✍️ [The push finding, section 1](../../../2-classifier-guidance/report/abstract-checkers-on-digits/does-the-count-checkers-push-compose-unseen-digits.md#1-the-push-separates-the-fused-digit).
 
 **The head can learn at all.** `overfit_one` (V2 lines 184 to 204) trains on 16 fixed canvases and must get at least 15 right; the saved count checker got 16 of 16. ✅ The ladder's `count-final.json`.
+
+To overfit is to fit the training canvases so closely that the head memorises them. In a real run that is a failure; here it is a test, because a head that cannot even memorise 16 fixed canvases has a bug in its wiring.
 
 **The bars sit in the code.** `MIN_BA = 0.75` and `MAX_GAP = 0.05` (V2 lines 33 and 34) are balanced accuracy on unseen digits and the largest gap to seen digits, so they cannot move after a score is seen without showing in a diff. ✅
 

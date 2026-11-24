@@ -4,6 +4,10 @@ Each folder here explains one method the loops use, from the whole system down t
 
 The two project words have their own pages: product-of-experts composition is on [PoE composition](../world/poe-composition.md#what-poe-composition-is), and the interaction term is on [the interaction term page](../world/interaction-term.md#what-the-interaction-term-is).
 
+🔤 **The name:** loop (as in Loop 8)
+- **loop**: one of the background sessions that run this project's work in parallel, each owning one question and one lane of steps on [the progress board](../../artifacts/notes/progress/map.png), and each repeating the same cycle (pick the next step, do one piece of work, check it, wake again later). The number is the session's place in [the table of who owns what](../../artifacts/notes/progress/prompts/shared-rules.md#who-owns-what).
+- **Consequence:** "Loop 8 trains the digit-map checkers" means the work, its review files and its pictures sit in Loop 8's folder, `artifacts/notes/progress/abstract-checkers/`, and its steps are the ones whose names start with V on the board. ✅ the owner table in the shared rules.
+
 🔤 **The name:** zoom ladder
 - **zoom**: moving a camera in so that one part fills the frame. Here each page shows one part of the page before it at a larger size: one sampler step of the whole system, then one network, then a miniature small enough to work by hand, then the lines of code.
 - **ladder**: rungs climbed one at a time, in order. Each rung is one zoom level, from the whole system down to the code, and the method's scene folder numbers the rungs in that order, as the rungs table in [the NoisyCLIP ladder's README](../../2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/README.md#the-rungs) lists them.
