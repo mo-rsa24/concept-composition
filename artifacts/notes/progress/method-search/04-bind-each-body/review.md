@@ -2,6 +2,9 @@
 
 This file holds what the runs in [the M9 design](design.md) produced. With bootstrapping on, rung 1 reaches 8 clear pairs of 8 on right boxes, and its written verdict is "regions without names". All 8 of those pictures are damaged. Rung 2 stopped at its check on the masks, with 11 of 24 reads failing against a limit of 6, and rendered no picture.
 
+The progress board lists M9 as `todo`. Its proof needs rung 2 compared with CO3 alone on faithful pairs of 96, which has not run, and the board
+lets a loop hold one step in progress, which is M7. Rung 2 waits on board question 65.
+
 ## Runs
 
 Outputs are on the cluster under `/datasets/mmolefe/poe_repair_min/loop-6/m9/`, and logs are in `/datasets/mmolefe/poe_repair_min/loop-6/logs/`.
@@ -66,12 +69,14 @@ more than 1 below. Swapped prompts reach 7 and the same prompt reaches 8 picture
 Rung 2 runs under this verdict.
 
 **What the pictures add to that label.** The same-prompt row drew two cats and no dog on all 8 seeds, and the swapped row drew a cat and a dog.
-So the prompt a region carries does decide its species. What the two controls show is that any two bootstrapped regions make two objects,
-wherever the boxes sit relative to the joint render's layout.
+So the prompt a region carries does decide its species. The two controls show that bootstrapped regions in the right places make two objects
+whichever prompt each carries. The place still matters: random boxes of the same sizes give two separate animals on 4 of 8 seeds, against 8 of
+8 in the right places.
 
 **Why this is not yet a usable method.** Bootstrapping is what separated the animals, since the same fusion without it reached 0 of 8. It also
-leaves cut-outs on flat grey, and neither reviewer passed any right-box picture as undamaged, against 5 of 8 for the joint prompt. The joint
-renders were 7 clear pairs in the first count and 6 in this one, so a difference of 1 between rows is within how much the calls move.
+leaves cut-outs on flat grey, and neither reviewer passed any right-box picture as undamaged, against 5 of 8 for the joint prompt. The same 8
+joint renders were 7 clear pairs in the first count and 6 in this one, because seed 25's dog was called clear in the first count and called a
+dog with cat-like ears in the second. A difference of 1 between rows is within how much the calls move.
 
 ## Rung 2: the check on the masks
 
@@ -98,4 +103,5 @@ says nothing yet about whether regions would fix identity on CO3.
 
 Rung 1 used 3.23 GPU-hours against a budget of about 1: 0.27 for the smoke test, 0.40 for the eight seeds, 1.99 for a bootstrapping smoke test
 that ran through a cluster stall, and 0.57 for the eight bootstrapped seeds. Rung 2's two checks used 0.30 GPU-hours, so M9 stands at 3.53 of the
-6.3 added for it. Rendering rung 2 would add about 4.8.
+6.3 added for it. Rendering rung 2 would add about 4.8 for its 288 pictures at the budgeted 60 seconds each, and about 5.3 with its smoke test,
+which is the figure the design budgets.

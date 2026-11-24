@@ -61,6 +61,9 @@ two separate, clear animals, which is the oracle-layout plan's own call. Every o
 | Inconclusive | right boxes reach 2 or 3 | the idea stops at this rung |
 | Null | right boxes reach 0 or 1 | held until the two sampler checks below have run, because a null from this composer alone cannot separate "regions are not enough" from "the composer is wrong" |
 
+This table and the [binding design](../../targets/binding-each-body-design.md) agree that a count under 4 stops the idea at rung 1. The table adds
+the oracle-layout plan's condition that a count of 0 or 1 is read only after the sampler checks below.
+
 **The two sampler checks behind a null.** The first turns on bootstrapping, the one part of MultiDiffusion the plain fusion leaves out. For
 the first 15 of 50 steps, the value the plan's overlap figure used, each region is denoised over a constant colour and the latents are
 fused. The right, random, swapped and same-prompt rows rerun on the same 8 seeds, and their 32 pictures are counted blind with the 8 joint
