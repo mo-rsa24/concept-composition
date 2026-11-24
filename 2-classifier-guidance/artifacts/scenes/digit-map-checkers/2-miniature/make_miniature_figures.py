@@ -69,7 +69,9 @@ def mm1():
         lgt = f.text(1490, y + 55, f"ℓ = {c['logit']:+.3f}", 14, OUTPUT, "bold", "center", "center", oid=f"lg{r}t")
         f.arrow(1376, y + 55, 1430, y + 55, HIDDEN, allowed=pl + [lg, lgt], name=f"p-l{r}")
         f.text(1490, y + 104, f"p = σ(ℓ) = {c['p']:.3f}", 13, OUTPUT, ha="center", oid=f"pp{r}")
-    f.text(30, 670, "The two canvases reach logits 0.36 apart only because their noisy pixels differ. The head has not been trained; mm2 shows one training step on each branch.", 13, INK, oid="foot")
+    gap = K["canvases"]["apart"]["logit"] - K["canvases"]["wrong"]["logit"]
+    f.text(30, 670, f"The two canvases reach logits {gap:.4f} apart (apart minus wrong) only because their noisy pixels differ. "
+                    "The head has not been trained; mm2 shows one training step on each branch.", 13, INK, oid="foot")
     f.write(HERE)
 
 

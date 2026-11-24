@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parent.parent
 LINK = re.compile(r'\]\(([^)\s]+)\)|(?:href|src)="([^"]+)"')
 broken, seen = [], 0
 for page in sorted(ROOT.rglob("*.md")):
-    if "env" in page.parts:
+    if "env" in page.parts or "node_modules" in page.parts:
         continue
     text = re.sub(r"```.*?```", "", page.read_text(), flags=re.S)
     for m in LINK.finditer(text):

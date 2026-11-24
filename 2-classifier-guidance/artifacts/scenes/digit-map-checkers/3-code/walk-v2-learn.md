@@ -1,8 +1,6 @@
 # The code behind the two checkers, block by block
 
-This walk reads the code that builds, trains and scores the count checker and the identity checker, in the order one training update runs. Each block quotes the lines, says what they compute in one equation, and links the figure that draws it. Every path is from the repository root, and the line numbers hold at commit `a737766d`. The four files quoted are unchanged between that commit and `6c3f8a16`, the code snapshot the split run (job 94085) ran from.
-
-The push has no code yet. It is step V3's design, and the last section quotes the design instead.
+This walk reads the code that builds, trains and scores the count checker and the identity checker, in the order one training update runs, then the code that saves the count checker, pushes the sampler with its gradient, and records what both do. Each block quotes the lines, says what they compute in one equation, and links the figure that draws it. Every path is from the repository root, and the line numbers hold at commit `cbff8c0e`. Blocks 1 to 9 quote lines that are the same in `6c3f8a16`, the code snapshot the split run (job 94085) ran from.
 
 ## Table of contents
 
@@ -15,7 +13,9 @@ The push has no code yet. It is step V3's design, and the last section quotes th
 - [7. One training update](#7-one-training-update)
 - [8. The two label sets](#8-the-two-label-sets)
 - [9. The split run](#9-the-split-run)
-- [10. The push, as designed](#10-the-push-as-designed)
+- [10. Saving the count checker and its real maps](#10-saving-the-count-checker-and-its-real-maps)
+- [11. The push](#11-the-push)
+- [12. Recording every layer and every sampler step](#12-recording-every-layer-and-every-sampler-step)
 
 ## 1. The noise schedule and the sixteen timesteps
 
@@ -210,12 +210,105 @@ Count keeps every canvas and labels it by layout: two digits one per half is lab
                 checks["gap_at_most_0.05"] = gap <= MAX_GAP
 ```
 
-It never saves either trained head; only `stage_final` (line 347) calls `torch.save`. That is why the rung with real logits and real gradients on example canvases is owed: it needs a run that saves the two heads.
+`stage_split` keeps no trained head. The count checker that the push uses is trained again and saved by the `final-count` stage in block 10.
 
-## 10. The push, as designed
+## 10. Saving the count checker and its real maps
 
-`artifacts/notes/progress/abstract-checkers/03-design.md`, section "How the push is computed":
+`v2_learn.py`, lines 365 to 376 (the `final-count` stage):
 
-$$\hat\varepsilon_t = \varepsilon_{\text{product}} - \lVert\varepsilon_{\text{product}}\rVert \sum_k b\,\frac{\nabla_{x_t}\ell_k}{\lVert\nabla_{x_t}\ell_k\rVert}, \qquad b = 0.4 \text{ for one checker.}$$
+```python
+def stage_final_count(args, model, data, dev, data_hash):
+    """Board question 69: retrain the count checker on digits 0 to 4 at the given window, save it, and read digits 5 to 9 once."""
+    out = args.out / "final-count.json"
+    if out.exists():
+        raise SystemExit(f"{out} exists: digits 5 to 9 are read once")
+    split = {s: relabel(data[s], "count") for s in ("train", "seen_test", "unseen_test")}
+    result = {"task": "count", "window": args.window, "timesteps": STEPS16.tolist(), "data_hash": data_hash, "model": str(args.model)}
+    for name, cfg in READERS.items():
+        fit = overfit_one(cfg, model, split["train"], dev)
+        head, info = train(cfg, model, split["train"], dev)
+        torch.save({"head": head.state_dict(), "cfg": cfg, "task": "count", "window": args.window,
+                    "timesteps": STEPS16.tolist(), "data_hash": data_hash}, args.out / f"count-head-{name}.pt")
+```
 
-To compute $\nabla_{x_t}\ell$, the maps must be built with gradients on, which `inputs` does not do: the push code needs its own call of `maps` outside `torch.no_grad`, with `xt.requires_grad_(True)`, so the gradient runs back through the head, the absolute value and the scaling, and all three U-Net calls. Figure: [the push gradient into the canvas](../0.5-network-view/dc7-the-push-gradient-into-the-canvas.png).
+The count checker trains on all 10 pairs among digits 0 to 4 with the training update of block 7 and the labels of block 8, and is saved as `count-head-map.pt` before digits 5 to 9 are scored once. Job 94108 ran it through `v2.sbatch` line 61 with `--window sdxl`. It scored 0.791 on digits 5 to 9 and 0.782 on digits 0 to 4 (`numbers/real/count-final.json`; [the V2 review](../../../../../artifacts/notes/progress/abstract-checkers/05-does-it-learn/review.md)).
+
+Lines 384 and 385 then call `explain` on the saved map reader:
+
+```python
+        if name == "map" and args.examples:
+            np.savez_compressed(args.out / "count-explained.npz", **explain(head, model, args.examples, dev))
+```
+
+`explain` (lines 341 to 362) builds the ladder's four example canvases with the ladder's own noise draw and, with gradients on, records the maps, the logit and $g = \nabla_{x_t}\ell$ (lines 353 to 357):
+
+```python
+            with torch.enable_grad():
+                xt = (ab.sqrt() * x0 + (1 - ab).sqrt() * noise).requires_grad_(True)
+                m = maps(model, xt, t, pair, "base")
+                logit = head(m, t, pair)[:, 0]
+                g, = torch.autograd.grad(logit.sum(), xt)
+```
+
+This is block 3's `maps` called outside `torch.no_grad`, so the gradient runs back through the head, the absolute value and the scaling, and all three U-Net calls. The file is `numbers/real/count-explained.npz`. Figures: the real maps in [where the two maps come from](../0.5-network-view/dc2-where-the-two-maps-come-from.png) and the real g in [the push gradient into the canvas](../0.5-network-view/dc7-the-push-gradient-into-the-canvas.png).
+
+## 11. The push
+
+`2-classifier-guidance/scripts/abstract_checkers/v3_compose.py`, lines 32 and 33:
+
+```python
+B_CHOICES = (0.1, 0.2, 0.4)
+WINDOW = {int(t) for t in ddim_timesteps(50) if 480 <= int(t) <= 712}
+```
+
+The window is the 50-step sampler's timesteps between 712 and 480, which are sampler steps 15 to 25 (timesteps 693 to 489). The push length $b$ was chosen from the three choices on the 10 seen pairs among digits 0 to 4: 8, 20 and 40 clean pairs of 320, so $b = 0.4$.
+
+Lines 50 to 66:
+
+```python
+def make_push(kind, b, head, model, a, bb, seed):
+    gen = torch.Generator().manual_seed(seed)
+
+    def push(x, t, eps):
+        if int(t[0]) not in WINDOW:
+            return torch.zeros_like(eps)
+        if kind == "random":
+            d = torch.randn(x.shape, generator=gen).to(x.device)
+        else:
+            with torch.enable_grad():
+                xx = x.detach().requires_grad_(True)
+                pair = torch.tensor([[a, bb]], device=x.device).expand(x.shape[0], 2)
+                logit = head(maps(model, xx, t, pair, "base"), t, pair)[:, 0]
+                d, = torch.autograd.grad(logit.sum(), xx)
+        size = eps.flatten(1).norm(dim=1)[:, None, None, None]
+        return -size * b * d / d.flatten(1).norm(dim=1).clamp_min(1e-12)[:, None, None, None]
+    return push
+```
+
+The sampler adds what `push` returns to the product's noise prediction (`scripts/mnist/canvas_unet.py` lines 217 to 219), so
+
+$$\hat\varepsilon = \varepsilon_{\text{product}} - \lVert\varepsilon_{\text{product}}\rVert\; b\; \frac{g}{\lVert g\rVert}, \qquad b = 0.4 .$$
+
+The `random` row swaps $g$ for a random direction of the same length. The sampler's cap of 1.0 times the product's length never binds at $b = 0.4$. On the 10 pairs among digits 5 to 9 at seeds 1000 to 1031 the push gave 43 clean pairs of 320 against 0 for the plain product, 1 for the random push and 0 for the best of 4 seeds (job 94134; [the V3 review](../../../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/review.md)). Figure: [the push gradient into the canvas](../0.5-network-view/dc7-the-push-gradient-into-the-canvas.png).
+
+## 12. Recording every layer and every sampler step
+
+`2-classifier-guidance/scripts/abstract_checkers/explain_stages.py`, lines 27 to 46, runs the saved count checker's forward pass one layer at a time and keeps each output; lines 86 and 87 stop the run if that pass differs from the head's own output by more than 1e-4:
+
+```python
+    if worst > 1e-4:
+        raise SystemExit(f"the layer-by-layer forward pass differs from the head's own by {worst}")
+```
+
+Job 94116 ran it on the same 16 cells as block 10, and its file is `numbers/real/count-stages.npz`.
+
+`2-classifier-guidance/scripts/abstract_checkers/trace_push.py`, lines 39 to 59, hooks a recorder into the sampler in place of the push. At every one of the 50 steps it computes $g$ for every canvas, applies the push only on the pushed row and only inside the window (line 49), and records where the two maps sit:
+
+```python
+        push = -size * B * unit if (row == "push" and step in WINDOW) else torch.zeros_like(eps)
+        md = m.detach()
+        col = md.sum(2)                                    # (n, 2, W): each map's mass per column
+        com = (col * XS.to(x.device)).sum(2) / col.sum(2).clamp_min(1e-12)
+```
+
+`com` is each map's centre of mass across the canvas width, and the overlap on line 55 is the shared share of the two maps' mass, 0 to 1. Job 94161 ran it and wrote `numbers/real/trace/`: the pushed row gave 41 clean pairs of 320 on this rerun, and inside the window the two maps' centres move from 1.6 to 6.6 pixels apart.

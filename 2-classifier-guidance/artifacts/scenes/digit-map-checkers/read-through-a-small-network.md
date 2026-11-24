@@ -11,8 +11,8 @@ Loop 8 trains two small classifiers on noisy digit canvases. The count checker a
 - [5. One forward pass with every number](#5-one-forward-pass-with-every-number)
 - [6. Training: the error flows into the weights](#6-training-the-error-flows-into-the-weights)
 - [7. The push: the gradient flows into the canvas](#7-the-push-the-gradient-flows-into-the-canvas)
-- [8. What the checkers reached so far](#8-what-the-checkers-reached-so-far)
-- [9. What is owed](#9-what-is-owed)
+- [8. What the checkers reached](#8-what-the-checkers-reached)
+- [9. The real count checker on these four canvases](#9-the-real-count-checker-on-these-four-canvases)
 
 ## 1. The two questions
 
@@ -34,13 +34,15 @@ On these two canvases the digits cannot be seen by eye at any of the four levels
 
 ## 3. The checker reads two maps, never the digits
 
-<a href="0.5-network-view/dc2-where-the-two-maps-come-from.png"><img src="0.5-network-view/dc2-where-the-two-maps-come-from.png" width="560" alt="Three frozen U-Net calls on the noisy canvas, two differences, and the scaling to two maps that each add to 2,048"></a>
+<a href="0.5-network-view/dc2-where-the-two-maps-come-from.png"><img src="0.5-network-view/dc2-where-the-two-maps-come-from.png" width="560" alt="Three frozen U-Net calls on the noisy canvas, two differences, and the scaling to two maps that each add to 2,048; the two map tiles show the real maps of the apart canvas at t = 480, tracing the 1 and the 3"></a>
 
 The frozen digit U-Net is asked three times: for digit $a$, for digit $b$, and for no digit. Where asking for $a$ changes its noise guess becomes the first map; the same for $b$ becomes the second. Each map is scaled so its mean over the 2,048 pixels is 1:
 
 $$m_a = 2048 \cdot \frac{|\varepsilon_a - \varepsilon_\varnothing|}{\sum_{\text{pixels}} |\varepsilon_a - \varepsilon_\varnothing|}.$$
 
 The checker gets these two maps, stacked as 2 × 32 × 64, and nothing else about the digits. In the [code walk](3-code/walk-v2-learn.md#3-the-two-maps) this is `maps()` in `v2_learn.py`.
+
+The two tiles in the figure are the real maps of the `apart` canvas at t = 480, where the canvas itself looks like noise. Both trace ink the eye cannot find: $m_a$ spreads over the 1 and the 3 and peaks at 8.9, and $m_b$ sits almost entirely on the 3, with 46 pixels above 10 and a peak of 47.7.
 
 ## 4. The network, layer by layer
 
@@ -66,9 +68,9 @@ In the miniature the same starting weights take one step per branch. Count wants
 
 ## 7. The push: the gradient flows into the canvas
 
-<a href="0.5-network-view/dc7-the-push-gradient-into-the-canvas.png"><img src="0.5-network-view/dc7-the-push-gradient-into-the-canvas.png" width="560" alt="The backward lane from the logit through the checker, the maps and three U-Net calls to the noisy canvas, then the push formula"></a>
+<a href="0.5-network-view/dc7-the-push-gradient-into-the-canvas.png"><img src="0.5-network-view/dc7-the-push-gradient-into-the-canvas.png" width="560" alt="The backward lane from the logit through the checker, the maps and three U-Net calls to the noisy canvas, then the push formula, with the real gradient of the count checker on the apart canvas at t = 480"></a>
 
-To steer a drawing (step V3), the trained weights stay fixed and the same backward pass is carried further: through the maps' scaling and absolute value, through all three U-Net calls, to the noisy canvas. That gives $g = \nabla_{x_t}\ell$, one number per pixel. Only its direction is used:
+To steer a drawing (step V3), the trained weights stay fixed and the same backward pass is carried further: through the maps' scaling and absolute value, through all three U-Net calls, to the noisy canvas. That gives $g = \nabla_{x_t}\ell$, one number per pixel. The real $g$ of the count checker on the `apart` canvas at t = 480 is drawn in the figure: it is positive along the 3's strokes and negative along the 1's. Only its direction is used:
 
 $$\hat\varepsilon = \varepsilon_{\text{product}} - \lVert\varepsilon_{\text{product}}\rVert\; b\; \frac{g}{\lVert g\rVert}, \qquad b = 0.4 .$$
 
@@ -76,26 +78,35 @@ $$\hat\varepsilon = \varepsilon_{\text{product}} - \lVert\varepsilon_{\text{prod
 
 In the miniature $\lVert g\rVert$ is 1.441 on one canvas and 0.850 on the other, and both pushes come out at exactly 0.40 of the product's length. A small step along $g$ raises the logit (0.7721 to 0.7866), which is the sign check.
 
-## 8. What the checkers reached so far
+The real push uses the count checker alone and acts at sampler steps 15 to 25 of 50 (timesteps 693 to 489). Its length $b = 0.4$ was chosen from 0.1, 0.2 and 0.4 on the seen pairs among digits 0 to 4, where clean pairs of 320 rose 8, 20, 40. Its code is `make_push` in `v3_compose.py`, read in [the code walk's block 11](3-code/walk-v2-learn.md#11-the-push).
 
-<a href="numbers/results-so-far.png"><img src="numbers/results-so-far.png" width="560" alt="Balanced accuracy on pairs holding digit 4: one combined checker 0.704 on all kinds and 0.511 on apart against wrong; the count checker 0.774 with the map reader and 0.775 with the raw-canvas reader; the identity checker not written yet"></a>
+## 8. What the checkers reached
 
-Each bar is balanced accuracy on the pairs holding digit 4, over the 16 timesteps with 4 noise draws per canvas; 0.5 is chance and 0.75 is the bar the design set. The rows answer different questions, so read each on its own.
+<a href="numbers/results-so-far.png"><img src="numbers/results-so-far.png" width="720" alt="Three panels. Left: balanced accuracy on digits never trained on, count checker 0.791 on digits 5 to 9 and 0.782 on 0 to 4, identity checker 0.555, right-digits checker 0.556, against chance 0.5 and the bar 0.75. Middle: clean pairs of 320 on digits 5 to 9, plain 0, random push 1, best of 4 seeds 0, the count checker's push 43, rerun 41. Right: removing count lowers its column 28.1 points, right digits 2.6, order 40.4, with a random push in its place 25.8, 10.8 and 45.9"></a>
 
-**One combined checker** (job 94080, [the V2 review](../../../../artifacts/notes/progress/abstract-checkers/05-does-it-learn/review.md)) learned where digits sit and not which digits: 0.704 over all five kinds and 0.511 on `apart` against `wrong`. Its score rose from 0.59 at the noisiest step to 0.81 at the least noisy, shown in [the two noise levels figure](../../../../artifacts/notes/progress/abstract-checkers/05-does-it-learn/two-noise-levels.png).
+Each score is balanced accuracy over the 16 SDXL-matched timesteps, where 0.5 is chance and 0.75 is the bar the design set. The numbers come from the stage reviews under `artifacts/notes/progress/abstract-checkers/`, and the count checker's own from `numbers/real/count-final.json`.
 
-**The count checker** (job 94085) met both of its bars: the map reader scored 0.774 on pairs holding 4 and 0.781 on the trained pairs, a gap of 0.007, after passing the overfit check 16 of 16. The raw-canvas reader scored 0.775 and 0.793. These are the lines the job printed to its log; the job had not yet written `split.json` when this page was built.
+**The count checker carries over to digits it never saw.** Trained on the 10 pairs among digits 0 to 4 (job 94108), it scores 0.791 on the 10 pairs among digits 5 to 9 and 0.782 on the pairs it trained on, so it meets both bars ([the V2 review](../../../../artifacts/notes/progress/abstract-checkers/05-does-it-learn/review.md)). Its score rises from 0.63 at the noisiest timestep to 0.92 at the least noisy.
 
-**The identity checker** had not finished. Its slot stays empty until `split.json` exists.
+**The identity checker does not learn which digits are present.** It scores 0.555 on the pairs holding digit 4 (job 94085), and the right-digits checker trained the same way scores 0.556 on digits 5 to 9. Telling `apart` from `wrong` at these noise levels is out of reach for both.
 
-## 9. What is owed
+**The count checker's push draws clean pairs the plain product never draws.** On the 10 pairs among digits 5 to 9 at 32 seeds each, the push gives 43 clean pairs of 320, where the plain product gives 0, a random push of the same length 1 and the best of 4 seeds picked by the checker 0. The lead is 5.7 times its standard error of 7.58. A rerun on another node gives 41, so a pushed render is not bit-reproducible across nodes ([the V3 review](../../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/review.md)). The push splits the fused glyph into two digits on 161 of 320 canvases; about a quarter of those carry both asked digits clearly, which fits a checker that reads where digits sit and not which.
 
-**The identity result.** Job 94085 writes `/datasets/mmolefe/poe_repair_min/loop-8/v2/sdxl-split/split.json` when it ends. Copy it to `numbers/split.json`, rerun `numbers/make_numbers.py` and `numbers/make_results_figure.py`, and the slot fills from the file, with per-timestep scores.
+**Removing one checker at a time is null by the written rule.** With three checkers pushing together (count, right digits and order), removing count lowers the count column 28.1 points and removing order lowers the order column 40.4. A random push of the same size in its place lowers it just as much (25.8 and 45.9), so the fall comes from losing that checker's direction. Each of those two removals also moves another column by about 7 points, past the 4.2-point limit, and removing right digits lowers its own column only 2.6 points, under the 6.25-point bar. No checker meets the whole rule ([the V5 review](../../../../artifacts/notes/progress/abstract-checkers/08-remove-one-checker/review.md)).
 
-**Real maps, real logits and real gradients on these canvases.** The split run never saves its two trained heads, so nothing on this page can show what the real checkers do to the `apart` and `wrong` canvases above. That needs one short GPU job, after the owner approves V2's final read:
+[The Loop 8 summary](../../../../artifacts/notes/progress/abstract-checkers/09-summary/executive-summary.md) sets these against the other loops and the published rivals. None of it has been run on SDXL.
 
-1. retrain the count head and the identity head with the split stage's settings (or extend `stage_split` to `torch.save` each head), on the snapshot of commit `6c3f8a16`;
-2. load the frozen share-0.0 U-Net and both heads, and for the canvases `apart_1_3`, `wrong_1_3`, `apart_3_4` and `wrong_3_4` (indices in `numbers/numbers.json`) at timesteps 712, 616, 539 and 480 with the display noise in `numbers/examples/display-noise.npy`, save $m_a$, $m_b$, each head's logit, and $g = \nabla_{x_t}\ell$ computed with the maps built outside `torch.no_grad`;
-3. copy that file back and redraw dc2's empty tiles and a real version of mm1 and mm3 from it.
+## 9. The real count checker on these four canvases
 
-The data, the canvases and the noise are already fixed, so the job only has to run the networks.
+The saved count checker (job 94108) was run on the four example canvases of this ladder, with the same noise draw the figures use. Each cell is its logit $\ell$ and, in brackets, the chance $\sigma(\ell)$ it gives label 1. All four canvases have count label 1.
+
+| Canvas | t = 712 | t = 616 | t = 539 | t = 480 |
+|---|---|---|---|---|
+| `apart`, 1 \| 3 | +0.54 (0.63) | +1.57 (0.83) | +3.81 (0.98) | +6.31 (1.00) |
+| `wrong`, 3 \| 2 | +0.08 (0.52) | −1.11 (0.25) | −1.28 (0.22) | −1.02 (0.27) |
+| `apart`, 3 \| 4 | +0.01 (0.50) | +0.08 (0.52) | +1.30 (0.79) | +3.00 (0.95) |
+| `wrong`, 2 \| 3 | +0.06 (0.52) | −0.35 (0.41) | +1.27 (0.78) | +4.09 (0.98) |
+
+At the noisiest timestep every canvas sits near 0.5, and the checker grows confident as the noise falls, as its score by timestep does. It calls the `wrong` canvas showing 3 | 2 label 0 at three of the four timesteps although that canvas has two digits one per half. This checker trained on digits 0 to 4, so all four canvases use digits it trained on; the two holding a 4 come from the test split. The file is `numbers/real/count-explained.npz`, and `numbers/real/count-stages.npz` (job 94116) holds every layer's output on the same 16 cells, which [the miniature page](https://claude.ai/artifact/MX2hKBUWBXSzPQSbaxysKC) draws.
+
+**Not shown here.** The identity checker was never saved, so it has no real maps, logits or gradients on these canvases. The three illustrations of level 1 are written as prompts and not rendered.

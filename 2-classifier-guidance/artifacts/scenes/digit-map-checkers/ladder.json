@@ -16,15 +16,18 @@
   },
   "code_checkout": {
     "repo": "this repository",
-    "commit": "a737766d",
-    "run_snapshot": "6c3f8a16 (job 94085), the four quoted files unchanged between the two",
+    "commit": "cbff8c0e",
+    "run_snapshot": "6c3f8a16 (job 94085) for the training code in the walk's blocks 1 to 9, whose lines are the same at both commits",
     "files": [
       "2-classifier-guidance/scripts/abstract_checkers/v2_learn.py",
+      "2-classifier-guidance/scripts/abstract_checkers/v3_compose.py",
+      "2-classifier-guidance/scripts/abstract_checkers/explain_stages.py",
+      "2-classifier-guidance/scripts/abstract_checkers/trace_push.py",
       "2-classifier-guidance/scripts/mnist/pixel_checker.py",
       "2-classifier-guidance/scripts/mnist/checker.py",
       "2-classifier-guidance/scripts/mnist/canvas_unet.py"
     ],
-    "push_design": "artifacts/notes/progress/abstract-checkers/03-design.md, section 'How the push is computed'"
+    "push_code": "make_push in v3_compose.py lines 50-66; the push acts at sampler steps 15 to 25 of 50 (timesteps 693 to 489) at b = 0.4, chosen from 0.1, 0.2 and 0.4 on the seen pairs"
   },
   "style": {
     "all levels": "clean cheat-sheet, journey 13's and the word-map ladder's choice, carried over as the default; the style gate was not asked because the ladder was built unattended"
@@ -49,7 +52,7 @@
       "state": "built",
       "files": ["0.5-network-view/dc0-where-the-checkers-sit.png"],
       "linked": ["../mnist-guidance-explained/1-the-sampler-step/nv7b-1-one-sampler-step.png"],
-      "note": "the push in dc0 is step V3's design; no pushed run exists"
+      "note": "the push in dc0 is the count checker's push of job 94134, at sampler steps 15 to 25 of 50"
     },
     "0_5_network_view": {
       "state": "built",
@@ -57,9 +60,8 @@
       "new": ["dc0", "dc1", "dc2", "dc3", "dc4", "dc5", "dc6", "dc7"],
       "shared": ["dc0", "dc1", "dc2", "dc3", "dc4"],
       "branch": ["dc5 (the two label sets)", "dc6 (training backprop, either branch)", "dc7 (the push, either branch)"],
-      "real": "canvases, schedule, time features, layer sizes, weight counts, branch counts",
-      "illustrative": "the display noise draw (numpy seed 0)",
-      "owed": "dc2's two map tiles are empty slots"
+      "real": "canvases, schedule, time features, layer sizes, weight counts, branch counts; dc2's two map tiles and dc7's gradient tile, from numbers/real/count-explained.npz (job 94108)",
+      "illustrative": "the display noise draw (numpy seed 0)"
     },
     "1_illustrations": {
       "state": "prompts written, 0 of 3 rendered",
@@ -73,7 +75,7 @@
       "design": "4-pixel canvas, hand-set frozen expert and head, real t = 480 and time features; hand backprop matches finite differences to 1.4e-09; one step of 0.05: count raises both logits, identity lowers both and leaves the gap at 0.42"
     },
     "3_code": {
-      "state": "built: one walk, read and not run",
+      "state": "built: one walk, read and not run, from the training update to the push and the two recording scripts",
       "files": ["3-code/walk-v2-learn.md"]
     },
     "companion": {
@@ -85,17 +87,23 @@
       "files": ["read-through-a-small-network.md", "numbers/results-so-far.png"]
     },
     "results": {
-      "state": "partial",
-      "combined_checker": "job 94080, printed in the V2 review: 0.704 all kinds, 0.511 apart against wrong, pairs holding 4",
-      "count": "job 94085 log, 07:19 on 2026-11-24: map reader 0.774 on pairs holding 4, 0.781 trained pairs, gap 0.007, overfit 16 of 16, all bars met; raw reader 0.775 and 0.793",
-      "identity": "owed: not printed when the ladder was built; split.json not yet written",
-      "to_fill": "copy /datasets/mmolefe/poe_repair_min/loop-8/v2/sdxl-split/split.json to numbers/split.json, rerun numbers/make_numbers.py and numbers/make_results_figure.py, then update section 8 of the closing page"
+      "state": "final on digits; the numbers are in numbers/numbers.json under results_final, each with its review",
+      "count": "job 94108, W&B tyhrpyov: 0.791 on digits 5 to 9 and 0.782 on 0 to 4, gap 0.009, overfit 16 of 16, support (05-does-it-learn/review.md)",
+      "identity": "job 94085: 0.555 on the pairs holding 4, bar 0.75, miss; the right-digits checker 0.556 on digits 5 to 9 (05-does-it-learn and 08-remove-one-checker reviews)",
+      "push": "job 94134, W&B qhusod91: 43 clean pairs of 320 on digits 5 to 9 against 0 plain, random push 1, best of 4 seeds 0, standard error 7.58, support; rerun job 94161 gave 41 (06-does-it-compose/review.md)",
+      "remove_one": "job 94186, W&B j4anxfgy: null by the written rule, board question 75 (08-remove-one-checker/review.md)",
+      "summary": "artifacts/notes/progress/abstract-checkers/09-summary/executive-summary.md"
     },
-    "owed_real_maps_and_gradients": {
-      "state": "owed",
-      "why": "stage_split never saves the trained count and identity heads",
-      "needs": "one short GPU job after the owner approves V2's final read: save both heads (retrain with the split stage's settings on snapshot 6c3f8a16, or add torch.save to stage_split), then for canvases apart_1_3, wrong_1_3, apart_3_4, wrong_3_4 at timesteps 712, 616, 539, 480 with numbers/examples/display-noise.npy, save m_a, m_b, each head's logit and g = grad of the logit with respect to x_t with the maps built outside torch.no_grad",
-      "then": "redraw dc2's map tiles and real versions of mm1 and mm3"
+    "real_outputs": {
+      "state": "on the laptop under numbers/real/",
+      "files": {
+        "count-final.json": "the saved count checker's scores per step on digits 0 to 4 and 5 to 9 (job 94108)",
+        "count-explained.npz": "for apart_1_3, wrong_1_3, apart_3_4, wrong_3_4 at t = 712, 616, 539, 480: x_t, maps, logit, grad (job 94108)",
+        "count-stages.npz": "every layer of the saved count checker on the same 16 cells (job 94116)",
+        "trace/": "plain and pushed sampling step by step on the 10 unseen pairs (job 94161)"
+      },
+      "drawn_in": ["0.5-network-view/dc2", "0.5-network-view/dc7", "read-through-a-small-network.md section 9", "miniature-page"],
+      "never_made": "the identity checker was never saved, so it has no real maps, logits or gradients"
     }
   }
 }

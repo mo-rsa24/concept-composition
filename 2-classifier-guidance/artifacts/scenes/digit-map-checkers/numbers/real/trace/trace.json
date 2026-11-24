@@ -1,0 +1,207 @@
+{
+ "pairs": {
+  "5-6": {
+   "clean": {
+    "plain": 0,
+    "push": 5
+   },
+   "v3_clean": {
+    "plain": 0,
+    "push": 9
+   },
+   "matches_v3": false,
+   "examples": {
+    "won": [
+     1006,
+     1019
+    ],
+    "lost": [
+     1000
+    ]
+   }
+  },
+  "5-7": {
+   "clean": {
+    "plain": 0,
+    "push": 5
+   },
+   "v3_clean": {
+    "plain": 0,
+    "push": 2
+   },
+   "matches_v3": false
+  },
+  "5-8": {
+   "clean": {
+    "plain": 0,
+    "push": 3
+   },
+   "v3_clean": {
+    "plain": 0,
+    "push": 5
+   },
+   "matches_v3": false
+  },
+  "5-9": {
+   "clean": {
+    "plain": 0,
+    "push": 2
+   },
+   "v3_clean": {
+    "plain": 0,
+    "push": 2
+   },
+   "matches_v3": true
+  },
+  "6-7": {
+   "clean": {
+    "plain": 0,
+    "push": 3
+   },
+   "v3_clean": {
+    "plain": 0,
+    "push": 1
+   },
+   "matches_v3": false
+  },
+  "6-8": {
+   "clean": {
+    "plain": 0,
+    "push": 8
+   },
+   "v3_clean": {
+    "plain": 0,
+    "push": 7
+   },
+   "matches_v3": false,
+   "examples": {
+    "won": [
+     1000,
+     1011
+    ],
+    "lost": [
+     1001
+    ]
+   }
+  },
+  "6-9": {
+   "clean": {
+    "plain": 0,
+    "push": 7
+   },
+   "v3_clean": {
+    "plain": 0,
+    "push": 6
+   },
+   "matches_v3": false
+  },
+  "7-8": {
+   "clean": {
+    "plain": 0,
+    "push": 4
+   },
+   "v3_clean": {
+    "plain": 0,
+    "push": 4
+   },
+   "matches_v3": true
+  },
+  "7-9": {
+   "clean": {
+    "plain": 0,
+    "push": 3
+   },
+   "v3_clean": {
+    "plain": 0,
+    "push": 3
+   },
+   "matches_v3": true,
+   "examples": {
+    "won": [
+     1002,
+     1010
+    ],
+    "lost": [
+     1000
+    ]
+   }
+  },
+  "8-9": {
+   "clean": {
+    "plain": 0,
+    "push": 1
+   },
+   "v3_clean": {
+    "plain": 0,
+    "push": 4
+   },
+   "matches_v3": false
+  }
+ },
+ "t": [
+  999,
+  979,
+  958,
+  938,
+  917,
+  897,
+  877,
+  856,
+  836,
+  816,
+  795,
+  775,
+  754,
+  734,
+  714,
+  693,
+  673,
+  652,
+  632,
+  612,
+  591,
+  571,
+  550,
+  530,
+  510,
+  489,
+  469,
+  449,
+  428,
+  408,
+  387,
+  367,
+  347,
+  326,
+  306,
+  285,
+  265,
+  245,
+  224,
+  204,
+  183,
+  163,
+  143,
+  122,
+  102,
+  82,
+  61,
+  41,
+  20,
+  0
+ ],
+ "push_steps": [
+  693,
+  673,
+  652,
+  632,
+  612,
+  591,
+  571,
+  550,
+  530,
+  510,
+  489
+ ],
+ "all_match_v3": false
+}

@@ -123,6 +123,46 @@ def example(split_name, split, i, xt_noise):
                         "ink_pixels": int((split["x"][i] > 0).sum())}
 
 
+REVIEWS = "artifacts/notes/progress/abstract-checkers/"
+
+
+def final_results():
+    """Loop 8's digit results. The count checker's scores are read from real/count-final.json (job 94108); every other
+    number is quoted from the review named beside it, unchanged."""
+    cf = json.loads((HERE / "real" / "count-final.json").read_text())
+    reader = {r: {"digits_0_to_4": round(cf[r]["seen_test"]["balanced_accuracy"], 3),
+                  "digits_5_to_9": round(cf[r]["unseen_test"]["balanced_accuracy"], 3),
+                  "gap": round(cf[r]["gap"], 3), "overfit_right_of_16": cf[r]["overfit"]["right_of_16"]}
+              for r in ("map", "raw")}
+    return {
+        "count_checker": {"job": 94108, "wandb_run": cf["wandb_run"], "verdict": cf["verdict"],
+                          "file": "numbers/real/count-final.json, copied from /datasets/mmolefe/poe_repair_min/loop-8/v2/count-final/",
+                          "trained_on": "all 10 pairs among digits 0 to 4", "scored_on": "the 10 pairs among digits 5 to 9, read once",
+                          "bars": {"digits_5_to_9_at_least": 0.75, "gap_at_most": 0.05}, **reader,
+                          "digits_5_to_9_per_step": [round(v, 4) for v in cf["map"]["unseen_test"]["per_step"]],
+                          "review": REVIEWS + "05-does-it-learn/review.md"},
+        "identity_checker": {"job": 94085, "pairs_holding_4": 0.555, "bar": 0.75, "verdict": "miss",
+                             "review": REVIEWS + "05-does-it-learn/review.md"},
+        "right_digits_checker": {"job": 94153, "digits_5_to_9": 0.556, "digits_0_to_4": 0.601,
+                                 "review": REVIEWS + "08-remove-one-checker/review.md"},
+        "push": {"job": 94134, "wandb_run": "qhusod91", "verdict": "support", "pairs": "the 10 pairs among digits 5 to 9",
+                 "seeds": "1000 to 1031", "canvases": 320, "b": 0.4, "b_chosen_from": [0.1, 0.2, 0.4],
+                 "b_chosen_on": "the 10 seen pairs among digits 0 to 4 at seeds 0 to 31 (job 94133): 8, 20 and 40 clean pairs of 320",
+                 "sampler_steps": "15 to 25 of 50", "timesteps": "693 to 489",
+                 "clean_pairs": {"plain": 0, "push": 43, "random_push_same_length": 1, "best_of_4_seeds": 0},
+                 "two_separate_digits": {"plain": 3, "push": 161, "random_push_same_length": 4, "best_of_4_seeds": 2},
+                 "standard_error_of_lead": 7.58, "rerun_job": 94161, "rerun_clean_pairs_push": 41,
+                 "review": REVIEWS + "06-does-it-compose/review.md"},
+        "remove_one": {"job": 94186, "wandb_run": "j4anxfgy", "verdict": "null by the written rule (board question 75)",
+                       "canvases_per_row": 960, "own_bar_points": 6.25, "other_column_limit_points": 4.2,
+                       "rows": {"count": {"own_fall": 28.1, "random_fall": 25.8, "largest_other_move": "order rises 6.8"},
+                                "right digits": {"own_fall": 2.6, "random_fall": 10.8, "largest_other_move": "order rises 3.0"},
+                                "order": {"own_fall": 40.4, "random_fall": 45.9, "largest_other_move": "right digits falls 6.9"}},
+                       "review": REVIEWS + "08-remove-one-checker/review.md"},
+        "summary": REVIEWS + "09-summary/executive-summary.md",
+    }
+
+
 def main():
     data, manifest = load()
     tr, seen, hold4 = inner_splits(data)
@@ -191,9 +231,16 @@ def main():
                 "read_afterwards_as_count": {"map_reader": 0.766, "raw_reader": 0.776,
                                              "note": "not planned before the run; supports no claim"}},
             "split_run": {"job": 94085, "file": "/datasets/mmolefe/poe_repair_min/loop-8/v2/sdxl-split/split.json",
-                          "state": "not written when this ladder was built (folder empty at 07:07 and on the retry); "
-                                   "the slot is filled by re-running this script after copying split.json to numbers/split.json"},
+                          "review": "artifacts/notes/progress/abstract-checkers/05-does-it-learn/review.md, 'Two checkers at SDXL's noise level'",
+                          "state": "split.json lives on the cluster; the values below are quoted from the review",
+                          "quoted": {"count": {"map": {"trained_pairs": 0.781, "holding_4_ba": 0.774, "gap": 0.007, "overfit_right_of_16": 16},
+                                               "raw": {"trained_pairs": 0.793, "holding_4_ba": 0.775, "gap": 0.018, "overfit_right_of_16": 16},
+                                               "verdict": "pass"},
+                                     "identity": {"map": {"trained_pairs": 0.603, "holding_4_ba": 0.555, "gap": 0.048, "overfit_right_of_16": 16},
+                                                  "raw": {"trained_pairs": 0.606, "holding_4_ba": 0.556, "gap": 0.049, "overfit_right_of_16": 16},
+                                                  "verdict": "miss"}}},
         },
+        "results_final": final_results(),
     }
     log_lines = HERE / "split-94085-log-lines.jsonl"
     if log_lines.exists():

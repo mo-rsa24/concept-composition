@@ -8,7 +8,7 @@ This route rebuilds or extends the [digit-map checkers ladder](README.md), one r
 /drip-skill-route --from /home/molef/PhD/concept-composition/2-classifier-guidance/artifacts/scenes/digit-map-checkers/route-zoom-ladder-digit-map-checkers.md
 ```
 
-**Environment for every step.** `~/.claude/venvs/figures/bin/python`, which has numpy and matplotlib. No GPU and no PyTorch are needed until step 8. Every command below starts from the ladder folder:
+**Environment for every step.** `~/.claude/venvs/figures/bin/python`, which has numpy and matplotlib. No step needs a GPU or PyTorch: the real outputs in `numbers/real/` come from cluster jobs that have already run. Every command below starts from the ladder folder:
 
 ```bash
 cd /home/molef/PhD/concept-composition/2-classifier-guidance/artifacts/scenes/digit-map-checkers
@@ -26,7 +26,7 @@ It worked if it prints `data hash: f70b0fb362e13e255ad332ba14ca93dfb5cf051a5dfd3
 
 ## Step 2: the numbers
 
-**Reads:** `numbers/env/`, and `numbers/split.json` or `numbers/split-94085-log-lines.jsonl` if present. **Leaves:** `numbers/numbers.json`, `numbers/examples/`.
+**Reads:** `numbers/env/`, `numbers/real/count-final.json`, and `numbers/split-94085-log-lines.jsonl` if present. **Leaves:** `numbers/numbers.json`, with the final results under `results_final`, and `numbers/examples/`.
 
 ```bash
 cd numbers && PYTHONDONTWRITEBYTECODE=1 ~/.claude/venvs/figures/bin/python -I make_numbers.py && cd ..
@@ -36,7 +36,7 @@ It worked if it prints `"weights": 481665`, `"count_train": 11504` and `"identit
 
 ## Step 3: level 0.5, the network view
 
-**Reads:** `numbers/numbers.json`, `numbers/examples/`. **Leaves:** `dc0` to `dc7` in `0.5-network-view/`.
+**Reads:** `numbers/numbers.json`, `numbers/examples/`, `numbers/real/count-explained.npz`. **Leaves:** `dc0` to `dc7` in `0.5-network-view/`.
 
 ```bash
 cd 0.5-network-view && PYTHONDONTWRITEBYTECODE=1 ~/.claude/venvs/figures/bin/python -I make_network_view.py && cd ..
@@ -83,22 +83,21 @@ It worked if the first prints a mismatch under 1e-6 and raises nothing, and the 
 /render-diagrams /home/molef/PhD/concept-composition/2-classifier-guidance/artifacts/scenes/digit-map-checkers/1-illustrations/diagram-prompts.md
 ```
 
-## Step 8: the identity result, when job 94085 ends
+## Step 8: the results figure
 
-**Reads:** `/datasets/mmolefe/poe_repair_min/loop-8/v2/sdxl-split/split.json` on the cluster. **Leaves:** `numbers/split.json`, a refreshed `numbers/numbers.json` and `numbers/results-so-far.png`.
+**Reads:** `numbers/numbers.json`'s `results_final` block. **Leaves:** `numbers/results-so-far.png` and `.svg`.
 
 ```bash
-timeout 300 ssh -o BatchMode=yes mscluster107 "cat /datasets/mmolefe/poe_repair_min/loop-8/v2/sdxl-split/split.json" > numbers/split.json
-cd numbers && ~/.claude/venvs/figures/bin/python -I make_numbers.py && ~/.claude/venvs/figures/bin/python -I make_results_figure.py && cd ..
+cd numbers && PYTHONDONTWRITEBYTECODE=1 ~/.claude/venvs/figures/bin/python -I make_results_figure.py && cd ..
 ```
 
-It worked if `make_results_figure.py` prints a number for both identity rows. Then rewrite section 8 of `read-through-a-small-network.md` from the new numbers, and the `results` row of `ladder.json`.
+It worked if it prints 0.791, 0.782, 0.555 and 0.556 for the four checker rows and 43 for the push. Every number in `results_final` is quoted from a stage review under `artifacts/notes/progress/abstract-checkers/` or read from `numbers/real/count-final.json`, so a changed review means editing `final_results()` in `numbers/make_numbers.py` and rerunning step 2 first.
 
-## Step 9: real maps, logits and gradients (owed, needs a GPU)
+## Step 9: the real outputs
 
-**Reads:** the two saved heads, the share-0.0 U-Net, `numbers/numbers.json` and `numbers/examples/display-noise.npy`. **Leaves:** a file of real maps, logits and gradients, copied to `numbers/`, and redrawn dc2 tiles, mm1 and mm3.
+**Reads:** `numbers/real/`. **Leaves:** nothing new; steps 2, 3 and 8 read it.
 
-This step waits for the owner's approval of V2's final read. What it needs is written in `ladder.json` under `owed_real_maps_and_gradients` and in section 9 of the closing page. Launch through `scripts/cluster.sh run "sbatch ..."` per the [launch recipe](../../../../runbook/00-INDEX.md).
+The four files came from the cluster: `count-final.json` and `count-explained.npz` from `/datasets/mmolefe/poe_repair_min/loop-8/v2/count-final/` (job 94108), `count-stages.npz` from job 94116 (`explain_stages.py`), and `trace/` from `/datasets/mmolefe/poe_repair_min/loop-8/v3/trace/` (job 94161, `trace_push.py`). The identity checker was never saved, so no real file exists for it.
 
 ## Step 10: the closing page
 

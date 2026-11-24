@@ -1,7 +1,8 @@
 """Level 0.5 of the digit-map checker ladder: the network view, figures dc0 to dc7.
 
-Every size and value comes from ../numbers/numbers.json and the example canvases in ../numbers/examples/. The two maps
-cannot be computed on the laptop (they need the frozen U-Net on a GPU), so their tiles are drawn as marked empty slots.
+Every size and value comes from ../numbers/numbers.json and the example canvases in ../numbers/examples/. The real maps
+in dc2 and the real gradient in dc7 come from ../numbers/real/count-explained.npz (job 94108: the frozen U-Net and the
+saved count checker run on the same example canvases with the same display noise).
 
 Run: ~/.claude/venvs/figures/bin/python -I make_network_view.py   (prints "0 crossings" per figure)
 """
@@ -18,6 +19,13 @@ from figure_kit import (COUNT, COUNT_FILL, FADED_FILL, FADED_TEXT, GREY, HIDDEN,
 
 N = json.loads((HERE.parent / "numbers" / "numbers.json").read_text())
 EX = HERE.parent / "numbers" / "examples"
+REAL = np.load(HERE.parent / "numbers" / "real" / "count-explained.npz")
+MAP_TOP = 10.0          # dc2's colour scale runs 0 to MAP_TOP; pixels above it are drawn at MAP_TOP and counted on the figure
+
+
+def real(key, name="apart_1_3", t=480):
+    i, j = list(REAL["names"]).index(name), list(REAL["timesteps"]).index(t)
+    return REAL[key][i, j]
 
 
 def ex(name, t=None):
@@ -88,8 +96,10 @@ def dc0():
     f.route([(940, 178), (1480, 178), (1480, 640), (1400, 640)], OUTPUT, 1.4, prod + comb, "prod-to-comb")
     ddim = node(f, 1100, 712, 300, 56, ["DDIM step to $x_{t-1}$, the next canvas"], INK, WHITE, INK, 14, oid="ddim")
     f.arrow(1250, 680, 1250, 712, INK, allowed=comb + ddim, name="to-ddim")
-    footer(f, "Grey: frozen. Green: the trained checker. Red: what the networks output. Orange: the backward signal and the push. "
-              "The push is step V3's design (03-design.md); no pushed run exists yet.")
+    footer(f, "Grey: frozen. Green: the trained checker. Red: what the networks output. Orange: the backward signal and the push.",
+           f.H - 42)
+    footer(f, "The push acts at sampler steps 15 to 25 of 50 (timesteps 693 to 489). On digits 5 to 9 it gives 43 clean pairs "
+              "of 320 against 0 for the plain product (job 94134).")
     f.write(HERE)
 
 
@@ -126,10 +136,10 @@ def dc1():
 
 
 # ---------------------------------------------------------------------------------------------------- dc2
-def owed_tile(f, x, y, w, h, oid, label):
-    f.box(x, y, w, h, "#f6f7f9", GREY, 1.0, 2, oid, "card", dash=(0, (4, 3)))
-    f.text(x + w / 2, y + h / 2 - 8, label, 12, GREY, ha="center", va="center", oid=oid + "-t1")
-    f.text(x + w / 2, y + h / 2 + 12, "real map owed (GPU)", 11, GREY, ha="center", va="center", oid=oid + "-t2")
+def map_tile(f, x, y, w, h, oid, label, m):
+    f.image(m, x, y, w, h, cmap="Greens", vmin=0, vmax=MAP_TOP, frame=HIDDEN, oid=oid)
+    f.text(x + w / 2, y - 10, label, 12, HIDDEN, ha="center", oid=oid + "-t1")
+    return int((m > MAP_TOP).sum())
 
 
 def dc2():
@@ -160,8 +170,9 @@ def dc2():
     nm.append(f.text(1185, 312, "so each map adds to 2,048", 13, HIDDEN, ha="center", va="center", oid="norm-b"))
     f.route([(1000, 200), (1030, 200), (1030, 250), (1060, 250)], HIDDEN, 1.2, da + nm, "da-norm")
     f.route([(1000, 330), (1030, 330), (1030, 290), (1060, 290)], HIDDEN, 1.2, db + nm, "db-norm")
-    owed_tile(f, 1380, 150, 200, 100, "ma", "$m_a$, channel 1")
-    owed_tile(f, 1380, 290, 200, 100, "mb", "$m_b$, channel 2")
+    m = real("maps")
+    over_a = map_tile(f, 1380, 150, 200, 100, "ma", f"$m_a$, channel 1, largest {m[0].max():.1f}", m[0])
+    over_b = map_tile(f, 1380, 290, 200, 100, "mb", f"$m_b$, channel 2, largest {m[1].max():.1f}", m[1])
     f.route([(1310, 250), (1345, 250), (1345, 200), (1380, 200)], HIDDEN, 1.2, nm + ["ma"], "to-ma")
     f.route([(1310, 290), (1345, 290), (1345, 340), (1380, 340)], HIDDEN, 1.2, nm + ["mb"], "to-mb")
     f.text(1480, 420, "stacked: the checker's input,", 13, HIDDEN, ha="center", oid="st1")
@@ -170,8 +181,10 @@ def dc2():
     f.text(40, 566, "• A map's mean over the 2,048 pixels is 1, so its total size is divided out and only its shape is kept.", 13, INK, oid="w1")
     f.text(40, 588, "• The digit labels a and b enter only through which two U-Net calls are made. Swapping the asked pair swaps the channels.", 13, INK, oid="w2")
     f.text(40, 610, "• In training the three calls run under torch.no_grad (v2_learn.py line 106), so no gradient reaches the U-Net there.", 13, INK, oid="w3")
-    f.text(40, 632, "• The real maps on these canvases need the U-Net's weights on a GPU; the tiles stay empty until that job runs.", 13, INK, oid="w4")
-    footer(f, "Source: v2_learn.py lines 85-98 (maps), canvas_unet.py line 35 (label 10 means no digit). Model: the share-0.0 canvas U-Net.")
+    f.text(40, 632, f"• The two tiles are the real maps of this canvas at t = 480. White is 0 and dark green {MAP_TOP:.0f} or more "
+                    f"({over_a} pixels of $m_a$ and {over_b} of $m_b$ lie above {MAP_TOP:.0f}).", 13, INK, oid="w4")
+    footer(f, "Source: v2_learn.py lines 85-98 (maps), canvas_unet.py line 35 (label 10 means no digit). Model: the share-0.0 canvas U-Net. "
+              "Real maps: numbers/real/count-explained.npz, job 94108.")
     f.write(HERE)
 
 
@@ -411,7 +424,15 @@ def dc7():
         f.text(40, y, a, 13, GREY, wgt, oid=f"t{r}a")
         f.text(220, y, b, 13, INK, wgt, oid=f"t{r}b")
         f.text(620, y, c, 13, ORANGE if r else INK, wgt, oid=f"t{r}c")
-    footer(f, "Design: artifacts/notes/progress/abstract-checkers/03-design.md, 'How the push is computed' (step V3). No pushed run exists; real g on these canvases is owed.")
+    g = real("grad")[0]
+    top = float(np.percentile(np.abs(g), 99))
+    f.image(g, 1250, 190, 200, 100, cmap="RdBu_r", vmin=-top, vmax=top, frame=ORANGE, oid="g-real")
+    f.text(1350, 178, "real g on this canvas, t = 480", 14, ORANGE, ha="center", oid="g-real-h")
+    f.text(1350, 312, f"count checker; red raises ℓ, blue lowers it", 12, ORANGE, ha="center", oid="g-real-a")
+    f.text(1350, 332, f"colour ±{top:.2f} per pixel,  ‖g‖ = {np.linalg.norm(g):.2f},  ℓ = {float(real('logit')):.2f}", 12, ORANGE,
+           ha="center", oid="g-real-b")
+    footer(f, "Code: make_push in scripts/abstract_checkers/v3_compose.py lines 50-66, used at sampler steps 15 to 25 of 50 (job 94134). "
+              "Real g: numbers/real/count-explained.npz, job 94108.")
     f.write(HERE)
 
 
