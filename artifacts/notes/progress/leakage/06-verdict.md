@@ -1,6 +1,6 @@
 # Verdict: where CO3's subjects borrow each other's parts, and what stops it (step Z6)
 
-**CO3 draws two bodies and one borrows the other's parts, and this loop did not find where that starts or a fix that stops it.** Three readings inside SDXL, taken across the whole sampling path, do not predict which pairs borrow; a correction late in sampling that subtracts the other animal's prediction inside each animal's hand-drawn region leaves the count of clean pictures where CO3 alone has it. Paper 2's next test is a fix in the text encoder, with Bounded Attention run as the rival.
+**CO3 draws two bodies and one borrows the other's parts, and this loop did not find where that starts or a fix that stops it.** Three readings inside SDXL, taken across the whole sampling path, do not predict which pairs borrow; a correction late in sampling that subtracts the other animal's prediction inside each animal's hand-drawn region leaves the count of clean pictures where CO3 alone has it. Paper 2's next test puts each animal's own prediction inside its own region, which Z3 never did.
 
 ## The mechanism
 
@@ -14,11 +14,11 @@
 
 ## The method chosen
 
-**The text-side fix, tested next, against Bounded Attention as the rival** ([Paper 2's method](04-paper-2-method.md)). The second subject's word vectors in the joint prompt are replaced by its encoding alone, which CO3 already computes; it trains nothing and keeps one trajectory per seed. A word-order check comes first: if borrowing follows the order of the names, the text encoder is where it enters. Per-cell CO3, regions read from $d_t$ and the checker choosing CO3's settings are closed by Z2, Z3 and board question 80. The identity reward LoRA is held, because it trains the diffusion model; it becomes the candidate only if the text-side fix and the rival also fail. The next test costs about 3.4 GPU-hours (0.7 for the word-order check, 0.7 for the text-side fix, about 2 for the rival) and is outside this loop's brief.
+**Each animal's own prediction inside its own region, tested next; the text-side fix held behind a free check; Bounded Attention the rival** ([Paper 2's method](04-paper-2-method.md), [the method review](method-review.md)). Z3's correction gave each animal's own prediction weight 0 inside its box, so whether the cougar's own prediction draws a clean cougar where the cougar is has not been tested; that test costs about 0.8 GPU-hours on the 48 pictures. The text-side swap cannot reach borrowing by the first-named animal (boar × pheasant) and runs only if a free text-only check supports it. Per-cell CO3, regions read from $d_t$ and the checker choosing CO3's settings are closed by Z2, Z3 and board question 80. The identity reward LoRA is held, because it trains the diffusion model.
 
 ## The reruns proposed for Loops 8, 9 and 10
 
-[The design audit](05-design-audit.md) finds 30 design issues: 3 could change a recorded verdict, 16 possibly could and 11 could not. Three reruns, about 0.25 GPU-hours in all, are on board question 97: where the digit sampler settles its digits before Loop 8's next push; an untrained rule against Loop 8's identity checker; and the block-wise form of Loop 10's shared-space idea on CO3's path.
+[The design audit](05-design-audit.md) finds 30 design issues: 3 could change a recorded verdict, 16 possibly could and 11 could not. Board question 97, decided by the manager loop for the owner, runs the first rerun in Loop 8 (where the digit sampler settles its digits, about 0.04 GPU-hours), holds the second, and reads the third from Loop 12's saved CO3 records at no GPU cost: [the push-region read](05-audit-rerun-3/README.md) finds each animal's push only partly on its own body at CO3's corrected steps.
 
 ## What it suggests for Paper 1
 
