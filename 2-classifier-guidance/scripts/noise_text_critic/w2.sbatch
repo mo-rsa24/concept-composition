@@ -6,7 +6,7 @@
 #SBATCH --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-9/logs/%x-%j.log
 # Step W2. Submit with the code snapshot in SNAP:
-#   sbatch --export=ALL,SNAP=<snapshot> w2.sbatch <prepare-smoke|prepare|read-smoke|read|probe-smoke|probe>
+#   sbatch --export=ALL,SNAP=<snapshot> w2.sbatch <prepare-smoke|prepare|read-smoke|read|probe-smoke|probe|fair-smoke|fair>
 set -uo pipefail
 STAGE=${1:?stage}
 ROOT=/datasets/mmolefe/poe_repair_min/loop-9
@@ -38,6 +38,8 @@ case "$STAGE" in
   read)          "$PY" "$S/w2_read.py"; rc=$? ;;
   probe-smoke)   "$PY" "$S/w2b_probe.py" extract --smoke --out "$ROOT/w2b/smoke" && "$PY" "$S/w2b_probe.py" fit --out "$ROOT/w2b/smoke"; rc=$? ;;
   probe)         "$PY" "$S/w2b_probe.py" extract --out "$ROOT/w2b/full" && "$PY" "$S/w2b_probe.py" fit --out "$ROOT/w2b/full"; rc=$? ;;
+  fair-smoke)    "$PY" "$S/w2c_fair.py" --smoke; rc=$? ;;
+  fair)          "$PY" "$S/w2c_fair.py"; rc=$? ;;
   *) echo "ABORT: unknown stage $STAGE"; exit 2 ;;
 esac
 echo "[$(date -u +%H:%M:%S)] DONE stage=$STAGE exit=$rc"

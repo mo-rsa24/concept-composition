@@ -849,7 +849,8 @@
    "owner": "s9",
    "proof": "noise-text-critic/03-does-it-steer/review.md compares CO3, CO3 with the push and CO3 with a same-length random push on 96 pictures against its bar, or records that no step was readable",
    "needs": [
-    "W2"
+    "W2",
+    "W2c"
    ],
    "state": "todo",
    "serves": "Paper 2",
@@ -907,6 +908,20 @@
    "state": "todo",
    "serves": "Paper 2",
    "objective": "Build and test"
+  },
+  {
+   "id": "W2c",
+   "label": "W2c Positive control and fair test of W2",
+   "owner": "s9",
+   "proof": "noise-text-critic/02c-fair-test/review.md reports the readout checker under W2's protocol and every sentence row with prompt ensembling, steps 20 to 29, the finished-picture check and the real trajectory states, against the bars in its design",
+   "needs": [
+    "W2"
+   ],
+   "state": "doing",
+   "serves": "Paper 2",
+   "objective": "Build and test",
+   "started": "2026-11-24T08:01:41+02:00",
+   "updated": "2026-11-24T08:01:41+02:00"
   },
   {
    "id": "X1",
@@ -1445,7 +1460,8 @@
       "W4",
       "W5",
       "W1b",
-      "W2b"
+      "W2b",
+      "W2c"
      ]
     },
     {

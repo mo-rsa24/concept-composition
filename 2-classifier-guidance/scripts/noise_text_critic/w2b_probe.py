@@ -76,7 +76,10 @@ def stage_extract(args) -> int:
     rows, latents, missing = [], [], 0
     for r in pictures():
         try:
-            latents.append(torch.load(find(r["latent"]), map_location="cpu", weights_only=True).half())
+            z = torch.load(find(r["latent"]), map_location="cpu", weights_only=True)
+            if "state_index" in r:  # a saved trajectory: keep the one state the tile names, -1 being the finished latent
+                z = z[-1:] if r["state_index"] == -1 else z[r["state_index"]:r["state_index"] + 1]
+            latents.append(z.half())
             rows.append(r)
         except FileNotFoundError:
             missing += 1
