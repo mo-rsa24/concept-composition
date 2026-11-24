@@ -535,8 +535,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-24T14:31:20+02:00",
-   "updated": "2026-11-24T16:52:19+02:00",
-   "note": "smoke passed for both lists (jobs 94579, 94580); CO3 read queued (94593 then 94594); overfit then 1% rungs queued (94603 to 94606); bar is two clear subjects by question 87"
+   "updated": "2026-11-24T18:06:32+02:00",
+   "note": "smoke passed for both lists; CO3 read running (94594); overfit and 1% rungs ready for mscluster107 card 1 under question 90, after Loop 8, launcher m5_shared_card.sh; Slurm copies 94603 to 94606 cancelled once it starts"
   },
   {
    "id": "D3",
@@ -2925,6 +2925,17 @@
    "asked": "2026-11-24T16:55:12+02:00",
    "answer": "Owner, in chat, 2026-11-24: yes. Loop 13 adds an edit command to scripts/progress_board.py and fixes exactly these records: Loop 8's SDXL test (V4) needs M5 instead of D3 and its proof names two clear subjects of 96 against CO3 alone; the small CLEVR test (M6) is closed as not run and the recipe freeze (M4) waits on the two-colour CLEVR test (M10) in its place, per question 84; Loop 10's skipped steps X6 to X8 are closed as skipped on question 76 and X9 as done, its verdict written.",
    "answered": "2026-11-24T17:41:04+02:00"
+  },
+  {
+   "id": 90,
+   "question": "Shared-device run on mscluster107 card 1: the node is another user's biggpu job (94610, ends about 23:36); its card 1 is idle (0% use, 170 MiB, their process's start-up context only). May loops launch queued work there over SSH with nohup under the shared-device rules in environment/hpc/execution-protocol.md step 3?",
+   "holds": null,
+   "default": "no shared-device launch",
+   "by": "s13",
+   "state": "answered",
+   "asked": "2026-11-24T18:04:46+02:00",
+   "answer": "Owner, in chat, 2026-11-24: yes. One run at a time on card 1, Loop 8's two waiting checks first (jobs 94595 to 94597), then Loop 6's queued checker training; each loop cancels its own queued Slurm copy so nothing runs twice. All step 3 safety rules apply, plus the owner's rule: the launch script checks card 1 every 30 seconds and stops our run, logging why, as soon as any process not ours passes 1 GB there.",
+   "answered": "2026-11-24T18:04:46+02:00"
   }
  ]
 }
