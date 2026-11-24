@@ -1,6 +1,21 @@
 # Review: does a checker learn plurality on unseen digits (step V2)
 
-**Status: null.** The map reader misses two of V2's three bars on digits 5 to 9 (W&B run `a562r799`), and the rehearsal at SDXL's noise level misses the same two on the pairs holding digit 4. Steps V3, V5 and V4 wait on the owner's answer to board question 67.
+**Status: null.** The map reader misses two of V2's three bars on digits 5 to 9 (W&B run `a562r799`), and the rehearsal at SDXL's noise level misses the same two on the pairs holding digit 4. Trained apart at SDXL's noise level, the count checker passes its rehearsal and the identity checker misses. Steps V3, V5 and V4 wait on the owner's answer to board question 69, which asks to read digits 5 to 9 once with the count checker.
+
+## Two checkers at SDXL's noise level
+
+Job 94085 on `mscluster42` took 49 minutes 54 seconds, from the code snapshot of commit `6c3f8a16`, and wrote `/datasets/mmolefe/poe_repair_min/loop-8/v2/sdxl-split/split.json`. Both checkers trained on the pairs among digits 0 to 3 at the 16 toy timesteps matching SDXL's noise, and were scored on those pairs and on the pairs holding digit 4. Digits 5 to 9 were not read. All scores are balanced accuracy over the 16 steps, where 0.5 is chance.
+
+| Checker | Reader | Trained pairs | Pairs holding 4, bar 0.75 | Gap | Overfit, of 16 | Verdict |
+|---|---|---|---|---|---|---|
+| Count: two digits apart? (11,504 training canvases, 800 test) | map | 0.781 | **0.774** | 0.007, bar 0.05 | 16 | **pass** |
+| | raw | 0.793 | 0.775 | 0.018 | 16 | |
+| Identity: the asked digits? (7,004 training canvases, 500 test) | map | 0.603 | **0.555** | 0.048 | 16 | **miss** |
+| | raw | 0.606 | 0.556 | 0.049 | 16 | |
+
+The count checker's score on the pairs holding digit 4 rises from 0.64 at the noisiest step to 0.91 at the least noisy. By kind it calls 95% of overlaid canvases correctly and 65% of single-digit canvases, its weakest kind.
+
+The identity checker rises from 0.48 to 0.65 across the window, so it reads a little identity at the least noisy steps and none at the noisiest. It says no to 63% of reads. Its training pool holds 6,000 right-digit canvases and 1,004 wrong-digit ones, drawn half and half, so each wrong-digit canvas is drawn about 510 times. The raw reader, which is told the asked digits, scores the same, so the limit is the noise level and the training data and not the maps.
 
 ## The rehearsal at SDXL's noise level
 
@@ -68,4 +83,4 @@ No configuration separates `apart` from `wrong`, on the pairs it trained on or o
 
 The written rule freezes the configuration with the highest smaller value of the two scores on the pairs holding 4, which is **log totals added** at 0.4999. The four values span 0.4946 to 0.4999, so this choice separates configurations that are all at chance.
 
-GPU-hours spent so far: 4.33 of 30 (0.14 on step V1, 0.30 on this ladder, 2.68 on the inner test, 0.66 on the final read and 0.55 on the rehearsal at SDXL's noise level).
+GPU-hours spent so far: 5.16 of 30 (0.14 on step V1, 0.30 on this ladder, 2.68 on the inner test, 0.66 on the final read, 0.55 on the rehearsal at SDXL's noise level and 0.83 on the two checkers).
