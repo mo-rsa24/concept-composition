@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-24 17:58 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-24 18:08 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -67,23 +67,23 @@ The finish range is `session_status.py`'s, from the 52 finished steps: fastest p
 | Loop | Doing now, and why | Steps left | Estimated finish | Session | Held by |
 |---|---|---|---|---|---|
 | 4. Rivals and targets | Keeping every target current. It recorded the CLEVR paste result and placed the two-colour CLEVR test in the CLEVR plan. | 1 | none useful: it ends after the paper tables, which have not started | idle | nothing |
-| 6. Best method | Checking whether its checker can tell CO3's clean pictures from its borrowed-part ones at each step (job 94594, running since 17:02 after its smoke run passed), before choosing which training list Paper 2's checker uses (step M5). The two retrained checkers finished. Two-colour CLEVR renders for Paper 1 run beside it. | 10 | 5.2 h to 232.1 h | busy | its own read; question 80 waits on this read |
+| 6. Best method | Checking whether its checker can tell CO3's clean pictures from its borrowed-part ones at each step (job 94594, 1 h 04 min of 2 h 30 min), before choosing which training list Paper 2's checker uses (step M5). Two-colour CLEVR renders for Paper 1 run beside it (1 h 35 min of 10 h). | 9 | 4.4 h to 208.0 h | busy | its own read; question 80 waits on this read; next on card 1 after Loop 8 |
 | 7. Abstract-checker papers | Finished; its session is closed. | 0 | done | closed | nothing |
-| 8. Abstract checkers | Its digit identity checker passed every robustness bar (second seed 0.877 against 0.75, shuffled labels 0.500, weakest pair 0.844). Two last checks wait for a node: the same reading by a rule that needs no training, and a read on real sampler states (jobs 94595 to 94597). Its SDXL test is rewritten to your answer on 86 and passed the design check. | 3 | 2.6 h to 110.2 h | busy | a free node; the SDXL test also waits on Loop 6's training list |
+| 8. Abstract checkers | Its digit identity checker passed every robustness bar (second seed 0.877 against 0.75, shuffled labels 0.500, weakest pair 0.844). Its last two checks, a rule that needs no training and a read on real sampler states, are running on mscluster107 card 1 (smoke run started 18:05); the queued Slurm copies stay until the full run is under way. Its SDXL test is rewritten to your answer on 86. | 3 | 1.9 h to 85.5 h | busy | nothing; the SDXL test waits on Loop 6's training list |
 | 11. Drain into the pillars | Stopped by your answer on 88. Its pillar checks are done and its census found every finished verdict on a report page (14 findings, eight method folders). Its final step stays open until Loops 6 and 8 stop. | 1 | when restarted | stopped its loop | waiting for a result worth draining: Loop 8's identity checker or Loop 6's two-colour CLEVR test |
-| 12. Where CO3 leaks | Measuring what predicts which animal pairs borrow each other's parts under CO3: the main predictor pass started at 16:48 (job 94591, 4-hour limit). | 5 | 2.6 h to 113.2 h | busy | its own job |
+| 12. Where CO3 leaks | Measuring what predicts which animal pairs borrow each other's parts under CO3: the main predictor pass (job 94591) is at 1 h 17 min of its 4-hour limit. | 5 | 2.4 h to 112.6 h | busy | its own job |
 
 ## Resources
 
-Read at 17:06 from `squeue`, `sacct` and `sinfo`; down nodes from `sinfo -R` at 16:28.
+Read at 18:06 from `squeue`, `sacct`, `sinfo` and `nvidia-smi` on mscluster107; down nodes from `sinfo -R` at 16:28.
 
 | What | Now |
 |---|---|
-| Our jobs against the caps | 4 running on `bigbatch` of 6 allowed (Loop 6's read and two CLEVR renders, Loop 12's predictor pass); 0 on `biggpu` of 1 allowed; 11 queued |
+| Our jobs against the caps | 4 running on `bigbatch` of 6 allowed (Loop 6's read and two CLEVR renders, Loop 12's predictor pass); 0 on `biggpu`; 11 queued; plus Loop 8 on mscluster107 card 1 outside Slurm |
 | Longest wait | Loop 8's 20-minute check (job 94595): 35 minutes, waiting for a node |
 | Nodes out of service | `bigbatch`: 12 down and 5 drained of 48. `biggpu`: 2 down and 2 drained of 7, including mscluster108 and mscluster111, drained at 09:27 and 09:10 today after a failed job kill |
 | Idle capacity | none: at 17:43 every working `bigbatch` and `biggpu` node was allocated. mscluster107 is now another user's `biggpu` job (94610, 6-hour limit, started 17:36); its second card sits idle at 170 MiB, but their process holds it, so it is not ours to use. Your interactive job 83423 on that node no longer appears in the queue |
-| Shared card | **mscluster107 card 1, approved by you on question 90.** One run at a time: Loop 8's two short checks first, then Loop 6's checker training. Each launch follows the shared-device rules in `environment/hpc/execution-protocol.md` step 3, with your watchdog: our run stops as soon as a process not ours passes 1 GB on card 1. The host job ends about 23:36. These runs are invisible to `squeue`; they are harvested with `pgrep` on the node |
+| Shared card | **mscluster107 card 1, approved by you on question 90.** Loop 8's run started at 18:05 (6.3 GB, 100% use); the other user's card 0 is unchanged at 36 GB. Its launch script (`/datasets/mmolefe/poe_repair_min/loop-8/v6/shared/launch.sh`) holds all three guards: under 1 GB at launch, node and card in the log, and your stop rule every 30 seconds. Loop 6 goes next. The host job ends about 23:36. Harvested with `pgrep` on the node, since `squeue` cannot see it |
 | Compute against budget since 2026-11-21 | Loop 6: 53.4 node-hours of 87 (34.8 were CLEVR renders that may have used no GPU). Loop 8: 11.9 of 30. Loop 12: about 0.4, no total set. Slurm here records no GPU count, so these are node-hours, an upper bound |
 
 **What would make the queue move faster:** little within our control. There is no idle `biggpu` card,
@@ -174,4 +174,4 @@ been acted on, 93 asked nothing, and 15 waited. Nine of those were re-routed or 
 
 ## Last tick
 
-2026-11-24 17:58. Next tick about 18:06. The briefing for you is [the briefing page](briefing.md).
+2026-11-24 18:08. Next tick about 19:08. The briefing for you is [the briefing page](briefing.md).
