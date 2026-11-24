@@ -55,6 +55,18 @@ The bars sit in `2-classifier-guidance/scripts/abstract_checkers/v5_remove.py`.
 
 **What would surprise.** Removing the right-digits or order checker lowering its own column even though the checker reads near chance. That would mean a weak checker's gradient still carries the property's direction.
 
+## The rerun (board question 73)
+
+The first run's verdict was inconclusive: the all-three row's total push passed 0.6 of the product's norm on 5.85% of pushed steps, and cells after removing count held as few as 16 canvases. The owner approved one rerun with the bars unchanged.
+
+**Push length.** Chosen on the 10 seen pairs at seeds 0 to 31 before any unseen pair is read: the largest of 0.229, 0.215, 0.2, 0.185, 0.17 and 0.155 whose all-three row passes 0.6 on at most 5% of pushed steps. The same length is used for every checker in every row (`tune-b` stage, `tune-b.json`).
+
+**Seeds.** 1000 to 1095 on the 10 unseen pairs, 960 canvases per row, three times the first run (`final3` stage, `final3.json`). The checkers, their training and every other setting are the first run's.
+
+**Cost:** about 0.5 GPU-hours: up to six all-three rows on the seen pairs, then eleven rows of 960 canvases. **Buys:** a verdict on V5 under the written rules.
+
+The first run's table stays in `review.md` as recorded, and the rerun's verdict is the one V5 reports.
+
 ## What this cannot say
 
 Binding, position and size do not exist on a 32 by 64 digit canvas, and order is left or right only. A pass here is about digits; the SDXL version waits for the owner's decision after V4 passes.

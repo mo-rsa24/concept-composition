@@ -35,6 +35,8 @@ CELL_MIN = 40            # canvases
 VOID_TOTAL, VOID_SHARE = 0.6, 0.05
 ZERO_PUSH_MAX_ABS = bars.ZERO_PUSH_MAX_ABS
 NAMES = ("count", "identity", "order")
+B_CANDIDATES = (0.229, 0.215, 0.2, 0.185, 0.17, 0.155)   # board question 73: tried in this order on the seen pairs
+RERUN_SEEDS = list(range(1000, 1096))                       # three times the first run's 32 seeds
 COLUMNS = ("count", "right", "order", "full")
 OWN_COLUMN = {"count": "count", "identity": "right", "order": "order"}
 ROWS = {"plain": ((), ()), "all": (NAMES, ())}
@@ -287,7 +289,7 @@ def log_wandb(name, config, summary):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("stage", choices=["smoke", "train", "calibrate", "final"])
+    ap.add_argument("stage", choices=["smoke", "train", "calibrate", "final", "tune-b", "final3"])
     for flag in ("model", "data", "count_head", "judge", "out"):
         ap.add_argument(f"--{flag.replace('_', '-')}", type=Path, required=True)
     ap.add_argument("--wandb-name", default=None)
@@ -320,19 +322,39 @@ def main():
         cal = stage_calibrate(args, model, dev, args.out, heads, SEEN, list(range(32)))
         return 0 if cal["zero_push_max_abs"] < ZERO_PUSH_MAX_ABS else 1
 
-    out = args.out / "final.json"
-    if out.exists():
-        raise SystemExit(f"{out} exists: the unseen pairs are read once")
     cal = json.loads((args.out / "calibrate.json").read_text())
-    per_row, void, lengths = run_rows(list(ROWS), UNSEEN, list(range(1000, 1032)), cal["b"], heads, model, net, dev,
-                                      args.out, "final")
+    if args.stage == "tune-b":
+        # Board question 73: the largest push length, from B_CANDIDATES at or below the calibrated one, whose
+        # all-three row on the seen pairs passes 0.6 of the product's norm on at most 5% of pushed steps.
+        tried = []
+        for b in [c for c in B_CANDIDATES if c <= cal["b"] + 1e-9]:
+            _, void, lengths = run_rows(["all"], SEEN, list(range(32)), b, heads, model, net, dev, args.out, f"tune-b{b}")
+            tried.append({"b": b, **lengths["all"], "void": void["all"]})
+            if not void["all"]:
+                break
+        chosen = next((t["b"] for t in tried if not t["void"]), None)
+        (args.out / "tune-b.json").write_text(json.dumps({"tried": tried, "chosen_b": chosen}, indent=1))
+        print(json.dumps({"chosen_b": chosen, "tried": tried}), flush=True)
+        return 0 if chosen is not None else 1
+
+    if args.stage == "final3":
+        out, seeds, tag = args.out / "final3.json", RERUN_SEEDS, "final3"
+        b = json.loads((args.out / "tune-b.json").read_text())["chosen_b"]
+        if b is None:
+            raise SystemExit("no push length passed the total-length rule on the seen pairs")
+    else:
+        out, seeds, tag, b = args.out / "final.json", list(range(1000, 1032)), "final", cal["b"]
+    if out.exists():
+        raise SystemExit(f"{out} exists: the unseen pairs are read once per run")
+    per_row, void, lengths = run_rows(list(ROWS), UNSEEN, seeds, b, heads, model, net, dev, args.out, tag)
     v, detail = verdict(per_row, void, cal["zero_push_max_abs"])
     table = {r: {c: share(per_row[r], c) for c in COLUMNS} for r in ROWS}
-    result = {"verdict": v, "b": cal["b"], "mean_cosine": cal["mean_cosine"], "zero_push_max_abs": cal["zero_push_max_abs"],
+    result = {"verdict": v, "b": b, "seeds": [seeds[0], seeds[-1]], "mean_cosine": cal["mean_cosine"],
+              "zero_push_max_abs": cal["zero_push_max_abs"],
               "table_percent": table, "totals": {r: sum_pp(per_row[r]) for r in ROWS}, "void": void, "lengths": lengths,
               "detail": detail, "per_pair": per_row}
     if args.wandb_name:
-        result["wandb_run"] = log_wandb(args.wandb_name, {"b": cal["b"]}, {"verdict": v, **{f"{r}_{c}": table[r][c]
+        result["wandb_run"] = log_wandb(args.wandb_name, {"b": b, "seeds": [seeds[0], seeds[-1]]}, {"verdict": v, **{f"{r}_{c}": table[r][c]
                                                                            for r in ROWS for c in COLUMNS}})
     out.write_text(json.dumps(result, indent=1, default=float))
     print(json.dumps({k: result[k] for k in ("verdict", "b", "table_percent")}, default=float), flush=True)

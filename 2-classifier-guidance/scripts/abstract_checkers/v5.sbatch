@@ -39,7 +39,7 @@ export CUDA_VISIBLE_DEVICES=0
 echo "[$(date -u +%H:%M:%S)] job=${SLURM_JOB_ID:-none} node=$(hostname -s) gpu=$(nvidia-smi --query-gpu=name --format=csv,noheader -i 0) python=$PY snap=$SNAP stage=$STAGE"
 
 "$PY" "$S/v5_remove.py" "$STAGE" --model "$MODEL" --data "$DATA" --count-head "$COUNT" --judge "$JUDGE" --out "$OUT" \
-  $([ "$STAGE" = final ] && echo --wandb-name loop8-v5-final)
+  $([ "$STAGE" = final ] && echo --wandb-name loop8-v5-final) $([ "$STAGE" = final3 ] && echo --wandb-name loop8-v5-final3)
 rc=$?
 echo "[$(date -u +%H:%M:%S)] DONE stage=$STAGE exit=$rc"
 exit $rc
