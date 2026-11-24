@@ -25,7 +25,7 @@ The drain's sweep (`/artifacts-drain . --dry-run`) found 8 new and 4 changed fil
 | Loop 9 | 2 | 0 | 0 |
 | Loop 10 | 8 | 0 | 0 |
 | Loop 12 | 7 | 0 | 0 |
-| scenes in `2-classifier-guidance/artifacts/scenes/` | 138 | 0 | 0 |
+| scenes in `2-classifier-guidance/artifacts/scenes/` | 142 | 0 | 0 |
 | older results and scenes, made before the loops | 405 | not counted | not counted |
 
 ## Results with a verdict, for step Y2
@@ -63,7 +63,7 @@ Folders with more than ten files are folded; open one to see every file.
 | [rivals-by-dataset.png](../../../../artifacts/notes/progress/targets/rivals-by-dataset.png) | rivals-by-dataset.png | `1-lora-correction/report/against-other-methods/do-the-rivals-reproduce-their-printed-scores.md`, which rival reports on which benchmark |
 | [what-we-are-doing-and-the-three-detours.png](../../../../artifacts/notes/progress/targets/what-we-are-doing-and-the-three-detours.png) | what-we-are-doing-and-the-three-detours.png | none: a picture of the route's own plan, which stays beside the plan it explains |
 | [where-clevr-sits-before-the-go-or-no-go.png](../../../../artifacts/notes/progress/targets/where-clevr-sits-before-the-go-or-no-go.png) | where-clevr-sits-before-the-go-or-no-go.png | none: a picture of the route's own plan, which stays beside the plan it explains |
-| [where-clevr-stage-2-sits-before-the-go-or-no-go.png](../../../../artifacts/notes/progress/targets/where-clevr-stage-2-sits-before-the-go-or-no-go.png) | where clevr stage 2 sits before the go or no go *(file name)* | none: a picture of the route's own plan, which stays beside the plan it explains |
+| [where-clevr-stage-2-sits-before-the-go-or-no-go.png](../../../../artifacts/notes/progress/targets/where-clevr-stage-2-sits-before-the-go-or-no-go.png) | where-clevr-stage-2-sits-before-the-go-or-no-go.png | none: a picture of the route's own plan, which stays beside the plan it explains |
 
 ### Loop 5
 
@@ -119,7 +119,7 @@ Folders with more than ten files are folded; open one to see every file.
 | [overfit-scaled-ramp-real-and-sampled.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/overfit-scaled-ramp-real-and-sampled.png) | Top two rows: the 16 real pictures. Bottom two rows: 16 samples with the right floor and lighting and faint coloured blotches in place of objects | waits for a verdict: the step is still running (M7) |
 | [overfit-unscaled-ramp-real-and-sampled.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/overfit-unscaled-ramp-real-and-sampled.png) | Top two rows: the 16 real pictures of one object. Bottom two rows: 16 samples from the model, which are colour noise | waits for a verdict: the step is still running (M7) |
 | [paste-three-experts-first-32.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/paste-three-experts-first-32.png) | Thirty-two pasted images, each with three objects at the three positions, several on a faintly lighter square around the object | waits for a verdict: the step is still running (M7) |
-| [paste-two-experts-first-32.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/paste-two-experts-first-32.png) | paste two experts first 32 *(file name)* | waits for a verdict: the step is still running (M7) |
+| [paste-two-experts-first-32.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/paste-two-experts-first-32.png) | paste-two-experts-first-32.png | waits for a verdict: the step is still running (M7) |
 | [smoke-objects-at-their-positions.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/smoke-objects-at-their-positions.png) | Twelve CLEVR renders at 64 pixels: four with one object at position 1, four empty scenes, and four with objects at all three positions, each asked position outlined by its 18-pixel paste window | waits for a verdict: the step is still running (M7) |
 | [window-control-written-rule.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/window-control-written-rule.png) | How often each pixel changes, for the three positions, with the 18 by 18 window drawn: position 3's object runs past the top and bottom of its window | waits for a verdict: the step is still running (M7) |
 
@@ -164,7 +164,7 @@ Folders with more than ten files are folded; open one to see every file.
 | File | What it shows | Lands on |
 |---|---|---|
 | [identity-grid.png](../../../../artifacts/notes/progress/abstract-checkers/10-reading-identity/identity-grid.png) | The 2 by 2 grid. V2's identity checker at 0.555 leads into the early window, where two maps score 0.563 and the ten-label signature 0.612, both red. The later window holds two maps at 0.702, red, and the ten-label signature at 0.888, green… | `2-classifier-guidance/report/abstract-checkers-on-digits/can-a-checker-read-which-digits-are-present.md` (to write), lands once step V6 is done on the board |
-| [robustness-ladder.png](../../../../artifacts/notes/progress/abstract-checkers/10-reading-identity/robustness-ladder.png) | robustness ladder *(file name)* | `2-classifier-guidance/report/abstract-checkers-on-digits/can-a-checker-read-which-digits-are-present.md` (to write), lands once step V6 is done on the board |
+| [robustness-ladder.png](../../../../artifacts/notes/progress/abstract-checkers/10-reading-identity/robustness-ladder.png) | robustness-ladder.png | `2-classifier-guidance/report/abstract-checkers-on-digits/can-a-checker-read-which-digits-are-present.md` (to write), lands once step V6 is done on the board |
 
 ### Loop 9
 
@@ -181,8 +181,8 @@ Folders with more than ten files are folded; open one to see every file.
 
 | File | What it shows | Lands on |
 |---|---|---|
-| [intended-chain-and-recommendations.png](../../../../artifacts/notes/progress/score-space/intended-chain-and-recommendations.png) | intended chain and recommendations *(file name)* | `context/methods/07-the-score-path/01-overview.md` |
-| [manager-tick.png](../../../../artifacts/notes/progress/score-space/manager-tick.png) | manager tick *(file name)* **Held: fails the subject guard or is on the held-pictures list, so it stays off every page.** | `context/methods/07-the-score-path/01-overview.md` |
+| [intended-chain-and-recommendations.png](../../../../artifacts/notes/progress/score-space/intended-chain-and-recommendations.png) | intended-chain-and-recommendations.png | `context/methods/07-the-score-path/01-overview.md` |
+| [manager-tick.png](../../../../artifacts/notes/progress/score-space/manager-tick.png) | manager-tick.png **Held: fails the subject guard or is on the held-pictures list, so it stays off every page.** | `context/methods/07-the-score-path/01-overview.md` |
 | [summary-where-loop-10-fits.png](../../../../artifacts/notes/progress/score-space/summary-where-loop-10-fits.png) | Loop 9's sentence scores and Loop 8's two-map checker feed into Loop 10's finding that all ten signed maps read which digits are present at 0.655. Dashed, untested arrows lead to Paper 1 (feed the checker all ten maps) and to Loop 6 and Pa… | `context/methods/07-the-score-path/01-overview.md` |
 
 **`artifacts/notes/progress/score-space/00-ladder/`: 1 file**
@@ -206,8 +206,8 @@ Folders with more than ten files are folded; open one to see every file.
 
 | File | What it shows | Lands on |
 |---|---|---|
-| [gpu-line.png](../../../../artifacts/notes/progress/leakage/gpu-line.png) | gpu line *(file name)* | Loop 12 started on 2026-11-24; its landing page is set when its first verdict lands |
-| [loop-12-and-the-other-loops.png](../../../../artifacts/notes/progress/leakage/loop-12-and-the-other-loops.png) | loop 12 and the other loops *(file name)* | Loop 12 started on 2026-11-24; its landing page is set when its first verdict lands |
+| [gpu-line.png](../../../../artifacts/notes/progress/leakage/gpu-line.png) | gpu-line.png | Loop 12 started on 2026-11-24; its landing page is set when its first verdict lands |
+| [loop-12-and-the-other-loops.png](../../../../artifacts/notes/progress/leakage/loop-12-and-the-other-loops.png) | loop-12-and-the-other-loops.png | Loop 12 started on 2026-11-24; its landing page is set when its first verdict lands |
 | [loop-12-progress.png](../../../../artifacts/notes/progress/leakage/loop-12-progress.png) | Loop 12's six steps: Z1 read the leakage papers, done; Z2 what predicts borrowing, in progress; Z3 one fix; Z4 Paper 2's method; Z5 audit Loops 8 to 10; Z6 verdict. | Loop 12 started on 2026-11-24; its landing page is set when its first verdict lands |
 | [mechanism-checker-idea.png](../../../../artifacts/notes/progress/leakage/mechanism-checker-idea.png) | A loop: a pretrained sampler (CO3, ToMe, plain SDXL or PoE) gives its own failure signal at steps 0 to 5, such as attention overlap, d_t maps or a blob count. A small checker reads only that signal and never the subjects' names. Its output… | Loop 12 started on 2026-11-24; its landing page is set when its first verdict lands |
 | [where-leakage-could-enter.png](../../../../artifacts/notes/progress/leakage/where-leakage-could-enter.png) | A prompt flows through the text encoder into SDXL's U-Net, where the layout, cross-attention and self-attention sit in one step, then into CO3's sum of predictions and out to a picture with two bodies and borrowed parts. Each of the five p… | Loop 12 started on 2026-11-24; its landing page is set when its first verdict lands |
@@ -231,29 +231,38 @@ Folders with more than ten files are folded; open one to see every file.
 | File | What it shows | Lands on |
 |---|---|---|
 | [co3-corrector.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/co3-corrector.png) | Algorithm 3 as a small network, with the printed and coded rules boxed beneath | made before the loops; not part of this drain |
-| [co3-geometry-sketch.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/co3-geometry-sketch.png) | co3 geometry sketch *(file name)* | made before the loops; not part of this drain |
+| [co3-geometry-sketch.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/co3-geometry-sketch.png) | co3-geometry-sketch.png | made before the loops; not part of this drain |
 | [co3-overview.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/co3-overview.png) | the whole run, with this step in the small forward diagram | made before the loops; not part of this drain |
 | [co3-resampler.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/co3-resampler.png) | Algorithm 2 drawn as a small network with its equations | made before the loops; not part of this drain |
 | [co3-schedule.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/co3-schedule.png) | the 50-step schedule with the six CO3 steps zoomed and the branch's rules boxed | made before the loops; not part of this drain |
-| [co3-toy-corrector.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/co3-toy-corrector.png) | co3 toy corrector *(file name)* | made before the loops; not part of this drain |
+| [co3-toy-corrector.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/co3-toy-corrector.png) | co3-toy-corrector.png | made before the loops; not part of this drain |
 | [co3-weights.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/co3-weights.png) | equations 14 and 15 as a small network beside equation 15's curve | made before the loops; not part of this drain |
-| [plain-vs-co3.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/plain-vs-co3.png) | plain vs co3 *(file name)* | made before the loops; not part of this drain |
+| [plain-vs-co3.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/plain-vs-co3.png) | plain-vs-co3.png | made before the loops; not part of this drain |
+
+**`2-classifier-guidance/artifacts/scenes/co3-sampler/exact-plane/`: 4 files**
+
+| File | What it shows | Lands on |
+|---|---|---|
+| [co3-exact-plane.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/exact-plane/co3-exact-plane.png) | the flat sheet through the three Tweedie means at each of CO3's six steps, both pairs | made before the loops; not part of this drain |
+| [co3-path-difference.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/exact-plane/co3-path-difference.png) | relative gap between the CO3 and plain latents over 50 steps, both pairs, CO3's steps shaded | made before the loops; not part of this drain |
+| [co3-steps-cheetah-cougar.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/exact-plane/co3-steps-cheetah-cougar.png) | cheetah and cougar: four decoded guesses per CO3 step with distances and weights, and the finished pictures | made before the loops; not part of this drain |
+| [co3-steps-eagle-fox.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/exact-plane/co3-steps-eagle-fox.png) | eagle and fox: the same grid, smaller | made before the loops; not part of this drain |
 
 **`2-classifier-guidance/artifacts/scenes/co3-sampler/reference/`: 3 files**
 
 | File | What it shows | Lands on |
 |---|---|---|
-| [owner-annotated-progress-with-code-boxes.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/reference/owner-annotated-progress-with-code-boxes.png) | owner annotated progress with code boxes *(file name)* | made before the loops; not part of this drain |
-| [owner-network-weights-and-equations.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/reference/owner-network-weights-and-equations.png) | owner network weights and equations *(file name)* | made before the loops; not part of this drain |
-| [owner-network-with-rule-boxes.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/reference/owner-network-with-rule-boxes.png) | owner network with rule boxes *(file name)* | made before the loops; not part of this drain |
+| [owner-annotated-progress-with-code-boxes.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/reference/owner-annotated-progress-with-code-boxes.png) | owner-annotated-progress-with-code-boxes.png | made before the loops; not part of this drain |
+| [owner-network-weights-and-equations.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/reference/owner-network-weights-and-equations.png) | owner-network-weights-and-equations.png | made before the loops; not part of this drain |
+| [owner-network-with-rule-boxes.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/reference/owner-network-with-rule-boxes.png) | owner-network-with-rule-boxes.png | made before the loops; not part of this drain |
 
 **`2-classifier-guidance/artifacts/scenes/co3-sampler/source/`: 3 files**
 
 | File | What it shows | Lands on |
 |---|---|---|
-| [co3-algorithm-1-ddim-with-corrector.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/source/co3-algorithm-1-ddim-with-corrector.png) | co3 algorithm 1 ddim with corrector *(file name)* | made before the loops; not part of this drain |
-| [co3-algorithms-2-and-3-and-equation-15.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/source/co3-algorithms-2-and-3-and-equation-15.png) | co3 algorithms 2 and 3 and equation 15 *(file name)* | made before the loops; not part of this drain |
-| [co3-eagle-fox-seed-6001.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/source/co3-eagle-fox-seed-6001.png) | co3 eagle fox seed 6001 *(file name)* | made before the loops; not part of this drain |
+| [co3-algorithm-1-ddim-with-corrector.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/source/co3-algorithm-1-ddim-with-corrector.png) | co3-algorithm-1-ddim-with-corrector.png | made before the loops; not part of this drain |
+| [co3-algorithms-2-and-3-and-equation-15.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/source/co3-algorithms-2-and-3-and-equation-15.png) | co3-algorithms-2-and-3-and-equation-15.png | made before the loops; not part of this drain |
+| [co3-eagle-fox-seed-6001.png](../../../../2-classifier-guidance/artifacts/scenes/co3-sampler/source/co3-eagle-fox-seed-6001.png) | co3-eagle-fox-seed-6001.png | made before the loops; not part of this drain |
 
 **`2-classifier-guidance/artifacts/scenes/digit-map-checkers/miniature-page/`: 1 file**
 
