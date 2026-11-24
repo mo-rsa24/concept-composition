@@ -20,7 +20,7 @@ At the corrected steps the latent is 0.6% to 1.7% picture on SDXL's schedule. Th
 
 **The records reproduce the code.** From each pass's recorded latent, predictions and weights, the runner recomputes the next latent with the authors' formulas (`attn_utils.py`, resampler lines 194 to 198, corrector lines 251 to 257) and compares it with the latent the next pass actually received. A relative difference above 1% on any pass means the records do not describe what ran, and the figures are not drawn.
 
-**The weights the code uses.** The distance list that sets the weights is filled with one distance per subject on each pass and cleared at the end of the pass (`attn_utils.py` lines 187 and 209 in the resampler, 245 and 267 in the corrector), so each pass's weights come from that pass's two distances. The run recorded the weights the code returned on every pass: two per pass on all 80 passes.
+**The weights the code uses.** The distance list that sets the weights is filled with one distance per subject on each pass and cleared at the end of the pass (`attn_utils.py` lines 187 and 209 in the resampler, 243 and 267 in the corrector), so each pass's weights come from that pass's two distances. The run recorded the weights the code returned on every pass: two per pass on all 80 passes.
 
 ## What the run recorded
 
