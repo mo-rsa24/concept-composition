@@ -132,9 +132,10 @@ def main():
     ap.add_argument("--count", type=int, required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--tile", type=int, default=32)
+    ap.add_argument("--use-gpu", type=int, default=0, help="1 renders with Cycles on the GPU through CUDA")
     ours = ap.parse_args(argv)
 
-    args = generator.parser.parse_args(["--use_gpu", "0", "--render_tile_size", str(ours.tile)])
+    args = generator.parser.parse_args(["--use_gpu", str(ours.use_gpu), "--render_tile_size", str(ours.tile)])
     TARGETS[:] = parse_targets(ours.targets)
     generator.add_random_objects = place_objects
     folder = os.path.join(ours.out, ours.name)

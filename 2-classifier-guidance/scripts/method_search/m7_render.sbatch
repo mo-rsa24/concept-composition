@@ -38,8 +38,12 @@ echo "[$(date -u +%H:%M:%S)] job=${SLURM_JOB_ID:-none} node=$(hostname -s) threa
 # Jobs starting together can race on this shared disk, so the folder is retried until it is visible.
 for _ in 1 2 3 4 5 6; do mkdir -p "$OUT/$SET" 2>/dev/null; [ -d "$OUT/$SET" ] && break; sleep 5; done
 [ -d "$OUT/$SET" ] || { echo "ABORT: could not create $OUT/$SET"; exit 3; }
+if [ "${USE_GPU:-0}" = 1 ]; then
+  # Record whether Blender actually holds the card while it renders.
+  ( for _ in 1 2 3; do sleep 40; echo "GPUCHECK $(nvidia-smi --query-gpu=utilization.gpu,memory.used --format=csv,noheader -i 0) apps=$(nvidia-smi --query-compute-apps=process_name --format=csv,noheader -i 0 | tr '\n' ' ')"; done ) &
+fi
 "$BL" --background --python-exit-code 7 --threads "$THREADS" --python "$S" -- --name "$SET" --targets "$TARGETS" --seed-base "$BASE" \
-  --start "$START" --count "$COUNT" --out "$OUT" 2>&1 | grep --line-buffered -E 'M7RENDER|Traceback|Error:|error:'
+  --start "$START" --count "$COUNT" --out "$OUT" --use-gpu "${USE_GPU:-0}" --tile "${TILE:-32}" 2>&1 | grep --line-buffered -E 'M7RENDER|Traceback|Error:|error:|CUDA|cuda'
 rc=${PIPESTATUS[0]}
 MISSING=0
 for ((i = START; i < START + COUNT; i++)); do
