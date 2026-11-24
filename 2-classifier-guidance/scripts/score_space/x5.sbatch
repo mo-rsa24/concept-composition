@@ -47,7 +47,7 @@ case "$STAGE" in
     run small
     rc=$? ;;
   full)
-    for f in smoke control overfit; do
+    for f in smoke overfit; do   # the control reruns at full size inside the full stage (board question 74)
       "$PY" -c "import json,sys; sys.exit(0 if json.load(open('$RES/$f.json'))['pass'] else 1)" \
         || { echo "ABORT: ladder rung $f did not pass"; exit 13; }
     done

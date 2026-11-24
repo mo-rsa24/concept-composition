@@ -290,13 +290,17 @@ def stage_smoke(model, data, dev):
             "canvas_forwards_per_second": 1 / per_forward, "pass": finite}
 
 
-def stage_control(model, data, dev):
-    fit, read = subset(data["train"], 1000, 1), subset(data["seen_test"], 500, 2)
+def stage_control(model, data, dev, n_fit=1000, n_read=500, gate=None):
+    """gate: the rows that must reach MIN_CONTROL. Board question 74: in the full read only the canvas row gates."""
+    fit = subset(data["train"], n_fit, 1)
+    read = data["seen_test"] if n_read >= len(data["seen_test"]["x"]) else subset(data["seen_test"], n_read, 2)
     ff, rf = build(model, fit, FIT_SEED, [CONTROL_T], dev), build(model, read, READ_SEED, [CONTROL_T], dev)
     pair = ("signature", "canvas") if PROBE["kind"] == "conv" else ("signature", "canvas_full")
     res = {r: any_probe(r, row_input(ff, CONTROL_T, r), presence(fit), row_input(rf, CONTROL_T, r), presence(read), dev)[0]
            for r in pair}
-    res["pass"] = all(res[r]["presence"] >= MIN_CONTROL for r in pair)
+    gate = gate or pair
+    res["gate"] = list(gate)
+    res["pass"] = all(res[r]["presence"] >= MIN_CONTROL for r in gate)
     return res
 
 
@@ -348,16 +352,23 @@ def main():
     elif args.stage == "small":
         res = stage_read(model, data, dev, SMALL_FIT, SMALL_READ)
     else:
-        res = stage_read(model, data, dev, FIT_N, READ_N)
-        e, s = res["early"]["verdict"], res["sdxl"]["verdict"]
-        res["verdict"] = ("support" if e["passes"] else "support at SDXL's noise only" if s["passes"] else "null")
+        canvas_row = "canvas" if PROBE["kind"] == "conv" else "canvas_full"
+        control = stage_control(model, data, dev, FIT_N, READ_N, gate=(canvas_row,))
+        print("control at full size", json.dumps({k: v for k, v in control.items() if k != "gate"}, default=float), flush=True)
+        if not control["pass"]:
+            res = {"control": control, "verdict": "inconclusive: the canvas row missed the control at full size"}
+        else:
+            res = stage_read(model, data, dev, FIT_N, READ_N)
+            res["control"] = control
+            e, s = res["early"]["verdict"], res["sdxl"]["verdict"]
+            res["verdict"] = ("support" if e["passes"] else "support at SDXL's noise only" if s["passes"] else "null")
     res.update({"probe": args.probe, "stage": args.stage, "data_hash": data_hash, "model": str(args.model), "seconds": time.time() - t0,
                 "bars": {"min_presence": MIN_PRESENCE, "min_over_noise": MIN_OVER_NOISE, "min_control": MIN_CONTROL,
                          "overfit_right": OVERFIT_RIGHT}, "windows": WINDOWS, "fit_seed": FIT_SEED, "read_seed": READ_SEED})
     args.out.mkdir(parents=True, exist_ok=True)
     (args.out / f"{args.stage}.json").write_text(json.dumps(res, indent=1, default=float))
     print(args.stage, "done in", round(time.time() - t0, 1), "s", flush=True)
-    if args.wandb_name and args.stage == "full":
+    if args.wandb_name and args.stage == "full" and "early" in res:
         import wandb
         run = wandb.init(project="poe-repair-animals-compose", entity="prime_lab", name=args.wandb_name,
                          config={"stage": args.stage, "windows": WINDOWS, "data_hash": data_hash})

@@ -82,7 +82,7 @@ The window is a second axis, read as its own comparison: every row is run once i
 **The ladder.**
 
 1. **Smoke test.** One batch of 128 canvases through the signature at one step: shapes, finite values, and the measured time per forward pass, written to the review.
-2. **Positive control.** At timestep 100, where the canvas keeps 0.946 of its signal, the probe on the signature and on the noisy canvas must both reach presence accuracy of at least 0.9. Timestep 0 is not used, because the noise prediction on an almost clean canvas is near zero for every label. If either misses, the pipeline is broken and X5 is inconclusive.
+2. **Positive control.** At timestep 100, where the canvas keeps 0.946 of its signal, the probe on the noisy canvas must reach presence accuracy of at least 0.9, on the full read's 4,000 fitting and 2,000 reading canvases, as the first part of the full read (board question 74). The signature's value at timestep 100 is reported beside it and does not gate, because on a nearly clean canvas the label changes the prediction little. Timestep 0 is not used, because the noise prediction on an almost clean canvas is near zero for every label.
 3. **Overfit.** The probe fitted and read on the same 16 canvases must call at least 15 right.
 4. **1% of the data.** 40 fitting canvases and 20 reading canvases, to check the code end to end. It carries no verdict.
 5. **Full read.** Every row in both windows.
@@ -94,7 +94,7 @@ The window is a second axis, read as its own comparison: every row is run once i
 | Support | The bar holds in the early window |
 | Support at SDXL's noise only | The bar misses in the early window and holds in the SDXL-matched window |
 | Null | The positive control and the overfit test pass, and the bar misses in both windows |
-| Inconclusive | The positive control or the overfit test fails |
+| Inconclusive | The canvas row misses the positive control, or the overfit test fails |
 
 **Reported beside the bar, and not part of it.** The signature against the noisy canvas in each window, `apart` against `wrong`, the error readout, and the path length. A trained reader is only worth building if the signature beats the error readout, which needs no training, so the review states that gap.
 
