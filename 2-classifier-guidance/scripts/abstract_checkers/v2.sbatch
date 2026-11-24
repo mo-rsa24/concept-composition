@@ -9,6 +9,7 @@
 #   sbatch --export=ALL,SNAP=<snapshot> v2.sbatch <ladder|inner|final|rehearse-sdxl>
 # ladder: smoke test, overfit 16 examples, and 1% of the data. inner: the rehearsal on digits 0 to 4. final: reads unseen_test once.
 # rehearse-sdxl: the base map reader and the raw reader on the rehearsal split at SDXL's noise level (board question 64).
+# split-sdxl: a count checker and a digit-identity checker on the rehearsal split at SDXL's noise level (board question 67).
 set -uo pipefail
 STAGE=${1:?stage}
 ROOT=/datasets/mmolefe/poe_repair_min/loop-8
@@ -50,6 +51,9 @@ case "$STAGE" in
     rc=$? ;;
   rehearse-sdxl)
     run rehearse --data "$FULL" --out "$OUT/sdxl-window" --window sdxl
+    rc=$? ;;
+  split-sdxl)
+    run split --data "$FULL" --out "$OUT/sdxl-split" --window sdxl
     rc=$? ;;
   final)
     run final --data "$FULL" --out "$OUT/full" --ladder "$OUT/ladder" --wandb-name loop8-v2-final

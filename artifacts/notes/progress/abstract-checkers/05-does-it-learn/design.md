@@ -82,6 +82,34 @@ The first run read the toy's sampler steps 0 to 15, where the signal-to-noise ra
 
 **What would surprise.** `apart` against `wrong` still at chance at this window. The toy's own timestep 480 keeps about 31% of the signal amplitude, so a reader blind to digit identity there would point at the maps and not the noise.
 
+## Two checkers at SDXL's noise level (board question 67)
+
+The rehearsal at SDXL's noise level showed one checker learning where digits are and not which digits. The five-checker design already keeps these as two checkers, count and prompt match. This run trains them apart, so each faces only its own question.
+
+**Group.** Runs that try a new idea (group 2).
+
+**Varied axis.** The task each checker is trained on: count or identity. Data source, noise window, network, 4,000 updates, loss and scoring stay as in the rehearsal at SDXL's noise level.
+
+| Checker | Label 1 | Label 0 | Training mix | Bar on the pairs holding digit 4 |
+|---|---|---|---|---|
+| Count: two digits apart? | `apart` and `wrong` | `overlaid`, `same_half`, `single` | half label 1, half label 0 | balanced accuracy at least 0.75, and within 0.05 of the trained pairs |
+| Identity: are they the asked digits? | `apart` | `wrong` | `apart` and `wrong` canvases only, half each | balanced accuracy at least 0.75, the bar from board question 55 |
+
+**Data and window.** The rehearsal split at the 16 toy timesteps matching SDXL's noise (712 down to 480). Training uses the pairs among digits 0 to 3 with no digit 4 on any canvas, and scoring uses those pairs and the pairs holding digit 4. Digits 5 to 9 are not read.
+
+**Readers.** Each checker is trained as a map reader and as a raw reader, each with its own overfit check and the 1%-to-99% check on how often it calls label 1. The map reader decides each verdict.
+
+**Cost:** about 1 GPU-hour of this loop's 30: two map-reader trainings of 21 minutes at the measured 316 ms per update, about 7 minutes of scoring, and a few minutes for the raw readers and overfit checks. **Buys:** whether the count half of plurality carries over to a digit the checker never saw at SDXL's noise, and whether digit identity can be read there at all.
+
+| Result | Next |
+|---|---|
+| Count passes | V3 may run with the count checker, after the owner approves a read of digits 5 to 9 |
+| Identity passes | The identity checker joins the count checker as a second push in V3, after the same approval |
+| Count misses | The chain stays held and the result goes to the owner |
+| A map reader fails its overfit check | That checker's result is inconclusive until the cause is found |
+
+**What would surprise.** The identity checker staying at chance when it trains only on `apart` against `wrong`. Each wrong canvas swaps one asked digit for another, and at timestep 480 about 31% of the signal amplitude remains, so a reader blind to identity there would mean these noise levels hide which digit is which.
+
 ## What this cannot say
 
 These canvases are pasted MNIST digits, so a pass says the checker reads pasted digits under noise. Step V3 tests whether its gradient helps on what the sampler draws. The steps are very noisy (at timestep 999 about 0.6% of the signal amplitude remains), so the per-step scores matter as much as the pooled one.

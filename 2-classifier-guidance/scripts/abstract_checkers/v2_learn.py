@@ -134,6 +134,8 @@ def train(cfg, model, split, dev, updates=None, seed=0, batch=256, log_every=500
 
 
 def balanced(pred, y):
+    if not (y == 1).any() or not (y == 0).any():
+        return None
     return 0.5 * (float(pred[y == 1].mean()) + float((~pred[y == 0]).mean()))
 
 
@@ -165,7 +167,8 @@ def evaluate(head, cfg, model, split, dev, draws=4, batch=512):
         "per_step": [balanced(pred[:, s], y) for s in range(len(STEPS16))],
         "apart_vs_wrong_per_step": [balanced(pred[versus][:, s], y[versus]) for s in range(len(STEPS16))],
         "timesteps": STEPS16.tolist(),
-        "accuracy_by_kind": {k: float((pred[kind == j] == (y[kind == j][:, None, None] == 1)).mean()) for j, k in enumerate(KINDS)},
+        "accuracy_by_kind": {k: float((pred[kind == j] == (y[kind == j][:, None, None] == 1)).mean())
+                             for j, k in enumerate(KINDS) if (kind == j).any()},
         "by_pair": {f"{a}-{b}": balanced(pred[m], y[m]) for a, b in pairs
                     for m in [(split["asked"][:, 0] == a) & (split["asked"][:, 1] == b)]},
     }
@@ -290,6 +293,47 @@ def stage_rehearse(args, model, data, dev):
     save(args.out / "rehearse.json", result)
 
 
+def relabel(split, task):
+    """count: two digits apart, so apart and wrong are label 1. identity: apart (1) against wrong (0) only."""
+    if task == "count":
+        out = dict(split)
+        out["target"] = split["apart"].copy()
+        return out
+    if task == "identity":
+        return take(split, np.isin(split["kind"], [KINDS.index("apart"), KINDS.index("wrong")]))
+    raise ValueError(task)
+
+
+def stage_split(args, model, data, dev):
+    """Board question 67: a count checker and a digit-identity checker, each trained and scored on the rehearsal split.
+    Never reads digits 5 to 9. The count bar is V2's first two bars; the identity bar is board question 55's."""
+    tr0, seen0, unseen0 = inner_splits(data)
+    if set(np.unique(tr0["holds"]).tolist()) - {-1, 0, 1, 2, 3}:
+        raise SystemExit("inner training data holds a digit above 3")
+    result = {"window": args.window, "timesteps": STEPS16.tolist()}
+    for task in ("count", "identity"):
+        tr, seen, unseen = (relabel(s, task) for s in (tr0, seen0, unseen0))
+        res = {"train_canvases": len(tr["x"]), "train_label_1_share": float(tr["target"].mean()),
+               "test_canvases_holding_4": len(unseen["x"])}
+        for name, cfg in READERS.items():
+            fit = overfit_one(cfg, model, tr, dev)
+            head, info = train(cfg, model, tr, dev)
+            s, u = evaluate(head, cfg, model, seen, dev), evaluate(head, cfg, model, unseen, dev)
+            gap = abs(s["balanced_accuracy"] - u["balanced_accuracy"])
+            checks = {"holding_4_ba_at_least_0.75": u["balanced_accuracy"] >= MIN_BA}
+            if task == "count":
+                checks["gap_at_most_0.05"] = gap <= MAX_GAP
+            res[name] = {"cfg": cfg, "overfit": fit, **info, "inner_seen": s, "inner_unseen": u, "gap": gap,
+                         "checks": checks, "all": all(checks.values()), "trained": 0.01 < u["share_called_1"] < 0.99}
+            print(json.dumps({"task": task, "reader": name, "overfit": fit["right_of_16"], "seen_ba": s["balanced_accuracy"],
+                              "holding_4_ba": u["balanced_accuracy"], "gap": gap, "share_called_1": u["share_called_1"],
+                              "all": res[name]["all"]}), flush=True)
+        m = res["map"]
+        res["verdict"] = "inconclusive" if not m["overfit"]["pass"] else "pass" if m["all"] else "miss"
+        result[task] = res
+    save(args.out / "split.json", result)
+
+
 def stage_final(args, model, data, dev, data_hash):
     out = args.out / "final.json"
     if out.exists():
@@ -319,7 +363,7 @@ def stage_final(args, model, data, dev, data_hash):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("stage", choices=["smoke", "overfit", "small", "inner", "final", "rehearse"])
+    ap.add_argument("stage", choices=["smoke", "overfit", "small", "inner", "final", "rehearse", "split"])
     ap.add_argument("--window", choices=sorted(WINDOWS), default="early",
                     help="early: the toy's sampler steps 0 to 15; sdxl: the toy timesteps matching SDXL's steps 0 to 15")
     ap.add_argument("--model", type=Path, required=True)
@@ -342,7 +386,7 @@ def main():
         stage_final(args, model, data, dev, data_hash)
         return 0
     return {"smoke": stage_smoke, "overfit": stage_overfit, "small": stage_small, "inner": stage_inner,
-            "rehearse": stage_rehearse}[args.stage](
+            "rehearse": stage_rehearse, "split": stage_split}[args.stage](
         args, model, data, dev) or 0
 
 
