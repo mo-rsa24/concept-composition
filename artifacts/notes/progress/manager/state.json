@@ -1,5 +1,5 @@
 {
- "last_tick": "2026-11-24T16:25:00+02:00",
+ "last_tick": "2026-11-24T16:33:00+02:00",
  "last_alignment_round": "2026-11-24T16:10:00+02:00",
  "steps": {
   "P0": "done",
@@ -44,7 +44,7 @@
   "M6": "todo",
   "M8": "todo",
   "M4": "todo",
-  "M9": "todo",
+  "M9": "done",
   "M10": "todo",
   "D4": "todo",
   "E1": "todo",
@@ -57,8 +57,9 @@
   "Z4": "todo",
   "Z5": "todo",
   "Z6": "todo",
-  "N1": "doing",
-  "N2": "todo",
+  "N1": "done",
+  "N2": "doing",
+  "M11": "todo",
   "U1": "done",
   "U2": "done",
   "U3": "done",
@@ -171,15 +172,16 @@
   "75": "answered",
   "76": "answered",
   "77": "answered",
-  "78": "open",
+  "78": "answered",
   "79": "open",
   "80": "open",
-  "81": "open",
+  "81": "answered",
   "82": "answered",
-  "83": "open",
+  "83": "answered",
   "84": "answered",
-  "85": "open",
-  "86": "open"
+  "85": "answered",
+  "86": "open",
+  "87": "open"
  },
  "nudges": [
   {
@@ -200,6 +202,16 @@
    "to": "s8",
    "kind": "reviewer verdict fix",
    "question": 86
+  },
+  {
+   "time": "2026-11-24T16:30:00+02:00",
+   "to": [
+    "s6",
+    "s8",
+    "s10",
+    "s11"
+   ],
+   "kind": "decisions and re-routes"
   }
  ],
  "notifications": [
@@ -209,6 +221,13 @@
     "questions 78,79,80,81,83 open",
     "method review request s6 M9",
     "nine requests addressed to Loops 7 and 10"
+   ]
+  },
+  {
+   "time": "2026-11-24T16:34:00+02:00",
+   "about": [
+    "decided 83,78,81,85",
+    "owner-only 79,80,86,87"
    ]
   }
  ],
@@ -229,5 +248,45 @@
    "s11",
    "s12"
   ]
+ },
+ "decided": [
+  {
+   "q": 83,
+   "choice": "close M9 (A)"
+  },
+  {
+   "q": 78,
+   "choice": "Loop 6 runs it"
+  },
+  {
+   "q": 81,
+   "choice": "all ten defaults"
+  },
+  {
+   "q": 85,
+   "choice": "two of three; bar part to q87"
+  }
+ ],
+ "rerouted": {
+  "to_s8": [
+   220,
+   238,
+   244,
+   252
+  ],
+  "to_s11": [
+   221,
+   225,
+   245,
+   "251-s10"
+  ],
+  "fixed_by_s10": [
+   254
+  ]
+ },
+ "slow_compute_watch": {
+  "job": "94450",
+  "loop": "s12",
+  "submitted_utc": "2026-11-24T12:39:50"
  }
 }

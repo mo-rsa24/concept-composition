@@ -1,101 +1,113 @@
 # 🧭 Manager: where the loops stand
 
-This page is rewritten every hour by Loop 13 (owner code `s13`) from the progress board, the open
-questions, `requests.md`, the cluster queue and the list of live sessions. It decides nothing: every
-row either points at something you answer or reports what a loop's own files say. Paper 1 is experts
-that never met; Paper 2 is doing better than CO3 inside one model.
+Loop 13 rewrites this page every hour. It reads the progress board, the open questions, the requests
+between loops, the cluster and the live sessions, decides the questions it is allowed to decide for you,
+and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
+model.
 
-**Last tick:** 2026-11-24 16:25 (UTC+2). Board: 56 of 90 steps done, 6 in progress.
+**Last tick:** 2026-11-24 16:33 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
-- [For you to answer](#for-you-to-answer)
+- [Decided for you, and still for you](#decided-for-you-and-still-for-you)
 - [Where each loop is](#where-each-loop-is)
+- [Resources](#resources)
 - [Things that may be wrong](#things-that-may-be-wrong)
 - [Alignment](#alignment)
-- [Nudges and requests sent](#nudges-and-requests-sent)
+- [Nudges, requests and decisions sent](#nudges-requests-and-decisions-sent)
 - [Requests waiting](#requests-waiting)
 - [Last tick](#last-tick)
 
-## For you to answer
+## Decided for you, and still for you
 
-Seven board questions are open. Answer with `python3 scripts/progress_board.py answer <number> "<answer>"`,
-or in chat to the loop that asked.
+### Decided for you since you last looked
 
-| # | Asked by | The question, in one line | Default if you say nothing | Open for |
+Each was reversible, inside the asking loop's budget, and changed no recorded bar or verdict. To
+overrule one, answer it again: `python3 scripts/progress_board.py answer <number> "<your answer>"`.
+
+| # | The question | Decided | Why |
+|---|---|---|---|
+| 83 | Should Loop 6 close its test of whether drawing each subject in its own region stops borrowed parts, after three tries missed? | **Close it**, reporting what it found | Loop 6's own [method review](../method-search/04-bind-each-body/method-review.md) and the [reviewer](../reviewer/2026-11-24-review.md#loop-6-find-the-best-method) agree: every try split the picture using a signal that had not yet separated the two subjects, and a fourth would cost about 4.9 GPU-hours without fixing that. Costs nothing. |
+| 78 | Who runs Loop 10's small digit test of whether the experts' vote beats simply pasting their samples, for Paper 1? | **Loop 6**, after its current step | About 0.3 GPU-hours inside Loop 6's budget, and it adds the paste comparison the reviewer finds Paper 1's tests lack. |
+| 81 | Loop 11's ten format conflicts on the 48 method and finding pages it wrote | **All ten of its defaults** | None changes a recorded number or verdict; where two verdicts exist both stay side by side. The reviewer found Loop 11's work sound. No GPU. |
+| 85 | The reviewer's fixes for Loop 6's search for the best checker | **Yes to two of three**: first check whether the checker can tell CO3's clean pictures from its borrowed-part ones at each step (about 1.2 GPU-hours), and give the two-colour CLEVR test a paste comparison (CPU only) | Both are reversible and inside budget. The third fix changes how Loop 6 is judged, so it is yours, as question 87. |
+| none | Eight requests were addressed to Loops 7 and 10, which have stopped | **Re-routed**: four to Loop 8, four to Loop 11 | Each corrects a page that disagreed with what ran; no result changes. A ninth, on numbers in Loop 10's digit-signal review, Loop 10 fixed itself (commit `77cf7bb7`: five copying slips corrected to match its result file, verdict unchanged). |
+
+### Still for you
+
+Newest first. A default happens only if you answer with it; nothing changes while a question waits.
+
+| # | The question, in one line | Why it is yours | Default | Waiting |
 |---|---|---|---|---|
-| 86 | Loop 13, from the reviewer | Rewrite Loop 8's SDXL test (V4) to push an identity checker on CO3's own trajectory and judge it against CO3 alone by Paper 2's bar, starting once M5 lands instead of waiting for D3? About 6 GPU-hours, as budgeted | Loop 8 continues unchanged | just filed |
-| 85 | Loop 13, from the reviewer | Before Loop 6's next comparisons, check whether its checker tells CO3's clean pictures from its borrowed-part ones at each step (about 1.2 GPU-hours), judge on two clear subjects with style ignored, and add a paste row to the two-colour CLEVR test? | Loop 6 continues unchanged | just filed |
-| 83 | Loop 6 | Paper 2's region-per-subject test (M9) failed its second region reader too (10 of 24 reads against a limit of 6): close it, try one last reader from Loop 10's per-subject signal, or take boxes from Be Decisive? | close M9, reporting the first rung and the two failed readers; no cost | 1 h 39 min |
-| 81 | Loop 11 | Ten points where the pillar formats conflict on the 48 pages Loop 11 wrote (page shape for `context/methods/`, commands on method pages, picture width, verdict words, cards for loop pictures and five more): take all ten defaults or name the ones to change? | all ten defaults as listed on the board | 3 h 12 min |
-| 80 | Loop 10 | Who runs the test where the checker picks CO3's weight sharpness at each corrected step (`score-space/11-the-checker-chooses-on-co3.md`), and at which size first? | Loop 6 runs the 6-pair first read, about 3.1 GPU-hours, and adds the rest only if the checker leads CO3 alone by 5 of 96 | 3 h 45 min |
-| 79 | Loop 11 | Loop 9's sentence-score test has two recorded verdicts (null on three properties in its own review, inconclusive in the later fairness test): which goes on the report finding's title line? | keep the test's own verdict on the title, and give the fairness test its own finding beside it | 4 h 53 min |
-| 78 | Loop 10 | Who runs Paper 1's short digit ablation of the experts' vote, with and without the corrector, beside sample-and-paste (`score-space/10-paper-1-placement-or-sampler.md`, about 0.3 GPU-hours)? | Loop 6 adds it as one Paper 1 step after the CLEVR paste test, on plan 33's settings, seeds 192 to 255 | 5 h 20 min |
+| 87 | Should Loop 6's search for the best Paper 2 checker be judged on "two clear subjects, drawing style ignored" (CO3 alone scores 32 of 96) instead of "faithful pairs", which also fails a picture for being a drawing (73 of CO3's 96 fail mostly that way)? | changes a recorded bar | keep faithful pairs | 6 min |
+| 86 | Should Loop 8's planned SDXL test be rewritten to push an identity checker on CO3's own run and be judged against CO3 alone, instead of counting bodies against the plain product, which CO3 already beats? | changes a recorded bar; about 6 GPU-hours | Loop 8 continues unchanged | 9 min |
+| 80 | Should a checker choose CO3's weight-sharpness setting at each of its corrected steps ([design](../score-space/11-the-checker-chooses-on-co3.md))? First read on 6 of 12 pairs | over 3 GPU-hours on one run (about 3.1) | Loop 6 runs the first read | 4 h 8 min |
+| 79 | Loop 9's test of whether sentence scores read a picture's properties has two recorded verdicts (null in its own review, inconclusive in a later fairness test). Which leads the report's title? | two records disagree | keep the test's own verdict, give the fairness test its own finding | 5 h 16 min |
+| none | Loop 10 is closed, but four of its steps (training and testing the shared spaces, and its verdict, which is written) stay open on the board, so the board counts it unfinished | changes another loop's step state | none set | since 10:34 |
+| none | Two Loop 4 sessions are alive and idle; only one should keep the targets current | stopping a session | none set | since 16:04 |
 
-Your own step C2 (confirm the draft statements from your readings) is ready on the board.
+Your own reading step (confirm the draft statements from your readings) is ready on the board.
 
 ## Where each loop is
 
-<a href="loops-and-blockers.png"><img src="loops-and-blockers.png" width="200" alt="Each watched loop as a box, with arrows from your open questions to the steps they hold, cluster jobs in blue, and the nine stranded requests to Loops 7 and 10 dashed grey."></a>
+<a href="loops-and-blockers.png"><img src="loops-and-blockers.png" width="200" alt="Each watched loop as a box, with arrows from your open questions to the work they hold, cluster jobs in blue, and stranded requests dashed grey."></a>
 
-Estimated finish is the range `session_status.py` prints from the 51 finished steps: the low end at
-the fastest step pace seen, the high end at the slowest. Session state is from the live session list.
+The finish range is `session_status.py`'s, from the 52 finished steps: fastest pace seen to slowest.
 
-| Loop | Now on | Steps left | Estimated finish | Session | What blocks it |
+| Loop | Doing now, and why | Steps left | Estimated finish | Session | Held by |
 |---|---|---|---|---|---|
-| 4. Rivals and targets | K6, keeping every target current: recorded the CLEVR paste result and folded the two-colour CLEVR test into the CLEVR plan at 15:46 | 1 | 29 min to 23.5 h | idle (two Loop 4 sessions are alive, see below) | nothing now; K6 closes only after the paper tables E1 and E2, which have not started |
-| 6. Best method | M5, balancing the checker's training pictures across pairs; jobs 94473 and 94474 wait for a GPU | 10 | 4.8 h to 233.1 h | busy | question 83 holds M9; D3 waits on M5; five CLEVR two-colour render jobs (94548 to 94552) are queued for M10 |
-| 7. Abstract-checker papers | all three steps done | 0 | done | idle | nothing; the loop has finished |
-| 8. Abstract checkers | V6, whether a checker reads which digits are present: support on digit 4 (0.888) and digits 5 to 9 (0.861, bar 0.75); two robustness jobs 94471 and 94472 running | 3 | 2.4 h to 112.2 h | busy | V4 (the SDXL test) waits on Loop 6's D3, which waits on M5 |
-| 10. Score path | closed by the owner on question 76; X6 to X9 still open on the board | 4 on the board | none | idle | the board, see [things that may be wrong](#things-that-may-be-wrong) |
-| 11. Drain into the pillars | Y4, the pillar checks over its 48 new pages | 2 | 58 min to 43.7 h | idle | question 81 |
-| 12. Where CO3 leaks | Z2, what predicts which pairs borrow parts: the predictor pass you approved on question 82 is queued as job 94534; job 94450 is on hold | 5 | 2.4 h to 114.2 h | busy | a free GPU for job 94534 |
+| 4. Rivals and targets | Keeping every target current. It recorded the CLEVR paste result and placed the two-colour CLEVR test in the CLEVR plan. | 1 | none useful: it ends after the paper tables, which have not started | idle (two sessions) | nothing |
+| 6. Best method | Training two checkers on differently balanced lists of training pictures, to learn which list Paper 2's checker should use (step M5). The training failed twice within 3 minutes and is running again. Two-colour CLEVR renders for Paper 1 run beside it. | 10 | 4.7 h to 232.7 h | busy | its own training job; question 87 decides how the result is judged |
+| 7. Abstract-checker papers | Finished. | 0 | done | idle | nothing |
+| 8. Abstract checkers | Checking that its digit checker really reads which digits are present: a second seed passed (0.877 balanced accuracy on unseen digit 4, bar 0.75; 0.5 is chance) and a shuffled-label control is scoring. | 3 | 2.4 h to 111.5 h | busy | the SDXL test waits on Loop 6's training list and on question 86 |
+| 11. Drain into the pillars | Auditing the 48 pages it wrote against the pillar formats. | 2 | 57 min to 43.4 h | idle | nothing since question 81 was decided |
+| 12. Where CO3 leaks | Measuring what predicts which animal pairs borrow each other's parts under CO3. Its small first read finished in 16 minutes; the main pass waits for a node. | 5 | 2.4 h to 113.9 h | busy | a free node for job 94450 |
+
+## Resources
+
+Read at 16:28 from `squeue`, `sacct`, `sinfo` and `sinfo -R`.
+
+| What | Now |
+|---|---|
+| Our jobs against the caps | 2 running on `bigbatch` of 6 allowed (Loop 6's checker training, Loop 8's identity check); 0 on `biggpu` of 1 allowed; 8 queued |
+| Longest wait | Loop 12's main predictor pass (job 94450, 4-hour limit): about 1 h 50 min, waiting for resources |
+| Nodes out of service | `bigbatch`: 12 down and 5 drained of 48. `biggpu`: 2 down and 2 drained of 7, including mscluster108 and mscluster111, drained at 09:27 and 09:10 today after a failed job kill |
+| Idle capacity | none on either partition; every working node is allocated |
+| Compute against budget since 2026-11-21 | Loop 6: 53.4 node-hours of 87 (34.8 were CLEVR renders that may have used no GPU). Loop 8: 11.9 of 30. Loop 12: about 0.4, no total set. Slurm here records no GPU count, so these are node-hours, an upper bound |
+
+**What would make the queue move faster:** nothing within our control right now. There is no idle
+`biggpu` card to move to, and the drained nodes need the administrator.
 
 ## Things that may be wrong
 
-Newest first. Cluster times are converted from the cluster's UTC clock to local time (UTC+2). Read
-from `squeue` and `sacct` on 2026-11-24 at 16:09.
+Newest first.
 
 | Concerns | Finding | Source |
 |---|---|---|
-| Loops 7 and 10 | **Nine waiting requests address loops that will not act.** Four lines ask Loop 7 (finished) and five ask Loop 10 (closed) to correct their own records; see [requests waiting](#requests-waiting). Someone has to own them. | `requests.md` |
-| Loop 6 | **A run of bad results on M9**, the test of whether giving each subject its own region fixes identity. Rung 1 gave "regions without names" with all 8 clear pairs damaged, then both region readers missed their limit of 6 failed mask reads: 11 of 24, then 10 of 24. A method review request went to Loop 6 at 16:09, scoped to M9; Loop 6 answered at 16:11 with [its method review](../method-search/04-bind-each-body/method-review.md), recommends question 83's option A, and starts no M9 run before you answer (see [nudges and requests sent](#nudges-and-requests-sent)). | [the region review](../method-search/04-bind-each-body/review.md), board question 83 |
-| Loop 6 | **M10 work before its step starts.** Five CLEVR two-colour render jobs (94548 to 94552) were submitted at 15:33 while M10 shows `todo` and M5 is Loop 6's step in progress. | `squeue`, board |
-| Loop 6 | **M6 still open.** Your answer to question 84 closes M6 as not run and puts M10 before M4. The board still shows M6 as `todo`, and M4 still waits on M6 rather than M10. Loop 6 was told in `requests.md` at 15:48. | board, question 84 |
-| Loop 4 | **Two Loop 4 sessions are alive,** one started about 3 hours ago and one about 20 minutes ago. Both are idle. Only one should be working K6. | live session list |
-| Loop 10 | **Closed, but four steps still open on the board.** You closed Loop 10 on question 76 and skipped X6 to X8, and its verdict (`score-space/09-verdict.md`) meets X9's proof. The board holds X6 to X9 as `todo` because X9 needs X8. While they stay open, Loop 10 counts as unfinished and this loop cannot reach its stop condition. | board, question 76 |
-| Loop 4 | **K6 has run 53.9 hours,** longer than any finished step (23.5 hours). It is a standing step that closes only after the paper tables E1 and E2, so this is by design, and its estimated finish is meaningless until E1 starts. | `session_status.py` |
-| Loops 6 and 8 | **Failed jobs in the last 24 hours, each followed by a rerun that finished.** Loop 6: 7 failed and 4 cancelled across the CLEVR paste test (renders, data, training: 93715, 93718, 93965, 93988, 94046, 94448), M9 (93719, 93936, 94380, 94381) and M1 (93687). Loop 8: 94115 (V3) and 94337 (V6, after 38 minutes). No time-outs or out-of-memory ends for any watched loop. | `sacct` |
-| Loops 6 and 8 | **Compute against budget,** counted as node-hours since 2026-11-21, because Slurm here records no GPU count and each job holds one node. Loop 6: 53.4 of its 87-hour limit, of which 34.8 were CLEVR render jobs that may have run on CPU. Loop 8: 11.9 of its 30-hour limit. Loop 12: 0.1; its prompt sets no total. | `sacct`, session prompts 6 and 8 |
+| Loop 6 | **The checker training failed twice in 3 minutes** (jobs 94473 and 94474) before the current run (94579) started. | `sacct` |
+| Loop 12 | **The main predictor pass has waited about 1 h 50 min** for a node; it becomes slow compute at 2 hours. | `squeue` |
+| Loops 6 and 8 | **A run of bad results, now reviewed.** Loop 6's region test missed three times in a row and Loop 8's misses shared a cause. Both answered their reviews within minutes and corrected their records and pictures (Loop 6 commit `f29cf613`, Loop 8 commit `8c310b3a`). | [the review](../reviewer/2026-11-24-review.md) |
+| Loop 6 | **A closed step is still open on the board.** Your answer to question 84 closed the small CLEVR test (step M6) as not run, but the board still shows it to do, and the go or no-go still waits on it. | board, question 84 |
+| Loop 10 | **Closed, but four steps open on the board** (listed under Still for you). | board, question 76 |
+| Loop 4 | **The standing step has run 54 hours**, longer than any finished step (23.5 hours). It ends only after the paper tables, by design. | `session_status.py` |
+| Loops 6 and 8 | **Failed jobs in the last 24 hours, each followed by a rerun that finished**: Loop 6, 9 failed and 4 cancelled; Loop 8, 2 failed. No time-outs or out-of-memory ends. | `sacct` |
 
-Nothing found for: jobs queued over 2 hours (the oldest pending, Loop 12's 94534, has waited about
-50 minutes for a free GPU), jobs running past twice their estimate, steps in progress with nothing
-running for them, or new rows on the void list (unchanged since 2026-11-22).
+Nothing found for: jobs running past twice their estimate, steps in progress with nothing running for
+them, or new rows on the void list (unchanged since 2026-11-22).
 
 ## Alignment
 
-Round 1, 2026-11-24 16:10. The intents are the paragraphs in
-[the alignment check](../score-space/13-alignment-check.md), collected this morning. This round
-compares them with each loop's reviews and board notes since then.
+Round 1, 2026-11-24 16:10, against the intents in [the alignment check](../score-space/13-alignment-check.md).
 
-| Loop | Still working towards its intent? | The fact that shows it |
-|---|---|---|
-| 4. Rivals and targets | yes | It said Paper 1 needs a target where pasting fails. The two-colour CLEVR test, where neither expert is told where to draw, is now Stage 2 of [the CLEVR plan](../targets/clevr-scaling-plan.md). |
-| 6. Best method | partly | The checker search has only just started (M5 at 14:31). Paper 2's region test failed its second reader ([the region review](../method-search/04-bind-each-body/review.md)), while Paper 1's [two-colour test](../method-search/05-two-experts-by-colour/design.md) removes what pasting needs, the gap the morning check named. |
-| 7. Abstract-checker papers | yes, finished | U1 to U3 are done; the five-checker design is in `abstract-checkers/03-design.md`. |
-| 8. Abstract checkers | partly | The digit half holds: the identity checker reads unseen digits at 0.888 and 0.861 against 0.75 ([the identity review](../abstract-checkers/10-reading-identity/review.md)). The SDXL half has not started. |
-| 10. Score path | closed | Its verdict is written (`score-space/09-verdict.md`); the open steps are a board record, not work. |
-| 11. Drain into the pillars | yes | [Its checks page](../drain/04-checks.md) audits the 48 pages it wrote (34 under `context/methods/`, 14 in `report/`), the work its brief asks for. |
-| 12. Where CO3 leaks | yes | [Its method candidates](../leakage/04-paper-2-method.md) keep your constraint: no change to SDXL's weights, one trajectory per seed, best-of-N only as a baseline. |
-
-**The reviewer's verdicts**, from [the 2026-11-24 review](../reviewer/2026-11-24-review.md), run on Loops 6 and 8 at the owner's request:
-
-| Loop | Verdict | Why |
-|---|---|---|
-| 6. Best method | fix | The checker search still judges two separate bodies, which CO3 already draws in 96 of 96, and nothing shows the checker sees CO3's borrowed parts at the steps where it pushes; the two-colour CLEVR test has no paste row. |
-| 8. Abstract checkers | fix | V6 repairs the identity miss, but V7 keeps the scoring behind most of V5's null, and V4 tests counting against the plain product when Paper 2's open failure is identity against CO3. |
-
-Loops 4, 11 and 12 are reviewed on the next 24-hour pass.
+| Loop | Still working towards its intent? | Reviewer | The fact that shows it |
+|---|---|---|---|
+| 4. Rivals and targets | yes | next pass | It said Paper 1 needs a test where pasting fails; the two-colour CLEVR test is now in [the CLEVR plan](../targets/clevr-scaling-plan.md). |
+| 6. Best method | partly | **fix** | The checker search still aims at drawing two separate bodies, which CO3 already does in 96 of 96 pictures, while CO3's real failure is borrowed parts ([review](../reviewer/2026-11-24-review.md#loop-6-find-the-best-method)). |
+| 7. Abstract-checker papers | yes, finished | not reviewed | Its three steps are done; the five-checker design is in `abstract-checkers/03-design.md`. |
+| 8. Abstract checkers | partly | **fix** | The digit half holds (0.861 on unseen digits 5 to 9 against 0.75), but its SDXL test counts bodies against the plain product, not identity against CO3 ([review](../reviewer/2026-11-24-review.md#loop-8-test-abstract-checkers)). |
+| 10. Score path | closed | not reviewed | Its verdict is written (`score-space/09-verdict.md`). |
+| 11. Drain into the pillars | yes | **continue** | [Its checks page](../drain/04-checks.md) covers all 48 pages it wrote, with 15 of 28 findings fixed. |
+| 12. Where CO3 leaks | yes | next pass | [Its method candidates](../leakage/04-paper-2-method.md) keep your constraints: SDXL's weights untouched, one run per seed, best-of-N only as a baseline. |
 
 **Loop 11's intent, written by Loop 13 from its brief for you to correct.** Loop 11 takes the
 diagrams, picture sheets and results the research loops produce, which sit in their own notes folders
@@ -103,43 +115,34 @@ where no pillar page shows them, and drains them into `report/` and `context/`: 
 pillar formats, explained from the overview down to each part, in organised folders of numbered pages.
 It took this over from Loops 2 and 3, which have stopped.
 
-## Nudges and requests sent
+## Nudges, requests and decisions sent
+
+Newest first.
 
 | Time | To | What and why |
 |---|---|---|
-| 2026-11-24 16:25 | Loop 6 | **Reviewer verdict: fix**, pointing at the review file and board question 85. Also one line in `requests.md`. |
-| 2026-11-24 16:25 | Loop 8 | **Reviewer verdict: fix**, pointing at the review file and board question 86. Also one line in `requests.md`. |
-| 2026-11-24 16:09 | Loop 6 | **Method review request on M9**, after three misses in a row (above). Asks Loop 6 to pause new M9 runs, but not M5's training or the CLEVR renders, and to write a short review in its folder answering five things: what the misses share, which unread papers bear on them, whether another loop's results explain them, whether M9 is still worth its cost for Paper 2, and what it would change. It names four results from other loops: Loop 8's identity read working in the later window but not the early one, Loop 9's finding that SDXL's own features read where sentence scores do not, the DAAM attention-overlap result from Loop 12's reading, and Loop 10's per-subject signal (question 83's option B). Also one line in `requests.md`. **Answered** at 16:11 (commit `d0d65be7`): all three misses separate the subjects with a signal that has not separated them yet, six unread papers are named, and M9 in its current form is judged not worth its 4.8 GPU-hours. |
+| 16:30 | Loop 10 | Its question 78 is decided; its open requests are re-routed. |
+| 16:30 | Loop 8 | Four requests re-routed from Loop 7, with leave to mark the design lines that disagree with what ran as superseded, keeping the old wording visible. |
+| 16:30 | Loop 11 | Question 81 decided (all ten defaults); four requests re-routed from Loop 10. |
+| 16:30 | Loop 6 | Questions 83, 78 and 85 decided; question 87 left with you, so its bar stands until then. |
+| 16:25 | Loop 8 | **Reviewer verdict: fix**, with the review and question 86. |
+| 16:25 | Loop 6 | **Reviewer verdict: fix**, with the review and question 85. |
+| 16:09 | Loop 6 | **Method review request** on the region test after three misses; answered at 16:11 with [its method review](../method-search/04-bind-each-body/method-review.md). |
 
 ## Requests waiting
 
-Read from `requests.md` at 277 lines. Of the 158 lines addressed to a watched loop, 49 were acted on,
-93 asked nothing, and these 15 wait. Each time is the commit that added the line. Line numbers are
-`requests.md`'s.
+Read from `requests.md` at 16:15 (277 lines then). Of the 158 lines addressed to a watched loop, 49 had
+been acted on, 93 asked nothing, and 15 waited. Nine of those were re-routed or fixed this tick
+(above). Still waiting:
 
 | Line | To | From | Added | The request | Why it still waits |
 |---|---|---|---|---|---|
-| 127 | Loop 4 | Loop 4 | 11-23 13:54 | Make the scoreboard count a win against the best finished rival rerun, with the printed bar beside it (question 47). Repeated as item 2 of line 269. | `beaten()` in `~/.claude/skills/session-status/scripts/progress_views.py` still compares only with the printed or reproduced target. Not due: `scoreboard.json` has no score of ours yet. |
-| 133 | Loop 4 | Loop 6 | 11-23 14:51 | Write question 53's decision (abstract checkers belong in Paper 2) into `problem-statements.md` and the two-paper route, "once a result exists". | Neither file mentions it. Unclear whether it is due: the digit results exist, the SDXL test has not run. |
-| 220 | Loop 7 | Loop 8 | 11-24 11:38 | Bring four lines of `abstract-checkers/03-design.md` (push window, right-digit scoring, definition of null, third bar) in line with what Loop 8 ran, or mark them superseded. | The lines are unchanged; Loop 7 has finished. |
-| 221 | Loop 10 | Loop 8 | 11-24 11:38 | `score-space/02-the-loops/loop-8-test-abstract-checkers.md` still says "cap at 0.4" (lines 68 and 122) though the picture was redrawn without a cap. | Unchanged; Loop 10 is closed. |
-| 225 | Loop 10 | Loop 11 | 11-24 11:38 | Redraw `score-space/05-signal/what-each-probe-reads.mmd` to show the convolutional probe that ran and the right pooled sizes. | Still says "linear probe per digit"; Loop 10 is closed. |
-| 238 | Loop 7 | Loop 8 | 11-24 14:14 | `03-design.md` line 69 says each map adds to 1; `v2_learn.py` makes it add to 2,048. | Unchanged; Loop 7 has finished. |
-| 239 | Loop 11 | Loop 8 | 11-24 14:14 | Pass on to whoever drew `annotated-overviews/loop-8.png` that its push window should read steps 15 to 25 and b fixed at 0.4. | No later line or check mentions it. |
-| 244 | Loop 7 | Loop 11 | 11-24 14:14 | Settle five disagreements between Loop 7's design and the word-map checker pages; fix `wm6`'s prompt and the laptop path in `check_pages.py`. | Nothing committed to those files since 11-23; Loop 7 has finished. |
-| 245 | Loop 10 | Loop 11 | 11-24 14:14 | Fix stale items in Loop 10's score-path pages (`00-ladder/NOTATION.md` line 12, README lines 27 and 62, the old window). | Unchanged; Loop 10 is closed. |
-| 247 | Loop 11 | Loop 4 | 11-24 14:14 | Commit the morning cross-reference links. | Four files with the links are still uncommitted. |
-| 251 | Loops 6 and 10 | Loop 11 | 11-24 14:14 | Backlinks from Loop 6's M1 and M9 designs to the three method-search findings, and from `score-space/04-design.md` to the score-path finding. | No such links; Loop 6 edited the M9 design at 14:11 without one. |
-| 252 | Loop 7 | Loop 8 | 11-24 14:14 | Backlinks in `03-design.md` from V2, V3 and V5 to the three digit-checker findings. | None; Loop 7 has finished. |
-| 254 | Loop 10 | Loop 11 | 11-24 14:14 | Make `score-space/05-signal/review.md` lines 36 to 42 match `full.json` (it prints 0.576 at t 480). | Unchanged; Loop 10 is closed. |
-| 269 | Loop 4 | Loop 4 | 11-24 15:46 | Four tasks carried from the Loop 4 session that ended. | Item 1 is done; item 2 is line 127; item 3 is not due; item 4 (read questions 78 and 79) cannot be checked from files. |
-| 273 | Loop 11 | Loop 4 | 11-24 15:58 | Commit the afternoon cross-reference pass, 11 links and 11 backlinks. | The files are still uncommitted. |
-
-**Nine of these lines are addressed to a loop that will not act on them.** Lines 220, 238, 244 and 252
-wait on Loop 7, which has finished; lines 221, 225, 245, 254 and Loop 10's half of 251 wait on Loop
-10, which is closed. They correct records (a design page, a review's numbers), so someone has to own
-them. This is yours to assign; it is listed under things that may be wrong.
+| 127 and 269 | Loop 4 | Loop 4 | 11-23 13:54 | Make the scoreboard count a win against the best finished rival rerun (your question 47). | Not due: no score of ours exists yet. |
+| 133 | Loop 4 | Loop 6 | 11-23 14:51 | Write your decision that abstract checkers belong in Paper 2 into the problem statements and the two-paper route, once a result exists. | Unclear whether due: digit results exist, the SDXL test has not run. |
+| 239 | Loop 11 | Loop 8 | 11-24 14:14 | Pass on to whoever drew `annotated-overviews/loop-8.png` that its push window and push length are wrong. | No later line mentions it. |
+| 247 and 273 | Loop 11 | Loop 4 | 11-24 14:14 and 15:58 | Commit the cross-reference links written this morning and afternoon. | The files are still uncommitted. |
+| 251 | Loop 6 | Loop 11 | 11-24 14:14 | Backlinks from Loop 6's first-test and region-test designs to the three method-search findings. | No such links yet. |
 
 ## Last tick
 
-2026-11-24 16:25. Next tick about 17:06.
+2026-11-24 16:33. Next tick about 17:06.
