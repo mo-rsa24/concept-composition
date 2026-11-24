@@ -1,5 +1,5 @@
 {
- "last_tick": "2026-11-24T17:03:00+02:00",
+ "last_tick": "2026-11-24T17:08:00+02:00",
  "last_alignment_round": "2026-11-24T16:10:00+02:00",
  "steps": {
   "P0": "done",
@@ -91,7 +91,7 @@
   "Y1": "done",
   "Y2": "done",
   "Y3": "done",
-  "Y4": "doing",
+  "Y4": "done",
   "Y5": "todo"
  },
  "questions": {
@@ -324,6 +324,11 @@
    "what": "bring question 80 back to the owner",
    "when": "Loop 6's per-step read on CO3 is scored (jobs 94593, 94594; method-search/01b-balance-the-checker-data/)",
    "set": "2026-11-24T16:58:00+02:00"
+  },
+  {
+   "what": "tell the owner to restart Loop 11",
+   "when": "Loop 8's identity step V6 or Loop 6's two-colour CLEVR test M10 is done",
+   "set": "2026-11-24T17:08:00+02:00"
   }
  ]
 }
