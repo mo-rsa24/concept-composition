@@ -1,0 +1,21 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef fits fill:#ebfbee,stroke:#2b8a3e,stroke-width:2px,color:#111111
+  classDef breaks fill:#fff5f5,stroke:#c92a2a,stroke-width:2px,stroke-dasharray:5 4,color:#111111
+  classDef base fill:#fff9db,stroke:#e67700,stroke-width:2px,color:#111111
+
+  subgraph CHAIN["Your intended chain: one seed, one trajectory, SDXL weights untouched"]
+    S["one seed's<br/>starting noise"]:::plain --> C["CO3 step<br/>(joint prompt,<br/>pushes off each concept)"]:::plain
+    C --> R["a trained checker<br/>reads this step"]:::plain
+    R --> K["steer this step:<br/>gradient push, or<br/>set CO3's own knobs"]:::plain
+    K -->|"next step"| C
+    K --> F["one faithful pair:<br/>right count, binding,<br/>identity"]:::plain
+  end
+
+  A1["checker sets CO3's beta<br/>each step (question 80)"]:::fits -.->|fits| K
+  A2["Bounded Attention<br/>(Loop 12, Z3)"]:::fits -.->|fits| C
+  A3["CO3 + kept push:<br/>7 vs 11 of 96"]:::fits -.->|"fits, measured,<br/>lost"| K
+  B1["4 CO3 runs, keep one<br/>(question 80, row 4)"]:::base -.->|"baseline only"| F
+  B2["NoisyCLIP ranks seeds"]:::base -.->|"baseline only"| S
+  X1["identity reward LoRA"]:::breaks -.->|"breaks: retrains SDXL"| C

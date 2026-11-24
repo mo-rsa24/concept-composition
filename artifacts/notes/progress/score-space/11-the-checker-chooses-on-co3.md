@@ -15,7 +15,7 @@ Every push aimed at which body is which has given nothing on CO3: adding the kep
 | 1. CO3 alone | M1's row 1, reused: 11 faithful pairs of 96 | the baseline |
 | 2. The checker chooses each step | 4 values of $\beta$ at each corrected step, keep the highest clean-pair logit | the method |
 | 3. A random candidate each step | the same 4 candidates, one kept at random | 2 against 3: does the checker's pick matter, or only the extra noise? |
-| 4. Choose once per picture | 4 CO3 runs from the same seed, one per value of $\beta$, run to step 15; the checker keeps one, which finishes | 2 against 4: does choosing at every step beat one choice of $\beta$ per picture? |
+| 4. Choose once per picture, a baseline only | 4 CO3 runs from the same seed, one per value of $\beta$, run to step 15; the checker keeps one, which finishes | 2 against 4: does choosing at every step beat one choice of $\beta$ per picture? |
 
 Each comparison changes one thing: rows 2 and 3 differ only in who picks, and rows 2 and 4 only in when the choice is made.
 
@@ -28,7 +28,7 @@ Each comparison changes one thing: rows 2 and 3 differ only in who picks, and ro
 | Support | row 2 leads row 1 by at least 5 of 96 and by more than 1.96 standard errors, and leads row 3 by the same margin |
 | Choosing helps, the checker does not | rows 2 and 3 both lead row 1, and row 2 does not lead row 3 |
 | Null | row 2 does not lead row 1 |
-| Choose once is enough | row 4 is within 5 of 96 of row 2 |
+| A baseline matches the method | row 4 is within 5 of 96 of row 2; row 4 keeps one of four runs per picture, which the owner's rule allows only as a baseline, so it can never be the method |
 
 **What would surprise.** Row 2 beating row 4. Choosing once per picture is the simpler move, and on the plain product plan 11's best-of-16 matched a stepwise method.
 
@@ -38,7 +38,7 @@ Each comparison changes one thing: rows 2 and 3 differ only in who picks, and ro
 
 **Cost:** CO3 alone takes a measured median of 38.4 seconds per picture ([M1's design](../method-search/01-beat-the-baseline/design.md#cost-and-what-it-buys)), and its corrector is about two thirds of that: 40 corrector iterations of 4 to 5 U-Net rows against the sampler's 100 rows ([Loop 5's CO3 design](../reproductions/CO3/design.md)). Running each corrected step 4 times plus the checker's reads makes rows 2 and 3 about 3 times CO3, about 115 seconds a picture or 3.1 GPU-hours each for 96 pictures. Row 4 runs about 3.3 times CO3, 3.4 GPU-hours. **About 9.6 GPU-hours in all**, on `biggpu` or a 48 GB `bigbatch` card, since SDXL with the readout checker needs the memory M1 used. A cheaper first read runs rows 2 and 3 on 6 of the 12 pairs, about 3.1 GPU-hours, and adds row 4 and the other 6 pairs only if row 2 leads. These are estimates; the smoke rung measures the real time.
 
-**Buys:** a measured answer to whether this project's checker can help CO3 at all without a gradient, which is the open route for Paper 2; and, if it can, the winning and losing candidates are preference pairs an LPO-style LoRA could train on.
+**Buys:** a measured answer to whether this project's checker can help CO3 at all without a gradient, which is the open route for Paper 2. The method stays on one trajectory per seed and leaves SDXL's weights untouched.
 
 ## Who runs it
 

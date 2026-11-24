@@ -37,11 +37,18 @@
 
 **The diffusion classifier's own readout reads the most and cannot steer.** The per-label error against the true injected noise reads presence at up to 0.746 at t 495, and at 0.61 to 0.66 in the early window where nothing else reads. It needs the noise that made the canvas, so it is a judge of canvases noised from a known picture, never a push (inferred, [the X5 review](05-signal/review.md#what-the-other-inputs-read)).
 
-## Why more tuning will not lift this path
+## What X5 closed, and what it left open
 
-The score path is computed from the noisy canvas: $d_t(c)$ is a function of $x_t$ and $t$. By the data-processing inequality it holds no more information about the clean picture than $x_t$ does. So it cannot be a third source of information beside the picture. It can only be a view of the picture that is easier to read. The signature's lead over the canvas, 0.700 against 0.593, measures how much easier: a frozen U-Net trained on many digits extracts features better than a probe trained on 4,000 canvases. Diffusion models are known to be good noise-aware feature extractors, so this is not a new kind of signal. At the brief's steps 0 to 15 the canvas holds 0.6% to 8.7% of its signal, so no reader of anything computed from it can do much there.
+An [independent audit](12-independent-audit.md) checked these calls against the evidence, the papers and the owner's intent.
 
-The owner closed the loop on 2026-11-24 on this reading. The questions that replace it go to the sampler and to where the experts' data overlap, which is where both papers' failures sit. [The Paper 1 design that follows from them](10-paper-1-placement-or-sampler.md) carries them forward.
+| Idea | Call | Why |
+|---|---|---|
+| The score path as a new source of information about the picture | closed | $d_t(c)$ is computed from $x_t$, so by the data-processing inequality it holds nothing the noisy canvas does not |
+| The score path, or the diffusion model's own features, as the coordinates in which to compose | open | the data-processing argument bounds information and says nothing about whether sums work there; SDXL's own features are the best early reader the project has, 0.63 to 0.79 over steps 0 to 15 |
+| A shared space in which adding two scores means "cat and dog" | exact form closed, block-wise form open | text vectors add only under the same independence that the product of experts assumes (Linear Spaces of Meanings, p. 5; Composable Diffusion, p. 7), so one shared space would line the two failures up and not fix them; adding scores is still correct in a space where each subject owns its own block of coordinates (Bradley et al., Theorem 6.1, p. 8), and the simplest such space is image regions |
+| A noise-aware CLIP pushing at SDXL's steps 0 to 15 | closed for layout and count | no reader beat frozen CLIP there; binding and identity on CO3 after step 10 were never scored |
+
+X5 was a fair test of readability and a weak test of additivity. Digits have no joint label, and the two arithmetic tests sat behind X5's bar and never ran.
 
 ## What it suggests for Paper 1, the separate-experts paper
 
