@@ -1,0 +1,123 @@
+{
+ "canvases": 2036,
+ "label_1": 1486,
+ "label_0": 550,
+ "steps": [
+  449,
+  428,
+  408,
+  387,
+  367,
+  347,
+  326,
+  306,
+  285,
+  265
+ ],
+ "per_step": [
+  0.6547632448305396,
+  0.6808907377951792,
+  0.6921717851462131,
+  0.7129683102899792,
+  0.7266927688731188,
+  0.7376189893551939,
+  0.7384093967943228,
+  0.7583616786981524,
+  0.7561238223418574,
+  0.7801199070108895
+ ],
+ "mean_ba": 0.7238120641135446,
+ "called_asked_given_1": [
+  0.5531628532974427,
+  0.5545087483176312,
+  0.5497981157469717,
+  0.5841184387617766,
+  0.6224764468371468,
+  0.6716016150740243,
+  0.7240915208613729,
+  0.765814266487214,
+  0.8122476446837147,
+  0.8438761776581427
+ ],
+ "called_asked_given_0": [
+  0.24363636363636362,
+  0.19272727272727272,
+  0.16545454545454547,
+  0.15818181818181817,
+  0.1690909090909091,
+  0.19636363636363635,
+  0.24727272727272728,
+  0.24909090909090909,
+  0.3,
+  0.28363636363636363
+ ],
+ "calls_per_step": [
+  {
+   "two, not both clear and right": 864,
+   "one blob": 72,
+   "two clear, right, apart": 956,
+   "damaged": 144
+  },
+  {
+   "two, not both clear and right": 893,
+   "one blob": 78,
+   "two clear, right, apart": 930,
+   "damaged": 133,
+   "same half": 2
+  },
+  {
+   "two, not both clear and right": 918,
+   "two clear, right, apart": 908,
+   "damaged": 129,
+   "one blob": 79,
+   "same half": 2
+  },
+  {
+   "two, not both clear and right": 892,
+   "two clear, right, apart": 955,
+   "damaged": 116,
+   "one blob": 71,
+   "same half": 2
+  },
+  {
+   "two clear, right, apart": 1018,
+   "one blob": 46,
+   "two, not both clear and right": 879,
+   "damaged": 92,
+   "same half": 1
+  },
+  {
+   "two clear, right, apart": 1106,
+   "two, not both clear and right": 822,
+   "damaged": 78,
+   "one blob": 29,
+   "same half": 1
+  },
+  {
+   "two clear, right, apart": 1212,
+   "two, not both clear and right": 739,
+   "damaged": 65,
+   "one blob": 20
+  },
+  {
+   "two clear, right, apart": 1275,
+   "two, not both clear and right": 688,
+   "damaged": 61,
+   "one blob": 12
+  },
+  {
+   "two clear, right, apart": 1372,
+   "two, not both clear and right": 607,
+   "damaged": 53,
+   "one blob": 4
+  },
+  {
+   "two clear, right, apart": 1410,
+   "two, not both clear and right": 571,
+   "damaged": 51,
+   "one blob": 4
+  }
+ ],
+ "verdict": "identity not plainly visible: option B",
+ "seconds": 86.7
+}

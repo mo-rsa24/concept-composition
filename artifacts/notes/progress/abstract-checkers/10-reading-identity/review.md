@@ -12,6 +12,7 @@
 - [The robustness checks](#the-robustness-checks)
 - [Two checks before V7](#two-checks-before-v7)
 - [Retraining on the sampler's own states](#retraining-on-the-samplers-own-states)
+- [Is identity visible at these steps at all](#is-identity-visible-at-these-steps-at-all)
 - [The runs](#the-runs)
 - [What this cannot say](#what-this-cannot-say)
 
@@ -95,6 +96,18 @@ The checker was retrained on the sampler's own states, as [the design's retraini
 
 **What this cannot say.** One training size and one recipe were tried. A checker trained on pasted canvases and sampler states together, or on many more sampler states, has not been tested. The smoke test (job 94653) read seeds 2960 to 2967, which are outside both ranges.
 
+## Is identity visible at these steps at all
+
+Board question 95, amended by Loop 13 for the owner after [the method review](method-review.md), ends the digit identity work with one diagnostic and no further training: the digit judge reads the sampler's one-step clean estimate, $\hat x_0 = (x_t - \sqrt{1-\bar\alpha_t}\,\epsilon_{\text{product}})/\sqrt{\bar\alpha_t}$, on the 2,036 saved digits 0 to 4 states at steps 27 to 36. A read counts as "the asked pair" when the judge calls the clean estimate "two clear, right, apart". Job 94717 (mscluster80, 2 minutes) wrote [the result file](grid-files/clean-check.json). The bar, written before the run, is 0.75.
+
+| Step | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Balanced accuracy | 0.655 | 0.681 | 0.692 | 0.713 | 0.727 | 0.738 | 0.738 | 0.758 | 0.756 | 0.780 |
+| Clean canvases called the asked pair | 0.55 | 0.55 | 0.55 | 0.58 | 0.62 | 0.67 | 0.72 | 0.77 | 0.81 | 0.84 |
+| Wrong-digit canvases called the asked pair | 0.24 | 0.19 | 0.17 | 0.16 | 0.17 | 0.20 | 0.25 | 0.25 | 0.30 | 0.28 |
+
+**Identity is not plainly visible at these steps: 0.724 over the 10 steps, under 0.75.** The judge on the clean estimate does better than either checker on the states (0.651 and 0.552) and still misses. At step 27 it finds the asked pair on only 55% of canvases that end clean, so on nearly half of them the digits they will end with are not yet drawn. The two checkers' misses are partly a property of the states, not only of the checkers.
+
 ## The runs
 
 | Job | What | Node | Time | Result |
@@ -110,6 +123,7 @@ The checker was retrained on the sampler's own states, as [the design's retraini
 | shared run | the rule that needs no training, then the sampler read | mscluster107 card 1 | 17 min | 0.539 and 0.651 |
 | 94654 | training states on digits 0 to 4 | mscluster60 | 15 min | 2,036 labelled |
 | 94655 | retraining on states, then the fresh read | mscluster60 | 46 min | 0.552 |
+| 94717 | the judge on the clean estimate of the saved states | mscluster80 | 2 min | 0.724 |
 
 Commit `ba6d84da` scores the signature's U-Net calls in pieces of 128, the size training uses, and gives each signature cell its own job. The grid used 2.66 GPU-hours, the failed job included, and the read of digits 5 to 9 0.92. Loop 8 has used about 10.9 of its 30.
 
