@@ -226,13 +226,15 @@ decides how they continue.
 
 Navigation: ⬅️ [Previous](#4-why-two-properties-are-inconclusive-the-labels) | 📋 [TOC](#table-of-contents) | [Next](#what-this-cannot-tell-you) ➡️
 
-**Three places where two records say different things. This page reports both and resolves none.**
+**Five places where two records say different things. This page reports both and resolves none.**
 
 | What | One source | The other source |
 |---|---|---|
 | The step's verdict | [the reading review](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), line 3: "null on counting, prompt match and left-right order, and inconclusive on position and size and on binding" | [the fairness review](../../../artifacts/notes/progress/noise-text-critic/02c-fair-test/review.md), line 3: "W2 is inconclusive by the bars fixed beforehand", because a reader on SDXL's own features, run as a positive control, read the clean pair at 0.637 over steps 0 to 15 against its floor of 0.65 (line 4). [The loop's summary](../../../artifacts/notes/progress/noise-text-critic/00-executive-summary.md), line 38, also calls the step "formally inconclusive" |
 | Latent CLIP's counting mean over steps 0 to 15 | [the reading review](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), line 13: 0.560 | [the loop verdict](../../../artifacts/notes/progress/noise-text-critic/05-verdict.md), line 13: "0.561, Latent CLIP", the value the fairness review's rerun prints at line 24 |
 | Whether position and size, and binding, were scored | [the reading review](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), lines 16 and 17: scores for all three models, with the verdict inconclusive | [the loop's summary](../../../artifacts/notes/progress/noise-text-critic/00-executive-summary.md), line 39: "Position and size, and binding, were not scored, because their labels failed the eye check" |
+| NoisyCLIP's lead over frozen CLIP on prompt match at step 30 | [section 2](#2-the-models-do-read-once-the-picture-is-mostly-drawn) and [the reading review](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), line 28: "0.16 at step 30" | [the reading result file](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/result.json), `balanced_accuracy_reading_half[17]` (step 30) under `prompt_match.noisyclip` and `prompt_match.frozen_clip`: 0.7830 minus 0.6155, which is 0.167 |
+| Latent CLIP's counting at its 7 passing steps | [section 1](#1-no-model-reads-any-property-at-steps-0-to-15) and [the reading review](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), line 36: "average 0.56" | [the reading result file](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/result.json), `counting.latent_clip.balanced_accuracy_reading_half` at the steps in `push_steps`, 3, 4, 5, 6, 10, 11 and 12: average 0.538 |
 
 ## What this cannot tell you
 
@@ -337,7 +339,7 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] Position and size needs labels that pass the eye check and at least 8 right pictures per half before it can be read.
 - [ ] The figure of reading against all 50 steps in section 2.
 - [ ] The figure of the head-only cat region in section 4.
-- [ ] The three disagreements under [Where the sources disagree](#where-the-sources-disagree).
+- [ ] The five disagreements under [Where the sources disagree](#where-the-sources-disagree).
 
 ## Cross-references
 

@@ -188,7 +188,7 @@ unseen pairs scores between 0.77 and 0.81. By kind it calls 96% of overlaid canv
 
 Navigation: ⬅️ [Previous](#4-the-count-checker-on-digits-5-to-9) | 📋 [TOC](#table-of-contents) | [Next](#what-this-cannot-tell-you) ➡️
 
-**Four places where two records say different things. This page reports both and resolves none.**
+**Six places where two records say different things. This page reports both and resolves none.**
 
 | What | One source | The other source |
 |---|---|---|
@@ -196,6 +196,8 @@ Navigation: ⬅️ [Previous](#4-the-count-checker-on-digits-5-to-9) | 📋 [TOC
 | Which noise levels the step's proof names | the board's proof for the step (`board.json`, line 767): "balanced accuracy over steps 0 to 15" | [the learning review](../../../artifacts/notes/progress/abstract-checkers/05-does-it-learn/review.md), line 5: the count checker was read at timesteps 712 to 480, "between the toy's sampler steps 14 and 25" |
 | The signal share at the end of SDXL's 16-step window | [the learning review](../../../artifacts/notes/progress/abstract-checkers/05-does-it-learn/review.md), line 75: "from 0.0058 to 0.0946" | [the learning design](../../../artifacts/notes/progress/abstract-checkers/05-does-it-learn/design.md), line 69: "from 0.0058 to 0.0949" |
 | Where the identity checker's 0.555 was read | [the learning review](../../../artifacts/notes/progress/abstract-checkers/05-does-it-learn/review.md), line 32: 0.555 on the pairs holding digit 4, trained on digits 0 to 3 | [the Loop 8 summary](../../../artifacts/notes/progress/abstract-checkers/09-summary/executive-summary.md), line 12: "0.555 on digits it never saw" in a table about digits 5 to 9. The right-digits checker read on digits 5 to 9 scored 0.556 ([the removal review](../../../artifacts/notes/progress/abstract-checkers/08-remove-one-checker/review.md), line 66) |
+| The identity checker's raw reader on the trained pairs | [section 3's table](#3-split-in-two-the-count-checker-passes-and-the-identity-checker-misses) and [the learning review](../../../artifacts/notes/progress/abstract-checkers/05-does-it-learn/review.md), line 35: 0.606 | `/datasets/mmolefe/poe_repair_min/loop-8/v2/sdxl-split/split.json`, key `identity.raw.inner_seen.balanced_accuracy`: 0.6054835, which is 0.605 at three places |
+| Whether the inner test's four variations missed every bar | [section 1](#1-the-single-checker-at-the-toys-noisiest-steps-is-null): the base reader and three named variations "all missed every bar"; [the learning review](../../../artifacts/notes/progress/abstract-checkers/05-does-it-learn/review.md), lines 98 to 101, marks each "missed" under "All bars" | `/datasets/mmolefe/poe_repair_min/loop-8/v2/full/inner.json`, `rows[0]` to `rows[3]`: `bars.checks.gap_at_most_0.05` is `true` on all four, so each passed the gap bar. The other two checks are `false` and `bars.all` is `false` on all four |
 
 ## What this cannot tell you
 
@@ -266,7 +268,7 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 
 - [ ] The two figures wanted in sections 3 and 4.
 - [ ] An identity checker that reads which digits are present at these noise levels. None has passed; the Loop 8 summary names a later push window and the full noise-prediction signature as untested routes.
-- [ ] The four disagreements under [Where the sources disagree](#where-the-sources-disagree).
+- [ ] The six disagreements under [Where the sources disagree](#where-the-sources-disagree).
 
 ## Cross-references
 
