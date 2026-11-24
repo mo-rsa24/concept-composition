@@ -1,6 +1,35 @@
 # Review: can a sentence score read the five properties? (step W2)
 
-**State: no score has been computed.** The labelled pictures are still being built, so no property has a verdict. The [design](design.md) holds the sentences and bars.
+**State: null on every property.** No model reads any of the five properties at steps 0 to 15. NoisyCLIP, frozen CLIP and Latent CLIP each stay between 0.46 and 0.56 mean balanced accuracy against the 0.75 bar, and none beats frozen CLIP. NoisyCLIP does read prompt match once the picture is mostly drawn, at steps 30 to 49, so the models and the input path work and the early steps are where reading fails. The [design](design.md) holds the sentences and bars, and the numbers are in [the result file](result.json), from W&B run `70g3qw2f`.
+
+<a href="balanced-accuracy-by-step.png"><img src="balanced-accuracy-by-step.png" width="900" alt="Five panels, one per property, of balanced accuracy on the reading half against sampler step 0 to 15, for NoisyCLIP, frozen CLIP and Latent CLIP; every line stays near the 0.5 chance line, under the 0.75 bar"></a>
+
+## Result
+
+Each cell is the mean over steps 0 to 15 of balanced accuracy on the reading half of the seeds, with the threshold chosen on the other half. 0.5 is chance, and the bar is 0.75.
+
+| Property | NoisyCLIP | Frozen CLIP | Latent CLIP | Pictures per half (right, wrong) | Verdict |
+|---|---|---|---|---|---|
+| Counting | 0.515 | 0.496 | 0.560 | 77 and 78, 15 and 15 | null |
+| Prompt match | 0.503 | 0.478 | 0.479 | 55 and 54, 23 and 23 | null |
+| Spatial relation | 0.479 | 0.506 | 0.507 | 33 and 31, 33 and 31 | null |
+| Position and size | 0.538 | 0.482 | 0.510 | 1 and 1, 57 and 55 | inconclusive: 1 right picture per half, under the 8 the design needs, and its labels failed the eye check |
+| Attribute binding | 0.492 | 0.467 | 0.481 | 33 and 31, 33 and 31 | inconclusive: the recolouring failed the eye check, so the labels cannot be trusted |
+
+**Against frozen CLIP.** No gap passes 1.96 standard errors except NoisyCLIP on position and size (0.056, standard error 0.015), which rests on 2 right pictures and does not count. Latent CLIP's gaps are marked mixed, because it differs from frozen CLIP in both the model and the input.
+
+**The late steps, as a check that the models work.** These are reading-half balanced accuracies at steps 20, 30, 40 and 49:
+
+| Property | NoisyCLIP | Frozen CLIP | Latent CLIP |
+|---|---|---|---|
+| Prompt match | 0.67, 0.78, 0.86, 0.82 | 0.52, 0.62, 0.80, 0.80 | 0.49, 0.56, 0.61, 0.70 |
+| Counting | 0.50, 0.64, 0.68, 0.71 | 0.49, 0.52, 0.56, 0.67 | 0.55, 0.54, 0.55, 0.54 |
+
+The design's check at step 49 passes, with prompt match on the threshold half at 0.91 for NoisyCLIP and 0.73 for Latent CLIP, against 0.6. NoisyCLIP leads frozen CLIP by 0.15 at step 20 and 0.16 at step 30 on prompt match, so its noise training does move reading earlier. It moves reading to about step 20 of 50, not into steps 0 to 15 where the push would act. The NoisyCLIP paper reports separation by latent 10 of 50 (p. 10). Whether its latent index counts the same way as this sampler's step is not settled (inferred).
+
+**The input path.** Our differentiable path from latent to CLIP input, compared with the authors' byte-rounded path through CLIP's own preprocessor, gives image vectors at cosine 0.995 for NoisyCLIP at steps 0 and 15. That passes the 0.99 bar. Frozen CLIP gives 0.989 and 0.987, just under the bar, so its row carries that caveat. It changes no verdict, because every row is null.
+
+**What this means for W3.** The design lets W3 push only on steps whose threshold-half balanced accuracy is at least 0.6. Some steps pass that gate on the threshold half, but none reads on the reading half. Latent CLIP's counting, for example, passes at 7 steps whose reading-half values average 0.56. With 15 wrong pictures per half, one step's balanced accuracy has a standard error of about 0.07 (inferred from the counts), so 0.6 on one half is within reach of chance. The owner is asked on the board whether W3 runs under the written rule or stops here.
 
 ## Runs
 
@@ -10,6 +39,10 @@
 | 93795 | label smoke test, 4 pictures | `bec5297b` | Ran in 3 minutes. Left-right labels were right on 4 of 4 by eye. Every box covered the whole 32 by 32 grid, and the colour masks covered the background, so the region rule was replaced |
 | 93851 | label smoke test, 8 pictures, new region rule | `9529388a` | Stalled: it started at 20:08 on mscluster89, printed only its start line, and was cancelled at its 90-minute limit. This matches the cluster storage outage below |
 | 94092 | label smoke test, 8 pictures, new region rule | `9529388a` | Ran in under 5 minutes. By eye at sheet size: left-right right on 8 of 8, and each recoloured animal carries its own colour with the background unchanged. Size labels are unreliable: on a large cat the word map covers mostly the head, so pictures 04 and 05 read "dog larger" when the animals are about equal, and 03 is doubtful |
+| 94093 | labels for all 64 relation pictures | `9529388a` | Ran in 3 minutes; checked by eye below |
+| 94094 | scoring smoke test, 24 pictures, steps 0 and 15 | `23599e96` | Failed in 3 minutes: safe loading refused Latent CLIP's checkpoint, which stores numpy numbers under numpy 1's class names |
+| 94096 | scoring smoke test | `385dae85` | Ran in 33 seconds: Latent CLIP loaded in safe mode with a strict key match, the checkpoint comparison matched the text side and the projections exactly, and NoisyCLIP's input path passed |
+| 94105 | full scoring, 441 latents, steps 0 to 15 and 20, 30, 40, 49, 4 noise draws | `385dae85` | Finished at 05:50 UTC with exit 0; W&B `70g3qw2f` |
 
 ## Label check by eye
 

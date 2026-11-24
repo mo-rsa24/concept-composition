@@ -835,11 +835,13 @@
    "needs": [
     "W1"
    ],
-   "state": "doing",
+   "state": "done",
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-23T19:04:15+02:00",
-   "updated": "2026-11-23T19:04:15+02:00"
+   "updated": "2026-11-24T07:52:32+02:00",
+   "finished": "2026-11-24T07:52:32+02:00",
+   "note": "null on all five at steps 0-15 (best mean 0.56, bar 0.75); NoisyCLIP reads prompt match from step 30; W&B 70g3qw2f"
   },
   {
    "id": "W3",
@@ -2305,6 +2307,15 @@
    "asked": "2026-11-24T07:29:48+02:00",
    "answer": "Option A: retrain the count checker on digits 0 to 4 at SDXL's noise, save it, and read digits 5 to 9 once; V3 runs with the count push alone if it passes.",
    "answered": "2026-11-24T07:33:17+02:00"
+  },
+  {
+   "id": 70,
+   "question": "W2 found no step from 0 to 15 that reads any property. The written W3 rule still lets Latent CLIP counting push on 7 steps that pass 0.6 on the threshold half but average 0.56 on the reading half. Run W3 under the written rule (about 4.5 GPU-hours), or stop W3 and record why?",
+   "holds": "W3",
+   "default": "Stop W3 and record that W2 found no readable step; go on to W2b and W4",
+   "by": "s9",
+   "state": "open",
+   "asked": "2026-11-24T07:52:41+02:00"
   }
  ]
 }
