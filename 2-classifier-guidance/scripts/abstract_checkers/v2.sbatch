@@ -6,8 +6,9 @@
 #SBATCH --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-8/logs/%x-%j.log
 # Step V2. Submit with the code snapshot in SNAP:
-#   sbatch --export=ALL,SNAP=<snapshot> v2.sbatch <ladder|inner|final>
+#   sbatch --export=ALL,SNAP=<snapshot> v2.sbatch <ladder|inner|final|rehearse-sdxl>
 # ladder: smoke test, overfit 16 examples, and 1% of the data. inner: the rehearsal on digits 0 to 4. final: reads unseen_test once.
+# rehearse-sdxl: the base map reader and the raw reader on the rehearsal split at SDXL's noise level (board question 64).
 set -uo pipefail
 STAGE=${1:?stage}
 ROOT=/datasets/mmolefe/poe_repair_min/loop-8
@@ -46,6 +47,9 @@ case "$STAGE" in
     rc=$? ;;
   inner)
     run inner --data "$FULL" --out "$OUT/full"
+    rc=$? ;;
+  rehearse-sdxl)
+    run rehearse --data "$FULL" --out "$OUT/sdxl-window" --window sdxl
     rc=$? ;;
   final)
     run final --data "$FULL" --out "$OUT/full" --ladder "$OUT/ladder" --wandb-name loop8-v2-final

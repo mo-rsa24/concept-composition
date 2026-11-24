@@ -58,6 +58,30 @@ The bars sit in `2-classifier-guidance/scripts/abstract_checkers/v2_learn.py` as
 
 **What would surprise.** The raw reader matching the map reader on `unseen_test`, because then the maps are not what makes the checker carry over.
 
+## The rehearsal at SDXL's noise level (board question 64)
+
+The first run read the toy's sampler steps 0 to 15, where the signal-to-noise ratio is 14 to 144 times lower than at SDXL's steps 0 to 15. This rehearsal asks whether the map reader learns which digits are present when the noise matches SDXL's.
+
+**Group.** Runs that try a new idea (group 2).
+
+**Varied axis.** The noise window, compared with the base map reader's row in the first inner test. Everything else stays at the base configuration: data, labels, loss, 4,000 updates, the network and the scoring.
+
+**Noise window.** The 16 toy timesteps whose signal share ($\bar\alpha$) equals SDXL's at its timesteps 981, 961, ..., 681: 712, 696, 680, 664, 648, 632, 616, 601, 585, 570, 555, 539, 524, 510, 495 and 480. Their $\bar\alpha$ runs from 0.0058 to 0.0949. The list sits in `v2_learn.py` as `SDXL_MATCHED`.
+
+**Data.** The rehearsal split only: training on the pairs among digits 0 to 3, scoring on those pairs and on the pairs holding digit 4. Digits 5 to 9 are not read.
+
+**Readers.** The base map reader and the raw reader, each with its own overfit check at this window. The raw reader keeps its recipe. In the first run it answered label 0 on every read with a final loss of 0.6931, which is what a reader with no usable signal learns, and no code fault has been found. Each reader now reports the share of reads it calls label 1, and one that calls label 1 on under 1% or over 99% of reads is marked as not trained.
+
+**Cost:** about 0.6 GPU-hours of this loop's 30: 24 minutes of map-reader training at the measured 360 ms per update, about 5 minutes of scoring, and a few minutes for the raw reader and the overfit checks. **Buys:** whether the null in the first run comes from the toy's noise level.
+
+| Result | What it takes | Next |
+|---|---|---|
+| Pass | The map reader on the pairs holding digit 4: balanced accuracy at least 0.75 and within 0.05 of the trained pairs, and at least 0.75 on `apart` against `wrong` | Ask the owner for a new read of digits 5 to 9 at this window, before V3 |
+| Miss | The overfit check passes and any of those three bars is missed | File the result with the owner, and the chain stays held |
+| Inconclusive | The map reader's overfit check fails | Find the cause before anything else runs |
+
+**What would surprise.** `apart` against `wrong` still at chance at this window. The toy's own timestep 480 keeps about 31% of the signal amplitude, so a reader blind to digit identity there would point at the maps and not the noise.
+
 ## What this cannot say
 
 These canvases are pasted MNIST digits, so a pass says the checker reads pasted digits under noise. Step V3 tests whether its gradient helps on what the sampler draws. The steps are very noisy (at timestep 999 about 0.6% of the signal amplitude remains), so the per-step scores matter as much as the pooled one.

@@ -41,6 +41,10 @@ DATA_HASHES = {"f70b0fb362e13e255ad332ba14ca93dfb5cf051a5dfd3c86eb30482931d5a5f3
 ARRAYS = ("x", "asked", "holds", "corner", "src", "kind", "target", "n_digits", "apart")
 KINDS = ("apart", "overlaid", "same_half", "single", "wrong")
 STEPS16 = ddim_timesteps(50)[:16]
+# The toy timesteps whose signal share (abar) equals SDXL's at its first 16 sampler steps, t = 981, 961, ..., 681
+# (scaled-linear betas 0.00085 to 0.012, leading spacing). Board question 64.
+SDXL_MATCHED = torch.tensor([712, 696, 680, 664, 648, 632, 616, 601, 585, 570, 555, 539, 524, 510, 495, 480])
+WINDOWS = {"early": STEPS16, "sdxl": SDXL_MATCHED}
 PIXELS = H * W
 EVAL_SEED = 880_000
 BASE = {"reader": "map", "input": "base", "updates": 4000}
@@ -155,6 +159,7 @@ def evaluate(head, cfg, model, split, dev, draws=4, batch=512):
     pairs = sorted({(int(a), int(b)) for a, b in split["asked"]})
     return {
         "canvases": n, "reads": int(pred.size),
+        "share_called_1": float(pred.mean()),
         "balanced_accuracy": balanced(pred, y),
         "apart_vs_wrong": balanced(pred[versus], y[versus]),
         "per_step": [balanced(pred[:, s], y) for s in range(len(STEPS16))],
@@ -264,6 +269,27 @@ def stage_inner(args, model, data, dev):
     (args.out / "chosen.json").write_text(json.dumps(chosen["cfg"], indent=1))
 
 
+def stage_rehearse(args, model, data, dev):
+    """Board question 64: the base map reader and the raw reader on the rehearsal split at one noise window. Never reads
+    digits 5 to 9. A reader that calls label 1 on under 1% or over 99% of reads is flagged as not trained."""
+    tr, seen, unseen = inner_splits(data)
+    if set(np.unique(tr["holds"]).tolist()) - {-1, 0, 1, 2, 3}:
+        raise SystemExit("inner training data holds a digit above 3")
+    result = {"window": args.window, "timesteps": STEPS16.tolist(), "overfit": {}}
+    for name, cfg in READERS.items():
+        result["overfit"][name] = overfit_one(cfg, model, tr, dev)
+        head, info = train(cfg, model, tr, dev)
+        s, u = evaluate(head, cfg, model, seen, dev), evaluate(head, cfg, model, unseen, dev)
+        result[name] = {"cfg": cfg, **info, "inner_seen": s, "inner_unseen": u, "bars": meets_bars(s, u),
+                        "trained": 0.01 < u["share_called_1"] < 0.99}
+        print(json.dumps({"reader": name, "overfit": result["overfit"][name]["right_of_16"],
+                          "inner_unseen_ba": u["balanced_accuracy"], "apart_vs_wrong": u["apart_vs_wrong"],
+                          "share_called_1": u["share_called_1"], "all_bars": result[name]["bars"]["all"]}), flush=True)
+    m = result["map"]
+    result["verdict"] = ("inconclusive" if not result["overfit"]["map"]["pass"] else "pass" if m["bars"]["all"] else "miss")
+    save(args.out / "rehearse.json", result)
+
+
 def stage_final(args, model, data, dev, data_hash):
     out = args.out / "final.json"
     if out.exists():
@@ -293,13 +319,17 @@ def stage_final(args, model, data, dev, data_hash):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("stage", choices=["smoke", "overfit", "small", "inner", "final"])
+    ap.add_argument("stage", choices=["smoke", "overfit", "small", "inner", "final", "rehearse"])
+    ap.add_argument("--window", choices=sorted(WINDOWS), default="early",
+                    help="early: the toy's sampler steps 0 to 15; sdxl: the toy timesteps matching SDXL's steps 0 to 15")
     ap.add_argument("--model", type=Path, required=True)
     ap.add_argument("--data", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--ladder", type=Path, help="the folder holding overfit.json, for the final stage")
     ap.add_argument("--wandb-name", default=None)
     args = ap.parse_args()
+    global STEPS16
+    STEPS16 = WINDOWS[args.window]
     args.out.mkdir(parents=True, exist_ok=True)
     dev = "cuda"
     model = load_unet(args.model, dev)
@@ -311,7 +341,8 @@ def main():
             raise SystemExit("final needs --ladder")
         stage_final(args, model, data, dev, data_hash)
         return 0
-    return {"smoke": stage_smoke, "overfit": stage_overfit, "small": stage_small, "inner": stage_inner}[args.stage](
+    return {"smoke": stage_smoke, "overfit": stage_overfit, "small": stage_small, "inner": stage_inner,
+            "rehearse": stage_rehearse}[args.stage](
         args, model, data, dev) or 0
 
 
