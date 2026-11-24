@@ -57,6 +57,12 @@ model takes about 1.5 hours with start-up and the four take about 6 GPU-hours, i
 
 <a href="overfit-batch-256-real-and-sampled.png"><img src="overfit-batch-256-real-and-sampled.png" width="420" alt="Top two rows: the 16 real pictures. Bottom two rows: 16 samples showing the same scene with one clear object at the same position"></a>
 
+**The first full model draws its object in place.** The position 1 expert trained on 2,000,896 images in 77 minutes on one Blackwell card (W&B
+`zv6oef8h`). Its first 16 samples, drawn by the training job, each hold one clear object at position 1, and the scorer agrees on 16 of 16. The
+expert check on 256 samples is still to run.
+
+<a href="full-p1-first-16-samples.png"><img src="full-p1-first-16-samples.png" width="420" alt="Sixteen samples from the position 1 expert, each a single CLEVR object at the upper left on an empty floor"></a>
+
 ## The window control
 
 **Result: it misses its mark of 95% on all three positions.** Over 256 real renders per position, the share of changed pixels inside the 18 by 18
