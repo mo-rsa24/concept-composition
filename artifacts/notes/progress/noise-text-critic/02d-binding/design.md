@@ -57,7 +57,25 @@ A score could therefore separate the labels by recognising the pair, without see
 
 ## Colour binding, with whole-animal regions
 
-W2's recolouring used the word maps, which landed on the cat's head. The rebuilt rule is written in its own section here once W2c lands, before any recoloured picture is made. It uses the detector's box for each animal (GroundingDINO, as in `2-classifier-guidance/scripts/rung2/label_with_detector.py`) to bound the region, and it gets a new eye check on 32 pictures against the same 90% bar.
+W2's recolouring used the word maps, which landed on the cat's head. The owner chose on 2026-11-24 to make colour binding the clean binding test. A picture and its colour swap differ only in which animal wears which colour, so neither the pair nor the picture can give the answer away. The rule below is fixed before any recoloured picture exists.
+
+**Pictures.** The 64 cat and dog pictures from W2's relation set, minus the 2 whose left-right label failed the eye check (`02-can-it-read/label-check/eye-labels.csv`, `relation_right` = 0): 62 pictures.
+
+**Regions.**
+1. **Detector.** GroundingDINO tiny (`IDEA-Research/grounding-dino-tiny`) is asked for "an animal." on the decoded 1,024-pixel picture. It keeps boxes with a score of at least 0.30 whose longer side is at least a quarter of the picture, as in the project's instance counter, then applies greedy overlap removal at 0.5.
+2. **Exactly two boxes.** A picture with any other count is left out, and the count is reported.
+3. **Which box is the cat.** The detector cannot tell a cat from a dog. W2's left-right label, confirmed by eye on these 62 pictures, says which box holds the cat.
+4. **Masks.** SAM (`facebook/sam-vit-base`), prompted with each box, gives each animal's mask. Pixels in both masks are left uncoloured, and each mask's edge is softened by 2 pixels.
+
+**Recolouring.** W2's rule: hue set to red (0) or blue (220/360), saturation at least 0.75 and brightness at least 0.40, inside each mask only. Each picture gives two copies: red cat with blue dog (label 1), and blue cat with red dog (label 0).
+
+**Eye check, before any score.** 32 copies (the first 16 pictures in hash order, both copies of each) are checked at full size. A copy passes when each animal is coloured over its whole body in its own colour, and the background is left as it was. The bar is 90%, as in W2. If it fails, nothing is scored, and the review says why.
+
+**Sentences.** W2's: right "a red cat and a blue dog", wrong "a blue cat and a red dog". Each is scored plain and with the five wordings of W2c.
+
+**Protocol.** As in W2c: three models, plain and ensembled; steps 0 to 15, 20 to 29, 30, 40 and 49 with four draws each, plus the clean latent; halves split by picture, so both copies of a picture land in the same half. A second read needs no threshold: on what fraction of pictures does the right copy score above the swapped copy, at each step? Chance is 0.5.
+
+**Code.** `w2d_colour.py`, stages `colour-prepare` (regions, copies, latents, the eye-check sheets) and `colour-read` (scoring, run only after the eye check passes).
 
 ## Bars
 
