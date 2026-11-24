@@ -27,8 +27,14 @@ colour anywhere.
 | Plain product | red expert at count x, plus blue expert at count y, minus the empty-scene model, with EDM2's 32-step Heun sampler | the floor |
 | Product with Loop 8's count checker | the same, plus the count checker's push, retrained on these experts' maps at the noise levels of the sampler's early steps and pushing only on those steps, as in [its digit test](../../abstract-checkers/06-does-it-compose/review.md) | Paper 1's method |
 | Product with Du et al.'s MCMC corrector | the plain product with the corrector's steps between sampling steps | a better sampler, apart from a new signal |
+| Mask paste | for each image, the red expert's sample at count x, with the blue expert's foreground laid over it: the pixels of the blue sample that differ from the mean empty scene by more than 0.1 on a 0-to-1 scale. CPU only, from the same samples the other rows draw | the rival a composition must beat: objects that land apart need no composition |
 
-Sample-and-paste has no row, because nothing tells it where each object goes.
+Mask paste needs no positions, because each expert's own sample says where its objects are. It fails where a blue object lands on or
+touches a red one, so its exact share falls as the count rises.
+
+**The count checker's training set.** Loop 8's count checker is retrained on mask pastes of the two experts' own samples, labelled with the
+counts the experts were asked for, at the noise levels of the sampler's early steps. No real scene holding both colours is used, as in
+[its digit test](../../abstract-checkers/04-environment/review.md), where the checker trained on pasted canvases.
 
 ## Data and models
 
@@ -61,7 +67,8 @@ rule applied per cell.
 
 | Result | What it takes |
 |---|---|
-| Support | the count checker row leads the plain product by at least 5 points of exact share, averaged over the 9 cells, and by more than 1.96 standard errors over cells, and leads the corrector row by the same |
+| Support | the count checker row leads the plain product, the corrector row and the mask paste, each by at least 5 points of exact share averaged over the 9 cells and by more than 1.96 standard errors over cells |
+| Paste explains it | the mask paste matches or beats the checker row; Paper 1 then needs scenes whose objects overlap or shade each other |
 | Corrector explains it | the corrector row matches the checker row within 1.96 standard errors |
 | Null | no lead over the plain product |
 | Inconclusive | an expert misses 90%, the scorer misses 95%, or the eye calls disagree with the scorer on more than 1 image in 10 |

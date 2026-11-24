@@ -374,7 +374,8 @@
    "serves": "Both papers",
    "objective": "Know the field",
    "started": "2026-11-22T10:10:35+02:00",
-   "updated": "2026-11-22T10:10:35+02:00"
+   "updated": "2026-11-24T15:46:54+02:00",
+   "note": "Standing step: keeps the scoreboard current until E1 and E2 finish, and neither has started, so it outlasts every finished step by design. 2026-11-24: M7's paste result and Loop 6's Stage 2 are in the CLEVR plan; Stage 2 added as M10; question 84 on M6"
   },
   {
    "id": "B6",
@@ -622,7 +623,8 @@
     "M3",
     "M6",
     "M8",
-    "M9"
+    "M9",
+    "M11"
    ],
    "state": "todo",
    "serves": "Both papers",
@@ -636,8 +638,24 @@
    "needs": [
     "M1"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "Paper 2",
+   "objective": "Build and test",
+   "started": "2026-11-24T16:29:00+02:00",
+   "finished": "2026-11-24T16:29:00+02:00",
+   "updated": "2026-11-24T16:29:00+02:00",
+   "note": "closed under question 83, decided by Loop 13 for the owner: rung 1 reported (8 of 8 clear with oracle boxes, all damaged), both rung 2 region readers missed their limit (11 and 10 of 24), rung 2 not rendered; method-search/04-bind-each-body/review.md and method-review.md"
+  },
+  {
+   "id": "M10",
+   "label": "M10 CLEVR Stage 2: two experts by colour",
+   "owner": "s6",
+   "proof": "method-search/05-two-experts-by-colour/review.md reports the plain product, the count-checker row and the MCMC-corrector row on the 9 cells of 2 to 6 objects, with each expert's 90% check and the scorer's 95% check",
+   "needs": [
+    "M7"
+   ],
+   "state": "todo",
+   "serves": "Paper 1",
    "objective": "Build and test"
   },
   {
@@ -780,6 +798,46 @@
    "state": "todo",
    "serves": "Paper 2",
    "objective": "Choose Paper 2's method"
+  },
+  {
+   "id": "N1",
+   "label": "N1 Manager page and first alignment round",
+   "owner": "s13",
+   "proof": "artifacts/notes/progress/manager/status.md exists with the owner's open questions, every watched loop's step, ETA, blocker and alignment, and the first alignment round done",
+   "needs": [],
+   "state": "done",
+   "serves": "Both papers",
+   "objective": "Keep every loop aimed and unblocked",
+   "started": "2026-11-24T16:03:59+02:00",
+   "updated": "2026-11-24T16:12:42+02:00",
+   "finished": "2026-11-24T16:12:42+02:00",
+   "note": "manager/status.md written: 5 open questions, 7 loops, 10 things that may be wrong, alignment round 1, 15 waiting requests"
+  },
+  {
+   "id": "N2",
+   "label": "N2 Manager keeps the page until the loops finish",
+   "owner": "s13",
+   "proof": "manager/status.md's last tick is within one tick of the stop, and its final section says why the loop stopped (every watched loop done, or the owner said stop)",
+   "needs": [
+    "N1"
+   ],
+   "state": "doing",
+   "serves": "Both papers",
+   "objective": "Keep every loop aimed and unblocked",
+   "started": "2026-11-24T16:12:51+02:00",
+   "updated": "2026-11-24T16:12:51+02:00"
+  },
+  {
+   "id": "M11",
+   "label": "M11 Paper 1 digit test: the experts' vote beside paste",
+   "owner": "s6",
+   "proof": "method-search/06-vote-or-placement-on-digits/review.md reports Loop 10's five arms (experts' vote, random held side, with and without the corrector, no held side) beside sample-and-paste, on plan 33's step 7 settings at seeds 192 to 255",
+   "needs": [
+    "M5"
+   ],
+   "state": "todo",
+   "serves": "Paper 1",
+   "objective": "Build and test"
   },
   {
    "id": "U1",
@@ -1548,7 +1606,7 @@
    "description": "BEFORE: nothing. It starts by itself when the paper repository (step D1) is done.\n\n1. IT RUNS as the background session 🔬 PhD Loop 5: Reproduce Rivals And Choose Checker, following:\nartifacts/notes/progress/prompts/session-5-reproduce-and-choose.md\n\n2. IT DOES: compares candidate checker architectures on small data, by a selection rule written before any of them trains.\n\n3. YOU DO: answer anything on the waiting picture.\n\nOUTCOME: one chosen architecture, with the comparison saved.\nDONE WHEN: the checker review names the choice and the rule that picked it.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nSCOREBOARD: /home/molef/PhD/concept-composition/artifacts/notes/progress/scoreboard.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: arch",
    "event_id": "l29esd328d9glp7jd5p4fn4ekg",
    "start": "2026-11-22T11:35:00+02:00",
-   "end": "2026-11-24T14:32:13+02:00",
+   "end": "2026-11-24T16:55:16+02:00",
    "synced": "1150295b1faf"
   },
   {
@@ -1678,7 +1736,8 @@
       "M6",
       "M8",
       "M4",
-      "M9"
+      "M9",
+      "M10"
      ]
     },
     {
@@ -1788,7 +1847,10 @@
     "Z3",
     "Z4",
     "Z5",
-    "Z6"
+    "Z6",
+    "N1",
+    "N2",
+    "M11"
    ],
    "joiner": "~~~"
   }
@@ -1854,7 +1916,8 @@
   "Keep one front-facing picture per run on the laptop, with the rest cited on the cluster",
   "Find what fixes identity on CO3",
   "Choose Paper 2's method",
-  "Improve the earlier designs"
+  "Improve the earlier designs",
+  "Keep every loop aimed and unblocked"
  ],
  "brief": {
   "outcome": "two papers, each beating its best rival",
@@ -2717,8 +2780,10 @@
    "holds": null,
    "default": "Loop 6 adds it as one Paper 1 step after M7, using plan 33's step 7 settings on seeds 192 to 255",
    "by": "s10",
-   "state": "open",
-   "asked": "2026-11-24T10:50:02+02:00"
+   "state": "answered",
+   "asked": "2026-11-24T10:50:02+02:00",
+   "answer": "Decided by Loop 13 for the owner: Loop 6 adds the digit test of the experts' vote (against a random held side, with and without the corrector, and with no held side) beside sample-and-paste, as one Paper 1 step after its current step, on plan 33's step 7 settings and seeds 192 to 255, because it costs about 0.3 GPU-hours inside Loop 6's 87-hour budget and carries the paste comparison the reviewer finds Paper 1's tests lack; review reviewer/2026-11-24-review.md. The owner may overrule by answering again.",
+   "answered": "2026-11-24T16:27:04+02:00"
   },
   {
    "id": 79,
@@ -2744,8 +2809,10 @@
    "holds": "Y4",
    "default": "all ten defaults as listed",
    "by": "s11",
-   "state": "open",
-   "asked": "2026-11-24T12:58:25+02:00"
+   "state": "answered",
+   "asked": "2026-11-24T12:58:25+02:00",
+   "answer": "Decided by Loop 13 for the owner: all ten defaults as listed, because none changes a recorded number or verdict (items 6 and 7 keep each review's own verdicts, side by side where there are two), item 5 matches the house 200-pixel thumbnail, and the reviewer's pass on Loop 11 (reviewer/2026-11-24-review.md) finds its checks page complete, with 15 of 28 findings already fixed. Every item is reversible and uses no GPU. Question 79, which asks which of two recorded verdicts leads a title, stays with the owner. The owner may overrule by answering again.",
+   "answered": "2026-11-24T16:27:04+02:00"
   },
   {
    "id": 82,
@@ -2764,8 +2831,50 @@
    "holds": "M9",
    "default": "Close M9 as in option A",
    "by": "s6",
+   "state": "answered",
+   "asked": "2026-11-24T14:31:20+02:00",
+   "answer": "Decided by Loop 13 for the owner: option A, close the test of whether drawing each subject in its own region fixes identity (Loop 6, step M9), reporting its first rung (8 of 8 clear pairs with oracle boxes, all damaged) and the two region readers that missed their limit, because Loop 6's method review (method-search/04-bind-each-body/method-review.md) and the reviewer (reviewer/2026-11-24-review.md) both find all three attempts separated the subjects with a signal that had not separated them yet, and a third reader would cost about 4.9 GPU-hours without touching that cause. It costs nothing and can be reopened. The owner may overrule by answering again.",
+   "answered": "2026-11-24T16:27:04+02:00"
+  },
+  {
+   "id": 84,
+   "question": "M7's paste placed every CLEVR object (1,024 of 1,024 images, rate 1.0 against 0.906), so by your answer to question 54 step M6 does not run. The board still makes the recipe freeze (M4) and so the go or no-go (D4) wait on M6, and its script cannot retire a step. Stage 2, your chosen test where pasting fails, is now step M10 (about 7.6 GPU-hours and 67 CPU node-hours, Loop 6's design). Option A (recommended): M10 takes M6's place before M4, so the go or no-go has Paper 1's CLEVR evidence, and M6 is closed with the note 'not run: replaced by M10 under question 54'. Option B: M6 is closed the same way and M10 runs after the go or no-go.",
+   "holds": "M4",
+   "default": "M10 takes M6's place before M4, and M6 is closed as not run",
+   "by": "s4",
+   "state": "answered",
+   "asked": "2026-11-24T15:46:26+02:00",
+   "answer": "The owner's answer in chat on 2026-11-24: option A. M10 (CLEVR Stage 2) takes M6's place before M4, so the go or no-go has Paper 1's CLEVR evidence, and M6 is closed as not run.",
+   "answered": "2026-11-24T15:48:06+02:00"
+  },
+  {
+   "id": 85,
+   "question": "Reviewer, Loop 6 (fix, reviewer/2026-11-24-review.md): before M5's comparison and the two-colour CLEVR test run, should Loop 6 measure whether its checker tells CO3's clean pictures from its borrowed-part pictures at each step (about 1.2 GPU-hours), judge M5 and D3 on two clear subjects with style ignored and damage reported apart, and add a mask-paste row to M10?",
+   "holds": null,
+   "default": "Loop 6 continues unchanged",
+   "by": "s13",
+   "state": "answered",
+   "asked": "2026-11-24T16:24:37+02:00",
+   "answer": "Decided by Loop 13 for the owner, in part: yes to the per-step check of whether Loop 6's checker tells CO3's two-clear pictures from its borrowed-part pictures on M1's 96 trajectories (about 1.2 GPU-hours, with a 0.75 bar written before the read), and yes to a mask-paste row and a stated training set for the count checker in the two-colour CLEVR test (CPU only), because both are reversible, inside Loop 6's budget and change no recorded bar. Judging the checker search on two clear subjects with style ignored changes a recorded bar, so it stays with the owner as question 87. Review reviewer/2026-11-24-review.md. The owner may overrule by answering again.",
+   "answered": "2026-11-24T16:27:05+02:00"
+  },
+  {
+   "id": 86,
+   "question": "Reviewer, Loop 8 (fix, reviewer/2026-11-24-review.md): should V4 be rewritten before it runs, to push an identity checker on CO3's own trajectory and judge it against CO3 alone by Paper 2's bar (5 of 96), starting once M5 lands instead of waiting for D3? About 6 GPU-hours, as budgeted.",
+   "holds": null,
+   "default": "Loop 8 continues unchanged",
+   "by": "s13",
    "state": "open",
-   "asked": "2026-11-24T14:31:20+02:00"
+   "asked": "2026-11-24T16:24:37+02:00"
+  },
+  {
+   "id": 87,
+   "question": "Loop 6's search for the best checker for Paper 2 picks a winner by 'faithful pairs', which also counts a drawing as a failure; 73 of CO3's 96 tuning pictures fail mostly for being drawn, which the prompts never asked to avoid. Should the search be judged on 'two clear subjects, drawing style ignored' (CO3 alone: 32 of 96), with damage reported beside it and two reviewers per picture? This changes a recorded bar before its result. Review: reviewer/2026-11-24-review.md.",
+   "holds": null,
+   "default": "the search keeps faithful pairs as its bar",
+   "by": "s13",
+   "state": "open",
+   "asked": "2026-11-24T16:27:05+02:00"
   }
  ]
 }

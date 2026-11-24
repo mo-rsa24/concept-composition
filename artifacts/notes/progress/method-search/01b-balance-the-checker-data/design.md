@@ -76,6 +76,32 @@ stays off every sheet, page and message.
 **Control.** A zero push reproduces plain PoE and CO3's own loop, each with a largest absolute latent difference under 1e-5, in one process
 on one card and dtype.
 
+## The check that the checker can see CO3's failure, before the comparison renders
+
+CO3 draws two separate bodies in all 96 tuning pictures, so its failures are identity: borrowed parts, a wrong species or an extra subject.
+A checker that cannot tell CO3's good pictures from these at the steps it pushes cannot help, whatever its training list. The owner's
+answer on board question 85, decided by Loop 13, adds this check before rows 2, 3, 5 and 6 render.
+
+**What runs.** CO3 at its released settings on M1's 12 tuning pairs at seeds 6001 to 6008, which reproduces the 96 trajectories behind M1's
+CO3 pictures. Each final picture must match M1's within 3 of 255 in mean absolute pixel value, or that trajectory is not read. At steps 0, 5,
+10, 15, 20, 25 and 30, the kept checker reads the step's latent under the pair's joint prompt, and its clean-pair score is recorded. Nothing
+is pushed.
+
+**The labels.** M1's blind calls on CO3 alone: 32 pictures on the `two_clear` rung, style ignored, against 64 with two bodies that are not
+both clear.
+
+**The bar, written on 2026-11-24 before the read.** Balanced accuracy of the clean-pair score's sign, over the 96 pictures, at each step. The
+area under the curve and a per-pair table are reported beside it.
+
+| Result | What it takes | What follows |
+|---|---|---|
+| The checker sees the failure | at least 0.75 at some step | the owner decides whether M5's and D3's push moves to the steps that pass |
+| It does not | under 0.65 at every step | the owner decides whether to pause D3 and M2 for a checker that reads identity |
+| Inconclusive | the best step between 0.65 and 0.75, or fewer than 80 trajectories reproduce | reported, and the comparison waits for the owner |
+
+**Cost:** about 1.2 GPU-hours, 96 CO3 runs at the 43.2 seconds M1 measured. **Buys:** whether the clean-pair checker can see CO3's failure
+at all, before about 11 GPU-hours go into choosing its training list.
+
 ## The bar, on faithful pairs of 96
 
 The standard error comes from 10,000 bootstrap resamples of the 12 pairs. Repeating a pushed render has moved its count by about 2 of 96,

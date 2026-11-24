@@ -2,8 +2,8 @@
 
 This file holds what the runs in [the M9 design](design.md) produced. With bootstrapping on, rung 1 reaches 8 clear pairs of 8 on right boxes, and its written verdict is "regions without names". All 8 of those pictures are damaged. Rung 2 stopped at its check on the masks with both readers it tried, 11 of 24 and then 10 of 24 reads failing against a limit of 6, and rendered no picture.
 
-The progress board lists M9 as `todo`. Its proof needs rung 2 compared with CO3 alone on faithful pairs of 96, which has not run, and the board
-lets a loop hold one step in progress, which is M7. Board question 65 chose the second reader, and it also missed its limit.
+M9 is closed. Board question 83 was decided by Loop 13 for the owner as option A: report rung 1 and the two region readers that missed their
+limit, and render no rung 2 picture. The reasons are in [the method review](method-review.md).
 
 ## Runs
 
