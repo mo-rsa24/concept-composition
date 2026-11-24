@@ -67,6 +67,8 @@ RULES = [
     (P + "score-space/00-ladder/2-miniature/", M + "07-the-score-path/03-the-miniature.md", ""),
     (P + "score-space/00-ladder/0.5-network-view/", M + "07-the-score-path/02-the-network-view.md", ""),
     (P + "score-space/", M + "07-the-score-path/01-overview.md", ""),
+    # Loop 12, started 2026-11-24
+    (P + "leakage/", "", "Loop 12 started on 2026-11-24; its landing page is set when its first verdict lands"),
     # Scenes
     (CG + "artifacts/scenes/annotated-overviews/loop-4", M + "08-the-blip-vqa-score/01-overview.md", ""),
     (CG + "artifacts/scenes/annotated-overviews/loop-6", M + "02-the-readout-checker/01-overview.md", ""),

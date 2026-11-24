@@ -27,6 +27,7 @@ LOOP_ROOTS = {
     "artifacts/notes/progress/abstract-checkers": "Loop 8",
     "artifacts/notes/progress/noise-text-critic": "Loop 9",
     "artifacts/notes/progress/score-space": "Loop 10",
+    "artifacts/notes/progress/leakage": "Loop 12",
     "2-classifier-guidance/artifacts/scenes": "scenes",
     "2-classifier-guidance/artifacts/results": "results",
     "1-lora-correction/artifacts/results": "results",
@@ -265,7 +266,7 @@ def render(out):
     groups = defaultdict(list)
     for o in loopish:
         groups[o["loop"]].append(o)
-    order = ["Loop 4", "Loop 5", "Loop 6", "Loop 7", "Loop 8", "Loop 9", "Loop 10", "scenes", "results"]
+    order = ["Loop 4", "Loop 5", "Loop 6", "Loop 7", "Loop 8", "Loop 9", "Loop 10", "Loop 12", "scenes", "results"]
     names = {"scenes": "scenes in `2-classifier-guidance/artifacts/scenes/`",
              "results": "results folders, made by a loop"}
 
