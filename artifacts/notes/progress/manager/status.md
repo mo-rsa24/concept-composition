@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-24 18:25 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-24 18:30 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -70,9 +70,9 @@ The finish range is `session_status.py`'s, from the 52 finished steps: fastest p
 | 4. Rivals and targets | Keeping every target current. It recorded the CLEVR paste result and placed the two-colour CLEVR test in the CLEVR plan. | 1 | none useful: it ends after the paper tables, which have not started | idle | nothing |
 | 6. Best method | Its read of whether the checker sees CO3's failure landed inconclusive by count (75 of 96 matched; best 0.616 at step 25 against a 0.75 bar and 0.65 floor). It reruns the 21 missing trajectories on card 1 after Loop 8, then trains on its fixed lists. Two-colour CLEVR renders for Paper 1 run beside it. | 9 | 4.4 h to 207.6 h | busy | card 1 after Loop 8 |
 | 7. Abstract-checker papers | Finished; its session is closed. | 0 | done | closed | nothing |
-| 8. Abstract checkers | Its digit identity checker passed every robustness bar (second seed 0.877 against 0.75, shuffled labels 0.500, weakest pair 0.844). Its last two checks run on mscluster107 card 1: the rule that needs no training now, the read on real sampler states next. Its SDXL test is rewritten to your answer on 86. | 3 | 1.9 h to 85.5 h | busy | its own run; the SDXL test waits on Loop 6's training list |
+| 8. Abstract checkers | Its last two digit checks finished on card 1 (18:24, exit 0, the stop rule never fired). The checker clearly adds to the model's own knowledge: 0.861 against 0.603 for a rule that needs no training (a lead of 0.322, standard error 0.009). But on real sampler states it reads 0.651 at steps 27 to 36, under its 0.75 bar, so the next removal test (V7) is on hold until you decide. | 3 | 1.9 h to 85.5 h | idle soon | your decision on whether the removal test runs, once Loop 8 files it |
 | 11. Drain into the pillars | Stopped by your answer on 88. Its pillar checks are done and its census found every finished verdict on a report page (14 findings, eight method folders). Its final step stays open until Loops 6 and 8 stop. | 1 | when restarted | stopped its loop | waiting for a result worth draining: Loop 8's identity checker or Loop 6's two-colour CLEVR test |
-| 12. Where CO3 leaks | Measuring what predicts which animal pairs borrow each other's parts under CO3: the main predictor pass (job 94591) is at 1 h 17 min of its 4-hour limit. | 5 | 2.4 h to 112.6 h | busy | its own job |
+| 12. Where CO3 leaks | Its predictor pass is null: none of three readings inside the model predicts which pairs borrow parts (best rank correlation 0.49, bar 0.706), and the most alike pair, crow and raven, never borrows ([review](../leakage/02-what-predicts-borrowing/review.md)). It asks which fix to test (question 91); the reviewer is reading it now, so Loop 13 can decide. | 5 | 2.4 h to 112.6 h | busy | question 91 |
 
 ## Resources
 
@@ -84,7 +84,7 @@ Read at 18:06 from `squeue`, `sacct`, `sinfo` and `nvidia-smi` on mscluster107; 
 | Longest wait | Loop 8's 20-minute check (job 94595): 35 minutes, waiting for a node |
 | Nodes out of service | `bigbatch`: 12 down and 5 drained of 48. `biggpu`: 2 down and 2 drained of 7, including mscluster108 and mscluster111, drained at 09:27 and 09:10 today after a failed job kill |
 | Idle capacity | none: at 17:43 every working `bigbatch` and `biggpu` node was allocated. mscluster107 is now another user's `biggpu` job (94610, 6-hour limit, started 17:36); its second card sits idle at 170 MiB, but their process holds it, so it is not ours to use. Your interactive job 83423 on that node no longer appears in the queue |
-| Shared card | **mscluster107 card 1, approved by you on question 90.** Loop 8's second launch (18:07, `launch-2.sh`, same three guards) passed its smoke stage after a one-line fix (commit `13c68afd`) and is running the untrained-rule check at about 15.6 GB; the sampler-state read follows. The first launch had failed on that code error, not on the stop rule. The other user's job runs one evaluation after another, each holding about 36 GB on card 0 and 170 MiB on card 1. Loop 6 goes next. The host job ends about 23:36 |
+| Shared card | **mscluster107 card 1, approved by you on question 90.** Loop 8's run finished at 18:24 with exit 0, and its stop rule never fired. The card went to Loop 6 at 18:27, first for the 21-run CO3 reread, then its checker training. The other user's job ends about 23:36 |
 | Compute against budget since 2026-11-21 | Loop 6: 53.4 node-hours of 87 (34.8 were CLEVR renders that may have used no GPU). Loop 8: 11.9 of 30. Loop 12: about 0.4, no total set. Slurm here records no GPU count, so these are node-hours, an upper bound |
 
 **What would make the queue move faster:** little within our control. There is no idle `biggpu` card,
@@ -98,6 +98,7 @@ Newest first.
 
 | Concerns | Finding | Source |
 |---|---|---|
+| Loop 8 | **The digit checker reads pasted canvases but not real sampler states**: 0.861 on pasted digits against 0.651 on the sampler's own states at steps 27 to 36, under 0.75. A checker that pushes during sampling has to read sampler states, so this is the result that decides whether the removal test is worth running. | Loop 8's message at 18:26 |
 | All loops | **The same CO3 run gives different pictures on different card types.** Loop 6's rerun of M1's 96 CO3 trajectories on an RTX 3090 matched all 48 first drawn on a 3090 and none of the 21 checked from an RTX 8000, beyond 3 of 255 in mean pixel value. Any comparison of pictures drawn on mixed card types mixes the card in. No environment page records this, and the environment pillar's keeper has stopped. | Loop 6's message at 18:22 |
 | Loop 6 | **Design note, not a problem.** The new check scores whether the checker's score lands on the right side of zero, a fixed cut. If its area under the curve, reported beside, is high while that accuracy is low, the checker separates CO3's clean pictures from its borrowed-part ones and only its cut is off. Read the two numbers together when the check lands. | `method-search/01b-balance-the-checker-data/design.md`, the check section |
 | Loop 6 | **The checker training failed twice in 3 minutes** (jobs 94473 and 94474); the reruns (94579 and 94580) finished in 11 and 12 minutes. | `sacct` |
