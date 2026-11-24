@@ -873,11 +873,13 @@
    "needs": [
     "W2"
    ],
-   "state": "doing",
+   "state": "done",
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-24T10:36:25+02:00",
-   "updated": "2026-11-24T10:36:25+02:00"
+   "updated": "2026-11-24T10:46:08+02:00",
+   "finished": "2026-11-24T10:46:08+02:00",
+   "note": "null: seen 0.758, unseen 0.590 (gap 0.168), unseen apart-vs-wrong 0.502 in the SDXL-matched window; W&B en52x031; encoder handed to Loop 10"
   },
   {
    "id": "W5",
@@ -916,9 +918,11 @@
    "needs": [
     "W2"
    ],
-   "state": "todo",
+   "state": "doing",
    "serves": "Paper 2",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "started": "2026-11-24T10:46:17+02:00",
+   "updated": "2026-11-24T10:46:17+02:00"
   },
   {
    "id": "W2c",
