@@ -30,7 +30,8 @@ or "where are we". The full detail is on [the status page](status.md).
    drained, so jobs wait for each other, not for us.
 5. **You answered** at 16:55: Loop 6's checker is now judged on two clear subjects with drawing style
    ignored, Loop 8's SDXL test targets identity against CO3, and Loop 11 stops after its last two steps.
-   Two questions still wait, below.
+   You also settled Loop 9's title (its own verdict leads) and chose to hold question 80 until
+   Loop 6's read lands.
 
 ## For you to decide
 
@@ -40,7 +41,6 @@ Nothing changes while a question waits.
 | # | The question | Default |
 |---|---|---|
 | 80 | Should a checker choose CO3's sharpness setting at each of its corrected steps? A first read costs about 3.1 GPU-hours | you chose to wait for Loop 6's per-step read of its checker on CO3; it comes back to you with that result |
-| 79 | Loop 9's sentence-score test has two recorded verdicts (null, and inconclusive in a later fairness test). Which leads the report's title? | keep the test's own verdict, with the fairness test as its own finding |
 
 Also yours, not on the board: Loop 10 is closed but four of its steps stay open on the board, so the
 board counts it unfinished.

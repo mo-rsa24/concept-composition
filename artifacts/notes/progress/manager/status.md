@@ -43,6 +43,7 @@ At 16:55, in chat, recorded on the board and sent to each loop:
 |---|---|---|
 | 88 | Should Loop 11 stop after its last two steps until a research loop has something new? | yes, the default |
 | 87 | Should Loop 6's checker search be judged on two clear subjects, drawing style ignored? | yes; damage reported beside it, two reviewers per picture |
+| 79 | Which of Loop 9's two recorded verdicts leads its report title? | the default: the test's own verdict on the title, and the fairness test as its own finding beside it (answered at 16:59) |
 | 86 | Should Loop 8's SDXL test push identity on CO3's own run and be judged against CO3 alone? | yes; it starts from Loop 6's training list, about 6 GPU-hours. Loop 8 is asked to use the same two-clear-subjects measure as Loop 6 so the two compare |
 
 ### Still for you
@@ -52,7 +53,6 @@ Newest first. A default happens only if you answer with it; nothing changes whil
 | # | The question, in one line | Why it is yours | Default | Waiting |
 |---|---|---|---|---|
 | 80 | Should a checker choose CO3's weight-sharpness setting at each of its corrected steps ([design](../score-space/11-the-checker-chooses-on-co3.md))? First read on 6 of 12 pairs | over 3 GPU-hours on one run (about 3.1) | **you chose to wait** until Loop 6's per-step read of its checker on CO3 lands (jobs 94593 and 94594); Loop 13 brings it back with that result | since 12:25 |
-| 79 | Loop 9's test of whether sentence scores read a picture's properties has two recorded verdicts (null in its own review, inconclusive in a later fairness test). Which leads the report's title? | two records disagree | keep the test's own verdict, give the fairness test its own finding | 5 h 16 min |
 | none | Loop 10 is closed, but four of its steps (training and testing the shared spaces, and its verdict, which is written) stay open on the board, so the board counts it unfinished | changes another loop's step state | none set | since 10:34 |
 
 Your own reading step (confirm the draft statements from your readings) is ready on the board.
