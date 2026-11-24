@@ -94,8 +94,9 @@ at equal training length:
 
 ## What it costs
 
-All costs are estimates. Our last CLEVR training at 8 million images took about 13h 50m for two models sharing one card, and a lone
-probe ran at 4.05 seconds per thousand images, so a model costs 7 to 9.4 GPU-hours. The first rung measures the real cost.
+All costs are estimates. Step M7 measured 6.82 seconds per thousand images on one RTX 3090 at 128 images per GPU pass, so a model costs
+about 3.8 GPU-hours for 2 million images and 15.2 for 8 million. An earlier lone probe ran at 4.05 seconds, and this table uses the slower
+measured rate.
 
 Rendering is measured at 5.46 seconds per single-object image and 4.50 per empty scene on one 28-thread CPU node, with 32-pixel render
 tiles. At 20,000 images per model, the size of our earlier CLEVR sets, ten experts plus the background and the control take about 359
@@ -104,8 +105,8 @@ the full render starts.
 
 | Stage | Models | GPU-hours at a quarter of that length | GPU-hours at the full length |
 |---|---|---|---|
-| Small test before the go or no-go (steps M7 and M6) | 5 | 9 to 12, plus about 37 CPU node-hours for rendering | not run |
-| Ladder, up to 2 experts | 4 | 7 to 9.4 | 28 to 38 |
-| Ladder, up to 6 experts | 8 | 14 to 19 | 56 to 75 |
-| Ladder, up to 10 experts | 12 | 21 to 28 | 84 to 113 |
-| Two experts holding several objects | 6 | 11 to 14 | 42 to 56 |
+| Small test before the go or no-go (steps M7 and M6) | 4 | about 15, plus about 37 CPU node-hours for rendering | not run |
+| Ladder, up to 2 experts | 4 | about 15 | about 61 |
+| Ladder, up to 6 experts | 8 | about 30 | about 121 |
+| Ladder, up to 10 experts | 12 | about 46 | about 182 |
+| Two experts holding several objects | 6 | about 23 | about 91 |
