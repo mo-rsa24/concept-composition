@@ -1,0 +1,41 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}, 'flowchart': {'nodeSpacing': 30, 'rankSpacing': 36}}}%%
+flowchart TB
+  subgraph SDXL["SDXL draws: unchanged in this loop"]
+    direction TB
+    P["prompt: a puma and a condor"]:::input
+    TE["CLIP ViT-L/14 text encoder + OpenCLIP bigG<br/>word-by-word vectors"]:::frozen
+    U["SDXL U-Net, run as a product or as CO3"]:::fixed
+    P --> TE --> U
+  end
+
+  X["half-drawn latent x_t"]:::input
+  X --> U
+
+  subgraph READ["The reader: W2 and W3"]
+    direction TB
+    V["NoisyCLIP image encoder<br/>one image vector, 768 numbers"]:::image
+    NT["NoisyCLIP text encoder<br/>right and wrong sentences"]:::frozen
+    D{"zero-shot score<br/>S right minus S wrong"}:::plain
+    V --> D
+    NT --> D
+  end
+
+  X --> V
+  NT -.-|"the same weights as SDXL's CLIP ViT-L/14,<br/>but its pooled sentence vector"| TE
+
+  L["W2b: one linear layer per step<br/>reads counting or prompt match"]:::probe
+  V --> L
+
+  E["the next step uses<br/>CO3's prediction minus the push"]:::push
+  U --> E
+  D -->|"W3: gradient, fixed length"| E
+
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef input fill:#ffffff,stroke:#1f5fd0,stroke-width:2px,color:#111111
+  classDef image fill:#dff3e4,stroke:#2f8a4a,stroke-width:2px,color:#111111
+  classDef frozen fill:#efeaf9,stroke:#8b7fb0,stroke-width:2px,color:#444444
+  classDef fixed fill:#f1f3f5,stroke:#6b7a88,stroke-width:2px,color:#111111
+  classDef push fill:#fff1e0,stroke:#c86a0a,stroke-width:3px,color:#111111
+  classDef probe fill:#e6f2fb,stroke:#1f5fd0,stroke-width:3px,color:#111111
+  style SDXL fill:#ffffff,stroke:#a0a0a0
+  style READ fill:#ffffff,stroke:#a0a0a0
