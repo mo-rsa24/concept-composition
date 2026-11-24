@@ -1,6 +1,6 @@
 {
  "last_tick": "2026-11-24T20:09:00+02:00",
- "last_alignment_round": "2026-11-24T16:10:00+02:00",
+ "last_alignment_round": "2026-11-24T22:10:00+02:00",
  "steps": {
   "P0": "done",
   "P1": "done",
@@ -188,7 +188,8 @@
   "91": "answered",
   "92": "answered",
   "93": "answered",
-  "94": "answered"
+  "94": "answered",
+  "95": "answered"
  },
  "nudges": [
   {
@@ -239,7 +240,8 @@
   }
  ],
  "patterns_requested": [
-  "s6:M9:three-misses-2026-11-24"
+  "s6:M9:three-misses-2026-11-24",
+  "s8:sampler-state-reads:two-misses-2026-11-24"
  ],
  "void_list_table_lines": 26,
  "last_reviewer_run": {
@@ -288,6 +290,10 @@
   {
    "q": 94,
    "choice": "A with fresh 5-9 seeds"
+  },
+  {
+   "q": 95,
+   "choice": "A with free check, held-out control, disclosure"
   }
  ],
  "rerouted": {
