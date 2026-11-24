@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-24 23:36 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-24 23:51 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -107,7 +107,6 @@ Newest first.
 | Concerns | Finding | Source |
 |---|---|---|
 | Loop 12 | **A run of bad results** (two nulls) and **a test that measured something else than its name**: the drawn-box fix never gave each animal its own prediction inside its box, so its draft verdict that regions cannot work overreaches. Method review request sent at 23:35. | `2-classifier-guidance/scripts/leakage/z3_regions.py` lines 66 to 72 |
-| Loop 12 | **Two records disagree** on the third rerun of question 97: `leakage/04-paper-2-method.md` line 20 says it is not to be spent, question 97 proposed it. Loop 12 is asked to make them agree. | both files |
 | Loop 8 | **A run of bad results on reading sampler states**: 0.651, then 0.552 with memorised training digits. Method review request sent at 22:20 after the reviewer's second pass. | `abstract-checkers/10-reading-identity/review.md` |
 | Loops 6 and 8 | **The same split in both loops**: their checkers rank good above bad pictures moderately (area under the curve about 0.70 on CO3, 0.78 on digits) but their yes-or-no call at zero misses the bar (0.602 and 0.651). Neither loop may swap the gate after seeing this; both are asked to look at it in review. | both reviews |
 | Loop 8 | **The digit checker reads pasted canvases but not real sampler states**: 0.861 on pasted digits against 0.651 on the sampler's own states at steps 27 to 36, under 0.75. A checker that pushes during sampling has to read sampler states, so this is the result that decides whether the removal test is worth running. | Loop 8's message at 18:26 |
@@ -148,6 +147,7 @@ Newest first.
 | Time | To | What and why |
 |---|---|---|
 | 17:02 | Loop 8 | Its rewritten SDXL test passes the design check (stop rule, random and zero controls, comparison prompts fixed in advance, the same two-clear measure as Loop 6; about 7 GPU-hours, inside budget). Its board record goes to you as question 89. |
+| 23:50 | Loop 12 | Its [method review](../leakage/method-review.md) answered: records corrected to say what the drawn-box test did, the two disagreeing records reconciled, question 97's third rerun read free from its own records. Next, in order: a free text-only check, each animal's own prediction inside its box (about 0.8 GPU-hours), and the text-side swap only if the free check supports it, with a positive control. |
 | 23:35 | Loops 12 and 8 | **Method review request** to Loop 12 after two nulls, with question 97 decided; Loop 8 runs that question's first rerun beside its free check. One line in `requests.md`. |
 | 22:30 | Loops 8 and 6 | Loop 8's method review answered (`method-review.md`): the first checker ranks but its cut drifts, the second memorised. Its removal test closes after the visibility check; the gate question is yours as 96, and both loops keep their recorded gate until then. |
 | 22:20 | Loop 8 | **Method review request** after two misses on sampler states, with question 95 decided; one line in `requests.md`. |
