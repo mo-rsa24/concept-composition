@@ -16,8 +16,8 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#how-each-folder-reads) ➡�
 | Folder | What the method does | Which loop uses it |
 |---|---|---|
 | [01: the product of experts](01-the-product-of-experts/01-overview.md) | Adds the noise predictions of two models that each know one thing, takes the base's off once, and samples from the sum; the piece the sum leaves out is the interaction term | The sampler every push is added to: Loop 7's five-checker design and Loop 8's digit push (step V3) |
-| 02: the readout checker, not written yet | A small trained head reads frozen SDXL's middle block and first two up blocks on a half-drawn picture, and the gradient of its score pushes the sampler | Loop 6, as Paper 2's kept checker |
-| 03: the digit-map checkers, not written yet | Two small classifiers read maps of where each asked digit acts on a noisy canvas, one counting the digits and one naming them, and their gradient pushes the digit product | Loop 8 |
+| [02: the readout checker](02-the-readout-checker/01-overview.md) | A small trained head reads frozen SDXL's middle block and first two up blocks on a half-drawn picture, and the gradient of its score pushes the sampler | Loop 6, as Paper 2's kept checker |
+| [03: the digit-map checkers](03-the-digit-map-checkers/01-overview.md) | Two small classifiers read maps of where each asked digit acts on a noisy canvas, one counting the digits and one naming them, and their gradient pushes the digit product | Loop 8 |
 | 04: the sentence-score push, not written yet | A noise-aware CLIP scores a half-drawn latent against a right and a wrong sentence, and the gradient of the difference joins the noise prediction | Loop 9 |
 | 05: Latent CLIP, not written yet | A CLIP model that reads SDXL latents directly, tried in place of the noise-aware CLIP for the same right-minus-wrong sentence score | Loop 9 (step W1b) |
 | 06: the word-map checker, not written yet | A classifier on two words' cross-attention maps reads the spatial relation between two subjects, Learn-to-Steer's method applied to SDXL's product | Loop 7, which designed it as Paper 2's spatial-relation checker |
