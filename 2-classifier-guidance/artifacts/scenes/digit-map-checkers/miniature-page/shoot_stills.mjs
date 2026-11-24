@@ -35,6 +35,12 @@ const SHOTS = [
   ["09-push-length-at-1", "push-length", "__seek(20, 0)", "push-length sweep at b = 1.00"],
   ["10-identity-training", "training", "document.getElementById('br-identity').click()", "identity branch after one step: both logits fall, gap 0.4205 to 0.4192"],
   ["11-noise-real-scores", "noise", "", "noise frame at t = 480: the real count checker's 0.63 and 0.92 ends and its 0.791 average"],
+  ["00i-real-readout-network", "real-system", "__real('apart_3_4', 539, 10)", "opening frame, the readout MLP as nodes on apart 3|4 at t = 539: 12 hidden units, their activations and output weights, and the sum that gives the logit 1.297"],
+  ["13-push-score-card", "push", "document.querySelectorAll('#pbody .card')[1].scrollIntoView()", "push frame, the card that reads the push as classifier guidance: (1 - p) drops out, and subtracting along g adds s_t g to the score"],
+  ["14-two-digits-before-push", "two-digits", "__trace('6-8', 'won', 10)", "step-by-step frame, digits 6 and 8, seed 1000, step 10: no push yet, the two lanes are one run"],
+  ["15-two-digits-push-acting", "two-digits", "__trace('6-8', 'won', 20)", "step 20, push acting: pushed maps 9.1 px apart against 3.1 in the plain lane; logit 3.78 against -1.08"],
+  ["16-two-digits-end", "two-digits", "__trace('5-6', 'won', 49)", "digits 5 and 6, seed 1006, step 49: plain ends as one blob, pushed as two clear digits"],
+  ["17-two-digits-lost", "two-digits", "__trace('7-9', 'lost', 49)", "digits 7 and 9, seed 1000, step 49: a seed the push did not separate, both lanes end as one blob"],
   ["12-convolution-hover", "convolution", "(() => { const h = document.querySelector('.hit[data-edge=k0000]'); const r = h.getBoundingClientRect(); h.dispatchEvent(new PointerEvent('pointerenter', {clientX: r.left + r.width * 0.6, clientY: r.top + r.height * 0.6, bubbles: true})); })()", "convolution frame with the kernel lines bare and one weight's hover label open"],
 ];
 // phone width: the opening frame and the network, where crowding would show first
@@ -43,6 +49,8 @@ const PHONE = [
   ["p2-real-logit", "real-system", "__real('wrong_1_3', 616, 10)"],
   ["p3-network-forward", "logit", ""],
   ["p4-training-end", "training", "__seek(14, 0)"],
+  ["p5-real-readout", "real-system", "__real('apart_3_4', 539, 10)"],
+  ["p6-two-digits", "two-digits", "__trace('6-8', 'won', 20)"],
 ];
 
 const browser = await chromium.launch({ executablePath: "/usr/bin/google-chrome", args: ["--no-sandbox"] });

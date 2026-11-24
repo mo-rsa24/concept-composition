@@ -22,7 +22,7 @@ This ladder teaches the two small classifiers Loop 8 trains on noisy digit canva
 | 0.5 | the network view: canvas and noise, maps, network, timestep (shared), then labels and the two backward passes (per branch) | [the network view](0.5-network-view/README.md) |
 | 1 | the idea, illustrated | [three prompts](1-illustrations/diagram-prompts.md), written and not rendered |
 | 2 | the miniature: a 4-pixel canvas, every number, one training step per branch, the push | [the worked miniature](2-miniature/README.md) |
-| 2, to play | the miniature as one page: step and play the forward pass, the training and push backward passes, the 16 noise levels and the push length | [the miniature page](miniature-page/digit-map-checkers-miniature.html), built locally and not published; [what it holds](miniature-page/SPEC.md) |
+| 2, to play | the miniature as one page: a real overview of every stage on four canvases, the readout drawn as a network with real activations, the score mathematics, the forward and both backward passes, the 16 noise levels, the push length, and how the push turns one fused glyph into two digits step by step | [the miniature page](https://claude.ai/artifact/MX2hKBUWBXSzPQSbaxysKC), published privately, version 2; local copy [here](miniature-page/digit-map-checkers-miniature.html); [what it holds](miniature-page/SPEC.md); [four Codex stills of the push](miniature-page/digit-map-checkers-miniature-stills.md) |
 | 3 | the real code, block by block | [the code walk](3-code/walk-v2-learn.md), at commit `a737766d` |
 | beside | each equation down to fundamentals | [the rebuild companion](rebuild-from-fundamentals.md) |
 | close | the two checkers read through the small network | [the closing page](read-through-a-small-network.md) |

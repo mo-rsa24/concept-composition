@@ -118,7 +118,18 @@ def one_timestep(row):
             push = np.linalg.norm(prod) * b * unit
             per_b.append({"b": b, "push": r(push), "eps_hat": r(prod - push), "x0_hat_shift": r(s1 / sa * push),
                           "push_length": round(float(np.linalg.norm(push)), 4)})
-        out["push"][name] = {"dlogit_dfeat": r(P0["v"] * 1.0), "dlogit_dpre": r(dpre), "dlogit_dmaps": r(dm), "g": r(gx), "norm_g": round(float(np.linalg.norm(gx)), 4),
+        # the score view (02-score-view.md Steps 1, 5 and 8): grad log p = (1 - p) g points along g, so normalising drops
+        # (1 - p); subtracting c*g from eps adds (c / sqrt(1 - abar)) * g to the score -eps / sqrt(1 - abar)
+        p = float(mini.sig(mini.logit_of_x(x, P0)))
+        glogp = (1 - p) * gx
+        assert np.allclose(glogp / np.linalg.norm(glogp), unit, atol=1e-12)
+        c_push = np.linalg.norm(prod) * mini.B / np.linalg.norm(gx)
+        assert np.allclose(-(prod - c_push * gx) / s1, -prod / s1 + (c_push / s1) * gx, atol=1e-12)
+        score_view = {"p": round(p, 4), "one_minus_p": round(1 - p, 4), "norm_grad_logp": round(float(np.linalg.norm(glogp)), 4),
+                      "b": mini.B, "score_gain": round(float(c_push / s1), 4),
+                      "score_push_length": round(float(mini.B * np.linalg.norm(prod) / s1), 4)}
+        out["push"][name] = {"score_view": score_view,
+                             "dlogit_dfeat": r(P0["v"] * 1.0), "dlogit_dpre": r(dpre), "dlogit_dmaps": r(dm), "g": r(gx), "norm_g": round(float(np.linalg.norm(gx)), 4),
                              "unit_g": r(unit), "norm_eps_product": round(float(np.linalg.norm(prod)), 4),
                              "clean_guess_gain": round(float(s1 / sa), 4), "g_maps_inside_no_grad": r(g_detached),
                              "logit_after_small_step_along_g": round(mini.logit_of_x(x + 0.01 * unit, P0), 4), "by_b": per_b}
@@ -203,6 +214,34 @@ def top_channels(a):
     return [int(i) for i in np.argsort(-means, kind="stable")[:N_CHANNELS]]
 
 
+READOUT = HERE / "readout-mlp.npz"      # written by read_readout.py from count-head-map.pt (the saved checker's MLP)
+N_HIDDEN_SHOWN = 12
+
+
+def readout(pooled, tf, logit):
+    """The readout MLP on one real cell: h = SiLU(W1 [pooled; phi] + b1), logit = w2 . h + b2.
+
+    The page draws the 12 hidden units with the largest |w2_j * h_j| on this cell, sorted by w2_j * h_j from most positive
+    to most negative, and folds the other 244 into one sum. The three parts plus b2 must rebuild the stored logit.
+    """
+    R = np.load(READOUT)
+    W1, b1, w2, b2 = (R[k].astype(np.float64) for k in ("W1", "b1", "w2", "b2"))
+    pre = W1 @ np.concatenate([pooled, tf]).astype(np.float64) + b1
+    h = pre / (1 + np.exp(-pre))
+    contrib = w2 * h
+    top = np.argsort(-np.abs(contrib), kind="stable")[:N_HIDDEN_SHOWN]
+    top = top[np.argsort(-contrib[top], kind="stable")]
+    rest = np.setdiff1d(np.arange(256), top)
+    shown, others = float(contrib[top].sum()), float(contrib[rest].sum())
+    again = shown + others + float(b2[0])
+    assert abs(again - logit) < 1e-3, (again, logit)
+    return {"units": [{"j": int(j), "pre": round(float(pre[j]), 3), "h": round(float(h[j]), 3), "w2": round(float(w2[j]), 3),
+                       "contrib": round(float(contrib[j]), 3)} for j in top],
+            "sum_shown": round(shown, 3), "sum_rest": round(others, 3), "n_rest": int(len(rest)), "b2": round(float(b2[0]), 3),
+            "logit_rebuilt": round(again, 4), "positive_units": int((contrib > 0).sum()),
+            "h_active": int((h > 0.01).sum()), "h_min": round(float(h.min()), 3)}
+
+
 def real_stages():
     """Every in-between output of the saved count checker (share-0.0 U-Net, job 94116) for the overview frame."""
     z = np.load(REAL_STAGES)
@@ -250,6 +289,7 @@ def real_stages():
             again = np.concatenate([c2.mean((1, 2)), c2.max((1, 2))])
             assert np.allclose(again, f32(k + "pooled"), atol=2e-2), (name, t, float(np.abs(again - f32(k + "pooled")).max()))
             assert all(abs(v - 2048) < 4 for v in cell["maps_sum"]), cell["maps_sum"]
+            cell["readout"] = readout(f32(k + "pooled"), f32(k + "time_features"), float(z[k + "logit"]))
             out["cells"][f"{name}|{t}"] = cell
     return out
 
@@ -289,6 +329,86 @@ def real_scores():
             "noisiest_t": ts[0], "least_noisy_t": ts[-1], "bar": 0.75, "chance": 0.5}
 
 
+TRACE = LADDER / "numbers" / "real" / "trace"     # job 94161, trace_push.py at commit 199210af
+TRACE_PAIRS = ["6-8", "5-6", "7-9"]               # the three example pairs, the default first
+CLEAN = "two clear, right, apart"
+# the review's table (06-does-it-compose/review.md, "What the two maps do while the push acts"), which the stats must give
+REVIEW_TABLE = {"steps": [0, 15, 20, 25, 30, 40, 49],
+                "plain": {"sep": [0.7, 1.6, 1.5, 1.3, 1.4, 1.0, 0.9], "overlap": [0.614, 0.620, 0.617, 0.614, 0.599, 0.657, 0.663],
+                          "logit": [-0.21, -0.23, -1.26, -4.14, -3.66, -1.33, -0.15]},
+                "push": {"sep": [0.7, 1.6, 4.1, 6.6, 6.4, 2.6, 1.1], "overlap": [0.614, 0.620, 0.619, 0.552, 0.525, 0.646, 0.667],
+                         "logit": [-0.21, -0.23, 3.22, 6.69, 6.41, 3.58, -0.04]}}
+
+
+def trace():
+    """Plain and pushed sampling recorded at every one of the 50 sampler steps (job 94161).
+
+    Aggregates over all 320 canvases (10 unseen pairs x 32 seeds), and for each example pair its first won seed (plain
+    'one blob', pushed clean) and its lost seed, with four pictures per step: the guess of the clean canvas, the two maps,
+    and the gradient g. Maps and g are scaled per step at their own 99th percentile; the scales are kept.
+    """
+    t = json.loads((TRACE / "trace.json").read_text())
+    S = np.load(TRACE / "trace-stats.npz", allow_pickle=False)
+    Z = np.load(TRACE / "trace-examples.npz", allow_pickle=False)
+    pairs = list(t["pairs"])
+    assert len(pairs) == 10 and len(t["t"]) == 50
+    window = [i for i, tt in enumerate(t["t"]) if tt in t["push_steps"]]
+    assert window == list(range(15, 26)), window
+    agg = {}
+    for row in ("plain", "push"):
+        sep = np.concatenate([np.abs(S[f"{p}__{row}__com_a"] - S[f"{p}__{row}__com_b"]) for p in pairs])
+        ov = np.concatenate([S[f"{p}__{row}__overlap"] for p in pairs])
+        lg = np.concatenate([S[f"{p}__{row}__logit"] for p in pairs])
+        assert sep.shape == (320, 50)
+        agg[row] = {"sep": [round(float(v), 3) for v in sep.mean(0)], "overlap": [round(float(v), 4) for v in ov.mean(0)],
+                    "logit": [round(float(v), 3) for v in lg.mean(0)]}
+        for k, want in REVIEW_TABLE[row].items():
+            d = 1 if k == "sep" else 3 if k == "overlap" else 2
+            got = [round(float(np.mean({"sep": sep, "overlap": ov, "logit": lg}[k][:, s])), d) for s in REVIEW_TABLE["steps"]]
+            assert got == want, (row, k, got, want)
+    clean = {p: {"plain": int(S[f"{p}__plain__clean"].sum()), "push": int(S[f"{p}__push__clean"].sum()),
+                 "v3_plain": t["pairs"][p]["v3_clean"]["plain"], "v3_push": t["pairs"][p]["v3_clean"]["push"]} for p in pairs}
+    for p in pairs:
+        assert clean[p]["plain"] == t["pairs"][p]["clean"]["plain"] and clean[p]["push"] == t["pairs"][p]["clean"]["push"], p
+    totals = {k: sum(c[k] for c in clean.values()) for k in ("plain", "push", "v3_plain", "v3_push")}
+    assert totals == {"plain": 0, "push": 41, "v3_plain": 0, "v3_push": 43}, totals
+    examples = []
+    for p in TRACE_PAIRS:
+        ex = t["pairs"][p]["examples"]
+        for kind in ("won", "lost"):
+            seed = ex[kind][0]
+            k = f"{p}_seed{seed}__"
+            rows = {}
+            for row in ("plain", "push"):
+                x0 = Z[k + row + "__x0"][:, 0].astype(np.float32)
+                maps = Z[k + row + "__maps"].astype(np.float32)
+                g = Z[k + row + "__g"][:, 0].astype(np.float32)
+                push = Z[k + row + "__push"][:, 0].astype(np.float32)
+                pn = np.linalg.norm(push.reshape(50, -1), axis=1)
+                inside = np.zeros(50, bool); inside[window] = True
+                assert np.all(pn[~inside] == 0) and (row == "plain") == np.all(pn == 0), (p, seed, row)
+                ms = np.array([[np.percentile(maps[s, c], 99) for c in range(2)] for s in range(50)])
+                gs = np.array([np.percentile(np.abs(g[s]), 99) for s in range(50)])
+                rows[row] = {"call": str(Z[k + row + "__call"]), "final": b64(Z[k + row + "__final"]),
+                             "x0": grey(x0), "maps": b64(np.round(255 * np.clip(maps / ms[:, :, None, None], 0, 1))),
+                             "g": b64(np.round(127.5 * (1 + np.clip(g / gs[:, None, None], -1, 1)))),
+                             "maps_scale": [[round(float(v), 2) for v in s] for s in ms], "g_scale": [float(f"{v:.3g}") for v in gs],
+                             "g_norm": [float(f"{v:.3g}") for v in np.linalg.norm(g.reshape(50, -1), axis=1)],
+                             "push_norm": [round(float(v), 2) for v in pn],
+                             **{q: [round(float(v), 3) for v in Z[k + row + "__" + q]] for q in ("logit", "com_a", "com_b", "overlap")}}
+            # the two lanes are one run until the first push: identical through step 15, apart from step 16
+            same = [bool(np.array_equal(Z[k + "plain__x0"][s], Z[k + "push__x0"][s])) for s in range(50)]
+            assert all(same[:16]) and not same[16], (p, seed)
+            if kind == "won":
+                assert rows["push"]["call"] == CLEAN and rows["plain"]["call"] == "one blob", (p, seed)
+            else:
+                assert rows["push"]["call"] != CLEAN, (p, seed)
+            examples.append({"pair": p, "digits": [int(d) for d in p.split("-")], "seed": seed, "kind": kind, "rows": rows})
+    return {"source": "../numbers/real/trace/ (job 94161, trace_push.py at commit 199210af, mscluster81)", "t": t["t"],
+            "window": [window[0], window[-1]], "b": 0.4, "clean": clean, "totals": totals, "canvases": 320,
+            "agg": agg, "examples": examples, "identical_through_step": 15}
+
+
 def main():
     steps = [one_timestep(row) for row in SCHEDULE]
     by_t = {s["t"]: s for s in steps}
@@ -316,6 +436,7 @@ def main():
         "real_canvases": real_canvases(),
         "real_stages": real_stages(),
         "real_scores": real_scores(),
+        "trace": trace(),
     }
     # the logits the job printed (job 94116's log) must be the ones the page shows
     printed = {"apart_1_3": [0.543, 1.567, 3.806, 6.308], "wrong_1_3": [0.076, -1.115, -1.281, -1.019],
