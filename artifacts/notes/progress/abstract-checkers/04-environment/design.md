@@ -1,5 +1,8 @@
 # A small repeatable environment for abstract checkers (step V1)
 
+
+The verdict is in [the finding on whether the small environment is repeatable](../../../../../2-classifier-guidance/report/abstract-checkers-on-digits/is-the-small-environment-repeatable.md).
+
 ## What this asks
 
 Later stages test whether a checker can learn a property that holds across concepts, starting with plurality: are the two asked

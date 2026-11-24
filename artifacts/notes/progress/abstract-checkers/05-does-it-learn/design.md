@@ -1,5 +1,8 @@
 # Does a checker learn plurality on unseen digits (step V2)
 
+
+The verdict is in [the finding on whether a checker learns plurality on unseen digits](../../../../../2-classifier-guidance/report/abstract-checkers-on-digits/does-a-checker-learn-plurality-on-unseen-digits.md).
+
 ## What this asks
 
 Can a small checker that reads only where each asked digit acts on a noisy canvas tell whether both asked digits are present and apart, on digits it never trained on? The checker trains on the 10 pairs among digits 0 to 4 and is tested on the 10 pairs among digits 5 to 9. The inputs, network and bars come from [the abstract-checker design](../03-design.md#step-v2-does-a-checker-learn-plurality-on-unseen-digits), and the data from [step V1](../04-environment/review.md).

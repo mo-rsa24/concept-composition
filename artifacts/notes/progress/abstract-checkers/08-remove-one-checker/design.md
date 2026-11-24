@@ -1,5 +1,8 @@
 # Remove one checker at a time, on digits (step V5)
 
+
+The verdict is in [the finding on whether removing one checker removes its property](../../../../../2-classifier-guidance/report/abstract-checkers-on-digits/does-removing-one-checker-remove-its-property.md).
+
 ## What this asks
 
 Does removing one checker damage only its own property? If it does, composition is controllable property by property, which is the owner's main experiment. This is the digit rehearsal from [the abstract-checker design](../03-design.md#the-digit-rehearsal), approved by board question 56, run before any SDXL version.

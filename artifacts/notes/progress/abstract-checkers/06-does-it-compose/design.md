@@ -1,5 +1,8 @@
 # Does the count checker's push compose unseen digits (step V3)
 
+
+The verdict is in [the finding on whether the count checker's push composes unseen digits](../../../../../2-classifier-guidance/report/abstract-checkers-on-digits/does-the-count-checkers-push-compose-unseen-digits.md).
+
 ## What this asks
 
 Step V2 left a count checker that tells two digits sitting apart from the other layouts, on digits it never trained on. Step V3 tests whether its gradient, added to the plain product while sampling, makes the digit model draw two separate, right digits on the pairs among digits 5 to 9. By the owner's answer to board question 69, the push is the count checker's alone, and the plain product's two digit labels supply which digits appear.
