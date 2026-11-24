@@ -535,8 +535,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-24T14:31:20+02:00",
-   "updated": "2026-11-24T23:39:21+02:00",
-   "note": "both full trainings done (held-out tiles: current 0.571, balanced 0.504); scoring pass 94783 reads all three checkers on CO3's saved states"
+   "updated": "2026-11-25T01:59:14+02:00",
+   "note": "scoring pass 94783 waits in Slurm; under question 99 it moves to mscluster107 card 1 after Loop 12 and Loop 8, launcher guarded on host job 94699"
   },
   {
    "id": "D3",
@@ -862,6 +862,21 @@
    "state": "todo",
    "serves": "Paper 1",
    "objective": "Build and test"
+  },
+  {
+   "id": "Z7",
+   "label": "Z7 Each animal's own prediction in its box",
+   "owner": "s12",
+   "proof": "artifacts/notes/progress/leakage/07-own-prediction/review.md reports two clear subjects of 48 against CO3 alone and the whole-picture control by the bar written before the run, with per-subject part scores beside it, and the free text-only check",
+   "needs": [
+    "Z6"
+   ],
+   "state": "doing",
+   "serves": "Paper 2",
+   "objective": "Find what fixes identity on CO3",
+   "started": "2026-11-25T00:14:17+02:00",
+   "updated": "2026-11-25T00:14:17+02:00",
+   "note": "free text-only check first, then the design and its bar"
   },
   {
    "id": "U1",
@@ -1648,7 +1663,7 @@
    "description": "BEFORE: nothing. It starts by itself when the paper repository (step D1) is done.\n\n1. IT RUNS as the background session 🔬 PhD Loop 5: Reproduce Rivals And Choose Checker, following:\nartifacts/notes/progress/prompts/session-5-reproduce-and-choose.md\n\n2. IT DOES: compares candidate checker architectures on small data, by a selection rule written before any of them trains.\n\n3. YOU DO: answer anything on the waiting picture.\n\nOUTCOME: one chosen architecture, with the comparison saved.\nDONE WHEN: the checker review names the choice and the rule that picked it.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nSCOREBOARD: /home/molef/PhD/concept-composition/artifacts/notes/progress/scoreboard.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: arch",
    "event_id": "l29esd328d9glp7jd5p4fn4ekg",
    "start": "2026-11-22T11:35:00+02:00",
-   "end": "2026-11-24T23:35:22+02:00",
+   "end": "2026-11-25T02:10:16+02:00",
    "synced": "1150295b1faf"
   },
   {
@@ -1892,7 +1907,8 @@
     "Z6",
     "N1",
     "N2",
-    "M11"
+    "M11",
+    "Z7"
    ],
    "joiner": "~~~"
   }
@@ -3040,8 +3056,21 @@
    "holds": null,
    "default": "run (1) and (2), about 0.8 GPU-hours, in whichever loop the owner names; hold the text-encoder fix behind (1)",
    "by": "s12",
-   "state": "open",
-   "asked": "2026-11-24T23:26:28+02:00"
+   "state": "answered",
+   "asked": "2026-11-24T23:26:28+02:00",
+   "answer": "Decided by Loop 13 for the owner: run (1) and (2), in Loop 12, which holds the code (z3_regions.py) and the records. (1) The free text-only check first, no GPU. (2) Each animal's own prediction inside its hand-drawn box at sampling steps 5 to 30, on the same 48 pictures of the six borrowing pairs, counted blind as two clear subjects with their own parts (question 92) against CO3 alone, with per-subject part scores from the blind notes reported beside it, about 0.8 GPU-hours. The 48-picture bar is written down before the run, as Loop 4 asks (a lead of 5 of 96 does not apply to 48). The text-encoder fix stays held behind (1), and comes to the owner if it runs over 3 GPU-hours. It is reversible, inside budget, changes no recorded bar, and is the test both reviews of Loop 12 named (reviewer/2026-11-24-review.md; leakage/method-review.md). Loop 12 adds it as one step with add, naming --serves 'Paper 2'. The owner may overrule by answering again.",
+   "answered": "2026-11-25T00:13:30+02:00"
+  },
+  {
+   "id": 99,
+   "question": "Shared-device run on mscluster107 card 1 again: the node is another user's new biggpu job (94699, started about 01:33, limit nearly 3 days); card 1 is idle (0% use, 170 MiB, their process's start-up context only) while 22 of our jobs wait on cluster priority. May loops run queued work there over SSH with nohup under the shared-device rules in environment/hpc/execution-protocol.md step 3?",
+   "holds": null,
+   "default": "no shared-device launch",
+   "by": "s13",
+   "state": "answered",
+   "asked": "2026-11-25T01:58:24+02:00",
+   "answer": "Owner, in chat, 2026-11-25: yes. One run at a time on card 1, shortest first: Loop 12's free text-only check and smoke run (jobs 94790, 94791), then Loop 8's readability check (94781), then Loop 6's read of its two new checkers (94783); each loop cancels its own queued Slurm copy once its shared run starts. All step 3 safety rules apply, plus the owner's rule: the launch script checks card 1 every 30 seconds and stops our run, logging why, as soon as any process not ours passes 1 GB there. This approval ends when job 94699 ends.",
+   "answered": "2026-11-25T01:58:24+02:00"
   }
  ]
 }
