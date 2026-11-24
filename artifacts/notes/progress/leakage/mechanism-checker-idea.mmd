@@ -5,7 +5,7 @@ flowchart LR
   C["small checker on that signal only<br/>never sees 'cheetah' or 'cougar'"]:::plain
   G{"use it to"}:::plain
   P["push: its gradient<br/>added while sampling"]:::plain
-  H["choose: restart a seed<br/>or pick CO3's beta"]:::plain
+  H["choose: set CO3's beta<br/>at each step, same trajectory"]:::plain
   L[("labels per failure kind<br/>count, co-occurrence: detector<br/>part binding: by eye only")]:::plain
   S --> R --> C --> G
   G --> P --> S
