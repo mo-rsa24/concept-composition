@@ -215,10 +215,18 @@ def score(args):
         verdict = "it does not"
     else:
         verdict = "inconclusive"
+    # Board question 96 asks whether the gate should be the area under the curve; until the owner answers, the gate above stands, and a
+    # checker that reaches the bar only on ranking is reported as that, beside the verdict, deciding nothing.
+    auc_best = max(per_step, key=lambda s: per_step[s]["area_under_curve"])
+    auc_top = per_step[auc_best]["area_under_curve"]
+    ranking_only = top < BAR and auc_top >= BAR
     result = {"runs": len(rows), "reproduced_and_labelled": len(kept), "clear": sum(clear[r["key"]] for r in kept),
-              "bar": BAR, "floor": FLOOR, "best_step": best, "best_balanced_accuracy": top, "verdict": verdict, "per_step": per_step}
+              "bar": BAR, "floor": FLOOR, "best_step": best, "best_balanced_accuracy": top, "verdict": verdict,
+              "best_auc_step": auc_best, "best_area_under_curve": auc_top,
+              "outcome_on_ranking": "reaches the bar on ranking only (question 96)" if ranking_only else None, "per_step": per_step}
     (args.out / ("read-score-merged.json" if args.also else "read-score.json")).write_text(json.dumps(result, indent=1) + "\n")
-    print(json.dumps({k: result[k] for k in ("runs", "reproduced_and_labelled", "clear", "best_step", "best_balanced_accuracy", "verdict")}))
+    print(json.dumps({k: result[k] for k in ("runs", "reproduced_and_labelled", "clear", "best_step", "best_balanced_accuracy", "verdict",
+                                           "best_auc_step", "best_area_under_curve", "outcome_on_ranking")}))
     print({s: (v["balanced_accuracy"], v["area_under_curve"]) for s, v in per_step.items()})
 
 
