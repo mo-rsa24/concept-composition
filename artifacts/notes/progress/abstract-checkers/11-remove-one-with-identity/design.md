@@ -53,6 +53,16 @@ One thing differs between the two runs: which right-digits checker is used. Its 
 | Null | No property meets the whole rule above, including a removal that lowers its own column by the margin but moves another column past the limit (board question 75) |
 | Inconclusive | The zero-push check fails, a row is void by the 0.6 total-length rule, or a cell the verdict needs holds fewer than 40 canvases |
 
+**Unchained columns, the primary reading.** V5 scored each property only on canvases that passed the one before, so removing count changed how many canvases reached the order column (134 against 38 in V5's rerun) and could move it through that selection alone. V7 also scores each property on every canvas, from the same judge reads, with the denominator fixed at the row's canvases:
+
+| Column | Counted on every canvas when |
+|---|---|
+| Count | the judge calls two separate digits, one per half (as in V5) |
+| Right digits | each of the two asked digits is read with probability at least 0.9, as its blob's most likely digit, in some blob anywhere on the canvas |
+| Order | the asked left digit is read the same way in a blob whose centre lies in the left half |
+
+The same rule as the table above, with the same margins (6.25 and 4.2 percentage points, 1.96 standard errors over pairs), applied to these columns gives V7's verdict on "one checker controls one property". The chained columns and their verdict are reported beside it unchanged, so V7 compares with V5 like for like. A canvas the judge cannot split into two blobs can still fail the right-digits and order columns, so the columns are not independent of layout: they are free of selection, not of physics. V5's saved rows hold per-pair tallies only, so V5 is redescribed with each chained count over all 960 canvases, labelled as a description made after its verdict.
+
 **What would surprise.** Removing the right-digits checker lowering the count column. The identity window starts after the count window ends, so a drop in count would mean late pushes still move the layout.
 
 **The ladder.** A smoke test of every row on one pair at 4 seeds; the gradient's memory on a 96-seed batch checked before the full run; the zero-push check and the push length on the seen pairs; then the eleven rows on the unseen pairs, once.

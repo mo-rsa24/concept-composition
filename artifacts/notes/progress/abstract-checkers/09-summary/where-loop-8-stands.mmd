@@ -4,8 +4,8 @@ flowchart TB
     direction TB
     V1["V1 test bed<br/>PASS"]:::good --> V2["V2 checker on unseen digits<br/>count PASS 0.791<br/>identity MISS 0.555"]:::mixed
     V2 --> V3["V3 push composes unseen pairs<br/>PASS: 43 of 320 vs 0"]:::good
-    V3 --> V5["V5 remove one checker<br/>NULL by the rule<br/>count, order control their own"]:::mixed
-    V5 --> V4["V4 on SDXL's unseen objects<br/>NOT RUN: waits on Loop 6's D3"]:::todo
+    V3 --> V5["V5 remove one checker<br/>NULL by the rule: removing count or order<br/>each moved another column about 7 points"]:::mixed
+    V5 --> V4["V4 on SDXL's unseen objects<br/>NOT RUN: needs M5's animal list;<br/>rewrite is board question 86"]:::todo
   end
   L9["Loop 9: sentence scores read<br/>no identity at early steps"]:::other
   L10["Loop 10: score path 0.700<br/>at SDXL's noise, 0.513 early"]:::other

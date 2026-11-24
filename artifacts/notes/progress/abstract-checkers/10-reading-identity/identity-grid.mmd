@@ -6,15 +6,15 @@ flowchart LR
   classDef wait fill:#f1f3f4,stroke:#5f6368,stroke-width:2px,stroke-dasharray:5 5,color:#111111
   Q["Right digits against one wrong digit?<br/>trained on pairs among 0 to 3<br/>scored on pairs holding 4<br/>bar 0.75, chance 0.5"]:::plain
   V2["V2 identity checker<br/>two maps, early window<br/>0.555"]:::miss
-  subgraph EARLY["Early window: SDXL steps 0 to 15"]
+  subgraph EARLY["Early window: toy timesteps 712 to 480,<br/>matched by noise share to SDXL steps 0 to 15 (inferred)"]
     BE["Two maps<br/>0.563<br/>(own pairs 0.586)"]:::miss
     SE["Ten-label signature<br/>0.612<br/>(own pairs 0.628)"]:::miss
   end
-  subgraph LATER["Later window: SDXL steps 16 to 31"]
+  subgraph LATER["Later window: toy timesteps 466 to 263,<br/>matched by noise share to SDXL steps 16 to 31 (inferred)"]
     BL["Two maps<br/>0.702<br/>(own pairs 0.827)"]:::miss
     SL["Ten-label signature<br/>0.888<br/>(own pairs 0.892)"]:::pass
   end
-  F["Retrain on digits 0 to 4,<br/>read digits 5 to 9 once<br/>job 94383"]:::wait
+  F["Retrained on digits 0 to 4,<br/>read digits 5 to 9 once: 0.861<br/>the fair number"]:::pass
   Q --> EARLY
   Q --> LATER
   V2 -. "bigger wrong-digit pool:<br/>+0.008" .-> BE

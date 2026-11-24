@@ -1,6 +1,6 @@
 # Can a checker read which digits are present (step V6): review
 
-**Status: support, on digit 4 and on digits 5 to 9; two robustness checks are queued (jobs 94471 and 94472).** One of the four checkers, the ten-label signature read in the later window, tells two right digits from one right and one wrong digit at 0.888 balanced accuracy on the pairs holding digit 4, which it never trained on. The bar, written before the run, is 0.75; 0.5 is chance. The design is [the V6 design](design.md).
+**Status: support. A checker trained on digits 0 to 4 tells two right digits from one right and one wrong digit at 0.861 balanced accuracy on digits 5 to 9.** The bar, written before the run, is 0.75; 0.5 is chance. 0.861 is the fair number: the checker, the ten-label signature read in the later window, is the best of four cells chosen on the pairs holding digit 4, where it scored 0.888. Digits 5 to 9 have been read by earlier steps too (V2, V3 and V5), so they are held out from training but not unread. The design is [the V6 design](design.md).
 
 <a href="identity-grid.png"><img src="identity-grid.png" width="900" alt="The 2 by 2 grid. V2's identity checker at 0.555 leads into the early window, where two maps score 0.563 and the ten-label signature 0.612, both red. The later window holds two maps at 0.702, red, and the ten-label signature at 0.888, green, which leads to the retrain on digits 0 to 4 and the read of digits 5 to 9."></a>
 

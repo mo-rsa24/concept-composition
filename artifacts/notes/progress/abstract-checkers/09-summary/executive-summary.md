@@ -49,7 +49,7 @@ A qualitative grid of the kind "the rival fuses, ours draws two" exists only on 
 | V2 a checker learns on unseen digits | done, with the count checker |
 | V3 its push composes unseen digits | done, support |
 | V5 remove one checker at a time | done, null by the written rule |
-| V4 the best checker on SDXL's unseen objects | waiting on Loop 6's step D3 |
+| V4 the best checker on SDXL's unseen objects | not run: needs M5's animal list; whether it is rewritten to test identity against CO3 is board question 86 |
 
 Four of five steps are done, using about 7.3 of the loop's 30 GPU-hours. The digit question is answered. The question that matters for the paper, whether this beats a rival on SDXL, starts with V4.
 
