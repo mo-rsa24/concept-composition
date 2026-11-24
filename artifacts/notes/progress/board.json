@@ -767,12 +767,13 @@
    "needs": [
     "Z2"
    ],
-   "state": "doing",
+   "state": "done",
    "serves": "Paper 2",
    "objective": "Find what fixes identity on CO3",
    "started": "2026-11-24T18:14:18+02:00",
-   "updated": "2026-11-24T18:14:18+02:00",
-   "note": "choosing the one fix to test; owner's question filed"
+   "updated": "2026-11-24T22:48:14+02:00",
+   "note": "null: two clear subjects 5 of 48 for drawn boxes, whole-picture correction and CO3 alone (lead 0, McNemar p 0.66); counted per question 92; the positive control failed, so no reader step",
+   "finished": "2026-11-24T22:48:14+02:00"
   },
   {
    "id": "Z4",
@@ -782,9 +783,13 @@
    "needs": [
     "Z3"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "Paper 2",
-   "objective": "Choose Paper 2's method"
+   "objective": "Choose Paper 2's method",
+   "started": "2026-11-24T22:48:26+02:00",
+   "updated": "2026-11-24T22:54:27+02:00",
+   "note": "no method yet removes borrowed parts; chosen to test next: the text-side token swap (after a word-order check), beside Bounded Attention as the rival; five candidates closed by Z2, Z3 and question 80",
+   "finished": "2026-11-24T22:54:27+02:00"
   },
   {
    "id": "Z5",
@@ -794,9 +799,12 @@
    "needs": [
     "Z4"
    ],
-   "state": "todo",
+   "state": "doing",
    "serves": "Paper 2",
-   "objective": "Improve the earlier designs"
+   "objective": "Improve the earlier designs",
+   "started": "2026-11-24T22:54:34+02:00",
+   "updated": "2026-11-24T22:54:34+02:00",
+   "note": "draft audit written; correcting rows 24, 27 and 28, then one question with the reruns"
   },
   {
    "id": "Z6",
@@ -3009,6 +3017,15 @@
    "by": "s13",
    "state": "open",
    "asked": "2026-11-24T22:15:25+02:00"
+  },
+  {
+   "id": 97,
+   "question": "Loop 12, which small reruns to make in three other loops' work. An audit of the designs of Loops 8 (abstract checkers tested on digits), 9 (sentence scores) and 10 (the score path) found 30 design issues; 3 could change a recorded verdict and 16 possibly could (artifacts/notes/progress/leakage/05-design-audit.md, with one row per issue and its source). Three cheap reruns would test the ones that matter most before larger planned runs: (1) find the sampling step at which the digit model has settled which digits it draws, before Loop 8 pushes its identity checker at steps 27 to 36, because a push after that step cannot change the digits (0.04 GPU-hours, measured on the earlier job); (2) score Loop 8's identity checker against an untrained rule that uses the same eleven predictions the checker sees, to tell whether its training adds anything (about 0.1 GPU-hours); (3) test the form of Loop 10's shared-space idea its own verdict keeps open, each subject owning its own region of the score path, read on CO3's own sampling path with Loop 6's written mask rule (under 0.1 GPU-hours; Loop 12's region test already shows such regions cannot work as a fix, so this answers Loop 10's question only). About 0.25 GPU-hours in all. Each rerun would run in the loop that owns the step.",
+   "holds": "Z5",
+   "default": "run all three, each in the loop that owns it, about 0.25 GPU-hours",
+   "by": "s12",
+   "state": "open",
+   "asked": "2026-11-24T22:55:37+02:00"
   }
  ]
 }
