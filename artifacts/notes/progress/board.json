@@ -535,8 +535,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-24T14:31:20+02:00",
-   "updated": "2026-11-24T22:37:33+02:00",
-   "note": "current full training done (held-out tiles 0.571); balanced at 1,300 of 2,000; control 94704 waits for a node; then all three checkers scored on CO3's saved states"
+   "updated": "2026-11-24T23:39:21+02:00",
+   "note": "both full trainings done (held-out tiles: current 0.571, balanced 0.504); scoring pass 94783 reads all three checkers on CO3's saved states"
   },
   {
    "id": "D3",
@@ -799,12 +799,13 @@
    "needs": [
     "Z4"
    ],
-   "state": "doing",
+   "state": "done",
    "serves": "Paper 2",
    "objective": "Improve the earlier designs",
    "started": "2026-11-24T22:54:34+02:00",
-   "updated": "2026-11-24T22:54:34+02:00",
-   "note": "draft audit written; correcting rows 24, 27 and 28, then one question with the reruns"
+   "updated": "2026-11-24T23:26:01+02:00",
+   "note": "30 issues (3 could change a verdict, 16 possibly); question 97 decided: rerun 1 in Loop 8, rerun 2 held, rerun 3 read from Loop 12's saved records",
+   "finished": "2026-11-24T23:26:01+02:00"
   },
   {
    "id": "Z6",
@@ -814,9 +815,13 @@
    "needs": [
     "Z5"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "Paper 2",
-   "objective": "Choose Paper 2's method"
+   "objective": "Choose Paper 2's method",
+   "started": "2026-11-24T23:26:28+02:00",
+   "finished": "2026-11-24T23:26:28+02:00",
+   "updated": "2026-11-24T23:26:28+02:00",
+   "note": "mechanism unknown (no reading predicts borrowing); fix null (5 of 48 for each row, the own prediction never used); next: own prediction inside each box, text-side held; question 97 decided; Paper 1 paragraph inferred"
   },
   {
    "id": "N1",
@@ -3024,8 +3029,19 @@
    "holds": "Z5",
    "default": "run all three, each in the loop that owns it, about 0.25 GPU-hours",
    "by": "s12",
+   "state": "answered",
+   "asked": "2026-11-24T22:55:37+02:00",
+   "answer": "Decided by Loop 13 for the owner, after the reviewer's second pass on Loop 12 (reviewer/2026-11-24-review.md, 'Loop 12 again, at 23:00'). Rerun 1 runs: the step at which the digit sampler has settled which digits it draws, in Loop 8, about 0.04 GPU-hours, beside question 95's free check. Rerun 2 does not run now: V6's checker already beat a rule holding more information than it sees (0.861 against 0.539), and its live problem is the sampler-state read question 95 addresses. Rerun 3 needs Loop 10, which is closed; instead Loop 12 reads it from its own saved CO3 records at no GPU cost if they hold each animal's per-cell push, as a note on its own data that reopens nothing. No recorded verdict changes. The owner may overrule by answering again.",
+   "answered": "2026-11-24T23:22:19+02:00"
+  },
+  {
+   "id": 98,
+   "question": "Paper 2's next test, after Loop 12 found neither where CO3's borrowed parts start nor a fix that removes them. Loop 12's last test corrected each animal's region late in sampling but, by a design flaw, never used that animal's own prediction inside its region (it used twice the joint prompt's prediction minus the other animal's), and the reviewer and the method review (artifacts/notes/progress/leakage/method-review.md) both point at the untested version. Proposed: (1) a free check, no GPU, of how far each animal's word vector inside 'a cheetah and a cougar' moves from its encoding alone, set against how often each pair borrows; (2) put each animal's own prediction inside its hand-drawn box at sampling steps 5 to 30, on the same 48 pictures of the six pairs that borrow, counted blind against CO3 alone by the bar already set (about 0.8 GPU-hours). A text-encoder fix (about 1.5 GPU-hours with its controls) would run only if check (1) supports it, and Bounded Attention, the rival, only once a candidate clears the bar. Which loop runs these is the owner's choice; Loop 12's brief ends here.",
+   "holds": null,
+   "default": "run (1) and (2), about 0.8 GPU-hours, in whichever loop the owner names; hold the text-encoder fix behind (1)",
+   "by": "s12",
    "state": "open",
-   "asked": "2026-11-24T22:55:37+02:00"
+   "asked": "2026-11-24T23:26:28+02:00"
   }
  ]
 }
