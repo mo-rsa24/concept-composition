@@ -14,6 +14,8 @@ flowchart LR
   Z1 --> Z5 --> Z6
   Z2 -. "owner's yes on cost" .-> Z2
   Z3 -. "owner's yes on cost;<br/>needs a box source (M9's reader failed 11 of 24)" .-> Z3
+  Z7["Z7 own prediction in its box<br/>text check job 94790, smoke 94791<br/>(question 98)"]:::doing
+  Z6 --> Z7
   classDef done fill:#d3f9d8,stroke:#2b8a3e,stroke-width:2px
   classDef doing fill:#ffe8cc,stroke:#e8590c,stroke-width:2px
   classDef detour fill:#ffffff,stroke:#868e96,stroke-width:2px,stroke-dasharray: 6 4
