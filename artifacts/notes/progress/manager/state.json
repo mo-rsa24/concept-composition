@@ -1,5 +1,5 @@
 {
- "last_tick": "2026-11-24T16:10:00+02:00",
+ "last_tick": "2026-11-24T16:15:00+02:00",
  "last_alignment_round": "2026-11-24T16:10:00+02:00",
  "steps": {
   "P0": "done",
@@ -181,13 +181,23 @@
  },
  "nudges": [
   {
-   "time": "2026-11-24T16:09:00+02:00", "answered": "2026-11-24T16:11:00+02:00 method-search/04-bind-each-body/method-review.md",
+   "time": "2026-11-24T16:09:00+02:00",
+   "answered": "2026-11-24T16:11:00+02:00 method-search/04-bind-each-body/method-review.md",
    "to": "s6",
    "kind": "method review request",
    "pattern": "M9: regions without names, reader 1 11/24, reader 2 10/24"
   }
  ],
- "notifications": [],
+ "notifications": [
+  {
+   "time": "2026-11-24T16:14:00+02:00",
+   "about": [
+    "questions 78,79,80,81,83 open",
+    "method review request s6 M9",
+    "nine requests addressed to Loops 7 and 10"
+   ]
+  }
+ ],
  "patterns_requested": [
   "s6:M9:three-misses-2026-11-24"
  ],
