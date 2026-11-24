@@ -6,8 +6,10 @@ of the three positions, 250 per subset. The first 200 of each subset train it, a
 
   overfit  fits 16 real pictures, 2 per subset, and must get at least 15 of 16 right at every position
   train    trains on the 1,600, and must reach 99% per position on the 400 held out
+  experts  scores each expert's first 256 samples, which must hold its object at its position in at least 90%
 
 Usage: python clevr_scorer.py overfit|train --renders <dir> --out <dir>
+       python clevr_scorer.py experts --samples <dir> --out <scorer dir>
 """
 import argparse
 import json
@@ -34,6 +36,8 @@ OVERFIT_STEPS = 300
 BATCH = 64
 LEARNING_RATE = 1e-3
 SEED = 20261124
+EXPERT_SAMPLES = 256
+MIN_EXPERT_RATE = 0.90
 
 
 class Scorer(nn.Module):
@@ -140,16 +144,51 @@ def train(args):
     raise SystemExit(0 if result["passes"] else 1)
 
 
+def call_samples(model, folder, count):
+    """The scorer's call on the first `count` samples in a folder, sorted by name: a 0 or 1 for each of the three positions."""
+    paths = sorted(folder.glob("*.png"))[:count]
+    if len(paths) < count:
+        raise SystemExit(f"{folder}: {len(paths)} samples, {count} needed")
+    x = torch.from_numpy(np.stack([to_64(p) for p in paths])).permute(0, 3, 1, 2) * 2 - 1
+    model.eval()
+    with torch.no_grad():
+        logits = torch.cat([model(x[start:start + 256]) for start in range(0, len(x), 256)])
+    return (torch.sigmoid(logits) > THRESHOLD).int(), [p.name for p in paths]
+
+
+def experts(args):
+    """Each expert alone on its first 256 samples: the share with an object at its own position, against 90%."""
+    state = torch.load(args.out / "scorer.pt", map_location="cpu", weights_only=False)
+    model = Scorer()
+    model.load_state_dict(state["state"])
+    rows = {}
+    for position, name in enumerate(("p1", "p2", "p3")):
+        calls, _ = call_samples(model, args.samples / name, EXPERT_SAMPLES)
+        target = [0, 0, 0]
+        target[position] = 1
+        rows[name] = {"samples": EXPERT_SAMPLES, "in_place": round(float(calls[:, position].float().mean()), 4),
+                      "exactly_its_object": round(float((calls == torch.tensor(target)).all(1).float().mean()), 4),
+                      "objects_elsewhere": int(calls.sum() - calls[:, position].sum())}
+        rows[name]["passes"] = rows[name]["in_place"] >= MIN_EXPERT_RATE
+    calls, _ = call_samples(model, args.samples / "empty", EXPERT_SAMPLES)
+    rows["empty"] = {"samples": EXPERT_SAMPLES, "share_with_no_object": round(float((calls.sum(1) == 0).float().mean()), 4)}
+    result = {"min_in_place": MIN_EXPERT_RATE, "experts": rows, "passes": all(rows[n]["passes"] for n in ("p1", "p2", "p3"))}
+    (args.samples / "experts.json").write_text(json.dumps(result, indent=1) + "\n")
+    print(json.dumps(result), flush=True)
+    raise SystemExit(0 if result["passes"] else 1)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("stage", choices=["overfit", "train"])
-    ap.add_argument("--renders", type=Path, required=True)
+    ap.add_argument("stage", choices=["overfit", "train", "experts"])
+    ap.add_argument("--renders", type=Path)
+    ap.add_argument("--samples", type=Path, help="the folder holding p1, p2, p3 and empty sample folders")
     ap.add_argument("--out", type=Path, required=True)
     args = ap.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     torch.manual_seed(SEED)
     torch.set_num_threads(int(os.environ.get("SLURM_CPUS_ON_NODE", os.cpu_count())))
-    {"overfit": overfit, "train": train}[args.stage](args)
+    {"overfit": overfit, "train": train, "experts": experts}[args.stage](args)
 
 
 if __name__ == "__main__":
