@@ -106,10 +106,6 @@
       "palette": "text is blue #1f5fd0 in the overview and lilac #b9a7e8 in the deep dives; the green image encoder, the orange push and the grey frozen parts match in both"
     },
     {
-      "rung": "overview",
-      "palette": "the overview draws the push returning to the half-drawn picture; the deep dives draw the gradient taken at x_t and subtracted from the noise prediction"
-    },
-    {
       "rung": "the linked CLIP ladder figures (cv1 to cv9b)",
       "palette": "blue inputs, green hidden units, red outputs, orange for the shared space, the similarity and the loss, grey for masked or fixed. On this ladder orange means only the push."
     },
@@ -155,7 +151,7 @@
         "digit-encoder"
       ],
       "sizes": "numbers.json latent_clip and w4_design, checked against the constants in annotated_explainer.py",
-      "notes": "W2b and W4 read and do not push, so their push lane is dashed grey; W2b's seen and unseen bars are hollow; W4's canvas is a drawn stand-in"
+      "notes": "W2b and W4 read and do not push, so their push lane is dashed grey; W2b's seen and unseen bars are hollow; W4's canvas is a real MNIST canvas built with V1's make_canvas (overview/make_w4_canvas.py); ov0 and ov1 end the push at the noise prediction and mark where the gradient is taken; Loop 7's copy at artifacts/notes/progress/abstract-checkers/01-reading/style-annotated-explainer-sentence-score.png is re-rendered from the same code and identical to ov0"
     },
     "0_system": {
       "state": "linked",

@@ -92,7 +92,7 @@ The released map blocks the gradient twice, at any clamped colour and at `.byte(
 
 Our existing [push code](../../../../scripts/method_search/co3_push.py) subtracts the push from both entries of CO3's main prediction, which lowers the guided prediction by exactly the push.
 
-**How this reads against the overview.** The overview draws the push returning to the half-drawn picture. These deep dives draw the gradient taken at $x_t$ and subtracted from the noise prediction, so the next sampler step moves the latent.
+**How this reads against the overview.** The overview marks where the gradient is taken, at $x_t$, and ends the push at the noise prediction. These deep dives draw the same two places with every size.
 
 ## All of it at once, with every size
 

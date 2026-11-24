@@ -10,7 +10,7 @@ This ladder explains one candidate for Paper 2's abstract checkers: a noise-awar
 
 <a href="overview/ov0-the-sentence-score-push.png"><img src="overview/ov0-the-sentence-score-push.png" width="900" alt="One half-drawn picture and two sentences followed through NoisyCLIP's text and vision encoders, two scores, the third score and the push, with the vision encoder opened in an inset."></a>
 
-One half-drawn picture enters at the left and is followed to the push. Its noise and the two bars are illustrative. The picture is `data/pilot/seed_42/a_cat__x__a_dog/monolithic.png`, checked at full size against the subject guard.
+One half-drawn picture enters at the left. The gradient is taken at it, and the push ends at the noise prediction, so the next sampler step moves the latent. Its noise and the two bars are illustrative. The picture is `data/pilot/seed_42/a_cat__x__a_dog/monolithic.png`, checked at full size against the subject guard.
 
 ### The deep dives, in the overview's order
 
@@ -34,7 +34,7 @@ One half-drawn picture enters at the left and is followed to the push. Its noise
 
 <a href="0.5-network-view/nc8-right-minus-wrong.png"><img src="0.5-network-view/nc8-right-minus-wrong.png" width="200" alt="An image strip meets two sentence columns, and a circle sketch shows the difference between the two sentence vectors."></a>
 
-**Third score and push.** [The gradient walks back to the latent](0.5-network-view/nc9-the-gradient-back-to-the-latent.png) through every step, and [the push joins CO3's noise prediction](0.5-network-view/nc10-how-the-push-joins-co3.png) before the next sampler step. The overview draws the push returning to the picture, and these deep dives draw where it actually enters.
+**Third score and push.** [The gradient walks back to the latent](0.5-network-view/nc9-the-gradient-back-to-the-latent.png) through every step, and [the push joins CO3's noise prediction](0.5-network-view/nc10-how-the-push-joins-co3.png) before the next sampler step. The overview marks where the gradient is taken and ends the push at the noise prediction, as these deep dives do.
 
 <a href="0.5-network-view/nc9-the-gradient-back-to-the-latent.png"><img src="0.5-network-view/nc9-the-gradient-back-to-the-latent.png" width="200" alt="Ten forward stages and an orange backward row."></a> <a href="0.5-network-view/nc10-how-the-push-joins-co3.png"><img src="0.5-network-view/nc10-how-the-push-joins-co3.png" width="200" alt="The push subtracted from both of CO3's predictions."></a>
 
@@ -54,9 +54,9 @@ A noised training picture goes through a frozen image encoder (NoisyCLIP, frozen
 
 ## 4. W4: our own noise-aware encoder on digits
 
-<a href="overview/ov3-our-own-encoder-on-digits.png"><img src="overview/ov3-our-own-encoder-on-digits.png" width="900" alt="A stand-in 32 by 64 digit canvas through a small encoder of four convolution blocks told the step, 35 captions through CLIP's frozen text encoder, the true caption picked out of 35, and a test on digits 5 to 9."></a>
+<a href="overview/ov3-our-own-encoder-on-digits.png"><img src="overview/ov3-our-own-encoder-on-digits.png" width="900" alt="A real 32 by 64 MNIST canvas of a 4 and a 3 through a small encoder of four convolution blocks told the step, 35 captions through CLIP's frozen text encoder, the true caption picked out of 35, and a test on digits 5 to 9."></a>
 
-A 32 × 64 canvas of digits 0 to 4 is noised to one of steps 0 to 15 and read by a small encoder of four convolution blocks that is told the step. CLIP's frozen text encoder embeds the 35 captions, and the loss picks the true caption out of the 35. The test reads digits 5 to 9 once, and their names never appear in the loss. The canvas is a drawn stand-in, because no canvas from step V1's dataset is on this laptop, and the sizes come from [the W4 design](../../../../artifacts/notes/progress/noise-text-critic/04-train-our-own/design.md). This step reads and does not push.
+A 32 × 64 canvas of digits 0 to 4 is noised to one of steps 0 to 15 and read by a small encoder of four convolution blocks that is told the step. CLIP's frozen text encoder embeds the 35 captions, and the loss picks the true caption out of the 35. The test reads digits 5 to 9 once, and their names never appear in the loss. The canvas is a real MNIST canvas of a 4 and a 3, built here with step V1's own `make_canvas` (see [the overview card](overview/README.md)), and the sizes come from [the W4 design](../../../../artifacts/notes/progress/noise-text-critic/04-train-our-own/design.md). This step reads and does not push.
 
 ## What is established and what is proposed
 

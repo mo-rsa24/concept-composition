@@ -14,7 +14,7 @@ REPO = L.parents[3]
 PAPER = Path('/home/molef/.claude/jobs/bed4762f/tmp/papers/noisyclip/paged.txt')
 PAGES = [L / n for n in ('README.md', 'NOTATION.md', 'read-through-a-small-network.md', 'rebuild-from-fundamentals.md', 'route-zoom-ladder-noisyclip.md',
                          'style-reference.md', '0.5-network-view/README.md', '1-illustrations/README.md', '1-illustrations/diagram-prompts.md',
-                         '2-miniature/README.md', '3-code/walk-noisyclip.md')]
+                         '2-miniature/README.md', '3-code/walk-noisyclip.md', 'overview/README.md')]
 NUMBER = re.compile(r'(?<![\w.#/])\d+\.\d+(?![\w.]*\d)')
 sources = [L / 'numbers/numbers.json', L / '2-miniature/miniature_answer_key.json',
            REPO / 'artifacts/notes/progress/noise-text-critic/02-can-it-read/design.md',
