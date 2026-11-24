@@ -21,9 +21,9 @@ The picture places each paper by what it reads. Its source is [the diagram file]
 
 **Score path.** The stack of $d_t(c) = \epsilon_\theta(x_t, t, c) - \epsilon_\theta(x_t, t, \varnothing)$ over sampling steps 0 to 15 for one canvas and one seed: what condition $c$ adds to the unconditional noise prediction at each step.
 
-**The separate-experts paper.** The paper that composes two models trained on disjoint data, with a trained checker guiding the product. [The problem statements](../../problem-statements.md) number it Paper 1, and this loop's brief calls it Paper 2.
+**Paper 1, the separate-experts paper.** The paper that composes two models trained on disjoint data, with a trained checker guiding the product, as numbered in [the problem statements](../../problem-statements.md), the targets and the scoreboard.
 
-**The CO3 paper.** The paper that improves composition inside one text-to-image model, adding a checker's push to the product or to CO3. The problem statements number it Paper 2.
+**Paper 2, the CO3 paper.** The paper that improves composition inside one text-to-image model, adding a checker's push to the product or to CO3.
 
 ## What the reading changes for this loop
 

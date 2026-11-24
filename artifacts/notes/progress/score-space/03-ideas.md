@@ -29,7 +29,7 @@ The picture shows the repair the whole page rests on (assumption A1 below). Its 
 
 **The SDXL-matched window.** Sampler steps 14 to 25 of the digit model, timesteps 712 to 480. These carry the same share of signal as SDXL's steps 0 to 15 ([the V2 review](../abstract-checkers/05-does-it-learn/review.md)).
 
-**The separate-experts paper** and **the CO3 paper.** Named by what they do, because [the problem statements](../problem-statements.md) number them 1 and 2 and this loop's brief numbers them the other way round.
+**The separate-experts paper** and **the CO3 paper.** Paper 1 and Paper 2 of [the problem statements](../problem-statements.md), the targets and the scoreboard.
 
 ## How each assumption is marked
 

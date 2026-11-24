@@ -6,7 +6,7 @@
 #SBATCH --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-10/logs/%x-%j.log
 # Loop 10, step X5 (artifacts/notes/progress/score-space/04-design.md, run group 1). Submit with the code snapshot in SNAP:
-#   sbatch --export=ALL,SNAP=<snapshot> x5.sbatch <ladder|full>
+#   sbatch --export=ALL,SNAP=<snapshot>[,PROBE=conv] x5.sbatch <ladder|full>   (PROBE=conv: board question 72)
 # ladder: smoke test, positive control at timestep 100, overfit 16 canvases, 1% of the data. full: the verdict read.
 set -uo pipefail
 STAGE=${1:?stage}
@@ -34,9 +34,11 @@ APPS=$(nvidia-smi --query-compute-apps=pid --format=csv,noheader -i 0 | wc -l)
 export CUDA_VISIBLE_DEVICES=0
 "$PY" -c "import torch,sys; sys.exit(0 if torch.cuda.is_available() and (torch.ones(100,100,device='cuda')@torch.ones(100,100,device='cuda')).sum().item()==1e6 else 6)" \
   || { echo "ABORT: CUDA probe failed"; exit 6; }
-echo "[$(date -u +%H:%M:%S)] job=${SLURM_JOB_ID:-none} node=$(hostname -s) gpu=$(nvidia-smi --query-gpu=name --format=csv,noheader -i 0) python=$PY snap=$SNAP stage=$STAGE"
+echo "[$(date -u +%H:%M:%S)] job=${SLURM_JOB_ID:-none} node=$(hostname -s) gpu=$(nvidia-smi --query-gpu=name --format=csv,noheader -i 0) python=$PY snap=$SNAP stage=$STAGE probe=${PROBE:-linear}"
 
-run() { "$PY" "$S/x5_signal.py" "$@" --model "$MODEL" --data "$DATA" --out "$OUT"; }
+PROBE=${PROBE:-linear}
+RES=$OUT; [ "$PROBE" = conv ] && RES=$OUT/conv
+run() { "$PY" "$S/x5_signal.py" "$@" --model "$MODEL" --data "$DATA" --out "$OUT" --probe "$PROBE"; }
 case "$STAGE" in
   ladder)
     run smoke || exit 10
@@ -46,10 +48,10 @@ case "$STAGE" in
     rc=$? ;;
   full)
     for f in smoke control overfit; do
-      "$PY" -c "import json,sys; sys.exit(0 if json.load(open('$OUT/$f.json'))['pass'] else 1)" \
+      "$PY" -c "import json,sys; sys.exit(0 if json.load(open('$RES/$f.json'))['pass'] else 1)" \
         || { echo "ABORT: ladder rung $f did not pass"; exit 13; }
     done
-    run full --wandb-name loop10-x5-full
+    run full --wandb-name "loop10-x5-full-$PROBE"
     rc=$? ;;
   *) echo "ABORT: unknown stage $STAGE"; exit 2 ;;
 esac

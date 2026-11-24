@@ -47,6 +47,11 @@ FOLDS = 5
 FIT_SEED, READ_SEED = 1_010_000, 1_020_000   # different noise draws for fitting and reading canvases
 WINDOWS = {"early": [int(t) for t in STEPS16], "sdxl": [int(t) for t in SDXL_MATCHED]}
 ROWS = ("signature", "canvas_pooled", "canvas_full", "raw_noise", "error_readout", "path_length", "shuffled")
+# With --probe conv (board question 72): the grid inputs go through one small convolutional probe; the 10-number rows stay linear.
+CONV_ROWS = {"signature": "signature_grid", "canvas": "canvas_grid", "raw_noise": "raw_noise_grid",
+             "shuffled": "signature_grid", "error_readout": None, "path_length": None}
+CONV_UPDATES = 1500
+PROBE = {"kind": "linear"}
 
 
 # ---------------------------------------------------------------- features
@@ -78,6 +83,9 @@ def step_features(model, x0, eps, t):
         "raw_noise": F.avg_pool2d(eps, 4).flatten(1),                   # 128
         "error_readout": err_c - err_null,                              # 10
         "path_length": d.pow(2).flatten(2).sum(2),                      # 10
+        "signature_grid": F.avg_pool2d(d, 2),                           # 10 x 16 x 32, for the convolutional probe
+        "canvas_grid": F.avg_pool2d(xt, 2),                             # 1 x 16 x 32
+        "raw_noise_grid": F.avg_pool2d(eps, 2),                         # 1 x 16 x 32
     }
 
 
@@ -133,6 +141,44 @@ def fit_linear(x, y, lam, dev, iters=200):
     return w.detach(), b.detach()
 
 
+class ConvProbe(torch.nn.Module):
+    """One small convolutional probe, the same for every grid input; only the input channel count differs."""
+    def __init__(self, cin, out=len(DIGITS)):
+        super().__init__()
+        blk = lambda a, b, s: [torch.nn.Conv2d(a, b, 3, stride=s, padding=1), torch.nn.GroupNorm(8, b), torch.nn.SiLU()]
+        self.body = torch.nn.Sequential(*blk(cin, 32, 1), *blk(32, 64, 2), *blk(64, 64, 2))
+        self.head = torch.nn.Linear(128, out)
+
+    def forward(self, x):
+        h = self.body(x)
+        return self.head(torch.cat([h.amax((2, 3)), h.mean((2, 3))], 1))
+
+
+def fit_conv(fit_x, fit_y, read_x, dev, updates=CONV_UPDATES, seed=0):
+    """Fixed recipe, chosen before any run: Adam 1e-3, weight decay 1e-4, batch 256, class-balanced BCE."""
+    torch.manual_seed(seed)
+    m, s = fit_x.float().mean((0, 2, 3), keepdim=True), fit_x.float().std((0, 2, 3), keepdim=True).clamp_min(1e-6)
+    norm = lambda x: ((x.float() - m) / s)
+    net = ConvProbe(fit_x.shape[1]).to(dev)
+    opt = torch.optim.Adam(net.parameters(), lr=1e-3, weight_decay=1e-4)
+    pos = fit_y.mean(0).clamp(1e-3, 1 - 1e-3).to(dev)
+    g = torch.Generator().manual_seed(seed)
+    for _ in range(updates):
+        i = torch.randint(len(fit_x), (min(256, len(fit_x)),), generator=g)
+        z = net(norm(fit_x[i]).to(dev))
+        loss = F.binary_cross_entropy_with_logits(z, fit_y[i].to(dev), pos_weight=(1 - pos) / pos)
+        opt.zero_grad(); loss.backward(); opt.step()
+    net.eval()
+    with torch.no_grad():
+        run = lambda x: torch.cat([net(norm(x[j:j + 512]).to(dev)).cpu() for j in range(0, len(x), 512)])
+        return run(fit_x), run(read_x)
+
+
+def probe_conv(fit_x, fit_y, read_x, read_y, dev):
+    lf, lr = fit_conv(fit_x, fit_y, read_x, dev)
+    return {"presence": balanced_accuracy(lr > 0, read_y), "fit_presence": balanced_accuracy(lf > 0, fit_y)}, lf, lr
+
+
 def standardise(fit, read):
     m, s = fit.float().mean(0), fit.float().std(0).clamp_min(1e-6)
     return (fit.float() - m) / s, (read.float() - m) / s
@@ -177,17 +223,26 @@ def apart_vs_wrong(logits_fit, fit_split, logits_read, read_split):
 
 
 def row_input(feats, t, row):
+    if PROBE["kind"] == "conv":
+        return feats[t][CONV_ROWS[row] or row]
     return feats[t]["signature" if row == "shuffled" else row]
 
 
-def read_window(fit_f, read_f, fit_split, read_split, ts, dev, rows=ROWS):
+def any_probe(row, fx, fy, rx, ry, dev):
+    if PROBE["kind"] == "conv" and CONV_ROWS.get(row):
+        return probe_conv(fx, fy, rx, ry, dev)
+    return probe(fx.flatten(1) if fx.dim() > 2 else fx, fy, rx.flatten(1) if rx.dim() > 2 else rx, ry, dev)
+
+
+def read_window(fit_f, read_f, fit_split, read_split, ts, dev, rows=None):
+    rows = rows or (tuple(CONV_ROWS) if PROBE["kind"] == "conv" else ROWS)
     fy, ry = presence(fit_split), presence(read_split)
     shuffled = fy[torch.randperm(len(fy), generator=torch.Generator().manual_seed(7))]
     out = {r: [] for r in rows}
     for t in ts:
         for r in rows:
-            res, lf, lr = probe(row_input(fit_f, t, r), shuffled if r == "shuffled" else fy,
-                                row_input(read_f, t, r), ry, dev)
+            res, lf, lr = any_probe(r, row_input(fit_f, t, r), shuffled if r == "shuffled" else fy,
+                                    row_input(read_f, t, r), ry, dev)
             res["apart_vs_wrong"] = apart_vs_wrong(lf, fit_split, lr, read_split)
             res["t"] = t
             out[r].append(res)
@@ -204,7 +259,7 @@ def read_window(fit_f, read_f, fit_split, read_split, ts, dev, rows=ROWS):
 
 def verdict_for(window):
     """The bar: signature presence at least 0.75 at some step, and at least 0.1 above the raw-noise probe there."""
-    sig, noise = window["signature"], window["raw_noise"]
+    sig, noise = window["signature"], window["raw_noise"]  # same row names under both probes
     hits = [s["t"] for s, z in zip(sig, noise) if s["presence"] >= MIN_PRESENCE and s["presence"] - z["presence"] >= MIN_OVER_NOISE]
     best = max(sig, key=lambda s: s["presence"])
     return {"passes": bool(hits), "steps_passing": hits, "best_presence": best["presence"], "best_t": best["t"]}
@@ -238,9 +293,10 @@ def stage_smoke(model, data, dev):
 def stage_control(model, data, dev):
     fit, read = subset(data["train"], 1000, 1), subset(data["seen_test"], 500, 2)
     ff, rf = build(model, fit, FIT_SEED, [CONTROL_T], dev), build(model, read, READ_SEED, [CONTROL_T], dev)
-    res = {r: probe(row_input(ff, CONTROL_T, r), presence(fit), row_input(rf, CONTROL_T, r), presence(read), dev)[0]
-           for r in ("signature", "canvas_full")}
-    res["pass"] = all(res[r]["presence"] >= MIN_CONTROL for r in ("signature", "canvas_full"))
+    pair = ("signature", "canvas") if PROBE["kind"] == "conv" else ("signature", "canvas_full")
+    res = {r: any_probe(r, row_input(ff, CONTROL_T, r), presence(fit), row_input(rf, CONTROL_T, r), presence(read), dev)[0]
+           for r in pair}
+    res["pass"] = all(res[r]["presence"] >= MIN_CONTROL for r in pair)
     return res
 
 
@@ -273,9 +329,13 @@ def main():
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--wandb-name", default=None)
     ap.add_argument("--device", default="cuda")
+    ap.add_argument("--probe", choices=["linear", "conv"], default="linear")
     args = ap.parse_args()
     torch.manual_seed(0)
     dev = args.device
+    PROBE["kind"] = args.probe
+    if args.probe == "conv":
+        args.out = args.out / "conv"
     data, data_hash = load_data(args.data)
     model = load_unet(args.model, dev)
     t0 = time.time()
@@ -291,7 +351,7 @@ def main():
         res = stage_read(model, data, dev, FIT_N, READ_N)
         e, s = res["early"]["verdict"], res["sdxl"]["verdict"]
         res["verdict"] = ("support" if e["passes"] else "support at SDXL's noise only" if s["passes"] else "null")
-    res.update({"stage": args.stage, "data_hash": data_hash, "model": str(args.model), "seconds": time.time() - t0,
+    res.update({"probe": args.probe, "stage": args.stage, "data_hash": data_hash, "model": str(args.model), "seconds": time.time() - t0,
                 "bars": {"min_presence": MIN_PRESENCE, "min_over_noise": MIN_OVER_NOISE, "min_control": MIN_CONTROL,
                          "overfit_right": OVERFIT_RIGHT}, "windows": WINDOWS, "fit_seed": FIT_SEED, "read_seed": READ_SEED})
     args.out.mkdir(parents=True, exist_ok=True)
@@ -302,7 +362,7 @@ def main():
         run = wandb.init(project="poe-repair-animals-compose", entity="prime_lab", name=args.wandb_name,
                          config={"stage": args.stage, "windows": WINDOWS, "data_hash": data_hash})
         for w in WINDOWS:
-            for r in ROWS:
+            for r in (CONV_ROWS if args.probe == "conv" else ROWS):
                 for s in res[w][r]:
                     run.log({f"{w}/{r}/presence": s["presence"], f"{w}/{r}/apart_vs_wrong": s["apart_vs_wrong"], "t": s["t"]})
         run.summary["verdict"] = res["verdict"]

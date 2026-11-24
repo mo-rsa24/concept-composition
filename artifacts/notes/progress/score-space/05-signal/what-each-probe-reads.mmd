@@ -1,0 +1,22 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef new fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px,color:#111111
+
+  X0["clean canvas x0<br/>32 x 64, digits 0 to 4"]:::plain --> XT
+  E["noise draw eps<br/>one per canvas,<br/>same at every step"]:::plain --> XT
+  XT["noisy canvas x_t<br/>16 timesteps per window"]:::plain --> U
+  U["digit U-Net share-0.0, frozen<br/>11 calls in one pass:<br/>null label and labels 0 to 9"]:::plain
+
+  U --> SIG["signature<br/>d_t(0..9), pooled 4x4<br/>1,280 numbers"]:::new
+  U --> ERR["error readout<br/>e_c = |eps - eps_c|^2 - |eps - eps_null|^2<br/>10 numbers"]:::new
+  U --> LEN["path length<br/>|d_t(c)|^2 per label<br/>10 numbers"]:::new
+  XT --> CAN["noisy canvas<br/>128 pooled, 2,048 full"]:::plain
+  E --> RAW["raw noise<br/>128 pooled, reads 0.5<br/>by construction"]:::plain
+
+  SIG --> P{"linear probe per digit<br/>fit on 4,000 train canvases,<br/>read on 2,000 seen_test,<br/>other noise draws"}
+  ERR --> P
+  LEN --> P
+  CAN --> P
+  RAW --> P
+  P --> BAR["bar: signature presence >= 0.75<br/>and >= raw noise + 0.1<br/>at some step of a window"]:::plain
