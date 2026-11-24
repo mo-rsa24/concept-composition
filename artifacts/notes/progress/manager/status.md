@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-24 18:30 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-24 18:41 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -27,6 +27,7 @@ overrule one, answer it again: `python3 scripts/progress_board.py answer <number
 
 | # | The question | Decided | Why |
 |---|---|---|---|
+| 91 | Which fix should Loop 12 test on CO3's borrowed parts? | **Not the default as written.** A free check on saved records first, then a place-by-place fix at about steps 15 to 30 with boxes drawn by eye as a positive control, beside a whole-canvas control; about 1.7 GPU-hours | The [reviewer](../reviewer/2026-11-24-review.md#loop-12-where-co3-leaks) found the default read its places at steps 0 to 5, where Loop 12's own picture shows both animals' predictions still drawing both bodies, the failure that closed Loop 6's region test. How the pictures are scored is yours, as question 92. |
 | 83 | Should Loop 6 close its test of whether drawing each subject in its own region stops borrowed parts, after three tries missed? | **Close it**, reporting what it found | Loop 6's own [method review](../method-search/04-bind-each-body/method-review.md) and the [reviewer](../reviewer/2026-11-24-review.md#loop-6-find-the-best-method) agree: every try split the picture using a signal that had not yet separated the two subjects, and a fourth would cost about 4.9 GPU-hours without fixing that. Costs nothing. |
 | 78 | Who runs Loop 10's small digit test of whether the experts' vote beats simply pasting their samples, for Paper 1? | **Loop 6**, after its current step | About 0.3 GPU-hours inside Loop 6's budget, and it adds the paste comparison the reviewer finds Paper 1's tests lack. |
 | 81 | Loop 11's ten format conflicts on the 48 method and finding pages it wrote | **All ten of its defaults** | None changes a recorded number or verdict; where two verdicts exist both stay side by side. The reviewer found Loop 11's work sound. No GPU. |
@@ -55,6 +56,7 @@ Newest first. A default happens only if you answer with it; nothing changes whil
 
 | # | The question, in one line | Why it is yours | Default | Waiting |
 |---|---|---|---|---|
+| 92 | Should Loop 12's fix test count "two clear subjects with their own parts, drawing style ignored" (with broken anatomy as a guard) instead of "faithful pairs", which fails drawings too, so every Paper 2 result is counted the way you chose on question 87? | changes a recorded bar | faithful pairs | just filed |
 | 80 | Should a checker choose CO3's weight-sharpness setting at each of its corrected steps ([design](../score-space/11-the-checker-chooses-on-co3.md))? First read on 6 of 12 pairs | over 3 GPU-hours on one run (about 3.1) | **The read you waited for has landed:** on 75 of 96 trajectories the checker's best balanced accuracy is 0.616 at step 25, under the 0.65 floor at every step, so it does not yet see CO3's failure. Inconclusive by count until the 21 missing trajectories are rerun (about 15 minutes, approved below). Recommendation: decline 80 if the full read stays under 0.65, since a checker that cannot see the failure cannot choose CO3's setting to fix it | since 12:25 |
 
 Your own reading step (confirm the draft statements from your readings) is ready on the board.
@@ -72,7 +74,7 @@ The finish range is `session_status.py`'s, from the 52 finished steps: fastest p
 | 7. Abstract-checker papers | Finished; its session is closed. | 0 | done | closed | nothing |
 | 8. Abstract checkers | Its last two digit checks finished on card 1 (18:24, exit 0, the stop rule never fired). The checker clearly adds to the model's own knowledge: 0.861 against 0.603 for a rule that needs no training (a lead of 0.322, standard error 0.009). But on real sampler states it reads 0.651 at steps 27 to 36, under its 0.75 bar, so the next removal test (V7) is on hold until you decide. | 3 | 1.9 h to 85.5 h | idle soon | your decision on whether the removal test runs, once Loop 8 files it |
 | 11. Drain into the pillars | Stopped by your answer on 88. Its pillar checks are done and its census found every finished verdict on a report page (14 findings, eight method folders). Its final step stays open until Loops 6 and 8 stop. | 1 | when restarted | stopped its loop | waiting for a result worth draining: Loop 8's identity checker or Loop 6's two-colour CLEVR test |
-| 12. Where CO3 leaks | Its predictor pass is null: none of three readings inside the model predicts which pairs borrow parts (best rank correlation 0.49, bar 0.706), and the most alike pair, crow and raven, never borrows ([review](../leakage/02-what-predicts-borrowing/review.md)). It asks which fix to test (question 91); the reviewer is reading it now, so Loop 13 can decide. | 5 | 2.4 h to 112.6 h | busy | question 91 |
+| 12. Where CO3 leaks | Its predictor pass is null: none of three readings inside the model predicts which pairs borrow parts (best rank correlation 0.49, bar 0.706), and the most alike pair, crow and raven, never borrows ([review](../leakage/02-what-predicts-borrowing/review.md)). Next, by question 91: a free check on saved records, then a place-by-place fix in a later window with boxes drawn by eye as a positive control. | 5 | 2.4 h to 112.6 h | busy | question 92 decides how its pictures are counted |
 
 ## Resources
 
@@ -121,7 +123,7 @@ Round 1, 2026-11-24 16:10, against the intents in [the alignment check](../score
 | 7. Abstract-checker papers | yes, finished | not reviewed | Its three steps are done; the five-checker design is in `abstract-checkers/03-design.md`. |
 | 8. Abstract checkers | partly, now re-aimed | **fix** | The digit half holds (0.861 on unseen digits 5 to 9 against 0.75), but its SDXL test counts bodies against the plain product, not identity against CO3 ([review](../reviewer/2026-11-24-review.md#loop-8-test-abstract-checkers)). |
 | 11. Drain into the pillars | yes | **continue** | [Its checks page](../drain/04-checks.md) covers all 48 pages it wrote, with 15 of 28 findings fixed. |
-| 12. Where CO3 leaks | yes | next pass | [Its method candidates](../leakage/04-paper-2-method.md) keep your constraints: SDXL's weights untouched, one run per seed, best-of-N only as a baseline. |
+| 12. Where CO3 leaks | partly, now re-aimed | **fix** | Its measurement was sound and null; the fix it proposed would have read places too early, so it now tests the idea later in the run with a drawn-box control first ([review](../reviewer/2026-11-24-review.md#loop-12-where-co3-leaks)). |
 
 **Loop 11's intent, written by Loop 13 from its brief for you to correct.** Loop 11 takes the
 diagrams, picture sheets and results the research loops produce, which sit in their own notes folders
@@ -136,6 +138,8 @@ Newest first.
 | Time | To | What and why |
 |---|---|---|
 | 17:02 | Loop 8 | Its rewritten SDXL test passes the design check (stop rule, random and zero controls, comparison prompts fixed in advance, the same two-clear measure as Loop 6; about 7 GPU-hours, inside budget). Its board record goes to you as question 89. |
+| 18:40 | Loop 12 | **Reviewer verdict: fix**, and question 91 decided against its default; question 92 left with you, so faithful pairs stand until then. |
+| 18:27 | Loop 6 | Card 1 handed over after Loop 8 finished. |
 | 17:58 | Loops 8 and 6 | Card 1 on mscluster107 approved (question 90): Loop 8 launches its two checks first, Loop 6's checker training follows; both cancel their queued Slurm copies once the shared run starts. |
 | 16:30 | Loop 10 | Its question 78 is decided; its open requests are re-routed. |
 | 16:39 | Loop 8 | The four requests re-routed from Loop 7 take the form Loop 8 proposed: the design text stays as written, and one added section lists what ran differently, line by line with commits. Loop 8 also put this to you in its own session; your answer there governs. |

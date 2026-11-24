@@ -184,7 +184,9 @@
   "87": "answered",
   "88": "answered",
   "89": "answered",
-  "90": "answered"
+  "90": "answered",
+  "91": "answered",
+  "92": "open"
  },
  "nudges": [
   {
@@ -268,6 +270,10 @@
   {
    "q": 85,
    "choice": "two of three; bar part to q87"
+  },
+  {
+   "q": 91,
+   "choice": "changed A: later window, drawn-box control; scoring to q92"
   }
  ],
  "rerouted": {
