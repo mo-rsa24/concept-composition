@@ -19,7 +19,7 @@ The drain's sweep (`/artifacts-drain . --dry-run`) found 8 new and 4 changed fil
 |---|---|---|---|
 | Loop 4 | 8 | 0 | 0 |
 | Loop 5 | 7 | 0 | 1 |
-| Loop 6 | 13 | 1 | 1 |
+| Loop 6 | 9 | 0 | 1 |
 | Loop 7 | 8 | 0 | 0 |
 | Loop 8 | 5 | 1 | 0 |
 | Loop 9 | 2 | 0 | 0 |
@@ -34,7 +34,6 @@ Each row is a review file whose verdict is recorded. The verdict column quotes t
 
 | File | Loop | What the review records | Lands on |
 |---|---|---|---|
-| [review.md](../../../../artifacts/notes/progress/method-search/05-two-experts-by-colour/review.md) `05-two-experts-by-colour` | Loop 6 | This file holds what the runs in the M10 design produced. The renders are under way, and no model has trained. |  |
 | [review.md](../../../../artifacts/notes/progress/abstract-checkers/10-reading-identity/review.md) `10-reading-identity` | Loop 8 | Status: support. A checker trained on digits 0 to 4 tells two right digits from one right and one wrong digit at 0.861 balanced accuracy on digits 5 to 9 | `2-classifier-guidance/report/abstract-checkers-on-digits/can-a-checker-read-which-digits-are-present.md` (to write) |
 
 ## Reviews with no verdict yet
@@ -44,7 +43,7 @@ These get no finding until their verdict lands. Y5 checks them on every tick.
 | File | Loop | What the review records | Why it waits |
 |---|---|---|---|
 | [review.md](../../../../artifacts/notes/progress/reproductions/CoInD/review.md) `CoInD` | Loop 5 | This file holds what the runs in the CoInD design produced. CelebA is context by the owner's answer to board question 35, so this rerun stopped after the classifier and the smoke test | no finding: CelebA was made context by the owner's answer to board question 35, so no generated face was scored |
-| [review.md](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/review.md) `01c-clevr-paste-first` | Loop 6 | This file holds what the runs in the M7 design produced. M7 has no verdict yet. | waits for a verdict: the step is still running (M7) |
+| [review.md](../../../../artifacts/notes/progress/method-search/05-two-experts-by-colour/review.md) `05-two-experts-by-colour` | Loop 6 | This file holds what the runs in the M10 design produced. The renders are under way, and no model has trained. | waits for a verdict: the step is still running (M10) |
 
 ## Pictures and scene pages, by loop
 
@@ -109,25 +108,21 @@ Folders with more than ten files are folded; open one to see every file.
 | [loop-6-route.png](../../../../artifacts/notes/progress/method-search/loop-6-route.png) | loop-6-route.png | none: a picture of the route's own plan, which stays beside the plan it explains |
 | [loop-6-scoreboard.png](../../../../artifacts/notes/progress/method-search/loop-6-scoreboard.png) | loop-6-scoreboard.png | none: a picture of the route's own plan, which stays beside the plan it explains |
 
-**`artifacts/notes/progress/method-search/01c-clevr-paste-first/`: 9 files**
+**`artifacts/notes/progress/method-search/01c-clevr-paste-first/`: 5 files**
 
 | File | What it shows | Lands on |
 |---|---|---|
-| [experts-alone-first-16-samples.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/experts-alone-first-16-samples.png) | Four blocks of 16 samples: one object at upper left, one at upper right, one larger object lower centre, and empty floors | waits for a verdict: the step is still running (M7) |
-| [full-p1-first-16-samples.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/full-p1-first-16-samples.png) | Sixteen samples from the position 1 expert, each a single CLEVR object at the upper left on an empty floor | waits for a verdict: the step is still running (M7) |
-| [overfit-batch-256-real-and-sampled.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/overfit-batch-256-real-and-sampled.png) | Top two rows: the 16 real pictures. Bottom two rows: 16 samples showing the same scene with one clear object at the same position | waits for a verdict: the step is still running (M7) |
-| [overfit-scaled-ramp-real-and-sampled.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/overfit-scaled-ramp-real-and-sampled.png) | Top two rows: the 16 real pictures. Bottom two rows: 16 samples with the right floor and lighting and faint coloured blotches in place of objects | waits for a verdict: the step is still running (M7) |
-| [overfit-unscaled-ramp-real-and-sampled.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/overfit-unscaled-ramp-real-and-sampled.png) | Top two rows: the 16 real pictures of one object. Bottom two rows: 16 samples from the model, which are colour noise | waits for a verdict: the step is still running (M7) |
-| [paste-three-experts-first-32.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/paste-three-experts-first-32.png) | Thirty-two pasted images, each with three objects at the three positions, several on a faintly lighter square around the object | waits for a verdict: the step is still running (M7) |
-| [paste-two-experts-first-32.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/paste-two-experts-first-32.png) | paste-two-experts-first-32.png | waits for a verdict: the step is still running (M7) |
-| [smoke-objects-at-their-positions.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/smoke-objects-at-their-positions.png) | Twelve CLEVR renders at 64 pixels: four with one object at position 1, four empty scenes, and four with objects at all three positions, each asked position outlined by its 18-pixel paste window | waits for a verdict: the step is still running (M7) |
-| [window-control-written-rule.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/window-control-written-rule.png) | How often each pixel changes, for the three positions, with the 18 by 18 window drawn: position 3's object runs past the top and bottom of its window | waits for a verdict: the step is still running (M7) |
+| [full-p1-first-16-samples.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/full-p1-first-16-samples.png) | Sixteen samples from the position 1 expert, each a single CLEVR object at the upper left on an empty floor | `2-classifier-guidance/report/the-method-search/does-sample-and-paste-already-solve-small-clevr.md` |
+| [overfit-batch-256-real-and-sampled.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/overfit-batch-256-real-and-sampled.png) | Top two rows: the 16 real pictures. Bottom two rows: 16 samples showing the same scene with one clear object at the same position | `2-classifier-guidance/report/the-method-search/does-sample-and-paste-already-solve-small-clevr.md` |
+| [overfit-scaled-ramp-real-and-sampled.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/overfit-scaled-ramp-real-and-sampled.png) | Top two rows: the 16 real pictures. Bottom two rows: 16 samples with the right floor and lighting and faint coloured blotches in place of objects | `2-classifier-guidance/report/the-method-search/does-sample-and-paste-already-solve-small-clevr.md` |
+| [overfit-unscaled-ramp-real-and-sampled.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/overfit-unscaled-ramp-real-and-sampled.png) | Top two rows: the 16 real pictures of one object. Bottom two rows: 16 samples from the model, which are colour noise | `2-classifier-guidance/report/the-method-search/does-sample-and-paste-already-solve-small-clevr.md` |
+| [smoke-objects-at-their-positions.png](../../../../artifacts/notes/progress/method-search/01c-clevr-paste-first/smoke-objects-at-their-positions.png) | Twelve CLEVR renders at 64 pixels: four with one object at position 1, four empty scenes, and four with objects at all three positions, each asked position outlined by its 18-pixel paste window | `2-classifier-guidance/report/the-method-search/does-sample-and-paste-already-solve-small-clevr.md` |
 
 **`artifacts/notes/progress/method-search/05-two-experts-by-colour/`: 1 file**
 
 | File | What it shows | Lands on |
 |---|---|---|
-| [smoke-renders-by-colour-and-count.png](../../../../artifacts/notes/progress/method-search/05-two-experts-by-colour/smoke-renders-by-colour-and-count.png) | Five rows of 8 CLEVR renders: one red object, three red, three blue, two red with one blue, and three red with three blue, each labelled with its counts | none: a picture of the route's own plan, which stays beside the plan it explains |
+| [smoke-renders-by-colour-and-count.png](../../../../artifacts/notes/progress/method-search/05-two-experts-by-colour/smoke-renders-by-colour-and-count.png) | Five rows of 8 CLEVR renders: one red object, three red, three blue, two red with one blue, and three red with three blue, each labelled with its counts | waits for a verdict: the step is still running (M10) |
 
 ### Loop 7
 
