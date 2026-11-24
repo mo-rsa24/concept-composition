@@ -35,6 +35,25 @@ The push splits the fused glyph into two digits on half the canvases, and about 
 
 Clean pairs by unseen pair: 5 and 6: 9, 5 and 7: 2, 5 and 8: 5, 5 and 9: 2, 6 and 7: 1, 6 and 8: 7, 6 and 9: 6, 7 and 8: 4, 7 and 9: 3, 8 and 9: 4. Every pair gains, and the gain is uneven.
 
+## A rerun on another node
+
+Job 94161 reran the plain and pushed rows on the same pairs and seeds with the same code path, on `mscluster81` in place of `mscluster79`, to record every sampler step for the miniature page (`trace_push.py`, commit `199210af`). The plain row matched exactly: 0 clean pairs on every pair. The pushed row gave 41 clean pairs of 320 in place of 43, and per pair it moved by up to 4 (5 and 6: 5 against 9; 8 and 9: 1 against 4; 5 and 7: 5 against 2). The verdict above stays as recorded from job 94134. The rerun shows that a pushed digit render is not bit-reproducible across nodes, as found earlier for pushed SDXL renders, so per-pair counts carry this much noise beyond the bootstrap error. The rerun's lead of 41 over plain is also more than 1.96 times V3's standard error of 7.58. The record is `/datasets/mmolefe/poe_repair_min/loop-8/v3/trace/trace.json`.
+
+## What the two maps do while the push acts
+
+The same rerun measured, at every sampler step for all 320 canvases, how far apart the two maps' centres of mass sit across the canvas width, and their overlap (the shared share of their mass, 0 to 1).
+
+| Sampler step | 0 | 15 | 20 | 25 | 30 | 40 | 49 |
+|---|---|---|---|---|---|---|---|
+| Plain: centre separation, pixels | 0.7 | 1.6 | 1.5 | 1.3 | 1.4 | 1.0 | 0.9 |
+| Push: centre separation, pixels | 0.7 | 1.6 | **4.1** | **6.6** | 6.4 | 2.6 | 1.1 |
+| Plain: overlap | 0.614 | 0.620 | 0.617 | 0.614 | 0.599 | 0.657 | 0.663 |
+| Push: overlap | 0.614 | 0.620 | 0.619 | **0.552** | 0.525 | 0.646 | 0.667 |
+| Plain: checker logit, mean | −0.21 | −0.23 | −1.26 | −4.14 | −3.66 | −1.33 | −0.15 |
+| Push: checker logit, mean | −0.21 | −0.23 | 3.22 | **6.69** | 6.41 | 3.58 | −0.04 |
+
+During the push window (steps 15 to 25), the two maps move apart, from 1.6 to 6.6 pixels on average, while under the plain product they stay within 1.6 pixels of each other. Their overlap falls from 0.62 to 0.55, and the checker's logit rises to 6.69 where the plain product's falls to −4.14. After the window the maps drift back together: by the last step the separation is about 1 pixel in both rows, so the centre of mass of a map at the last steps does not show where the digits ended up (inferred: the late noise predictions differ mostly in stroke detail spread over both digits).
+
 ## Choosing the push length
 
 Job 94133 ran the push on the 10 seen pairs among digits 0 to 4 at seeds 0 to 31. Clean pairs of 320 rose with the length: 0 with no push, 8 at b = 0.1, 20 at b = 0.2 and 40 at b = 0.4. The rule froze b = 0.4, the largest of the three choices, so a longer push was not tried.
@@ -56,4 +75,4 @@ The model here never saw two digits on one canvas, and the push still draws them
 
 The clean count rests on the judge's confidence threshold of 0.9, so a faint but correct digit counts as not clean. The 161 separate-digit count carries no bar and is reported for what it shows about layout.
 
-GPU-hours spent so far: 5.72 of 30 (5.62 through step V2, and 0.10 on this step's five jobs).
+GPU-hours spent so far: 5.76 of 30 (5.62 through step V2, 0.10 on this step's five jobs and 0.04 on the rerun).
