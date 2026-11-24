@@ -861,9 +861,13 @@
     "W2",
     "W2c"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "Paper 2",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "started": "2026-11-24T10:49:03+02:00",
+   "finished": "2026-11-24T10:49:03+02:00",
+   "updated": "2026-11-24T10:49:03+02:00",
+   "note": "not run: no step readable (W2, W2c); stopped by the owner on 2026-11-24, questions 70 and 77"
   },
   {
    "id": "W4",
@@ -944,13 +948,17 @@
    "id": "W2d",
    "label": "W2d Binding read by sentence scores",
    "owner": "s9",
-   "proof": "noise-text-critic/02d-binding/review.md reports part binding on CO3's 96 pictures (two blind labellers and their agreement) and colour binding on rebuilt labels, at the finished picture and steps 0 to 15, against the bars in its design",
+   "proof": "noise-text-critic/02d-binding/review.md reports the part-binding labels on CO3's 96 pictures with the two labellers' agreement, and the colour labels' eye check, and records binding as untested by the owner's choice of 2026-11-24 to wrap up Loop 9",
    "needs": [
     "W2"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "Both papers",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "started": "2026-11-24T10:49:11+02:00",
+   "finished": "2026-11-24T10:49:11+02:00",
+   "updated": "2026-11-24T10:49:11+02:00",
+   "note": "binding untested by the owner's choice; part-binding labels kept (94.5% agreement), colour labels 26 of 32 against 90%"
   },
   {
    "id": "X1",
@@ -2556,8 +2564,10 @@
    "holds": "W3",
    "default": "Stop W3: no sentence score reads at steps 0 to 15 in any setting",
    "by": "s9",
-   "state": "open",
-   "asked": "2026-11-24T10:36:33+02:00"
+   "state": "answered",
+   "asked": "2026-11-24T10:36:33+02:00",
+   "answer": "The owner's answer in chat on 2026-11-24: wrap up Loop 9; stop W3 because no sentence score reads steps 0 to 15 in any setting.",
+   "answered": "2026-11-24T10:49:03+02:00"
   }
  ]
 }

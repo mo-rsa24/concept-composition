@@ -28,4 +28,8 @@ Binding failure is mostly a property of the pair. Cheetah × cougar and duck × 
 
 The checker passed pictures 01 and 13 as close calls, each with just under a tenth of one animal uncoloured. No copy had a tinted background.
 
-By the design's rule, nothing is scored on these labels. Whether to repair them is the owner's choice.
+By the design's rule, nothing is scored on these labels.
+
+## Why binding stays untested
+
+The owner chose on 2026-11-24 to wrap up Loop 9 without repairing either label set. The sentence scores missed counting at steps 0 to 15 and on the finished picture ([the W2c review](../02c-fair-test/review.md)), and binding is the harder property for a text encoder that keeps word order only weakly ([the word check](../02-can-it-read/review.md#text-only-word-check)). The part-binding labels stay for whoever tests binding next. Their main finding, that CO3's binding failures are fixed by the pair and not by the seed, goes to Loop 6.
