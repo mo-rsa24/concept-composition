@@ -1,6 +1,6 @@
 # Can a checker read which digits are present (step V6): review
 
-**Status: support. A checker trained on digits 0 to 4 tells two right digits from one right and one wrong digit at 0.861 balanced accuracy on digits 5 to 9.** The bar, written before the run, is 0.75; 0.5 is chance. 0.861 is the fair number: the checker, the ten-label signature read in the later window, is the best of four cells chosen on the pairs holding digit 4, where it scored 0.888. Digits 5 to 9 have been read by earlier steps too (V2, V3 and V5), so they are held out from training but not unread. The design is [the V6 design](design.md).
+**Status: support. A checker trained on digits 0 to 4 tells two right digits from one right and one wrong digit at 0.861 balanced accuracy on digits 5 to 9.** The bar, written before the run, is 0.75; 0.5 is chance. The frozen model alone reads the same canvases at 0.539, so the checker's reading is its own. On the sampler's own states it reads 0.651, under the 0.75 bar for that check, so step V7 waits on the owner. 0.861 is the fair number: the checker, the ten-label signature read in the later window, is the best of four cells chosen on the pairs holding digit 4, where it scored 0.888. Digits 5 to 9 have been read by earlier steps too (V2, V3 and V5), so they are held out from training but not unread. The design is [the V6 design](design.md).
 
 <a href="identity-grid.png"><img src="identity-grid.png" width="900" alt="The 2 by 2 grid. V2's identity checker at 0.555 leads into the early window, where two maps score 0.563 and the ten-label signature 0.612, both red. The later window holds two maps at 0.702, red, and the ten-label signature at 0.888, green, which leads to the retrain on digits 0 to 4 and the read of digits 5 to 9."></a>
 
@@ -66,7 +66,18 @@ The bars were fixed in [the design's robustness checks](design.md#robustness-che
 
 ## Two checks before V7
 
-Job 94595 smoke-tests both, then job 94596 scores the rule that needs no training and job 94597 reads V6's checker on the sampler's own states, as set in [the design](design.md#two-checks-before-v7). Their results fill this section.
+Both ran on mscluster107's card 1, on another user's idle allocation, by the owner's yes on board question 90, through `/datasets/mmolefe/poe_repair_min/loop-8/v6/shared/launch-2.sh` (code commit `13c68afd`; log `logs/l8-v6-shared-2.log`, 16:07 to 16:24 UTC). A watchdog checked the card every 30 seconds and never fired. The bars are in [the design](design.md#two-checks-before-v7). The numbers are in [the rule's result file](grid-files/untrained-untrained.json) and [the sampler read's result file](grid-files/sampler-sampler.json).
+
+| Check | Result | Bar | Verdict |
+|---|---|---|---|
+| The checker against the rule that needs no training, digits 5 to 9 | checker 0.861; rule 0.539 per read and 0.603 with each digit's fit summed over a canvas's 64 reads; lead 0.322, standard error 0.009 over pairs | lead more than 1.96 standard errors | **the checker adds to what the model knows** |
+| The checker on the sampler's own states, sampler steps 27 to 36 | 0.651 over the 10 steps, on 123 clean against 49 wrong-digit canvases | at least 0.75 | **does not read sampler states**; reported to the owner before V7 |
+
+**The frozen model alone barely reads identity.** The rule reads 0.52 to 0.58 on every pair and 0.50 to 0.57 at every step. Summing a canvas's 64 reads lifts it to 0.603. The trained checker's 0.861 is mostly its own.
+
+**On sampler states the checker reads less.** Per step it reads 0.67 at step 27 (t 449), peaks at 0.737 at step 29 (t 408), and falls to 0.60 to 0.63 by steps 33 to 36. The states come from V3's pushed renders at seeds 1000 to 1095 on the 10 pairs among 5 to 9, 960 canvases. The judge calls 123 clean, 328 "two, not both clear and right", 443 one blob, 57 damaged and 9 same half. Only 49 of the 328 hold two confident digits that are not the asked pair, so most of them are unclear rather than wrong, and they are left out. Per pair the labels are uneven: 5 and 7 has 3 wrong and 1 clean, 6 and 8 has 1 wrong and 26 clean.
+
+**What this cannot say.** The labels come from the finished picture, ten to twenty steps after the read, so a state the checker reads correctly can still end in a different picture. The training set's `wrong` canvases always hold one asked digit and one other digit; on sampler states a wrong canvas may hold the same asked digit twice, which the training never showed (inferred; the judge's per-canvas digits were not saved).
 
 ## The runs
 
@@ -80,6 +91,7 @@ Job 94595 smoke-tests both, then job 94596 scores the rule that needs no trainin
 | 94383 | the passing cell retrained on digits 0 to 4, read on digits 5 to 9 | mscluster87 | 55 min | 0.861 |
 | 94471 | second training seed | mscluster60 | 44 min | 0.877 |
 | 94472 | labels shuffled | mscluster88 | 47 min | 0.500 |
+| shared run | the rule that needs no training, then the sampler read | mscluster107 card 1 | 17 min | 0.539 and 0.651 |
 
 Commit `ba6d84da` scores the signature's U-Net calls in pieces of 128, the size training uses, and gives each signature cell its own job. The grid used 2.66 GPU-hours, the failed job included, and the read of digits 5 to 9 0.92. Loop 8 has used about 10.9 of its 30.
 

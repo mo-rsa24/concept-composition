@@ -3,6 +3,7 @@ flowchart TB
   classDef pass fill:#e6f4ea,stroke:#137333,stroke-width:2px,color:#111111
   classDef run fill:#fef7e0,stroke:#b06000,stroke-width:3px,color:#111111
   classDef wait fill:#f1f3f4,stroke:#5f6368,stroke-width:2px,stroke-dasharray:5 5,color:#111111
+  classDef miss fill:#fdecea,stroke:#b3261e,stroke-width:3px,color:#111111
   classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
   C["The checker: ten-label signature, later window<br/>chosen on digit 4 (0.888); read on 5 to 9: 0.861, bar 0.75"]:::plain
   R1["1. Layout cannot give the answer<br/>every test canvas has two digits apart<br/>done: built into the test"]:::pass
@@ -11,8 +12,8 @@ flowchart TB
   R4["4. Not one lucky training run<br/>second seed: 0.877, bar 0.75<br/>done: job 94471"]:::pass
   R5["5. Not a pipeline bug<br/>labels shuffled: 0.500, bar at most 0.55<br/>done: job 94472"]:::pass
   R6["6. Not one easy pair<br/>mean over 10 pairs minus 1.96 SE: 0.844<br/>done: weakest pair 0.824"]:::pass
-  B7["7. More than the model already knows<br/>beat the untrained best-fit rule by 1.96 SE<br/>running: job 94596"]:::run
-  S8["8. Reads the sampler's own states<br/>at least 0.75 at steps 27 to 36<br/>running: job 94597"]:::run
+  B7["7. More than the model already knows<br/>checker 0.861 against the rule's 0.539<br/>done: lead 0.322, 36 standard errors"]:::pass
+  S8["8. Reads the sampler's own states<br/>0.651 at steps 27 to 36, bar 0.75<br/>MISSED: V7 waits on the owner"]:::miss
   V7["V7: the push test<br/>count early, identity later"]:::wait
   C --> R1 --> R2 --> R3
   R3 --> R4
