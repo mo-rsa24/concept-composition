@@ -1,0 +1,31 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}, 'flowchart': {'nodeSpacing': 26, 'rankSpacing': 40}}}%%
+flowchart LR
+  Q["Can a sentence score on a<br/>half-drawn latent act as<br/>the five checkers?"]:::plain
+
+  I1["Use Latent CLIP directly"]:::idea
+  I2["Zero-shot classifier,<br/>push with its gradient"]:::idea
+  I3["Linear layers on top"]:::idea
+  I4["Add the five concepts"]:::idea
+  I5["Swap SDXL's text encoder"]:::idea
+  I6["Train our own"]:::idea
+
+  W2["W2: does it read?<br/>3 models, 5 properties<br/>labels being built"]:::doing
+  W2b["W2b: linear probe,<br/>7 unseen pairs"]:::todo
+  W3["W3: does the push<br/>improve CO3?"]:::todo
+  W4["W4: own encoder on<br/>digits, unseen 5 to 9"]:::todo
+  NO["Not expected to help:<br/>PixArt with T5 also fuses,<br/>0 of 8 seeds"]:::done
+  LATER["After W2: only properties<br/>that read, gradients checked<br/>for overlap"]:::todo
+
+  Q --> I1 & I2 & I3 & I4 & I5 & I6
+  I1 --> W2
+  I2 --> W2 --> W3
+  I3 --> W2b
+  I4 --> LATER
+  I5 --> NO
+  I6 --> W4
+
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef idea fill:#ffffff,stroke:#1f5fd0,stroke-width:2px,color:#111111
+  classDef doing fill:#fff1e0,stroke:#c86a0a,stroke-width:3px,color:#111111
+  classDef todo fill:#f1f3f5,stroke:#6b7a88,stroke-width:2px,color:#111111
+  classDef done fill:#dff3e4,stroke:#2f8a4a,stroke-width:2px,color:#111111
