@@ -1,0 +1,17 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  P["Paper 2's problem<br/>CO3 draws two bodies, but one<br/>borrows the other's face, fur or beak"]:::plain
+  E["Loops 6 and 9 pushed toward<br/>the outcome: no push restored<br/>which body is which"]:::plain
+  L10["Loop 10<br/>reads the score path, d_t over steps;<br/>verdict: a noise-aware score helps<br/>by choosing, not by pushing"]:::plain
+  Z1["Z1 read 13<br/>leakage papers"]:::done
+  Z2["Z2 which reading<br/>predicts which<br/>pairs borrow"]:::doing
+  Z3["Z3 one fix<br/>aimed there"]:::plain
+  Z4["Z4 choose<br/>Paper 2's method"]:::plain
+  Z5["Z5 audit Loops<br/>8, 9 and 10"]:::plain
+  P --> E --> Z1 --> Z2 --> Z3 --> Z4 --> Z5
+  L10 -- "1. its d_t maps are Z2's third reading" --> Z2
+  L10 -- "2. its choosing test (checker picks CO3's beta)<br/>is one candidate method" --> Z4
+  Z5 -- "3. small design flaws found<br/>and reruns proposed" --> L10
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef done fill:#d3f9d8,stroke:#2b8a3e,stroke-width:2px
+  classDef doing fill:#ffe8cc,stroke:#e8590c,stroke-width:2px

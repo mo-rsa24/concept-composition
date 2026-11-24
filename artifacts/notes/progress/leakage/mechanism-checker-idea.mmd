@@ -1,0 +1,15 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  S["a pretrained sampler<br/>CO3, ToMe, plain SDXL, PoE"]:::plain
+  R["its own failure signal at steps 0 to 5<br/>attention overlap, d_t maps, blob count<br/>(Z2 finds which one, for CO3)"]:::doing
+  C["small checker on that signal only<br/>never sees 'cheetah' or 'cougar'"]:::plain
+  G{"use it to"}:::plain
+  P["push: its gradient<br/>added while sampling"]:::plain
+  H["choose: restart a seed<br/>or pick CO3's beta"]:::plain
+  L[("labels per failure kind<br/>count, co-occurrence: detector<br/>part binding: by eye only")]:::plain
+  S --> R --> C --> G
+  G --> P --> S
+  G --> H --> S
+  L -. "training data; the costly part for binding" .-> C
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef doing fill:#ffe8cc,stroke:#e8590c,stroke-width:2px
