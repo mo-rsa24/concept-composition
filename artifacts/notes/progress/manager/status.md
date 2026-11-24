@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-24 19:10 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-24 20:04 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -88,7 +88,7 @@ Read at 19:07 from `squeue`, `sacct`, `sinfo` and `nvidia-smi` on mscluster107; 
 | Longest wait | Loop 8's 20-minute retraining start (job 94640), waiting for a node |
 | Nodes out of service | `bigbatch`: 12 down and 5 drained of 48. `biggpu`: 2 down and 2 drained of 7, including mscluster108 and mscluster111, drained at 09:27 and 09:10 today after a failed job kill |
 | Idle capacity | none: at 17:43 every working `bigbatch` and `biggpu` node was allocated. mscluster107 is now another user's `biggpu` job (94610, 6-hour limit, started 17:36); its second card sits idle at 170 MiB, but their process holds it, so it is not ours to use. Your interactive job 83423 on that node no longer appears in the queue |
-| Shared card | **mscluster107 card 1, approved by you on question 90.** Loop 6's balanced-list checker training runs there (about 10 GB, since 18:43), under `m5_shared_card.sh`, which refuses a card with a foreign process over 1,024 MiB and stops our whole process group every 30 seconds if one appears. Loop 8's run before it finished cleanly. The node now hosts a different job from the same user (94628, started 18:28, limit nearly 3 days), whose process holds 36.5 GB on card 0 and its 166 MiB start-up context on card 1 |
+| Shared card | **Not in use.** The other user's job on mscluster107 ended early, around 20:00, leaving the node idle in Slurm, so question 90's approval for borrowing a card inside their allocation no longer applies. Loop 6 stopped its shared run within 30 seconds, with nothing written, and resubmitted it through Slurm as its one `biggpu` job (94676, pinned to mscluster107 for the RTX 8000 the six CO3 pairs were first drawn on). Loop 8's run there earlier finished cleanly. A new shared-card run needs a new yes from you |
 | Compute against budget since 2026-11-21 | Loop 6: 53.4 node-hours of 87 (34.8 were CLEVR renders that may have used no GPU). Loop 8: 11.9 of 30. Loop 12: about 0.4, no total set. Slurm here records no GPU count, so these are node-hours, an upper bound |
 
 **What would make the queue move faster:** little within our control. There is no idle `biggpu` card,
