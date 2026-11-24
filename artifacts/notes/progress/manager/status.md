@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-24 16:50 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-24 16:56 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -35,15 +35,22 @@ overrule one, answer it again: `python3 scripts/progress_board.py answer <number
 
 **Acted on.** Loop 6 carried out 83, 78 and 85 by 16:31 (commits `6f8f65e5` and `58cee28a`): the region test is closed on the board, the digit test is its new step M11, and the check of whether its checker can see CO3's failure is designed with its bar written first and runs as jobs 94593 and 94594 before any comparison renders.
 
+### Answered by you
+
+At 16:55, in chat, recorded on the board and sent to each loop:
+
+| # | The question | Your answer |
+|---|---|---|
+| 88 | Should Loop 11 stop after its last two steps until a research loop has something new? | yes, the default |
+| 87 | Should Loop 6's checker search be judged on two clear subjects, drawing style ignored? | yes; damage reported beside it, two reviewers per picture |
+| 86 | Should Loop 8's SDXL test push identity on CO3's own run and be judged against CO3 alone? | yes; it starts from Loop 6's training list, about 6 GPU-hours. Loop 8 is asked to use the same two-clear-subjects measure as Loop 6 so the two compare |
+
 ### Still for you
 
 Newest first. A default happens only if you answer with it; nothing changes while a question waits.
 
 | # | The question, in one line | Why it is yours | Default | Waiting |
 |---|---|---|---|---|
-| 88 | Should Loop 11, which moves results onto the report pages and uses no GPU, finish its last two steps (its pillar checks and a final drain) and then stop until a research loop has a new result to drain? | stopping a loop | yes: finish, then stop until a new result | just filed |
-| 87 | Should Loop 6's search for the best Paper 2 checker be judged on "two clear subjects, drawing style ignored" (CO3 alone scores 32 of 96) instead of "faithful pairs", which also fails a picture for being a drawing (73 of CO3's 96 fail mostly that way)? | changes a recorded bar | keep faithful pairs | 6 min |
-| 86 | Should Loop 8's planned SDXL test be rewritten to push an identity checker on CO3's own run and be judged against CO3 alone, instead of counting bodies against the plain product, which CO3 already beats? | changes a recorded bar; about 6 GPU-hours | Loop 8 continues unchanged | 9 min |
 | 80 | Should a checker choose CO3's weight-sharpness setting at each of its corrected steps ([design](../score-space/11-the-checker-chooses-on-co3.md))? First read on 6 of 12 pairs | over 3 GPU-hours on one run (about 3.1) | Loop 6 runs the first read | 4 h 8 min |
 | 79 | Loop 9's test of whether sentence scores read a picture's properties has two recorded verdicts (null in its own review, inconclusive in a later fairness test). Which leads the report's title? | two records disagree | keep the test's own verdict, give the fairness test its own finding | 5 h 16 min |
 | none | Loop 10 is closed, but four of its steps (training and testing the shared spaces, and its verdict, which is written) stay open on the board, so the board counts it unfinished | changes another loop's step state | none set | since 10:34 |
@@ -105,7 +112,7 @@ Round 1, 2026-11-24 16:10, against the intents in [the alignment check](../score
 | Loop | Still working towards its intent? | Reviewer | The fact that shows it |
 |---|---|---|---|
 | 4. Rivals and targets | yes | next pass | It said Paper 1 needs a test where pasting fails; the two-colour CLEVR test is now in [the CLEVR plan](../targets/clevr-scaling-plan.md). |
-| 6. Best method | partly | **fix** | The checker search still aims at drawing two separate bodies, which CO3 already does in 96 of 96 pictures, while CO3's real failure is borrowed parts ([review](../reviewer/2026-11-24-review.md#loop-6-find-the-best-method)). |
+| 6. Best method | partly, now re-aimed | **fix** | The checker search still aims at drawing two separate bodies, which CO3 already does in 96 of 96 pictures, while CO3's real failure is borrowed parts ([review](../reviewer/2026-11-24-review.md#loop-6-find-the-best-method)). |
 | 7. Abstract-checker papers | yes, finished | not reviewed | Its three steps are done; the five-checker design is in `abstract-checkers/03-design.md`. |
 | 8. Abstract checkers | partly | **fix** | The digit half holds (0.861 on unseen digits 5 to 9 against 0.75), but its SDXL test counts bodies against the plain product, not identity against CO3 ([review](../reviewer/2026-11-24-review.md#loop-8-test-abstract-checkers)). |
 | 10. Score path | closed | not reviewed | Its verdict is written (`score-space/09-verdict.md`). |
@@ -163,4 +170,4 @@ been acted on, 93 asked nothing, and 15 waited. Nine of those were re-routed or 
 
 ## Last tick
 
-2026-11-24 16:50. Next tick about 17:06. The briefing for you is [the briefing page](briefing.md).
+2026-11-24 16:56. Next tick about 17:06. The briefing for you is [the briefing page](briefing.md).

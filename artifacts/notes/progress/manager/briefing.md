@@ -3,7 +3,7 @@
 The one page to read. Loop 13 rewrites it every 6 hours, and at once when you say "updates", "brief me"
 or "where are we". The full detail is on [the status page](status.md).
 
-**Written:** 2026-11-24 16:50 (UTC+2).
+**Written:** 2026-11-24 16:56 (UTC+2).
 
 ## Contents
 
@@ -28,8 +28,9 @@ or "where are we". The full detail is on [the status page](status.md).
    your questions and closed five idle sessions of finished or duplicate loops.
 4. **The cluster** has no idle node: 17 of 48 `bigbatch` nodes and 4 of 7 `biggpu` nodes are down or
    drained, so jobs wait for each other, not for us.
-5. **Waiting on you:** five questions below, the most important being how Loop 6's checker should be
-   judged (question 87) and whether Loop 8's SDXL test should target identity against CO3 (question 86).
+5. **You answered** at 16:55: Loop 6's checker is now judged on two clear subjects with drawing style
+   ignored, Loop 8's SDXL test targets identity against CO3, and Loop 11 stops after its last two steps.
+   Two questions still wait, below.
 
 ## For you to decide
 
@@ -38,9 +39,6 @@ Nothing changes while a question waits.
 
 | # | The question | Default |
 |---|---|---|
-| 88 | Should Loop 11, which moves results onto the report pages and uses no GPU, finish its last two steps and then stop until a research loop has something new to drain? | yes: finish, then stop until a new result |
-| 87 | Should Loop 6's search for the best Paper 2 checker be judged on "two clear subjects, drawing style ignored" instead of "faithful pairs", which also fails a picture for being a drawing? | keep faithful pairs |
-| 86 | Should Loop 8's SDXL test push an identity checker on CO3's own run and be judged against CO3 alone, instead of counting bodies against the plain product? About 6 GPU-hours | Loop 8 continues unchanged |
 | 80 | Should a checker choose CO3's sharpness setting at each of its corrected steps? A first read costs about 3.1 GPU-hours | Loop 6 runs the first read |
 | 79 | Loop 9's sentence-score test has two recorded verdicts (null, and inconclusive in a later fairness test). Which leads the report's title? | keep the test's own verdict, with the fairness test as its own finding |
 
