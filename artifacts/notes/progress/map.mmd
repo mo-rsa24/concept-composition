@@ -37,7 +37,7 @@ flowchart TB
     end
     subgraph L6["Session 6: find the best method"]
       direction TB
-      M1["M1 Each method beats its simple baseline"]:::done --> M7["M7 CLEVR paste test first<br/>YOU ARE HERE"]:::doing --> M5["M5 Checker data balanced"]:::todo --> D3["D3 Checker architecture chosen"]:::todo --> M2["M2 Checker labels chosen"]:::todo --> D5["D5 Short inclusive fine-tune with the push"]:::todo --> M3["M3 Winning method tuned"]:::todo --> M6["M6 Small CLEVR test"]:::todo --> M8["M8 Loop 6 and Loop 8 checkers compared"]:::todo --> M4["M4 One recipe frozen per paper"]:::todo --> M9["M9 Regions bind each body"]:::todo
+      M1["M1 Each method beats its simple baseline"]:::done --> M7["M7 CLEVR paste test first"]:::done --> M5["M5 Checker data balanced<br/>YOU ARE HERE"]:::doing --> D3["D3 Checker architecture chosen"]:::todo --> M2["M2 Checker labels chosen"]:::todo --> D5["D5 Short inclusive fine-tune with the push"]:::todo --> M3["M3 Winning method tuned"]:::todo --> M6["M6 Small CLEVR test"]:::todo --> M8["M8 Loop 6 and Loop 8 checkers compared"]:::todo --> M4["M4 One recipe frozen per paper"]:::todo --> M9["M9 Regions bind each body"]:::todo
     end
     subgraph L7["Session 7: read the abstract-checker papers"]
       direction TB
@@ -45,7 +45,7 @@ flowchart TB
     end
     subgraph L8["Session 8: test abstract checkers"]
       direction TB
-      V1["V1 Small repeatable environment"]:::done --> V2["V2 Checker learns plurality on unseen digits"]:::done --> V3["V3 Its gradient composes unseen digits"]:::done --> V5["V5 Remove-one-checker rehearsal on digits"]:::done --> V4["V4 Abstract checker on SDXL's unseen objects"]:::todo
+      V1["V1 Small repeatable environment"]:::done --> V2["V2 Checker learns plurality on unseen digits"]:::done --> V3["V3 Its gradient composes unseen digits"]:::done --> V5["V5 Remove-one-checker rehearsal on digits"]:::done --> V4["V4 Abstract checker on SDXL's unseen objects"]:::todo --> V6["V6 Identity checker reads which digits<br/>YOU ARE HERE"]:::doing --> V7["V7 Removal test rerun with the identity checker"]:::todo
     end
     subgraph L9["Session 9: turn concepts into scores"]
       direction TB
@@ -57,7 +57,7 @@ flowchart TB
     end
     subgraph L11["Session 11: drain the loops into the pillars"]
       direction TB
-      Y1["Y1 Census of undrained figures and results"]:::done --> Y2["Y2 Loop results on report findings<br/>YOU ARE HERE"]:::doing --> Y3["Y3 Method pages in context/methods"]:::todo --> Y4["Y4 Pillar checks pass"]:::todo --> Y5["Y5 Nothing left undrained"]:::todo
+      Y1["Y1 Census of undrained figures and results"]:::done --> Y2["Y2 Loop results on report findings"]:::done --> Y3["Y3 Method pages in context/methods"]:::done --> Y4["Y4 Pillar checks pass<br/>YOU ARE HERE"]:::doing --> Y5["Y5 Nothing left undrained"]:::todo
     end
   end
   subgraph JOIN["THE LOOP, AFTER THE LANES JOIN"]
@@ -74,7 +74,7 @@ flowchart TB
   end
   subgraph SF["F. WRITE"]
     direction LR
-    F1["F1 Paper 1 submitted, code public"]:::todo ~~~ F2["F2 Paper 2 submitted, code public"]:::todo
+    F1["F1 Paper 1 submitted, code public"]:::todo ~~~ F2["F2 Paper 2 submitted, code public"]:::todo ~~~ Z1["Z1 Leakage papers read"]:::done ~~~ Z2["Z2 What predicts borrowing on CO3<br/>YOU ARE HERE"]:::doing ~~~ Z3["Z3 One fix on the pairs that leak"]:::todo ~~~ Z4["Z4 Paper 2's method redesigned"]:::todo ~~~ Z5["Z5 Loops 8 to 10 design audit"]:::todo ~~~ Z6["Z6 Verdict for Paper 2"]:::todo
   end
   GOAL["FINISH: two papers, each beating its best rival"]:::goal
   X0["Detour: idea walk, 7 claims, paused"]:::detour -.-> P2

@@ -530,9 +530,12 @@
    "needs": [
     "M1"
    ],
-   "state": "todo",
+   "state": "doing",
    "serves": "Paper 2",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "started": "2026-11-24T14:31:20+02:00",
+   "updated": "2026-11-24T14:31:20+02:00",
+   "note": "Loop 6 started M5 after M7: method-search/01b-balance-the-checker-data/design.md, CO3 rows decide (question 57)"
   },
   {
    "id": "D3",
@@ -2754,6 +2757,15 @@
    "asked": "2026-11-24T13:04:32+02:00",
    "answer": "yes: whole path, three windows (early 0-5, middle 10-20, late 25-45), seven tests at rho >= 0.706, about 1.8 GPU-hours, padding-token column on, no word-order swap. Recorded by Loop 12 at the owner's request in chat, 2026-11-24.",
    "answered": "2026-11-24T13:54:38+02:00"
+  },
+  {
+   "id": 83,
+   "question": "M9's second region reader, chosen on question 65, also missed: 10 of 24 reads failed against a limit of 6, and on 4 of 12 pairs one word's attention covers both bodies at step 10, so no comparison of the two word maps gives each subject a region. Rung 2 has rendered nothing and its CO3 comparison is untested. Option A (recommended): close M9 here, reporting rung 1 (8 of 8 with oracle boxes and bootstrapping, all damaged) and the two failed readers, and leave identity to Paper 2's other routes. No cost. Option B: one last reader, Loop 10's per-subject score signal (score-space/12-independent-audit.md, question 6), on fresh seeds 6005 and 6006 with the same limit, rendering only if it passes. Under 0.1 GPU-hours for the check, then about 4.8 for the renders. Option C: boxes from Be Decisive, which Loop 12 reports at 77 seconds and 36 GB per image on SDXL.",
+   "holds": "M9",
+   "default": "Close M9 as in option A",
+   "by": "s6",
+   "state": "open",
+   "asked": "2026-11-24T14:31:20+02:00"
   }
  ]
 }
