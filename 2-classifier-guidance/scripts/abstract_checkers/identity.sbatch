@@ -6,7 +6,7 @@
 #SBATCH --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-8/logs/%x-%j.log
 # Step V6, reading identity. Submit with the code snapshot in SNAP:
-#   sbatch --export=ALL,SNAP=<snapshot> identity.sbatch <smoke|grid-base|grid-signature|grid-sig-early|grid-sig-later|final|seed|shuffled|checks-smoke|untrained|sampler|resample-smoke|resample-collect|resample-train>
+#   sbatch --export=ALL,SNAP=<snapshot> identity.sbatch <smoke|grid-base|grid-signature|grid-sig-early|grid-sig-later|final|seed|shuffled|checks-smoke|untrained|sampler|resample-smoke|resample-collect|resample-train|clean-check>
 set -uo pipefail
 STAGE=${1:?stage}
 ROOT=/datasets/mmolefe/poe_repair_min/loop-8
@@ -51,6 +51,9 @@ case "$STAGE" in
     st=${STAGE#resample-}
     "$PY" "$S/v6_resample.py" "$st" --model "$MODEL" --data "$DATA" --v6 "$OUT" \
       --count-head "$ROOT/v2/count-final/count-head-map.pt" --judge "$MN/judge-v3/judge.pt" --out "$OUT/resample"; rc=$? ;;
+  clean-check)
+    "$PY" "$S/v6_mix.py" clean-check --model "$MODEL" --judge "$MN/judge-v3/judge.pt" \
+      --states "$OUT/resample/train-states.npz" --out "$OUT/mix"; rc=$? ;;
   checks-smoke|untrained|sampler)
     st=${STAGE#checks-}
     "$PY" "$S/v6_baselines.py" "$st" --model "$MODEL" --data "$DATA" --v6 "$OUT" \

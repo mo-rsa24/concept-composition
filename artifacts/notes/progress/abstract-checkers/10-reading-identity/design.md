@@ -101,6 +101,28 @@ Its read of V1's pasted digits 5 to 9 (the 1,250 canvases V6 read at 0.861) is r
 
 **Cost:** about 1.5 GPU-hours: 9,600 training renders with states (the sampler read rendered 960 in under 4 minutes), the training with eleven model calls per example, and the read. **Buys:** a checker V7 can push with, or the answer that this form of checker cannot read the sampler's own states.
 
+## Training on pasted canvases and sampler states together
+
+The checker retrained on 2,036 sampler states learned those states and read fresh digits 5 to 9 at 0.552. Board question 95, decided for the owner by Loop 13 on 2026-11-24 after the reviewer's second pass (option A with three additions, no bar changed), trains on both sources and adds two checks first. The constants are in `v6_mix.py`, written before the runs.
+
+**The states again, with their seeds.** The saved states do not record which seed made them, so the 10 pairs among digits 0 to 4 at seeds 2000 to 2959 are rendered again exactly as before, keeping each canvas's seed. Pushed renders can differ slightly between machines, so the counts can differ a little from the 2,036 of the first collection.
+
+**1. Is identity visible at these steps at all.** For each kept canvas and each of sampler steps 27 to 36, the one-step clean estimate $\hat x_0 = (x_t - \sqrt{1-\bar\alpha_t}\,\epsilon_{\text{product}})/\sqrt{\bar\alpha_t}$ is read by the digit judge, the same judge that labels the finished picture. A read counts as "the asked pair" when the judge's call on $\hat x_0$ is "two clear, right, apart". This is a diagnostic only and never becomes the checker. If its balanced accuracy over the 10 steps is under 0.75, identity is not plainly present at those steps; then V7 is closed as not run and no checker is trained.
+
+**2. A positive control.** Seeds 2000 to 2959 ending in 0 (96 seeds, about 10%) are held out of training on every pair. Every 500 updates the checker reads them, and the checker kept is the one with the highest balanced accuracy there. If that best is under 0.75, the recipe does not read even the digits it trained on, and the result is inconclusive.
+
+**3. The mix.** Each batch of 128 holds 64 pasted canvases from V6's pool (digits 0 to 3, 32 label 1 and 32 label 0, forward-noised to a later-window timestep with fresh noise) and 64 sampler states (32 label 1 and 32 label 0, at one of steps 27 to 36). At most 4,000 updates.
+
+| Result | What it takes |
+|---|---|
+| Reads sampler states | balanced accuracy over the 10 steps at least 0.75 on digits 5 to 9 at new fresh seeds 3100 to 3195, read once |
+| Does not | below 0.75; V7 is closed as not run |
+| Inconclusive | the positive control's best is under 0.75, or fewer than 40 canvases in either label |
+
+The area under the curve is reported beside every balanced accuracy, and the read of V1's pasted digits 5 to 9 beside the fresh read. About 50 wrong-digit canvases in a read give a standard error near 0.04.
+
+**Cost:** about 1.6 GPU-hours, bringing Loop 8 to about 15 of 30. **Buys:** whether one checker can read identity on pasted canvases and the sampler's states at once, and, if identity is not visible at these steps, the reason two recipes missed.
+
 ## What this cannot say
 
 A pass says a checker reads digit identity on pasted canvases. Whether its gradient helps the sampler draw the right digits is V5's rerun. The later window is later in sampling, where the layout may already be fixed, so an identity push there may fix identity without moving the digits apart.
