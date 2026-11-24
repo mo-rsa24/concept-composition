@@ -51,7 +51,7 @@ uses a dash as a clause separator. The discovery routes to both pillars are in p
 | R8 | "(board question 75)" sits in a finding title | removal finding and its index row | this loop | fixed, `eda9d9a4` |
 | R9 | claims run past four sentences | most of the 13 findings | this loop | fixed, `eda9d9a4` |
 | R10 | seven findings cite the board step and design instead of a plan file | seven findings | owner's call, item 9 | waiting |
-| R11 | most numbers are marked stated because the cluster result files were not opened | 184 stated against 93 verified | this loop, read only on the cluster | to fix |
+| R11 | most numbers are marked stated because the cluster result files were not opened | 184 stated against 93 verified | this loop, read only on the cluster | fixed, `8f2dea1b`: verified 93 to 198, stated 184 to 93; nine page-against-file mismatches recorded on their pages and sent to the loops |
 | R12 | no finding has a Depends on section, and few link their method pages | 13 findings | the cross-reference pass | fixed, `f3cee98a` |
 | R13 | the repeatability check is filed as a finding rather than an environment fact | environment finding | owner's call, item 10 | waiting |
 | R14 | as C12 | `MASTER_PLAN.md` | outside this loop's files | reported |
