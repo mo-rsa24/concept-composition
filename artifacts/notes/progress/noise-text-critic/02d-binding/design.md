@@ -36,6 +36,25 @@ All the sentences name the same subjects, so the score difference rests on bindi
 
 **Protocol.** W2's: four noise draws per step at steps 0 to 15, 20 to 29, 30, 40 and 49, plus the clean latent; the same split of seeds into halves, within each pair; the same threshold rule, balanced accuracy and bootstrap; and NoisyCLIP, frozen CLIP and Latent CLIP.
 
+**The labels.** They are in [the part-binding calls](part-binding-calls.csv). The two labellers agreed on 91 of 96 calls, and on 69 of the 73 pictures both called `own_parts` or `borrowed` (94.5%, against the 80% bar). The five disagreements were settled by a third look at full size. Four bobcat × quail pictures became `borrowed`: the bobcat's ear tufts end in the quail's teardrop plume, or the quail carries the bobcat's black spots. One duck × goose picture became `not_two`, because it shows a drake and a duck with a mallard hen's head and no goose. The final counts are 40 `own_parts`, 33 `borrowed` and 23 `not_two`.
+
+**Binding failure is mostly a property of the pair.** Within one pair, the 8 seeds nearly always fall the same way:
+
+| Pair | Own parts | Borrowed | Not two |
+|---|---|---|---|
+| eagle × fox | 8 | 0 | 0 |
+| zebra × flamingo | 7 | 0 | 1 |
+| crow × raven, lighthouse × sailboat, giraffe × tortoise | 6 each | 0 | 2 each |
+| cheetah × cougar, duck × goose | 0 | 7 each | 1 each |
+| boar × pheasant | 0 | 4 | 4 |
+| puma × condor | 1 | 7 | 0 |
+| bobcat × quail, seal × gull | 3 each | 4 each | 1 each |
+| hippopotamus × swallow | 0 | 0 | 8 |
+
+A score could therefore separate the labels by recognising the pair, without seeing binding at all. Two rules are fixed here, before any score:
+- **Pair-only baseline.** Every reader is compared with a reader that predicts, for each pair, that pair's majority label on the threshold half. A reader that does not beat it by more than 1.96 standard errors reads the pair, not binding.
+- **Within-pair test.** The main binding result uses only pairs holding both labels, with each picture's score centred on its pair's mean before the threshold. On CO3's row that is bobcat × quail, seal × gull and puma × condor: 7 `own_parts` and 15 `borrowed`. That is under the 8-per-label-per-half minimum, so on CO3's row alone the within-pair result is inconclusive by design. Labelling the push and random rows (192 pictures) would give those three pairs, and any newly mixed pairs, up to 24 pictures each. That choice is the owner's.
+
 ## Colour binding, with whole-animal regions
 
 W2's recolouring used the word maps, which landed on the cat's head. The rebuilt rule is written in its own section here once W2c lands, before any recoloured picture is made. It uses the detector's box for each animal (GroundingDINO, as in `2-classifier-guidance/scripts/rung2/label_with_detector.py`) to bound the region, and it gets a new eye check on 32 pictures against the same 90% bar.

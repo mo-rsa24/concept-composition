@@ -1,0 +1,97 @@
+pair,seed,picture,labeller_1,labeller_2,final,settled_by_third_look,note_1,note_2
+a_boar__x__a_pheasant,6001,renders/co3/a_boar__x__a_pheasant/seed-6001.png,not_two,not_two,not_two,False,boar with two pheasants; boar also has feathered tail,boar with pheasant plus a second grouse-like bird
+a_boar__x__a_pheasant,6002,renders/co3/a_boar__x__a_pheasant/seed-6002.png,not_two,not_two,not_two,False,boar with pheasant plus an extra dark bird,boar with two birds (pheasant and a second dark bird)
+a_boar__x__a_pheasant,6003,renders/co3/a_boar__x__a_pheasant/seed-6003.png,not_two,not_two,not_two,False,boar with two birds; boar also has feathered tail,boar with two birds (pheasant and a small grouse); boar also has a feathered tail tuft
+a_boar__x__a_pheasant,6004,renders/co3/a_boar__x__a_pheasant/seed-6004.png,not_two,not_two,not_two,False,boar with pheasant plus an extra small bird; boar also has feathered tail,boar with pheasant plus a second small bird
+a_boar__x__a_pheasant,6005,renders/co3/a_boar__x__a_pheasant/seed-6005.png,borrowed,borrowed,borrowed,False,boar feet drawn as bird claws,boar has curved bird-like claws for feet
+a_boar__x__a_pheasant,6006,renders/co3/a_boar__x__a_pheasant/seed-6006.png,borrowed,borrowed,borrowed,False,boar has a feathered tail and bird claws for feet,boar has bird talons for feet
+a_boar__x__a_pheasant,6007,renders/co3/a_boar__x__a_pheasant/seed-6007.png,borrowed,borrowed,borrowed,False,boar feet drawn as pheasant claws,boar has bird talons for feet
+a_boar__x__a_pheasant,6008,renders/co3/a_boar__x__a_pheasant/seed-6008.png,borrowed,borrowed,borrowed,False,boar has bird talons for feet and a feathered tail,boar has bird talons for feet
+a_bobcat__x__a_quail,6001,renders/co3/a_bobcat__x__a_quail/seed-6001.png,own_parts,own_parts,own_parts,False,clean bobcat and quail apart,clean bobcat and quail apart
+a_bobcat__x__a_quail,6002,renders/co3/a_bobcat__x__a_quail/seed-6002.png,own_parts,borrowed,borrowed,True,clean bobcat and quail apart,"bobcat has long curved black ear tufts like the quail's plume, red inside ear"
+a_bobcat__x__a_quail,6003,renders/co3/a_bobcat__x__a_quail/seed-6003.png,own_parts,borrowed,borrowed,True,clean bobcat and quail apart,bobcat's black ear tufts curl into the quail's teardrop plume shape
+a_bobcat__x__a_quail,6004,renders/co3/a_bobcat__x__a_quail/seed-6004.png,own_parts,own_parts,own_parts,False,clean bobcat and quail apart,clean bobcat and quail apart
+a_bobcat__x__a_quail,6005,renders/co3/a_bobcat__x__a_quail/seed-6005.png,own_parts,borrowed,borrowed,True,clean bobcat and quail apart,bobcat's black ear tufts curl into the quail's teardrop plume shape
+a_bobcat__x__a_quail,6006,renders/co3/a_bobcat__x__a_quail/seed-6006.png,own_parts,borrowed,borrowed,True,clean bobcat and quail apart,quail's wing and body carry the bobcat's leopard-style black spots
+a_bobcat__x__a_quail,6007,renders/co3/a_bobcat__x__a_quail/seed-6007.png,own_parts,own_parts,own_parts,False,clean bobcat and quail apart,clean bobcat and quail apart
+a_bobcat__x__a_quail,6008,renders/co3/a_bobcat__x__a_quail/seed-6008.png,not_two,not_two,not_two,False,bobcat and quail plus a small extra quail chick,bobcat with two quail (one small)
+a_cheetah__x__a_cougar,6001,renders/co3/a_cheetah__x__a_cougar/seed-6001.png,borrowed,borrowed,borrowed,False,cougar has cheetah spots and tear marks,cougar has cheetah spots and tear-line face marks
+a_cheetah__x__a_cougar,6002,renders/co3/a_cheetah__x__a_cougar/seed-6002.png,borrowed,borrowed,borrowed,False,cougar has cheetah spots and tear marks,cougar has cheetah spots and tear-line face marks
+a_cheetah__x__a_cougar,6003,renders/co3/a_cheetah__x__a_cougar/seed-6003.png,borrowed,borrowed,borrowed,False,cougar has cheetah spots and tear marks,cougar has cheetah spots and tear-line face marks
+a_cheetah__x__a_cougar,6004,renders/co3/a_cheetah__x__a_cougar/seed-6004.png,borrowed,borrowed,borrowed,False,cougar has cheetah spots and tear marks,cougar has cheetah spots and tear-line face marks
+a_cheetah__x__a_cougar,6005,renders/co3/a_cheetah__x__a_cougar/seed-6005.png,borrowed,borrowed,borrowed,False,cougar has cheetah spots on body,cougar has cheetah spots and tear-line face marks
+a_cheetah__x__a_cougar,6006,renders/co3/a_cheetah__x__a_cougar/seed-6006.png,not_two,not_two,not_two,False,two cheetahs and no cougar,two cheetahs; the second has full cheetah spots and tear lines and no clear cougar
+a_cheetah__x__a_cougar,6007,renders/co3/a_cheetah__x__a_cougar/seed-6007.png,borrowed,borrowed,borrowed,False,cougar has cheetah spots and tear marks,cougar has cheetah spots and tear-line face marks
+a_cheetah__x__a_cougar,6008,renders/co3/a_cheetah__x__a_cougar/seed-6008.png,borrowed,borrowed,borrowed,False,cougar has cheetah spots,cougar has cheetah spots on body and legs
+a_crow__x__a_raven,6001,renders/co3/a_crow__x__a_raven/seed-6001.png,not_two,not_two,not_two,False,three crows or ravens (one flying),three corvids (one flying above)
+a_crow__x__a_raven,6002,renders/co3/a_crow__x__a_raven/seed-6002.png,own_parts,own_parts,own_parts,False,clean raven and crow apart,two separate clean black corvids
+a_crow__x__a_raven,6003,renders/co3/a_crow__x__a_raven/seed-6003.png,own_parts,own_parts,own_parts,False,clean crow and raven apart,two separate clean black corvids
+a_crow__x__a_raven,6004,renders/co3/a_crow__x__a_raven/seed-6004.png,not_two,not_two,not_two,False,three crows or ravens,three corvids (extra small one in the middle)
+a_crow__x__a_raven,6005,renders/co3/a_crow__x__a_raven/seed-6005.png,own_parts,own_parts,own_parts,False,clean crow and raven apart,two separate clean black corvids
+a_crow__x__a_raven,6006,renders/co3/a_crow__x__a_raven/seed-6006.png,own_parts,own_parts,own_parts,False,clean crow and raven apart,two separate clean black corvids
+a_crow__x__a_raven,6007,renders/co3/a_crow__x__a_raven/seed-6007.png,own_parts,own_parts,own_parts,False,clean crow and raven apart,two separate clean black corvids
+a_crow__x__a_raven,6008,renders/co3/a_crow__x__a_raven/seed-6008.png,own_parts,own_parts,own_parts,False,clean crow and raven apart,two separate clean black corvids
+a_duck__x__a_goose,6001,renders/co3/a_duck__x__a_goose/seed-6001.png,borrowed,borrowed,borrowed,False,goose body carries mallard drake head; other is a mallard hen head on goose shape,both birds have duck heads; the barred goose body on the right carries a mallard's green head
+a_duck__x__a_goose,6002,renders/co3/a_duck__x__a_goose/seed-6002.png,borrowed,borrowed,borrowed,False,goose carries mallard green head and orange bill,mallard's green head sits on a long-necked goose body
+a_duck__x__a_goose,6003,renders/co3/a_duck__x__a_goose/seed-6003.png,borrowed,not_two,not_two,True,mallard drake clean; goose body carries a mallard hen head,"mallard drake and a second duck, no goose"
+a_duck__x__a_goose,6004,renders/co3/a_duck__x__a_goose/seed-6004.png,borrowed,borrowed,borrowed,False,goose body carries mallard green head; duckling beside it,goose-shaped body carries a mallard's green head and yellow bill; other bird is a duckling
+a_duck__x__a_goose,6005,renders/co3/a_duck__x__a_goose/seed-6005.png,borrowed,borrowed,borrowed,False,goose body carries mallard green head and yellow bill,goose has a duck's flat bill and head; mallard body has goose barring
+a_duck__x__a_goose,6006,renders/co3/a_duck__x__a_goose/seed-6006.png,borrowed,borrowed,borrowed,False,goose body carries mallard green head; gosling beside it,goose-shaped barred body carries a mallard's green head; other bird is a duckling
+a_duck__x__a_goose,6007,renders/co3/a_duck__x__a_goose/seed-6007.png,borrowed,borrowed,borrowed,False,goose body carries mallard green head; duckling beside it,goose body carries a mallard's green head (with a doubled bill); other bird is a duck
+a_duck__x__a_goose,6008,renders/co3/a_duck__x__a_goose/seed-6008.png,borrowed,borrowed,borrowed,False,goose body carries mallard green head; grey goose beside it,mallard's green head sits on a goose body with white breast and barred flanks
+a_giraffe__x__a_tortoise,6001,renders/co3/a_giraffe__x__a_tortoise/seed-6001.png,own_parts,own_parts,own_parts,False,,
+a_giraffe__x__a_tortoise,6002,renders/co3/a_giraffe__x__a_tortoise/seed-6002.png,not_two,not_two,not_two,False,,
+a_giraffe__x__a_tortoise,6003,renders/co3/a_giraffe__x__a_tortoise/seed-6003.png,own_parts,own_parts,own_parts,False,,
+a_giraffe__x__a_tortoise,6004,renders/co3/a_giraffe__x__a_tortoise/seed-6004.png,own_parts,own_parts,own_parts,False,,
+a_giraffe__x__a_tortoise,6005,renders/co3/a_giraffe__x__a_tortoise/seed-6005.png,own_parts,own_parts,own_parts,False,,
+a_giraffe__x__a_tortoise,6006,renders/co3/a_giraffe__x__a_tortoise/seed-6006.png,own_parts,own_parts,own_parts,False,,
+a_giraffe__x__a_tortoise,6007,renders/co3/a_giraffe__x__a_tortoise/seed-6007.png,not_two,not_two,not_two,False,,
+a_giraffe__x__a_tortoise,6008,renders/co3/a_giraffe__x__a_tortoise/seed-6008.png,own_parts,own_parts,own_parts,False,,
+a_hippopotamus__x__a_swallow,6001,renders/co3/a_hippopotamus__x__a_swallow/seed-6001.png,not_two,not_two,not_two,False,hippo with two birds,hippo with two birds
+a_hippopotamus__x__a_swallow,6002,renders/co3/a_hippopotamus__x__a_swallow/seed-6002.png,not_two,not_two,not_two,False,hippo with two birds,hippo with two birds
+a_hippopotamus__x__a_swallow,6003,renders/co3/a_hippopotamus__x__a_swallow/seed-6003.png,not_two,not_two,not_two,False,hippo with two birds,hippo with two birds
+a_hippopotamus__x__a_swallow,6004,renders/co3/a_hippopotamus__x__a_swallow/seed-6004.png,not_two,not_two,not_two,False,hippo with two birds,hippo with two birds
+a_hippopotamus__x__a_swallow,6005,renders/co3/a_hippopotamus__x__a_swallow/seed-6005.png,not_two,not_two,not_two,False,hippo with two birds,hippo with two birds
+a_hippopotamus__x__a_swallow,6006,renders/co3/a_hippopotamus__x__a_swallow/seed-6006.png,not_two,not_two,not_two,False,hippo with two birds (one flying one perched),hippo with two birds (one flying and one on the ground)
+a_hippopotamus__x__a_swallow,6007,renders/co3/a_hippopotamus__x__a_swallow/seed-6007.png,not_two,not_two,not_two,False,hippo with four birds,hippo with four birds
+a_hippopotamus__x__a_swallow,6008,renders/co3/a_hippopotamus__x__a_swallow/seed-6008.png,not_two,not_two,not_two,False,hippo with two birds flying,hippo with two swallows
+a_lighthouse__x__a_sailboat,6001,renders/co3/a_lighthouse__x__a_sailboat/seed-6001.png,own_parts,own_parts,own_parts,False,clean lighthouse and sailboat apart,clean lighthouse and sailboat apart
+a_lighthouse__x__a_sailboat,6002,renders/co3/a_lighthouse__x__a_sailboat/seed-6002.png,own_parts,own_parts,own_parts,False,clean lighthouse and sailboat apart,clean lighthouse and sailboat apart
+a_lighthouse__x__a_sailboat,6003,renders/co3/a_lighthouse__x__a_sailboat/seed-6003.png,not_two,not_two,not_two,False,lighthouse with two sailboats,lighthouse with two sailboats
+a_lighthouse__x__a_sailboat,6004,renders/co3/a_lighthouse__x__a_sailboat/seed-6004.png,own_parts,own_parts,own_parts,False,clean lighthouse and sailboat apart,clean lighthouse and sailboat apart
+a_lighthouse__x__a_sailboat,6005,renders/co3/a_lighthouse__x__a_sailboat/seed-6005.png,own_parts,own_parts,own_parts,False,clean lighthouse and sailboat apart,clean lighthouse and sailboat apart
+a_lighthouse__x__a_sailboat,6006,renders/co3/a_lighthouse__x__a_sailboat/seed-6006.png,own_parts,own_parts,own_parts,False,clean lighthouse and sailboat apart,clean lighthouse and sailboat apart
+a_lighthouse__x__a_sailboat,6007,renders/co3/a_lighthouse__x__a_sailboat/seed-6007.png,not_two,not_two,not_two,False,lighthouse with two sailboats,lighthouse with two sailboats
+a_lighthouse__x__a_sailboat,6008,renders/co3/a_lighthouse__x__a_sailboat/seed-6008.png,own_parts,own_parts,own_parts,False,clean lighthouse and sailboat apart,clean lighthouse and sailboat apart
+a_puma__x__a_condor,6001,renders/co3/a_puma__x__a_condor/seed-6001.png,borrowed,borrowed,borrowed,False,condor body carries a puma head and ear,"condor has a cat head, ear and tan fur chest"
+a_puma__x__a_condor,6002,renders/co3/a_puma__x__a_condor/seed-6002.png,borrowed,borrowed,borrowed,False,puma chest covered in feather-like scales; condor clean,puma's chest and neck are covered in feather-like scallops
+a_puma__x__a_condor,6003,renders/co3/a_puma__x__a_condor/seed-6003.png,borrowed,borrowed,borrowed,False,condor has a furry black mammal head with a muzzle,condor has a furry mammal face
+a_puma__x__a_condor,6004,renders/co3/a_puma__x__a_condor/seed-6004.png,borrowed,borrowed,borrowed,False,condor has a black puma head and puma has condor wings at its sides,condor has a cat head and paws; puma has dark wings on its sides
+a_puma__x__a_condor,6005,renders/co3/a_puma__x__a_condor/seed-6005.png,borrowed,borrowed,borrowed,False,condor has a pointed puma ear and tan puma-coloured neck,condor has a pointed cat ear and tan puma fur on its neck
+a_puma__x__a_condor,6006,renders/co3/a_puma__x__a_condor/seed-6006.png,own_parts,own_parts,own_parts,False,clean puma and condor apart; puma chest fur slightly scaly,clean puma and condor apart
+a_puma__x__a_condor,6007,renders/co3/a_puma__x__a_condor/seed-6007.png,borrowed,borrowed,borrowed,False,condor body carries a puma head,condor has a puma's head and face
+a_puma__x__a_condor,6008,renders/co3/a_puma__x__a_condor/seed-6008.png,borrowed,borrowed,borrowed,False,condor has a black cat head with ears and whiskers,"condor has a cat face, cat ears and whiskers"
+a_seal__x__a_gull,6001,renders/co3/a_seal__x__a_gull/seed-6001.png,own_parts,own_parts,own_parts,False,clean seal and gull apart,clean seal and gull apart
+a_seal__x__a_gull,6002,renders/co3/a_seal__x__a_gull/seed-6002.png,own_parts,own_parts,own_parts,False,clean gull and seal apart,clean gull and seal apart
+a_seal__x__a_gull,6003,renders/co3/a_seal__x__a_gull/seed-6003.png,borrowed,borrowed,borrowed,False,gull is a white seal body with flippers and a beak,gull head on a seal-shaped body with flippers
+a_seal__x__a_gull,6004,renders/co3/a_seal__x__a_gull/seed-6004.png,not_two,not_two,not_two,False,seal with two gulls,seal with two gulls
+a_seal__x__a_gull,6005,renders/co3/a_seal__x__a_gull/seed-6005.png,borrowed,borrowed,borrowed,False,second animal is a spotted seal body with gull head and beak,gull is a hooked beak on a spotted seal body; white seal beside it is clean
+a_seal__x__a_gull,6006,renders/co3/a_seal__x__a_gull/seed-6006.png,own_parts,own_parts,own_parts,False,clean seal and gull apart,clean seal and gull apart
+a_seal__x__a_gull,6007,renders/co3/a_seal__x__a_gull/seed-6007.png,borrowed,borrowed,borrowed,False,gull is a speckled seal body with a beak,gull is a whiskered beak on a spotted seal body with a flipper
+a_seal__x__a_gull,6008,renders/co3/a_seal__x__a_gull/seed-6008.png,borrowed,borrowed,borrowed,False,gull has a seal hind flipper behind it,gull's body ends in a seal's hind flipper
+a_zebra__x__a_flamingo,6001,renders/co3/a_zebra__x__a_flamingo/seed-6001.png,own_parts,own_parts,own_parts,False,clean zebra and flamingo apart,clean zebra and flamingo apart
+a_zebra__x__a_flamingo,6002,renders/co3/a_zebra__x__a_flamingo/seed-6002.png,own_parts,own_parts,own_parts,False,zebra clean; flamingo drawn as white line art with feather lines,line-drawn zebra and white flamingo; wing lines are drawing strokes
+a_zebra__x__a_flamingo,6003,renders/co3/a_zebra__x__a_flamingo/seed-6003.png,own_parts,own_parts,own_parts,False,clean zebra and flamingo apart,clean zebra and flamingo apart
+a_zebra__x__a_flamingo,6004,renders/co3/a_zebra__x__a_flamingo/seed-6004.png,own_parts,own_parts,own_parts,False,clean zebra and flamingo apart,clean zebra and flamingo apart
+a_zebra__x__a_flamingo,6005,renders/co3/a_zebra__x__a_flamingo/seed-6005.png,own_parts,own_parts,own_parts,False,clean flamingo and zebra apart,clean flamingo and zebra apart
+a_zebra__x__a_flamingo,6006,renders/co3/a_zebra__x__a_flamingo/seed-6006.png,own_parts,own_parts,own_parts,False,clean zebra and flamingo apart,clean zebra and flamingo apart
+a_zebra__x__a_flamingo,6007,renders/co3/a_zebra__x__a_flamingo/seed-6007.png,not_two,not_two,not_two,False,zebra with two flamingos (one zebra-striped),"zebra with two flamingos, one of them covered in zebra stripes"
+a_zebra__x__a_flamingo,6008,renders/co3/a_zebra__x__a_flamingo/seed-6008.png,own_parts,own_parts,own_parts,False,clean zebra and flamingo apart,clean zebra and flamingo apart
+an_eagle__x__a_fox,6001,renders/co3/an_eagle__x__a_fox/seed-6001.png,own_parts,own_parts,own_parts,False,clean eagle and fox apart,clean eagle and fox apart
+an_eagle__x__a_fox,6002,renders/co3/an_eagle__x__a_fox/seed-6002.png,own_parts,own_parts,own_parts,False,clean eagle and fox apart,clean eagle and fox; red ribbon under eagle's talons is not a part
+an_eagle__x__a_fox,6003,renders/co3/an_eagle__x__a_fox/seed-6003.png,own_parts,own_parts,own_parts,False,clean eagle and fox apart,clean eagle and fox apart
+an_eagle__x__a_fox,6004,renders/co3/an_eagle__x__a_fox/seed-6004.png,own_parts,own_parts,own_parts,False,clean eagle and fox apart; fox tail only overlaps eagle legs,eagle and fox apart; fox tail passes behind eagle's legs but stays the fox's
+an_eagle__x__a_fox,6005,renders/co3/an_eagle__x__a_fox/seed-6005.png,own_parts,own_parts,own_parts,False,clean eagle and fox apart,clean eagle and fox apart
+an_eagle__x__a_fox,6006,renders/co3/an_eagle__x__a_fox/seed-6006.png,own_parts,own_parts,own_parts,False,clean eagle and fox apart,clean eagle and fox apart
+an_eagle__x__a_fox,6007,renders/co3/an_eagle__x__a_fox/seed-6007.png,own_parts,own_parts,own_parts,False,clean eagle and fox apart,clean eagle and fox apart
+an_eagle__x__a_fox,6008,renders/co3/an_eagle__x__a_fox/seed-6008.png,own_parts,own_parts,own_parts,False,clean eagle and fox apart; fox tail only overlaps eagle feet,eagle and fox; fox tail runs behind eagle's feet but stays the fox's
