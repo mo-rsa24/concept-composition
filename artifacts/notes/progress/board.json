@@ -535,8 +535,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-24T14:31:20+02:00",
-   "updated": "2026-11-24T18:12:15+02:00",
-   "note": "CO3 read inconclusive by count (75 of 96 reproduce; best 0.616 at step 25); 21 reruns on RTX 8000 card 1 after Loop 8 (Loop 13 for the owner); overfit fixed and resubmitted 94622 to 94625"
+   "updated": "2026-11-24T18:26:31+02:00",
+   "note": "CO3 reread of 21 running on mscluster107 card 1 (RTX 8000), then balanced overfit and 1% there; current list's overfit running under Slurm 94622"
   },
   {
    "id": "D3",
@@ -751,12 +751,13 @@
    "needs": [
     "Z1"
    ],
-   "state": "doing",
+   "state": "done",
    "serves": "Paper 2",
    "objective": "Find what fixes identity on CO3",
    "started": "2026-11-24T12:58:05+02:00",
-   "updated": "2026-11-24T12:58:05+02:00",
-   "note": "writing the design: three predictors per pair, cost before the SDXL pass"
+   "updated": "2026-11-24T18:13:51+02:00",
+   "note": "null on all 7 tests (best: late attention overlap rho 0.489, p 0.056, bar 0.706); crow x raven highest on every reading, borrows 0 of 8; place unknown",
+   "finished": "2026-11-24T18:13:51+02:00"
   },
   {
    "id": "Z3",
@@ -766,9 +767,12 @@
    "needs": [
     "Z2"
    ],
-   "state": "todo",
+   "state": "doing",
    "serves": "Paper 2",
-   "objective": "Find what fixes identity on CO3"
+   "objective": "Find what fixes identity on CO3",
+   "started": "2026-11-24T18:14:18+02:00",
+   "updated": "2026-11-24T18:14:18+02:00",
+   "note": "choosing the one fix to test; owner's question filed"
   },
   {
    "id": "Z4",
@@ -2936,6 +2940,15 @@
    "asked": "2026-11-24T18:04:46+02:00",
    "answer": "Owner, in chat, 2026-11-24: yes. One run at a time on card 1, Loop 8's two waiting checks first (jobs 94595 to 94597), then Loop 6's queued checker training; each loop cancels its own queued Slurm copy so nothing runs twice. All step 3 safety rules apply, plus the owner's rule: the launch script checks card 1 every 30 seconds and stops our run, logging why, as soon as any process not ours passes 1 GB there.",
    "answered": "2026-11-24T18:04:46+02:00"
+  },
+  {
+   "id": 91,
+   "question": "Loop 12, which fix to test on CO3's borrowed parts. CO3, our best two-subject sampler, often gives one animal the other's parts (a cougar with cheetah spots). We measured three readings inside the model on 12 animal pairs to find where that starts; none predicted which pairs borrow (Spearman rho at most 0.49 against a bar of 0.706; the most alike pair, crow and raven, never borrows). So no measured place points the fix. Test one fix on the 6 pairs that borrow (48 pictures), scored by eye against CO3 alone on the same pictures, by Loop 4's bar (a lead of at least 5 faithful pairs of 96 and more than 1.96 standard errors). Options: (A) CO3 with one weight per cell: CO3's own rule, but each animal's push is set place by place from where its prediction differs from the joint prompt's, so the cheetah's push can act on the cougar's body only; training-free, no boxes, one trajectory, and Paper 2's own method; about 1 GPU-hour. (B) Bounded Attention, the brief's default and the rival Paper 2 must beat; it needs a box per animal, taken from CO3's finished pictures, which makes it an upper bound; about 2 GPU-hours. (C) Both, A first. Review: artifacts/notes/progress/leakage/02-what-predicts-borrowing/review.md.",
+   "holds": "Z3",
+   "default": "(A) CO3 with one weight per cell, about 1 GPU-hour; Bounded Attention stays the rival for Z4",
+   "by": "s12",
+   "state": "open",
+   "asked": "2026-11-24T18:14:27+02:00"
   }
  ]
 }
