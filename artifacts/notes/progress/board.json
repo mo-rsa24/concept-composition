@@ -873,9 +873,11 @@
    "needs": [
     "W2"
    ],
-   "state": "todo",
+   "state": "doing",
    "serves": "Paper 2",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "started": "2026-11-24T10:36:25+02:00",
+   "updated": "2026-11-24T10:36:25+02:00"
   },
   {
    "id": "W5",
@@ -926,11 +928,13 @@
    "needs": [
     "W2"
    ],
-   "state": "doing",
+   "state": "done",
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-24T08:01:41+02:00",
-   "updated": "2026-11-24T08:01:41+02:00"
+   "updated": "2026-11-24T10:36:17+02:00",
+   "finished": "2026-11-24T10:36:17+02:00",
+   "note": "inconclusive by its bar: control (readout checker) 0.637 on clean pair, floor 0.65, beats frozen CLIP by 0.150 (SE 0.035); no sentence row reads in any fair setting (best mean 0.574); W&B etbecql0; species-free counting (group 4) to follow"
   },
   {
    "id": "W2d",
@@ -1033,7 +1037,9 @@
    ],
    "state": "todo",
    "serves": "Both papers",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "updated": "2026-11-24T10:35:31+02:00",
+   "note": "skipped: X5 missed its bar; the brief skips X6 to X8, confirmed by the owner on question 76"
   },
   {
    "id": "X7",
@@ -1045,7 +1051,9 @@
    "state": "todo",
    "proof": "artifacts/notes/progress/score-space/07-figures/README.md shows, for each trained variation, one annotated-explainer overview and its clip-contrastive deep dives as PNG and SVG, each looked at full size",
    "serves": "Both papers",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "updated": "2026-11-24T10:35:31+02:00",
+   "note": "skipped: X5 missed its bar; the brief skips X6 to X8, confirmed by the owner on question 76"
   },
   {
    "id": "X8",
@@ -1057,7 +1065,9 @@
    ],
    "state": "todo",
    "serves": "Both papers",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "updated": "2026-11-24T10:35:31+02:00",
+   "note": "skipped: X5 missed its bar; the brief skips X6 to X8, confirmed by the owner on question 76"
   },
   {
    "id": "X9",
@@ -1069,7 +1079,9 @@
    ],
    "state": "todo",
    "serves": "Both papers",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "updated": "2026-11-24T10:35:45+02:00",
+   "note": "verdict written (score-space/09-verdict.md, proof met); the board holds X9 behind X8, which the owner skipped on question 76"
   },
   {
    "id": "Y1",
@@ -1077,9 +1089,13 @@
    "owner": "s11",
    "proof": "artifacts/notes/progress/drain/01-census.md lists every loop figure, sheet and result on no pillar page, with its loop, what it shows and its landing page",
    "needs": [],
-   "state": "todo",
+   "state": "done",
    "serves": "Both papers",
-   "objective": "Absorb and check the record"
+   "objective": "Absorb and check the record",
+   "started": "2026-11-24T10:24:16+02:00",
+   "updated": "2026-11-24T10:29:36+02:00",
+   "note": "drain/01-census.md: 94 loop pictures, 200 scene files, 11 verdict reviews, 6 waiting",
+   "finished": "2026-11-24T10:29:36+02:00"
   },
   {
    "id": "Y2",
@@ -1397,7 +1413,7 @@
    "description": "BEFORE: nothing. It starts by itself when the paper repository (step D1) is done.\n\n1. IT RUNS as the background session 🔬 PhD Loop 5: Reproduce Rivals And Choose Checker, following:\nartifacts/notes/progress/prompts/session-5-reproduce-and-choose.md\n\n2. IT DOES: compares candidate checker architectures on small data, by a selection rule written before any of them trains.\n\n3. YOU DO: answer anything on the waiting picture.\n\nOUTCOME: one chosen architecture, with the comparison saved.\nDONE WHEN: the checker review names the choice and the rule that picked it.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nSCOREBOARD: /home/molef/PhD/concept-composition/artifacts/notes/progress/scoreboard.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: arch",
    "event_id": "l29esd328d9glp7jd5p4fn4ekg",
    "start": "2026-11-22T11:35:00+02:00",
-   "end": "2026-11-24T10:20:15+02:00",
+   "end": "2026-11-24T12:30:04+02:00",
    "synced": "1150295b1faf"
   },
   {
@@ -2525,8 +2541,19 @@
    "holds": "X6",
    "default": "Skip X6 to X8 as the brief says, and write the X9 verdict from X5",
    "by": "s10",
+   "state": "answered",
+   "asked": "2026-11-24T10:14:36+02:00",
+   "answer": "Skip X6 to X8 as the brief says, and write the X9 verdict from X5. Owner, in chat, 2026-11-24.",
+   "answered": "2026-11-24T10:34:23+02:00"
+  },
+  {
+   "id": 77,
+   "question": "W2c found W2 inconclusive by its bar: the readout checker's control read 0.637, under its 0.65 floor, though it beat frozen CLIP by 0.150. No sentence score read in any fair setting (best mean 0.574 over steps 0 to 15). Question 70 said to stop W3 if W2c left the null standing. Stop W3 now on this result, or hold it?",
+   "holds": "W3",
+   "default": "Stop W3: no sentence score reads at steps 0 to 15 in any setting",
+   "by": "s9",
    "state": "open",
-   "asked": "2026-11-24T10:14:36+02:00"
+   "asked": "2026-11-24T10:36:33+02:00"
   }
  ]
 }

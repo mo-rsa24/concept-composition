@@ -49,7 +49,7 @@ flowchart TB
     end
     subgraph L9["Session 9: turn concepts into scores"]
       direction TB
-      W1["W1 Noise-aware text papers read"]:::done --> W2["W2 Sentence scores read the five properties"]:::done --> W3["W3 Sentence score steers CO3"]:::todo --> W4["W4 Our own noise-aware model on digits"]:::todo --> W5["W5 Verdict: Paper 2, Paper 3 or drop"]:::todo --> W1b["W1b Latent CLIP read"]:::done --> W2b["W2b Linear probe on frozen vectors"]:::todo --> W2c["W2c Positive control and fair test of W2<br/>YOU ARE HERE"]:::doing --> W2d["W2d Binding read by sentence scores"]:::todo
+      W1["W1 Noise-aware text papers read"]:::done --> W2["W2 Sentence scores read the five properties"]:::done --> W3["W3 Sentence score steers CO3"]:::todo --> W4["W4 Our own noise-aware model on digits<br/>YOU ARE HERE"]:::doing --> W5["W5 Verdict: Paper 2, Paper 3 or drop"]:::todo --> W1b["W1b Latent CLIP read"]:::done --> W2b["W2b Linear probe on frozen vectors"]:::todo --> W2c["W2c Positive control and fair test of W2"]:::done --> W2d["W2d Binding read by sentence scores"]:::todo
     end
     subgraph L10["Session 10: the score path as a third space"]
       direction TB
@@ -57,7 +57,7 @@ flowchart TB
     end
     subgraph L11["Session 11: drain the loops into the pillars"]
       direction TB
-      Y1["Y1 Census of undrained figures and results"]:::todo --> Y2["Y2 Loop results on report findings"]:::todo --> Y3["Y3 Method pages in context/methods"]:::todo --> Y4["Y4 Pillar checks pass"]:::todo --> Y5["Y5 Nothing left undrained"]:::todo
+      Y1["Y1 Census of undrained figures and results"]:::done --> Y2["Y2 Loop results on report findings"]:::todo --> Y3["Y3 Method pages in context/methods"]:::todo --> Y4["Y4 Pillar checks pass"]:::todo --> Y5["Y5 Nothing left undrained"]:::todo
     end
   end
   subgraph JOIN["THE LOOP, AFTER THE LANES JOIN"]
