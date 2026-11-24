@@ -21,25 +21,25 @@ The bar, fixed in `x5_signal.py` before the full read as `MIN_PRESENCE = 0.75` a
 
 | Window | Signature, best step | Raw noise at that step | 0.75 met | 0.1 over noise met | Result |
 |---|---|---|---|---|---|
-| Early, t 999 to 693 | 0.513 at t 754 | 0.50 | no | no | miss |
+| Early, t 999 to 693 | 0.513 at t 754 | 0.493 | no | no | miss |
 | SDXL-matched, t 712 to 480 | **0.700** at t 480 | 0.499 | no | yes, by 0.20 | miss |
 
 Both windows miss, the control and the overfit test passed, so the design's table makes this **null**. The signature is still rising at the last step of the matched window: 0.680 at t 495 and 0.700 at t 480.
 
 ## What the other inputs read
 
-Presence accuracy at the first, middle and last step of each window, and the best balanced accuracy on `apart` against `wrong` (two separate digits, the asked pair against one wrong digit; layout alone scores 0.5).
+Presence accuracy at the first, middle and last step of each window, and the best balanced accuracy on `apart` against `wrong` in the SDXL-matched window (two separate digits, the asked pair against one wrong digit; layout alone scores 0.5).
 
 | Input | Early t 999 | t 836 | t 693 | Matched t 712 | t 585 | t 480 | Best `apart` against `wrong` |
 |---|---:|---:|---:|---:|---:|---:|---|
 | Signature, ten $d_t$ maps | 0.493 | 0.502 | 0.510 | 0.502 | 0.565 | **0.700** | 0.655 at t 480 |
 | Noisy canvas $x_t$ | 0.497 | 0.496 | 0.494 | 0.505 | 0.523 | 0.593 | 0.576 at t 480 |
-| Raw noise | 0.505 | 0.497 | 0.497 | 0.500 | 0.504 | 0.499 | about 0.5 |
+| Raw noise | 0.505 | 0.497 | 0.497 | 0.500 | 0.504 | 0.499 | 0.543 at t 570 |
 | Error readout, 10 numbers | 0.608 | 0.656 | 0.656 | 0.643 | 0.711 | 0.742 | 0.681 at t 480 |
-| Path length, 10 numbers | 0.491 | 0.501 | 0.526 | 0.521 | 0.572 | 0.621 | 0.576 at t 480 |
-| Signature, labels shuffled | 0.50 to 0.51 throughout | | | | | | about 0.5 |
+| Path length, 10 numbers | 0.491 | 0.501 | 0.526 | 0.521 | 0.572 | 0.621 | 0.577 at t 539 |
+| Signature, labels shuffled | 0.49 to 0.51 throughout | | | | | | 0.504 at t 696 |
 
-**The signature reads more than the canvas it is computed from.** In the matched window it leads the noisy canvas from about t 600 onward, by 0.107 at t 480, with the same probe on both. The model's ten predictions make the digits easier to read than the pixels at this noise.
+**The signature reads more than the canvas it is computed from.** In the matched window it leads the noisy canvas from about t 600 onward, by 0.106 at t 480, with the same probe on both. The model's ten predictions make the digits easier to read than the pixels at this noise.
 
 **It reads which digits, not only where.** On `apart` against `wrong` it reaches 0.655. [Loop 8's map reader](../../abstract-checkers/05-does-it-learn/review.md#the-rehearsal-at-sdxls-noise-level), which read only the asked pair's two maps, normalised and unsigned, scored 0.511 on the same comparison in the same window. The ten signed, unnormalised maps carry the identity Loop 8's maps dropped, though not to 0.75.
 

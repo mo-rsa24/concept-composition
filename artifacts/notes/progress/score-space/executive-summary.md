@@ -38,7 +38,7 @@ Both papers fail at one place. Adding two prompts' noise predictions (a product 
 |---|---|---|---|
 | Does the score path read the digits at the brief's steps 0 to 15? | No | conclusive for digits | every input read 0.49 to 0.53 on 2,000 held-out canvases, and the control showed the reader works (0.950 on a nearly clean canvas) |
 | Does it read them at SDXL's matching noise? | Yes, below the bar | conclusive that it misses 0.75 | 0.700 against 0.75, and 0.20 above chance. One run, with no confidence interval computed |
-| Does it read more than the picture? | Yes | strong | it leads by 0.107 with the same reader, and the gap grows toward less noise |
+| Does it read more than the picture? | Yes | strong | it leads by 0.106 with the same reader, and the gap grows toward less noise |
 | Can it share a space with sentences? | Unknown | not tested | the brief stops training when the signal check misses, and the owner agreed (board question 76) |
 | Does any of this hold on SDXL? | Unknown | not tested | digits are a 6-million-weight pixel model with 11 labels; SDXL reads text through attention |
 

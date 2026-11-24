@@ -24,7 +24,7 @@
 | Variation | What was matched | Bar | Result | Verdict |
 |---|---|---|---|---|
 | Score path carries the digits (X5) | a probe for digit presence on the signature, against the canvas and the raw noise | presence at least 0.75 at some step, and at least 0.1 above the raw noise | 0.700 at t 480, 0.20 above the raw noise; 0.513 in the brief's early window | **null**, W&B `gq51nl74` |
-| Canvas with score path | dropped as its own space before any run, because the signature is a fixed function of the canvas ([B2a](03-ideas.md#b-ideas-for-one-shared-space)); its question was read by X5's comparison | none of its own | the signature leads the canvas by 0.107 at t 480 with the same probe | answered inside X5 |
+| Canvas with score path | dropped as its own space before any run, because the signature is a fixed function of the canvas ([B2a](03-ideas.md#b-ideas-for-one-shared-space)); its question was read by X5's comparison | none of its own | the signature leads the canvas by 0.106 at t 480 with the same probe | answered inside X5 |
 | Text with canvas | W4's model, Loop 9's, reused as the baseline | unseen-pair balanced accuracy at least 0.75, within 0.05 of seen pairs | owned by Loop 9; no result when this loop closed | not this loop's |
 | Text with score path | not trained, because X5 missed | the same as W4 | none | not run |
 | All three in one space | not trained, because X5 missed | the same as W4 | none | not run |
