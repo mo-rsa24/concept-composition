@@ -3,7 +3,7 @@
 The one page to read. Loop 13 rewrites it every 6 hours, and at once when you say "updates", "brief me"
 or "where are we". The full detail is on [the status page](status.md).
 
-**Written:** 2026-11-24 22:22 (UTC+2).
+**Written:** 2026-11-24 23:20 (UTC+2).
 
 ## Contents
 
@@ -18,10 +18,10 @@ or "where are we". The full detail is on [the status page](status.md).
 1. **Paper 1** (experts that never met) is level with simply pasting the two experts' samples (295
    clean digit pairs of 320 against 287). Loop 6's CLEVR test where neither expert is told where to
    draw is still rendering, with a paste comparison beside it.
-2. **Paper 2** (better than CO3) has its first sign of a fix: Loop 12 corrected one animal's place in
-   the picture later in the run, and on one seed the cougar lost the cheetah's spots; the blind count
-   on 48 pictures is running. The checkers are weaker: Loop 6's kept checker does not see CO3's
-   failure (right 60% of the time against a 65% floor), and its two new checkers are being read.
+2. **Paper 2** (better than CO3) has no working fix yet. Loop 12's drawn-box fix took the cheetah's
+   spots off the cougar on one seed, but over 48 pictures it gave 5 two-clear, the same as CO3 alone;
+   it tries a text-side fix next. Loop 6's kept checker does not see CO3's failure (right 60% of the
+   time against a 65% floor), and its two new checkers are being read.
 3. **Loop 8** missed twice at reading digits from the sampler's own states (0.651, then 0.552 after
    memorising its training digits). The reviewer read it again, Loop 13 sent a method review request,
    and a free check now asks whether the digits are readable there at all before any more training.

@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-24 22:31 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-24 23:20 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -70,16 +70,16 @@ Your own reading step (confirm the draft statements from your readings) is ready
 
 <a href="loops-and-blockers.png"><img src="loops-and-blockers.png" width="200" alt="Each watched loop as a box, with arrows from your open questions to the work they hold, cluster jobs in blue, and stranded requests dashed grey."></a>
 
-The finish range is `session_status.py`'s, from the 52 finished steps: fastest pace seen to slowest.
+The finish range is `session_status.py`'s, from the 63 finished steps: fastest pace seen to slowest.
 
 | Loop | Doing now, and why | Steps left | Estimated finish | Session | Held by |
 |---|---|---|---|---|---|
-| 4. Rivals and targets | yes | next pass | Paper 2's bar page now counts two clear subjects with their own parts, by questions 87 and 92, so every Paper 2 result is judged one way ([leakage rivals](../targets/leakage-rivals.md), commit `a437cb86`). |
-| 6. Best method | partly, re-aimed | **fix** | It now tests whether a checker can see CO3's failure before choosing one: the kept checker cannot (best 0.602 against a 0.65 floor, [review](../method-search/01b-balance-the-checker-data/review.md)), and its two new checkers are read next. |
+| 4. Rivals and targets | Keeping every target current. It updated Paper 2's bar page to count two clear subjects with their own parts (questions 87 and 92). | 1 | none useful: it ends after the paper tables, which have not started | idle | nothing |
+| 6. Best method | Choosing the training list for Paper 2's checker (step M5): its kept checker does not see CO3's failure (right 60% of the time, floor 65%), so by question 93 it reads its two new checkers the same way first; one training is done, one runs (job 94662), and the read waits for the `biggpu` slot (94704). Paper 1's two-colour CLEVR test has its first 5,000 pictures per colour rendered and its scoring renders queued. | 9 | 5.1 h to 202.5 h | busy | its own jobs; question 96 decides how its checker reads are judged |
 | 7. Abstract-checker papers | Finished; its session is closed. | 0 | done | closed | nothing |
-| 8. Abstract checkers | On its removal test (step V7), whose first gate, from question 94, is retraining the identity checker on sampler states and reading fresh digits 5 to 9 at 0.75 or more. The retraining jobs wait for a node; the first try failed in 12 seconds and was resubmitted. Its SDXL test is rewritten to your answer on 86. | 3 | 1.9 h to 85.5 h | busy | a free node |
-| 11. Drain into the pillars | Stopped by your answer on 88. Its pillar checks are done and its census found every finished verdict on a report page (14 findings, eight method folders). Its final step stays open until Loops 6 and 8 stop. | 1 | when restarted | stopped its loop | waiting for a result worth draining: Loop 8's identity checker or Loop 6's two-colour CLEVR test |
-| 12. Where CO3 leaks | yes, re-aimed | **fix** | The first sign of a Paper 2 fix: its free check found the per-place signal marks the borrowing body on the recorded seed, and on seed 6001 the drawn-box run's cougar lost the cheetah's spots (commits `abd25540`, `31664cb4`); the 48-picture blind count is running. |
+| 8. Abstract checkers | Its digit identity checker reads pasted digits (0.861 against 0.75) but not the sampler's own states. Its method review found the first checker ranks but its cut drifts, and the second memorised. It finishes one cheap check of whether digits are readable there (job 94717), then closes its removal test as not run. Its SDXL test against CO3 is next. | 2 | 1.7 h to 61.7 h | busy | question 96 decides the SDXL test's readability gate; Loop 6's training list |
+| 11. Drain into the pillars | Stopped by your answer on 88; every finished result is on a report page. | 1 | when restarted | stopped its loop | a new result worth draining |
+| 12. Where CO3 leaks | Its fix test is done and null: boxes drawn by eye, whole-picture correction and CO3 alone each give 5 of 48 two-clear pictures ([fix review](../leakage/03-one-fix/review.md)). It chose a text-side fix to test next and audited Loops 8, 9 and 10's designs ([audit](../leakage/05-design-audit.md)); question 97 asks for three small reruns. The reviewer is reading it again. | 2 | 49 min to 46.6 h | idle | question 97 |
 
 ## Resources
 
@@ -125,12 +125,12 @@ Round 2, 2026-11-24 22:10 (round 1 at 16:10), against the intents in [the alignm
 
 | Loop | Still working towards its intent? | Reviewer | The fact that shows it |
 |---|---|---|---|
-| 4. Rivals and targets | yes | next pass | It said Paper 1 needs a test where pasting fails; the two-colour CLEVR test is now in [the CLEVR plan](../targets/clevr-scaling-plan.md). |
-| 6. Best method | partly, now re-aimed | **fix** | The checker search still aims at drawing two separate bodies, which CO3 already does in 96 of 96 pictures, while CO3's real failure is borrowed parts ([review](../reviewer/2026-11-24-review.md#loop-6-find-the-best-method)). |
+| 4. Rivals and targets | yes | next pass | Paper 2's bar page now counts two clear subjects with their own parts, by questions 87 and 92, so every Paper 2 result is judged one way ([leakage rivals](../targets/leakage-rivals.md), commit `a437cb86`). |
+| 6. Best method | partly, re-aimed | **fix** | It now tests whether a checker can see CO3's failure before choosing one: the kept checker cannot (best 0.602 against a 0.65 floor, [review](../method-search/01b-balance-the-checker-data/review.md)), and its two new checkers are read next. |
 | 7. Abstract-checker papers | yes, finished | not reviewed | Its three steps are done; the five-checker design is in `abstract-checkers/03-design.md`. |
-| 8. Abstract checkers | partly | **fix**, twice | Its digit half holds on pasted digits (0.861 against 0.75), but two tries to read the sampler's own states missed; a free check now asks whether the digits are readable there at all ([second pass](../reviewer/2026-11-24-review.md#loop-8-again-at-2215-two-misses-on-reading-sampler-states)). |
+| 8. Abstract checkers | partly | **fix**, twice | Its digit half holds on pasted digits (0.861 against 0.75), but two tries to read the sampler's own states missed; its [method review](../abstract-checkers/10-reading-identity/method-review.md) found the causes, and its SDXL test against CO3 is the step that serves Paper 2 ([second pass](../reviewer/2026-11-24-review.md#loop-8-again-at-2215-two-misses-on-reading-sampler-states)). |
 | 11. Drain into the pillars | yes | **continue** | [Its checks page](../drain/04-checks.md) covers all 48 pages it wrote, with 15 of 28 findings fixed. |
-| 12. Where CO3 leaks | partly, now re-aimed | **fix** | Its measurement was sound and null; the fix it proposed would have read places too early, so it now tests the idea later in the run with a drawn-box control first ([review](../reviewer/2026-11-24-review.md#loop-12-where-co3-leaks)). |
+| 12. Where CO3 leaks | partly | **being re-reviewed** | Two nulls in a row: nothing predicts which pairs borrow parts, and the drawn-box fix gave 5 of 48 two-clear pictures, the same as CO3 alone, so its positive control failed. The one seed where the cougar lost the cheetah's spots did not carry over to the 48. |
 
 **Loop 11's intent, written by Loop 13 from its brief for you to correct.** Loop 11 takes the
 diagrams, picture sheets and results the research loops produce, which sit in their own notes folders
