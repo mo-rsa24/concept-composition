@@ -769,12 +769,13 @@
     "V1",
     "U3"
    ],
-   "state": "doing",
+   "state": "done",
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-23T17:49:26+02:00",
-   "updated": "2026-11-23T17:49:26+02:00",
-   "note": "Starting from abstract-checkers/03-design.md"
+   "updated": "2026-11-24T08:02:46+02:00",
+   "note": "Count checker 0.791 on digits 5 to 9 vs 0.782 on 0 to 4 (bar 0.75, gap 0.009), W&B tyhrpyov; identity checker missed at 0.555; split approved in board questions 67 and 69",
+   "finished": "2026-11-24T08:02:46+02:00"
   },
   {
    "id": "V3",
@@ -784,9 +785,12 @@
    "needs": [
     "V2"
    ],
-   "state": "todo",
+   "state": "doing",
    "serves": "Paper 2",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "started": "2026-11-24T08:02:54+02:00",
+   "updated": "2026-11-24T08:02:54+02:00",
+   "note": "Count checker's push alone, by board question 69"
   },
   {
    "id": "V5",
@@ -1560,7 +1564,7 @@
    "name": "Loop 9"
   },
   "s10": {
-   "id": "pending",
+   "id": "70624adb",
    "name": "Loop 10"
   }
  },
