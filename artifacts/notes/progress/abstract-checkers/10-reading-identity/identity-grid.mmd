@@ -1,0 +1,24 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef miss fill:#fdecea,stroke:#b3261e,stroke-width:2px,color:#111111
+  classDef pass fill:#e6f4ea,stroke:#137333,stroke-width:3px,color:#111111
+  classDef wait fill:#f1f3f4,stroke:#5f6368,stroke-width:2px,stroke-dasharray:5 5,color:#111111
+  Q["Right digits against one wrong digit?<br/>trained on pairs among 0 to 3<br/>scored on pairs holding 4<br/>bar 0.75, chance 0.5"]:::plain
+  V2["V2 identity checker<br/>two maps, early window<br/>0.555"]:::miss
+  subgraph EARLY["Early window: SDXL steps 0 to 15"]
+    BE["Two maps<br/>0.563<br/>(own pairs 0.586)"]:::miss
+    SE["Ten-label signature<br/>0.612<br/>(own pairs 0.628)"]:::miss
+  end
+  subgraph LATER["Later window: SDXL steps 16 to 31"]
+    BL["Two maps<br/>0.702<br/>(own pairs 0.827)"]:::miss
+    SL["Ten-label signature<br/>0.888<br/>(own pairs 0.892)"]:::pass
+  end
+  F["Retrain on digits 0 to 4,<br/>read digits 5 to 9 once<br/>job 94383"]:::wait
+  Q --> EARLY
+  Q --> LATER
+  V2 -. "bigger wrong-digit pool:<br/>+0.008" .-> BE
+  BE -- "richer input: +0.049" --> SE
+  BE -- "later window: +0.139" --> BL
+  BL -- "richer input: +0.186" --> SL
+  SL --> F
