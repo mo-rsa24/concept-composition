@@ -1,0 +1,13 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  subgraph NOW["Plain sampler (same seed, CO3 off)"]
+    direction LR
+    A0["x at step 0<br/>pure noise"]:::plain --> A1["ordinary step<br/>U-Net reads x and the joint prompt,<br/>guesses the picture, moves x toward it"]:::plain --> A2["... 50 ordinary steps ..."]:::plain --> A3["picture"]:::plain
+  end
+  subgraph NEXT["CO3"]
+    direction LR
+    B0["x at step 0<br/>same noise"]:::plain --> B1["REPLACE x, 10 passes:<br/>4 prompts, distances, weights,<br/>2 x joint minus singles, add noise back"]:::co3 --> B2["ordinary step"]:::plain --> B3["steps 1 to 5:<br/>replace x (10, 5, 5, 5, 5 passes),<br/>then an ordinary step"]:::co3 --> B4["steps 6 to 49:<br/>ordinary steps only,<br/>the same rule as plain"]:::plain --> B5["picture"]:::plain
+  end
+  style NEXT fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef co3 fill:#fff4e6,stroke:#e8590c,stroke-width:2px,color:#111111
