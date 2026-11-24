@@ -252,12 +252,14 @@ def main() -> int:
                          "trained with the head so the features the checker reads can adapt; 0 keeps SDXL frozen")
     ap.add_argument("--steps", type=int, default=3000)
     ap.add_argument("--eval-every", type=int, default=500)
+    ap.add_argument("--out-root", type=Path, default=None,
+                    help="the folder the run's folder goes in; the default is this ladder's readout_pair folder")
     args = ap.parse_args()
     if not (args.manifest or args.labels):
         raise SystemExit("give --manifest or --labels")
     if not torch.cuda.is_available():
         raise SystemExit("guard: torch sees no CUDA card")
-    out = RUNG2 / "readout_pair" / args.run
+    out = (args.out_root or RUNG2 / "readout_pair") / args.run
     out.mkdir(parents=True, exist_ok=True)
 
     ctx = make_ctx(output_root=out / "raw")
