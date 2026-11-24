@@ -6,7 +6,7 @@ This page shrinks the checker until every number fits on paper: a canvas of four
 
 <a href="../../../2-classifier-guidance/artifacts/scenes/digit-map-checkers/2-miniature/mm1-the-forward-pass-with-every-number.png"><img src="../../../2-classifier-guidance/artifacts/scenes/digit-map-checkers/2-miniature/mm1-the-forward-pass-with-every-number.png" width="720" alt="Two rows, apart showing 1 and 3 and wrong showing 3 and 2: blue boxes for the four clean pixels and the four noisy pixels, green boxes for the two maps, the hidden values per half and channel, and the pooled four numbers, ending in a red logit of 0.772 for apart and 0.352 for wrong"></a>
 
-*The miniature's forward pass, left to right, at t = 480. Top row, the `apart` canvas (shows 1 | 3); bottom row, the `wrong` canvas (shows 3 | 2); both asked 1 and 3. Blue: the clean pixels x₀ and the noisy ones x_t = 0.308 x₀ + 0.951 ε. Green: the map for digit 1 (m_a) and for digit 3 (m_b), each adding to 4; the hidden values h, one row per half and one column per channel; then mean, mean, max, max. Red: the logit, 0.772 for apart (chance 0.684) and 0.352 for wrong (chance 0.587).* ✅ *The footer's "logits 0.36 apart" does not match the key's gap of 0.4205; see [where this came from](#where-this-came-from).*
+*The miniature's forward pass, left to right, at t = 480. Top row, the `apart` canvas (shows 1 | 3); bottom row, the `wrong` canvas (shows 3 | 2); both asked 1 and 3. Blue: the clean pixels x₀ and the noisy ones x_t = 0.308 x₀ + 0.951 ε. Green: the map for digit 1 (m_a) and for digit 3 (m_b), each adding to 4; the hidden values h, one row per half and one column per channel; then mean, mean, max, max. Red: the logit, 0.772 for apart (chance 0.684) and 0.352 for wrong (chance 0.587). The footer says the two logits are 0.4205 apart (apart minus wrong) only because the noisy pixels differ, since the head is untrained.* ✅ *Read on the figure at full size; 0.7721 − 0.3516 = 0.4205 in the answer key.*
 
 ## Table of contents
 
@@ -184,7 +184,7 @@ Navigation: ⬅️ [Run it yourself](#run-it-yourself) | 📋 [TOC](#table-of-co
 | Every forward, training and push value | Read in `miniature_answer_key.json` | 2026-11-24 |
 | The readout sum, the losses, and the quotient-rule column (−1.31, 3.73, −1.72, −0.70) | Recomputed this session from the key's values | 2026-11-24 |
 | The figure labels | Read on mm1, mm2, mm3 and the frame 14 still at full size | 2026-11-24 |
-| mm1's footer "logits 0.36 apart" against the key's 0.7721 − 0.3516 = 0.4205, which mm2 also prints | Read on mm1 and in the key; not resolved here | 2026-11-24 |
+| mm1's footer gap of 0.4205, which mm2 also prints | Read on mm1 and checked against the key's 0.7721 − 0.3516 | 2026-11-24 |
 | The 320-canvas means | Recomputed from `numbers/real/trace/trace-stats.npz` (job 94161) | 2026-11-24 |
 | The broken-run control and the interactive page's contents | Stated by the miniature page's spec | 2026-11-24 |
 
