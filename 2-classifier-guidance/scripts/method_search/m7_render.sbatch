@@ -28,6 +28,18 @@ case "$SET" in
     [ $((M & 2)) -ne 0 ] && TARGETS="$TARGETS;$P2"
     [ $((M & 4)) -ne 0 ] && TARGETS="$TARGETS;$P3"
     TARGETS=${TARGETS#;} ;;
+  r[1-3]|b[1-3])
+    # Stage 2 experts: k objects of one colour, anywhere.
+    K=${SET#?}; C=red; [ "${SET:0:1}" = b ] && C=blue
+    COLOURS=$(printf "$C,%.0s" $(seq 1 "$K")); COLOURS=${COLOURS%,}; TARGETS=""
+    BASE=$((6000000 + ${#C} * 100000 + K * 10000)) ;;
+  c[0-3][0-3])
+    # Stage 2 scorer: x red and y blue, anywhere; c00 is an empty scene.
+    X=${SET:1:1}; Y=${SET:2:1}; COLOURS=""
+    for ((i = 0; i < X; i++)); do COLOURS="$COLOURS,red"; done
+    for ((i = 0; i < Y; i++)); do COLOURS="$COLOURS,blue"; done
+    COLOURS=${COLOURS#,}; TARGETS=""
+    BASE=$((7000000 + X * 100000 + Y * 10000)) ;;
   *) echo "ABORT: unknown set $SET"; exit 2 ;;
 esac
 [ -x "$BL" ] && [ -f "$CLEVR_GEN/render_images.py" ] && [ -f "$S" ] || { echo "ABORT: renderer or snapshot missing on $(hostname -s)"; exit 3; }
@@ -43,7 +55,7 @@ if [ "${USE_GPU:-0}" = 1 ]; then
   ( for _ in 1 2 3; do sleep 40; echo "GPUCHECK $(nvidia-smi --query-gpu=utilization.gpu,memory.used --format=csv,noheader -i 0) apps=$(nvidia-smi --query-compute-apps=process_name --format=csv,noheader -i 0 | tr '\n' ' ')"; done ) &
 fi
 "$BL" --background --python-exit-code 7 --threads "$THREADS" --python "$S" -- --name "$SET" --targets "$TARGETS" --seed-base "$BASE" \
-  --start "$START" --count "$COUNT" --out "$OUT" --use-gpu "${USE_GPU:-0}" --tile "${TILE:-32}" 2>&1 | grep --line-buffered -E 'M7RENDER|Traceback|Error:|error:|CUDA|cuda'
+  --start "$START" --count "$COUNT" --out "$OUT" --use-gpu "${USE_GPU:-0}" --tile "${TILE:-32}" --colours "${COLOURS:-}" 2>&1 | grep --line-buffered -E 'M7RENDER|Traceback|Error:|error:|CUDA|cuda'
 rc=${PIPESTATUS[0]}
 MISSING=0
 for ((i = START; i < START + COUNT; i++)); do

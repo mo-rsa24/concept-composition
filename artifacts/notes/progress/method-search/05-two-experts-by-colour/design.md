@@ -71,6 +71,9 @@ It is costed below and starts only with the owner's yes.
 
 ## Cost and what it buys
 
+The renders run on CPU. Blender 2.78c, which the CLEVR generator needs, ships no GPU code for the cluster's RTX 3090 and Blackwell cards and
+tries to build it with NVIDIA's compiler, which the cluster does not have, so every GPU frame fails (job 94448).
+
 Rates are M7's measurements: 5.46 seconds per single-object render on one CPU node, with more objects budgeted at 7 seconds, and 2.25
 seconds per thousand images seen on one RTX PRO 6000 Blackwell.
 

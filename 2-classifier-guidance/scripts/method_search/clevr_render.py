@@ -7,9 +7,13 @@ A target (x, y) is a fraction of the image width and height, measured from the t
 to OFFSET, and the object goes on the ground point that projects there under this image's jittered camera. Each image has its own seed,
 and an image whose scene file exists is skipped, so a job can resume.
 
+Stage 2 of the CLEVR plan uses --colours in place of --targets: one object per listed colour, placed anywhere by the generator's own
+distance and margin rules, so no position is fixed.
+
 Usage:
   CLEVR_GEN=<image_generation folder> blender --background --threads N --python clevr_render.py -- \
       --name p1 --targets "0.30,0.30" --seed-base 1000000 --start 0 --count 8 --out <dir>
+  ... --name r2 --colours red,red --seed-base 6200000 --start 0 --count 8 --out <dir>
 """
 from __future__ import print_function
 
@@ -36,6 +40,7 @@ import render_images as generator  # noqa: E402
 OFFSET = 0.02
 MAX_TRIES = 50
 TARGETS = []
+COLOURS = []
 
 
 class ClosingTempfile:
@@ -118,6 +123,63 @@ def place_objects(scene_struct, num_objects, args, camera):
     raise RuntimeError("could not place the objects in %d tries" % MAX_TRIES)
 
 
+def colour_objects(scene_struct, num_objects, args, camera):
+    """Stage 2: one object per entry of COLOURS, anywhere on the ground, by the generator's own rules for distance and margin.
+
+    Shapes, sizes and materials are the generator's random draws. Positions are uniform in (-3, 3), each object keeps the generator's
+    minimum distance and its margin along the four directions to every other, and the visibility check rejects a hidden object.
+    """
+    with open(args.properties_json, "r") as f:
+        properties = json.load(f)
+    colours = {name: [float(c) / 255.0 for c in rgb] + [1.0] for name, rgb in properties["colors"].items()}
+    materials = [(v, k) for k, v in properties["materials"].items()]
+    shapes = [(v, k) for k, v in properties["shapes"].items()]
+    sizes = list(properties["sizes"].items())
+    bpy.context.scene.update()
+    scene_struct["asked_colours"] = list(COLOURS)
+    directions = [scene_struct["directions"][d] for d in ("left", "right", "front", "behind")]
+
+    for attempt in range(MAX_TRIES):
+        placed, objects, blender_objects = [], [], []
+        fits = True
+        for colour_name in COLOURS:
+            size_name, r = random.choice(sizes)
+            obj_name, obj_name_out = random.choice(shapes)
+            if obj_name == "Cube":
+                r /= math.sqrt(2)
+            for _ in range(args.max_retries):
+                x, y = random.uniform(-3, 3), random.uniform(-3, 3)
+                good = True
+                for xx, yy, rr in placed:
+                    dx, dy = x - xx, y - yy
+                    if math.sqrt(dx * dx + dy * dy) - r - rr < args.min_dist:
+                        good = False
+                        break
+                    if any(0 < dx * d[0] + dy * d[1] < args.margin for d in directions):
+                        good = False
+                        break
+                if good:
+                    break
+            else:
+                fits = False
+                break
+            theta = 360.0 * random.random()
+            utils.add_object(args.shape_dir, obj_name, r, (x, y), theta=theta)
+            obj = bpy.context.object
+            blender_objects.append(obj)
+            placed.append((x, y, r))
+            mat_name, mat_name_out = random.choice(materials)
+            utils.add_material(mat_name, Color=colours[colour_name])
+            objects.append({"shape": obj_name_out, "size": size_name, "material": mat_name_out,
+                            "3d_coords": tuple(obj.location), "rotation": theta,
+                            "pixel_coords": utils.get_camera_coords(camera, obj.location), "color": colour_name})
+        if fits and (not blender_objects or generator.check_visibility(blender_objects, args.min_pixels_per_object)):
+            return objects, blender_objects
+        for obj in blender_objects:
+            utils.delete_object(obj)
+    raise RuntimeError("could not place the objects in %d tries" % MAX_TRIES)
+
+
 def parse_targets(text):
     return [tuple(float(v) for v in item.split(",")) for item in text.split(";") if item.strip()]
 
@@ -133,11 +195,16 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--tile", type=int, default=32)
     ap.add_argument("--use-gpu", type=int, default=0, help="1 renders with Cycles on the GPU through CUDA")
+    ap.add_argument("--colours", default="", help="Stage 2: one colour per object, such as red,red,blue, placed anywhere")
     ours = ap.parse_args(argv)
 
     args = generator.parser.parse_args(["--use_gpu", str(ours.use_gpu), "--render_tile_size", str(ours.tile)])
     TARGETS[:] = parse_targets(ours.targets)
-    generator.add_random_objects = place_objects
+    COLOURS[:] = [c.strip() for c in ours.colours.split(",") if c.strip()]
+    if TARGETS and COLOURS:
+        raise SystemExit("give --targets or --colours, not both")
+    generator.add_random_objects = colour_objects if COLOURS else place_objects
+    count_objects = len(COLOURS) if COLOURS else len(TARGETS)
     folder = os.path.join(ours.out, ours.name)
     os.makedirs(os.path.join(folder, "images"), exist_ok=True)
     os.makedirs(os.path.join(folder, "scenes"), exist_ok=True)
@@ -151,7 +218,7 @@ def main():
         if os.path.exists(image_path) and os.path.exists(scene_path):
             continue
         random.seed(ours.seed_base + index)
-        generator.render_scene(args, num_objects=len(TARGETS), output_index=index, output_split=ours.name,
+        generator.render_scene(args, num_objects=count_objects, output_index=index, output_split=ours.name,
                                output_image=image_path, output_scene=scene_path)
         done += 1
         print("M7RENDER %s %d done=%d seconds_per_image=%.2f" % (ours.name, index, done, (time.time() - begun) / done), flush=True)
