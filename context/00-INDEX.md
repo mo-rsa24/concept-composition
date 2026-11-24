@@ -29,6 +29,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#the-themes) ➡️
 | What a chimera looks like | [Chimera § What it looks like](world/chimera.md#what-it-looks-like) |
 | What a failed render's look says about its cause (clipart, mush, sketch, invented people, wrong species) | [How a render fails § The looks](world/how-a-render-fails.md#the-looks) |
 | What the interaction term (`r_t`) is | [Interaction term § What the interaction term is](world/interaction-term.md#what-the-interaction-term-is) |
+| How each method the loops use works, from the overview down to its parts | [Methods § The methods, in reading order](methods/00-INDEX.md#the-methods-in-reading-order) |
 | What the trained LoRA corrector does, and why it never sees the joint prompt | [LoRA corrector § What the LoRA corrector is](world/lora-corrector.md#what-the-lora-corrector-is) |
 | What an animal pair is, and why the pool is biased toward failure | [Animal pair § What an animal pair is](world/animal-pair.md#what-an-animal-pair-is) |
 | What a compose rate is, and what the scorer can and cannot tell you | [Compose rate § What a compose rate is](world/compose-rate.md#what-a-compose-rate-is) |
@@ -46,6 +47,7 @@ Navigation: ⬅️ [I want to know...](#i-want-to-know) | 📋 [TOC](#table-of-c
 | [purpose/](purpose) | Why this exists, what it produces, what working looks like | 3 |
 | [world/](world) | The real things behind the data: PoE composition, chimera, the interaction term, the LoRA corrector, the animal pair, compose rate, how a render fails | 7 |
 | [data/](data) | Where the data comes from, and what every field means | 2 |
+| [methods/](methods/00-INDEX.md) | How each method the loops use works, from the overview down to its parts: the product of experts written, seven more planned | 5 |
 | [plain-words.md](plain-words.md) | Which words this project replaced, which it kept, and why | 1 |
 | [research-guidelines.md](research-guidelines.md) | Where the general research rules land in this repo, and the mistakes it has already made | 1 |
 
