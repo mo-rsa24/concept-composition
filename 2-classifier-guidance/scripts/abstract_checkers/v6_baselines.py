@@ -25,6 +25,7 @@ import v2_learn as v2  # noqa: E402
 import v3_compose as v3  # noqa: E402
 import two_experts as te  # noqa: E402
 from canvas_unet import NULL, ddim_timesteps, sample  # noqa: E402
+from v3_compose import to_uint8  # noqa: E402
 from checker import load_unet  # noqa: E402
 from judge import load as load_judge  # noqa: E402
 
@@ -129,8 +130,9 @@ def stage_sampler(model, ihead, chead, net, pairs, seeds, dev):
             for t in IDENTITY_STEPS:
                 tt = torch.full((len(seeds),), t, device=dev, dtype=torch.long)
                 logits[t] = ihead(ig.signature(model, store[t], tt, pair), tt, pair)[:, 0].cpu().numpy()
+        canv = to_uint8(x)   # the judge reads uint8 canvases on the CPU, as V3 and V5 score them
         for k, s in enumerate(seeds):
-            label, call = judge_label(net, x[k], (a, bb), dev)
+            label, call = judge_label(net, canv[k], (a, bb), dev)
             rows.append({"pair": f"{a}-{bb}", "seed": s, "call": call, "label": label,
                          "logits": [float(logits[t][k]) for t in IDENTITY_STEPS]})
         print(json.dumps({"pair": f"{a}-{bb}", "labelled_1": sum(r["label"] == 1 for r in rows if r["pair"] == f"{a}-{bb}"),
