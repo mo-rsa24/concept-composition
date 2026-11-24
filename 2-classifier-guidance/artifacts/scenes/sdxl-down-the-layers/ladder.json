@@ -1,0 +1,136 @@
+{
+ "subject": "SDXL base 1.0, from the prompt down to one cross-attention head",
+ "kind": "architecture",
+ "purpose": "show where CO3's fix (steps 0 to 5, before the ordinary step) and Loop 12 step Z2's three readings sit inside SDXL",
+ "landing": "standalone pages in this folder; no journey (owner's brief)",
+ "pace": "unattended; the question round was settled in the brief",
+ "model": {
+  "snapshot": "mscluster:~/.cache/huggingface/hub/models--stabilityai--stable-diffusion-xl-base-1.0/snapshots/462165984030d82259a11f4367a4eed129e94a7b",
+  "configs": "source/sdxl-config/"
+ },
+ "code": {
+  "diffusers": "0.29.2",
+  "remote_path": "/home-mscluster/mmolefe/miniforge3/envs/co3/lib/python3.10/site-packages/diffusers/",
+  "copies": "source/diffusers-0.29.2/",
+  "transformers": "4.44.1",
+  "co3_checkout": "/home/molef/PhD/replications/co3",
+  "co3_commit": "35ea972313276014716dca3d821023728e8bc917",
+  "z2": "/home/molef/PhD/concept-composition/2-classifier-guidance/scripts/leakage/z2_predictors.py"
+ },
+ "numbers": {
+  "script": "sdxl_numbers.py",
+  "json": "sdxl_numbers.json"
+ },
+ "notation": "NOTATION.md (shares the CO3 ladder's symbols: ../co3-sampler/NOTATION.md)",
+ "colour_key": {
+  "input": "#1f5fd0",
+  "denoiser (SDXL's frozen networks)": "#1d7a3e",
+  "output": "#c0262d",
+  "method (CO3)": "#c86a0a",
+  "fixed or off": "#6b7a88",
+  "broken": "#b0186e",
+  "concept c_1 (eagle)": "#7b4fb8",
+  "concept c_2 (fox)": "#0f8b8d",
+  "reading (Z2's capture)": "#8a6a00"
+ },
+ "colour_concordance": "the CO3 ladder's key plus one colour, gold, for Z2's readings",
+ "style": {
+  "0": "annotated explainer with code boxes, after ../co3-sampler/reference/owner-annotated-progress-with-code-boxes.png",
+  "0.5": "boxes and arrows in the clean cheat-sheet register with formulas in thin boxes, after ../co3-sampler/reference/owner-network-weights-and-equations.png",
+  "2": "tables of the worked numbers beside real heat maps on a plain background with traced outlines"
+ },
+ "style_gate": "not run: the brief settled the styles for each level",
+ "line_check": "sdxl_figkit.Canvas.save refuses to write a figure where a line crosses a node, box or label, or two labels overlap",
+ "rungs": {
+  "0": {
+   "state": "built",
+   "files": [
+    "l0-sdxl-from-prompt-to-picture.png",
+    "l0-sdxl-from-prompt-to-picture.svg",
+    "draw_l0_overview.py"
+   ],
+   "links": [
+    "../co3-sampler/co3-overview.png",
+    "../co3-sampler/co3-schedule.png",
+    "../../../../artifacts/notes/progress/leakage/02-what-predicts-borrowing/z2-what-and-when.png"
+   ]
+  },
+  "0.5": {
+   "state": "built",
+   "figures": [
+    {
+     "part": "inside the U-Net",
+     "files": [
+      "l05a-inside-the-unet.png",
+      "l05a-inside-the-unet.svg",
+      "draw_l05a_unet.py"
+     ],
+     "links": [
+      "journey 13 nv4-how-the-inputs-join.png",
+      "journey 13 nv9-inside-the-sdxl-unet.png",
+      "../word-map-checker/0.5-network-view/wm1-three-inputs-and-where-the-maps-come-from.png"
+     ],
+     "why_drawn": "nv9 shows the U but not which blocks hold the 70 layers Z2 reads, the transformer counts per stack, the heads or the skip widths per grid"
+    },
+    {
+     "part": "one transformer block",
+     "files": [
+      "l05b-one-transformer-block.png",
+      "l05b-one-transformer-block.svg",
+      "draw_l05b_transformer_block.py"
+     ],
+     "links": [
+      "journey 02 sd3-inside-one-transformer-block.png",
+      "journey 02 sd4-self-attention-against-cross-attention.png"
+     ],
+     "why_drawn": "sd3 draws the 640-channel block at 64 x 64 without cross-attention opened or Z2's capture; this one is the 1280-channel block at 32 x 32, where 60 of the 70 layers sit"
+    },
+    {
+     "part": "the noise guess and the clean guess",
+     "files": [
+      "l05c-noise-guess-and-clean-guess.png",
+      "l05c-noise-guess-and-clean-guess.svg",
+      "draw_l05c_noise_and_clean_guess.py"
+     ],
+     "links": [
+      "journey 02 sd6-one-sampler-step.png",
+      "../product-of-experts-interaction-term/figures/level0-one-sampler-step-of-a-product-of-experts.png"
+     ],
+     "open_slot": "decoded clean guesses at steps 0 to 5, before and after CO3's passes: waits for job 94450, /datasets/mmolefe/poe_repair_min/loop-12/co3-inside/ (pending, folder absent on 2026-11-24)"
+    }
+   ]
+  },
+  "1": {
+   "state": "skipped",
+   "why": "not in the brief's levels"
+  },
+  "2": {
+   "state": "built",
+   "files": [
+    "l2-one-attention-head-by-hand.png",
+    "l2-one-attention-head-by-hand.svg",
+    "draw_l2_attention_by_hand.py"
+   ],
+   "links": [
+    "../word-map-checker/0.5-network-view/wm2-from-one-layer-to-a-words-stack.png"
+   ],
+   "note": "a static worked figure with the numbers from sdxl_numbers.json, not deep-learning-scene's interactive miniature"
+  },
+  "3": {
+   "state": "built",
+   "files": [
+    "code-walk.md",
+    "gen_codewalk.py"
+   ]
+  },
+  "beside": {
+   "state": "missing",
+   "why": "the rebuild companion was not in the brief"
+  },
+  "close": {
+   "state": "missing",
+   "why": "the closing page reads the subject through the miniature, and the interactive miniature was not in the brief"
+  }
+ },
+ "config_disagreements": "none in sizes; wm1 leaves out the 6 size numbers from the time-vector join, sd3 leaves out the GroupNorm (said on its face); see index.md's closed section"
+}
