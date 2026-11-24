@@ -1,0 +1,17 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef you fill:#fff4e5,stroke:#d97706,stroke-width:3px,color:#111111
+  classDef run fill:#eaf1ff,stroke:#a8c7fa,stroke-width:2px,color:#111111
+  KB[("84 papers the project has read")]:::plain
+  LOOP["A loop's question, designs,<br/>pictures and latest results"]:::plain
+  REV["Reviewer checks every assumption<br/>against the papers and our runs"]:::plain
+  V{"Verdict"}:::plain
+  C["continue"]:::run
+  F["fix: names the fix,<br/>its cost and how we'd know"]:::run
+  S["stop: goes to you<br/>as a board question"]:::you
+  KB --> REV
+  LOOP --> REV --> V
+  V --> C
+  V --> F
+  V --> S

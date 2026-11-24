@@ -1,0 +1,14 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef you fill:#fff4e5,stroke:#d97706,stroke-width:3px,color:#111111
+  classDef run fill:#eaf1ff,stroke:#a8c7fa,stroke-width:2px,color:#111111
+  Q["A loop asks a question<br/>on the board"]:::plain
+  R["The reviewer reads that loop<br/>against 84 papers"]:::plain
+  T{"Reversible, inside budget,<br/>no recorded bar or verdict changed?"}:::plain
+  M["Manager decides<br/>marked 'Decided by Loop 13'"]:::run
+  Y["Stays with you<br/>with a default"]:::you
+  O["You can overrule<br/>by answering again"]:::you
+  Q --> R --> T
+  T -- "yes" --> M --> O
+  T -- "no: deletes, secrets, records that disagree,<br/>over 3 GPU-hours, stopping a loop" --> Y

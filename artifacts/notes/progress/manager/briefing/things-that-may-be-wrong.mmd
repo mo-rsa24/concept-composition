@@ -1,0 +1,16 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef you fill:#fff4e5,stroke:#d97706,stroke-width:3px,color:#111111
+  classDef run fill:#eaf1ff,stroke:#a8c7fa,stroke-width:2px,color:#111111
+  J["Failed, cancelled or out-of-memory jobs"]:::plain
+  SL["Slow compute and long waits"]:::plain
+  ST["Steps marked running<br/>with nothing running"]:::plain
+  DIS["Two records that disagree"]:::plain
+  BAD["Two or more misses in a row"]:::plain
+  PAGE["A row on the status page"]:::run
+  MR["Method review request:<br/>the loop pauses and writes why"]:::run
+  YOU["You decide any change of direction"]:::you
+  J & SL & ST --> PAGE
+  DIS --> YOU
+  BAD --> MR --> YOU

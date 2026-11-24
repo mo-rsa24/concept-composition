@@ -1,0 +1,11 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef you fill:#fff4e5,stroke:#d97706,stroke-width:3px,color:#111111
+  classDef run fill:#eaf1ff,stroke:#a8c7fa,stroke-width:2px,color:#111111
+  T["Every 6 hours, or when you say<br/>'updates', 'brief me', 'where are we'"]:::you
+  B["Briefing page:<br/>where we are in 5 sentences,<br/>one picture"]:::run
+  D["What the manager does,<br/>one picture per duty"]:::plain
+  Q["For you to decide,<br/>each with its default"]:::you
+  T --> B --> D
+  B --> Q

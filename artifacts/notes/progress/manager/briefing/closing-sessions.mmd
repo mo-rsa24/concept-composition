@@ -1,0 +1,16 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef you fill:#fff4e5,stroke:#d97706,stroke-width:3px,color:#111111
+  classDef run fill:#eaf1ff,stroke:#a8c7fa,stroke-width:2px,color:#111111
+  L["Live loop sessions"]:::plain
+  B{"Busy?"}:::plain
+  K["Never closed"]:::plain
+  T{"Loop finished or closed,<br/>or a second copy of one loop?"}:::plain
+  C["Carry its open requests over,<br/>then close it and list it"]:::run
+  Y["A loop with steps left:<br/>only with your yes"]:::you
+  L --> B
+  B -- "yes" --> K
+  B -- "no, idle" --> T
+  T -- "yes" --> C
+  T -- "no" --> Y

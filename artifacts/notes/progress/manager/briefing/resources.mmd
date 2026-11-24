@@ -1,0 +1,16 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef you fill:#fff4e5,stroke:#d97706,stroke-width:3px,color:#111111
+  classDef run fill:#eaf1ff,stroke:#a8c7fa,stroke-width:2px,color:#111111
+  S["Cluster read every hour<br/>queue, finished jobs, node state"]:::plain
+  CAP["Our jobs against the caps<br/>1 biggpu, 6 bigbatch"]:::plain
+  W["Waits over 2 hours<br/>and runs past twice their estimate"]:::plain
+  IDLE{"Idle card on the other partition<br/>while we queue?"}:::plain
+  TELL["Tell the loop whose job waits"]:::run
+  BUD["Compute per loop<br/>against its budget"]:::plain
+  S --> CAP
+  S --> W
+  S --> BUD
+  W --> IDLE
+  IDLE -- "yes" --> TELL

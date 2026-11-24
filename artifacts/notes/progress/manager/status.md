@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-24 16:39 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-24 16:50 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -41,12 +41,12 @@ Newest first. A default happens only if you answer with it; nothing changes whil
 
 | # | The question, in one line | Why it is yours | Default | Waiting |
 |---|---|---|---|---|
+| 88 | Should Loop 11, which moves results onto the report pages and uses no GPU, finish its last two steps (its pillar checks and a final drain) and then stop until a research loop has a new result to drain? | stopping a loop | yes: finish, then stop until a new result | just filed |
 | 87 | Should Loop 6's search for the best Paper 2 checker be judged on "two clear subjects, drawing style ignored" (CO3 alone scores 32 of 96) instead of "faithful pairs", which also fails a picture for being a drawing (73 of CO3's 96 fail mostly that way)? | changes a recorded bar | keep faithful pairs | 6 min |
 | 86 | Should Loop 8's planned SDXL test be rewritten to push an identity checker on CO3's own run and be judged against CO3 alone, instead of counting bodies against the plain product, which CO3 already beats? | changes a recorded bar; about 6 GPU-hours | Loop 8 continues unchanged | 9 min |
 | 80 | Should a checker choose CO3's weight-sharpness setting at each of its corrected steps ([design](../score-space/11-the-checker-chooses-on-co3.md))? First read on 6 of 12 pairs | over 3 GPU-hours on one run (about 3.1) | Loop 6 runs the first read | 4 h 8 min |
 | 79 | Loop 9's test of whether sentence scores read a picture's properties has two recorded verdicts (null in its own review, inconclusive in a later fairness test). Which leads the report's title? | two records disagree | keep the test's own verdict, give the fairness test its own finding | 5 h 16 min |
 | none | Loop 10 is closed, but four of its steps (training and testing the shared spaces, and its verdict, which is written) stay open on the board, so the board counts it unfinished | changes another loop's step state | none set | since 10:34 |
-| none | Two Loop 4 sessions are alive and idle; only one should keep the targets current | stopping a session | none set | since 16:04 |
 
 Your own reading step (confirm the draft statements from your readings) is ready on the board.
 
@@ -58,9 +58,9 @@ The finish range is `session_status.py`'s, from the 52 finished steps: fastest p
 
 | Loop | Doing now, and why | Steps left | Estimated finish | Session | Held by |
 |---|---|---|---|---|---|
-| 4. Rivals and targets | Keeping every target current. It recorded the CLEVR paste result and placed the two-colour CLEVR test in the CLEVR plan. | 1 | none useful: it ends after the paper tables, which have not started | idle (two sessions) | nothing |
+| 4. Rivals and targets | Keeping every target current. It recorded the CLEVR paste result and placed the two-colour CLEVR test in the CLEVR plan. | 1 | none useful: it ends after the paper tables, which have not started | idle | nothing |
 | 6. Best method | Training two checkers on differently balanced lists of training pictures, to learn which list Paper 2's checker should use (step M5). The training failed twice within 3 minutes and is running again. Two-colour CLEVR renders for Paper 1 run beside it. | 10 | 4.7 h to 232.7 h | busy | its own training job; question 87 decides how the result is judged |
-| 7. Abstract-checker papers | Finished. | 0 | done | idle | nothing |
+| 7. Abstract-checker papers | Finished; its session is closed. | 0 | done | closed | nothing |
 | 8. Abstract checkers | Checking that its digit checker really reads which digits are present. Its robustness bars hold: a second seed scores 0.877 balanced accuracy on unseen digit 4 (bar 0.75; 0.5 is chance), shuffled labels score 0.500, and the weakest pair 0.844. Now running, with bars fixed first: the same reading by a rule that needs no training, and a read on real sampler states (jobs 94595 to 94597). | 3 | 2.4 h to 111.5 h | busy | the SDXL test waits on Loop 6's training list and on question 86 |
 | 11. Drain into the pillars | Auditing the 48 pages it wrote against the pillar formats. | 2 | 57 min to 43.4 h | idle | nothing since question 81 was decided |
 | 12. Where CO3 leaks | Measuring what predicts which animal pairs borrow each other's parts under CO3. Its small first read finished in 16 minutes; the main pass waits for a node. | 5 | 2.4 h to 113.9 h | busy | a free node for job 94450 |
@@ -133,6 +133,20 @@ Newest first.
 | 16:25 | Loop 6 | **Reviewer verdict: fix**, with the review and question 85. |
 | 16:09 | Loop 6 | **Method review request** on the region test after three misses; answered at 16:11 with [its method review](../method-search/04-bind-each-body/method-review.md). |
 
+### Sessions closed
+
+Under the closing rule: idle, and the loop finished, closed, or a second copy of one loop. Open requests were carried over first.
+
+| Time | Session | Loop | Why |
+|---|---|---|---|
+| 16:46 | `70624adb` | 10, the score path | closed by you on question 76; its requests went to Loop 11 and question 80 stays with you |
+| 16:46 | `38bc00f5` | 4, rivals and targets | the older of two sessions; `f3676c33` keeps running and the board now names it |
+| 16:44 | `09f14d5d` | 7, abstract-checker papers | every step done |
+| 16:44 | `bed4762f` | 9, concepts into scores | closed by you |
+| 16:44 | `b0fc9e51` | 5, reproduce the rivals | closed by you |
+
+Four more entries in the session list (an old Loop 4 copy, Loops 2 and 3, and a Loop 7 copy in the learning folder) have no running process, so there was nothing to close.
+
 ## Requests waiting
 
 Read from `requests.md` at 16:15 (277 lines then). Of the 158 lines addressed to a watched loop, 49 had
@@ -149,4 +163,4 @@ been acted on, 93 asked nothing, and 15 waited. Nine of those were re-routed or 
 
 ## Last tick
 
-2026-11-24 16:39. Next tick about 17:06.
+2026-11-24 16:50. Next tick about 17:06. The briefing for you is [the briefing page](briefing.md).

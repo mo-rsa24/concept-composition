@@ -1,0 +1,14 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef you fill:#fff4e5,stroke:#d97706,stroke-width:3px,color:#111111
+  classDef run fill:#eaf1ff,stroke:#a8c7fa,stroke-width:2px,color:#111111
+  D["A loop writes or changes a design"]:::plain
+  C1["Right data, enough of it,<br/>balanced and checked labels"]:::plain
+  C2["Controls: one that shows it can work,<br/>a random one, the simplest baseline"]:::plain
+  C3["Does the input hold the information<br/>at the steps it reads?"]:::plain
+  C4["Cost, and a cheaper first read"]:::plain
+  F["One request to the loop naming the fix"]:::run
+  Y["Over 3 GPU-hours wasted,<br/>or unusable for a paper: you hear"]:::you
+  D --> C1 & C2 & C3 & C4 --> F
+  F -.-> Y
