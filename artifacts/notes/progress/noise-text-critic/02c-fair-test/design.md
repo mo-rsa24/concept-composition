@@ -41,6 +41,21 @@ The owner asked for both on 2026-11-24. This file is written after W2's scores w
 
 There are 24 sentence rows here: 6 readers (3 models, plain and ensembled), on 3 tasks in Group 2 and 1 task in Group 3. The means have standard errors of about 0.02 to 0.04, and W2's best row was 0.56, so a pass by chance is unlikely (inferred).
 
+## Group 4: counting with sentences that name no species
+
+W2's counting sentences mix the species with the count. The wrong sentence "one animal that is part cat and part dog" shares both species words with the right one, so two cats or two dogs match neither, and NoisyCLIP calls them one animal on 23 of 46 finished pictures (`02-can-it-read/review.md`). The owner chose on 2026-11-24 to rescore counting with sentences that name no species, fixed here before any score:
+
+| Role | Sentence |
+|---|---|
+| Right | a photo of two animals |
+| Wrong | a photo of one animal |
+| Wrong | a photo of one animal with mixed features |
+
+- **What stays the same.** The pictures, labels, draws, halves and analysis are W2's counting task. The image side is W2's saved image vectors (`loop-9/w2/read/vectors-<model>.npy`), so only the text changes.
+- **Rows.** Each of the three models, plain and with the five wordings above.
+- **Bars.** The same: a mean of at least 0.75 over steps 0 to 15 reads, and 0.75 at step 49 passes the finished-picture check.
+- **Code and cost.** `w2c_species_free.py`, as stage `species` of `w2.sbatch`. It encodes three sentences in five wordings per model and reuses saved vectors, so it takes a few GPU-minutes.
+
 ## Run
 
 - **Group:** `loop9-w2c`. **Varied axis per comparison:** the reader, with pictures, draws, halves and labels held fixed.
