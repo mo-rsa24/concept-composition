@@ -17,7 +17,9 @@ Outputs are on the cluster under `/datasets/mmolefe/poe_repair_min/loop-6/m7/`, 
 | EDM2 smoke test on the empty scenes, 16,384 images seen, then 16 samples | 94044 | `beaf1219-15d8bdd` | `smoke/models/empty/` | passed, 3 minutes 31 seconds |
 | EDM2 overfit on 16 pictures of position 1, EDM2's fixed ramp | 94047 | `50d1d1a1-15d8bdd` | `overfit/models/p1-16/` | failed, the samples are noise |
 | 1% rung: 50 pictures per set, 65,536 images seen, batch 256, on one Blackwell | 94073, 94075, 94077, 94079 | `a601dd41-15d8bdd` | `one-percent/models/` | passed: the loss falls from about 0.52 to between -3.22 and -3.89 for all four |
-| Full training: 2,000,896 images seen per model, batch 256, one after another on Blackwell | 94081, 94082, 94083, 94084 | `9b852e6f-15d8bdd` | `full/models/` | queued |
+| Full training: 2,000,896 images seen per model, batch 256, one after another on Blackwell | 94081, 94082, 94083, 94084 | `9b852e6f-15d8bdd` | `full/models/` | position 1 and position 2 trained in 77 minutes each (W&B `zv6oef8h` for position 1); position 3 restarted once from its start after Slurm requeued it off mscluster112 |
+| Samples: 1,024 per model, from seeds 10000, 20000, 30000 and 40000 | 94086, 94087, 94169, 94181 | `ac6f26f7-15d8bdd` | `full/samples/` | positions 1 and 2 finished, the rest queued behind their training |
+| Each expert alone on 256 samples, against 90% | 94182 | `ac6f26f7-15d8bdd` | `full/samples/experts.json` | queued behind the samples |
 | Scorer: overfit on 16 pictures, then 1,600 train and 400 held out, on CPU | 93978 | `a6c06e83-15d8bdd` | `full/scorer/` | passed: 16 of 16 on the overfit, and 100% at all three positions on the 400 held-out renders against a bar of 99% (W&B `guf6vtho`) |
 | EDM2 overfit on 16 pictures of position 1, ramp scaled to the run | 94055 | `0306b4bf-15d8bdd` | `overfit-scaled-ramp/models/p1-16/` | failed: the scorer finds the object in 0 of 16 samples, against a bar of 15 |
 | The same overfit at batch 256 | 94066 | `a601dd41-15d8bdd` | `overfit-batch-256/models/p1-16/` | passed: the scorer finds the object at position 1 and nowhere else in 16 of 16 samples, against a bar of 15 |
