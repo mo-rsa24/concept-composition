@@ -28,7 +28,9 @@ from co3_common import load, load_parser, set_prompt, start_noise  # noqa: E402
 from composers.utils_custom import seed_everything  # noqa: E402
 from disallowed_subjects import is_allowed  # noqa: E402
 from train_readout_pair import joint_prompt  # noqa: E402
-from z3_bars import STEPS  # noqa: E402
+import z3_bars  # noqa: E402
+
+STEPS = z3_bars.STEPS  # Z3: 15 to 30; Z7 passes --steps 5-30
 
 BETA = 0.9
 GRID = 128
@@ -62,14 +64,20 @@ class Corrector:
         dists = torch.tensor([(ea - em).norm().item(), (eb - em).norm().item()])
         w = lc._get_concept_weights_from_dists(dists, method="exp", beta=BETA)
         guess = lambda e: xf - s * (eu + lam * (e - eu))
+        w0 = torch.full((1, 1, GRID, GRID), 2.0, device=x.device)
         wa = torch.full((1, 1, GRID, GRID), float(w[0]), device=x.device)
         wb = torch.full((1, 1, GRID, GRID), float(w[1]), device=x.device)
+        if self.row == "own":  # Z7: inside each animal's own box, that animal's own guess alone
+            ma, mb = box_mask(self.boxes[0], x.device), box_mask(self.boxes[1], x.device)
+            only_a, only_b = (ma > 0) & (mb == 0), (mb > 0) & (ma == 0)
+            w0[0, 0][only_a], wa[0, 0][only_a], wb[0, 0][only_a] = 0.0, 1.0, 0.0
+            w0[0, 0][only_b], wa[0, 0][only_b], wb[0, 0][only_b] = 0.0, 0.0, 1.0
         if self.row == "boxes":
             ma, mb = box_mask(self.boxes[0], x.device), box_mask(self.boxes[1], x.device)
             only_a, only_b = (ma > 0) & (mb == 0), (mb > 0) & (ma == 0)
             wa[0, 0][only_a], wb[0, 0][only_a] = 0.0, -1.0
             wa[0, 0][only_b], wb[0, 0][only_b] = -1.0, 0.0
-        composed = 2.0 * guess(em) + wa * guess(ea) + wb * guess(eb)
+        composed = w0 * guess(em) + wa * guess(ea) + wb * guess(eb)
         r = guess(em).max()
         composed = composed / composed.max() * r
         x2 = composed + s * eu
@@ -125,7 +133,13 @@ def main():
     ap.add_argument("--seeds", default="")
     ap.add_argument("--rung", default="z3")
     ap.add_argument("--control", action="store_true")
+    ap.add_argument("--steps", default="", help="sampler steps as first-last, e.g. 5-30 (Z7); default Z3's 15-30")
+    ap.add_argument("--control-row", default="boxes", help="the region row the empty-box control checks against the whole row")
     args = ap.parse_args()
+    global STEPS
+    if args.steps:
+        a, b = (int(v) for v in args.steps.split("-"))
+        STEPS = tuple(range(a, b + 1))
     if not torch.cuda.is_available():
         raise SystemExit("torch sees no CUDA card")
     split = json.loads(args.splits.read_text())
@@ -148,12 +162,12 @@ def main():
         img_w, _ = render(model, corr, seed, "whole", (None, None)); whole15 = corr.entry[STEPS[0]]
         b = boxes[pair][str(seed)]
         # empty boxes: the region row must reproduce the whole-canvas row
-        img_e, _ = render(model, corr, seed, "boxes", (None, None))
+        img_e, _ = render(model, corr, seed, args.control_row, (None, None))
         diff_img = float(np.abs(np.asarray(img_w, np.int16) - np.asarray(img_e, np.int16)).max())
         result = {"pair": pair, "seed": seed, "device": torch.cuda.get_device_name(0),
-                  "step15_plain_vs_whole_max_abs": float((plain15 - whole15).abs().max()),
+                  "first_step_plain_vs_whole_max_abs": float((plain15 - whole15).abs().max()), "first_step": STEPS[0],
                   "empty_boxes_vs_whole_max_pixel_diff": diff_img, "boxes_for_seed": b}
-        result["passes"] = result["step15_plain_vs_whole_max_abs"] < 1e-5 and diff_img == 0.0
+        result["passes"] = result["first_step_plain_vs_whole_max_abs"] < 1e-5 and diff_img == 0.0
         (args.out / "control.json").write_text(json.dumps(result, indent=1) + "\n")
         print(json.dumps(result), flush=True)
         raise SystemExit(0 if result["passes"] else 1)
@@ -168,7 +182,7 @@ def main():
                 path, meta = folder / f"seed-{seed}.png", folder / f"seed-{seed}.json"
                 if path.exists() and meta.exists():
                     continue
-                img, sec = render(model, corr, seed, row, (b.get("A"), b.get("B")) if row == "boxes" else (None, None))
+                img, sec = render(model, corr, seed, row, (b.get("A"), b.get("B")) if row in ("boxes", "own") else (None, None))
                 folder.mkdir(parents=True, exist_ok=True)
                 img.save(path)
                 meta.write_text(json.dumps({"row": row, "pair": pair, "seed": seed, "seconds": round(sec, 2), "boxes": b,
