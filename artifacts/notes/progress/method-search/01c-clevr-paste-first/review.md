@@ -16,6 +16,8 @@ Outputs are on the cluster under `/datasets/mmolefe/poe_repair_min/loop-6/m7/`, 
 | Scorer subsets s0 to s7, 250 pictures each, one job at a time | 93949 to 93956 | `100772b7-15d8bdd` | `full/renders/` | finished, 250 of 250 in each subset |
 | EDM2 smoke test on the empty scenes, 16,384 images seen, then 16 samples | 94044 | `beaf1219-15d8bdd` | `smoke/models/empty/` | passed, 3 minutes 31 seconds |
 | EDM2 overfit on 16 pictures of position 1, EDM2's fixed ramp | 94047 | `50d1d1a1-15d8bdd` | `overfit/models/p1-16/` | failed, the samples are noise |
+| 1% rung: 50 pictures per set, 65,536 images seen, batch 256, on one Blackwell | 94073, 94075, 94077, 94079 | `a601dd41-15d8bdd` | `one-percent/models/` | passed: the loss falls from about 0.52 to between -3.22 and -3.89 for all four |
+| Full training: 2,000,896 images seen per model, batch 256, one after another on Blackwell | 94081, 94082, 94083, 94084 | `9b852e6f-15d8bdd` | `full/models/` | queued |
 | Scorer: overfit on 16 pictures, then 1,600 train and 400 held out, on CPU | 93978 | `a6c06e83-15d8bdd` | `full/scorer/` | passed: 16 of 16 on the overfit, and 100% at all three positions on the 400 held-out renders against a bar of 99% (W&B `guf6vtho`) |
 | EDM2 overfit on 16 pictures of position 1, ramp scaled to the run | 94055 | `0306b4bf-15d8bdd` | `overfit-scaled-ramp/models/p1-16/` | failed: the scorer finds the object in 0 of 16 samples, against a bar of 15 |
 | The same overfit at batch 256 | 94066 | `a601dd41-15d8bdd` | `overfit-batch-256/models/p1-16/` | passed: the scorer finds the object at position 1 and nowhere else in 16 of 16 samples, against a bar of 15 |
@@ -50,7 +52,8 @@ object at position 1 in 0 of 16 (`overfit-scaled-ramp-scorer.json`). At EDM2's b
 
 **A batch of 256 passes the overfit rung.** The same 256,000 images now make 1,000 weight updates, against 125 at batch 2,048. The loss falls to -4.78, the
 samples look like the training scenes by eye, and the scorer finds the object at position 1 and nowhere else in 16 of 16 (`overfit-batch-256-scorer.json`).
-Training runs at 8.08 seconds per thousand images on an RTX 3090, which would make four 2-million-image models about 18 GPU-hours.
+Training runs at 8.08 seconds per thousand images on an RTX 3090, which would make four 2-million-image models about 18 GPU-hours. On an RTX PRO 6000 Blackwell it runs at 2.25 to 2.28 seconds per thousand images after the first minutes, so each full
+model takes about 1.5 hours with start-up and the four take about 6 GPU-hours, inside the 9 to 12 approved on board question 48. The full models train there.
 
 <a href="overfit-batch-256-real-and-sampled.png"><img src="overfit-batch-256-real-and-sampled.png" width="420" alt="Top two rows: the 16 real pictures. Bottom two rows: 16 samples showing the same scene with one clear object at the same position"></a>
 
