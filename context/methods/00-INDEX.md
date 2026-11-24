@@ -1,6 +1,6 @@
 # 🌍 Context: how each method the loops use works
 
-Each folder here explains one method the loops use, from the whole system down to its parts: an overview page first, then one page per part, in the order of that method's zoom ladder under `2-classifier-guidance/artifacts/scenes/`. What the project's own words mean (product-of-experts composition, the interaction term, a compose rate) stays on the world pages listed in [the context index](../00-INDEX.md#the-themes). A method page links those for the meaning and adds what they do not carry: the ladder's pictures, a small worked example with real numbers, and the code.
+Each folder here explains one method the loops use, from the whole system down to its parts: an overview page first, then one page per part, in the order of that method's zoom ladder under `2-classifier-guidance/artifacts/scenes/`. What the project's own words mean (product-of-experts composition, the interaction term, a [compose rate](../world/compose-rate.md)) stays on the world pages listed in [the context index](../00-INDEX.md#the-themes). A method page links those for the meaning and adds what they do not carry: the ladder's pictures, a small worked example with real numbers, and the code.
 
 ## Table of contents
 
@@ -22,7 +22,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#how-each-folder-reads) ➡�
 | [05: Latent CLIP](05-latent-clip/01-overview.md) | A CLIP model that reads SDXL latents directly, tried in place of the noise-aware CLIP for the same right-minus-wrong sentence score; and a linear probe on its, NoisyCLIP's and frozen CLIP's picture vectors, asking whether they carry counting and prompt match at all | Loop 9 (step W1b read it, W2 scored it, W2b probed it; its push, W3, never ran) |
 | [06: the word-map checker](06-the-word-map-checker/01-overview.md) | A classifier on two words' cross-attention maps reads the spatial relation between two subjects, Learn-to-Steer's method applied to SDXL's product; proposed only, no head trained or run on SDXL | Loop 7, which designed it as Paper 2's spatial-relation checker |
 | [07: the score path](07-the-score-path/01-overview.md) | The changes a frozen digit model's prediction makes when told each label, stacked over the noisy steps, read as a third space beside the caption and the canvas | Loop 10 (step X5 read all ten labels' changes and missed its bar; the encoder and the shared space, X6 to X8, never ran) |
-| 08: the BLIP-VQA score, not written yet | Splits a prompt into one question per noun phrase, has BLIP-VQA answer each, and multiplies the yes-probabilities into one score | Loop 4, for the targets |
+| [08: the BLIP-VQA score](08-the-blip-vqa-score/01-overview.md) | Splits a prompt into one question per noun phrase, has BLIP-VQA answer each, and multiplies the yes-probabilities into one score; a category's number is the mean over its pictures | Loop 4, for the Color, Shape and Texture targets, and Loop 5, which scored its rival reruns with the same code |
 
 ## How each folder reads
 
