@@ -1,32 +1,22 @@
 %%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
 flowchart LR
-  %% Blue boxes have a cluster job running or queued; orange is you; dashed grey is stranded work
   classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
   classDef you fill:#fff4e5,stroke:#d97706,stroke-width:3px,color:#111111
   classDef run fill:#eaf1ff,stroke:#a8c7fa,stroke-width:2px,color:#111111
   classDef stuck fill:#f3f3f3,stroke:#888888,stroke-width:2px,color:#555555,stroke-dasharray: 5 5
 
-  OWNER{{"You<br/>5 open questions"}}:::you
+  OWNER{{"You<br/>nothing waiting"}}:::you
+  L6R["Loop 6: trains two new checkers,<br/>then reads if they see CO3's failure<br/>(card 1 and job 94623 running)"]:::run
+  L6N["Loop 6: choose checker<br/>architecture and labels<br/>(about 31 GPU-hours)"]:::plain
+  L6C["Loop 6: two-colour CLEVR test<br/>for Paper 1 (2 renders running, 4 queued)"]:::run
+  L8["Loop 8: idle; removal test on hold,<br/>its question not yet filed (nudged)"]:::stuck
+  V4["Loop 8: SDXL identity test<br/>against CO3"]:::plain
+  L12["Loop 12: fix for borrowed parts<br/>free check, then drawn-box control<br/>(job 94635 queued)"]:::run
+  L11["Loop 11: stopped<br/>until a new result to drain"]:::stuck
+  L4["Loop 4: updating Paper 2's bar page<br/>to count two clear subjects"]:::plain
 
-  L4["Loop 4: K6 keep targets current<br/>idle, two sessions alive"]:::plain
-  L6a["Loop 6: M5 balance checker data<br/>job 94473 running"]:::run
-  L6b["Loop 6: M9 region per subject<br/>3 misses, review written"]:::plain
-  L6c["Loop 6: M10 two-colour CLEVR<br/>5 render jobs queued"]:::run
-  D3["Loop 6: D3 checker architecture"]:::plain
-  L8["Loop 8: V6 identity checker<br/>jobs 94471, 94472 running"]:::run
-  V4["Loop 8: V4 checker on SDXL"]:::plain
-  L11["Loop 11: Y4 pillar checks<br/>idle"]:::plain
-  L12["Loop 12: Z2 what predicts borrowing<br/>job 94534 waits for a GPU"]:::run
-  E12["Paper tables E1, E2<br/>not started"]:::plain
-  OLD["Loops 7 and 10: finished or closed<br/>9 requests nobody will act on"]:::stuck
-
-  OWNER -- "question 83" --> L6b
-  OWNER -- "question 81" --> L11
-  NEW["Two tests with no owner:<br/>digit ablation for Paper 1 (78),<br/>checker sets CO3's sharpness (80)"]:::plain
-  OWNER -- "questions 78, 80" --> NEW
-  NEW -. "default: Loop 6 takes them" .-> L6a
-  OWNER -- "question 79" --> L11
-  OWNER -. "who owns them?" .-> OLD
-  L6a --> D3 --> V4
-  L8 --> V4
-  L4 -- "closes only after" --> E12
+  L6R -- "if a new checker sees it" --> L6N
+  L6R -. "if neither does: your choice,<br/>switch to an identity checker" .-> OWNER
+  L6R -- "training list" --> V4
+  L8 -. "files question, then" .-> OWNER
+  L6C -. "result to drain" .-> L11
