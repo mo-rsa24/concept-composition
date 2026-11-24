@@ -801,12 +801,13 @@
    "needs": [
     "V3"
    ],
-   "state": "doing",
+   "state": "done",
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-24T08:20:13+02:00",
-   "updated": "2026-11-24T08:20:13+02:00",
-   "note": "Digit rehearsal of the remove-one-checker test, by board question 56"
+   "updated": "2026-11-24T10:10:41+02:00",
+   "note": "Removal table filled, 960 per row, W&B j4anxfgy: minus count 38.4->10.3% count, minus order 88.2->47.8% order, random replacements fall alike; one other column moves ~7 points each; coded null, label on board question 75",
+   "finished": "2026-11-24T10:10:41+02:00"
   },
   {
    "id": "V4",
@@ -997,12 +998,13 @@
    "needs": [
     "X3"
    ],
-   "state": "doing",
+   "state": "done",
    "serves": "Both papers",
    "objective": "Build and test",
    "started": "2026-11-24T08:32:39+02:00",
-   "updated": "2026-11-24T08:32:39+02:00",
-   "note": "design"
+   "updated": "2026-11-24T08:43:43+02:00",
+   "note": "design 04-design.md; owner answered question 71 yes, X6 may use the SDXL-matched window",
+   "finished": "2026-11-24T08:43:43+02:00"
   },
   {
    "id": "X5",
@@ -1012,9 +1014,13 @@
    "needs": [
     "X4"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "Both papers",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "started": "2026-11-24T08:43:50+02:00",
+   "updated": "2026-11-24T10:14:46+02:00",
+   "note": "null by the bar: signature best 0.700 at t 480 (SDXL-matched), 0.513 early; beats canvas by 0.11; W&B gq51nl74; question 76 on skipping X6-X8",
+   "finished": "2026-11-24T10:14:46+02:00"
   },
   {
    "id": "X6",
@@ -1064,6 +1070,65 @@
    "state": "todo",
    "serves": "Both papers",
    "objective": "Build and test"
+  },
+  {
+   "id": "Y1",
+   "label": "Y1 Census of undrained figures and results",
+   "owner": "s11",
+   "proof": "artifacts/notes/progress/drain/01-census.md lists every loop figure, sheet and result on no pillar page, with its loop, what it shows and its landing page",
+   "needs": [],
+   "state": "todo",
+   "serves": "Both papers",
+   "objective": "Absorb and check the record"
+  },
+  {
+   "id": "Y2",
+   "label": "Y2 Loop results on report findings",
+   "owner": "s11",
+   "proof": "every loop review holding a verdict has a report/ finding with its numbers, bar, run id and sheet, indexed in report/00-INDEX.md",
+   "needs": [
+    "Y1"
+   ],
+   "state": "todo",
+   "serves": "Both papers",
+   "objective": "Absorb and check the record"
+  },
+  {
+   "id": "Y3",
+   "label": "Y3 Method pages in context/methods",
+   "owner": "s11",
+   "proof": "context/methods/ holds one numbered folder per method, overview first then one page per part, with the teaching triad on every name and equation",
+   "needs": [
+    "Y1"
+   ],
+   "state": "todo",
+   "serves": "Both papers",
+   "objective": "Absorb and check the record"
+  },
+  {
+   "id": "Y4",
+   "label": "Y4 Pillar checks pass",
+   "owner": "s11",
+   "proof": "artifacts/notes/progress/drain/04-checks.md records context-pulse, report-pulse and xref-pillar over Y2 and Y3 with every finding fixed",
+   "needs": [
+    "Y2",
+    "Y3"
+   ],
+   "state": "todo",
+   "serves": "Both papers",
+   "objective": "Absorb and check the record"
+  },
+  {
+   "id": "Y5",
+   "label": "Y5 Nothing left undrained",
+   "owner": "s11",
+   "proof": "a final census after Loops 5 to 10 stop finds nothing undrained",
+   "needs": [
+    "Y4"
+   ],
+   "state": "todo",
+   "serves": "Both papers",
+   "objective": "Absorb and check the record"
   }
  ],
  "blocks": [
@@ -1514,6 +1579,17 @@
       "X8",
       "X9"
      ]
+    },
+    {
+     "id": "L11",
+     "title": "Session 11: drain the loops into the pillars",
+     "steps": [
+      "Y1",
+      "Y2",
+      "Y3",
+      "Y4",
+      "Y5"
+     ]
     }
    ]
   },
@@ -1598,6 +1674,10 @@
   "s10": {
    "id": "70624adb",
    "name": "Loop 10"
+  },
+  "s11": {
+   "id": "pending",
+   "name": "Loop 11"
   }
  },
  "objectives": [
@@ -2390,8 +2470,63 @@
    "holds": "X5",
    "default": "X5 runs both windows as designed, and X6 goes ahead only in a window where the bar holds",
    "by": "s10",
+   "state": "answered",
+   "asked": "2026-11-24T08:36:05+02:00",
+   "answer": "Yes: run X5 to X8 as designed (about 4 GPU-hours on bigbatch), and X6 may go ahead in the SDXL-matched window if only that window passes. Owner, in chat, 2026-11-24.",
+   "answered": "2026-11-24T08:41:22+02:00"
+  },
+  {
+   "id": 72,
+   "question": "Loop 10 X5: the positive control missed. At timestep 100 (canvas keeps 0.946 of its signal) a linear probe reads digit presence at 0.779 on the signature and 0.764 on the canvas, against a 0.9 bar; overfit passed 16 of 16. The probe is too weak for digits that move. Swap it for one small convolutional probe, the same for every input, and rerun the control before the full read (about 0.5 GPU-hours)? Other options: a linear probe on each label map's spatial maximum, or record X5 inconclusive.",
+   "holds": "X5",
+   "default": "Swap to one small convolutional probe shared by every input, rerun the control at timestep 100 against the same 0.9 bar, and go on to the full read only if it passes",
+   "by": "s10",
+   "state": "answered",
+   "asked": "2026-11-24T08:57:03+02:00",
+   "answer": "Yes: swap to one small convolutional probe shared by every grid input, rerun the control at timestep 100 against 0.9, then the full read. Owner, in chat, 2026-11-24.",
+   "answered": "2026-11-24T09:31:32+02:00"
+  },
+  {
+   "id": 73,
+   "question": "V5's removal test on digits is inconclusive by its written rules: in the all-three-checkers row the total push passed 0.6 of the prediction's size on 5.85% of pushed steps (limit 5%), and removing count leaves only 18 canvases in the order column (minimum 40). Read without a verdict, the table looks like control for two of three: removing count drops the count score from 41.6% to 14.1% (random in its place 10.9%) while right digits (40.6 to 40.0) and order (88.9 to 88.9) hold; removing order drops order from 88.9% to 45.2% (random 53.1%) while count holds (41.6 to 44.1); removing right digits moves its own score only from 40.6% to 34.2%, and its random replacement does not drop it (41.4%), as its 0.556 accuracy predicts. Option A (recommended): rerun the eleven rows with three times the seeds (seeds 1000 to 1095, 960 canvases per row) so every cell clears 40, and set each push length on the seen pairs so the all-checkers row passes 0.6 on at most 5% of steps, before any unseen pair is read, about 0.5 GPU-hours; the bars stay as written. Option B: record V5 as inconclusive with this table and go on to V4 when D3 lands.",
+   "holds": "V5",
+   "default": "Hold V5 inconclusive and spend no more GPU time on it until the owner answers",
+   "by": "s8",
+   "state": "answered",
+   "asked": "2026-11-24T09:37:07+02:00",
+   "answer": "Option A: rerun the eleven rows with three times the seeds (1000 to 1095, 960 per row), each push length set on the seen pairs so the all-checkers row passes 0.6 on at most 5% of pushed steps before any unseen pair is read; bars unchanged.",
+   "answered": "2026-11-24T09:45:49+02:00"
+  },
+  {
+   "id": 74,
+   "question": "Loop 10 X5: with the convolutional probe the control at timestep 100 reads 0.890 on the noisy canvas and 0.802 on the signature (bar 0.9 for both), on 1,000 fitting canvases. The canvas row checks the pipeline; the signature is weak there because a nearly clean canvas makes the label matter little. Rerun the control at the full read's size (4,000 fitting canvases) with only the canvas row gating, report the signature's control value as a finding, and go on to the full read if the canvas passes (about 0.6 GPU-hours)? Or record X5 inconclusive.",
+   "holds": "X5",
+   "default": "Rerun the control at full size with only the canvas row gating at 0.9, report the signature's control value beside it, and run the full read if the canvas passes",
+   "by": "s10",
+   "state": "answered",
+   "asked": "2026-11-24T09:42:56+02:00",
+   "answer": "Yes: rerun the control at full size with only the canvas row gating at 0.9, report the signature's control value beside it, then the full read if the canvas passes. Owner, in chat, 2026-11-24.",
+   "answered": "2026-11-24T09:45:22+02:00"
+  },
+  {
+   "id": 75,
+   "question": "V5's rerun (960 canvases per row, push length 0.215, W&B j4anxfgy) is coded as null, but the design's words do not fit it. Count and order each lower their own column by far more than the margin, and so do their random replacements: count 38.4% to 10.3% (random 12.6%), standard error 2.7; order 88.2% to 47.8% (random 42.3%), standard error 5.3. What fails is the side condition: removing count raises the order column by 6.8 points (limit 4.2 points and 1.96 standard errors = 5.4), and removing order lowers the right-digits column by 6.9 points (1.96 standard errors = 6.8). The right-digits checker lowers its own column by only 2.6 points. The design calls null 'no removal lowers its own column by that margin', which is not what happened, and partial needs at least one property to meet the whole rule, which none does. Option A (recommended): record V5 as 'null by the written rule, with count and order each lowering their own property by 28 and 40 points and moving one other by about 7', and keep the code's label. Option B: record it as partial, reading the side condition as met within noise for order (6.9 against 6.8). Option C: record it as unclassified and have Session 7 tighten the design's wording before the SDXL version.",
+   "holds": null,
+   "default": "Record the coded label, null, with the description, and change nothing",
+   "by": "s8",
+   "state": "answered",
+   "asked": "2026-11-24T10:10:16+02:00",
+   "answer": "Option A: record V5 as null by the written rule, with the description that removing count or order lowers its own property by 28 and 40 points and moves one other by about 7.",
+   "answered": "2026-11-24T10:14:47+02:00"
+  },
+  {
+   "id": 76,
+   "question": "Loop 10 X5 is null by the written rule: the signature reads digit presence at best 0.700 at t 480 (SDXL-matched window), bar 0.75, and 0.513 in the early window. It beats the noisy canvas by 0.11 and reads apart-against-wrong at 0.655 against Loop 8's 0.511, and it is still rising at the window's end. Per the brief, X6 to X8 are skipped and X9 writes the verdict. Agree, or first run a new small design reading later timesteps (t 480 to 100, about 0.3 GPU-hours) to find where it reaches 0.75?",
+   "holds": "X6",
+   "default": "Skip X6 to X8 as the brief says, and write the X9 verdict from X5",
+   "by": "s10",
    "state": "open",
-   "asked": "2026-11-24T08:36:05+02:00"
+   "asked": "2026-11-24T10:14:36+02:00"
   }
  ]
 }

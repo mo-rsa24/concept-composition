@@ -45,7 +45,7 @@ flowchart TB
     end
     subgraph L8["Session 8: test abstract checkers"]
       direction TB
-      V1["V1 Small repeatable environment"]:::done --> V2["V2 Checker learns plurality on unseen digits"]:::done --> V3["V3 Its gradient composes unseen digits"]:::done --> V5["V5 Remove-one-checker rehearsal on digits<br/>YOU ARE HERE"]:::doing --> V4["V4 Abstract checker on SDXL's unseen objects"]:::todo
+      V1["V1 Small repeatable environment"]:::done --> V2["V2 Checker learns plurality on unseen digits"]:::done --> V3["V3 Its gradient composes unseen digits"]:::done --> V5["V5 Remove-one-checker rehearsal on digits"]:::done --> V4["V4 Abstract checker on SDXL's unseen objects"]:::todo
     end
     subgraph L9["Session 9: turn concepts into scores"]
       direction TB
@@ -53,7 +53,11 @@ flowchart TB
     end
     subgraph L10["Session 10: the score path as a third space"]
       direction TB
-      X1["X1 Score-path papers read"]:::done --> X2["X2 Running loops described side by side"]:::done --> X3["X3 Ideas and their wrong assumptions"]:::done --> X4["X4 Small experiment designed, owner checked<br/>YOU ARE HERE"]:::doing --> X5["X5 Does the score path carry signal"]:::todo --> X6["X6 Train the two-way and three-way spaces"]:::todo --> X7["X7 Figures for each trained space"]:::todo --> X8["X8 Unseen pairs and the arithmetic tests"]:::todo --> X9["X9 Verdict per paper"]:::todo
+      X1["X1 Score-path papers read"]:::done --> X2["X2 Running loops described side by side"]:::done --> X3["X3 Ideas and their wrong assumptions"]:::done --> X4["X4 Small experiment designed, owner checked"]:::done --> X5["X5 Does the score path carry signal"]:::done --> X6["X6 Train the two-way and three-way spaces"]:::todo --> X7["X7 Figures for each trained space"]:::todo --> X8["X8 Unseen pairs and the arithmetic tests"]:::todo --> X9["X9 Verdict per paper"]:::todo
+    end
+    subgraph L11["Session 11: drain the loops into the pillars"]
+      direction TB
+      Y1["Y1 Census of undrained figures and results"]:::todo --> Y2["Y2 Loop results on report findings"]:::todo --> Y3["Y3 Method pages in context/methods"]:::todo --> Y4["Y4 Pillar checks pass"]:::todo --> Y5["Y5 Nothing left undrained"]:::todo
     end
   end
   subgraph JOIN["THE LOOP, AFTER THE LANES JOIN"]
@@ -76,7 +80,7 @@ flowchart TB
   X0["Detour: idea walk, 7 claims, paused"]:::detour -.-> P2
   X1["Detour: zoom-ladder, about 430k tokens"]:::detour -.-> P2
   X2["Detour: reading route and pictures, about 1.8M tokens"]:::detour -.-> P2
-  L1 ~~~ L2 ~~~ L3 ~~~ L4 ~~~ L5 ~~~ L6 ~~~ L7 ~~~ L8 ~~~ L9 ~~~ L10
+  L1 ~~~ L2 ~~~ L3 ~~~ L4 ~~~ L5 ~~~ L6 ~~~ L7 ~~~ L8 ~~~ L9 ~~~ L10 ~~~ L11
   S0 --> SA --> LOOP --> JOIN --> CAL --> SE --> SF --> GOAL
   style S0 fill:#fafafa,stroke:#adb5bd
   style SA fill:#fafafa,stroke:#adb5bd
@@ -91,6 +95,7 @@ flowchart TB
   style L8 fill:#ffffff,stroke:#a8c7fa
   style L9 fill:#ffffff,stroke:#a8c7fa
   style L10 fill:#ffffff,stroke:#a8c7fa
+  style L11 fill:#ffffff,stroke:#a8c7fa
   style JOIN fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
   style CAL fill:#fff9db,stroke:#f08c00
   style SE fill:#fafafa,stroke:#adb5bd
