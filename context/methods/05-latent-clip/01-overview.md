@@ -22,6 +22,7 @@ Latent CLIP is a CLIP model whose picture side reads SDXL's latent directly, the
 - [The pages of this method](#the-pages-of-this-method)
 - [Where this came from](#where-this-came-from)
 - [Read more](#read-more)
+- [Cross-references](#cross-references)
 
 ## Words this page uses
 
@@ -228,7 +229,7 @@ Navigation: ⬅️ [The pages of this method](#the-pages-of-this-method) | 📋 
 
 ## Read more
 
-Navigation: ⬅️ [Where this came from](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Where this came from](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
 
 | What | Where |
 |---|---|
@@ -240,6 +241,8 @@ Navigation: ⬅️ [Where this came from](#where-this-came-from) | 📋 [TOC](#t
 ⬅️ Previous: [the methods index](../00-INDEX.md) | 📋 [The pages of this method](#the-pages-of-this-method) | Next: [reading a latent with no VAE](02-reading-a-latent-with-no-vae.md) ➡️
 
 ## Cross-references
+
+Navigation: ⬅️ [Read more](#read-more) | 📋 [TOC](#table-of-contents)
 
 - The mention of **Latent CLIP** in [the finding "Can a sentence score read the five properties on a half-drawn picture?"](../../../2-classifier-guidance/report/the-sentence-score/can-a-sentence-score-read-the-five-properties.md).
 - The mention of **Latent CLIP** in [the finding "Does a linear probe on frozen image vectors read unseen pairs?"](../../../2-classifier-guidance/report/the-sentence-score/does-a-linear-probe-on-frozen-image-vectors-read-unseen-pairs.md).

@@ -19,6 +19,7 @@ The BLIP-VQA score is T2I-CompBench's number for whether a picture holds each co
 - [The pages of this method](#the-pages-of-this-method)
 - [Where this came from](#where-this-came-from)
 - [Read more](#read-more)
+- [Cross-references](#cross-references)
 
 ## Words this page uses
 
@@ -152,7 +153,7 @@ Navigation: ⬅️ [The score, by what moves](#the-score-by-what-moves) | 📋 [
 
 *The prompt "a mug and a wine glass" at seed 11, scored by BLIP-VQA as two questions, "a mug?" and "a wine glass?". Left, SDXL given the one sentence naming both: a tall glass with a mug's handle on a goblet's stem and foot, beside a smaller wine glass; score 0.3641. Right, the plain product of two prompts, one per object: one wine glass and no mug; score 0.0044. The score is the product of the two yes-probabilities, on a 0 to 1 scale.* ✅ both pictures seen at full size; both scores read in [the probe's BLIP-VQA file](../../../1-lora-correction/artifacts/results/measuring-composition/the-scorers/what-each-scorer-says-about-two-objects/probe_blipvqa.csv); what each picture holds matches [the scorer probe finding](../../../1-lora-correction/report/measuring-composition/what-each-scorer-says-about-two-objects.md#the-two-images-and-their-four-scores).
 
-The missing mug drops the score by a factor of 0.3641 / 0.0044 = 83, and both of the joint picture's answers were at least 0.3641. ✅ arithmetic. The left object has a mug's handle and a goblet's stem, and nothing in the score says whether the "mug" BLIP answered yes to is a mug standing apart from the glass. 🔍 inferred from the questions being asked one at a time; [the scorer probe finding](../../../1-lora-correction/report/measuring-composition/what-each-scorer-says-about-two-objects.md#what-this-cannot-tell-you) records the same kind of blind spot for GenEval's detector.
+The missing mug drops the score by a factor of 0.3641 / 0.0044 = 83, and both of the joint picture's answers were at least 0.3641. ✅ arithmetic. The left object has a mug's handle and a goblet's stem, and nothing in the score says whether the "mug" BLIP answered yes to is a mug standing apart from the glass. 🔍 inferred from the questions being asked one at a time; [the scorer probe finding](../../../1-lora-correction/report/measuring-composition/what-each-scorer-says-about-two-objects.md#what-this-cannot-tell-you) records the same kind of blind spot for [GenEval](../../../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/textbook/04-geneval.md)'s detector.
 
 💥 **Broken run (mean in place of product):** the toy's photo 3, a yellow banana and no apple, scored by averaging its two answers.
 
@@ -207,7 +208,7 @@ Navigation: ⬅️ [The pages of this method](#the-pages-of-this-method) | 📋 
 
 ## Read more
 
-Navigation: ⬅️ [Where this came from](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Where this came from](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
 
 | What | Where |
 |---|---|
@@ -219,6 +220,8 @@ Navigation: ⬅️ [Where this came from](#where-this-came-from) | 📋 [TOC](#t
 ⬅️ Previous: [the methods index](../00-INDEX.md) | 📋 [The pages of this method](#the-pages-of-this-method) | Next: [how the question reads the picture](02-how-the-question-reads-the-picture.md) ➡️
 
 ## Cross-references
+
+Navigation: ⬅️ [Read more](#read-more) | 📋 [TOC](#table-of-contents)
 
 - The mention of **BLIP-VQA** in [the report page "How the adapter scores against other methods on the 276 Attend-and-Excite prompts", section "The scores by method and prompt set"](../../../1-lora-correction/report/against-other-methods/how-does-the-adapter-score-on-the-attend-and-excite-prompts.md#the-scores-by-method-and-prompt-set).
 - The mention of **BLIP-VQA** in [the report page "Captions for the appendix render grids"](../../../1-lora-correction/report/paper-review/captions-showcase-grids.md).
