@@ -57,7 +57,8 @@ image's jittered camera, with a uniform offset of up to 0.02 of the image in x a
 
 Each of the 4 models is EDM2's `edm2-img64-xs`, unconditional, trained once for 2 million images seen, a quarter of the earlier 8 million
 image length. The preset ramps its learning rate over 10 million of its 1,074 million images, 0.93% of training, and each model keeps that
-fraction, about 19,000 images for a run of 2 million. An unscaled ramp would hold such a run at or below 20% of the full rate. Sampling uses
+fraction, about 19,000 images for a run of 2 million. An unscaled ramp would hold such a run at or below 20% of the full rate. Each model
+trains with a batch of 256, against the preset's 2,048, so a run of 2,000,896 images makes 7,816 weight updates. Sampling uses
 EDM2's 32-step Heun sampler with 65 model calls and no guidance. The one-network control belongs to step M6 and trains only if this stage
 does not stop.
 

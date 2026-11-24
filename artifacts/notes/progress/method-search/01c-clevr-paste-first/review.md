@@ -18,7 +18,7 @@ Outputs are on the cluster under `/datasets/mmolefe/poe_repair_min/loop-6/m7/`, 
 | EDM2 overfit on 16 pictures of position 1, EDM2's fixed ramp | 94047 | `50d1d1a1-15d8bdd` | `overfit/models/p1-16/` | failed, the samples are noise |
 | Scorer: overfit on 16 pictures, then 1,600 train and 400 held out, on CPU | 93978 | `a6c06e83-15d8bdd` | `full/scorer/` | passed: 16 of 16 on the overfit, and 100% at all three positions on the 400 held-out renders against a bar of 99% (W&B `guf6vtho`) |
 | EDM2 overfit on 16 pictures of position 1, ramp scaled to the run | 94055 | `0306b4bf-15d8bdd` | `overfit-scaled-ramp/models/p1-16/` | failed: the scorer finds the object in 0 of 16 samples, against a bar of 15 |
-| The same overfit at batch 256 | 94066 | `a601dd41-15d8bdd` | `overfit-batch-256/models/p1-16/` | running |
+| The same overfit at batch 256 | 94066 | `a601dd41-15d8bdd` | `overfit-batch-256/models/p1-16/` | passed: the scorer finds the object at position 1 and nowhere else in 16 of 16 samples, against a bar of 15 |
 
 ## The smoke render
 
@@ -48,8 +48,11 @@ object at position 1 in 0 of 16 (`overfit-scaled-ramp-scorer.json`). At EDM2's b
 
 <a href="overfit-scaled-ramp-real-and-sampled.png"><img src="overfit-scaled-ramp-real-and-sampled.png" width="420" alt="Top two rows: the 16 real pictures. Bottom two rows: 16 samples with the right floor and lighting and faint coloured blotches in place of objects"></a>
 
-**The next and last change on this rung is a batch of 256,** which gives 1,000 updates for the same 256,000 images. If it also misses 15 of 16, the rung stops and
-the training recipe goes to the owner, so settings are not turned until one happens to pass.
+**A batch of 256 passes the overfit rung.** The same 256,000 images now make 1,000 weight updates, against 125 at batch 2,048. The loss falls to -4.78, the
+samples look like the training scenes by eye, and the scorer finds the object at position 1 and nowhere else in 16 of 16 (`overfit-batch-256-scorer.json`).
+Training runs at 8.08 seconds per thousand images on an RTX 3090, which would make four 2-million-image models about 18 GPU-hours.
+
+<a href="overfit-batch-256-real-and-sampled.png"><img src="overfit-batch-256-real-and-sampled.png" width="420" alt="Top two rows: the 16 real pictures. Bottom two rows: 16 samples showing the same scene with one clear object at the same position"></a>
 
 ## The window control
 
