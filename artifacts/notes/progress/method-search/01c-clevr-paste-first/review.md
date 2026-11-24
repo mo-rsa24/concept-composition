@@ -71,8 +71,6 @@ the sheet below shows the first 16 of each by eye.
 
 <a href="experts-alone-first-16-samples.png"><img src="experts-alone-first-16-samples.png" width="420" alt="Four blocks of 16 samples: one object at upper left, one at upper right, one larger object lower centre, and empty floors"></a>
 
-**What happens next.** Every input to the paste exists. The paste is not built or scored until the window is fixed on board question 66, so
-the choice of window is made without seeing any paste result.
 
 ## The window control
 
@@ -87,6 +85,24 @@ pixels are on the object's own footprint. Positions 1 and 2 have no object pixel
 across the frame, about 3 per picture, against 0.39 per picture in an empty scene. The breakdown is in `window-diagnosis.json`, where a pixel is on
 the footprint if it changes in at least 2% of renders and connects to the position.
 
-**What follows.** No sample has been scored, and the design says the window is fixed before one is. The choice of fix is with the owner, because this
-paste is the frozen rival.
+**The check changed after it failed.** The owner chose option A on board question 66, before any paste existed: position 3's window becomes 18 wide
+and 24 tall, starting on the row where the other two windows end, and the check asks for 95% of each object's own footprint. Under that check the
+windows hold 100% of position 1's footprint, 100% of position 2's and 99.8% of position 3's (`window-footprint-tall-p3.json`). Under the written
+check the new windows hold 94.4%, 93.9% and 97.6%, so positions 1 and 2 still miss it.
 
+## The paste verdict
+
+**Paste is predicted to reach 7 objects, so M7 stops.** With the tall window at position 3, the paste of experts 1 and 2 puts both objects in
+place in 1,024 of 1,024 images, and the paste of all three puts all three in place in 1,024 of 1,024. The paste rate is 1.0 against the bar of
+0.906, and no object appears where none was asked (`paste-score.json`). The first 32 images of each count, enlarged and called by eye, agree
+with the scorer on 64 of 64. Many pasted objects sit on a faintly lighter square where the expert's floor meets the background's, a seam the
+in-place rate does not measure.
+
+<a href="paste-three-experts-first-32.png"><img src="paste-three-experts-first-32.png" width="420" alt="Thirty-two pasted images, each with three objects at the three positions, several on a faintly lighter square around the object"></a>
+
+**What follows from the design and from the owner's answer on board question 54.** Object count on separated CLEVR positions cannot separate Paper 1
+from pasting, so step M6 does not run on these models. The test where pasting fails is the one the owner chose on 2026-11-24: two experts trained on
+one colour each, told what to draw and not where, in [the Stage 2 design](../05-two-experts-by-colour/design.md).
+
+**GPU time.** M7 used about 8.5 GPU-hours against the 9 to 12 approved on board question 48: about 2.9 for the smoke, overfit and 1% rungs, about
+5.5 for the four full models including one restart, and about 0.1 for sampling.

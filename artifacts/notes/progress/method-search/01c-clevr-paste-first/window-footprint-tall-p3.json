@@ -1,0 +1,48 @@
+{
+ "windows": "tall-p3",
+ "images_per_position": 256,
+ "object_frequency": 0.02,
+ "min_inside_share": 0.95,
+ "positions": {
+  "p1": {
+   "window_pixels": [
+    10,
+    10,
+    28,
+    28
+   ],
+   "footprint_changed_pixels": 13744,
+   "inside_window": 13744,
+   "footprint_inside_share": 1.0,
+   "written_rule_inside_share": 0.9439,
+   "passes": true
+  },
+  "p2": {
+   "window_pixels": [
+    29,
+    10,
+    47,
+    28
+   ],
+   "footprint_changed_pixels": 15090,
+   "inside_window": 15090,
+   "footprint_inside_share": 1.0,
+   "written_rule_inside_share": 0.9394,
+   "passes": true
+  },
+  "p3": {
+   "window_pixels": [
+    17,
+    28,
+    35,
+    52
+   ],
+   "footprint_changed_pixels": 37071,
+   "inside_window": 36998,
+   "footprint_inside_share": 0.998,
+   "written_rule_inside_share": 0.9764,
+   "passes": true
+  }
+ },
+ "passes": true
+}

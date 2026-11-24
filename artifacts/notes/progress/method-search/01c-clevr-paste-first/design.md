@@ -72,8 +72,10 @@ must reach 99% accuracy per position on the 400 held-out renders before any samp
 Each expert and the background draw from their own seeds. Around each asked position, a window of 18 by 18 pixels is taken from that
 expert's sample, with its outer 2 pixels faded linearly, and laid on the background sample. Windows do not overlap at these positions.
 
-**Control on the window.** On 256 real single-object renders per position, at least 95% of the pixels that differ from the mean empty
-scene by more than 0.1 on a 0-to-1 scale must fall inside the window. If not, the design is fixed before any sample is scored.
+**Control on the window.** On 256 real single-object renders per position, at least 95% of each object's own footprint, the pixels that differ
+from the mean empty scene by more than 0.1 on a 0-to-1 scale and connect to the position, must fall inside the window. Position 3's window is 18
+wide and 24 tall, starting on the row where the other two end, because its objects sit nearer the camera. The owner set this check and window on
+board question 66, after the first check, which counted every changed pixel in the frame, missed at all three positions.
 
 ## What gets measured
 
