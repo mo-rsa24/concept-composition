@@ -9,6 +9,7 @@
 #   sbatch --export=ALL,SNAP=<snapshot> v3.sbatch <smoke|tune|final|stages>
 # smoke: pair 0 and 1 at 4 seeds, every row, and the zero-push check. tune: picks the push length on seen pairs.
 # final: the unseen pairs, once. stages: every in-between output of the count checker for the miniature page.
+# trace: plain and pushed sampling on the unseen pairs recorded step by step, for the miniature page.
 set -uo pipefail
 STAGE=${1:?stage}
 ROOT=/datasets/mmolefe/poe_repair_min/loop-8
@@ -44,6 +45,9 @@ case "$STAGE" in
   smoke) run smoke; rc=$? ;;
   tune)  run tune; rc=$? ;;
   final) run final --wandb-name loop8-v3-test1-final; rc=$? ;;
+  trace)
+    "$PY" "$S/trace_push.py" --model "$MODEL" --head "$HEAD" --judge "$JUDGE" --v3 "$OUT/final.json" --out "$ROOT/v3/trace"
+    rc=$? ;;
   stages)
     "$PY" "$S/explain_stages.py" --model "$MODEL" --head "$HEAD" --examples "$ROOT/v2/count-final/examples" \
       --out "$ROOT/v3/stages/count-stages.npz"
