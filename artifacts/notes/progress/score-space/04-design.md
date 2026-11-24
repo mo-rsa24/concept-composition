@@ -64,19 +64,18 @@ Loop 8's readers learned where digits sit and not which digits they are. The sig
 
 **Varied axis.** What the probe reads. The data, labels, probe, noise draws and windows are the same for every row.
 
-| Row | What the probe reads, per step | Numbers per step |
+| Row | What the probe reads, per step | Size per step |
 |---|---|---|
-| Signature | the ten $d_t(c)$ maps, pooled 4 by 4 | 1,280 |
-| Noisy canvas | $x_t$, pooled 4 by 4 to match | 128 |
-| Noisy canvas, full | $x_t$ at 32 by 64 | 2,048 |
-| Raw noise | the injected $\epsilon$, pooled 4 by 4 | 128 |
+| Signature | the ten $d_t(c)$ maps, pooled 2 by 2 | 10 by 16 by 32 |
+| Noisy canvas | $x_t$, pooled 2 by 2 | 1 by 16 by 32 |
+| Raw noise | the injected $\epsilon$, pooled 2 by 2 | 1 by 16 by 32 |
 | Error readout | $e_0, \dots, e_9$, no training | 10 |
 | Path length | $\lVert d_t(c) \rVert^2$ per label, and summed over the window | 10 |
-| Shuffled labels | the signature with presence labels permuted | 1,280 |
+| Shuffled labels | the signature with presence labels permuted | 10 by 16 by 32 |
 
 The window is a second axis, read as its own comparison: every row is run once in the early window and once in the SDXL-matched window, and the two are never mixed in one number.
 
-**Probe.** Logistic regression on standardised features, one per digit, with its L2 strength chosen by 5-fold cross-validation on the training canvases only. It is fitted per step, and once more on the 16 steps of a window stacked, pooled further to 2 by 4 per map so the stack has 1,280 numbers.
+**Probe.** One small convolutional probe, the same architecture for every input that has a grid, chosen on board question 72 because a linear probe cannot follow a digit that moves: it read presence at only 0.779 on the signature and 0.764 on the noisy canvas at timestep 100, against the control's 0.9 ([the X5 review](05-signal/review.md)). The signature (10 channels), the noisy canvas and the raw noise (1 channel each) are average-pooled 2 by 2 to 16 by 32, normalised per channel on the fitting canvases, and read by three 3 by 3 convolutions (32, 64 and 64 channels, the last two with stride 2, each with group normalisation and SiLU), then the maximum and the mean over the grid, then one linear layer to one output per digit. Its training is fixed before any run: 1,500 updates at batch 256, Adam at $10^{-3}$ with weight decay $10^{-4}$, class-balanced binary cross-entropy. It is trained per step, and the shuffled-label row uses the same probe. The error readout and the path length have no grid, so they keep logistic regression with its L2 strength chosen by 5-fold cross-validation on the fitting canvases. Each window is also read once with its 16 steps stacked, by logistic regression: the signature pooled to 2 by 4 per map, 1,280 numbers, and the path length summed over the window. Code: `x5_signal.py --probe conv`.
 
 **Data.** 4,000 canvases from `train` to fit and the 2,000 of `seen_test` to read, digits 0 to 4 throughout. Digits 5 to 9 are not read in X5.
 
