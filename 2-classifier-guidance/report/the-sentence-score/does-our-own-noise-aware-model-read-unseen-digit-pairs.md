@@ -1,4 +1,4 @@
-# Does our own noise-aware model read unseen digit pairs?   ⚪ null · read 2026-11-24
+# Does our own noise-aware model read unseen digit pairs?   ⚪ null · verified 2026-11-24
 
 **The claim**
 
@@ -6,8 +6,8 @@ A small image encoder trained on noisy digit canvases against CLIP's frozen text
 does not carry that to new digits. On seen digits 0 to 4 it reads 0.758 balanced accuracy over the digit sampler's steps 14 to
 25, the window that keeps as much of the picture as SDXL's steps 0 to 15. On digits 5 to 9, whose names never reached its loss,
 it reads 0.590, 0.168 below seen, and on two digits apart against wrong digits it reads 0.502, which is chance.
-W&B run `en52x031` `stated`
-([the own model review](../../../artifacts/notes/progress/noise-text-critic/04-train-our-own/review.md), line 3).
+W&B run `en52x031` `verified`
+(key `wandb_run` in [the own model result file](../../../artifacts/notes/progress/noise-text-critic/04-train-our-own/final.json), opened 2026-11-24).
 
 **Why it was asked.** After the reading test found no sentence score that reads steps 0 to 15
 ([the reading finding](can-a-sentence-score-read-the-five-properties.md)), the owner sent the loop on to two trained readers on
@@ -131,7 +131,8 @@ places):
 
 **The model learned the task before it was judged.** The overfit test placed 16 of 16 canvases right (15 needed), and the run on
 1% of the data read seen canvases at 0.660 in the judged window. The full training, 8,000 updates at batch 256, took 158 seconds
-`stated` (review, lines 12 and 13).
+`verified` (`ladder/overfit.json` and `ladder/small.json` under `/datasets/mmolefe/poe_repair_min/loop-9/w4/`, `UPDATES` and
+`BATCH` in `w4_train.py`, and `train_seconds` in the result file, opened 2026-11-24).
 
 ## 2. Unseen digits apart against wrong digits sit at chance
 
@@ -245,13 +246,14 @@ on SDXL latents, as [the NoisyCLIP reading](../../../artifacts/notes/progress/no
 
 Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
-**The headline numbers, the per-step scores and the checks were read from the result file; the rest is copied from the review
-and the design.**
+**The headline numbers, the per-step scores and the checks were read from the result file, and the overfit test and the 1% run
+from the ladder files on the cluster; the rest is copied from the review and the design.**
 
 | What | Source | Mark |
 |---|---|---|
 | Seen and unseen balanced accuracy, digits apart against wrong digits, the steps 0 to 15 means, the gap, the three checks, the per-step scores, 158 seconds, data hash `f70b0fb3…`, W&B `en52x031` | [the own model result file](../../../artifacts/notes/progress/noise-text-critic/04-train-our-own/final.json), read 2026-11-24, matching [the own model review](../../../artifacts/notes/progress/noise-text-critic/04-train-our-own/review.md), lines 3 and 13 to 28 | verified |
-| The verdict, the overfit test, the 1% run, the reason for the miss, the SDXL cost | [the own model review](../../../artifacts/notes/progress/noise-text-critic/04-train-our-own/review.md), lines 3, 12, 30 and 36 to 41 | stated |
+| The overfit test and the 1% run | `ladder/overfit.json` and `ladder/small.json` under `/datasets/mmolefe/poe_repair_min/loop-9/w4/`, opened 2026-11-24 | verified |
+| The verdict wording, the reason for the miss, the SDXL cost | [the own model review](../../../artifacts/notes/progress/noise-text-critic/04-train-our-own/review.md), lines 3, 30 and 36 to 41 | stated |
 | The runs | review lines 7 to 13: jobs 94162 and 94163 cancelled before they started, a laptop attempt that wrote nothing, job 94208 for the smoke, overfit and 1% runs, job 94211 for the final training, all at commit `8cbdaf49` | stated |
 | The rule, the data, the sentences, the model and the window | [the own model design](../../../artifacts/notes/progress/noise-text-critic/04-train-our-own/design.md), lines 20 to 128 | stated |
 | The bars in code | `2-classifier-guidance/scripts/noise_text_critic/w4_train.py`, lines 35 to 39 and 52, read 2026-11-24 | verified |

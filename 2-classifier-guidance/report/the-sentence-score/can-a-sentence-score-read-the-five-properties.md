@@ -85,8 +85,8 @@ before any score existed, and its bars are constants in `2-classifier-guidance/s
 **What would have surprised the design** (line 54): NoisyCLIP passing on left-right order or colour binding at steps 0 to 9,
 or Latent CLIP reading above chance at steps 0 to 5, since it never trained on a noisy latent.
 
-W&B run `70g3qw2f` `stated`
-([the reading review](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), line 3).
+W&B run `70g3qw2f` `verified`
+(key `wandb_run` in [the reading result file](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/result.json), opened 2026-11-24).
 
 ## 1. No model reads any property at steps 0 to 15
 
@@ -118,7 +118,8 @@ on 2026-11-24; the table is the review's, lines 11 to 17):
 
 **Against frozen CLIP.** No gap passes 1.96 standard errors except NoisyCLIP on position and size (0.056, standard error
 0.015), which rests on 2 right pictures and does not count. Latent CLIP's gaps are mixed comparisons, because it differs from
-frozen CLIP in both the model and the input `stated` (review, line 19).
+frozen CLIP in both the model and the input `verified` (keys `noisyclip_minus_frozen` and `latent_clip_minus_frozen` in the
+reading result file, opened 2026-11-24).
 
 **Steps a push could have used.** The design let the push act only on steps whose threshold-half balanced accuracy was at
 least 0.6. Some steps pass that on the threshold half and none reads on the reading half: Latent CLIP's counting passes at 7
@@ -140,7 +141,8 @@ the models and [the input path](../../artifacts/scenes/noisyclip-sentence-score/
 > Render into `2-classifier-guidance/artifacts/results/can-a-sentence-score-read-the-five-properties/`, write its card entry,
 > then embed here.
 
-**The number.** Reading-half balanced accuracy at steps 20, 30, 40 and 49 `stated` (review, lines 23 to 26):
+**The number.** Reading-half balanced accuracy at steps 20, 30, 40 and 49 `verified` (`balanced_accuracy_reading_half` in the
+reading result file, opened 2026-11-24):
 
 | Property | NoisyCLIP | Frozen CLIP | Latent CLIP |
 |---|---|---|---|
@@ -185,7 +187,8 @@ The wrong sentence shares both species words with the right one and scores withi
 two-of-a-kind picture, which matches neither, falls on the wrong side of the cut-off half the time. The review marks the
 reason, that the counting sentences mix the species with the count, as inferred from these cosines.
 
-**A text-only check bounds what any reader with this text side can do** `stated` (review, lines 65 to 78). It uses no image.
+**A text-only check bounds what any reader with this text side can do** `verified` ([the word check](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/word-check/word-check.json),
+keys `trained` and `random_weights`, opened 2026-11-24). It uses no image.
 CLIP ViT-L/14's text side, the one NoisyCLIP keeps frozen, carries colour binding: 0.72 of a red-blue swap survives averaging
 both word orders, against 0.13 with random weights. It carries left-right order weakly: 0.28, against 0.08 with random weights,
 and swapping the two nouns moves a sentence about a third as far as changing one noun.
@@ -204,8 +207,9 @@ colour labels built from it fail the eye check.**
 > picture against the subject guard, render into
 > `2-classifier-guidance/artifacts/results/can-a-sentence-score-read-the-five-properties/`, write its card entry, then embed here.
 
-**The number.** Every label set was checked by eye at sheet size against a 90% bar before any score `stated` (review, lines
-53 to 61):
+**The number.** Every label set was checked by eye at sheet size against a 90% bar before any score `verified` (counts from
+[the eye-check calls](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/label-check/eye-labels.csv) and `label-check/eye-colours.csv`, opened 2026-11-24; the 90% bar is
+the design's, line 78):
 
 | Label set | Right | Bar | Result |
 |---|---|---|---|
@@ -309,13 +313,14 @@ teach it.
 
 Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
-**The headline means, picture counts and checks were read from the result file; the rest is copied from the review.**
+**The means, gaps, late steps, picture counts, checks, label calls and word check were read from their files on 2026-11-24; the rest is copied from the review.**
 
 | What | Source | Mark |
 |---|---|---|
 | Means over steps 0 to 15, pictures per half, the step 49 check, the input path cosines, W&B `70g3qw2f` | [the reading result file](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/result.json), read 2026-11-24, matching [the reading review](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), lines 11 to 17 and 28 to 34 | verified |
-| The verdicts, the gaps against frozen CLIP, the late steps, the counting calls at step 49 | [the reading review](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), lines 3, 16 to 30 and 36 | stated |
-| The eye check of the labels and the text-only check | review lines 51 to 78, with [the eye-check calls](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/label-check/eye-labels.csv) and [the word check](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/word-check/word-check.json) | stated |
+| The gaps against frozen CLIP and the late steps | the reading result file, keys `noisyclip_minus_frozen`, `latent_clip_minus_frozen` and `balanced_accuracy_reading_half`, opened 2026-11-24 | verified |
+| The verdicts, the step 20 and step 30 leads, the push-step average, the counting calls at step 49 | [the reading review](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/review.md), lines 3, 16 to 30 and 36 | stated |
+| The eye check of the labels and the text-only check | [the eye-check calls](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/label-check/eye-labels.csv), `label-check/eye-colours.csv` and [the word check](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/word-check/word-check.json), opened 2026-11-24, matching review lines 51 to 78 | verified |
 | The runs | review lines 40 to 49: Slurm jobs 93753 to 94105, full scoring by job 94105 at commit `385dae85` | stated |
 | The rule, the sentences and the pictures | [the reading design](../../../artifacts/notes/progress/noise-text-critic/02-can-it-read/design.md), lines 33 to 116 | stated |
 | What each picture shows | the two pictures above, opened at full size on 2026-11-24 and passed through `is_showable` in `scripts/shared/disallowed_subjects.py` with their labels | verified |

@@ -1,4 +1,4 @@
-# Is the sentence-score test fair, and can anything read the half-drawn picture at all?   ❓ inconclusive by the bars fixed beforehand, and no sentence score reads in any fair setting · read 2026-11-24
+# Is the sentence-score test fair, and can anything read the half-drawn picture at all?   ❓ inconclusive by the bars fixed beforehand, and no sentence score reads in any fair setting · verified 2026-11-24
 
 **The claim**
 
@@ -92,8 +92,8 @@ standard practice from outside this data, none tuned on it.
 There are 24 sentence rows: 6 readers (3 models, plain and averaged) on 3 tasks in group 2 and 1 task in group 3. The design
 expects standard errors of about 0.02 to 0.04 on each mean, so a pass by chance is unlikely, which it marks inferred (line 42).
 
-W&B run `etbecql0` `stated`
-([the fairness review](../../../artifacts/notes/progress/noise-text-critic/02c-fair-test/review.md), lines 3 to 5).
+W&B run `etbecql0` `verified`
+(key `wandb_run` in [the fairness result file](../../../artifacts/notes/progress/noise-text-critic/02c-fair-test/result.json), opened 2026-11-24).
 
 ## 1. On the sampler's real states, only SDXL's own features read early
 
@@ -114,8 +114,9 @@ near 0.87 from step 15 to 20; the three sentence lines never reach 0.64 `verifie
 picture was drawn from that file by `2-classifier-guidance/scripts/noise_text_critic/w5_who_reads_early.py` `verified` (the
 script read on 2026-11-24).
 
-**The number.** Group 3, the clean-pair task on 195 real runs (105 clean), balanced accuracy on the reading half `stated`
-([the fairness review](../../../artifacts/notes/progress/noise-text-critic/02c-fair-test/review.md), lines 32 to 41):
+**The number.** Group 3, the clean-pair task on 195 real runs (105 clean), balanced accuracy on the reading half `verified`
+(`group_b.clean_pair` in the fairness result file, keys `mean_steps_0_to_15` and `balanced_accuracy_reading_half`, opened
+2026-11-24):
 
 | Reader | Mean, steps 0 to 15 | Step 0 | Step 5 | Step 10 | Step 15 | Step 20 |
 |---|---|---|---|---|---|---|
@@ -146,8 +147,9 @@ the reading test inconclusive; it still beats frozen CLIP by 0.150.**
 > [the fairness result file](../../../artifacts/notes/progress/noise-text-critic/02c-fair-test/result.json). Render into
 > `2-classifier-guidance/artifacts/results/is-the-sentence-score-test-fair/`, write its card entry, then embed here.
 
-**The number.** Group 2, mean balanced accuracy on the reading half, with the cut-off chosen on the threshold half `stated`
-([the fairness review](../../../artifacts/notes/progress/noise-text-critic/02c-fair-test/review.md), lines 13 to 28). "Plain /
+**The number.** Group 2, mean balanced accuracy on the reading half, with the cut-off chosen on the threshold half `verified`
+(`group_a` in the fairness result file, keys `mean_steps_0_to_15`, `mean_steps_20_to_29` and
+`balanced_accuracy_reading_half`, opened 2026-11-24). "Plain /
 averaged" is one wording against five wordings averaged.
 
 | Task | Reader | Steps 0 to 15 | Steps 20 to 29 | Step 49 |
@@ -169,7 +171,8 @@ The steps 0 to 15 column was checked against `mean_steps_0_to_15` in the result 
 
 **Against frozen CLIP.** The readout checker beats frozen CLIP's plain score by more than 1.96 standard errors on every task:
 0.150 on the clean pair (standard error 0.035), 0.150 on counting and 0.114 on prompt match. These are mixed comparisons,
-because the reader and its input both change `stated` (review, lines 4 and 30). The result file also marks Latent CLIP above frozen
+because the reader and its input both change `verified` (`readout_minus_frozen` under `group_a` in the result file, opened
+2026-11-24). The result file also marks Latent CLIP above frozen
 CLIP on the clean pair: plain and averaged on these pictures (0.069 with standard error 0.027, and 0.047 with 0.023), and
 plain on the real states (0.094 with 0.038). These are mixed comparisons the review does not mention, and no bar uses them
 `verified` (read from `latent_clip_minus_frozen` and `latent_clip_ens_minus_frozen` under `group_a` and `group_b`).
@@ -199,7 +202,9 @@ Navigation: ⬅️ [Previous](#2-on-the-reading-tests-pictures-the-control-falls
 > `2-classifier-guidance/artifacts/results/is-the-sentence-score-test-fair/`, write its card entry, then embed here.
 
 **The number.** No sentence row's mean over steps 0 to 15 reaches 0.6 in any setting. The highest single step on the reading
-half is 0.67, Latent CLIP's counting score at step 10 on the reading test's pictures `stated` (review, line 59).
+half is 0.67, Latent CLIP's counting score at step 10 on the reading test's pictures `verified`
+(`balanced_accuracy_reading_half` under `group_a` and `group_b` in the result file, and under `counting` in
+`loop-9/w2c/species-free/result.json`, opened 2026-11-24).
 
 ## 4. Counting with sentences that name no species
 
@@ -215,8 +220,9 @@ line 46), shown on six pictures in
 Here the right sentence is "a photo of two animals", against "a photo of one animal" and "a photo of one animal with mixed
 features". It is scored on the reading test's saved image vectors, so only the text changes (review, line 49).
 
-**The number.** Mean balanced accuracy on the reading half for counting, Slurm job 94210 `stated` (review, lines 51 to 57;
-its numbers are in `loop-9/w2c/species-free/result.json` on the cluster's data disk, not in the notes folder):
+**The number.** Mean balanced accuracy on the reading half for counting, Slurm job 94210 `verified` (`counting` in
+`loop-9/w2c/species-free/result.json` under `/datasets/mmolefe/poe_repair_min/`, opened 2026-11-24; the last column from
+`group_a.counting` in the fairness result file):
 
 | Reader | Steps 0 to 15 | Step 49 | The reading test's sentences at step 49 |
 |---|---|---|---|
@@ -317,15 +323,17 @@ and input and differs only in the image side's weights, so that gap (0.019 on th
 
 Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
-**The verdict, the tables and the runs are copied from the review; picture counts, the steps 0 to 15 means and the gaps not
-in the review were read from the result file.**
+**The verdict, the tables, the gaps and the species-free rescore were read from the result files on 2026-11-24; the fair
+settings table, the runs and the design are copied from the review and the design.**
 
 | What | Source | Mark |
 |---|---|---|
-| The verdict, every table of means, the gaps against frozen CLIP, W&B `etbecql0` | [the fairness review](../../../artifacts/notes/progress/noise-text-critic/02c-fair-test/review.md), lines 3 to 59 | stated |
+| The group 2 and group 3 tables, the gaps against frozen CLIP, the highest single step, W&B `etbecql0` | the fairness result file, `group_a`, `group_b` and `wandb_run`, opened 2026-11-24, matching [the fairness review](../../../artifacts/notes/progress/noise-text-critic/02c-fair-test/review.md), lines 3 to 59 | verified |
+| The fair settings table in section 3 | [the fairness review](../../../artifacts/notes/progress/noise-text-critic/02c-fair-test/review.md), lines 43 to 47 | stated |
 | Pictures per half, the group 2 and group 3 means over steps 0 to 15, Latent CLIP's gaps, the step 8 and 9 tie, the verdict block `"state": "W2 is inconclusive"` | [the fairness result file](../../../artifacts/notes/progress/noise-text-critic/02c-fair-test/result.json), read 2026-11-24 | verified |
 | The bars, the groups, the wordings, the control's caveat | [the fairness design](../../../artifacts/notes/progress/noise-text-critic/02c-fair-test/design.md), lines 3 to 64, fixed before any score of this test | stated |
-| The species-free counting rescore | review lines 49 to 57, from `loop-9/w2c/species-free/result.json` on the cluster's data disk, not opened here | stated |
+| The species-free counting rescore | `loop-9/w2c/species-free/result.json` under `/datasets/mmolefe/poe_repair_min/`, key `counting`, opened 2026-11-24 | verified |
+| The bars in code | `2-classifier-guidance/scripts/noise_text_critic/w2c_fair.py`, lines 35 and 36, with `SE_MULTIPLE` from `w2_read.py`, line 35, read 2026-11-24 | verified |
 | The runs | review lines 63 to 67: smoke test job 94113 and full run job 94114 at commit `be6a9e0f`, the species-free rescore as job 94210 (line 49) | stated |
 | What the picture shows | `who-reads-early.png`, opened at full size on 2026-11-24, and its path and every label passed through `is_showable` in `scripts/shared/disallowed_subjects.py`; not on [the held pictures list](../../../artifacts/notes/progress/held-pictures.md) | verified |
 | The plan that owned the step | step W2c on [the progress board](../../../artifacts/notes/progress/board.json), under [the Session 9 brief](../../../artifacts/notes/progress/prompts/session-9-turn-abstract-concepts-into-scores.md), described in [the sentence score loop page](../../../artifacts/notes/progress/score-space/02-the-loops/loop-9-turn-concepts-into-scores.md) | |

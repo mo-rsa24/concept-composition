@@ -10,8 +10,9 @@ chance, 0.513 at best. W&B run
 numbers match [the score path result file](../../artifacts/notes/progress/score-space/05-signal/full.json)).
 
 **What else it shows.** At the noise levels that match SDXL's first 16 steps, those ten predictions say more about which
-digits are present than the canvas they were computed from: 0.700 against 0.593 at timestep 480, with the same reader `stated`
-(review, lines 35, 36 and 42). The pipeline works: the reader on [the noisy canvas](../artifacts/scenes/digit-map-checkers/rebuild-from-fundamentals.md#1-the-noisy-canvas) passed its positive control at full size.
+digits are present than the canvas they were computed from: 0.700 against 0.593 at timestep 480, with the same reader `verified`
+([the score path result file](../../artifacts/notes/progress/score-space/05-signal/full.json), key `sdxl`, rows `signature` and
+`canvas` at t 480, opened 2026-11-24). The pipeline works: the reader on [the noisy canvas](../artifacts/scenes/digit-map-checkers/rebuild-from-fundamentals.md#1-the-noisy-canvas) passed its positive control at full size.
 
 **Why it was asked.** The plan was to train an encoder that reads this path of predictions into the same space as a frozen
 text encoder, so a caption could name digits the model never drew together. That is worth building only if the path carries
@@ -113,7 +114,7 @@ review's, lines 22 to 25):
 | SDXL-matched, t 712 to 480 | 0.700 at t 480 | 0.499 | no | yes, by 0.20 | miss |
 
 Both windows miss and the control and the overfit test passed, so the design's table makes this null. The signature reads
-0.680 at t 495 and 0.700 at t 480 `stated` (review, line 27).
+0.680 at t 495 and 0.700 at t 480 `verified` (`full.json`, key `sdxl.signature`).
 
 ## 2. What the other inputs read
 
@@ -177,7 +178,9 @@ its 0.9 floor, so the pipeline can read digits when they are there to read.**
 > `2-classifier-guidance/artifacts/results/does-the-score-path-carry-which-digits-are-present/`, write its card entry, then
 > embed here.
 
-**The number.** The ladder before the full read `stated` (review, lines 54 to 62); the final control is `verified` against
+**The number.** The ladder before the full read `verified` (`control.json`, `overfit.json` and `smoke.json` under
+`/datasets/mmolefe/poe_repair_min/loop-10/x5/` for the linear reader, and the same three under `x5/conv/` for the
+convolutional one, opened 2026-11-24; the job numbers and durations are from the review, lines 54 to 62); the final control is `verified` against
 `control` in the result file (canvas 0.95015869, signature 0.90358622):
 
 | Job | Reader | Rung | Result | Bar |
@@ -276,13 +279,14 @@ the learning tree.
 
 Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
-**The verdict, the best values, the control and the stacked reads were checked against the result file; the rest is copied
-from the review.**
+**The verdict, the best values, the control, the stacked reads and the ladder were checked against the result files on
+2026-11-24; the per-step table, the reader changes and the cost are copied from the review.**
 
 | What | Source | Mark |
 |---|---|---|
 | Verdict `null`, best 0.700 at t 480 and 0.513 at t 754, control 0.950 and 0.904, stacked 0.607 and 0.674, reader `conv`, W&B `gq51nl74` | [the score path result file](../../artifacts/notes/progress/score-space/05-signal/full.json), read 2026-11-24, copied by the review from `/datasets/mmolefe/poe_repair_min/loop-10/x5/conv/full.json` (review, line 7) | verified |
-| The per-step table, `apart` against `wrong`, the ladder, the reader changes, the cost | [the score path review](../../artifacts/notes/progress/score-space/05-signal/review.md), lines 22 to 72 | stated |
+| The ladder's scores and the overfit counts | `control.json`, `overfit.json` and `smoke.json` in `/datasets/mmolefe/poe_repair_min/loop-10/x5/` and in its `conv/` folder, opened 2026-11-24 | verified |
+| The per-step table, `apart` against `wrong`, the ladder's jobs and durations, the reader changes, the cost | [the score path review](../../artifacts/notes/progress/score-space/05-signal/review.md), lines 22 to 72 | stated |
 | The rule, the inputs, the windows, the data and the model | [the score path design](../../artifacts/notes/progress/score-space/04-design.md), lines 21 to 101 | stated |
 | The owner skipping the encoder steps | [the loop verdict](../../artifacts/notes/progress/score-space/09-verdict.md), line 3, board question 76 | stated |
 | What each picture shows | the two pictures above, opened at full size on 2026-11-24 and passed through `is_showable` in `scripts/shared/disallowed_subjects.py` with their labels | verified |

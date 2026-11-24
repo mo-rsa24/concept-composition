@@ -1,4 +1,4 @@
-# Does a linear probe on frozen image vectors read unseen pairs?   ⚪ null for all three encoders · read 2026-11-24
+# Does a linear probe on frozen image vectors read unseen pairs?   ⚪ null for all three encoders · verified 2026-11-24
 
 **The claim**
 
@@ -6,8 +6,8 @@ At steps 0 to 15 of a 50-step SDXL run, a single trained layer on top of NoisyCL
 and prompt match only a little better than chance on pairs it trained on, and less well on the 7 pairs it never saw. The best
 is NoisyCLIP: 0.637 and 0.644 mean balanced accuracy on seen pairs, 0.560 and 0.586 on unseen pairs, against a bar of 0.75,
 where 0.5 is chance. A probe fitted on random numbers instead of pictures stays at 0.506 and 0.497, so the probe found real but
-weak information `stated` ([the linear probe review](../../../artifacts/notes/progress/noise-text-critic/02b-linear-probe/review.md),
-lines 3 and 17 to 22). No W&B run id is recorded for this step.
+weak information `verified` (`seen_mean` and `unseen_mean` in [the linear probe result file](../../../artifacts/notes/progress/noise-text-critic/02b-linear-probe/result.json),
+opened 2026-11-24). No W&B run id is recorded for this step.
 
 **Why it was asked.** The reading test scored a right sentence against a wrong one and trained nothing; it found no step from 0
 to 15 that reads any property ([the reading finding](can-a-sentence-score-read-the-five-properties.md)). On 2026-11-24 the owner
@@ -141,8 +141,8 @@ information is real but weak and does not carry well to new pairs.**
 
 **The number.** The random-number probe sits at 0.502 and 0.505 on seen pairs and 0.506 and 0.497 on unseen pairs, under its
 0.6 ceiling `verified` (`random_numbers` and `random_control_passes: true` in the result file). The three encoders' seen scores
-run from 0.575 to 0.644, and "all three fall by 0.05 to 0.08 from seen to unseen pairs, and none comes near the bar" `stated`
-(review, line 26).
+run from 0.575 to 0.644, and "all three fall by 0.05 to 0.08 from seen to unseen pairs, and none comes near the bar" `verified`
+(`seen_mean` and `unseen_mean` in the result file, falls of 0.048 to 0.077, opened 2026-11-24; the words are the review's, line 26).
 
 **The run.** 4,039 pictures: 3,268 to fit, 349 in the seen test and 422 from the 7 unseen pairs, each noised to steps 0 to 15
 with one shared noise draw, with 0 latents missing (review, line 11). The training pictures come from 119 pairs after the
@@ -230,12 +230,13 @@ prompt match for the unseen pairs, under the 0.6 ceiling, so the encoders' small
 
 Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
-**The means, counts and verdict fields were read from the result file; the rest is copied from the review and the design.**
+**The means, the seen-to-unseen fall, counts and verdict fields were read from the result file; the rest is copied from the review and the design.**
 
 | What | Source | Mark |
 |---|---|---|
 | Seen and unseen means, unseen counts, per-row verdicts, `random_control_passes`, 0 missing latents | [the linear probe result file](../../../artifacts/notes/progress/noise-text-critic/02b-linear-probe/result.json), read 2026-11-24, matching [the linear probe review](../../../artifacts/notes/progress/noise-text-critic/02b-linear-probe/review.md), lines 17 to 24 | verified |
-| The verdict, the seen-to-unseen fall, the reading against the readout checker | [the linear probe review](../../../artifacts/notes/progress/noise-text-critic/02b-linear-probe/review.md), lines 3 and 26 | stated |
+| The seen-to-unseen fall | the linear probe result file, `seen_mean` and `unseen_mean`, opened 2026-11-24 | verified |
+| The verdict wording, the reading against the readout checker | [the linear probe review](../../../artifacts/notes/progress/noise-text-critic/02b-linear-probe/review.md), lines 3 and 26 | stated |
 | The runs | review lines 7 to 11: smoke test job 94110 failed at the fit stage, smoke test job 94219 and full run job 94220 at commit `8cbdaf49`, 13 minutes | stated |
 | The rule, the pictures, the labels, the probe | [the linear probe design](../../../artifacts/notes/progress/noise-text-critic/02b-linear-probe/design.md), lines 17 to 75 | stated |
 | The bars in code | `2-classifier-guidance/scripts/noise_text_critic/w2b_probe.py`, lines 32 to 36, read 2026-11-24 | verified |

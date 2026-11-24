@@ -1,11 +1,11 @@
-# Does composing two digit models trained apart beat sampling each alone and pasting?   ⚪ null · read 2026-11-24
+# Does composing two digit models trained apart beat sampling each alone and pasting?   ⚪ null · verified 2026-11-24
 
 **The claim**
 
 Paper 1's method, with its checker push, draws 295 clean digit pairs of 320 canvases, and sampling each digit alone and pasting the
 two halves side by side draws 287. The lead of 8 is under the bar of 13.54, which is 1.96 times its standard error of 6.91, so the
-verdict is null `stated` ([the step's review](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/review.md), lines
-59 and 60). The push does real work inside the method: it lifts it by 36 pairs where a random push of the same size changes nothing,
+verdict is null `verified` (`/datasets/mmolefe/poe_repair_min/loop-6/m1/paper-1/full/rows/result.json`, keys `clean`,
+`lead_push_over_paste`, `se_push_minus_paste` and `verdict`, opened 2026-11-24). The push does real work inside the method: it lifts it by 36 pairs where a random push of the same size changes nothing,
 and that lift brings the method level with pasting.
 
 **What Paper 1 is.** Paper 1 asks whether two diffusion models trained on disjoint data, so that neither has seen both concepts in
@@ -74,7 +74,9 @@ because five pairs are too few to resample as units `stated` (design, lines 70 t
 |---|
 | <a href="../../../artifacts/notes/progress/method-search/01-beat-the-baseline/the-two-comparisons.png"><img src="../../../artifacts/notes/progress/method-search/01-beat-the-baseline/the-two-comparisons.png" width="200" alt="Two flow panels: the lower one shows two digit models trained apart feeding four rows into the digit judge, the upper one shows SDXL feeding three CO3 rows into a blind count"></a><br>The lower panel is this page: two digit models trained apart (0 to 4 and 5 to 9) feed four rows, 5 digit pairs by 64 seeds, so 320 canvases per row, into the digit judge, where a win is the push beating paste by over 1.96 standard errors. The paste box carries the design's expectation of about 285 `verified` (read on the picture; matches the design, line 80). The upper panel is Paper 2's comparison, which this page does not cover. |
 
-**The checks that had to pass first** `stated` (review, lines 27 to 35):
+**The checks that had to pass first** `verified` (under `/datasets/mmolefe/poe_repair_min/loop-6/`: `m1/paper-1/ladder/overfit.json`
+with the bar of 15 in `checker_overfit.py`; `logs/l6-m1-p1-93583.log`, lines 4, 5, 9 and 10; `logs/l6-m1-p1-93461.log`, lines
+1 to 11 and 22; `m1/paper-1/ladder/rows-smoke/result.json`; opened 2026-11-24):
 
 | Check | Result |
 |---|---|
@@ -94,8 +96,8 @@ second digits.**
 |---|
 | <a href="../../../artifacts/notes/progress/method-search/01-beat-the-baseline/paper-1-four-rows-first-two-seeds.png"><img src="../../../artifacts/notes/progress/method-search/01-beat-the-baseline/paper-1-four-rows-first-two-seeds.png" width="200" alt="Four rows of digit canvases for five digit pairs at seeds 0 and 1, paste, method with no push, method with the checker push and method with a random push, each canvas framed green when the judge calls it clean and red when it does not"></a><br>Rows top to bottom: paste, the method with no push, the method with the checker push, the method with a random push. Columns: digit pairs 1 and 9, 3 and 6, 4 and 7, 2 and 8, 0 and 5, two seeds each. A green frame is a canvas the judge calls clean, a red frame one it does not. On these 10 canvases per row, paste has 10 green, no push 8, checker push 9 and random push 8 `verified` (counted on the picture). The red no-push and random-push canvases hold a 4 beside a faint mark and an 8 beside a stray stroke; the red pushed canvas is a 0 and 5 whose 0 is malformed `verified` (seen at full size). The row labels read 287, 259, 295 and 258 of 320 clean, matching the review. |
 
-**The number.** Clean digit pairs of 320 canvases (5 pairs by seeds 0 to 63), Slurm job 93598, commit pair `7df3e0b1-f2bdb6d`, W&B
-run `vekm3sfh` `stated` (review, lines 15 and 64 to 69):
+**The number.** Clean digit pairs of 320 canvases (5 pairs by seeds 0 to 63), Slurm job 93598, commit pair `7df3e0b1-f2bdb6d`, W&B run `vekm3sfh` `verified` (`m1/paper-1/full/rows/result.json`, keys `seeds`, `canvases_per_row`, `clean`, `per_pair` and
+`wandb_run`; the job and commit pair in the first line of `loop-6/logs/l6-m1-p1-93598.log`; opened 2026-11-24):
 
 | Row | Clean digit pairs of 320 | 1 and 9 | 3 and 6 | 4 and 7 | 2 and 8 | 0 and 5 |
 |---|---:|---:|---:|---:|---:|---:|
@@ -105,7 +107,7 @@ run `vekm3sfh` `stated` (review, lines 15 and 64 to 69):
 | Method with a random push | 258 | 56 | 51 | 49 | 50 | 52 |
 
 The method with the push leads paste by 8, under the bar of 13.54 (1.96 times the standard error of 6.91), so the verdict is null by
-the written rule `stated` (review, lines 59 and 60).
+the written rule `verified` (`full/rows/result.json`, keys `lead_push_over_paste`, `se_push_minus_paste` and `verdict`).
 
 ## 2. The checker's direction is what lifts the method
 
@@ -118,7 +120,8 @@ Navigation: ⬅️ [Previous](#1-the-four-rows-on-the-same-seeds) | 📋 [TOC](#
 > error margin drawn as a band around zero, so the reader sees which bars clear their band. Data from the review's table at lines
 > 73 to 78. Render into `2-classifier-guidance/artifacts/results/the-method-search/`, write its card entry, then embed here.
 
-**The number.** Lead in clean digit pairs of 320, each margin 1.96 standard errors `stated` (review, lines 73 to 78):
+**The number.** Lead in clean digit pairs of 320, each margin 1.96 standard errors `verified` (recomputed on 2026-11-24 from the per-canvas
+calls in `m1/paper-1/full/rows/calls.json` with `se_within_groups` in `beat_baseline_bars.py`):
 
 | Comparison | Lead, of 320 | Margin |
 |---|---:|---:|
@@ -220,15 +223,17 @@ on top of two experts combined as a [product of experts](../../../../../Obsidian
 
 Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
-**Every number is copied from the review; the results files it summarises are on the cluster and were not opened.**
+**The counts, leads, margins, controls and run ids were read off the results files and job logs under
+`/datasets/mmolefe/poe_repair_min/loop-6/` on 2026-11-24. The eye check, the design's prediction and the CLEVR rule are copied
+from the review, the design and the scaling plan.**
 
 | What | Source | Mark |
 |---|---|---|
-| Clean pairs per row and per digit pair, the lead, the bar, the verdict | [the step's review](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/review.md), lines 59 to 69 | stated |
-| The matched leads and margins | review, lines 71 to 81 | stated |
+| Clean pairs per row and per digit pair, the lead, the bar, the verdict | `loop-6/m1/paper-1/full/rows/result.json` on the cluster, opened 2026-11-24; [the step's review](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/review.md), lines 59 to 69, copies it | verified |
+| The matched leads and margins | recomputed from `loop-6/m1/paper-1/full/rows/calls.json` with `se_within_groups`, 2026-11-24; review, lines 71 to 81 | verified |
 | The judge against the eye | review, lines 83 to 85 | stated |
-| The controls | review, lines 27 to 35 | stated |
-| The runs: Slurm jobs 93461, 93583, 93598, W&B `vekm3sfh`, outputs under `/datasets/mmolefe/poe_repair_min/loop-6/m1/paper-1/` | review, lines 8 to 15 | stated |
+| The controls | `loop-6/m1/paper-1/ladder/overfit.json`, `ladder/rows-smoke/result.json`, and the logs of jobs 93461 and 93583 under `loop-6/logs/`, opened 2026-11-24; review, lines 27 to 35 | verified |
+| The runs: Slurm jobs 93461, 93583, 93598, W&B `vekm3sfh`, outputs under `/datasets/mmolefe/poe_repair_min/loop-6/m1/paper-1/` | the first line of each job's log under `loop-6/logs/` and `wandb_run` in `full/rows/result.json`, opened 2026-11-24 | verified |
 | The rows, the checker's data, the bar, the prediction of about 285 | [the step's design](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/design.md), lines 38 to 81 | stated |
 | Bradley's rule and the 90.6% threshold | [the CLEVR scaling plan](../../../artifacts/notes/progress/targets/clevr-scaling-plan.md), lines 33 to 34 and 79 to 80 | stated |
 | What each picture shows | the three pictures above, opened at full size on 2026-11-24, frames counted on the four-row sheet, every label checked with `is_showable` and against the held-pictures list | verified |

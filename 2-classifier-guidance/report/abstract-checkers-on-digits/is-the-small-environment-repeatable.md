@@ -1,10 +1,11 @@
-# Is the small digit environment repeatable?   ✅ passed · read 2026-11-24
+# Is the small digit environment repeatable?   ✅ passed · verified 2026-11-24
 
 **The claim**
 
 The digit data that every later checker test trains and scores on rebuilds byte for byte: two builds give the same data hash on
 the laptop and on the cluster. Asking the sampler for a push of exactly zero changes no pixel, a largest difference of 0.0
-against a bar of under 1e-5, on all 20 digit pairs at 8 seeds. W&B run `xv6mbklb` `stated` ([the environment review](../../../artifacts/notes/progress/abstract-checkers/04-environment/review.md), line 3).
+against a bar of under 1e-5, on all 20 digit pairs at 8 seeds. W&B run `xv6mbklb` `verified` on the cluster's files (`v1/zero-push.json` and `v1/data/manifest.json` under
+`/datasets/mmolefe/poe_repair_min/loop-8/`, opened 2026-11-24); the laptop's two builds are `stated` ([the environment review](../../../artifacts/notes/progress/abstract-checkers/04-environment/review.md), line 3).
 A later pass or miss on this test bed is therefore about the checker under test, because the data and the sampler stay fixed.
 
 **What a canvas is.** Every test in this group works on a canvas: a small black picture 32 pixels tall and 64 wide, with room
@@ -50,7 +51,10 @@ byte anywhere changes it.
 |---|
 | <a href="../../../artifacts/notes/progress/abstract-checkers/04-environment/canvas-kinds.png"><img src="../../../artifacts/notes/progress/abstract-checkers/04-environment/canvas-kinds.png" width="200" alt="Five rows of pasted digit canvases, one row per kind, three training columns of digits 0 to 4 and three unseen columns of digits 5 to 9, each titled with its asked pair and label"></a><br>One row per kind of canvas, top to bottom: both asked digits apart, both on the same spot, both in one half, one digit only, and the two halves holding one asked digit and one wrong digit. The left three columns come from training (digits 0 to 4) and the right three from the unseen test split (digits 5 to 9). Only the top row is titled green, label 1; the other four rows are red, label 0 `verified` (read on the picture; matches the review). Notice the bottom row: it looks like the top row, and only the asked pair in its title makes it label 0. |
 
-**The number.** All three checks are copied from the review's results table `stated`.
+**The number.** The two cluster rows are `verified` (`v1/data/manifest.json` and `v1/ladder/data-1pct/manifest.json`, keys
+`data_hash` and `rebuild_hash`, opened 2026-11-24). The laptop's two rebuilds are `stated` from the review's results table: the
+laptop's copy of the manifest, `2-classifier-guidance/artifacts/scenes/digit-map-checkers/numbers/env/manifest.json`, holds the
+same hash and NumPy 2.5.5 with no rebuild hash.
 
 | Check | Bar | Result | Where it ran |
 |---|---|---|---|
@@ -58,7 +62,7 @@ byte anywhere changes it.
 | The same hash on the cluster, built twice | identical | identical, the same hash | job 93686, `mscluster79` |
 | The 1% build (160 training canvases, 80 per test split), two rebuilds | identical | identical, `9b70760ad5bed2f8d1b9a0dc6714bbf37f256a9d3486f498b4e4b601278b1b0b` | laptop, and job 93685 |
 
-The three splits hold these canvases `stated`. Each asked pair gets the same mix of kinds, so the asked pair alone says nothing
+The three splits hold these canvases `verified` (`v1/data/manifest.json`, key `counts`). Each asked pair gets the same mix of kinds, so the asked pair alone says nothing
 about the label.
 
 | Split | Canvases | Pairs | `apart` | `overlaid` | `same_half` | `single` | `wrong` |
@@ -82,8 +86,8 @@ model's two one-digit predictions (the plain product).
 > largest pixel difference printed under each column. The per-pair numbers are in `v1/zero-push.json` under
 > `/datasets/mmolefe/poe_repair_min/loop-8/`. The loop owns where it lands under `artifacts/notes/progress/abstract-checkers/04-environment/`.
 
-**The number.** Largest absolute pixel difference over all 20 pairs at 8 seeds, job 93686 on an RTX 3090 in float32, from the
-code snapshot of commit `6dc426a2` `stated`:
+**The number.** Largest absolute pixel difference over all 20 pairs at 8 seeds, job 93686 on an RTX 3090 in float32, from the code snapshot of commit `6dc426a2` `verified` (`v1/zero-push.json`, keys `largest_plain_vs_zero_push`,
+`largest_plain_vs_plain`, `bar`, `pairs`, `seeds`, `device` and `dtype`, opened 2026-11-24; the job and commit are from the review):
 
 | Comparison | Bar | Result |
 |---|---|---|
@@ -107,7 +111,8 @@ the later pass mark of 0.75, and gets every wrong-digit canvas wrong.** That is 
 **The number.** Balanced accuracy, the mean of the share of label-1 canvases and the share of label-0 canvases called correctly,
 on a 0 to 1 scale where 0.5 is chance: 0.873 on the 2,000 unseen canvases and 0.871 on the 2,000 seen ones, a gap of 0.002 `verified`
 (`digit-blind-reader.json`, keys `unseen_test.balanced_accuracy` and `seen_test.balanced_accuracy`). On `apart` against `wrong`
-the rule scores 0.5, because it labels both kinds 1 `stated` (review, line 51). The rule and the figure come from
+the rule scores 0.5, because it labels both kinds 1 `verified` (`digit-blind-reader.json`, key
+`unseen_test.correct_by_kind`: `apart` 1.0, `wrong` 0.0). The rule and the figure come from
 `2-classifier-guidance/scripts/abstract_checkers/blind_reader.py`.
 
 ## Where the sources disagree
@@ -160,11 +165,12 @@ byte changes the string, so two builds with one hash hold the same bytes.
 
 Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
-**The numbers are copied from the review, except the layout rule's, which were read from its local results file.**
+**The run numbers were read off the results files under `/datasets/mmolefe/poe_repair_min/loop-8/v1/` and the layout rule's local results file on 2026-11-24; only the laptop's two rebuilds are copied from the review.**
 
 | What | Source | Mark |
 |---|---|---|
-| Hashes, zero-push results, split counts, jobs, W&B `xv6mbklb` | [the environment review](../../../artifacts/notes/progress/abstract-checkers/04-environment/review.md), lines 3 to 30 and 56 to 66 | stated |
+| The cluster's hashes, zero-push results, split counts, W&B `xv6mbklb` | `v1/data/manifest.json`, `v1/ladder/data-1pct/manifest.json` and `v1/zero-push.json`, opened 2026-11-24 | verified |
+| The laptop's two rebuilds, the jobs and the commit | [the environment review](../../../artifacts/notes/progress/abstract-checkers/04-environment/review.md), lines 3 to 30 and 56 to 66 | stated |
 | The rule and the bars | [the environment design](../../../artifacts/notes/progress/abstract-checkers/04-environment/design.md), lines 65 to 71 | stated |
 | The layout rule's scores | `artifacts/notes/progress/abstract-checkers/04-environment/digit-blind-reader.json`, opened 2026-11-24 | verified |
 | What each picture shows | the two pictures above, opened at full size on 2026-11-24 | verified |

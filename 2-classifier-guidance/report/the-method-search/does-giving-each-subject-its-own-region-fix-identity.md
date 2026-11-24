@@ -1,4 +1,4 @@
-# Does giving each subject its own region fix which animal each body becomes?   rung 1 with bootstrapping: regions without names · rung 2: stopped at its mask check · read 2026-11-24
+# Does giving each subject its own region fix which animal each body becomes?   rung 1 with bootstrapping: regions without names · rung 2: stopped at its mask check · verified 2026-11-24
 
 **The claim**
 
@@ -73,11 +73,13 @@ Navigation: ⬅️ [Previous](#words-this-page-uses) | 📋 [TOC](#table-of-cont
 | Null | right boxes reach 0 or 1 | held until bootstrapping has run, because a null from this composer alone cannot separate "regions are not enough" from "the composer is wrong" |
 
 The same-prompt row asks for a cat in both regions, so its count in the bar is pictures with at least two separate, clear animals.
-Every other row counts clear pairs `stated` (design, lines 51 and 52).
+Every other row counts clear pairs `verified` (`counts_used_by_the_bar` in `rung-1-bootstrapped-result.json`, beside
+the review, opened 2026-11-24).
 
 **Rung 2's check on the masks, before any render.** Boxes are read at step 10 on the 12 tuning pairs at seeds 6001 and 6002, 24 reads.
 A read fails if either box covers at least 80% of the grid, or if the two boxes overlap with an intersection over union of at least 0.8.
-If more than 25% of reads fail, rung 2 stops and renders nothing `stated` (design, lines 87 to 90).
+If more than 25% of reads fail, rung 2 stops and renders nothing `verified` (`reads`, `max_box_share`, `max_read_iou` and
+`max_degenerate_share` in `rung-2-mask-reads.json`, and the same limits in `m9_rung2.py`, lines 35 to 38, opened 2026-11-24).
 
 > [!NOTE]
 > On the bootstrapped counts (right boxes 8, random boxes 4) the support row's two conditions also hold, and the bar table does not say
@@ -96,7 +98,10 @@ render that succeeded.**
 | <a href="../../../artifacts/notes/progress/method-search/04-bind-each-body/rung-1-six-rows-eight-seeds.png"><img src="../../../artifacts/notes/progress/method-search/04-bind-each-body/rung-1-six-rows-eight-seeds.png" width="200" alt="Eight seeds by six conditions: the joint prompt column draws a cat beside a dog, every other column draws one animal or one fused cat-dog per tile"></a><br>Columns: joint prompt, plain product, right boxes, random boxes, swapped prompts, same prompt twice. Rows: seeds 9, 12, 16, 19, 22, 25, 27 and 30. The joint prompt column shows a cat beside a dog in every row, and its seed 19 tile has a white animal with a cat's face beside the cat. Every tile in the other five columns holds one animal or one fused cat-dog `verified` (seen at full size). The column headers read 7 of 8, then 0 of 8 for each region row, matching `rung-1-result.json`, which lists seed 19 as the joint prompt's one miss `verified` (read on the picture and in the file). |
 
 **The number.** Of 8 seeds, all 48 pictures called blind at full size by two reviewers, who agreed on 47; a third blind call settled the
-other, the joint render on seed 19, as two bodies with borrowed parts. Slurm job 93794 `stated` (review, lines 28 to 41):
+other, the joint render on seed 19, as two bodies with borrowed parts. Slurm job 93794 `verified` (`rows`,
+`reviewers_agree_on_two_clear` and `pictures_the_reviewers_differed_on` in `rung-1-result.json`, the seed-19 call in
+`rung-1-calls-third.csv` matched through `rung-1-key.json`, and the job in the first line of
+`/datasets/mmolefe/poe_repair_min/loop-6/logs/l6-m9-r1-93794.log`, opened 2026-11-24):
 
 | Row | Clear pairs of 8 | Pictures with two separate animals, of 8 |
 |---|---|---|
@@ -110,7 +115,8 @@ other, the joint render on seed 19, as two bodies with borrowed parts. Slurm job
 Right boxes drew 6 fused cat-dogs and 2 single animals. The bar calls 0 of 8 a null, and the oracle-layout plan holds a null until
 bootstrapping has run on the same layouts `stated` (review, lines 43 to 45). The two controls on seed 9 passed: the joint render matches
 the picture its boxes came from with a mean absolute difference of 0.0 of 255, and masks of 0.5 at guidance 7.5 differ from the plain
-product at guidance 3.75 by 1.53 of 255, both against a limit of 3 `stated` (review, lines 21 to 24).
+product at guidance 3.75 by 1.53 of 255, both against a limit of 3 `verified` (`loop-6/m9/full/refs_check.json` and
+`loop-6/m9/full/composer_check.json` on the cluster, opened 2026-11-24).
 
 ## 2. With bootstrapping, two regions make two animals whatever prompt they carry
 
@@ -125,7 +131,10 @@ with swapped prompts and with the same prompt twice, and 4 of 8 with random boxe
 
 **The number.** Of 8 seeds, the 32 region pictures shuffled with the 8 joint renders and called blind at full size. The two reviewers
 agreed on `two_clear` for 38 of 40, and a third blind call settled the 3 pictures they split on for `two_clear` or for the count of
-animals. Slurm job 93906, commit pair `100772b7-15d8bdd` `stated` (review, lines 15 and 47 to 62):
+animals. Slurm job 93906, commit pair `100772b7-15d8bdd` `verified` (`rows` and the agreement keys in
+`rung-1-bootstrapped-result.json`; the undamaged column from the two reviewers' `damaged` calls in
+`rung-1-bootstrapped-calls-first.csv` and `-second.csv`, matched through `rung-1-bootstrapped-key.json`; the job and commit pair in
+the first line of `loop-6/logs/l6-m9-r1-93906.log`; opened 2026-11-24):
 
 | Row | Clear pairs of 8 | Two separate animals, of 8 | Marked undamaged by both reviewers, of 8 |
 |---|---|---|---|
@@ -136,8 +145,8 @@ animals. Slurm job 93906, commit pair `100772b7-15d8bdd` `stated` (review, lines
 | Same prompt twice | 0 | 8 | 1 |
 
 Right boxes reach 8, which clears the bar of 4, and random boxes reach 4, which is more than 1 below. Swapped prompts reach 7 and the
-same prompt reaches 8 pictures with two animals, so both are within 1 of right boxes, and the written verdict is "regions without
-names" `stated` (review, lines 64 to 66).
+same prompt reaches 8 pictures with two animals, so both are within 1 of right boxes, and the written verdict is "regions without names" `verified` (`counts_used_by_the_bar`, `bar_on_right_boxes` and `verdict` in
+`rung-1-bootstrapped-result.json`, with the rule in `m9_count.py`, lines 99 and 101, opened 2026-11-24).
 
 **What the pictures add to that label.** The same-prompt row drew two cats on all 8 seeds and the swapped row drew a cat and a dog, so
 the prompt a region carries does decide its species. Any two bootstrapped regions make two objects, wherever the boxes sit relative to
@@ -162,13 +171,14 @@ body or spreads over the frame on 11 of 24 reads, past the limit of 6, so rung 2
 
 **The number.** 11 of 24 reads fail, against a limit of 6 (25% of 24): 7 on overlap and 4 on box size, with a median overlap of 0.53.
 The written rule stops rung 2 here, so the comparison with CO3 alone on faithful pairs of 96 has not been made. Slurm job 93936, commit
-pair `d5aeb4b6-15d8bdd` `stated` (review, lines 17 and 82 to 85); the 11 fails, the 7 and 4 split and a median overlap of 0.527 match
+pair `d5aeb4b6-15d8bdd` `verified` (the first line of `loop-6/logs/l6-m9-r2-93936.log`, and `max_degenerate_share` in
+`rung-2-mask-reads.json`, opened 2026-11-24); the 11 fails, the 7 and 4 split and a median overlap of 0.527 match
 `rung-2-mask-reads.json` `verified` (read in the file).
 
 **The zero-binding control passes.** With the regions computed and discarded, the final latent matches plain CO3 with a largest
 absolute difference of 0.0, against a limit of 1e-5, on an RTX 3090 at fp16. That process's plain CO3 picture differs from the one in
-[the baseline comparison](does-composing-two-digit-models-beat-sampling-and-pasting.md) by 2.38 of 255 in mean absolute pixel value, inside the
-project's limit of 3 `stated` (review, lines 78 to 80); `rung-2-zero-binding-check.json` holds 0.0 and 2.3833 `verified` (read in the
+[the baseline comparison](does-composing-two-digit-models-beat-sampling-and-pasting.md) by 2.38 of 255 in mean absolute pixel value, inside the project's limit of 3 `verified` (`device`, `dtype`, `zero_binding_max_abs` and `zero_bar` in
+`rung-2-zero-binding-check.json`, and `MAX_PIXEL_DIFF` in `m9_rung1.py`, opened 2026-11-24); `rung-2-zero-binding-check.json` holds 0.0 and 2.3833 `verified` (read in the
 file). The same run showed the first box reader returning the whole grid for both subjects (review, line 16).
 
 **What the attention maps show.** The reader fails for two visible reasons. In reads such as bobcat and quail at seed 6001, the second
@@ -250,15 +260,16 @@ lines 127 to 143).
 
 Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
-**Every number is copied from the review; the rung 1 counts and the rung 2 mask reads were also checked against the result files beside
-it.**
+**The counts, verdicts, controls and run ids were read off the result and call files beside the review, the check files under
+`/datasets/mmolefe/poe_repair_min/loop-6/m9/` and the job logs under `loop-6/logs/` on 2026-11-24. The GPU time, the design's
+rules and the reviewers' readings of the pictures are copied from the review and the design.**
 
 | What | Source | Mark |
 |---|---|---|
-| Rung 1 counts without bootstrapping | [the step's review](../../../artifacts/notes/progress/method-search/04-bind-each-body/review.md), lines 28 to 45; `rung-1-result.json` beside it | stated, and verified against the file |
-| Rung 1 counts with bootstrapping and the verdict | review, lines 47 to 74; `rung-1-bootstrapped-result.json`, whose `verdict` reads "regions without names" | stated, and verified against the file |
-| Rung 2 mask reads and the zero-binding check | review, lines 76 to 95; `rung-2-mask-reads.json` and `rung-2-zero-binding-check.json` | stated, and verified against the files |
-| The runs: Slurm jobs 93724, 93794, 93852, 93906, 93935 and 93936, outputs under `/datasets/mmolefe/poe_repair_min/loop-6/m9/` | review, lines 7 to 17 | stated |
+| Rung 1 counts without bootstrapping | [the step's review](../../../artifacts/notes/progress/method-search/04-bind-each-body/review.md), lines 28 to 45; `rung-1-result.json`, `rung-1-calls-first.csv`, `-second.csv` and `-third.csv` beside it, and `loop-6/m9/full/refs_check.json` and `composer_check.json` on the cluster, opened 2026-11-24 | verified |
+| Rung 1 counts with bootstrapping and the verdict | review, lines 47 to 74; `rung-1-bootstrapped-result.json`, whose `verdict` reads "regions without names", and the three `rung-1-bootstrapped-calls` files, opened 2026-11-24 | verified |
+| Rung 2 mask reads and the zero-binding check | review, lines 76 to 95; `rung-2-mask-reads.json` and `rung-2-zero-binding-check.json`, byte-identical to `loop-6/m9/rung2/mask-read/reads.json` and `loop-6/m9/rung2/controls/check.json` on the cluster, opened 2026-11-24 | verified |
+| The runs: Slurm jobs 93724, 93794, 93852, 93906, 93935 and 93936, outputs under `/datasets/mmolefe/poe_repair_min/loop-6/m9/` | the first and last line of each job's log, `l6-m9-r1-*.log` and `l6-m9-r2-*.log` under `loop-6/logs/`, opened 2026-11-24; review, lines 7 to 17 | verified |
 | GPU time | review, lines 99 to 101 | stated |
 | The rows, the bars and the mask rule | [the step's design](../../../artifacts/notes/progress/method-search/04-bind-each-body/design.md), lines 21 to 116 | stated |
 | The three-rung ladder | [the binding design](../../../artifacts/notes/progress/targets/binding-each-body-design.md) | stated |

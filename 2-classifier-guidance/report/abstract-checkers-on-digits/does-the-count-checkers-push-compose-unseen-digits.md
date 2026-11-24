@@ -1,11 +1,11 @@
-# Does the count checker's push compose unseen digits?   ✅ support · read 2026-11-24
+# Does the count checker's push compose unseen digits?   ✅ support · verified 2026-11-24
 
 **The claim**
 
 On the 10 pairs among digits 5 to 9, which the count checker never trained on, adding its push while sampling turns the plain
 product's 0 clean pairs of 320 into 43. The lead of 43 is 5.7 times its standard error of 7.58, a random push of the same length
-gives 1, and picking the best of 4 plain samples by the checker's own score gives 0. W&B run `qhusod91` `stated`
-([the push review](../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/review.md), lines 3 and 14 to 20).
+gives 1, and picking the best of 4 plain samples by the checker's own score gives 0. W&B run `qhusod91` `verified`
+(`v3/test-1/final.json`, keys `clean`, `lead_push_over_plain`, `se_push_over_plain` and `wandb_run`, opened 2026-11-24).
 The push mostly fixes layout: 161 of the 320 pushed canvases hold two separate digits, and 43 of those are both asked digits drawn
 clearly.
 
@@ -71,7 +71,8 @@ Navigation: ⬅️ [Previous](#what-would-have-counted) | 📋 [TOC](#table-of-c
 | <a href="../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/unseen-plain.png"><img src="../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/unseen-plain.png" width="200" alt="Ten rows of eight digit canvases, one row per unseen pair from 5 and 6 to 8 and 9, every canvas one fused shape framed red"></a><br>One row per unseen pair, the first 8 of its 32 seeds. Every canvas holds one fused shape and every frame is red; each row reads 0/32, and the title reads 0 clean pairs of 320 `verified` (read on the picture). | <a href="../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/unseen-push.png"><img src="../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/unseen-push.png" width="200" alt="The same pairs and seeds with the push, many canvases now two separate digits, 12 of the 80 shown framed green"></a><br>Same pairs, same seed in the same place. Many canvases now hold two separate digits; 12 of the 80 shown are framed green as clean. The row labels read 9, 2, 5, 2, 1, 7, 6, 4, 3 and 4 of 32, and the title 43 clean pairs of 320 `verified` (counted on the picture; matches the review's per-pair counts). |
 
 **The number.** Clean pairs of 320 canvases, 10 unseen pairs at seeds 1000 to 1031, job 94134 on `mscluster79`, commit
-`ae80cee6`, from `/datasets/mmolefe/poe_repair_min/loop-8/v3/test-1/final.json` as the review copies it `stated`:
+`ae80cee6`, from `/datasets/mmolefe/poe_repair_min/loop-8/v3/test-1/final.json` `verified` (keys `clean`, `separate`, `lead_*`, `se_*`
+and `zero_push_max_abs`, opened 2026-11-24; the job, node and commit are from the review, lines 14 to 22):
 
 | Row | Clean pairs | Two separate digits, any identity | Lead over plain | Standard error | Clears 1.96 standard errors |
 |---|---|---|---|---|---|
@@ -81,8 +82,8 @@ Navigation: ⬅️ [Previous](#what-would-have-counted) | 📋 [TOC](#table-of-c
 | Best of 4 starting seeds, picked by the checker | 0 | 2 | | | |
 | Zero push against plain, largest pixel difference | 0.0, bar under 1e-5 | | | | |
 
-The verdict is support by the written rule. Every unseen pair gains, and the gain is uneven: 9 clean pairs for 5 and 6, 1 for 6
-and 7 `stated`.
+The verdict is support by the written rule. Every unseen pair gains, and the gain is uneven: 9 clean pairs for 5 and 6, 1 for 6 and 7 `verified` (`v3/test-1/final.json`, key
+`per_pair.push`).
 
 ## 2. A random push and picking the best seed do nothing
 
@@ -96,7 +97,7 @@ samples by the checker's score.** The gain therefore comes from the checker's di
 | <a href="../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/unseen-random.png"><img src="../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/unseen-random.png" width="200" alt="Ten rows of eight canvases with a random push, nearly all one fused shape, one canvas framed green in the 5 and 6 row"></a><br>Same layout as section 1. Nearly every canvas holds one fused shape, much like the plain sheet; one canvas, in the 5 and 6 row, is framed green. Title: 1 clean pairs of 320 `verified` (read on the picture). | <a href="../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/unseen-best4.png"><img src="../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/unseen-best4.png" width="200" alt="Ten rows of eight canvases picked as the best of four plain seeds, every canvas one shape framed red"></a><br>Each canvas is the one of four plain samples the checker scored highest. Every frame is red and every row reads 0/32. Title: 0 clean pairs of 320 `verified` (read on the picture). |
 
 **The number.** Random push 1 clean pair of 320, lead 1, standard error 0.96, under 1.96 standard errors. Best of 4 seeds 0 of
-320 `stated` (review, lines 18 and 19). The best-of-4 row spends four plain samples per canvas.
+320 `verified` (`v3/test-1/final.json`, keys `clean`, `lead_random_over_plain` and `se_random_over_plain`). The best-of-4 row spends four plain samples per canvas.
 
 ## 3. What the push does to each canvas
 
@@ -110,7 +111,8 @@ the checker reads: where two digits sit, and not which digits they are `stated` 
 |---|---|
 | <a href="../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/smoke-plain.png"><img src="../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/smoke-plain.png" width="200" alt="Four canvases asked for 0 and 1 with no push, each one faint or fused mark, framed red"></a><br>Four canvases asked for 0 and 1, a seen pair, with no push. Each holds one mark, framed red; title 0 clean pairs of 4 `verified` (read on the picture). | <a href="../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/smoke-push.png"><img src="../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/smoke-push.png" width="200" alt="The same four canvases with the push, each now two separate marks, one per half, framed red"></a><br>The same seeds with the push. Each canvas now holds two separate marks, one per half, and none is framed green; title 0 clean pairs of 4. The review records two separate digits on 4 of 4 and no clean pair `verified` (read on the picture; matches the review, line 66). |
 
-**The number.** The judge's call on each of the 320 unseen canvases `stated` (review, lines 26 to 32):
+**The number.** The judge's call on each of the 320 unseen canvases `verified` (`v3/test-1/final.json`, key `per_pair`, the
+`calls` summed over the 10 pairs, opened 2026-11-24):
 
 | Judge's call, 320 canvases | Plain | Push |
 |---|---|---|
@@ -121,7 +123,8 @@ the checker reads: where two digits sit, and not which digits they are `stated` 
 | Damaged | 0 | 12 |
 
 The push raises damaged canvases from 0 to 12. The plain product's two digit labels decide which digits appear, and on these
-pairs they supply both right digits about one time in four `stated`.
+pairs they supply both right digits about one time in four `verified` (43 of 161 separate-digit canvases,
+`v3/test-1/final.json`, keys `clean` and `separate`).
 
 ## 4. What the two maps do while the push acts
 
@@ -134,7 +137,9 @@ together.**
 > and one for the push, with the push window (steps 15 to 25) shaded, and the checker's mean logit on a second panel. The data is
 > `v3/trace/trace.json` under `/datasets/mmolefe/poe_repair_min/loop-8/`, from job 94161.
 
-**The number.** Means over all 320 canvases of the rerun (job 94161), at selected sampler steps `stated` (review, lines 46 to 53).
+**The number.** Means over all 320 canvases of the rerun (job 94161), at selected sampler steps `verified`
+(`v3/trace/trace-stats.npz`, arrays `com_a`, `com_b`, `overlap` and `logit` per pair and row, averaged over the 320 canvases on
+the cluster, opened 2026-11-24).
 Centre separation is how far apart the two maps' centres of mass sit across the canvas width; overlap is the shared share of
 their mass, from 0 to 1; the logit is the checker's raw score, above 0 meaning yes.
 
@@ -168,11 +173,12 @@ Navigation: ⬅️ [Previous](#4-what-the-two-maps-do-while-the-push-acts) | �
 
 On the 10 seen pairs among digits 0 to 4 at seeds 0 to 31 (job 94133), clean pairs of 320 rose with the length: 0 with no push, 8
 at b = 0.1, 20 at b = 0.2 and 40 at b = 0.4. The rule froze b = 0.4, the largest of the three choices, so a longer push was not
-tried `stated` (review, line 59).
+tried `verified` (`v3/test-1/tune.json`, keys `rows` and `chosen_b`).
 
 Job 94161 reran the plain and pushed rows on the same pairs and seeds on `mscluster81` in place of `mscluster79`. The plain row
 matched exactly, 0 clean pairs on every pair. The pushed row gave 41 of 320, and per pair it moved by up to 4 (5 and 6: 5 against
-9). The rerun's lead of 41 is also more than 1.96 times the standard error of 7.58 `stated` (review, line 40). A pushed digit
+9). The rerun's lead of 41 is also more than 1.96 times the standard error of 7.58 `verified` (`v3/trace/trace.json`, key `pairs`,
+against `se_push_over_plain` in `v3/test-1/final.json`). A pushed digit
 render is therefore not bit-reproducible across nodes, so per-pair counts carry this much noise beyond the bootstrap error. The
 verdict stays as recorded from job 94134.
 
@@ -222,7 +228,8 @@ design's letters, ε̂ = ε_product − ‖ε_product‖ b g / ‖g‖. The push
 pairs with replacement many times, say (4, 4, 1) with mean 3 and (1, 1, 1) with mean 1, and the spread of those means is the
 standard error. "Bootstrap" because the data resamples itself; "standard error" because it is the typical wander of the mean.
 Here the 10 unseen pairs' gains run from 1 to 9 clean pairs, and the review records a standard error of 7.58 clean pairs from
-10,000 resamples of the 10 pairs, so a lead of 43 is 5.7 standard errors `stated`. The [bootstrap card](../../../../../Obsidian/Mathematics/Statistics/Bootstrap.md#where-to-learn-this)
+10,000 resamples of the 10 pairs, so a lead of 43 is 5.7 standard errors `verified` (`v3/test-1/final.json`, keys
+`per_pair`, `lead_push_over_plain` and `se_push_over_plain`). The [bootstrap card](../../../../../Obsidian/Mathematics/Statistics/Bootstrap.md#where-to-learn-this)
 and [the chapter on the bootstrap standard error](../../../../../goal-setting/learning/mathematics/statistics/sampling/textbook/08-the-percentile-bootstrap.md#84-why-with-replacement-and-the-bootstrap-standard-error)
 teach it.
 
@@ -230,15 +237,15 @@ teach it.
 
 Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
-**Every number is copied from the review; the results files it quotes are on the cluster and were not opened.**
+**The run numbers were read off the results files under `/datasets/mmolefe/poe_repair_min/loop-8/v3/` on 2026-11-24, and the bars off the shared bars script.**
 
 | What | Source | Mark |
 |---|---|---|
-| Clean pairs, separate-digit counts, standard errors, zero push, W&B `qhusod91` | [the push review](../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/review.md), lines 3 and 14 to 22, from `v3/test-1/final.json` | stated |
-| The judge's calls and per-pair counts | review lines 26 to 36 | stated |
-| The rerun and the map trace | review lines 40 to 55, from `v3/trace/trace.json` | stated |
-| The push length and the ladder | review lines 59 to 68 | stated |
-| The rule, the rows, the window and the score | [the push design](../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/design.md), lines 19 to 52 | stated |
+| Clean pairs, separate-digit counts, standard errors, zero push, W&B `qhusod91` | [the push review](../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/review.md), lines 3 and 14 to 22, copies `v3/test-1/final.json`; keys `clean`, `separate`, `lead_*`, `se_*`, `zero_push_max_abs` and `wandb_run` opened 2026-11-24 | verified |
+| The judge's calls and per-pair counts | `v3/test-1/final.json`, key `per_pair`, opened 2026-11-24 | verified |
+| The rerun and the map trace | `v3/trace/trace.json`, key `pairs`, and `v3/trace/trace-stats.npz`, opened 2026-11-24 | verified |
+| The push length and the ladder | `v3/test-1/tune.json`, keys `rows` and `chosen_b`, and the smoke test in `v3/test-1/smoke.json`, opened 2026-11-24 | verified |
+| The rule, the rows, the window and the score | [the push design](../../../artifacts/notes/progress/abstract-checkers/06-does-it-compose/design.md), lines 19 to 52; the bars `Z`, `ZERO_PUSH_MAX_ABS` and `BOOTSTRAP_DRAWS` in `2-classifier-guidance/scripts/method_search/beat_baseline_bars.py`, opened 2026-11-24 | stated |
 | What each picture shows | the six pictures above, opened at full size on 2026-11-24, green frames counted on the pushed sheet | verified |
 | The plan that owned the step | step V3 on [the progress board](../../../artifacts/notes/progress/board.json), run under [the Session 8 brief](../../../artifacts/notes/progress/prompts/session-8-test-abstract-checkers.md), from [the abstract-checker design](../../../artifacts/notes/progress/abstract-checkers/03-design.md#step-v3-does-its-gradient-compose-unseen-digits) | |
 | Regenerate with | the step's scripts under `2-classifier-guidance/scripts/abstract_checkers/`, launched as in [launching and harvesting a run](../../../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md) | |

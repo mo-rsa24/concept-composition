@@ -1,9 +1,9 @@
-# Does adding the kept push to CO3 beat CO3 alone?   ⚪ null · read 2026-11-24
+# Does adding the kept push to CO3 beat CO3 alone?   ⚪ null · verified 2026-11-24
 
 **The claim**
 
 On 12 subject pairs at 8 seeds each, CO3 with the kept push makes 7 faithful pairs of 96 pictures and CO3 alone makes 11.
-The lead is -4, so the verdict is null `stated` ([the step's review](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/review.md), lines 87 to 89).
+The lead is -4, so the verdict is null `verified` ([the scored result](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/paper-2-blind-result.json), keys `faithful`, `lead_push_over_co3` and `verdict`, opened 2026-11-24).
 A random push of the same size makes 12, one more than CO3 alone, so the rule that would make the run inconclusive does not fire.
 W&B run `s7o6404z`.
 
@@ -82,7 +82,8 @@ error of 5.14.
 |---|
 | <a href="../../../artifacts/notes/progress/method-search/01-beat-the-baseline/the-two-comparisons.png"><img src="../../../artifacts/notes/progress/method-search/01-beat-the-baseline/the-two-comparisons.png" width="200" alt="Two flow panels: the upper one shows SDXL with a joint prompt feeding three CO3 rows into a blind count by eye, the lower one shows two digit models feeding four rows into the digit judge"></a><br>The upper panel is this page: SDXL with the joint prompt (the example is a puma and a condor) feeds three rows, 12 subject pairs by 8 seeds, so 96 pictures per row, into a blind count by eye, where a win is a lead of at least 5 and over 1.96 standard errors. The pushed row's box reads steps 0 to 15, strength 30, cap 0.4 `verified` (read on the picture; matches the design, lines 87, 97 and 136). The lower panel is Paper 1's comparison, which [the digit-half finding](does-composing-two-digit-models-beat-sampling-and-pasting.md) covers. |
 
-**The checks that had to pass first** `stated` (review, lines 39 to 49):
+**The checks that had to pass first** `verified` (`/datasets/mmolefe/poe_repair_min/loop-6/m1/paper-2/controls/check.json`, and the
+timings from `/datasets/mmolefe/poe_repair_min/loop-6/logs/l6-m1-p2-93481.log`, lines 35, 43 and 51, opened 2026-11-24):
 
 | Check | Result |
 |---|---|
@@ -107,7 +108,9 @@ CO3 alone and 12 for the random push.**
 | <a href="../../../artifacts/notes/progress/method-search/01-beat-the-baseline/paper-2-three-rows-seed-6002.png"><img src="../../../artifacts/notes/progress/method-search/01-beat-the-baseline/paper-2-three-rows-seed-6002.png" width="200" alt="Three rows of renders at seed 6002 for a puma and a condor, a zebra and a flamingo, and a seal and a gull: CO3 alone, CO3 with the checker push and CO3 with a random push, each tile holding two separate animals"></a><br>Rows top to bottom: CO3 alone, CO3 with the checker push, CO3 with a random push. Columns: a puma and a condor, a zebra and a flamingo, a seal and a gull, all at seed 6002, the first three tuning pairs. Every tile shows two separate animals, and the zebra and flamingo column is drawn as flat graphic art in all three rows `verified` (seen at full size). The CO3-alone and random-push rows look nearly the same at this seed `verified` (seen). The row labels read 11, 7 and 12 of 96 faithful and 32, 30 and 35 of 96 two clear with style ignored, matching the review. None of these nine pictures is faithful in the blind count: eight are called two bodies, for borrowed parts such as a puma with a feathered chest or a seal with a beak-like snout, and the pushed zebra and flamingo is called two clear but damaged as a drawing `verified` ([the blind calls](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/paper-2-blind-calls.csv), lines 9, 82, 87, 142, 156, 182, 199, 241 and 253, matched to the sheet through [the method key](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/paper-2-blind-key.json)). |
 
 **The number.** Pictures of 96 per row (12 tuning pairs by seeds 6001 to 6008), Slurm jobs 93523 and 93524, commit pair
-`99ac88a8-f2bdb6d`, W&B run `s7o6404z` `stated` (review, lines 18, 19, 89 and 97 to 101):
+`99ac88a8-f2bdb6d`, W&B run `s7o6404z` `verified` (`pictures_per_row`, `faithful`, `rungs` and `damaged` in the scored result; the seeds
+in [the method key](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/paper-2-blind-key.json); the jobs and commit pair in the first line of each job's log under
+`/datasets/mmolefe/poe_repair_min/loop-6/logs/`; the W&B run's folder under `loop-6/m1/paper-2/blind/wandb/`, opened 2026-11-24):
 
 | Row, of 96 pictures | Faithful pair | Two clear subjects, style ignored | Two bodies, not both clear | One subject or a fused hybrid | Not an intact photograph |
 |---|---:|---:|---:|---:|---:|
@@ -116,8 +119,8 @@ CO3 alone and 12 for the random push.**
 | CO3 with a random push | 12 | 35 | 61 | 0 | 72 |
 
 CO3 with the push trails CO3 alone by 4 faithful pairs. A win needed a lead of at least 5 and more than 10.08 (1.96 times the
-standard error of 5.14), and the loss rule needs CO3 alone ahead by at least 5, so the verdict is null by the written rule `stated`
-(review, lines 87 to 89). The counts were read from [the scored result](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/paper-2-blind-result.json),
+standard error of 5.14), and the loss rule needs CO3 alone ahead by at least 5, so the verdict is null by the written rule `verified`
+(the scored result, keys `lead_push_over_co3`, `se_push_minus_co3`, `min_lead`, `z` and `verdict`). The counts were read from [the scored result](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/paper-2-blind-result.json),
 whose `faithful`, `lead_push_over_co3`, `se_push_minus_co3` and `verdict` fields agree with the review `verified` (opened 2026-11-24).
 
 ## 2. What the push follows
@@ -168,6 +171,9 @@ style.** These readings came after the run and carry no bar of their own `stated
 | Reviewers differ in strictness | The six reviewers passed 7, 0, 6, 4, 4 and 9 of their 48 pictures. Each batch mixes all three rows, so this adds noise to the comparison and does not favour a row |
 
 The per-pair counts in the fourth row agree with `faithful_per_pair` in the scored result `verified` (opened 2026-11-24).
+The style-ignored lead of 2 and its margin of 11.25, the empty one-or-hybrid rung, and the six reviewers' passes per 48 agree
+with the calls matched through the key, the margin recomputed with `se_over_groups` in `beat_baseline_bars.py` `verified`
+(opened 2026-11-24). The drawn-style counts depend on which note words count as a style and were not recomputed.
 
 ## Where the sources disagree
 
@@ -260,15 +266,15 @@ no concept card or textbook page teaches this ladder.
 
 Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
-**Every verdict, count, bar and run id is copied from the review; the scored result, the calls and the key were opened to check
-them, and the 288 full-size renders are on the cluster and were not opened.**
+**The counts, the lead, the bar and the verdict were read off the scored result, the calls and the key, and the checks and run
+ids off the cluster's control file and job logs, on 2026-11-24. The 288 full-size renders were counted there and not opened.**
 
 | What | Source | Mark |
 |---|---|---|
-| Faithful pairs and rungs per row, the lead, the bar, the verdict, W&B `s7o6404z` | [the step's review](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/review.md), lines 87 to 101 | stated |
+| Faithful pairs and rungs per row, the lead, the bar, the verdict, W&B `s7o6404z` | [the scored result](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/paper-2-blind-result.json) and the W&B run's folder under `loop-6/m1/paper-2/blind/wandb/`, opened 2026-11-24; [the step's review](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/review.md), lines 87 to 101, copies them | verified |
 | The readings after the run | review, lines 103 to 115 | stated |
-| The controls and the smoke picture | review, lines 37 to 55 | stated |
-| The runs: Slurm jobs 93468, 93481, 93523, 93524, commit pair `99ac88a8-f2bdb6d`, outputs under `/datasets/mmolefe/poe_repair_min/loop-6/m1/paper-2/` | review, lines 8 to 23 | stated |
+| The controls and the smoke picture | `loop-6/m1/paper-2/controls/check.json` and `loop-6/logs/l6-m1-p2-93481.log` on the cluster, opened 2026-11-24; review, lines 37 to 55 | verified |
+| The runs: Slurm jobs 93468, 93481, 93523, 93524, commit pair `99ac88a8-f2bdb6d`, outputs under `/datasets/mmolefe/poe_repair_min/loop-6/m1/paper-2/` | the job logs `l6-m1-p2-93468.log`, `-93481.log`, `-93523.log` and `-93524.log` under `loop-6/logs/`, the snapshot folder `loop-6/code/99ac88a8-f2bdb6d`, and 96 renders per row under `paper-2/full/renders/`, opened 2026-11-24 | verified |
 | The rows, CO3's settings, where the push enters, the checker, the bar | [the step's design](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/design.md), lines 83 to 142 | stated |
 | The rung ladder and the two marks | [the blind count rubric](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/blind-count-rubric.md), lines 10 to 28 | stated |
 | Counts per row and per pair, the lead and its standard error | [the scored result](../../../artifacts/notes/progress/method-search/01-beat-the-baseline/paper-2-blind-result.json), opened 2026-11-24 | verified |

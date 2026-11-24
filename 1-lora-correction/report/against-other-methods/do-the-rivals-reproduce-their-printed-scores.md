@@ -40,7 +40,7 @@ so a score on fewer of them is a weaker test.
 
 | The prompts each paper scored and the prompts this rerun renders |
 |---|
-| <a href="../../../artifacts/notes/progress/reproductions/prompts-the-guard-keeps-out.png"><img src="../../../artifacts/notes/progress/reproductions/prompts-the-guard-keeps-out.png" width="200" alt="Two columns of boxes, what each paper scored and what we render after the subject guard, one box per benchmark"></a><br>Left, the prompt count each paper scored. Right, the count left after the subject guard. T2I-CompBench Complex goes from 1,000 to 988 (12 kept out) and RareBench Concat from 40 to 33 (7 kept out) `verified` (read on the picture; matches the RTD design). The GenEval box reads "all 553 released prompts". The FKC baseline below renders only the 99 two-object prompts among them `stated` (FKC review). |
+| <a href="../../../artifacts/notes/progress/reproductions/prompts-the-guard-keeps-out.png"><img src="../../../artifacts/notes/progress/reproductions/prompts-the-guard-keeps-out.png" width="200" alt="Two columns of boxes, what each paper scored and what we render after the subject guard, one box per benchmark"></a><br>Left, the prompt count each paper scored. Right, the count left after the subject guard. T2I-CompBench Complex goes from 1,000 to 988 (12 kept out) and RareBench Concat from 40 to 33 (7 kept out) `verified` (read on the picture; matches the RTD design). The GenEval box reads "all 553 released prompts". The FKC baseline below renders only the 99 two-object prompts among them `verified` (`loop-5/renders/FKC/full/sdxl-result.json`, key `prompts`, opened 2026-11-24). |
 
 The numbers come from [the RTD review](../../../artifacts/notes/progress/reproductions/RTD/review.md) and
 [the FKC review](../../../artifacts/notes/progress/reproductions/FKC/review.md).
@@ -57,8 +57,7 @@ scores back.
 | <a href="../../../artifacts/notes/progress/reproductions/RTD/why-the-complex-score-misses.png"><img src="../../../artifacts/notes/progress/reproductions/RTD/why-the-complex-score-misses.png" width="200" alt="Flow from the RTD Complex result through five checks that pass to three causes still open and the owner's answer to question 26"></a><br>Left box, the result: ours 0.242 against printed 0.466 on 988 prompts at 3 seeds. Middle, five checks that pass: plain SDXL 0.264 against printed 0.308, the authors' pipeline at commit `241eb37`, eight random prompts render cleanly, 0 of 2,964 scores equal plain SDXL's, and a zero-size update matches plain SDXL with difference 0.0. Right, three causes nothing run here separates: their H200 against our RTX 3090s, an unstated ImageReward package or preprocessing, and the printed number itself `verified` (read on the picture; matches the review, which gives the same numbers to four places). | <a href="../../../artifacts/notes/progress/reproductions/RTD/plain-sdxl-against-rtd-eight-random-complex-prompts-seed0.png"><img src="../../../artifacts/notes/progress/reproductions/RTD/plain-sdxl-against-rtd-eight-random-complex-prompts-seed0.png" width="200" alt="Eight T2I-CompBench Complex prompts, plain SDXL on the left and RTD on the right of each pair, with each picture's ImageReward above it"></a><br>Eight Complex prompts drawn at random (generator seed 0, picture seed 0), plain SDXL left and RTD right in each pair, with each picture's ImageReward printed above `stated` (RTD review). Both methods draw clean pictures. On the cube, rectangle and sphere prompt RTD drops the cube and scores 0.03 against plain SDXL's 1.45. On the lemon and lime prompt RTD draws separate lemons and limes as a flat pattern and scores -0.90, against -0.02 for a plain SDXL picture of limes with lemon-coloured flesh `verified` (seen on the picture). Eight prompts are too few to say how often the scorer misses the composition like this. |
 
 **The number.** ImageReward is the mean over 3 seeds per prompt (seeds 0, 1 and 2); higher is better. The pass band is the
-range a printed score must fall in to count as reproduced. All rows `stated` from the review's results table, and the two RTD
-rows match [the RTD rows file](../../../artifacts/notes/progress/reproductions/RTD/rows.json).
+range a printed score must fall in to count as reproduced. All rows `verified` against the four result files under `/datasets/mmolefe/poe_repair_min/loop-5/renders/RTD/full/` (`rtd-t2i_compbench-result.json`, `rtd-rarebench-result.json`, `sdxl-t2i_compbench-result.json` and `sdxl-rarebench-result.json`, keys `prompts`, `ours`, `interval_low`, `interval_high`, `published`, `verdict` and `wandb_run`, opened 2026-11-24), and the two RTD rows match [the RTD rows file](../../../artifacts/notes/progress/reproductions/RTD/rows.json).
 
 | Method | Benchmark | Prompts | Ours | Pass band | Printed | Verdict | W&B run |
 |---|---|---|---|---|---|---|---|
@@ -93,12 +92,16 @@ raise the bar on this row `stated`.
 **The number.** GenEval's two-object score is the share of images in which a detector finds both named objects. Plain SDXL
 scores 0.7399 of 396 images correct (99 two-object prompts at 4 images each), against the 0.80 printed in FKC Table A4, p39.
 The pass band is 0.6468 to 0.8330, so the row is `reproduced`. Rendered by Slurm job 93251 and scored by job 93311 at commit
-pair `ac85826a-47e659d`, W&B run `qcdz35cj` `stated` (FKC review).
+pair `ac85826a-47e659d`, W&B run `qcdz35cj` `verified` (`loop-5/renders/FKC/full/sdxl-result.json`, keys `ours`, `pictures`,
+`prompts`, `published`, `interval_low`, `interval_high`, `commit` and `wandb_run`, opened 2026-11-24; the job numbers and commit
+match the logs `l5-geneval-plain-93251.log` and `l5-geneval-score-93311.log` in `loop-5/logs/`). The table and page in FKC's paper
+are from the FKC review.
 
 **What one FKC image would cost.** One batch of 8 particles takes 205.6 seconds on an RTX 3090, against 12.8 seconds for a
 plain render, so 16.1 times as long. The 396 images at 8 particles would be 22.6 GPU-hours. On the one prompt timed, all 8
-particles at the last step descend from one ancestor, as the paper's note on weight degeneracy (p7) describes `stated` (FKC
-review).
+particles at the last step descend from one ancestor, as the paper's note on weight degeneracy (p7) describes `verified` (`loop-5/renders/FKC/timing/fkc-timing.json`, keys
+`fkc_seconds_per_batch`, `plain_seconds_per_image`, `fkc_over_plain`, `projected_fkc_gpu_hours_for_396_images` and
+`distinct_ancestors_at_end`, opened 2026-11-24).
 
 ## Where the sources disagree
 
@@ -142,8 +145,8 @@ The toy numbers below are invented. GenEval's fraction correct is taught on
 A coffee tasting: three people each taste one cup and give it a number, 0.5, -0.2 and 0.9, and the cup's score is the mean,
 1.2 / 3 = 0.4. ImageReward does the same for a picture and its prompt, except the taster is a model trained on people's
 preferences between pictures. "Image" because it scores the picture, "reward" because it is the number such a model is trained
-to push up, so higher is better and a score can be negative. Here each prompt gets 3 pictures (seeds 0, 1 and 2), and on the
-1% rung single pictures scored from -1.71 to 1.96 `stated` (RTD review). RTD's Complex score of 0.2423 is that mean over 988
+to push up, so higher is better and a score can be negative. Here each prompt gets 3 pictures (seeds 0, 1 and 2), and on the 1% rung single pictures scored from -1.71 to 1.96 `verified` (the lowest and highest `image_reward` across
+`loop-5/renders/RTD/one-percent/rtd-scores.jsonl` and `sdxl-scores.jsonl`, read on 2026-11-24). RTD's Complex score of 0.2423 is that mean over 988
 prompts. Read more in [the ImageReward walk](../../../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/02-imagereward-the-preference-number.md)
 and [the ImageReward note](../../../../../Obsidian/deep-learning/12-scoring-and-rival-methods/tables/imagereward.md).
 
@@ -168,14 +171,14 @@ RareBench has no walk or note in the learning tree.
 
 Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
-**Every number is copied from the two reviews; the score files they summarise are on the cluster and were not opened.**
+**The run numbers were read off the result, score and timing files under `/datasets/mmolefe/poe_repair_min/loop-5/` on 2026-11-24; the printed scores come from the papers through the RTD design, and the matched comparison from the RTD review.**
 
 | What | Source | Mark |
 |---|---|---|
-| RTD and plain SDXL scores, pass bands, verdicts, W&B runs | [the RTD review](../../../artifacts/notes/progress/reproductions/RTD/review.md), lines 52 to 61; RTD rows checked against [the RTD rows file](../../../artifacts/notes/progress/reproductions/RTD/rows.json) | stated |
-| RTD runs | Slurm jobs 93064 (RTD) and 93068 (plain SDXL) scoring at commit pair `045e027f-94b2919`; scores in `full/rtd-scores.jsonl` and `full/sdxl-scores.jsonl` under `/datasets/mmolefe/poe_repair_min/loop-5/renders/RTD/` | stated |
+| RTD and plain SDXL scores, pass bands, verdicts, W&B runs | [the RTD review](../../../artifacts/notes/progress/reproductions/RTD/review.md), lines 52 to 61; checked against the four `*-result.json` files under `/datasets/mmolefe/poe_repair_min/loop-5/renders/RTD/full/`, opened 2026-11-24, and RTD rows against [the RTD rows file](../../../artifacts/notes/progress/reproductions/RTD/rows.json) | verified |
+| RTD runs | Slurm jobs 93064 (RTD) and 93068 (plain SDXL) scoring at commit pair `045e027f-94b2919`; scores in `full/rtd-scores.jsonl` and `full/sdxl-scores.jsonl` under `/datasets/mmolefe/poe_repair_min/loop-5/renders/RTD/`; jobs and commit read off `loop-5/logs/l5-rtd-full-score-rtd-93064.log` and `l5-rtd-full-score-sdxl-93068.log` on 2026-11-24 | verified |
 | The printed scores and the protocol | [the RTD design](../../../artifacts/notes/progress/reproductions/RTD/design.md), RTD Table 2, p6 | stated |
-| Plain SDXL on GenEval, FKC's cost | [the FKC review](../../../artifacts/notes/progress/reproductions/FKC/review.md), lines 3 to 4 and 19 to 31; jobs 93248, 93251 and 93311, W&B `qcdz35cj` | stated |
+| Plain SDXL on GenEval, FKC's cost | [the FKC review](../../../artifacts/notes/progress/reproductions/FKC/review.md), lines 3 to 4 and 19 to 31; jobs 93248, 93251 and 93311, W&B `qcdz35cj`; checked against `loop-5/renders/FKC/full/sdxl-result.json`, `loop-5/renders/FKC/timing/fkc-timing.json` and the three jobs' logs, opened 2026-11-24 | verified |
 | The owner's answers to board questions 14, 26 and 41 | [the progress board](../../../artifacts/notes/progress/board.json), `questions` | stated |
 | What each picture shows | the four pictures above, opened at full size on 2026-11-24 | verified |
 | The plan that owned the reruns | step D2 of [the two-papers route](../../../plans/route-two-papers.md#the-steps), run by Session 5 | |

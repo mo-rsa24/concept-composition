@@ -1,4 +1,4 @@
-# Does removing one checker remove its property, and only its property?   ⚪ null by the written rule · read 2026-11-24
+# Does removing one checker remove its property, and only its property?   ⚪ null by the written rule · verified 2026-11-24
 
 **The claim**
 
@@ -62,7 +62,7 @@ The margins of 6.25 and 4.2 points are the planned SDXL table's 3 and 2 pictures
 bootstrap resamples of the 10 pairs.
 
 Removing count raises the order share by 6.8 points and removing order lowers the right-digits share by 6.9 points, past the
-4.2-point limit, and removing the right-digits checker lowers its own share by only 2.6 points `stated`. The owner recorded this
+4.2-point limit, and removing the right-digits checker lowers its own share by only 2.6 points `verified` (`v5/final3.json`, key `detail`, opened 2026-11-24). The owner recorded this
 as null by the written rule (board question 75). W&B run `j4anxfgy`
 ([the removal review](../../../artifacts/notes/progress/abstract-checkers/08-remove-one-checker/review.md), lines 3 and 25 to 29).
 
@@ -83,8 +83,7 @@ Navigation: ⬅️ [Previous](#what-would-have-counted) | 📋 [TOC](#table-of-c
 | <a href="../../../artifacts/notes/progress/abstract-checkers/remove-one-checker.png"><img src="../../../artifacts/notes/progress/abstract-checkers/remove-one-checker.png" width="200" alt="Five checkers with counting switched off feed a box that scales each gradient to a fixed length, then a box that adds them with no shared cap, then the sampler, then five scorers, then a choice between control holds and tangled"></a><br>Left, five checkers with counting greyed out and no gradient. Each remaining gradient is scaled to a fixed length so the others cannot take its share, then added "with no shared cap; a row is void if the total passes 0.6 of the prediction's length". The sampler draws, five scorers that never steer read the pictures, and the outcome is "control holds" if only counting falls, or "tangled" if another score falls with it `verified` (read on the picture). It draws the five-checker SDXL version; the digit run on this page has three checkers, because binding, position and size do not exist on a digit canvas `stated` ([the removal design](../../../artifacts/notes/progress/abstract-checkers/08-remove-one-checker/design.md), line 72). |
 
 **The number.** Eleven rows on the 10 unseen pairs among digits 5 to 9 at seeds 1000 to 1095, 960 canvases per row: the plain
-product, all three checkers, each removed (3), each removed with a random push of the same length in its place (3), and each
-alone (3) `stated`. Each canvas asks for the lower digit on the left for even seeds and on the right for odd seeds.
+product, all three checkers, each removed (3), each removed with a random push of the same length in its place (3), and each alone (3) `verified` (`v5/final3.json`, keys `seeds` and `totals`). Each canvas asks for the lower digit on the left for even seeds and on the right for odd seeds.
 
 ## 2. The removal table, 960 canvases per row
 
@@ -96,8 +95,9 @@ Navigation: ⬅️ [Previous](#1-what-is-removed-and-what-is-scored) | 📋 [TOC
 > digits), each canvas framed by the judge's call, so the reader sees two digits merge when count goes and swap sides when order
 > goes. The canvases are from job 94186 under `/datasets/mmolefe/poe_repair_min/loop-8/v5/`; none is on the laptop.
 
-**The number.** Job 94186 on `mscluster81`, commit `b82bf776`, push length 0.215 per checker, from `v5/final3.json` as the
-review copies it. Canvas counts are in brackets `stated` (review, lines 9 to 21).
+**The number.** Job 94186 on `mscluster81`, commit `b82bf776`, push length 0.215 per checker, from `v5/final3.json`. Canvas counts are in
+brackets `verified` (`v5/final3.json`, keys `table_percent` and `totals`, opened 2026-11-24); the job and commit are from the
+review, lines 9 to 21.
 
 | Row | Count: two digits apart | Right digits, of those | Order, of those | Fully right, of all |
 |---|---|---|---|---|
@@ -115,7 +115,7 @@ review copies it. Canvas counts are in brackets `stated` (review, lines 9 to 21)
 
 A removal's own column is count for minus count, right digits for minus right digits, and order for minus order. All three together beat the plain product on fully right canvases by 14.0 points, standard
 error 2.64. No row was void: the all-three row's total push passed 0.6 of the product's norm on 2.1% of pushed steps, under the 5%
-limit `stated` (review, lines 7 and 31).
+limit `verified` (`v5/final3.json`, keys `detail.all_over_plain_full`, `void` and `lengths`).
 
 ## 3. Which removal meets the rule
 
@@ -138,8 +138,8 @@ Navigation: ⬅️ [Previous](#2-the-removal-table-960-canvases-per-row) | 📋 
 
 The side moves have plain sources in the table above. Without count, fewer canvases reach the order column (38 against 134), and
 those few are in order more often (95.0% against 88.2%). Without order, the right-digits share falls from 41.2% to 34.3%. The
-right-digits checker, which reads near chance (0.556), controls its own property no more than a random push does `stated`
-(review, line 33).
+right-digits checker, which reads near chance (0.556), controls its own property no more than a random push does `verified`
+(`v5/train.json`, key `identity.unseen_ba`, and `v5/final3.json`, key `detail.identity`).
 
 ## 4. The first run, 320 canvases per row, was inconclusive
 
@@ -158,7 +158,8 @@ times the seeds and the bars unchanged (board question 73).
 
 Read without a verdict, as the review does: removing count lowered the count column from 41.6% to 14.1% (random 10.9%), and
 removing order lowered the order column from 88.9% to 45.2% (random 53.1%). Removing right digits lowered its column from 40.6%
-to 34.2%, and its random replacement left it at 41.4% `stated` (review, lines 39 to 57, job 94172, `v5/final.json`). These carry
+to 34.2%, and its random replacement left it at 41.4% `verified` (`v5/final.json`, keys `table_percent`, `totals` and
+`lengths`, job 94172). These carry
 no claim.
 
 ## 5. How well each checker reads, and the push length
@@ -175,16 +176,16 @@ Navigation: ⬅️ [Previous](#4-the-first-run-320-canvases-per-row-was-inconclu
 
 | Checker | Overfit check, of 16 | Digits 0 to 4 | Digits 5 to 9, never trained on | Source |
 |---|---|---|---|---|
-| Count | 16 | 0.782 | 0.791 | the learning step, W&B `tyhrpyov` |
+| Count | 16 | 0.782 | 0.791 | `v2/count-final/final-count.json`, key `map`, W&B `tyhrpyov` |
 | Right digits | 16 | 0.601 | 0.556 | `v5/train.json` |
 | Order | 16 | 0.798 | 0.711 | `v5/train.json` |
 
-Scores are balanced accuracy over the 16 steps, where 0.5 is chance, from job 94153 `stated` (review, lines 61 to 67).
+Scores are balanced accuracy over the 16 steps, where 0.5 is chance, from job 94153 `verified` (the files in the Source column, opened 2026-11-24).
 
 The push length came from the three gradients' mean pairwise cosine on the seen pairs, 0.009 over 10,560 pairs of gradients, which
 gives b = 0.4 / √(3 (1 + 2 × 0.009)) = 0.229 for the first run (job 94154). For the rerun, job 94185 took the largest length on
-the design's list whose all-three row passed 0.6 on at most 5% of pushed steps on the seen pairs: 0.215, at 2.2% `stated`
-(review, lines 7 and 73).
+the design's list whose all-three row passed 0.6 on at most 5% of pushed steps on the seen pairs: 0.215, at 2.2% `verified`
+(`v5/calibrate.json` and `v5/tune-b.json`).
 
 ## Where the sources disagree
 
@@ -241,14 +242,14 @@ teaches the measure, and the [bootstrap card](../../../../../Obsidian/Mathematic
 
 Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
-**Every number is copied from the review; the results files it quotes are on the cluster and were not opened.**
+**The run numbers were read off the results files under `/datasets/mmolefe/poe_repair_min/loop-8/` on 2026-11-24, and the bars off the removal script.**
 
 | What | Source | Mark |
 |---|---|---|
-| The rerun table, the removal verdict table, W&B `j4anxfgy` | [the removal review](../../../artifacts/notes/progress/abstract-checkers/08-remove-one-checker/review.md), lines 3 to 33, from `v5/final3.json` | stated |
-| The first run | review lines 35 to 57, from `v5/final.json` | stated |
-| The checkers' accuracies and the push length | review lines 59 to 84, from `v5/train.json` and `v5/calibrate.json` | stated |
-| The rule | [the removal design](../../../artifacts/notes/progress/abstract-checkers/08-remove-one-checker/design.md), lines 43 to 50, with the bars in `2-classifier-guidance/scripts/abstract_checkers/v5_remove.py` | stated |
+| The rerun table, the removal verdict table, W&B `j4anxfgy` | [the removal review](../../../artifacts/notes/progress/abstract-checkers/08-remove-one-checker/review.md), lines 3 to 33, copies `v5/final3.json`; keys `table_percent`, `totals`, `detail`, `lengths` and `wandb_run` opened 2026-11-24 | verified |
+| The first run | `v5/final.json`, keys `table_percent`, `totals` and `lengths`, opened 2026-11-24 | verified |
+| The checkers' accuracies and the push length | `v5/train.json`, `v5/calibrate.json`, `v5/tune-b.json` and `v2/count-final/final-count.json`, opened 2026-11-24 | verified |
+| The rule | [the removal design](../../../artifacts/notes/progress/abstract-checkers/08-remove-one-checker/design.md), lines 43 to 50, with the bars in `2-classifier-guidance/scripts/abstract_checkers/v5_remove.py`, lines 32 to 35, and `Z` and `BOOTSTRAP_DRAWS` in `2-classifier-guidance/scripts/method_search/beat_baseline_bars.py`, opened 2026-11-24 | verified |
 | The owner's answers to board questions 56, 73 and 75 | [the progress board](../../../artifacts/notes/progress/board.json), `questions` | stated |
 | What the design picture shows | the picture above, opened at full size on 2026-11-24, and its `.mmd` source | verified |
 | The plan that owned the step | step V5 on the progress board, run under [the Session 8 brief](../../../artifacts/notes/progress/prompts/session-8-test-abstract-checkers.md), from [the abstract-checker design](../../../artifacts/notes/progress/abstract-checkers/03-design.md#step-v5-remove-one-checker-at-a-time) | |
