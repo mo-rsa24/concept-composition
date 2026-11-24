@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-24 23:51 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-25 00:16 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -28,6 +28,7 @@ overrule one, answer it again: `python3 scripts/progress_board.py answer <number
 | # | The question | Decided | Why |
 |---|---|---|---|
 | none | Loop 8's method review found the removal test feeds nothing since your answer on 86 | **Close the removal test (V7) as not run** after the cheap visibility check; the full retraining from question 95 is skipped | Reversible, saves about 1.5 GPU-hours, no bar changed; it was option B of question 95. |
+| 98 | What does Paper 2 test next, now that Loop 12 found neither where borrowed parts start nor a working fix? | **Each animal's own prediction inside its drawn box** at steps 5 to 30, on the same 48 pictures, after a free text-only check, run by Loop 12; about 0.8 GPU-hours, its 48-picture bar written first | The test the first fix never ran, named by both reviews; the text-encoder fix stays held behind the free check. |
 | 97 | Which of three small reruns from Loop 12's audit of Loops 8, 9 and 10 should run? | **Only the first** (when the digit sampler settles which digits it draws), in Loop 8, about 0.04 GPU-hours; the third read free from Loop 12's own records, reopening nothing | The second is already settled by Loop 8's checks; the third needs Loop 10, which is closed. |
 | 95 | Loop 8's identity checker missed twice on the sampler's own states (0.651, then 0.552 with memorised training digits); what next? | **A with three additions**: first check the digits are readable from the sampler's states at all (about 0.1 GPU-hours, and stop if not), hold out seeds of digits 0 to 4 as a control, then train on both data sets and read fresh digits 5 to 9 once; about 1.6 GPU-hours | The [reviewer's second pass](../reviewer/2026-11-24-review.md#loop-8-again-at-2215-two-misses-on-reading-sampler-states) found the second try memorised 2,036 stored states with no fresh noise, and no one has checked the digits are readable there at all. The SDXL test does not wait on this. |
 | 94 | Loop 8's digit identity checker reads pasted digits (0.861) but not the sampler's own states (0.651 against 0.75); does its removal test run? | **A: retrain it on sampler states from digits 0 to 4, read digits 5 to 9 again on freshly drawn canvases, and run the removal test only if it passes**, about 1.5 GPU-hours | It answers the reviewer's main point on Loop 8 and tells its SDXL test whether to train on CO3's states. Reversible, inside budget, no bar changed. |
@@ -80,7 +81,7 @@ The finish range is `session_status.py`'s, from the 63 finished steps: fastest p
 | 7. Abstract-checker papers | Finished; its session is closed. | 0 | done | closed | nothing |
 | 8. Abstract checkers | Its digit identity checker reads pasted digits (0.861 against 0.75) but not the sampler's own states. Its method review found the first checker ranks but its cut drifts, and the second memorised. It finishes one cheap check of whether digits are readable there (job 94717), then closes its removal test as not run. Its SDXL test against CO3 is next. | 2 | 1.7 h to 61.7 h | busy | question 96 decides the SDXL test's readability gate; Loop 6's training list |
 | 11. Drain into the pillars | Stopped by your answer on 88; every finished result is on a report page. | 1 | when restarted | stopped its loop | a new result worth draining |
-| 12. Where CO3 leaks | Its fix test is done and null: boxes drawn by eye, whole-picture correction and CO3 alone each give 5 of 48 two-clear pictures ([fix review](../leakage/03-one-fix/review.md)). It chose a text-side fix to test next and audited Loops 8, 9 and 10's designs ([audit](../leakage/05-design-audit.md)); question 97 asks for three small reruns. The reviewer is reading it again. | 2 | 49 min to 46.6 h | idle | question 97 |
+| 12. Where CO3 leaks | Its six planned steps are done: nothing predicts which pairs borrow parts, and its first fix was null, a test that never used each animal's own prediction ([verdict](../leakage/06-verdict.md)). By question 98 it runs one more step: a free text-only check, then each animal's own prediction inside its drawn box, about 0.8 GPU-hours. | 1 to add | not yet estimated | idle | its own new step |
 
 ## Resources
 
