@@ -13,7 +13,7 @@ repository commit, then the replications hub commit.
 | CO3 read smoke: puma and condor, seed 6001 | 94593 | `58cee28a-15d8bdd` | `co3-read-smoke/` | passed: the rerun matches M1's picture within 2.38 of 255, all 7 steps read, 38.7 seconds |
 | CO3 read: 96 tuning trajectories, on an RTX 3090 | 94594 | `58cee28a-15d8bdd` | `co3-read/` | 75 of 96 reproduce, against 80 needed |
 | Overfit, both lists | 94603, 94605 | `ee84f4aa-15d8bdd` | `overfit/`, no checkpoint | failed before training: the tile picker read a `latent` field that benchmark-pool tiles do not carry |
-| Overfit, then 1% of the data, current list | 94622, 94623 | `9df9dc5b-15d8bdd` | `overfit/current/`, `tiny/current/` | running under Slurm on mscluster89; the picker now reads a pool tile's first augmented copy for its check |
+| Overfit, then 1% of the data, current list | 94622, 94623 | `9df9dc5b-15d8bdd` | `overfit/current/`, `tiny/current/` | overfit passed: 16 of 16 right (balanced accuracy 1.0, bar 0.9375) from sampler step 2; the 1% rung running under Slurm on mscluster89. The picker now reads a pool tile's first augmented copy for its check |
 | CO3 reread of the 21, then overfit and 1% of the data, balanced list, one after another | shared card: mscluster107 card 1, wrapper process 87714 | `9df9dc5b-15d8bdd` | `co3-read-rtx8000/`, `overfit/balanced/`, `tiny/balanced/` | started 16:25:47 UTC on a Quadro RTX 8000 under board question 90, the Slurm copies 94624 and 94625 cancelled; the reread finished at 16:42:53 UTC with all 21 matching M1 exactly (difference 0.0 of 255) |
 
 ## The read of CO3's trajectories
