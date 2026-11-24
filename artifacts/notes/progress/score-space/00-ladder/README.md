@@ -24,7 +24,7 @@ The canvas is real, built with V1's `make_canvas` from MNIST's test images. The 
 
 **Where $d_t$ comes from.** The three calls and the two subtractions are drawn in [where the two maps come from](../../../../../2-classifier-guidance/artifacts/scenes/digit-map-checkers/0.5-network-view/dc2-where-the-two-maps-come-from.png), from the digit-map ladder, which then scales each map to add to 2,048.
 
-**The path.** [Sixteen steps make a score path](0.5-network-view/sp2-sixteen-steps-make-a-score-path.png) prints the real timesteps, 999 down to 693, and the clean canvas's share of $x_t$ at each, from 0.006 to 0.087. Its $d_t$ tiles are empty because none has been computed.
+**The path.** [Sixteen steps make a score path](0.5-network-view/sp2-sixteen-steps-make-a-score-path.png) prints the real timesteps, 999 down to 693, and the clean canvas's share of $x_t$ at each, from 0.006 to 0.087. Its $d_t$ tiles are empty because this ladder computed none. The ten-label $d_t$ maps were computed by the step that read which digits are present, and [the score-path finding](../../../../../2-classifier-guidance/report/does-the-score-path-carry-which-digits-are-present.md) reports what they carry.
 
 **The encoders.** [Three encoders into one width](0.5-network-view/sp3-the-planned-score-path-encoder.png) puts the planned score-path encoder beside the two that exist and lists what X4 must decide for it.
 
@@ -59,7 +59,9 @@ Four pixels, two steps and integer weights set by hand, computed by [the miniatu
 
 **Illustrative.** The noise draw on the canvas (numpy seed 10, not the sampler's own noise). Every size on the score-path encoder, including its 768-number output. The dots in the overview's shared space. Every number in the miniature, which is hand-set. The summed three-way loss in sp4, one possible form.
 
-**Not computed.** No $d_t$ map, no score path and no similarity score from the digit models exists; those need the U-Net's weights on a GPU, which this ladder did not use.
+**Not computed here.** This ladder computed no $d_t$ map, no score path and no similarity score, because those need the U-Net's weights on a GPU. The ten-label $d_t$ maps were computed by the step that read which digits are present, in both windows, and [the score-path finding](../../../../../2-classifier-guidance/report/does-the-score-path-carry-which-digits-are-present.md) holds its verdict. No similarity score from the digit models exists, because steps X6 to X8, which would train a text-aligned reader of the path and test it, were dropped on board question 76.
+
+**Older labels on four figures.** These figures are not redrawn and still carry labels from before the presence read. [Sixteen steps make a score path](0.5-network-view/sp2-sixteen-steps-make-a-score-path.png) draws only steps 0 to 15 (timesteps 999 to 693) and says no $d_t$ is computed yet; the own-encoder step judges steps 14 to 25, and the presence read used both windows. [The score-path encoder](0.5-network-view/sp3-the-planned-score-path-encoder.png), [the three similarity matrices](0.5-network-view/sp4-three-spaces-three-matrices.png) and [the overview](overview/ov0-the-score-path-as-a-third-space.png) mark the encoder and its tests as planned, and board question 76 dropped those steps.
 
 **Skipped.** Level 1 (Codex image renders), by this loop's rule of no image-generation runs. The rebuild-from-fundamentals companion, which this loop's hand-back did not ask for. The route file under `plans/`, because this loop writes only inside this folder.
 

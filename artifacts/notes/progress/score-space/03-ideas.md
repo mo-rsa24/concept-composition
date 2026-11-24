@@ -27,7 +27,7 @@ The picture shows the repair the whole page rests on (assumption A1 below). Its 
 
 **The early window.** Sampler steps 0 to 15 of the digit model's 50-step DDIM, timesteps 999 to 693, the window the brief names.
 
-**The SDXL-matched window.** Sampler steps 14 to 25 of the digit model, timesteps 712 to 480. These carry the same share of signal as SDXL's steps 0 to 15 ([the V2 review](../abstract-checkers/05-does-it-learn/review.md)).
+**The SDXL-matched window.** Sampler steps 14 to 25 of the digit model, timesteps 712 to 480. By that timestep range the digit model's 50-step DDIM steps are 15 to 25 (timesteps 693 to 489), since step 14 is timestep 714 (`ddim_timesteps` in `canvas_unet.py` line 167). These carry the same share of signal as SDXL's steps 0 to 15 ([the V2 review](../abstract-checkers/05-does-it-learn/review.md)).
 
 **The separate-experts paper** and **the CO3 paper.** Paper 1 and Paper 2 of [the problem statements](../problem-statements.md), the targets and the scoreboard.
 

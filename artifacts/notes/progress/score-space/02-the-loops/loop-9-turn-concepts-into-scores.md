@@ -139,12 +139,12 @@ W4's control is V1's layout-only rule, which scores 0.5 on `apart` against `wron
 |---|---|---|---|
 | W1, the reading | done | [the reading table](../../noise-text-critic/01-reading/reading-table.md) | Board note: 11 of 11 papers read in full (258 PDF pages), 167 quotes found on their pages, 4 read from figures; the published NoisyCLIP projection heads equal base CLIP |
 | W1b, Latent CLIP read | done | [the Latent CLIP note](../../noise-text-critic/01-reading/latent-clip.md) | Board note: 21 of 21 pages read, 30 quotes on their pages, 1 read from a figure |
-| W2, does a sentence score read | done | [the W2 review](../../noise-text-critic/02-can-it-read/review.md) | Below |
-| W2b, linear probe | todo, ready | none yet | No result |
-| W2c, positive control and fair test | doing | none yet (`02c-fair-test/review.md` does not exist) | No result |
+| W2, does a sentence score read | done | [the W2 review](../../noise-text-critic/02-can-it-read/review.md); finding: [can a sentence score read the five properties](../../../../../2-classifier-guidance/report/the-sentence-score/can-a-sentence-score-read-the-five-properties.md) | Below |
+| W2b, linear probe | todo, ready | finding: [does a linear probe on frozen image vectors read unseen pairs](../../../../../2-classifier-guidance/report/the-sentence-score/does-a-linear-probe-on-frozen-image-vectors-read-unseen-pairs.md) | In the finding |
+| W2c, positive control and fair test | doing | finding: [is the sentence-score test fair](../../../../../2-classifier-guidance/report/the-sentence-score/is-the-sentence-score-test-fair.md) | In the finding |
 | W2d, binding | todo, ready | none yet (`02d-binding/review.md` does not exist); the labels are in [the part-binding calls](../../noise-text-critic/02d-binding/part-binding-calls.csv) | No score yet. The part-binding labels on CO3's 96 pictures pass their bar, below |
 | W3, does the push improve CO3 | todo | none yet | No result. Board question 70 records the owner's answer of 2026-11-24 to stop W3 and record that W2 found no readable step from 0 to 15 |
-| W4, our own reader on digits | todo, ready | none yet | No result |
+| W4, our own reader on digits | todo, ready | finding: [does our own noise-aware model read unseen digit pairs](../../../../../2-classifier-guidance/report/the-sentence-score/does-our-own-noise-aware-model-read-unseen-digit-pairs.md) | In the finding |
 | W5, verdict | todo | none yet (`05-verdict.md` does not exist) | No result |
 
 **W2's result.** Each cell is the mean over steps 0 to 15 of balanced accuracy on the reading half of the seeds, with the threshold chosen on the other half, on a 0 to 1 scale where 0.5 is chance and the bar is 0.75 ([the W2 review](../../noise-text-critic/02-can-it-read/review.md#result), numbers in [its result file](../../noise-text-critic/02-can-it-read/result.json), W&B run `70g3qw2f`).

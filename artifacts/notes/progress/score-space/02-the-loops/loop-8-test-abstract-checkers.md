@@ -65,7 +65,7 @@ $$
 - $\bar\rho$: the mean pairwise cosine of the checkers' gradients, clipped at 0. As the gradients align, $\bar\rho$ rises and $b$ falls, keeping the average total length near 0.4.
 - $t$: the pushed steps. The design pushed sampler steps 0 to 15. V3 pushed sampler steps 15 to 25 (timesteps 693 to 489), where the checker had trained ([the V3 design](../../abstract-checkers/06-does-it-compose/design.md#run-settings-for-test-1)).
 
-**Where the picture and the design differ.** [The removal-test picture](../../abstract-checkers/remove-one-checker.png) draws a box "Add them and cap at 0.4 of the prediction's length" after the per-checker scaling. [The design](../../abstract-checkers/03-design.md#how-the-push-is-computed) says "No shared cap runs", and voids a row whose total length passes 0.6 of the product's norm on more than 5% of pushed steps. Both stand as written.
+**How the removal test adds the pushes.** [The removal-test picture](../../abstract-checkers/remove-one-checker.png) draws a box "Add them, with no shared cap; a row is void if the total passes 0.6 of the prediction's length" after the per-checker scaling. [The design](../../abstract-checkers/03-design.md#how-the-push-is-computed) says the same: "No shared cap runs", and a row is void if its total length passes 0.6 of the product's norm on more than 5% of pushed steps.
 
 ## The objective, with its bar
 
@@ -119,7 +119,7 @@ The zero push differs from plain by 0.0 (bar under 1e-5). The push also raises d
 
 `artifacts/notes/progress/abstract-checkers/08-remove-one-checker/` did not exist when this page was written at 08:23 on 2026-11-24, so there is no design or review file. The rehearsal as Loop 7 designed it runs eleven rows of 320 canvases on the 10 unseen pairs, with three checkers (count, right digits, left-right order), on `share-0.0` because V3 passed Test 1 ([the digit rehearsal](../../abstract-checkers/03-design.md#the-digit-rehearsal)). Its right-digits checker trains on `apart` against `wrong`, the same task V2's identity checker missed at 0.555 (inferred link between the two).
 
-<a href="../../abstract-checkers/remove-one-checker.png"><img src="../../abstract-checkers/remove-one-checker.png" width="620" alt="Five checkers with counting switched off. The rest are scaled to a fixed length, added, capped at 0.4 of the prediction's length, and pushed into the product of A and B. Five scorers that never steer read the pictures. If only counting falls, the control holds; if another score falls too, the properties are tangled."></a>
+<a href="../../abstract-checkers/remove-one-checker.png"><img src="../../abstract-checkers/remove-one-checker.png" width="620" alt="Five checkers with counting switched off. The rest are scaled to a fixed length, added with no shared cap (a row is void if the total passes 0.6 of the prediction's length), and pushed into the product of A and B. Five scorers that never steer read the pictures. If only counting falls, the control holds; if another score falls too, the properties are tangled."></a>
 
 **V4, todo: no result yet**
 

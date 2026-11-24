@@ -58,6 +58,8 @@ Loop 8's readers learned where digits sit and not which digits they are. The sig
 
 ## Run group 1, step X5: does the signature carry the digits
 
+**Verdict.** [The score-path finding](../../../../2-classifier-guidance/report/does-the-score-path-carry-which-digits-are-present.md) holds this step's verdict and the numbers behind it.
+
 **Group.** Runs that try a new idea (group 2 of the conventions). A result here changes no claim in either paper.
 
 **Question.** Can a linear probe on the signature read which digits are present, in either window, better than the same probe on the noisy canvas and on the raw noise?
@@ -166,7 +168,7 @@ Test 1 also reads the text side alone first: does $g(a) + g(b)$ sit nearer $g(\t
 
 | Group | Forward passes | GPU-hours |
 |---|---|---|
-| X5 | 6,000 canvases × 30 timesteps (two windows of 16, sharing two) × 11 labels, about 2.0 million | about 0.5, with fitting and the ladder |
+| X5 | 6,000 canvases × 30 timesteps (two windows of 16, sharing two) × 11 labels, about 2.0 million. The two windows as run (early 999 to 693, matched 712 to 480, from `05-signal/full.json` `windows`) share no timestep, so the run read 32 distinct timesteps; the estimate stays as planned | about 0.5, with fitting and the ladder |
 | X6 | 20,000 canvases × 4 draws × 16 timesteps × 11 labels, about 14 million, cached once, then 8,000 updates per training | about 2.5 |
 | X6, all three | one more training on the cached signatures | about 0.5 |
 | X8 | 640 canvases × (50 sampler steps × 3, plus 16 × 11), about 0.2 million, plus the judge and the embeddings | about 0.5 |

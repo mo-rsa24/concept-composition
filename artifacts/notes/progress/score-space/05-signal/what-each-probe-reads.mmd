@@ -8,15 +8,17 @@ flowchart LR
   XT["noisy canvas x_t<br/>16 timesteps per window"]:::plain --> U
   U["digit U-Net share-0.0, frozen<br/>11 calls in one pass:<br/>null label and labels 0 to 9"]:::plain
 
-  U --> SIG["signature<br/>d_t(0..9), pooled 4x4<br/>1,280 numbers"]:::new
+  U --> SIG["signature<br/>d_t(0..9), pooled 2x2<br/>10 x 16 x 32 per step"]:::new
   U --> ERR["error readout<br/>e_c = |eps - eps_c|^2 - |eps - eps_null|^2<br/>10 numbers"]:::new
   U --> LEN["path length<br/>|d_t(c)|^2 per label<br/>10 numbers"]:::new
-  XT --> CAN["noisy canvas<br/>128 pooled, 2,048 full"]:::plain
-  E --> RAW["raw noise<br/>128 pooled, reads 0.5<br/>by construction"]:::plain
+  XT --> CAN["noisy canvas<br/>x_t pooled 2x2<br/>1 x 16 x 32 per step"]:::plain
+  E --> RAW["raw noise<br/>eps pooled 2x2<br/>1 x 16 x 32 per step,<br/>reads 0.5 by construction"]:::plain
 
-  SIG --> P{"linear probe per digit<br/>fit on 4,000 train canvases,<br/>read on 2,000 seen_test,<br/>other noise draws"}
-  ERR --> P
-  LEN --> P
+  SIG --> P["convolutional reader per step,<br/>same for every grid input:<br/>three 3x3 convolutions,<br/>max and mean over the grid,<br/>one output per digit"]
   CAN --> P
   RAW --> P
-  P --> BAR["bar: signature presence >= 0.75<br/>and >= raw noise + 0.1<br/>at some step of a window"]:::plain
+  ERR --> L["logistic regression per step,<br/>no grid to read"]
+  LEN --> L
+  P --> FIT["fit on 4,000 train canvases,<br/>read on 2,000 seen_test,<br/>other noise draws"]
+  L --> FIT
+  FIT --> BAR["bar: signature presence >= 0.75<br/>and >= raw noise + 0.1<br/>at some step of a window"]:::plain

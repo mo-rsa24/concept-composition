@@ -9,7 +9,7 @@
 | $\epsilon_\theta(x_t, t, c)$, $\epsilon_c$ | the frozen digit U-Net's noise prediction | `CanvasUNet.forward` |
 | $d_t(c)$, $d(c)$ | $\epsilon_c - \epsilon_\varnothing$: what label $c$ adds | `product_eps`, `v2_learn.maps` |
 | $\epsilon_{\mathrm{PoE}}$ | $\epsilon_\varnothing + d_t(a) + d_t(b)$, the product's prediction | `product_eps` at $g = 1$ |
-| $S(c)$ | the score path: $d_t(c)$ at steps 0 to 15, 16 by 32 by 64 | the session note; no code yet |
+| $S(c)$ | the score path: $d_t(c)$ at steps 0 to 15, 16 by 32 by 64, under the canvas's own labels. The step that read which digits are present used the ten-label form instead, all ten $d_t(c)$ on the same $x_t$, which [assumption A1 of the ideas page](../03-ideas.md#a-the-score-path-itself) gives as the repair | the session note; the ten-label form is computed in `x5_signal.py` |
 | $T$, $I$, $S$ | text, canvas and score-path embeddings | figures sp3 and sp4 |
 | $z$, $e$ | the miniature's path embedding and caption vector | `2-miniature/miniature.py` |
 | $r$ | the miniature's hand-set interaction term in its toy joint label | `2-miniature/miniature.py` |
