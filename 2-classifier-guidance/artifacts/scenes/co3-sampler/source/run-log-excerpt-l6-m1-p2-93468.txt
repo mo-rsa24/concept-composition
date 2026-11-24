@@ -1,0 +1,8 @@
+# excerpt of mscluster84:/datasets/mmolefe/poe_repair_min/loop-6/logs/l6-m1-p2-93468.log, copied 2026-11-24 with grep; lines kept verbatim
+Processed prompts: prompts ['an eagle and a fox', 'eagle', 'fox', 'an eagle and a fox'], prompts_single ['eagle', 'fox', 'an eagle and a fox'], null_prompt ['']
+resampling step at t=981
+resampling step at t=961
+resampling step at t=941
+correction step at t=921
+correction step at t=901
+correction step at t=881

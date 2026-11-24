@@ -1,0 +1,143 @@
+{
+ "subject": "CO3, \"Steer Away From Mode Collisions: Improving Composition In Diffusion Models\" (Dutta et al.)",
+ "kind": "paper",
+ "paper": {
+  "arxiv": "2509.25940",
+  "version_named_in_brief": "v1",
+  "version_on_shelf": "v2 (13 Mar 2026, per the PDF's first page)",
+  "pdf": "/home/molef/goal-setting/learning/papers/deep-learning/diffusion-models/compositional-diffusion-models/region-and-binding-failures/steer-away-from-mode-collisions.pdf",
+  "pages_used": {
+   "Algorithm 1": 4,
+   "equations 4 to 6": 3,
+   "equations 12 and 13": 4,
+   "Proposition 1": 5,
+   "equation 14": 5,
+   "Algorithms 2 and 3": 6,
+   "equation 15": 6,
+   "settings": [
+    6,
+    17
+   ],
+   "ablations": [
+    19,
+    20
+   ]
+  }
+ },
+ "landing": "standalone pages in this folder; no journey (owner's choice)",
+ "pace": "unattended",
+ "code": {
+  "checkout": "/home/molef/PhD/replications/co3",
+  "commit": "35ea972313276014716dca3d821023728e8bc917",
+  "files": [
+   "composers/Co3.py (denoise_step 261 to 365, co3-hybrid 302 to 333, main step 338 to 362)",
+   "composers/utils/attn_utils.py (weights 119 to 156, co3_resampling 158 to 210, co3_corrector 214 to 268)"
+  ],
+  "settings_source": "mscluster84:/datasets/mmolefe/poe_repair_min/loop-6/code/f0410a14-f2bdb6d/hub/scripts/reproductions/co3_common.py (copy in source/co3_common.py.copy)"
+ },
+ "numbers": {
+  "script": "co3_numbers.py",
+  "json": "co3_numbers.json",
+  "schedule": "numpy reimplementation of diffusers DDIMScheduler from source/sdxl-scheduler-config.json; diffusers is not installed on the laptop"
+ },
+ "notation": "NOTATION.md",
+ "colour_key": {
+  "input": "#1f5fd0",
+  "denoiser (hidden units)": "#1d7a3e",
+  "output": "#c0262d",
+  "method (CO3's own parts)": "#c86a0a",
+  "fixed or off (empty prompt, plain steps)": "#6b7a88",
+  "broken (code departs from paper)": "#b0186e",
+  "concept c_1": "#7b4fb8",
+  "concept c_2": "#0f8b8d"
+ },
+ "line_check": "co3_figkit.Canvas.save refuses to write a figure where a line crosses a node, box or label, or two labels overlap",
+ "rungs": {
+  "0": {
+   "state": "built",
+   "shows": "one CO3 run on SDXL, 50 DDIM steps, annotated stage by stage with code boxes and a small forward diagram",
+   "files": [
+    "co3-overview.png",
+    "co3-overview.svg",
+    "draw_overview.py"
+   ],
+   "style": "annotated explainer, in the register of reference/owner-annotated-progress-with-code-boxes.png",
+   "open_slot": "worked case with a real latent: waits for /datasets/mmolefe/poe_repair_min/loop-12/z2/smoke/ (not present on 2026-11-24)"
+  },
+  "0.5": {
+   "state": "built",
+   "figures": [
+    {
+     "part": "Algorithm 2, the resampler",
+     "files": [
+      "co3-resampler.png",
+      "co3-resampler.svg",
+      "draw_resampler.py"
+     ],
+     "style": "reference/owner-network-weights-and-equations.png"
+    },
+    {
+     "part": "Algorithm 3, the corrector",
+     "files": [
+      "co3-corrector.png",
+      "co3-corrector.svg",
+      "draw_corrector.py"
+     ],
+     "style": "reference/owner-network-weights-and-equations.png with the boxed rules of reference/owner-network-with-rule-boxes.png"
+    },
+    {
+     "part": "equations 14 and 15, the weights",
+     "files": [
+      "co3-weights.png",
+      "co3-weights.svg",
+      "draw_weights.py"
+     ],
+     "style": "reference/owner-network-weights-and-equations.png"
+    },
+    {
+     "part": "the co3-hybrid schedule over 50 steps",
+     "files": [
+      "co3-schedule.png",
+      "co3-schedule.svg",
+      "draw_schedule.py"
+     ],
+     "style": "reference/owner-network-with-rule-boxes.png (a strip with its rules boxed beneath)"
+    }
+   ]
+  },
+  "1": {
+   "state": "skipped",
+   "why": "owner chose overview, algorithms and code first"
+  },
+  "2": {
+   "state": "skipped",
+   "why": "owner chose overview, algorithms and code first"
+  },
+  "3": {
+   "state": "built",
+   "files": [
+    "code-walk.md",
+    "gen_codewalk.py"
+   ],
+   "style": "hld-diagram --paper's code-walk shape as a static markdown page: each block of the authors' lines, byte for byte and asserted, under the equation it computes",
+   "not_done_from_the_paper_walk": [
+    "the exact rig on a toy",
+    "a seeded capture of the authors' run",
+    "term figures from captured values",
+    "the interactive page and its probe",
+    "the stepper",
+    "a Codex review"
+   ],
+   "why_not_done": "no runs, no GPU and no API calls in this round; the seeded capture can come from the Z2 smoke run"
+  },
+  "beside": {
+   "state": "missing",
+   "why": "the rebuild companion was not in the owner's chosen set this round"
+  },
+  "close": {
+   "state": "missing",
+   "why": "the closing page reads the subject through the miniature, which is skipped"
+  }
+ },
+ "paper_code_disagreements": "code-walk.md, section 'Where the paper and the code disagree'"
+}
