@@ -11,6 +11,20 @@
 | 93851 | label smoke test, 8 pictures, new region rule | `9529388a` | Stalled: it started at 20:08 on mscluster89, printed only its start line, and was cancelled at its 90-minute limit. This matches the cluster storage outage below |
 | 94092 | label smoke test, 8 pictures, new region rule | `9529388a` | Ran in under 5 minutes. By eye at sheet size: left-right right on 8 of 8, and each recoloured animal carries its own colour with the background unchanged. Size labels are unreliable: on a large cat the word map covers mostly the head, so pictures 04 and 05 read "dog larger" when the animals are about equal, and 03 is doubtful |
 
+## Label check by eye
+
+Job 94093 built the labels for all 64 relation pictures in 3 minutes. A checker read every sheet at sheet size against a fixed guide, and the calls are in [label-check](label-check/eye-labels.csv).
+
+| Label set | Right | Bar | Result |
+|---|---|---|---|
+| Left-right order, 64 pictures | 62 of 64 (96.9%) | 90% | passes |
+| Size, 57 pictures with a size call | 37 of 57 (64.9%) | 90% | fails |
+| Recoloured copies, 32 checked | 18 of 32 (56%) | 90% | fails |
+
+Both failures have one cause. The word "cat" lands mostly on the cat's head, so the cat's region is often the head alone. That makes the cat look small in 20 size calls, and leaves the cat's body uncoloured or coloured as the dog in 7 of the 16 checked pictures. The two left-right misses, 43 and 54, are a cat sitting in front of the dog between its front legs, where neither is to the left.
+
+By the design, position and size and attribute binding are held, and the owner decides how they continue.
+
 ## Text-only word check
 
 Before any image is read, [this check](word-check/word-check.json) asks whether CLIP ViT-L/14's text encoder, the one NoisyCLIP keeps frozen, can tell word order and colour binding apart at all. It averages each swapped pair over both word orders: what survives is the part of the swap a sum of word slots cannot produce. The ratio is that part's size over twice the swap's size, 0 for a pure sum of word slots and 1 when the whole swap survives. The script is `2-classifier-guidance/scripts/noise_text_critic/word_check.py`, run on the laptop's CPU, over six noun pairs.

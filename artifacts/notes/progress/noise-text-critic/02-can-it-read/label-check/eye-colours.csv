@@ -1,0 +1,33 @@
+index,meant,colour_right,note
+0,"red cat, blue dog",1,
+0,"blue cat, red dog",1,
+1,"red cat, blue dog",1,
+1,"blue cat, red dog",1,
+2,"red cat, blue dog",1,
+2,"blue cat, red dog",1,
+3,"red cat, blue dog",0,cat colour on head only; cat body unchanged
+3,"blue cat, red dog",0,cat colour on head only; cat body unchanged
+4,"red cat, blue dog",0,cat colour on head only; cat body unchanged
+4,"blue cat, red dog",0,cat colour on head only; cat body unchanged
+5,"red cat, blue dog",0,cat colour on head only; cat body unchanged; colour block spills onto background behind cat head
+5,"blue cat, red dog",0,cat colour on head only; cat body unchanged; colour block spills onto background behind cat head
+6,"red cat, blue dog",1,left white body behind cat (likely dog's rear) unchanged; head and front of dog coloured
+6,"blue cat, red dog",1,left white body behind cat (likely dog's rear) unchanged; head and front of dog coloured
+7,"red cat, blue dog",1,
+7,"blue cat, red dog",1,
+8,"red cat, blue dog",1,
+8,"blue cat, red dog",1,
+9,"red cat, blue dog",0,cat head carries cat colour but cat body carries dog colour; dog front paw unchanged
+9,"blue cat, red dog",0,cat head carries cat colour but cat body carries dog colour; dog front paw unchanged
+10,"red cat, blue dog",1,
+10,"blue cat, red dog",1,
+11,"red cat, blue dog",1,
+11,"blue cat, red dog",1,
+12,"red cat, blue dog",0,cat head carries cat colour but cat body and legs carry dog colour
+12,"blue cat, red dog",0,cat head carries cat colour but cat body and legs carry dog colour
+13,"red cat, blue dog",0,cat colour on head only; black cat body unchanged
+13,"blue cat, red dog",0,cat colour on head only; black cat body unchanged
+14,"red cat, blue dog",1,
+14,"blue cat, red dog",1,
+15,"red cat, blue dog",0,cat colour on head only; large cat body unchanged
+15,"blue cat, red dog",0,cat colour on head only; large cat body unchanged

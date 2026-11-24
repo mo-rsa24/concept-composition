@@ -1,0 +1,65 @@
+index,relation_right,size_call,box_note
+0,1,right,
+1,1,right,
+2,1,no_label,
+3,1,wrong,cat box covers head only
+4,1,wrong,cat box covers head only
+5,1,wrong,cat box covers head only
+6,1,right,
+7,1,right,
+8,1,right,
+9,1,right,cat box covers head only; dog box also covers cat
+10,1,right,
+11,1,no_label,
+12,1,wrong,cat box covers head only; dog box covers cat body
+13,1,right,cat box covers head only
+14,1,no_label,
+15,1,wrong,cat box covers head and chest only
+16,1,right,cat box covers head only
+17,1,right,
+18,1,right,
+19,1,right,cat box covers head only
+20,1,wrong,cat box covers cat ear area only and misses the cat; dog box covers whole picture
+21,1,wrong,cat box covers head only; dog box covers both animals
+22,1,no_label,
+23,1,wrong,cat box covers head only
+24,1,right,
+25,1,wrong,cat box covers head only
+26,1,right,cat box covers head only; dog box covers whole picture
+27,1,wrong,
+28,1,wrong,cat box covers head and chest only; dog box covers cat
+29,1,right,
+30,1,right,cat box covers head only
+31,1,right,cat box covers head only
+32,1,no_label,
+33,1,right,
+34,1,wrong,cat box covers head only; dog box covers cat body
+35,1,no_label,
+36,1,right,cat box covers head only
+37,1,right,cat box covers head only; dog box covers cat
+38,1,right,cat box covers head only; dog box covers whole picture
+39,1,right,
+40,1,right,cat box misses lower half of cat
+41,1,right,
+42,1,right,dog box covers cat
+43,0,right,cat box covers head only; left-right ambiguous: cat sits between dog's front legs under its chin
+44,1,right,
+45,1,right,
+46,1,right,cat box covers head only
+47,1,right,
+48,1,wrong,cat box covers head only
+49,1,no_label,
+50,1,right,
+51,1,wrong,cat box covers head only
+52,1,right,cat box covers head only; dog box covers cat
+53,1,wrong,cat box covers head only
+54,0,right,cat box covers head only; left-right ambiguous: cat sits centred in front of dog between its paws
+55,1,wrong,
+56,1,wrong,
+57,1,right,cat box covers head only; dog box covers whole picture
+58,1,wrong,cat box covers edge of cat face only and misses the cat
+59,1,right,
+60,1,wrong,cat box covers head only
+61,1,wrong,
+62,1,right,
+63,1,right,cat box covers head only

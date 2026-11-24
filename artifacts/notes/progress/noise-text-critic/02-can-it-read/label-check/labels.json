@@ -1,0 +1,1286 @@
+{
+ "map_t": 200,
+ "prompt": "a cat and a dog",
+ "records": [
+  {
+   "index": 0,
+   "id": "more_catdog-a_cat__x__a_dog__seed239__joint",
+   "seed": 239,
+   "cat_left": true,
+   "cat_box": [
+    3,
+    7,
+    15,
+    30
+   ],
+   "dog_box": [
+    9,
+    4,
+    32,
+    31
+   ],
+   "larger": "dog",
+   "area_ratio": 2.25
+  },
+  {
+   "index": 1,
+   "id": "more_catdog-a_cat__x__a_dog__seed205__joint",
+   "seed": 205,
+   "cat_left": true,
+   "cat_box": [
+    8,
+    8,
+    18,
+    26
+   ],
+   "dog_box": [
+    14,
+    2,
+    29,
+    25
+   ],
+   "larger": "dog",
+   "area_ratio": 1.9166666666666667
+  },
+  {
+   "index": 2,
+   "id": "more_catdog-a_cat__x__a_dog__seed211__joint",
+   "seed": 211,
+   "cat_left": true,
+   "cat_box": [
+    0,
+    5,
+    15,
+    27
+   ],
+   "dog_box": [
+    13,
+    6,
+    31,
+    28
+   ],
+   "larger": null,
+   "area_ratio": 1.2
+  },
+  {
+   "index": 3,
+   "id": "more2-a_cat__x__a_dog__seed743__joint",
+   "seed": 743,
+   "cat_left": true,
+   "cat_box": [
+    2,
+    4,
+    15,
+    16
+   ],
+   "dog_box": [
+    16,
+    2,
+    32,
+    32
+   ],
+   "larger": "dog",
+   "area_ratio": 3.076923076923077
+  },
+  {
+   "index": 4,
+   "id": "seed07__left_right",
+   "seed": 7,
+   "cat_left": false,
+   "cat_box": [
+    20,
+    3,
+    30,
+    14
+   ],
+   "dog_box": [
+    0,
+    6,
+    17,
+    31
+   ],
+   "larger": "dog",
+   "area_ratio": 3.8636363636363638
+  },
+  {
+   "index": 5,
+   "id": "seed07__joint",
+   "seed": 7,
+   "cat_left": false,
+   "cat_box": [
+    14,
+    0,
+    26,
+    13
+   ],
+   "dog_box": [
+    0,
+    6,
+    18,
+    32
+   ],
+   "larger": "dog",
+   "area_ratio": 3.0
+  },
+  {
+   "index": 6,
+   "id": "more2-a_cat__x__a_dog__seed654__joint",
+   "seed": 654,
+   "cat_left": true,
+   "cat_box": [
+    6,
+    10,
+    16,
+    23
+   ],
+   "dog_box": [
+    12,
+    3,
+    32,
+    28
+   ],
+   "larger": "dog",
+   "area_ratio": 3.8461538461538463
+  },
+  {
+   "index": 7,
+   "id": "more2-a_cat__x__a_dog__seed677__joint",
+   "seed": 677,
+   "cat_left": true,
+   "cat_box": [
+    0,
+    8,
+    17,
+    31
+   ],
+   "dog_box": [
+    13,
+    3,
+    32,
+    32
+   ],
+   "larger": "dog",
+   "area_ratio": 1.4092071611253196
+  },
+  {
+   "index": 8,
+   "id": "more2-a_cat__x__a_dog__seed717__joint",
+   "seed": 717,
+   "cat_left": true,
+   "cat_box": [
+    1,
+    8,
+    15,
+    29
+   ],
+   "dog_box": [
+    12,
+    3,
+    29,
+    30
+   ],
+   "larger": "dog",
+   "area_ratio": 1.5612244897959184
+  },
+  {
+   "index": 9,
+   "id": "more2-a_cat__x__a_dog__seed636__joint",
+   "seed": 636,
+   "cat_left": false,
+   "cat_box": [
+    20,
+    2,
+    32,
+    15
+   ],
+   "dog_box": [
+    0,
+    5,
+    32,
+    28
+   ],
+   "larger": "dog",
+   "area_ratio": 4.717948717948718
+  },
+  {
+   "index": 10,
+   "id": "more_catdog-a_cat__x__a_dog__seed227__joint",
+   "seed": 227,
+   "cat_left": true,
+   "cat_box": [
+    0,
+    8,
+    16,
+    30
+   ],
+   "dog_box": [
+    10,
+    4,
+    32,
+    32
+   ],
+   "larger": "dog",
+   "area_ratio": 1.75
+  },
+  {
+   "index": 11,
+   "id": "more_catdog-a_cat__x__a_dog__seed213__joint",
+   "seed": 213,
+   "cat_left": true,
+   "cat_box": [
+    1,
+    8,
+    15,
+    28
+   ],
+   "dog_box": [
+    15,
+    6,
+    32,
+    26
+   ],
+   "larger": null,
+   "area_ratio": 1.2142857142857142
+  },
+  {
+   "index": 12,
+   "id": "more_catdog-a_cat__x__a_dog__seed224__joint",
+   "seed": 224,
+   "cat_left": true,
+   "cat_box": [
+    7,
+    7,
+    17,
+    17
+   ],
+   "dog_box": [
+    2,
+    13,
+    32,
+    25
+   ],
+   "larger": "dog",
+   "area_ratio": 3.6
+  },
+  {
+   "index": 13,
+   "id": "more2-a_cat__x__a_dog__seed667__joint",
+   "seed": 667,
+   "cat_left": true,
+   "cat_box": [
+    5,
+    4,
+    17,
+    17
+   ],
+   "dog_box": [
+    16,
+    1,
+    32,
+    23
+   ],
+   "larger": "dog",
+   "area_ratio": 2.2564102564102564
+  },
+  {
+   "index": 14,
+   "id": "more_catdog-a_cat__x__a_dog__seed223__joint",
+   "seed": 223,
+   "cat_left": true,
+   "cat_box": [
+    3,
+    6,
+    17,
+    28
+   ],
+   "dog_box": [
+    16,
+    8,
+    32,
+    29
+   ],
+   "larger": null,
+   "area_ratio": 1.0909090909090908
+  },
+  {
+   "index": 15,
+   "id": "more2-a_cat__x__a_dog__seed607__joint",
+   "seed": 607,
+   "cat_left": true,
+   "cat_box": [
+    3,
+    2,
+    17,
+    20
+   ],
+   "dog_box": [
+    14,
+    2,
+    32,
+    32
+   ],
+   "larger": "dog",
+   "area_ratio": 2.142857142857143
+  },
+  {
+   "index": 16,
+   "id": "more2-a_cat__x__a_dog__seed626__joint",
+   "seed": 626,
+   "cat_left": true,
+   "cat_box": [
+    4,
+    7,
+    13,
+    17
+   ],
+   "dog_box": [
+    13,
+    2,
+    32,
+    31
+   ],
+   "larger": "dog",
+   "area_ratio": 6.122222222222222
+  },
+  {
+   "index": 17,
+   "id": "more2-a_cat__x__a_dog__seed745__joint",
+   "seed": 745,
+   "cat_left": true,
+   "cat_box": [
+    1,
+    1,
+    22,
+    32
+   ],
+   "dog_box": [
+    17,
+    6,
+    32,
+    32
+   ],
+   "larger": "cat",
+   "area_ratio": 1.6692307692307693
+  },
+  {
+   "index": 18,
+   "id": "more2-a_cat__x__a_dog__seed664__joint",
+   "seed": 664,
+   "cat_left": true,
+   "cat_box": [
+    2,
+    10,
+    12,
+    29
+   ],
+   "dog_box": [
+    9,
+    5,
+    32,
+    29
+   ],
+   "larger": "dog",
+   "area_ratio": 2.905263157894737
+  },
+  {
+   "index": 19,
+   "id": "more_catdog-a_cat__x__a_dog__seed229__joint",
+   "seed": 229,
+   "cat_left": true,
+   "cat_box": [
+    0,
+    0,
+    17,
+    18
+   ],
+   "dog_box": [
+    9,
+    2,
+    32,
+    32
+   ],
+   "larger": "dog",
+   "area_ratio": 2.2549019607843137
+  },
+  {
+   "index": 20,
+   "id": "more_catdog-a_cat__x__a_dog__seed207__joint",
+   "seed": 207,
+   "cat_left": false,
+   "cat_box": [
+    20,
+    11,
+    27,
+    21
+   ],
+   "dog_box": [
+    0,
+    2,
+    32,
+    32
+   ],
+   "larger": "dog",
+   "area_ratio": 13.714285714285714
+  },
+  {
+   "index": 21,
+   "id": "more2-a_cat__x__a_dog__seed723__joint",
+   "seed": 723,
+   "cat_left": false,
+   "cat_box": [
+    19,
+    4,
+    30,
+    16
+   ],
+   "dog_box": [
+    0,
+    6,
+    32,
+    29
+   ],
+   "larger": "dog",
+   "area_ratio": 5.575757575757576
+  },
+  {
+   "index": 22,
+   "id": "more2-a_cat__x__a_dog__seed747__joint",
+   "seed": 747,
+   "cat_left": true,
+   "cat_box": [
+    0,
+    1,
+    15,
+    30
+   ],
+   "dog_box": [
+    14,
+    6,
+    32,
+    28
+   ],
+   "larger": null,
+   "area_ratio": 1.0984848484848484
+  },
+  {
+   "index": 23,
+   "id": "more2-a_cat__x__a_dog__seed647__joint",
+   "seed": 647,
+   "cat_left": false,
+   "cat_box": [
+    11,
+    1,
+    31,
+    19
+   ],
+   "dog_box": [
+    0,
+    5,
+    27,
+    32
+   ],
+   "larger": "dog",
+   "area_ratio": 2.025
+  },
+  {
+   "index": 24,
+   "id": "more2-a_cat__x__a_dog__seed749__joint",
+   "seed": 749,
+   "cat_left": true,
+   "cat_box": [
+    0,
+    6,
+    15,
+    25
+   ],
+   "dog_box": [
+    10,
+    3,
+    32,
+    30
+   ],
+   "larger": "dog",
+   "area_ratio": 2.0842105263157893
+  },
+  {
+   "index": 25,
+   "id": "seed08-d2__left_right",
+   "seed": 8,
+   "cat_left": true,
+   "cat_box": [
+    1,
+    5,
+    14,
+    19
+   ],
+   "dog_box": [
+    14,
+    5,
+    32,
+    32
+   ],
+   "larger": "dog",
+   "area_ratio": 2.67032967032967
+  },
+  {
+   "index": 26,
+   "id": "more2-a_cat__x__a_dog__seed685__joint",
+   "seed": 685,
+   "cat_left": false,
+   "cat_box": [
+    19,
+    8,
+    27,
+    20
+   ],
+   "dog_box": [
+    0,
+    0,
+    32,
+    32
+   ],
+   "larger": "dog",
+   "area_ratio": 10.666666666666666
+  },
+  {
+   "index": 27,
+   "id": "more2-a_cat__x__a_dog__seed696__joint",
+   "seed": 696,
+   "cat_left": true,
+   "cat_box": [
+    0,
+    11,
+    19,
+    30
+   ],
+   "dog_box": [
+    11,
+    4,
+    32,
+    31
+   ],
+   "larger": "dog",
+   "area_ratio": 1.5706371191135735
+  },
+  {
+   "index": 28,
+   "id": "more2-a_cat__x__a_dog__seed630__joint",
+   "seed": 630,
+   "cat_left": false,
+   "cat_box": [
+    15,
+    10,
+    23,
+    22
+   ],
+   "dog_box": [
+    3,
+    9,
+    23,
+    26
+   ],
+   "larger": "dog",
+   "area_ratio": 3.5416666666666665
+  },
+  {
+   "index": 29,
+   "id": "more2-a_cat__x__a_dog__seed697__joint",
+   "seed": 697,
+   "cat_left": true,
+   "cat_box": [
+    6,
+    18,
+    15,
+    29
+   ],
+   "dog_box": [
+    4,
+    3,
+    32,
+    30
+   ],
+   "larger": "dog",
+   "area_ratio": 7.636363636363637
+  },
+  {
+   "index": 30,
+   "id": "more2-a_cat__x__a_dog__seed684__joint",
+   "seed": 684,
+   "cat_left": true,
+   "cat_box": [
+    4,
+    12,
+    12,
+    21
+   ],
+   "dog_box": [
+    7,
+    4,
+    32,
+    28
+   ],
+   "larger": "dog",
+   "area_ratio": 8.333333333333334
+  },
+  {
+   "index": 31,
+   "id": "more2-a_cat__x__a_dog__seed712__joint",
+   "seed": 712,
+   "cat_left": false,
+   "cat_box": [
+    21,
+    10,
+    28,
+    17
+   ],
+   "dog_box": [
+    0,
+    5,
+    32,
+    26
+   ],
+   "larger": "dog",
+   "area_ratio": 13.714285714285714
+  },
+  {
+   "index": 32,
+   "id": "more2-a_cat__x__a_dog__seed601__joint",
+   "seed": 601,
+   "cat_left": true,
+   "cat_box": [
+    0,
+    2,
+    17,
+    30
+   ],
+   "dog_box": [
+    14,
+    4,
+    32,
+    30
+   ],
+   "larger": null,
+   "area_ratio": 1.017094017094017
+  },
+  {
+   "index": 33,
+   "id": "more_catdog-a_cat__x__a_dog__seed221__joint",
+   "seed": 221,
+   "cat_left": true,
+   "cat_box": [
+    2,
+    7,
+    15,
+    30
+   ],
+   "dog_box": [
+    11,
+    4,
+    30,
+    31
+   ],
+   "larger": "dog",
+   "area_ratio": 1.7157190635451505
+  },
+  {
+   "index": 34,
+   "id": "more2-a_cat__x__a_dog__seed618__joint",
+   "seed": 618,
+   "cat_left": false,
+   "cat_box": [
+    16,
+    1,
+    31,
+    16
+   ],
+   "dog_box": [
+    0,
+    9,
+    32,
+    26
+   ],
+   "larger": "dog",
+   "area_ratio": 2.417777777777778
+  },
+  {
+   "index": 35,
+   "id": "more2-a_cat__x__a_dog__seed735__joint",
+   "seed": 735,
+   "cat_left": true,
+   "cat_box": [
+    0,
+    8,
+    19,
+    28
+   ],
+   "dog_box": [
+    15,
+    6,
+    30,
+    27
+   ],
+   "larger": null,
+   "area_ratio": 1.2063492063492063
+  },
+  {
+   "index": 36,
+   "id": "more_catdog-a_cat__x__a_dog__seed237__joint",
+   "seed": 237,
+   "cat_left": true,
+   "cat_box": [
+    8,
+    12,
+    16,
+    21
+   ],
+   "dog_box": [
+    8,
+    2,
+    32,
+    31
+   ],
+   "larger": "dog",
+   "area_ratio": 9.666666666666666
+  },
+  {
+   "index": 37,
+   "id": "more2-a_cat__x__a_dog__seed681__joint",
+   "seed": 681,
+   "cat_left": false,
+   "cat_box": [
+    20,
+    12,
+    29,
+    23
+   ],
+   "dog_box": [
+    0,
+    7,
+    29,
+    31
+   ],
+   "larger": "dog",
+   "area_ratio": 7.03030303030303
+  },
+  {
+   "index": 38,
+   "id": "more2-a_cat__x__a_dog__seed676__joint",
+   "seed": 676,
+   "cat_left": false,
+   "cat_box": [
+    19,
+    14,
+    30,
+    27
+   ],
+   "dog_box": [
+    0,
+    1,
+    29,
+    32
+   ],
+   "larger": "dog",
+   "area_ratio": 6.286713286713287
+  },
+  {
+   "index": 39,
+   "id": "more2-a_cat__x__a_dog__seed699__joint",
+   "seed": 699,
+   "cat_left": true,
+   "cat_box": [
+    1,
+    11,
+    13,
+    27
+   ],
+   "dog_box": [
+    11,
+    2,
+    32,
+    31
+   ],
+   "larger": "dog",
+   "area_ratio": 3.171875
+  },
+  {
+   "index": 40,
+   "id": "more_catdog-a_cat__x__a_dog__seed222__joint",
+   "seed": 222,
+   "cat_left": false,
+   "cat_box": [
+    19,
+    11,
+    28,
+    23
+   ],
+   "dog_box": [
+    3,
+    4,
+    24,
+    29
+   ],
+   "larger": "dog",
+   "area_ratio": 4.861111111111111
+  },
+  {
+   "index": 41,
+   "id": "more2-a_cat__x__a_dog__seed698__joint",
+   "seed": 698,
+   "cat_left": true,
+   "cat_box": [
+    3,
+    6,
+    14,
+    24
+   ],
+   "dog_box": [
+    13,
+    4,
+    30,
+    26
+   ],
+   "larger": "dog",
+   "area_ratio": 1.8888888888888888
+  },
+  {
+   "index": 42,
+   "id": "more2-a_cat__x__a_dog__seed740__joint",
+   "seed": 740,
+   "cat_left": false,
+   "cat_box": [
+    17,
+    12,
+    24,
+    23
+   ],
+   "dog_box": [
+    8,
+    3,
+    29,
+    31
+   ],
+   "larger": "dog",
+   "area_ratio": 7.636363636363637
+  },
+  {
+   "index": 43,
+   "id": "more2-a_cat__x__a_dog__seed608__joint",
+   "seed": 608,
+   "cat_left": false,
+   "cat_box": [
+    14,
+    16,
+    22,
+    23
+   ],
+   "dog_box": [
+    0,
+    3,
+    29,
+    32
+   ],
+   "larger": "dog",
+   "area_ratio": 15.017857142857142
+  },
+  {
+   "index": 44,
+   "id": "more_catdog-a_cat__x__a_dog__seed212__joint",
+   "seed": 212,
+   "cat_left": true,
+   "cat_box": [
+    3,
+    4,
+    18,
+    30
+   ],
+   "dog_box": [
+    16,
+    8,
+    28,
+    31
+   ],
+   "larger": "cat",
+   "area_ratio": 1.4130434782608696
+  },
+  {
+   "index": 45,
+   "id": "more2-a_cat__x__a_dog__seed734__joint",
+   "seed": 734,
+   "cat_left": true,
+   "cat_box": [
+    9,
+    6,
+    18,
+    28
+   ],
+   "dog_box": [
+    19,
+    6,
+    32,
+    29
+   ],
+   "larger": "dog",
+   "area_ratio": 1.5101010101010102
+  },
+  {
+   "index": 46,
+   "id": "more2-a_cat__x__a_dog__seed655__joint",
+   "seed": 655,
+   "cat_left": true,
+   "cat_box": [
+    4,
+    9,
+    15,
+    21
+   ],
+   "dog_box": [
+    13,
+    2,
+    32,
+    32
+   ],
+   "larger": "dog",
+   "area_ratio": 4.318181818181818
+  },
+  {
+   "index": 47,
+   "id": "more2-a_cat__x__a_dog__seed687__joint",
+   "seed": 687,
+   "cat_left": true,
+   "cat_box": [
+    5,
+    9,
+    15,
+    24
+   ],
+   "dog_box": [
+    12,
+    7,
+    27,
+    27
+   ],
+   "larger": "dog",
+   "area_ratio": 2.0
+  },
+  {
+   "index": 48,
+   "id": "more2-a_cat__x__a_dog__seed700__joint",
+   "seed": 700,
+   "cat_left": false,
+   "cat_box": [
+    17,
+    7,
+    26,
+    17
+   ],
+   "dog_box": [
+    4,
+    8,
+    18,
+    25
+   ],
+   "larger": "dog",
+   "area_ratio": 2.6444444444444444
+  },
+  {
+   "index": 49,
+   "id": "more2-a_cat__x__a_dog__seed744__joint",
+   "seed": 744,
+   "cat_left": true,
+   "cat_box": [
+    0,
+    3,
+    16,
+    29
+   ],
+   "dog_box": [
+    15,
+    7,
+    32,
+    30
+   ],
+   "larger": null,
+   "area_ratio": 1.0639386189258313
+  },
+  {
+   "index": 50,
+   "id": "more2-a_cat__x__a_dog__seed675__joint",
+   "seed": 675,
+   "cat_left": true,
+   "cat_box": [
+    6,
+    13,
+    19,
+    29
+   ],
+   "dog_box": [
+    14,
+    5,
+    32,
+    27
+   ],
+   "larger": "dog",
+   "area_ratio": 1.9038461538461537
+  },
+  {
+   "index": 51,
+   "id": "more_catdog-a_cat__x__a_dog__seed250__joint",
+   "seed": 250,
+   "cat_left": false,
+   "cat_box": [
+    15,
+    6,
+    27,
+    17
+   ],
+   "dog_box": [
+    2,
+    4,
+    20,
+    29
+   ],
+   "larger": "dog",
+   "area_ratio": 3.409090909090909
+  },
+  {
+   "index": 52,
+   "id": "more2-a_cat__x__a_dog__seed605__joint",
+   "seed": 605,
+   "cat_left": false,
+   "cat_box": [
+    19,
+    8,
+    27,
+    17
+   ],
+   "dog_box": [
+    5,
+    2,
+    32,
+    31
+   ],
+   "larger": "dog",
+   "area_ratio": 10.875
+  },
+  {
+   "index": 53,
+   "id": "more2-a_cat__x__a_dog__seed691__joint",
+   "seed": 691,
+   "cat_left": true,
+   "cat_box": [
+    2,
+    4,
+    15,
+    17
+   ],
+   "dog_box": [
+    15,
+    7,
+    30,
+    29
+   ],
+   "larger": "dog",
+   "area_ratio": 1.952662721893491
+  },
+  {
+   "index": 54,
+   "id": "more2-a_cat__x__a_dog__seed661__joint",
+   "seed": 661,
+   "cat_left": false,
+   "cat_box": [
+    16,
+    10,
+    26,
+    20
+   ],
+   "dog_box": [
+    6,
+    2,
+    32,
+    31
+   ],
+   "larger": "dog",
+   "area_ratio": 7.54
+  },
+  {
+   "index": 55,
+   "id": "more2-a_cat__x__a_dog__seed736__joint",
+   "seed": 736,
+   "cat_left": true,
+   "cat_box": [
+    3,
+    3,
+    16,
+    30
+   ],
+   "dog_box": [
+    15,
+    2,
+    32,
+    32
+   ],
+   "larger": "dog",
+   "area_ratio": 1.452991452991453
+  },
+  {
+   "index": 56,
+   "id": "more_catdog-a_cat__x__a_dog__seed209__joint",
+   "seed": 209,
+   "cat_left": true,
+   "cat_box": [
+    3,
+    3,
+    17,
+    19
+   ],
+   "dog_box": [
+    16,
+    7,
+    32,
+    30
+   ],
+   "larger": "dog",
+   "area_ratio": 1.6428571428571428
+  },
+  {
+   "index": 57,
+   "id": "more2-a_cat__x__a_dog__seed652__joint",
+   "seed": 652,
+   "cat_left": true,
+   "cat_box": [
+    3,
+    3,
+    15,
+    16
+   ],
+   "dog_box": [
+    0,
+    0,
+    32,
+    32
+   ],
+   "larger": "dog",
+   "area_ratio": 6.564102564102564
+  },
+  {
+   "index": 58,
+   "id": "more_catdog-a_cat__x__a_dog__seed242__joint",
+   "seed": 242,
+   "cat_left": false,
+   "cat_box": [
+    16,
+    10,
+    24,
+    20
+   ],
+   "dog_box": [
+    0,
+    9,
+    22,
+    32
+   ],
+   "larger": "dog",
+   "area_ratio": 6.325
+  },
+  {
+   "index": 59,
+   "id": "more2-a_cat__x__a_dog__seed710__joint",
+   "seed": 710,
+   "cat_left": true,
+   "cat_box": [
+    3,
+    10,
+    15,
+    27
+   ],
+   "dog_box": [
+    11,
+    2,
+    30,
+    30
+   ],
+   "larger": "dog",
+   "area_ratio": 2.607843137254902
+  },
+  {
+   "index": 60,
+   "id": "more2-a_cat__x__a_dog__seed658__joint",
+   "seed": 658,
+   "cat_left": true,
+   "cat_box": [
+    1,
+    0,
+    16,
+    21
+   ],
+   "dog_box": [
+    10,
+    11,
+    32,
+    32
+   ],
+   "larger": "dog",
+   "area_ratio": 1.4666666666666666
+  },
+  {
+   "index": 61,
+   "id": "more2-a_cat__x__a_dog__seed620__joint",
+   "seed": 620,
+   "cat_left": false,
+   "cat_box": [
+    15,
+    4,
+    32,
+    22
+   ],
+   "dog_box": [
+    0,
+    5,
+    20,
+    26
+   ],
+   "larger": "dog",
+   "area_ratio": 1.3725490196078431
+  },
+  {
+   "index": 62,
+   "id": "more2-a_cat__x__a_dog__seed639__joint",
+   "seed": 639,
+   "cat_left": true,
+   "cat_box": [
+    2,
+    7,
+    14,
+    30
+   ],
+   "dog_box": [
+    13,
+    5,
+    29,
+    30
+   ],
+   "larger": "dog",
+   "area_ratio": 1.4492753623188406
+  },
+  {
+   "index": 63,
+   "id": "more_catdog-a_cat__x__a_dog__seed202__joint",
+   "seed": 202,
+   "cat_left": false,
+   "cat_box": [
+    22,
+    10,
+    30,
+    18
+   ],
+   "dog_box": [
+    0,
+    4,
+    17,
+    27
+   ],
+   "larger": "dog",
+   "area_ratio": 6.109375
+  }
+ ]
+}
