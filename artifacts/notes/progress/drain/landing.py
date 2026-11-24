@@ -48,7 +48,7 @@ RULES = [
     (P + "abstract-checkers/remove-one-checker", R2 + "abstract-checkers-on-digits/does-removing-one-checker-remove-its-property.md", "the design picture for V5"),
     (P + "abstract-checkers/", "", PROC),
     # Loop 9
-    (P + "noise-text-critic/02-can-it-read/", R2 + "the-sentence-score/can-a-sentence-score-read-the-five-properties.md", ""),
+    (P + "noise-text-critic/02-can-it-read/", R2 + "can-a-sentence-score-read-the-five-properties.md", ""),
     (P + "noise-text-critic/02c-fair-test/", "", WAIT + " (W2c)"),
     (P + "noise-text-critic/01-reading/latent-clip", M + "05-latent-clip/01-overview.md", ""),
     (P + "noise-text-critic/way-2", M + "05-latent-clip/01-overview.md", ""),
@@ -58,7 +58,7 @@ RULES = [
     (P + "noise-text-critic/three-way-space-idea", M + "07-the-score-path/01-overview.md", ""),
     (P + "noise-text-critic/", "", PROC),
     # Loop 10
-    (P + "score-space/05-signal/", R2 + "the-score-path/does-the-score-path-carry-which-digits-are-present.md", ""),
+    (P + "score-space/05-signal/", R2 + "does-the-score-path-carry-which-digits-are-present.md", ""),
     (P + "score-space/00-ladder/style-sample", "", "none: a style sample for drawing, not a result or a method"),
     (P + "score-space/00-ladder/2-miniature/", M + "07-the-score-path/03-the-miniature.md", ""),
     (P + "score-space/00-ladder/0.5-network-view/", M + "07-the-score-path/02-the-network-view.md", ""),
