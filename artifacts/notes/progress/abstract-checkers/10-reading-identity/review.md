@@ -1,6 +1,6 @@
 # Can a checker read which digits are present (step V6): review
 
-**Status: support. A checker trained on digits 0 to 4 tells two right digits from one right and one wrong digit at 0.861 balanced accuracy on digits 5 to 9.** The bar, written before the run, is 0.75; 0.5 is chance. The frozen model alone reads the same canvases at 0.539, so the checker's reading is its own. On the sampler's own states it reads 0.651, under the 0.75 bar for that check, so step V7 waits on the owner. 0.861 is the fair number: the checker, the ten-label signature read in the later window, is the best of four cells chosen on the pairs holding digit 4, where it scored 0.888. Digits 5 to 9 have been read by earlier steps too (V2, V3 and V5), so they are held out from training but not unread. The design is [the V6 design](design.md).
+**Status: support. A checker trained on digits 0 to 4 tells two right digits from one right and one wrong digit at 0.861 balanced accuracy on digits 5 to 9.** The bar, written before the run, is 0.75; 0.5 is chance. The frozen model alone reads the same canvases at 0.539, so the checker's reading is its own. On the sampler's own states it reads 0.651, under the 0.75 bar for that check, and a checker retrained on those states reads fresh digits 5 to 9 at 0.552, so step V7 does not run. 0.861 is the fair number: the checker, the ten-label signature read in the later window, is the best of four cells chosen on the pairs holding digit 4, where it scored 0.888. Digits 5 to 9 have been read by earlier steps too (V2, V3 and V5), so they are held out from training but not unread. The design is [the V6 design](design.md).
 
 <a href="identity-grid.png"><img src="identity-grid.png" width="900" alt="The 2 by 2 grid. V2's identity checker at 0.555 leads into the early window, where two maps score 0.563 and the ten-label signature 0.612, both red. The later window holds two maps at 0.702, red, and the ten-label signature at 0.888, green, which leads to the retrain on digits 0 to 4 and the read of digits 5 to 9."></a>
 
@@ -11,6 +11,7 @@
 - [Digits 5 to 9](#digits-5-to-9)
 - [The robustness checks](#the-robustness-checks)
 - [Two checks before V7](#two-checks-before-v7)
+- [Retraining on the sampler's own states](#retraining-on-the-samplers-own-states)
 - [The runs](#the-runs)
 - [What this cannot say](#what-this-cannot-say)
 
@@ -79,6 +80,21 @@ Both ran on mscluster107's card 1, on another user's idle allocation, by the own
 
 **What this cannot say.** The labels come from the finished picture, ten to twenty steps after the read, so a state the checker reads correctly can still end in a different picture. The training set's `wrong` canvases always hold one asked digit and one other digit; on sampler states a wrong canvas may hold the same asked digit twice, which the training never showed (inferred; the judge's per-canvas digits were not saved).
 
+## Retraining on the sampler's own states
+
+The checker was retrained on the sampler's own states, as [the design's retraining section](design.md#retraining-on-the-samplers-own-states) sets out (board question 94, option A). It **does not read sampler states**: 0.552 on fresh digits 5 to 9, against the bar of 0.75. Step V7 does not run, and the result goes to the owner. The numbers are in [the training data file](grid-files/collect-collect.json) and [the read file](grid-files/train-read.json).
+
+| What | Result |
+|---|---|
+| Training canvases, digits 0 to 4, seeds 2000 to 2959 (job 94654, 15 min) | 9,600 rendered; 1,486 clean (label 1) and 550 with two confident digits that are not the asked pair (label 0); 3,738 one blob, 3,358 two digits not both clear, 904 damaged and 114 in one half were left out |
+| Training (job 94655) | the 16-example check learned 16 of 16; 4,000 updates, final loss 0.0014 |
+| Read on fresh digits 5 to 9, seeds 3000 to 3095, used once | 0.552 over the 10 steps (0.49 to 0.61 per step), on 108 clean against 50 wrong-digit canvases |
+| Read on V1's pasted digits 5 to 9, beside it | 0.541: 0.750 right on two-right-digit canvases, 0.332 on one-wrong-digit canvases |
+
+**It learned the training digits, not the property.** A loss of 0.0014 on 2,036 canvases, with both reads of unseen digits near chance, is what memorising digits 0 to 4 looks like. V6's original checker trained on 15,000 pasted canvases and carried over to unseen digits at 0.861; on these states it read 0.651. Retraining on 2,036 states lost the carry-over without gaining the states.
+
+**What this cannot say.** One training size and one recipe were tried. A checker trained on pasted canvases and sampler states together, or on many more sampler states, has not been tested. The smoke test (job 94653) read seeds 2960 to 2967, which are outside both ranges.
+
 ## The runs
 
 | Job | What | Node | Time | Result |
@@ -92,6 +108,8 @@ Both ran on mscluster107's card 1, on another user's idle allocation, by the own
 | 94471 | second training seed | mscluster60 | 44 min | 0.877 |
 | 94472 | labels shuffled | mscluster88 | 47 min | 0.500 |
 | shared run | the rule that needs no training, then the sampler read | mscluster107 card 1 | 17 min | 0.539 and 0.651 |
+| 94654 | training states on digits 0 to 4 | mscluster60 | 15 min | 2,036 labelled |
+| 94655 | retraining on states, then the fresh read | mscluster60 | 46 min | 0.552 |
 
 Commit `ba6d84da` scores the signature's U-Net calls in pieces of 128, the size training uses, and gives each signature cell its own job. The grid used 2.66 GPU-hours, the failed job included, and the read of digits 5 to 9 0.92. Loop 8 has used about 10.9 of its 30.
 

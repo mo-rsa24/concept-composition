@@ -1,0 +1,14 @@
+{
+ "stage": "collect",
+ "kept": 2036,
+ "label_1": 1486,
+ "label_0": 550,
+ "calls": {
+  "one blob": 3738,
+  "two, not both clear and right": 3358,
+  "two clear, right, apart": 1486,
+  "damaged": 904,
+  "same half": 114
+ },
+ "seconds": 882.1
+}
