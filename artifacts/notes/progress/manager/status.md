@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-24 20:04 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-24 20:09 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -74,18 +74,18 @@ The finish range is `session_status.py`'s, from the 52 finished steps: fastest p
 | 4. Rivals and targets | Keeping every target current. It recorded the CLEVR paste result and placed the two-colour CLEVR test in the CLEVR plan. | 1 | none useful: it ends after the paper tables, which have not started | idle | nothing |
 | 6. Best method | Its full read is in: the checker it kept does not see CO3's failure (best 60% right at step 5, floor 65%). By question 93 it now reads its two new checkers the same way (about 2.2 GPU-hours) before choosing an architecture or labels. Training on card 1 and in Slurm job 94622; two-colour CLEVR renders for Paper 1 beside it. | 9 | 4.4 h to 207.6 h | busy | its own runs |
 | 7. Abstract-checker papers | Finished; its session is closed. | 0 | done | closed | nothing |
-| 8. Abstract checkers | Its digit identity checker adds to the model's own knowledge (0.861 against 0.539 for a rule that needs no training) but reads the sampler's own states at only 0.651. By question 94 it now retrains the checker on sampler states and re-reads fresh digits 5 to 9 before running its removal test. Its SDXL test is rewritten to your answer on 86. | 3 | 1.9 h to 85.5 h | busy | its own retraining; the SDXL test waits on Loop 6's training list |
+| 8. Abstract checkers | On its removal test (step V7), whose first gate, from question 94, is retraining the identity checker on sampler states and reading fresh digits 5 to 9 at 0.75 or more. The retraining jobs wait for a node; the first try failed in 12 seconds and was resubmitted. Its SDXL test is rewritten to your answer on 86. | 3 | 1.9 h to 85.5 h | busy | a free node |
 | 11. Drain into the pillars | Stopped by your answer on 88. Its pillar checks are done and its census found every finished verdict on a report page (14 findings, eight method folders). Its final step stays open until Loops 6 and 8 stop. | 1 | when restarted | stopped its loop | waiting for a result worth draining: Loop 8's identity checker or Loop 6's two-colour CLEVR test |
 | 12. Where CO3 leaks | Its predictor pass is done and null ([review](../leakage/02-what-predicts-borrowing/review.md)). Now testing one fix for borrowed parts (step Z3) as question 91 set it: a free check on saved records, then a place-by-place fix at about steps 15 to 30 with boxes drawn by eye as a positive control, counted as two clear subjects with drawing ignored (question 92). Loop 4 has updated the bar page to match. | 4 | 2.4 h to 112.6 h | busy | its own free check; then about 1.7 GPU-hours |
 
 ## Resources
 
-Read at 19:07 from `squeue`, `sacct`, `sinfo` and `nvidia-smi` on mscluster107; down nodes from `sinfo -R` at 16:28.
+Read at 20:07 from `squeue`, `sacct` and `sinfo`; down nodes from `sinfo -R` at 16:28.
 
 | What | Now |
 |---|---|
-| Our jobs against the caps | 4 running on `bigbatch` of 6 allowed (Loop 6's read of its new checker, its current-list training and two CLEVR renders); 0 on `biggpu`; 8 queued, including Loop 8's three retraining jobs; plus Loop 6's training on mscluster107 card 1 outside Slurm |
-| Longest wait | Loop 8's 20-minute retraining start (job 94640), waiting for a node |
+| Our jobs against the caps | 4 running on `bigbatch` of 6 allowed (Loop 6's current-list training and two CLEVR renders, Loop 12's fix test); 1 on `biggpu` of 1 (Loop 6 saving CO3's states on mscluster107's RTX 8000); 8 queued, including Loop 6's balanced-list training and Loop 8's three retraining jobs |
+| Longest wait | Loop 8's retraining start (job 94653), waiting for a node after its first try (94640) failed in 12 seconds |
 | Nodes out of service | `bigbatch`: 12 down and 5 drained of 48. `biggpu`: 2 down and 2 drained of 7, including mscluster108 and mscluster111, drained at 09:27 and 09:10 today after a failed job kill |
 | Idle capacity | none: at 17:43 every working `bigbatch` and `biggpu` node was allocated. mscluster107 is now another user's `biggpu` job (94610, 6-hour limit, started 17:36); its second card sits idle at 170 MiB, but their process holds it, so it is not ours to use. Your interactive job 83423 on that node no longer appears in the queue |
 | Shared card | **Not in use.** The other user's job on mscluster107 ended early, around 20:00, leaving the node idle in Slurm, so question 90's approval for borrowing a card inside their allocation no longer applies. Loop 6 stopped its shared run within 30 seconds, with nothing written, and resubmitted it through Slurm as its one `biggpu` job (94676, pinned to mscluster107 for the RTX 8000 the six CO3 pairs were first drawn on). Loop 8's run there earlier finished cleanly. A new shared-card run needs a new yes from you |
@@ -187,4 +187,4 @@ been acted on, 93 asked nothing, and 15 waited. Nine of those were re-routed or 
 
 ## Last tick
 
-2026-11-24 19:10. Next tick about 20:10. The briefing for you is [the briefing page](briefing.md).
+2026-11-24 20:09. Next tick about 21:09. The briefing for you is [the briefing page](briefing.md).
