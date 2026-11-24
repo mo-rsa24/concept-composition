@@ -51,6 +51,8 @@ RULES = [
     (P + "abstract-checkers/", "", PROC),
     # Loop 9
     (P + "noise-text-critic/02-can-it-read/", R2 + "the-sentence-score/can-a-sentence-score-read-the-five-properties.md", ""),
+    (P + "noise-text-critic/02b-linear-probe/", R2 + "the-sentence-score/does-a-linear-probe-on-frozen-image-vectors-read-unseen-pairs.md", ""),
+    (P + "noise-text-critic/04-train-our-own/", R2 + "the-sentence-score/does-our-own-noise-aware-model-read-unseen-digit-pairs.md", ""),
     (P + "noise-text-critic/02c-fair-test/", R2 + "the-sentence-score/is-the-sentence-score-test-fair.md", ""),
     (P + "noise-text-critic/01-reading/latent-clip", M + "05-latent-clip/01-overview.md", ""),
     (P + "noise-text-critic/way-2", M + "05-latent-clip/01-overview.md", ""),
