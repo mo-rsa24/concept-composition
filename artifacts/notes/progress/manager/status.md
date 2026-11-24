@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-24 16:36 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-24 16:39 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -61,7 +61,7 @@ The finish range is `session_status.py`'s, from the 52 finished steps: fastest p
 | 4. Rivals and targets | Keeping every target current. It recorded the CLEVR paste result and placed the two-colour CLEVR test in the CLEVR plan. | 1 | none useful: it ends after the paper tables, which have not started | idle (two sessions) | nothing |
 | 6. Best method | Training two checkers on differently balanced lists of training pictures, to learn which list Paper 2's checker should use (step M5). The training failed twice within 3 minutes and is running again. Two-colour CLEVR renders for Paper 1 run beside it. | 10 | 4.7 h to 232.7 h | busy | its own training job; question 87 decides how the result is judged |
 | 7. Abstract-checker papers | Finished. | 0 | done | idle | nothing |
-| 8. Abstract checkers | Checking that its digit checker really reads which digits are present: a second seed passed (0.877 balanced accuracy on unseen digit 4, bar 0.75; 0.5 is chance) and a shuffled-label control is scoring. | 3 | 2.4 h to 111.5 h | busy | the SDXL test waits on Loop 6's training list and on question 86 |
+| 8. Abstract checkers | Checking that its digit checker really reads which digits are present. Its robustness bars hold: a second seed scores 0.877 balanced accuracy on unseen digit 4 (bar 0.75; 0.5 is chance), shuffled labels score 0.500, and the weakest pair 0.844. Now running, with bars fixed first: the same reading by a rule that needs no training, and a read on real sampler states (jobs 94595 to 94597). | 3 | 2.4 h to 111.5 h | busy | the SDXL test waits on Loop 6's training list and on question 86 |
 | 11. Drain into the pillars | Auditing the 48 pages it wrote against the pillar formats. | 2 | 57 min to 43.4 h | idle | nothing since question 81 was decided |
 | 12. Where CO3 leaks | Measuring what predicts which animal pairs borrow each other's parts under CO3. Its small first read finished in 16 minutes; the main pass waits for a node. | 5 | 2.4 h to 113.9 h | busy | a free node for job 94450 |
 
@@ -125,7 +125,8 @@ Newest first.
 | Time | To | What and why |
 |---|---|---|
 | 16:30 | Loop 10 | Its question 78 is decided; its open requests are re-routed. |
-| 16:30 | Loop 8 | Four requests re-routed from Loop 7, with leave to mark the design lines that disagree with what ran as superseded, keeping the old wording visible. |
+| 16:39 | Loop 8 | The four requests re-routed from Loop 7 take the form Loop 8 proposed: the design text stays as written, and one added section lists what ran differently, line by line with commits. Loop 8 also put this to you in its own session; your answer there governs. |
+| 16:30 | Loop 8 | Four requests re-routed from Loop 7, which has finished. |
 | 16:30 | Loop 11 | Question 81 decided (all ten defaults); four requests re-routed from Loop 10. |
 | 16:30 | Loop 6 | Questions 83, 78 and 85 decided; question 87 left with you, so its bar stands until then. |
 | 16:25 | Loop 8 | **Reviewer verdict: fix**, with the review and question 86. |
@@ -148,4 +149,4 @@ been acted on, 93 asked nothing, and 15 waited. Nine of those were re-routed or 
 
 ## Last tick
 
-2026-11-24 16:36. Next tick about 17:06.
+2026-11-24 16:39. Next tick about 17:06.
