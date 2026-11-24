@@ -186,7 +186,7 @@
   "89": "answered",
   "90": "answered",
   "91": "answered",
-  "92": "open"
+  "92": "answered"
  },
  "nudges": [
   {
@@ -274,6 +274,10 @@
   {
    "q": 91,
    "choice": "changed A: later window, drawn-box control; scoring to q92"
+  },
+  {
+   "q": 92,
+   "choice": "yes, two clear subjects (owner delegated)"
   }
  ],
  "rerouted": {

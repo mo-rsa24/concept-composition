@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-24 18:41 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-24 18:46 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -45,6 +45,7 @@ At 16:55, in chat, recorded on the board and sent to each loop:
 |---|---|---|
 | 88 | Should Loop 11 stop after its last two steps until a research loop has something new? | yes, the default |
 | 87 | Should Loop 6's checker search be judged on two clear subjects, drawing style ignored? | yes; damage reported beside it, two reviewers per picture |
+| 92 | Should Loop 12's fix test count two clear subjects with their own parts, drawing style ignored? | you asked Loop 13 to decide: yes, with broken anatomy as a guard and faithful pairs reported beside it, so every Paper 2 result is counted one way; Loop 4 is bringing the bar's page in line |
 | 90 | May loops run queued work on mscluster107's idle card 1, inside another user's allocation? | yes: one run at a time, Loop 8 then Loop 6, with a watchdog that stops ours if their process starts using the card |
 | 89 | May Loop 13 add an edit command to the board script and fix the three records that disagreed with your answers? | yes: Loop 8's SDXL test now needs Loop 6's training list and names CO3 alone as its rival; the small CLEVR test is closed without running and the recipe freeze waits on the two-colour CLEVR test; Loop 10's skipped steps are closed. Commit `88b787c9`; the board before the change is kept at `/home/molef/.claude/jobs/3c51301e/tmp/board-before-q89.json` |
 | 79 | Which of Loop 9's two recorded verdicts leads its report title? | the default: the test's own verdict on the title, and the fairness test as its own finding beside it (answered at 16:59) |
@@ -56,7 +57,6 @@ Newest first. A default happens only if you answer with it; nothing changes whil
 
 | # | The question, in one line | Why it is yours | Default | Waiting |
 |---|---|---|---|---|
-| 92 | Should Loop 12's fix test count "two clear subjects with their own parts, drawing style ignored" (with broken anatomy as a guard) instead of "faithful pairs", which fails drawings too, so every Paper 2 result is counted the way you chose on question 87? | changes a recorded bar | faithful pairs | just filed |
 | 80 | Should a checker choose CO3's weight-sharpness setting at each of its corrected steps ([design](../score-space/11-the-checker-chooses-on-co3.md))? First read on 6 of 12 pairs | over 3 GPU-hours on one run (about 3.1) | **The read you waited for has landed:** on 75 of 96 trajectories the checker's best balanced accuracy is 0.616 at step 25, under the 0.65 floor at every step, so it does not yet see CO3's failure. Inconclusive by count until the 21 missing trajectories are rerun (about 15 minutes, approved below). Recommendation: decline 80 if the full read stays under 0.65, since a checker that cannot see the failure cannot choose CO3's setting to fix it | since 12:25 |
 
 Your own reading step (confirm the draft statements from your readings) is ready on the board.
@@ -74,7 +74,7 @@ The finish range is `session_status.py`'s, from the 52 finished steps: fastest p
 | 7. Abstract-checker papers | Finished; its session is closed. | 0 | done | closed | nothing |
 | 8. Abstract checkers | Its last two digit checks finished on card 1 (18:24, exit 0, the stop rule never fired). The checker clearly adds to the model's own knowledge: 0.861 against 0.603 for a rule that needs no training (a lead of 0.322, standard error 0.009). But on real sampler states it reads 0.651 at steps 27 to 36, under its 0.75 bar, so the next removal test (V7) is on hold until you decide. | 3 | 1.9 h to 85.5 h | idle soon | your decision on whether the removal test runs, once Loop 8 files it |
 | 11. Drain into the pillars | Stopped by your answer on 88. Its pillar checks are done and its census found every finished verdict on a report page (14 findings, eight method folders). Its final step stays open until Loops 6 and 8 stop. | 1 | when restarted | stopped its loop | waiting for a result worth draining: Loop 8's identity checker or Loop 6's two-colour CLEVR test |
-| 12. Where CO3 leaks | Its predictor pass is null: none of three readings inside the model predicts which pairs borrow parts (best rank correlation 0.49, bar 0.706), and the most alike pair, crow and raven, never borrows ([review](../leakage/02-what-predicts-borrowing/review.md)). Next, by question 91: a free check on saved records, then a place-by-place fix in a later window with boxes drawn by eye as a positive control. | 5 | 2.4 h to 112.6 h | busy | question 92 decides how its pictures are counted |
+| 12. Where CO3 leaks | Its predictor pass is null: none of three readings inside the model predicts which pairs borrow parts (best rank correlation 0.49, bar 0.706), and the most alike pair, crow and raven, never borrows ([review](../leakage/02-what-predicts-borrowing/review.md)). Next, by question 91: a free check on saved records, then a place-by-place fix in a later window with boxes drawn by eye as a positive control. | 5 | 2.4 h to 112.6 h | busy | its own free check, then about 1.7 GPU-hours |
 
 ## Resources
 
@@ -138,6 +138,7 @@ Newest first.
 | Time | To | What and why |
 |---|---|---|
 | 17:02 | Loop 8 | Its rewritten SDXL test passes the design check (stop rule, random and zero controls, comparison prompts fixed in advance, the same two-clear measure as Loop 6; about 7 GPU-hours, inside budget). Its board record goes to you as question 89. |
+| 18:46 | Loops 12 and 4 | Question 92 decided at your request: Loop 12 counts two clear subjects, drawing ignored; Loop 4 asked to update `targets/leakage-rivals.md` lines 23 and 24 and any Paper 2 row naming faithful pairs. |
 | 18:40 | Loop 12 | **Reviewer verdict: fix**, and question 91 decided against its default; question 92 left with you, so faithful pairs stand until then. |
 | 18:27 | Loop 6 | Card 1 handed over after Loop 8 finished. |
 | 17:58 | Loops 8 and 6 | Card 1 on mscluster107 approved (question 90): Loop 8 launches its two checks first, Loop 6's checker training follows; both cancel their queued Slurm copies once the shared run starts. |

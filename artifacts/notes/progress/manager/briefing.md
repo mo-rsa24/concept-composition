@@ -39,7 +39,6 @@ Answer with `python3 scripts/progress_board.py answer <number> "<your answer>"`,
 
 | # | The question | Default |
 |---|---|---|
-| 92 | Should Loop 12's fix test count two clear subjects with their own parts, drawing style ignored, the same way you set Loop 6's search on 87, instead of faithful pairs? | faithful pairs |
 | 80 | Should a checker choose CO3's sharpness setting at each of its corrected steps (a first read costs about 3.1 GPU-hours)? The read you waited for landed: the checker does not yet see CO3's failure (best 0.616, floor 0.65), pending a 15-minute rerun of 21 trajectories. | Loop 6 runs the first read; Loop 13 recommends declining if the full read stays under 0.65 |
 
 **When Loop 11 restarts.** Loop 13 may not start sessions, so it tells you when Loop 8's identity result
