@@ -30,6 +30,14 @@ The owner set this form on board question 86 (2026-11-24). It replaces [Loop 7's
 
 **Checker.** A small convolutional head on the four signature inputs and the timestep, one per window, trained for 4,000 updates of 64 with half label 1 and half label 0. A 16-example overfit check runs first.
 
+**What the digit misses change here.** Two digit checkers missed the same kind of read on the sampler's own states ([the method review](../10-reading-identity/method-review.md)): one ranked the states well and drifted at its cutoff, and one trained on 2,036 stored states with no fresh noise and learned those states. Three rules follow, fixed before V4 runs.
+
+- **Fresh noise on every draw.** Each finished latent is noised again at every update, with new noise and a new timestep, as `train_readout_pair.py` does, so no example is shown twice in the same form.
+- **If the checker ever trains on CO3's states**, which this design does not do, it trains on the states' one-step clean estimates noised afresh at each draw, with at least as many examples as M5's list holds, and the design states how each batch mixes finished pictures and states before the run.
+- **Base rates per pair.** Steps 1 and 2 report, for each pair, how many label-1 and label-0 examples it holds and the balanced accuracy on it, beside the pooled score. CO3's counts differ by pair: 8 of the 12 tuning pairs made no faithful picture in M1.
+
+**Ranking beside the cutoff.** Steps 1 and 2 report the area under the curve beside the balanced accuracy at a logit of zero. Which of the two gates step 2 is board question 96, and step 2 waits for its answer. Until then the gate is the balanced accuracy as written, and a read that passes only on the area under the curve goes to the owner.
+
 ## The steps, each with its bar
 
 | Step | What runs | Bar, fixed here | If it misses |
