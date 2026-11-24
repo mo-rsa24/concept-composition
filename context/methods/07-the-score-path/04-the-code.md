@@ -324,7 +324,7 @@ The X5 script, lines 59 to 62 and 65 to 86; the dots stand for lines 76 to 84, w
 
 🔤 **The name:** path length
 - **path**: the d_t maps over the window, as above.
-- **length**: how big a vector is, here measured as the sum of squares of all its numbers.
+- **length**: how big a vector is. The code measures the squared length, the sum of squares of all its numbers; the length itself is the square root of that sum.
 - **Formula, in those words:** `d.pow(2).flatten(2).sum(2)`, per label, ‖d_t(c)‖²; summed over the window it is the quantity Sampling Path Tells More ranks seeds by ✍️ ([the reading table](../../../artifacts/notes/progress/score-space/01-reading/reading-table.md)).
 - **Consequence:** in the miniature, ‖d(3)‖² is 1 + 1 = 2 at both steps, so S(3)'s length is 4, and S(7)'s is (1 + 4) + 1 = 6. Length throws away where each label acts, so two paths with the same sizes and different layouts look the same to it; the design kept it as a baseline a trained reader had to beat ✍️ ([the design](../../../artifacts/notes/progress/score-space/04-design.md#run-group-1-step-x5-does-the-signature-carry-the-digits)). ✅ The miniature's lengths computed from the key.
 

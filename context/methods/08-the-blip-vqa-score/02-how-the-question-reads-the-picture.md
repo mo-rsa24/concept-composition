@@ -163,7 +163,7 @@ P(\text{yes})
 = \frac{1}{1 + e^{-(\textcolor{#3d93bf}{z_{\text{yes}}} - \textcolor{#3d93bf}{z_{\text{no}}})}}
 $$
 
-The first form is what the code computes: p_yes and p_no are entries 2748 and 2053 of the softmax over all 30,524 words. The second form follows from the softmax: every other word's share appears in both p_yes and p_no and cancels, so P(yes) depends only on the gap between the yes logit z_yes and the no logit z_no. ✅ algebra on the code's formula.
+The first form is what the code computes: p_yes and p_no are entries 2748 and 2053 of the softmax over all 30,524 words. The second form follows from the softmax: p_yes and p_no share one bottom line, the softmax total over all 30,524 words, and that shared total cancels in their ratio, so P(yes) depends only on the gap between the yes logit z_yes and the no logit z_no. ✅ algebra on the code's formula.
 
 | Symbol | What it is | If it grew |
 |---|---|---|

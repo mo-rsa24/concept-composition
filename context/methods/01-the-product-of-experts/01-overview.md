@@ -58,7 +58,7 @@ Each box in the picture above has a twin in the toy and in the real digit runs:
 
 A U-Net, the network each real expert is, shrinks the canvas a few times to read it whole, then grows it back to full size while passing each size's detail across, so its drawing has the shape of a U. It is taught with textbook pages on [the U-Net card](../../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/U-Net.md#where-to-learn-this).
 
-On SDXL the base is the empty prompt's prediction, and the code that sums the two guided predictions is quoted on [PoE composition](../../world/poe-composition.md#in-pictures-code-and-further-reading).
+On SDXL the base is the empty prompt's prediction, and the code that sums the two guided predictions is quoted on [PoE composition](../../world/poe-composition.md#-in-pictures-code-and-further-reading).
 
 ## The names, taken apart
 

@@ -138,7 +138,7 @@ Read whole again: one shared network pools each word's stack into a single 16 ×
 - **Consequence:** the miniature fixes the weights at 3/4 for layer 1 and 1/4 for layer 2, so the cat's top-left cell becomes 0.75 × 0.4459 + 0.25 × 0.3830 = 0.4302. Swap them to 1/4 and 3/4 and it becomes 0.3987. ✅ The first from the answer key, the second computed this session. The paper's plain mean over all maps scored higher on position, 0.78 against 0.70, and gave dull backgrounds. ✍️ The paper, p. 13, Table 9, as the numbers file records it.
 
 🔤 **The name:** logit
-- **logit**: short for "log-odds unit", an unscaled score for one class. Five classes, five logits.
+- **logit**: an unscaled score for one class, which a softmax turns into probabilities. Five classes, five logits; adding the same number to all five changes no probability.
 - **On the picture:** the red box at the end, "5 logits".
 - **Formula, in those words:** a class's chance is e^(its logit) divided by the sum of e^(every logit), the softmax.
 - **Consequence:** all logits equal gives each class 1/5 = 0.2, which is what the miniature's fused body gets; raise one logit by 1 and its chance rises from 0.2 to e / (e + 4) = 0.405. ✅ Computed this session.
