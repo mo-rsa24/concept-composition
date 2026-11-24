@@ -8,11 +8,11 @@ repository commit, then the replications hub commit.
 
 | Run | Job | Commits | Output | Outcome |
 |---|---|---|---|---|
-| Smoke, current list: 2 updates | 94579 | `ab7f6c55-15d8bdd` | `smoke/current/` | passed: one batch trained, a checkpoint saved, 11 minutes 42 seconds on mscluster89 |
-| Smoke, balanced list: 2 updates | 94580 | `ab7f6c55-15d8bdd` | `smoke/balanced/` | passed, 10 minutes 34 seconds |
+| Smoke, current list: 2 updates | 94579 | `7ac66879-15d8bdd` | `smoke/current/` | passed: one batch trained, a checkpoint saved, 11 minutes 42 seconds on mscluster89 |
+| Smoke, balanced list: 2 updates | 94580 | `7ac66879-15d8bdd` | `smoke/balanced/` | passed, 10 minutes 34 seconds |
 | CO3 read smoke: puma and condor, seed 6001 | 94593 | `58cee28a-15d8bdd` | `co3-read-smoke/` | passed: the rerun matches M1's picture within 2.38 of 255, all 7 steps read, 38.7 seconds |
 | CO3 read: 96 tuning trajectories | 94594 | `58cee28a-15d8bdd` | `co3-read/` | inconclusive under the written bar: 75 of 96 reproduce, against 80 needed |
-| Overfit, both lists | 94603, 94605 | `ee84f4aa-15d8bdd` | none | failed before training: the tile picker read a `latent` field that benchmark-pool tiles do not carry |
+| Overfit, both lists | 94603, 94605 | `ee84f4aa-15d8bdd` | `overfit/`, no checkpoint | failed before training: the tile picker read a `latent` field that benchmark-pool tiles do not carry |
 | Overfit, then 1% of the data, both lists | 94622 to 94625 | `9df9dc5b-15d8bdd` | `overfit/`, `tiny/` | queued; the picker now reads a pool tile's first augmented copy for its check |
 
 ## The read of CO3's trajectories
@@ -33,5 +33,9 @@ the others more often than not, and its zero point does not separate them.
 puma and condor 4, giraffe and tortoise 4, seal and gull 1. The read ran on an RTX 3090, and all 48 trajectories M1 drew on an RTX 3090 match,
 the largest difference 2.50 of 255. The 21 differ by 3.0 to 27.4. So the difference is the card type, and a rerun of the 21 on an RTX 8000
 can meet the reproduction rule with no bar changed. `m5_read.sbatch reread` writes it to `co3-read-rtx8000/` and scores the merged set into
-`co3-read/read-score-merged.json`. The only usable RTX 8000 is mscluster107's card 1, the shared card of board question 90, and Loop 13 is asked
-for the slot.
+`co3-read/read-score-merged.json`. The only usable RTX 8000 is mscluster107's card 1, the shared card of board question 90.
+
+**The order of events.** The 75-trajectory result above (best 0.616 at step 25, inconclusive by its count) was read first. The rerun of the 21
+on an RTX 8000 was decided after it, by Loop 13 for the owner, who may overrule: about 15 minutes, reversible, and meeting the read's own
+written reproduction rule on the card type that drew the pictures, with no bar changed. The full 96 will be reported against the bar exactly
+as written in the design.
