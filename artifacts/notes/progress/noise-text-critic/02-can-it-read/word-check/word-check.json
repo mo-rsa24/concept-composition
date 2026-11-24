@@ -1,0 +1,253 @@
+{
+ "model": "openai/clip-vit-large-patch14",
+ "pairs": [
+  [
+   "cat",
+   "dog"
+  ],
+  [
+   "puma",
+   "condor"
+  ],
+  [
+   "zebra",
+   "flamingo"
+  ],
+  [
+   "horse",
+   "sheep"
+  ],
+  [
+   "duck",
+   "goose"
+  ],
+  [
+   "lighthouse",
+   "sailboat"
+  ]
+ ],
+ "colours": [
+  "red",
+  "blue"
+ ],
+ "trained": {
+  "order": [
+   {
+    "pair": "cat, dog",
+    "cosine_of_swapped_sentences": 0.9826895594596863,
+    "swap_difference": 0.18606767058372498,
+    "w": 0.12225895375013351,
+    "ratio": 0.3285335600376129,
+    "noun_change_difference": 0.7203410267829895
+   },
+   {
+    "pair": "puma, condor",
+    "cosine_of_swapped_sentences": 0.9426963329315186,
+    "swap_difference": 0.3385370373725891,
+    "w": 0.21632342040538788,
+    "ratio": 0.31949740648269653,
+    "noun_change_difference": 0.8673384189605713
+   },
+   {
+    "pair": "zebra, flamingo",
+    "cosine_of_swapped_sentences": 0.9419779181480408,
+    "swap_difference": 0.3406527638435364,
+    "w": 0.14711272716522217,
+    "ratio": 0.21592769026756287,
+    "noun_change_difference": 0.6644874811172485
+   },
+   {
+    "pair": "horse, sheep",
+    "cosine_of_swapped_sentences": 0.9690729975700378,
+    "swap_difference": 0.2487049698829651,
+    "w": 0.1319759488105774,
+    "ratio": 0.2653263211250305,
+    "noun_change_difference": 0.6779398322105408
+   },
+   {
+    "pair": "duck, goose",
+    "cosine_of_swapped_sentences": 0.9808473587036133,
+    "swap_difference": 0.19571717083454132,
+    "w": 0.1067226380109787,
+    "ratio": 0.2726450562477112,
+    "noun_change_difference": 0.6476683616638184
+   },
+   {
+    "pair": "lighthouse, sailboat",
+    "cosine_of_swapped_sentences": 0.9720324277877808,
+    "swap_difference": 0.23650586605072021,
+    "w": 0.14035512506961823,
+    "ratio": 0.2967265248298645,
+    "noun_change_difference": 0.6258987188339233
+   }
+  ],
+  "bind": [
+   {
+    "pair": "cat, dog",
+    "cosine_of_swapped_sentences": 0.9479369521141052,
+    "swap_difference": 0.3226856291294098,
+    "w": 0.39381274580955505,
+    "ratio": 0.6102111339569092
+   },
+   {
+    "pair": "puma, condor",
+    "cosine_of_swapped_sentences": 0.9664996862411499,
+    "swap_difference": 0.25884509086608887,
+    "w": 0.4260161221027374,
+    "ratio": 0.8229171633720398
+   },
+   {
+    "pair": "zebra, flamingo",
+    "cosine_of_swapped_sentences": 0.9708812236785889,
+    "swap_difference": 0.24132460355758667,
+    "w": 0.23090124130249023,
+    "ratio": 0.47840386629104614
+   },
+   {
+    "pair": "horse, sheep",
+    "cosine_of_swapped_sentences": 0.9155948758125305,
+    "swap_difference": 0.4108652174472809,
+    "w": 0.6063965559005737,
+    "ratio": 0.7379506826400757
+   },
+   {
+    "pair": "duck, goose",
+    "cosine_of_swapped_sentences": 0.9728464484214783,
+    "swap_difference": 0.23303933441638947,
+    "w": 0.4366492033004761,
+    "ratio": 0.936857283115387
+   },
+   {
+    "pair": "lighthouse, sailboat",
+    "cosine_of_swapped_sentences": 0.9606373310089111,
+    "swap_difference": 0.28058019280433655,
+    "w": 0.4119735062122345,
+    "ratio": 0.7341457605361938
+   }
+  ],
+  "order_swap_direction_shared_across_pairs": {
+   "mean_cosine": 0.0014578222297132015,
+   "min": -0.1670410931110382,
+   "max": 0.12942828238010406
+  },
+  "bind_swap_direction_shared_across_pairs": {
+   "mean_cosine": 0.23759182890256245,
+   "min": 0.12616480886936188,
+   "max": 0.48665985465049744
+  },
+  "order_mean_ratio": 0.2831094264984131,
+  "order_mean_cosine_of_swapped_sentences": 0.9648860991001129,
+  "bind_mean_ratio": 0.7200809816519419,
+  "bind_mean_cosine_of_swapped_sentences": 0.9557327528794607
+ },
+ "random_weights": {
+  "order": [
+   {
+    "pair": "cat, dog",
+    "cosine_of_swapped_sentences": 0.9728611707687378,
+    "swap_difference": 0.2329755574464798,
+    "w": 0.03777607902884483,
+    "ratio": 0.08107305318117142,
+    "noun_change_difference": 0.13254506886005402
+   },
+   {
+    "pair": "puma, condor",
+    "cosine_of_swapped_sentences": 0.9643228650093079,
+    "swap_difference": 0.2671220600605011,
+    "w": 0.04225817695260048,
+    "ratio": 0.07909899950027466,
+    "noun_change_difference": 0.13611723482608795
+   },
+   {
+    "pair": "zebra, flamingo",
+    "cosine_of_swapped_sentences": 0.9699426889419556,
+    "swap_difference": 0.24518251419067383,
+    "w": 0.04614189267158508,
+    "ratio": 0.09409703314304352,
+    "noun_change_difference": 0.12794886529445648
+   },
+   {
+    "pair": "horse, sheep",
+    "cosine_of_swapped_sentences": 0.9688977599143982,
+    "swap_difference": 0.24940818548202515,
+    "w": 0.03921223804354668,
+    "ratio": 0.07861056923866272,
+    "noun_change_difference": 0.1380673348903656
+   },
+   {
+    "pair": "duck, goose",
+    "cosine_of_swapped_sentences": 0.9640558362007141,
+    "swap_difference": 0.2681194245815277,
+    "w": 0.03982355818152428,
+    "ratio": 0.07426459342241287,
+    "noun_change_difference": 0.14533866941928864
+   },
+   {
+    "pair": "lighthouse, sailboat",
+    "cosine_of_swapped_sentences": 0.9565503001213074,
+    "swap_difference": 0.2947869300842285,
+    "w": 0.05590919777750969,
+    "ratio": 0.09482984244823456,
+    "noun_change_difference": 0.23828236758708954
+   }
+  ],
+  "bind": [
+   {
+    "pair": "cat, dog",
+    "cosine_of_swapped_sentences": 0.982116162776947,
+    "swap_difference": 0.18912369012832642,
+    "w": 0.04235783591866493,
+    "ratio": 0.11198447644710541
+   },
+   {
+    "pair": "puma, condor",
+    "cosine_of_swapped_sentences": 0.9804301261901855,
+    "swap_difference": 0.19783775508403778,
+    "w": 0.044583067297935486,
+    "ratio": 0.11267583072185516
+   },
+   {
+    "pair": "zebra, flamingo",
+    "cosine_of_swapped_sentences": 0.9804166555404663,
+    "swap_difference": 0.19790585339069366,
+    "w": 0.04752953723073006,
+    "ratio": 0.12008117884397507
+   },
+   {
+    "pair": "horse, sheep",
+    "cosine_of_swapped_sentences": 0.9809476137161255,
+    "swap_difference": 0.19520442187786102,
+    "w": 0.045978203415870667,
+    "ratio": 0.11776936799287796
+   },
+   {
+    "pair": "duck, goose",
+    "cosine_of_swapped_sentences": 0.9810300469398499,
+    "swap_difference": 0.1947813779115677,
+    "w": 0.048788685351610184,
+    "ratio": 0.12523961067199707
+   },
+   {
+    "pair": "lighthouse, sailboat",
+    "cosine_of_swapped_sentences": 0.9829165935516357,
+    "swap_difference": 0.1848422884941101,
+    "w": 0.060347750782966614,
+    "ratio": 0.1632411926984787
+   }
+  ],
+  "order_swap_direction_shared_across_pairs": {
+   "mean_cosine": 0.026231980634232363,
+   "min": -0.10660842061042786,
+   "max": 0.18088898062705994
+  },
+  "bind_swap_direction_shared_across_pairs": {
+   "mean_cosine": 0.9561363140741984,
+   "min": 0.9449620842933655,
+   "max": 0.9659768342971802
+  },
+  "order_mean_ratio": 0.08366234848896663,
+  "order_mean_cosine_of_swapped_sentences": 0.9661051034927368,
+  "bind_mean_ratio": 0.12516527622938156,
+  "bind_mean_cosine_of_swapped_sentences": 0.9813095331192017
+ }
+}
