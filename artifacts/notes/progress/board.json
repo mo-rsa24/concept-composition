@@ -535,8 +535,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-24T14:31:20+02:00",
-   "updated": "2026-11-24T19:18:31+02:00",
-   "note": "current overfit passed 16 of 16; current 1% running (94623), full queued (94638); balanced overfit on card 1; states shard 1 saving (94637); question 93 A"
+   "updated": "2026-11-24T19:44:39+02:00",
+   "note": "both overfits pass 16 of 16; current 1% passes, full current running (94638); balanced 1% on card 1; shard-1 states saved, 48 of 48 exact"
   },
   {
    "id": "D3",
@@ -995,9 +995,12 @@
    "needs": [
     "V6"
    ],
-   "state": "todo",
+   "state": "doing",
    "serves": "Paper 2",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "started": "2026-11-24T19:27:14+02:00",
+   "updated": "2026-11-24T19:27:14+02:00",
+   "note": "Gate first (board question 94, option A): the identity checker retrained on sampler states must read fresh digits 5 to 9 at 0.75 or more; jobs 94640 to 94642 queued"
   },
   {
    "id": "W1",
