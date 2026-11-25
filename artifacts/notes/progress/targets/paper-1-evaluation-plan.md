@@ -38,18 +38,22 @@ They tell each reader what a correct answer looks like, and they set the realism
 
 ## The methods every measure scores
 
-All four rows use the same two experts and the same empty-scene model from the two-colour CLEVR test, step M10, each expert trained
+Every row uses the same two experts and the same empty-scene model from the two-colour CLEVR test, step M10, each expert trained
 on 2,000,896 images, at the same seeds and requested counts.
 
 | Row | What it does | Why it is here |
 |---|---|---|
 | Mask paste | the two experts' samples, one laid over the other | the control: right wherever the objects need nothing from each other |
+| Mask paste with a shadow generator | the mask paste, then a published multi-object shadow generator such as MultiShadow (arXiv 2603.02743) adds shadows | the stronger control a reviewer expects; scored on measures 2 to 4, and run only if a generator works on 64-pixel CLEVR, which is checked first |
 | Bradley's rule | the plain product of the two experts | the published composition rule, on our models |
 | Product with Du et al.'s corrector | the plain product with MCMC steps between sampling steps | separates a better sampler from a new signal |
 | Paper 1's method | the plain product plus the count checker's push | the method the paper claims |
 
 Bradley's printed CLEVR numbers come from models trained on 134 million images, against our full length of 8 million
 ([CLEVR scaling plan](clevr-scaling-plan.md#what-counts-as-a-win)). They stay as context beside each table and are never a bar.
+
+Beside every result sits a list of each image the count checker trained on and how it was made, so a reader can see that no image
+holding both colours reached it.
 
 ## How a difference counts
 
@@ -82,7 +86,8 @@ Reader check: on the 500 crowded reference renders, where the scene file gives e
 95% of overlapping pairs. Objects at 64 pixels seldom touch, so the crowded condition asks 3 red with 3 blue, and both the reference
 renders and the method's images are generated until each row has 200 overlapping pairs. The CLEVR generator rejects scenes where
 objects sit close or hide each other, so the crowded reference renders run with its minimum distance and minimum visible pixels per
-object turned down, and the page reporting them says which values were used.
+object turned down, and the page reporting them says which values were used. Beside the pixel reading, the box-level occlusion score
+from DepthArb (arXiv 2603.23924) is reported: the share of the two objects' box overlap covered by the nearer object's box.
 
 **2. One light for every object.** Each training render has its own jittered light, so two separately drawn samples can be lit from
 different sides. For every object the reader takes the direction from the object's base to the centre of the dark pixels beside it.
@@ -126,6 +131,9 @@ treats the other's finding as unlikely. It is a hypothesis to test, and measures
 | A. Anatomy kept | an anatomy segmenter finds both lungs and the heart, and the heart-to-chest width ratio falls inside the range of real images with the same findings | share of images passing; Paper 1 leads paste and Bradley's rule by the margin | real images per finding to set the range; a segmenter trained on real images |
 | B. Both findings present | a classifier trained on real labelled images gives each finding a probability above its own threshold, fixed on real images. DCFM's utility is reported beside it: a classifier trained on one row's generated images only, tested on real images, with the recall for each disease combination averaged over combinations (DCFM p8, Eq. 18) | the same, on the first reading; utility is reported with no bar | real images with each finding alone and both together, for the classifiers only |
 | C. One finding changes the other | for effusion with cardiomegaly, the contrast along the heart's left border | the composites' border contrast lies closer to real images holding both findings than to real images with a large heart alone, and closer than paste's, interval excluding zero | real images with cardiomegaly alone and with both findings |
+
+For tuberculosis with silicosis, measure C reads cavitation inside a silicotic mass, the published sign that one finding changes the
+other, called by a reader with radiology training once a dataset holds both findings.
 
 Pasting needs its own definition here, because a finding is not an object with an outline. The proposal is two pastes: lay the second
 expert's finding region (the lower lung zone for effusion, from the anatomy segmenter's mask) over the first expert's image, and the
@@ -189,21 +197,15 @@ Loop 14 lists 19 questions a reviewer is likely to ask of Paper 1, with the pape
 Questions 6 (is the missing interaction framing new) and 7 (how Paper 1 differs from DCFM) are about positioning and are answered in
 writing: Loop 14's list for the first, and [the DCFM note](dcfm-compositional-flow-matching-from-separate-silos.md) for the second.
 
-Three questions need something this plan does not yet hold:
+Three more questions are answered by additions the owner accepted (board question 109):
 
-**2. Is it better than pasting followed by a published shadow generator?** Adding shadows to pasted objects is a published task
-(MultiShadow, arXiv 2603.02743, per Loop 14's list), so "paste has no shadows" is a weak control on its own. The proposal is a fifth
-row, paste plus a shadow generator, scored on measures 2 to 4, if such a generator runs on 64-pixel CLEVR. Whether one does is unknown.
+| Loop 14's question | Answered by |
+|---|---|
+| 2. Is it better than pasting followed by a published shadow generator? | the mask paste with a shadow generator row, on measures 2 to 4 |
+| 8. For tuberculosis with silicosis, what shows one finding changing the other? | cavitation inside a silicotic mass, under X-ray measure C |
+| 14. Has the checker seen images holding both concepts? | the list beside every result of each image the checker trained on |
 
-**8. For tuberculosis with silicosis, what shows one finding changing the other?** Loop 14's list names cavitation inside a silicotic
-mass as the sign. The proposal is to add it as the cross-finding reading for that pair, called by a reader with radiology training,
-once a dataset holding both findings exists.
-
-**14. Has the checker seen images holding both concepts?** No score answers this. The proposal is an audit listed beside every result:
-each image the checker trained on and how it was made.
-
-Loop 14's list also names a box-level occlusion score from DepthArb (the share of the two objects' overlap covered by the nearer object's
-box). The proposal reports it beside measure 1's pixel reading, which costs only the box detection.
+Loop 14's list also names DepthArb's box-level occlusion score, which is reported beside measure 1.
 
 ## Still open
 

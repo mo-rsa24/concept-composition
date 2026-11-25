@@ -1,29 +1,31 @@
 %%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
 flowchart LR
-    subgraph ROWS["Same two experts, same seeds, same counts"]
+    subgraph ROWS["Same two experts, same seeds, same counts;<br/>checker training images listed beside every result"]
         direction TB
         P["Mask paste<br/>(the control)"]:::plain
+        PS["Paste + shadow generator<br/>(measures 2 to 4 only)"]:::added
         B["Bradley's rule<br/>(plain product)"]:::plain
         C["Product + corrector"]:::plain
         M["Paper 1's method<br/>(product + count checker)"]:::paper
     end
     subgraph CLEVR["CLEVR, two colours, 2 to 6 objects"]
         direction TB
-        O["1. Which object hides which<br/>paste: about half right"]:::plain
+        O["1. Which object hides which<br/>pixel and box-level readings<br/>paste: about half right"]:::plain
         L["2. One light for every object<br/>paste: two lights"]:::plain
         S["3. Shadow on the other object<br/>paste: never"]:::plain
         R["4. Seams and realism<br/>paste: visible seams"]:::plain
         K["5. Colour stays with its object<br/>a guard: paste is perfect"]:::guard
     end
     subgraph XR["Chest X-ray: no data yet"]
-        X["A. anatomy kept<br/>B. both findings present<br/>C. effusion hides the heart border"]:::open
+        X["A. anatomy kept<br/>B. both findings present,<br/>with DCFM's utility beside it<br/>C. effusion hides the heart border;<br/>cavitation for TB with silicosis"]:::open
     end
-    P ~~~ B ~~~ C ~~~ M
+    P ~~~ PS ~~~ B ~~~ C ~~~ M
     O ~~~ L ~~~ S ~~~ R ~~~ K
     ROWS --> CLEVR
     ROWS -.->|needs a dataset and two experts| XR
 
     classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
     classDef paper fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px,color:#111111
+    classDef added fill:#eaf1ff,stroke:#2b6cb0,stroke-width:2px,stroke-dasharray: 4 3,color:#111111
     classDef guard fill:#f1f3f5,stroke:#868e96,stroke-width:2px,color:#111111
     classDef open fill:#ffffff,stroke:#868e96,stroke-width:2px,stroke-dasharray: 5 5,color:#555555
