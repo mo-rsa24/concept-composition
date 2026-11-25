@@ -129,6 +129,27 @@ whether a checker moves that point.
 5. **Comparison.** The four rows on the 9 cells, and the evaluation plan's five measures on the same samples, with the fifth row on
    measures 2 to 4 if the shadow generator passes its check.
 
+## Watching the full runs, and when to stop one
+
+The two experts train on RunPod RTX 4090 pods with the same arguments as the cluster job (`m10_pod/run_ladder.sh`), 128 images per pass
+and batch 256; every sampling row later runs on one card type, the cluster's RTX 3090s. Each full run saves a checkpoint every quarter
+(500,224 images). The owner asked to see each quarter and to stop a run that is failing; this rule was written on 2026-11-25, before the
+first quarter.
+
+**What each quarter shows.** `m10_pod/quarter_watch.py` samples the quarter's 0.100 EMA snapshot on the CPU, 16 seeds (0 to 15) per count
+label in 32 steps, and reports the right-count share: how many of the 48 samples a colour-blob counter (`m10_pod/blob_count.py`, threshold 30
+on the colour channel's lead, pieces of at least 4 pixels) reads as holding the asked count. The counter is cheap and imperfect: on real
+training pictures it reads 0.82 of red and 0.86 of blue right (1.00 at one object, 0.78 and 0.96 at two, 0.68 and 0.62 at three, where
+objects hide each other), so a sample share is read against that ceiling. With 48 samples a share moves by about 0.07 by chance. The
+quarter's mean training loss comes from `stats.jsonl`.
+
+**The stopping rule.** It only stops a failing run and never declares success, which stays with the bars above.
+
+| Check | Stop the run when |
+|---|---|
+| any quarter | the loss is not a number, or the samples are blank or noise by eye |
+| 75% (1,500,672 images), the first check after half the run | the right-count share is not above its value at 50% and is below 0.75 times the counter's ceiling on real pictures of that colour (0.62 for red, 0.65 for blue), or the quarter's mean loss is more than 0.05 above the 50% quarter's |
+
 ## What this cannot say
 
 Two colours make each expert's objects easy to tell apart, so this tests composition of counts and places, and leaves identity mixing to
