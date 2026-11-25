@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-25 02:16 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-25 02:25 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -65,6 +65,7 @@ Newest first. A default happens only if you answer with it; nothing changes whil
 
 | # | The question, in one line | Why it is yours | Default | Waiting |
 |---|---|---|---|---|
+| 100 | None of Loop 6's three checkers can tell CO3's good pictures from its borrowed-part ones (best yes-or-no 0.648 against a 0.65 floor; best ranking 0.714 against 0.75). Pause its next two steps (about 31 GPU-hours) and move Paper 2's checker search to one that reads which subjects are drawn, run them as designed, or stop the checker route for Paper 2? | changes a paper's direction | A: pause and move to an identity reader. Loop 13 agrees, with one caution: both named starting points have struggled (Loop 8's checker cannot read sampler states; the attention reader failed on 4 of 12 pairs in the region test), so the next reader should follow a reviewer pass | just filed |
 | 96 | Paper 2's checkers are gated on their yes-or-no call at zero (75% right), but the push follows only the direction of the checker's gradient, so ranking good pictures above bad ones is what steers it. Loop 6's checker ranks at about 0.70 but calls 0.602 right; Loop 8's ranks at 0.78 but calls 0.651. Keep the recorded gate, or switch to ranking? | changes a recorded bar after seeing which one passes on similar checkers | keep the recorded gate, report ranking beside it, and bring a pass on ranking alone back to you | just filed |
 
 Your own reading step (confirm the draft statements from your readings) is ready on the board.
@@ -78,7 +79,7 @@ The finish range is `session_status.py`'s, from the 63 finished steps: fastest p
 | Loop | Doing now, and why | Steps left | Estimated finish | Session | Held by |
 |---|---|---|---|---|---|
 | 4. Rivals and targets | Keeping every target current. It updated Paper 2's bar page to count two clear subjects with their own parts (questions 87 and 92). | 1 | none useful: it ends after the paper tables, which have not started | idle | nothing |
-| 6. Best method | Choosing the training list for Paper 2's checker (step M5): its kept checker does not see CO3's failure (right 60% of the time, floor 65%), so by question 93 it reads its two new checkers the same way first; one training is done, one runs (job 94662), and the read waits for the `biggpu` slot (94704). Paper 1's two-colour CLEVR test has its first 5,000 pictures per colour rendered and its scoring renders queued. | 9 | 5.1 h to 202.5 h | busy | its own jobs; question 96 decides how its checker reads are judged |
+| 6. Best method | Its read of all three Paper 2 checkers is done (on card 1, 6 minutes): none sees CO3's failure, best 0.648 against a 0.65 floor, best ranking 0.714 ([review](../method-search/01b-balance-the-checker-data/review.md)). Its next two steps wait on your question 100. Paper 1's two-colour CLEVR renders continue. | 9 | not yet estimated | busy | question 100 |
 | 7. Abstract-checker papers | Finished; its session is closed. | 0 | done | closed | nothing |
 | 8. Abstract checkers | Its digit identity checker reads pasted digits (0.861 against 0.75) but not the sampler's own states, and its removal test (V7) is closed as not run. The last check shows why: at steps 27 to 36 the digits are still unsettled (16% settled by step 26, half by step 37), and even the digit judge reads only 0.724 there ([review](../abstract-checkers/10-reading-identity/review.md)). Its one remaining step is the SDXL identity test against CO3. | 1 | not yet estimated | idle | Loop 6's training list and question 96 |
 | 11. Drain into the pillars | Stopped by your answer on 88; every finished result is on a report page. | 1 | when restarted | stopped its loop | a new result worth draining |
@@ -94,7 +95,7 @@ Read at 02:13 from `squeue`, `sacct` and `sinfo`; down nodes from `sinfo -R` at 
 | Longest wait | the queue as a whole: nothing of ours finished between 00:13 and 01:13 |
 | Nodes out of service | `bigbatch`: 12 down and 5 drained of 48. `biggpu`: 2 down and 2 drained of 7, including mscluster108 and mscluster111, drained at 09:27 and 09:10 today after a failed job kill |
 | Idle capacity | none: at 17:43 every working `bigbatch` and `biggpu` node was allocated. mscluster107 is now another user's `biggpu` job (94610, 6-hour limit, started 17:36); its second card sits idle at 170 MiB, but their process holds it, so it is not ours to use. Your interactive job 83423 on that node no longer appears in the queue |
-| Shared card | **mscluster107 card 1, approved again by you on question 99**, for as long as the other user's job 94699 runs. Loop 12 used it 02:02 to 02:10, Loop 8 02:13 to 02:13 (its watchdog never fired); both left nothing behind. Handed to Loop 6 at 02:16 for its read of the two new checkers |
+| Shared card | **mscluster107 card 1, approved again by you on question 99**, for as long as the other user's job 94699 runs. Loop 12 (02:02 to 02:10), Loop 8 (02:13) and Loop 6 (02:16 to 02:22) each finished there with the stop rule never firing and nothing left behind. The three jobs you approved are done; the card is idle again |
 | Compute against budget since 2026-11-21 | Loop 6: 53.4 node-hours of 87 (34.8 were CLEVR renders that may have used no GPU). Loop 8: 11.9 of 30. Loop 12: about 0.4, no total set. Slurm here records no GPU count, so these are node-hours, an upper bound |
 
 **What would make the queue move faster:** little within our control. There is no idle `biggpu` card,
@@ -149,6 +150,7 @@ Newest first.
 | Time | To | What and why |
 |---|---|---|
 | 17:02 | Loop 8 | Its rewritten SDXL test passes the design check (stop rule, random and zero controls, comparison prompts fixed in advance, the same two-clear measure as Loop 6; about 7 GPU-hours, inside budget). Its board record goes to you as question 89. |
+| 02:25 | Loop 6 | Its checker read is done: none of three checkers sees CO3's failure; it filed question 100 to you. |
 | 02:16 | Loop 6 | Card 1 is free after Loop 8; Loop 6's turn. Loop 8 closed its removal test, as decided. |
 | 02:11 | Loop 8 | Card 1 is free after Loop 12; Loop 8's turn. |
 | 01:58 | Loops 12, 8 and 6 | Card 1 on mscluster107 approved again (question 99): Loop 12 first, then Loop 8, then Loop 6; each told the order and the rules. |
