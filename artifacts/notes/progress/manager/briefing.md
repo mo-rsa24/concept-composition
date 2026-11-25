@@ -3,7 +3,7 @@
 The one page to read. Loop 13 rewrites it every 6 hours, and at once when you say "updates", "brief me"
 or "where are we". The full detail is on [the status page](status.md).
 
-**Written:** 2026-11-25 02:25 (UTC+2).
+**Written:** 2026-11-25 03:05 (UTC+2).
 
 ## Contents
 
@@ -37,6 +37,7 @@ Answer with `python3 scripts/progress_board.py answer <number> "<your answer>"`,
 
 | # | The question | Default |
 |---|---|---|
+| 101 | May Loop 6's first identity reader run on the idle card 1, and may its judge use about 1.5 million tokens on your Anthropic key, reusing question 15's unspent budget? Recommended yes to both. | no to both |
 | 96 | Should Paper 2's checkers be judged on ranking good pictures above bad ones (what actually steers the push) instead of their yes-or-no call at zero? Both loops' checkers rank moderately but miss at zero. | keep the recorded gate, report ranking beside it, and bring a pass on ranking alone back to you |
 
 **When Loop 11 restarts.** Loop 13 may not start sessions, so it tells you when Loop 8's identity result
