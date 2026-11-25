@@ -71,6 +71,10 @@ case "$STAGE" in
          G=$ROOT/m13; FROM=("$OUT-states-shard0" "$OUT-states-shard1" "$ROOT/m12/size-corrected/co3")
          [ "$SHARD" = 1 ] && { G=$ROOT/m13-smoke; FROM=("$ROOT/m12/size-corrected-smoke/co3"); }
          "$PY" "$S/m5_read_co3.py" gradcos --head "$HEAD" --latents-from "${FROM[@]}" --out "$G"; rc=$? ;;
+  poegrad) # step M13's plain-PoE half: 48 plain-PoE trajectories at Z8's settings with states saved, then the same cosines; SHARD=1 is the smoke
+         P=$ROOT/m13-poe; LIM=""; [ "$SHARD" = 1 ] && { P=$ROOT/m13-poe-smoke; LIM="--limit 1"; }
+         "$PY" "$S/m13_poe_states.py" --splits "$SPLITS" --out "$P/states" $LIM; rc=$?
+         [ "$rc" -eq 0 ] && { "$PY" "$S/m5_read_co3.py" gradcos --head "$HEAD" --latents-from "$P/states" --out "$P/cosines"; rc=$?; } ;;
   heads)  # score the kept checker (the control) and M5's two trained checkers on the saved states
          F=$ROOT/m5/full
          "$PY" "$S/m5_read_co3.py" heads --heads "kept=$HEAD" "current=$F/current/head_step_002000.pt" "balanced=$F/balanced/head_step_002000.pt" \
