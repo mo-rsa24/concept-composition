@@ -1,0 +1,61 @@
+{
+ "pictures": 128,
+ "counts_per_row": {
+  "lora": {
+   "one": 0,
+   "hybrid": 4,
+   "two_bodies": 26,
+   "two_clear": 2
+  },
+  "own": {
+   "one": 7,
+   "hybrid": 23,
+   "two_bodies": 2,
+   "two_clear": 0
+  },
+  "both": {
+   "one": 3,
+   "hybrid": 10,
+   "two_bodies": 15,
+   "two_clear": 4
+  },
+  "plain": {
+   "one": 4,
+   "hybrid": 27,
+   "two_bodies": 1,
+   "two_clear": 0
+  }
+ },
+ "two_clear": {
+  "lora": 2,
+  "own": 0,
+  "both": 4,
+  "plain": 0
+ },
+ "broken": {
+  "lora": 24,
+  "own": 10,
+  "both": 14,
+  "plain": 7
+ },
+ "both_vs_lora": {
+  "lead": 2,
+  "won": 4,
+  "lost": 2,
+  "p": 0.34375
+ },
+ "both_vs_own": {
+  "lead": 4,
+  "won": 4,
+  "lost": 0,
+  "p": 0.0625
+ },
+ "own_vs_lora": {
+  "lead": -2,
+  "won": 0,
+  "lost": 2,
+  "p": 1.0
+ },
+ "passes": false,
+ "call": "fail"
+}

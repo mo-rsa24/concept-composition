@@ -1,0 +1,901 @@
+{
+ "rung_agreement": 0.9296875,
+ "settled": {
+  "mrt4dp5xmfhv": {
+   "row": "plain",
+   "pair": "a_bee__x__an_owl",
+   "seed": 6004,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "j2uxfy83gt5j": {
+   "row": "plain",
+   "pair": "a_butterfly__x__a_crab",
+   "seed": 6004,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "v6nzrjmjfqe7": {
+   "row": "own",
+   "pair": "a_kangaroo__x__a_squid",
+   "seed": 6002,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "vavbxdcywuc6": {
+   "row": "both",
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6002,
+   "rung": "two_clear",
+   "broken": 0
+  },
+  "ns4fffaptu2h": {
+   "row": "both",
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6004,
+   "rung": "two_clear",
+   "broken": 1
+  },
+  "s6gffquvmmbj": {
+   "row": "lora",
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6002,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "rmdb98uxaeyh": {
+   "row": "both",
+   "pair": "a_butterfly__x__a_crab",
+   "seed": 6004,
+   "rung": "hybrid",
+   "broken": 1
+  },
+  "tvkrtxa47mtu": {
+   "row": "both",
+   "pair": "a_kangaroo__x__a_squid",
+   "seed": 6003,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "6fxsqnhcw6dy": {
+   "row": "plain",
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6003,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "4c6hfdtgwdym": {
+   "row": "own",
+   "pair": "a_butterfly__x__a_crab",
+   "seed": 6002,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "mg45nesm6ews": {
+   "row": "both",
+   "pair": "a_butterfly__x__a_crab",
+   "seed": 6002,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "8dhjnketujxs": {
+   "row": "plain",
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6004,
+   "rung": "hybrid",
+   "broken": 1
+  },
+  "kudy2p9cen7w": {
+   "row": "both",
+   "pair": "a_flamingo__x__a_sloth",
+   "seed": 6004,
+   "rung": "two_bodies",
+   "broken": 0
+  },
+  "h3nry9e8bkct": {
+   "row": "lora",
+   "pair": "a_lobster__x__a_whale",
+   "seed": 6001,
+   "rung": "hybrid",
+   "broken": 1
+  },
+  "b3cwp5yuduxd": {
+   "row": "own",
+   "pair": "a_flamingo__x__a_sloth",
+   "seed": 6001,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "u4uhrb84gqyx": {
+   "row": "plain",
+   "pair": "a_butterfly__x__a_crab",
+   "seed": 6002,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "t57tpx2uu69g": {
+   "row": "plain",
+   "pair": "a_flamingo__x__a_sloth",
+   "seed": 6001,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "zsmanqhpjd6p": {
+   "row": "both",
+   "pair": "a_kangaroo__x__a_squid",
+   "seed": 6002,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "46y5hmqf2m22": {
+   "row": "plain",
+   "pair": "a_lobster__x__a_whale",
+   "seed": 6002,
+   "rung": "one",
+   "broken": 0
+  },
+  "hqw5sbxgnmtr": {
+   "row": "plain",
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6001,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "ewq234fmvavy": {
+   "row": "own",
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6004,
+   "rung": "one",
+   "broken": 0
+  },
+  "s7ysd9etv2q9": {
+   "row": "own",
+   "pair": "a_fox__x__a_llama",
+   "seed": 6001,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "gnc26upg5bjy": {
+   "row": "own",
+   "pair": "a_kangaroo__x__a_squid",
+   "seed": 6004,
+   "rung": "hybrid",
+   "broken": 1
+  },
+  "92hn5et9rpp7": {
+   "row": "plain",
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6001,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "g5nfaa234cnq": {
+   "row": "plain",
+   "pair": "a_lobster__x__a_whale",
+   "seed": 6001,
+   "rung": "one",
+   "broken": 1
+  },
+  "rqaaxp4x96cm": {
+   "row": "lora",
+   "pair": "a_kangaroo__x__a_squid",
+   "seed": 6002,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "ermbv4kssskc": {
+   "row": "both",
+   "pair": "a_fox__x__a_llama",
+   "seed": 6003,
+   "rung": "hybrid",
+   "broken": 1
+  },
+  "ukm542hw7rb6": {
+   "row": "both",
+   "pair": "a_lobster__x__a_whale",
+   "seed": 6001,
+   "rung": "one",
+   "broken": 0
+  },
+  "yqumjz7x83dt": {
+   "row": "both",
+   "pair": "a_bee__x__an_owl",
+   "seed": 6004,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "m8fau3cc785w": {
+   "row": "plain",
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6002,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "gm3daybx9t9c": {
+   "row": "both",
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6002,
+   "rung": "two_clear",
+   "broken": 0
+  },
+  "g8y8gmjqdgkp": {
+   "row": "lora",
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6003,
+   "rung": "two_clear",
+   "broken": 0
+  },
+  "r4ut36yw99v9": {
+   "row": "own",
+   "pair": "a_bee__x__an_owl",
+   "seed": 6004,
+   "rung": "one",
+   "broken": 1
+  },
+  "n6uqy28w8rkx": {
+   "row": "own",
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6002,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "mspumxsapptv": {
+   "row": "plain",
+   "pair": "a_kangaroo__x__a_squid",
+   "seed": 6001,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "su2rktk3gec6": {
+   "row": "lora",
+   "pair": "a_flamingo__x__a_sloth",
+   "seed": 6001,
+   "rung": "two_bodies",
+   "broken": 0
+  },
+  "7qrvvka4hftf": {
+   "row": "own",
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6003,
+   "rung": "one",
+   "broken": 0
+  },
+  "c6cb872c9tr3": {
+   "row": "own",
+   "pair": "a_bee__x__an_owl",
+   "seed": 6001,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "s29dugrudz9m": {
+   "row": "plain",
+   "pair": "a_lobster__x__a_whale",
+   "seed": 6004,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "yns82xks7ugw": {
+   "row": "own",
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6001,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "wgp2ue475ed8": {
+   "row": "both",
+   "pair": "a_bee__x__an_owl",
+   "seed": 6001,
+   "rung": "hybrid",
+   "broken": 1
+  },
+  "n3bya382fq9u": {
+   "row": "lora",
+   "pair": "a_fox__x__a_llama",
+   "seed": 6001,
+   "rung": "two_bodies",
+   "broken": 0
+  },
+  "fvt4cdeb7m7e": {
+   "row": "lora",
+   "pair": "a_fox__x__a_llama",
+   "seed": 6002,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "zcr6fmpgbqsf": {
+   "row": "plain",
+   "pair": "a_fox__x__a_llama",
+   "seed": 6004,
+   "rung": "hybrid",
+   "broken": 1
+  },
+  "ftfw4uyyuadj": {
+   "row": "lora",
+   "pair": "a_butterfly__x__a_crab",
+   "seed": 6001,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "d83a9h762xpu": {
+   "row": "both",
+   "pair": "a_fox__x__a_llama",
+   "seed": 6004,
+   "rung": "two_bodies",
+   "broken": 0
+  },
+  "jy97b9p93fs4": {
+   "row": "plain",
+   "pair": "a_flamingo__x__a_sloth",
+   "seed": 6004,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "88j7nqnppupp": {
+   "row": "plain",
+   "pair": "a_flamingo__x__a_sloth",
+   "seed": 6003,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "xyk7zavfctcp": {
+   "row": "own",
+   "pair": "a_bee__x__an_owl",
+   "seed": 6003,
+   "rung": "hybrid",
+   "broken": 1
+  },
+  "c4cj999ac8cs": {
+   "row": "own",
+   "pair": "a_kangaroo__x__a_squid",
+   "seed": 6003,
+   "rung": "hybrid",
+   "broken": 1
+  },
+  "2z9sf8bx373y": {
+   "row": "plain",
+   "pair": "a_butterfly__x__a_crab",
+   "seed": 6001,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "eqp82h9brz7q": {
+   "row": "both",
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6001,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "y7kx38ysbahh": {
+   "row": "lora",
+   "pair": "a_lobster__x__a_whale",
+   "seed": 6003,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "u56bqcscbyx5": {
+   "row": "plain",
+   "pair": "a_bee__x__an_owl",
+   "seed": 6001,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "t4ga99qkjtp8": {
+   "row": "both",
+   "pair": "a_bee__x__an_owl",
+   "seed": 6002,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "5qzbxggyvejg": {
+   "row": "own",
+   "pair": "a_fox__x__a_llama",
+   "seed": 6003,
+   "rung": "hybrid",
+   "broken": 1
+  },
+  "crnhu48cmzz6": {
+   "row": "lora",
+   "pair": "a_flamingo__x__a_sloth",
+   "seed": 6002,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "drtr4cdt7fpg": {
+   "row": "both",
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6003,
+   "rung": "two_bodies",
+   "broken": 0
+  },
+  "se56svfqjk4v": {
+   "row": "plain",
+   "pair": "a_bee__x__an_owl",
+   "seed": 6003,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "56yj5k4sp6tg": {
+   "row": "own",
+   "pair": "a_butterfly__x__a_crab",
+   "seed": 6004,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "2d46kv7h542f": {
+   "row": "lora",
+   "pair": "a_kangaroo__x__a_squid",
+   "seed": 6001,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "faue4ytqucrq": {
+   "row": "both",
+   "pair": "a_kangaroo__x__a_squid",
+   "seed": 6004,
+   "rung": "one",
+   "broken": 1
+  },
+  "tm8y39j7adnu": {
+   "row": "lora",
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6002,
+   "rung": "hybrid",
+   "broken": 1
+  },
+  "5tav74qun84d": {
+   "row": "lora",
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6004,
+   "rung": "two_bodies",
+   "broken": 0
+  },
+  "bpgc8p5kbxed": {
+   "row": "own",
+   "pair": "a_lobster__x__a_whale",
+   "seed": 6002,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "ma8d8nkh4h4f": {
+   "row": "plain",
+   "pair": "a_butterfly__x__a_crab",
+   "seed": 6003,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "a29b4sd4ab42": {
+   "row": "own",
+   "pair": "a_flamingo__x__a_sloth",
+   "seed": 6002,
+   "rung": "hybrid",
+   "broken": 1
+  },
+  "uee388ygdqzb": {
+   "row": "both",
+   "pair": "a_kangaroo__x__a_squid",
+   "seed": 6001,
+   "rung": "one",
+   "broken": 0
+  },
+  "vvnpkhnyt2fu": {
+   "row": "lora",
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6003,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "5v9eg7gkt385": {
+   "row": "plain",
+   "pair": "a_flamingo__x__a_sloth",
+   "seed": 6002,
+   "rung": "hybrid",
+   "broken": 1
+  },
+  "fz9gjhjenfcb": {
+   "row": "own",
+   "pair": "a_butterfly__x__a_crab",
+   "seed": 6001,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "ck2bufkckmct": {
+   "row": "plain",
+   "pair": "a_fox__x__a_llama",
+   "seed": 6001,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "eyg4gtenjbgt": {
+   "row": "own",
+   "pair": "a_lobster__x__a_whale",
+   "seed": 6001,
+   "rung": "one",
+   "broken": 0
+  },
+  "9ypykjm35vaw": {
+   "row": "lora",
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6004,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "xafg6aqugyb3": {
+   "row": "plain",
+   "pair": "a_fox__x__a_llama",
+   "seed": 6003,
+   "rung": "one",
+   "broken": 0
+  },
+  "s8txw8eghdr3": {
+   "row": "own",
+   "pair": "a_lobster__x__a_whale",
+   "seed": 6004,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "vsvnm9d9q8fb": {
+   "row": "own",
+   "pair": "a_lobster__x__a_whale",
+   "seed": 6003,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "kg55avep44f7": {
+   "row": "own",
+   "pair": "a_fox__x__a_llama",
+   "seed": 6002,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "8hpq7zxt8su2": {
+   "row": "own",
+   "pair": "a_bee__x__an_owl",
+   "seed": 6002,
+   "rung": "one",
+   "broken": 1
+  },
+  "jqgh492ne6ga": {
+   "row": "both",
+   "pair": "a_flamingo__x__a_sloth",
+   "seed": 6001,
+   "rung": "two_bodies",
+   "broken": 0
+  },
+  "9hsdu22gx9jz": {
+   "row": "own",
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6001,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "99zfcbz2ha6r": {
+   "row": "lora",
+   "pair": "a_butterfly__x__a_crab",
+   "seed": 6004,
+   "rung": "hybrid",
+   "broken": 1
+  },
+  "jrf7mw8eqv4h": {
+   "row": "both",
+   "pair": "a_flamingo__x__a_sloth",
+   "seed": 6003,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "gu9bp3vccu8j": {
+   "row": "both",
+   "pair": "a_butterfly__x__a_crab",
+   "seed": 6003,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "qp28pnjdtw88": {
+   "row": "plain",
+   "pair": "a_kangaroo__x__a_squid",
+   "seed": 6003,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "tkyk6r3ushzy": {
+   "row": "lora",
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6001,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "tcq6h8ed9amd": {
+   "row": "lora",
+   "pair": "a_kangaroo__x__a_squid",
+   "seed": 6003,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "sz69vyyxqfvd": {
+   "row": "both",
+   "pair": "a_bee__x__an_owl",
+   "seed": 6003,
+   "rung": "hybrid",
+   "broken": 1
+  },
+  "ca9zr9c37bjh": {
+   "row": "lora",
+   "pair": "a_bee__x__an_owl",
+   "seed": 6004,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "vh5ruuyzmdhg": {
+   "row": "both",
+   "pair": "a_fox__x__a_llama",
+   "seed": 6002,
+   "rung": "two_bodies",
+   "broken": 0
+  },
+  "85z66g3autyv": {
+   "row": "lora",
+   "pair": "a_flamingo__x__a_sloth",
+   "seed": 6003,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "pwqkmqjqfbtc": {
+   "row": "lora",
+   "pair": "a_fox__x__a_llama",
+   "seed": 6003,
+   "rung": "two_bodies",
+   "broken": 0
+  },
+  "ckw97e3cpusw": {
+   "row": "lora",
+   "pair": "a_bee__x__an_owl",
+   "seed": 6001,
+   "rung": "two_bodies",
+   "broken": 0
+  },
+  "bwbr95b9kfzt": {
+   "row": "both",
+   "pair": "a_fox__x__a_llama",
+   "seed": 6001,
+   "rung": "two_bodies",
+   "broken": 0
+  },
+  "z64wq7g6k6je": {
+   "row": "lora",
+   "pair": "a_fox__x__a_llama",
+   "seed": 6004,
+   "rung": "two_bodies",
+   "broken": 0
+  },
+  "cqtjnckbpe3y": {
+   "row": "own",
+   "pair": "a_fox__x__a_llama",
+   "seed": 6004,
+   "rung": "one",
+   "broken": 0
+  },
+  "n2uyq6ykz58g": {
+   "row": "lora",
+   "pair": "a_butterfly__x__a_crab",
+   "seed": 6002,
+   "rung": "two_clear",
+   "broken": 0
+  },
+  "wq8f6ykg6ty6": {
+   "row": "lora",
+   "pair": "a_bee__x__an_owl",
+   "seed": 6003,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "guznd933jjab": {
+   "row": "own",
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6002,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "5ypmdhc8k72p": {
+   "row": "own",
+   "pair": "a_flamingo__x__a_sloth",
+   "seed": 6004,
+   "rung": "hybrid",
+   "broken": 1
+  },
+  "tujwwny52mad": {
+   "row": "lora",
+   "pair": "a_lobster__x__a_whale",
+   "seed": 6002,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "j3erdm33bye4": {
+   "row": "plain",
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6004,
+   "rung": "hybrid",
+   "broken": 1
+  },
+  "df2vhun4n7wk": {
+   "row": "both",
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6003,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "7mq3wkc5s63g": {
+   "row": "plain",
+   "pair": "a_lobster__x__a_whale",
+   "seed": 6003,
+   "rung": "one",
+   "broken": 0
+  },
+  "bsqd97tqcd5h": {
+   "row": "own",
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6004,
+   "rung": "one",
+   "broken": 0
+  },
+  "yrf8x7xd8q6x": {
+   "row": "plain",
+   "pair": "a_kangaroo__x__a_squid",
+   "seed": 6002,
+   "rung": "hybrid",
+   "broken": 1
+  },
+  "8tbq7ec2utd7": {
+   "row": "own",
+   "pair": "a_kangaroo__x__a_squid",
+   "seed": 6001,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "tyakbvbdy26f": {
+   "row": "plain",
+   "pair": "a_fox__x__a_llama",
+   "seed": 6002,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "fthapyfrqcs8": {
+   "row": "plain",
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6003,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "28x8w3wy3edd": {
+   "row": "lora",
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6001,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "xe8k5348aetm": {
+   "row": "both",
+   "pair": "a_lobster__x__a_whale",
+   "seed": 6004,
+   "rung": "two_clear",
+   "broken": 0
+  },
+  "9ysmb7pskv5k": {
+   "row": "both",
+   "pair": "a_lobster__x__a_whale",
+   "seed": 6002,
+   "rung": "hybrid",
+   "broken": 1
+  },
+  "nm74jawphhfe": {
+   "row": "own",
+   "pair": "a_butterfly__x__a_crab",
+   "seed": 6003,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "wgxg98zsmhrm": {
+   "row": "plain",
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6002,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "w4u3nhac8wba": {
+   "row": "both",
+   "pair": "a_lobster__x__a_whale",
+   "seed": 6003,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "44qpcag6dfcq": {
+   "row": "both",
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6004,
+   "rung": "two_bodies",
+   "broken": 0
+  },
+  "pu2nymjjharr": {
+   "row": "lora",
+   "pair": "a_bee__x__an_owl",
+   "seed": 6002,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "tenjx9hb76sh": {
+   "row": "lora",
+   "pair": "a_lobster__x__a_whale",
+   "seed": 6004,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "xm5rka9ywhnc": {
+   "row": "plain",
+   "pair": "a_kangaroo__x__a_squid",
+   "seed": 6004,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "7fun7x29een4": {
+   "row": "both",
+   "pair": "a_flamingo__x__a_sloth",
+   "seed": 6002,
+   "rung": "two_bodies",
+   "broken": 0
+  },
+  "6jfb5y24e6ac": {
+   "row": "lora",
+   "pair": "a_kangaroo__x__a_squid",
+   "seed": 6004,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "azdmb2x4ssb3": {
+   "row": "both",
+   "pair": "a_butterfly__x__a_crab",
+   "seed": 6001,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "z7xvuut79g5u": {
+   "row": "lora",
+   "pair": "a_flamingo__x__a_sloth",
+   "seed": 6004,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "etssenmhmwew": {
+   "row": "lora",
+   "pair": "a_butterfly__x__a_crab",
+   "seed": 6003,
+   "rung": "hybrid",
+   "broken": 1
+  },
+  "khzp355zumju": {
+   "row": "plain",
+   "pair": "a_bee__x__an_owl",
+   "seed": 6002,
+   "rung": "hybrid",
+   "broken": 0
+  },
+  "gxcjfdqy5qbp": {
+   "row": "own",
+   "pair": "a_flamingo__x__a_sloth",
+   "seed": 6003,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "62uybzgcvr64": {
+   "row": "both",
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6001,
+   "rung": "two_bodies",
+   "broken": 1
+  },
+  "cbcyy8fu84be": {
+   "row": "own",
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6003,
+   "rung": "hybrid",
+   "broken": 0
+  }
+ }
+}

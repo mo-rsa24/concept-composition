@@ -2,7 +2,7 @@
 
 <a href="binding-plan.png"><img src="binding-plan.png" width="760" alt="Now: the LoRA alone turns a fox-llama hybrid into two llamas. Option A: the LoRA's correction everywhere, then inside each animal's box that animal's own prediction, at steps 5 to 30; if two clear animals result, a binding loss is worth building, otherwise stop"></a>
 
-The diagram's source is [binding-plan.mmd](binding-plan.mmd). Nothing here has run; the run needs the owner's yes on a board question first.
+The diagram's source is [binding-plan.mmd](binding-plan.mmd). **Option A failed its bar** (4 of 32 two clear against 2 for the LoRA alone and 0 for the box rule alone; [option A's review](binding/option-a-review.md)), so way a of section 4 is not built; way c acts on attention and needs its own test.
 
 ## 1. The problem this plan starts from
 
