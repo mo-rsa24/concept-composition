@@ -5,7 +5,7 @@ classDef todo fill:#e9ecef,stroke:#868e96,color:#111111
 classDef you fill:#fff4e5,stroke:#e65100,stroke-width:2px,color:#111111
 classDef stale fill:#ffffff,stroke:#c62828,stroke-dasharray:5 5,color:#111111
 subgraph P1["Paper 1: experts trained apart"]
-  Z9["Z9 Colored MNIST vs DCFM<br/>arm 2 won, arm 3 failed,<br/>arm 4 and a control running"]:::doing
+  Z9["Z9 Colored MNIST vs DCFM<br/>arm 2 won, arm 3 failed,<br/>arm 4 gate, then a control"]:::doing
   M11["M11 digits: experts' vote<br/>beside paste"]:::doing
   M10["M10 two-colour CLEVR"]:::todo
   M4["M3 tune, M4 Paper 1's recipe"]:::todo
@@ -21,7 +21,6 @@ subgraph BOTH["Both papers: Loop 15's three experiments"]
   M14 --> Z10
 end
 subgraph P2["Paper 2: one frozen model"]
-  D5["D5, V4: still name<br/>the closed checker route"]:::stale
   R2["Paper 2's method,<br/>from M14 to Z10"]:::you
 end
 Z9 --> Z10
