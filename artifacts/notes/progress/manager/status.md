@@ -27,6 +27,7 @@ overrule one, answer it again: `python3 scripts/progress_board.py answer <number
 
 | # | The question | Decided | Why |
 |---|---|---|---|
+| none | The digit shared-canvas experiment filled every canvas with ink twice (0 of 320 each time); diagnose it? | **Yes, as a diagnosis**: no corrector and no pushes first, then each piece added back alone, stopping at the first that breaks it; about 6 GPU-minutes, after M10 starts | It is the one comparison asking whether the experts need their own regions; reads no bar until the sampler draws digits |
 | none | M14's bar was written with M13's old sign; may it be corrected before the split? | **Yes, mechanically**: every threshold negated and "opposes" read as "follows", nothing else changed, committed alone before any split | M13's sign was reversed (Loop 6's check on 12 saved states: cosine -1.0 between the push and the gradient); no split had been computed |
 | none | Should Z9's checker push get the matched-length digit-and-colour-only control Loop 15 asked for? | **Yes**, about 0.2 GPU-hours inside Z9 | Without it, the 46.9% to 76.0% lift cannot be told apart from stronger attributes alone |
 | none | Two steps downstream of the closed checker route (tuning the winner, M3; Loop 6's checker against Loop 8's, M8) and the recipes step (M4) still named a Paper 2 checker | **M3 covers Paper 1 only; M8 closes as not run; M4 needs Paper 1's recipe only**, and Paper 2's recipe waits for your choice after Z9 and Loop 15's last step | Follows from your answer to 111; changes no result or bar |
