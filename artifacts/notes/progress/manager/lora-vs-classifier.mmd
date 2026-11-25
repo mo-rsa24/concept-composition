@@ -1,0 +1,17 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TB
+classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+classDef weak fill:#fdecea,stroke:#c62828,stroke-width:2px,color:#111111
+classDef strong fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#111111
+subgraph L["LoRA adapter (worked: 58 of 64 on unseen pairs)"]
+  L1["sits INSIDE the U-Net,<br/>on cross-attention: can change<br/>which word each region attends to"]:::strong
+  L2["trained on a full target:<br/>128 x 128 x 4 numbers of r_t<br/>at every step, every picture"]:::strong
+  L3["outputs the correction itself"]:::strong
+end
+subgraph C["Classifier push (parked on PoE)"]
+  C1["sits OUTSIDE, reads the latent<br/>(even when it reads U-Net features)"]:::plain
+  C2["trained on one label per picture:<br/>clean pair, yes or no"]:::weak
+  C3["the correction is its GRADIENT:<br/>right answer, unreliable direction"]:::weak
+end
+L1 --> L2 --> L3
+C1 --> C2 --> C3
