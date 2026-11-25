@@ -1,0 +1,683 @@
+{
+ "sizes": {
+  "clevr_side_px": {
+   "value": 64,
+   "unit": "pixels, square",
+   "source": "artifacts/notes/progress/method-search/05-two-experts-by-colour/design.md:41"
+  },
+  "clevr_expert_model": {
+   "value": "edm2-img64-xs",
+   "source": "artifacts/notes/progress/method-search/05-two-experts-by-colour/design.md:50"
+  },
+  "clevr_expert_images_seen": {
+   "value": 2000896,
+   "unit": "training images seen per expert",
+   "source": "artifacts/notes/progress/method-search/05-two-experts-by-colour/design.md:50"
+  },
+  "clevr_expert_minutes": {
+   "value": 77,
+   "unit": "minutes on one RTX PRO 6000 Blackwell card (position 1 expert, step M7)",
+   "source": "artifacts/notes/progress/method-search/01c-clevr-paste-first/review.md:63"
+  },
+  "clevr_renders_per_count": {
+   "value": 5000,
+   "unit": "renders per object count, 1 to 3, per colour",
+   "source": "artifacts/notes/progress/method-search/05-two-experts-by-colour/design.md:46"
+  },
+  "clevr_counts_per_expert": {
+   "value": [
+    1,
+    2,
+    3
+   ],
+   "source": "artifacts/notes/progress/method-search/05-two-experts-by-colour/design.md:14"
+  },
+  "digit_canvas": {
+   "value": [
+    1,
+    32,
+    64
+   ],
+   "unit": "channels, height, width in pixels",
+   "source": "2-classifier-guidance/artifacts/scenes/mnist-guidance-explained/4-the-derivation.md:16"
+  },
+  "digit_experts": {
+   "value": [
+    "e04-either: digits 0 to 4, either side",
+    "e59-either: digits 5 to 9, either side"
+   ],
+   "source": "2-classifier-guidance/report/the-method-search/does-composing-two-digit-models-beat-sampling-and-pasting.md:39"
+  },
+  "sampler_steps": {
+   "value": 50,
+   "unit": "DDIM steps",
+   "source": "2-classifier-guidance/scripts/mnist/canvas_unet.py:197"
+  },
+  "push_strength": {
+   "value": 10.0,
+   "source": "2-classifier-guidance/scripts/method_search/paper1_rows.py:33",
+   "unit": "lambda, multiplies sigma_t times the checker gradient"
+  },
+  "push_cap": {
+   "value": 0.1,
+   "source": "2-classifier-guidance/scripts/method_search/paper1_rows.py:34",
+   "unit": "largest push as a share of the noise prediction's length, per canvas"
+  },
+  "layout_lock_t": {
+   "value": 800.0,
+   "source": "2-classifier-guidance/scripts/method_search/paper1_rows.py:35",
+   "unit": "noise step t (of 1000) after which each expert's side is held"
+  },
+  "eta": {
+   "value": 1.0,
+   "source": "2-classifier-guidance/scripts/method_search/paper1_rows.py:36",
+   "unit": "DDIM noise setting, 1 adds fresh noise every step"
+  },
+  "checker_layers": {
+   "value": "1 -> 64 -> 64 (stride 2) -> 128 (stride 2) -> 128 -> 128 channels; the step scales and shifts the middle maps; mean and max pooled to 256 numbers; MLP 256 -> answers",
+   "source": "2-classifier-guidance/scripts/mnist/pixel_checker.py:39"
+  },
+  "checker_grid_after_stem": {
+   "value": [
+    8,
+    16
+   ],
+   "unit": "rows, columns after two stride-2 convolutions on 32 x 64",
+   "source": "2-classifier-guidance/scripts/mnist/pixel_checker.py:41"
+  },
+  "pair_checker_weights": {
+   "value": 514497,
+   "unit": "trained weights, counted from the layers",
+   "source": "2-classifier-guidance/scripts/mnist/pixel_checker.py:44"
+  },
+  "separate_checker_weights": {
+   "value": 483402,
+   "unit": "trained weights, counted from the layers",
+   "source": "2-classifier-guidance/scripts/mnist/pixel_checker.py:45"
+  },
+  "pair_push_line": {
+   "value": "return -s * _rate(t, x) * g * inside",
+   "source": "2-classifier-guidance/scripts/mnist/pixel_checker.py:78"
+  },
+  "cap_line": {
+   "value": "per_sample_cap",
+   "source": "2-classifier-guidance/scripts/mnist/canvas_unet.py:180"
+  }
+ },
+ "results": {
+  "digits_halves_vs_paste": {
+   "what": "clean digit pairs of 320 canvases (5 tuning pairs x 64 seeds), digit judge judge-v3, W&B vekm3sfh; null by the written rule",
+   "paste": 287,
+   "method_no_push": 259,
+   "method_checker_push": 295,
+   "method_random_push": 258,
+   "lead_push_over_paste": 8,
+   "bar": 13.54,
+   "lift_push_over_no_push": 36,
+   "source": "2-classifier-guidance/report/the-method-search/does-composing-two-digit-models-beat-sampling-and-pasting.md:106",
+   "verdict_source": "2-classifier-guidance/report/the-method-search/does-composing-two-digit-models-beat-sampling-and-pasting.md:6"
+  },
+  "clevr_fixed_places_paste": {
+   "what": "pasted images with every asked object in place, fixed separated places, step M7",
+   "two_experts": [
+    1024,
+    1024
+   ],
+   "three_experts": [
+    1024,
+    1024
+   ],
+   "paste_rate": 1.0,
+   "bar": 0.906,
+   "each_expert_alone": [
+    256,
+    256
+   ],
+   "source": "2-classifier-guidance/report/the-method-search/does-sample-and-paste-already-solve-small-clevr.md:102"
+  },
+  "digits_either_side_plain_product": {
+   "what": "two clear right digits of 320 seeds, experts trained apart drawing on either side, no regions",
+   "plain_product": 0,
+   "both_pushes": 4,
+   "source": "2-classifier-guidance/report/classifier-guided-poe/32-mnist-two-experts.md:17"
+  },
+  "digits_shared_canvas_best": {
+   "what": "clean pairs of 320 on one shared canvas with no halves, five tuning pairs; bar 288",
+   "value": 121,
+   "bar": 288,
+   "source": "artifacts/notes/progress/problem-statements.md:41",
+   "note": "problem statement, not a report page; the finding below holds the same number"
+  },
+  "digits_final_void": {
+   "what": "clean pairs of 1,280 on 20 unseen pairs, fixed halves; ON THE VOID LIST, out of any claim",
+   "value": 1200,
+   "of": 1280,
+   "source": "artifacts/notes/progress/problem-statements.md:39",
+   "finding": "2-classifier-guidance/report/classifier-guided-poe/can-two-separately-trained-digit-models-compose-while-sampling.md:5"
+  },
+  "two_colour_clevr": {
+   "what": "two-colour CLEVR experts (step M10): renders under way, no expert trained, no sample exists",
+   "source": "artifacts/notes/progress/method-search/05-two-experts-by-colour/review.md:3",
+   "note": "a review file, the only record of this step"
+  }
+ },
+ "toy_from_poe_ladder": {
+  "source": "product-of-experts-interaction-term/data/poe_interaction_numbers.json, key outcomes_of_4000",
+  "two_apart_of_4000": {
+   "product": 811,
+   "joint_every_step": 4000,
+   "regions_visible_coin_held": 3468,
+   "regions_hidden_coin_held": 3859,
+   "regions_hidden_vote_held": 3840,
+   "regions_hidden_revoted": 1810,
+   "product_breakdown": {
+    "two apart": 811,
+    "both in one cell": 781,
+    "one digit": 967,
+    "other": 1441
+   }
+  }
+ },
+ "toy_checker": {
+  "positives": "4 and 7 in different cells (2 canvases), half the training set",
+  "negatives": "one digit alone (4 canvases) and both in one cell (2 canvases), half the training set",
+  "built_from": "pastes of the toy experts' own samples; no canvas the joint was trained on is used beyond what pasting makes"
+ },
+ "toy_push": {
+  "lambdas": [
+   0,
+   0.5,
+   1,
+   2,
+   4,
+   10
+  ],
+  "two_apart_of_4000": {
+   "product of the two experts, plus the push": [
+    811,
+    3893,
+    4000,
+    3999,
+    4000,
+    4000
+   ],
+   "each expert on its own cell (other cell hidden, coin layout held), plus the push": [
+    3859,
+    3971,
+    3955,
+    3938,
+    3893,
+    3758
+   ]
+  },
+  "same_noise_as_poe_ladder": true,
+  "reproduces_poe_ladder": {
+   "product": 811,
+   "regions_hidden_coin_held": 3859
+  },
+  "outcomes_at_lambda_1": {
+   "product of the two experts, plus the push": {
+    "two apart": 4000,
+    "both in one cell": 0,
+    "one digit": 0,
+    "other": 0
+   },
+   "each expert on its own cell (other cell hidden, coin layout held), plus the push": {
+    "two apart": 3955,
+    "both in one cell": 8,
+    "one digit": 8,
+    "other": 29
+   }
+  },
+  "bayes_check": {
+   "what": "the checker's own training mixture as the base, plus the push at lambda 1; Bayes says this is the positives' own score, so it should draw two apart every time",
+   "two_apart_of_4000": 4000
+  },
+  "windows_product_lambda_4": {
+   "steps 0 to 9 only": 814,
+   "steps 10 to 49 only": 4000,
+   "every step": 4000
+  },
+  "gradient_vs_interaction_term": [
+   {
+    "step": 0,
+    "abar": 6.168375916970092e-05,
+    "median_cosine_I_vs_checker_gradient": 0.9999265715566814,
+    "median_norm_ratio_checker_over_I": 0.33339664461994895
+   },
+   {
+    "step": 1,
+    "abar": 0.0015792911657106965,
+    "median_cosine_I_vs_checker_gradient": 0.9981751592096105,
+    "median_norm_ratio_checker_over_I": 0.3347807140914907
+   },
+   {
+    "step": 2,
+    "abar": 0.00512459313166491,
+    "median_cosine_I_vs_checker_gradient": 0.9941374619320129,
+    "median_norm_ratio_checker_over_I": 0.33774745221525576
+   },
+   {
+    "step": 3,
+    "abar": 0.010683166521355099,
+    "median_cosine_I_vs_checker_gradient": 0.9882724266877572,
+    "median_norm_ratio_checker_over_I": 0.34251230932614996
+   },
+   {
+    "step": 4,
+    "abar": 0.018232397729807476,
+    "median_cosine_I_vs_checker_gradient": 0.9805261910714089,
+    "median_norm_ratio_checker_over_I": 0.34851239377979404
+   },
+   {
+    "step": 5,
+    "abar": 0.02774157468030085,
+    "median_cosine_I_vs_checker_gradient": 0.9733063195074723,
+    "median_norm_ratio_checker_over_I": 0.35353591218472574
+   },
+   {
+    "step": 6,
+    "abar": 0.039172011768434566,
+    "median_cosine_I_vs_checker_gradient": 0.9649015913355712,
+    "median_norm_ratio_checker_over_I": 0.3614664116018012
+   },
+   {
+    "step": 7,
+    "abar": 0.05247720724441284,
+    "median_cosine_I_vs_checker_gradient": 0.9576167789900232,
+    "median_norm_ratio_checker_over_I": 0.3692318100014618
+   },
+   {
+    "step": 8,
+    "abar": 0.06760303239327567,
+    "median_cosine_I_vs_checker_gradient": 0.9496620251938475,
+    "median_norm_ratio_checker_over_I": 0.376460528812826
+   },
+   {
+    "step": 9,
+    "abar": 0.08448795174344804,
+    "median_cosine_I_vs_checker_gradient": 0.9448342169111734,
+    "median_norm_ratio_checker_over_I": 0.3839519022218606
+   },
+   {
+    "step": 10,
+    "abar": 0.10306327340774354,
+    "median_cosine_I_vs_checker_gradient": 0.9347071993626502,
+    "median_norm_ratio_checker_over_I": 0.39196327747907445
+   },
+   {
+    "step": 11,
+    "abar": 0.1232534285383791,
+    "median_cosine_I_vs_checker_gradient": 0.9244586213168897,
+    "median_norm_ratio_checker_over_I": 0.3976893675625196
+   },
+   {
+    "step": 12,
+    "abar": 0.14497627875910604,
+    "median_cosine_I_vs_checker_gradient": 0.920042500047318,
+    "median_norm_ratio_checker_over_I": 0.4062682077666857
+   },
+   {
+    "step": 13,
+    "abar": 0.16814345032375652,
+    "median_cosine_I_vs_checker_gradient": 0.91141334169444,
+    "median_norm_ratio_checker_over_I": 0.4089814957471922
+   },
+   {
+    "step": 14,
+    "abar": 0.19266069364176144,
+    "median_cosine_I_vs_checker_gradient": 0.9071700474615276,
+    "median_norm_ratio_checker_over_I": 0.41453377147470816
+   },
+   {
+    "step": 15,
+    "abar": 0.21842826670801066,
+    "median_cosine_I_vs_checker_gradient": 0.8929647788639468,
+    "median_norm_ratio_checker_over_I": 0.42222871777202664
+   },
+   {
+    "step": 16,
+    "abar": 0.24534134087716533,
+    "median_cosine_I_vs_checker_gradient": 0.8921837128694031,
+    "median_norm_ratio_checker_over_I": 0.42466318820995586
+   },
+   {
+    "step": 17,
+    "abar": 0.27329042733164144,
+    "median_cosine_I_vs_checker_gradient": 0.8890771754684808,
+    "median_norm_ratio_checker_over_I": 0.42914125890649174
+   },
+   {
+    "step": 18,
+    "abar": 0.30216182250828433,
+    "median_cosine_I_vs_checker_gradient": 0.8769781635376073,
+    "median_norm_ratio_checker_over_I": 0.4255183954607611
+   },
+   {
+    "step": 19,
+    "abar": 0.33183807067163923,
+    "median_cosine_I_vs_checker_gradient": 0.8692467562384468,
+    "median_norm_ratio_checker_over_I": 0.43210800420286066
+   },
+   {
+    "step": 20,
+    "abar": 0.3621984417519508,
+    "median_cosine_I_vs_checker_gradient": 0.8607097526782096,
+    "median_norm_ratio_checker_over_I": 0.44143834763551315
+   },
+   {
+    "step": 21,
+    "abar": 0.3931194225039429,
+    "median_cosine_I_vs_checker_gradient": 0.8448116323655706,
+    "median_norm_ratio_checker_over_I": 0.43824097286611985
+   },
+   {
+    "step": 22,
+    "abar": 0.42447521898821566,
+    "median_cosine_I_vs_checker_gradient": 0.8429166517239595,
+    "median_norm_ratio_checker_over_I": 0.43743718469871246
+   },
+   {
+    "step": 23,
+    "abar": 0.4561382683310558,
+    "median_cosine_I_vs_checker_gradient": 0.8351651014273176,
+    "median_norm_ratio_checker_over_I": 0.436448817900011
+   },
+   {
+    "step": 24,
+    "abar": 0.4879797576806915,
+    "median_cosine_I_vs_checker_gradient": 0.8232231335561851,
+    "median_norm_ratio_checker_over_I": 0.43614050974209806
+   },
+   {
+    "step": 25,
+    "abar": 0.5198701482487593,
+    "median_cosine_I_vs_checker_gradient": 0.808060426927141,
+    "median_norm_ratio_checker_over_I": 0.4270987475404162
+   },
+   {
+    "step": 26,
+    "abar": 0.5516797023050519,
+    "median_cosine_I_vs_checker_gradient": 0.7971887513176361,
+    "median_norm_ratio_checker_over_I": 0.41971170751035203
+   },
+   {
+    "step": 27,
+    "abar": 0.5832790109816105,
+    "median_cosine_I_vs_checker_gradient": 0.7817999417476025,
+    "median_norm_ratio_checker_over_I": 0.41072531769209286
+   },
+   {
+    "step": 28,
+    "abar": 0.6145395207389276,
+    "median_cosine_I_vs_checker_gradient": 0.7698433885287205,
+    "median_norm_ratio_checker_over_I": 0.40041110915593114
+   },
+   {
+    "step": 29,
+    "abar": 0.6453340563524669,
+    "median_cosine_I_vs_checker_gradient": 0.743336570172362,
+    "median_norm_ratio_checker_over_I": 0.388080562683496
+   },
+   {
+    "step": 30,
+    "abar": 0.675537338291871,
+    "median_cosine_I_vs_checker_gradient": 0.7321754006152692,
+    "median_norm_ratio_checker_over_I": 0.3696580206124124
+   },
+   {
+    "step": 31,
+    "abar": 0.7050264923880304,
+    "median_cosine_I_vs_checker_gradient": 0.7018297674377515,
+    "median_norm_ratio_checker_over_I": 0.35074650278749986
+   },
+   {
+    "step": 32,
+    "abar": 0.7336815497145691,
+    "median_cosine_I_vs_checker_gradient": 0.6628382941810129,
+    "median_norm_ratio_checker_over_I": 0.3079328784480315
+   },
+   {
+    "step": 33,
+    "abar": 0.7613859346501077,
+    "median_cosine_I_vs_checker_gradient": 0.6107665896303189,
+    "median_norm_ratio_checker_over_I": 0.2750683787359458
+   },
+   {
+    "step": 34,
+    "abar": 0.7880269391357514,
+    "median_cosine_I_vs_checker_gradient": 0.5846112287429661,
+    "median_norm_ratio_checker_over_I": 0.24242447896519792
+   },
+   {
+    "step": 35,
+    "abar": 0.813496181198409,
+    "median_cosine_I_vs_checker_gradient": 0.5333511627888622,
+    "median_norm_ratio_checker_over_I": 0.1890597869040394
+   },
+   {
+    "step": 36,
+    "abar": 0.8376900458745622,
+    "median_cosine_I_vs_checker_gradient": 0.45482904680893954,
+    "median_norm_ratio_checker_over_I": 0.1514458761139795
+   },
+   {
+    "step": 37,
+    "abar": 0.8605101067406984,
+    "median_cosine_I_vs_checker_gradient": 0.4033216662492241,
+    "median_norm_ratio_checker_over_I": 0.11436496477290917
+   },
+   {
+    "step": 38,
+    "abar": 0.8818635263355257,
+    "median_cosine_I_vs_checker_gradient": 0.2999801481211213,
+    "median_norm_ratio_checker_over_I": 0.06330012668337265
+   },
+   {
+    "step": 39,
+    "abar": 0.9016634338449503,
+    "median_cosine_I_vs_checker_gradient": 0.21117005498207647,
+    "median_norm_ratio_checker_over_I": 0.031703018004118
+   },
+   {
+    "step": 40,
+    "abar": 0.9198292785133115,
+    "median_cosine_I_vs_checker_gradient": 0.1512264697118325,
+    "median_norm_ratio_checker_over_I": 0.013411319545642154
+   },
+   {
+    "step": 41,
+    "abar": 0.9362871573431046,
+    "median_cosine_I_vs_checker_gradient": 0.08347640535430043,
+    "median_norm_ratio_checker_over_I": 0.004823120859287419
+   },
+   {
+    "step": 42,
+    "abar": 0.9509701157500376,
+    "median_cosine_I_vs_checker_gradient": 0.04462561341006423,
+    "median_norm_ratio_checker_over_I": 0.0011103022528607467
+   },
+   {
+    "step": 43,
+    "abar": 0.9638184199502804,
+    "median_cosine_I_vs_checker_gradient": 0.023955375239601603,
+    "median_norm_ratio_checker_over_I": 0.00012328132875094909
+   },
+   {
+    "step": 44,
+    "abar": 0.9747797999717739,
+    "median_cosine_I_vs_checker_gradient": 0.01596771481374097,
+    "median_norm_ratio_checker_over_I": 5.51819935392199e-06
+   },
+   {
+    "step": 45,
+    "abar": 0.9838096623009674,
+    "median_cosine_I_vs_checker_gradient": 0.0062777024032392836,
+    "median_norm_ratio_checker_over_I": 7.317844235965225e-08
+   },
+   {
+    "step": 46,
+    "abar": 0.9908712712998899,
+    "median_cosine_I_vs_checker_gradient": 0.0014789022277604917,
+    "median_norm_ratio_checker_over_I": 9.543676822975914e-11
+   },
+   {
+    "step": 47,
+    "abar": 0.9959358986555035,
+    "median_cosine_I_vs_checker_gradient": 5.888423109640885e-05,
+    "median_norm_ratio_checker_over_I": 1.0455262639218789e-14
+   },
+   {
+    "step": 48,
+    "abar": 0.9989829402533477,
+    "median_cosine_I_vs_checker_gradient": 0.0,
+    "median_norm_ratio_checker_over_I": 0.0
+   },
+   {
+    "step": 49,
+    "abar": 1.0,
+    "median_cosine_I_vs_checker_gradient": 0.0,
+    "median_norm_ratio_checker_over_I": 0.0
+   }
+  ]
+ },
+ "worked_state": {
+  "step": 26,
+  "abar": 0.5517,
+  "sigma_t": 0.6696,
+  "next_abar": 0.5833,
+  "lambda": 1.0,
+  "order": "(4 in left, 7 in left, 4 in right, 7 in right)",
+  "x_t": [
+   0.744,
+   0.201,
+   -0.185,
+   0.143
+  ],
+  "eps_A": [
+   0.198,
+   0.297,
+   -0.469,
+   0.211
+  ],
+  "eps_B": [
+   1.097,
+   -0.277,
+   -0.272,
+   -0.311
+  ],
+  "eps_empty": [
+   0.55,
+   0.072,
+   -0.392,
+   0.006
+  ],
+  "eps_PoE": [
+   0.745,
+   -0.052,
+   -0.35,
+   -0.107
+  ],
+  "score_A": [
+   -0.296,
+   -0.443,
+   0.701,
+   -0.315
+  ],
+  "score_B": [
+   -1.638,
+   0.414,
+   0.407,
+   0.465
+  ],
+  "score_empty": [
+   -0.822,
+   -0.107,
+   0.586,
+   -0.009
+  ],
+  "score_joint": [
+   -0.32,
+   -0.126,
+   0.725,
+   1.004
+  ],
+  "I_t_score_units": [
+   0.793,
+   -0.204,
+   0.202,
+   0.845
+  ],
+  "r_t_noise_units": [
+   -0.531,
+   0.136,
+   -0.136,
+   -0.566
+  ],
+  "eps_joint": [
+   0.214,
+   0.084,
+   -0.485,
+   -0.672
+  ],
+  "merge_A_left_B_right": [
+   0.198,
+   0.297,
+   -0.272,
+   -0.311
+  ],
+  "checker_prob_both_apart": 0.4679,
+  "grad_log_checker": [
+   0.176,
+   -0.18,
+   0.059,
+   0.545
+  ],
+  "push_noise_units": [
+   -0.118,
+   0.121,
+   -0.039,
+   -0.365
+  ],
+  "eps_hat_product_plus_push": [
+   0.627,
+   0.069,
+   -0.389,
+   -0.471
+  ],
+  "eps_hat_merge_plus_push": [
+   0.08,
+   0.418,
+   -0.312,
+   -0.676
+  ],
+  "x0_estimate_from_merge_plus_push": [
+   0.929,
+   -0.106,
+   0.032,
+   0.802
+  ],
+  "x_next_mean_part": [
+   0.71,
+   -0.081,
+   0.025,
+   0.612
+  ],
+  "eta_sigma": 0.2244,
+  "x_next_before_fresh_noise": [
+   0.758,
+   0.172,
+   -0.164,
+   0.203
+  ],
+  "eps_direction_coefficient": 0.6053,
+  "cosine_I_vs_grad_log_checker": 0.901,
+  "eps_A_check_minus_sigma_times_score_A": [
+   0.198,
+   0.297,
+   -0.469,
+   0.211
+  ],
+  "note": "x_t is the joint's 4-left-7-right canvas noised to step 26 with a fixed draw (seed 7); every vector is exact on the toy"
+ }
+}

@@ -112,7 +112,7 @@
       "kind": "service",
       "eyebrow": "sampling time",
       "label": "Merge, then push",
-      "sub": "each expert on its own region (CLEVR),\nor a plain product (Colored MNIST);\nthen the checker's gradient pushes",
+      "sub": "regions: digits, fixed-place CLEVR;\nproduct: two-colour CLEVR, Colored MNIST;\nthen the checker's gradient pushes",
       "col": 2.5,
       "row": 3,
       "h": 100

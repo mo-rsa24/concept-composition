@@ -1,0 +1,41 @@
+{
+  "subject": "Paper 1: composing experts that never met",
+  "kind": "paper method (this project's own)",
+  "landing": "standalone pages under 2-classifier-guidance/artifacts/scenes/paper-1-experts-that-never-met/",
+  "live_purpose": "Paper 1 in plans/route-two-papers.md, and the comparison with DCFM in artifacts/notes/progress/gaps/04-exploiting-dcfm.md",
+  "mode": "--auto, question round answered by the owner in the brief",
+  "colour_key": {"inputs": "#1f5fd0", "experts_and_hidden": "#1d6b3a", "outputs": "#c0262d", "interaction_term_and_pushes": "#c8680a", "fixed_frozen_or_off": "#6b7a88"},
+  "colour_key_shared_with": ["../product-of-experts-interaction-term/ladder.json", "the DCFM ladder, built in parallel"],
+  "notation_file": "NOTATION.md",
+  "numbers_script": "scripts/make_paper1_numbers.py",
+  "numbers_json": "data/paper1_numbers.json",
+  "figure_check": "scripts/figure_kit.py: check() stops a figure script when a line crosses a node or text it does not start or end at, or when two texts overlap",
+  "style": {
+    "0": {"register": "annotated explainer", "template": "~/.claude/skills/zoom-ladder/scripts/annotated_explainer.py", "worked_example": "../annotated-overviews/loop-6.png"},
+    "0.5": {"register": "clean cheat-sheet: thin outlines, glow on the part in question, fade the rest", "families": ["product of experts", "guidance as a vector sum plus the push", "readout or CNN checker"]},
+    "maths": {"register": "TeX in the markdown, plus matplotlib mathtext renders in maths/"},
+    "2": {"register": "plain charts, colour key kept"}
+  },
+  "code_checkout": {"path": "/home/molef/PhD/concept-composition/2-classifier-guidance/scripts", "commit": "33cea79b", "note": "read in place; line numbers on 04-the-code.md"},
+  "real_pictures": {
+    "digit canvas": "artifacts/notes/progress/method-search/01-beat-the-baseline/paper-1-four-rows-first-two-seeds.png, row 3 (method with the checker push), tile 5 (digits 4 and 7, seed 0), W&B vekm3sfh",
+    "expert samples": "the same sheet, row 1 (paste), tiles 1, 3, 5, 7, 9, cut into halves",
+    "two-colour CLEVR": "artifacts/notes/progress/method-search/05-two-experts-by-colour/smoke-renders-by-colour-and-count.png, rows r3, b3, c21"
+  },
+  "rungs": {
+    "0": {"state": "built", "files": ["00-the-overview.md", "figures/level0-paper-1-overview.png", "figures/level0-paper-1-overview.svg", "scripts/make_overview.py"]},
+    "0.5": {"state": "built and linked",
+            "built": ["01-the-network-view.md", "figures/level05-the-region-merge.png", "figures/level05-the-region-merge.svg", "figures/level05-the-checker-push-lane.png", "figures/level05-the-checker-push-lane.svg", "figures/level05-regions-or-plain-product.png", "figures/level05-regions-or-plain-product.svg", "scripts/make_network_view.py"],
+            "linked": ["../product-of-experts-interaction-term/figures/level05-the-product-score-the-joint-score-and-the-term.png", "../product-of-experts-interaction-term/figures/level05-the-interaction-term-against-the-sampler-step.png", "../mnist-guidance-explained/2-the-networks/a1-the-canvas-unet.png", "../mnist-guidance-explained/2-the-networks/a2-the-pair-aware-checker.png", "../mnist-guidance-explained/2-the-networks/a3-the-separate-label-checker.png", "../mnist-guidance-explained/3-the-gradient/g1-the-pair-aware-gradient-flow.png", "../digit-map-checkers/0.5-network-view/dc7-the-push-gradient-into-the-canvas.png"]},
+    "1": {"state": "skipped", "why": "the owner chose to skip level 1 illustrations"},
+    "maths": {"state": "built", "files": ["02-the-maths-step-by-step.md", "maths/step-1-noise-prediction-is-a-scaled-score.png", "maths/step-2-the-product-of-experts.png", "maths/step-3-the-interaction-term.png", "maths/step-4-the-region-merge.png", "maths/step-5-bayes-gives-the-checker-term.png", "maths/step-6-from-score-to-noise-the-push.png", "maths/step-7-one-sampler-step-with-the-push.png", "scripts/make_maths.py"], "derivations_from": ["../mnist-guidance-explained/4-the-derivation.md", "../product-of-experts-interaction-term/", "../../../../context/methods/01-the-product-of-experts/01-overview.md"]},
+    "2": {"state": "linked and extended", "linked": ["../product-of-experts-interaction-term/02-the-miniature.md", "../product-of-experts-interaction-term/scripts/poe_toy.py"], "built": ["03-the-toy.md", "figures/level2-the-push-on-the-toy.png", "figures/level2-the-push-on-the-toy.svg", "scripts/make_toy_figure.py"], "note": "the PoE toy already had the region merge; this ladder adds the exact checker and its push, imported read-only, same starting noise, and checks it reproduces 811 and 3,859"},
+    "3": {"state": "linked", "files": ["04-the-code.md"], "linked": ["../product-of-experts-interaction-term/03-the-code.md", "../digit-map-checkers/3-code/walk-v2-learn.md", "../../../../context/methods/01-the-product-of-experts/04-the-code.md", "../../../../context/methods/03-the-digit-map-checkers/04-the-code.md"]},
+    "close": {"state": "built", "files": ["README.md"]}
+  },
+  "route_file": "route-zoom-ladder-paper-1.md",
+  "colour_concordance": {
+    "../annotated-overviews/": "same blue, green, red; orange #c86a0a against this key's #c8680a, read as the same push colour",
+    "../mnist-guidance-explained/ and ../digit-map-checkers/": "their own palettes; linked figures keep them, and each is introduced on 01-the-network-view.md by what it shows"
+  }
+}
