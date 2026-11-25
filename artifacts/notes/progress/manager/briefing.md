@@ -3,7 +3,7 @@
 The one page to read. Loop 13 rewrites it every 6 hours, and at once when you say "updates", "brief me"
 or "where are we". The full detail is on [the status page](status.md).
 
-**Written:** 2026-11-25 07:02 (UTC+2).
+**Written:** 2026-11-25 08:55 (UTC+2).
 
 ## Contents
 
@@ -13,34 +13,26 @@ or "where are we". The full detail is on [the status page](status.md).
 
 ## Where we are
 
-<a href="briefing/where-we-are.png"><img src="briefing/where-we-are.png" width="200" alt="Paper 1: Loop 6's two-colour CLEVR renders running and its identity reader unread, Loop 4's evaluation plan waiting for you. Paper 2: Loop 12's first correction test running, Loop 14's finding that look-alike pairs are still open. Your questions on the right."></a>
+<a href="briefing/where-we-are.png"><img src="briefing/where-we-are.png" width="200" alt="Paper 2's checker push parked; the CoInD and DCFM equation pointing to a ratio classifier; Loop 6's size-corrected reader running; question 108's experiment 1 waiting for a loop; your decision at the bottom."></a>
 
-1. **Paper 2's first real test is running.** It asks whether a correction that leaves SDXL
-   unchanged can fix failures we already know, beyond what a random push of the same size does
-   ([the design](paper2-four-way-design.md)). The first part, drawing plain PoE and the joint prompt
-   to find their failures, is 39 of 88 pictures in on mscluster107's free card; the test itself
-   follows in the queue. The answer should land in about 2 hours. The fix before it, each animal's
-   own prediction inside its box, was a near miss: 14 pictures with two clear subjects of 48
-   against CO3's 8, carried mostly by duck and goose.
-2. **Paper 2 still has a problem worth solving.** Loop 14 found that newer models (SD3.5, FLUX)
-   draw two different everyday objects in 78% to 89% of pictures, but two look-alike subjects in
-   only about 53%, and the best published fix that leaves the model unchanged reaches 69%. On our
-   tuning pairs CO3 rarely fuses animals. In 88 pictures, 33 give one animal the other's parts and
-   20 add an extra animal ([the sheet](co3-failure-kinds.png)). CO3's own paper reports neither
-   rate. A background search is checking whether any paper does.
-3. **Paper 1 has measures where pasting can fail, and its closest rival.** Pasting separately drawn objects already
-   places every object in 1,024 of 1,024 CLEVR images, so counting objects cannot show Paper 1 is
-   better. Loop 4 drafted a plan with five measures pasting should fail or tie: which object hides
-   which, one light for every object, one object's shadow on the other, seams, and colour staying
-   with its object. You accepted the plan (question 105). Loop 6's two-colour CLEVR renders, the
-   experiment it scores, are still running. DCFM (arXiv 2606.10153) composes models from separate
-   hospitals' chest X-rays by forcing them to be independent; Loop 14 is turning its eight limits
-   into experiments (step G4).
-4. **Loop 6's session has stopped.** Its jobs keep running, but its identity reader (job 94807)
-   finished at about 05:00 and nobody has read it. Restarting Loop 6 gets it read.
-5. **Compute.** A RunPod RTX 4090 draws SDXL 2.5 times faster than a cluster RTX 3090 (5.96
-   against 14.81 seconds a picture). Nothing runs on RunPod yet, because every deciding test fits
-   the cluster; RunPod is for paper-sized runs after a "go".
+1. **Paper 2's checker push is parked by its own bar.** On known failures it made no plain-PoE picture
+   two clear (0 of 12, random push 0) and 2 joint-prompt pictures (random 0, a lead of 4 needed). On
+   CO3 it fixed borrowed parts on two cases (8 of 12) but spoiled 4 of 8 draws CO3 already got right,
+   and across all 96 tuning pictures it did worse than CO3 alone (7 against 11). It can correct parts
+   on two bodies already drawn; it cannot split one body into two ([the review](../leakage/08-first-correction-test/review.md)).
+2. **CoInD and DCFM say what the classifier should learn.** Both train the interaction term to zero
+   (CoInD's penalty is exactly the size of it). By Bayes' rule that term is the gradient of
+   p(A, B | x) / (p(A | x) p(B | x)): how much more likely the two concepts are together than apart.
+   A classifier trained on that ratio gives a push that is zero where the concepts do not interact and
+   works on any model with classifier-free guidance. It is an idea, untested.
+3. **The size-corrected identity reader is running** (Loop 6, your answer to 106), on 96 fresh CO3
+   pictures with the extra-animal rule. Its result lands in a few hours.
+4. **Paper 1 has its evaluation plan and its closest rival read.** You accepted five measures where
+   pasting can fail (105) and added NIH Chest X-ray 14 and DCFM's score (107). DCFM's code is not
+   public. You chose its first experiment (108: Colored MNIST, finished experts, with and without a
+   push), but no running loop has it yet. Loop 6's two-colour CLEVR renders are at about 3 hours.
+5. **Loop 12 is idle**, with no step after Z8, and Loop 14 has finished. mscluster48 joined the
+   dead-GPU list.
 
 ## For you to decide
 
@@ -48,14 +40,9 @@ Answer with `python3 scripts/progress_board.py answer <number> "<your answer>"`,
 
 | # | The question | Default |
 |---|---|---|
-| 106 | Paper 2's first identity reader, which needs no training, is inconclusive (0.688 against a 0.75 bar). Next: a version that corrects for animals of very different sizes, a trained reader, pushing on it as it is, or stopping? | A: the size-corrected version on 8 fresh seeds per pair, about 1.2 GPU-hours |
-| 107 | Add two points from DCFM, Paper 1's closest rival, to the X-ray part of the evaluation plan: NIH Chest X-ray 14 as the candidate dataset, and DCFM's classifier-recall score reported beside ours | the plan stays as accepted |
+| none yet | Give question 108's experiment 1 to Loop 12, and add a third arm: a classifier trained on the together-against-apart ratio | Loop 13 asks the reviewer first, then sends it |
 | 96 | Should Paper 2's checkers be judged on ranking good pictures above bad ones instead of their yes-or-no call at zero? | keep the yes-or-no gate, report ranking beside it |
-| 104 | Which model Paper 2 runs on | **held by you** until Paper 2 works on SDXL and beats its rivals there |
-
-**Restart Loop 6.** Open the 🧪 PhD Loop 6: Find The Best Method session and say
-`Read artifacts/notes/progress/requests.md and continue step M12`. It reads its identity reader's
-output and keeps the two-colour CLEVR renders moving.
+| 104 | Which model Paper 2 runs on | **held by you** until Paper 2 works on SDXL |
 
 ## What the manager does for you
 

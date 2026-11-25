@@ -1,16 +1,17 @@
 %%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
-flowchart LR
+flowchart TB
 classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+classDef stop fill:#fdecea,stroke:#c62828,stroke-width:2px,color:#111111
+classDef hope fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#111111
 classDef you fill:#fff4e5,stroke:#e65100,stroke-width:2px,color:#111111
-subgraph P2["Paper 2: fix how frozen SDXL draws two subjects"]
-  L12["Loop 12: first correction test<br/>screening 39 of 88 on card 1,<br/>then the test, about 2 hours"]:::plain
-  L14["Loop 14: look-alike pairs still open<br/>on SD3.5 and FLUX (about 53%);<br/>now writing Paper 1's reviewer questions"]:::plain
-end
-subgraph P1["Paper 1: experts trained apart"]
-  L6["Loop 6: two-colour CLEVR renders<br/>running; identity reader ran<br/>but unread (session stopped)"]:::plain
-  L4["Loop 4: evaluation plan drafted,<br/>5 measures where pasting can fail"]:::plain
-end
-Y["You: 105 accept the plan?<br/>restart Loop 6<br/>96 still open; 104 held by you"]:::you
-L4 --> Y
-L6 -.->|"needs a restart"| Y
-L12 --> R{"Does the correction<br/>fix known failures?"}:::plain
+Z8["Paper 2: checker push parked<br/>fixes some CO3 borrowing,<br/>cannot split a PoE hybrid"]:::stop
+Z7["Own prediction in each box:<br/>14 vs CO3's 8 of 48, near miss"]:::plain
+M12["Loop 6: identity reader that corrects<br/>for animal size, running"]:::plain
+EQ["From CoInD and DCFM: the missing term<br/>is the gradient of p(A,B|x) / p(A|x)p(B|x)<br/>so train a classifier on that ratio"]:::hope
+E1["Question 108, experiment 1:<br/>Colored MNIST, finished experts<br/>(answered; no loop has it yet)"]:::plain
+P1["Paper 1: CLEVR two-colour renders<br/>running; plan with 5 measures accepted"]:::plain
+Y["You: give experiment 1 to Loop 12,<br/>add the ratio classifier as a third arm?"]:::you
+Z8 --> EQ
+EQ --> Y
+E1 --> Y
+M12 -.-> Y
