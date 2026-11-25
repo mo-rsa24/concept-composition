@@ -3582,8 +3582,10 @@
    "holds": "M10",
    "default": "one last attempt, judged on 800 new scenes",
    "by": "s13",
-   "state": "open",
-   "asked": "2026-11-25T19:03:20+02:00"
+   "state": "answered",
+   "asked": "2026-11-25T19:03:20+02:00",
+   "answer": "Report on the blind eye calls; the block counter is short (disagrees with the eye on 14.7%) and retraining cannot fix overlaps it never saw",
+   "answered": "2026-11-26T00:13:41+02:00"
   },
   {
    "id": 115,
@@ -3591,8 +3593,10 @@
    "holds": "Z12",
    "default": "the deciding rerun",
    "by": "s13",
-   "state": "open",
-   "asked": "2026-11-25T19:03:20+02:00"
+   "state": "answered",
+   "asked": "2026-11-25T19:03:20+02:00",
+   "answer": "Yes: one deciding rerun of Z7's clean-up pass with boxes against without, on fresh seeds, 96 pictures each, bar written first, about 3 cluster GPU-hours",
+   "answered": "2026-11-26T00:13:41+02:00"
   },
   {
    "id": 116,
@@ -3600,8 +3604,10 @@
    "holds": "M10",
    "default": "train the raw-picture checker once, bar unchanged",
    "by": "s13",
-   "state": "open",
-   "asked": "2026-11-25T20:18:48+02:00"
+   "state": "answered",
+   "asked": "2026-11-25T20:18:48+02:00",
+   "answer": "Yes: one checker that reads the noisy picture itself, written into M10's design before it trains, bar 0.75 unchanged, its row judged by eye like the others, on the same RTX 4090 pod, about 1 GPU-hour",
+   "answered": "2026-11-26T00:13:41+02:00"
   }
  ]
 }
