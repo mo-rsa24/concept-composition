@@ -1,0 +1,37 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef ours fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px,color:#111111
+  classDef gap fill:#fdecea,stroke:#c0392b,stroke-width:2px,color:#111111
+
+  subgraph DCFM["DCFM's limits (Loop 4's note, page given)"]
+    L3["3. Experts never stay finished<br/>finished-expert baselines: novel FID 25.19<br/>DCFM-A retrains: 11.41 (Table 1, p. 7)"]:::gap
+    L4["4. Needs at least 19% of combinations seen<br/>runs only at 50% and 75% (Eq. 2, p. 3)"]:::gap
+    L1["1. Cost of forcing independence<br/>never measured (p. 3, p. 5)"]:::gap
+    L57["5 and 7. X-ray utility under 0.25 for every method<br/>no anatomy check, ribs below diaphragm (p. 8)"]:::gap
+    LO["2, 6, 8. One object's attributes only;<br/>not best on seen combinations; cost grows"]:::plain
+  end
+
+  subgraph OURS["Our ideas"]
+    I1["Checker push on finished experts<br/>Paper 2's correction, no retraining"]:::ours
+    I2["Experts that never met<br/>Paper 1's own setting"]:::ours
+    I3["What a product drops where things interact<br/>X-ray measures A, B, C"]:::ours
+  end
+
+  subgraph RUNS["Experiments, cheapest first (estimates)"]
+    E1["1. Two data holders, Colored MNIST<br/>product vs product + push<br/>about 1 to 3 GPU-hours"]:::plain
+    E2["2. Diagonal split, 10% seen<br/>product, CoInD penalty, push<br/>about 2 to 4 GPU-hours"]:::plain
+    E3["3. Ten holders, DCFM's own setup<br/>novel FID vs 11.41<br/>about 4 to 14 GPU-hours"]:::plain
+    E45["4 and 5. Chest X-ray smoke run, then<br/>effusion + cardiomegaly, heart edge traced<br/>cost unknown until 4 runs"]:::plain
+  end
+
+  L3 --> I1
+  L4 --> I2
+  L1 --> I3
+  L57 --> I3
+  LO -.->|"6 untouched; 8 timed in 1"| E1
+  I1 --> E1
+  I1 --> E3
+  I2 --> E2
+  I3 --> E45
+  E1 -.->|"go only if the push moves<br/>unseen combinations"| E3
