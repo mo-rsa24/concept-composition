@@ -242,6 +242,7 @@ Under the closing rule: idle, and the loop finished, closed, or a second copy of
 
 | Time | Session | Loop | Why |
 |---|---|---|---|
+| Loop 6: Find the best method | 2026-11-26 01:20 | closed by the owner's shutdown; its M10 ledger entry checked and given full archive paths (5cbc4c42); no jobs, pods or watchers left |
 | 2026-11-25 | 🎯 PhD Loop 4: Read Rivals And Set Targets (both copies) | **paused by the owner** until the go or no-go; its upkeep step K6 stays open; restart with its prompt's start command |
 | 2026-11-25 | 🗂️ PhD Loop 11: Drain The Loops Into The Pillars | **paused by the owner** until the go or no-go; its final drain (Y5) waits for the other loops |
 | 2026-11-25 | 🔭 PhD Loop 14: Gaps And Reviewer Questions | G1 to G4 done; idle; its requests moved to Loops 4, 12 and 13 |
