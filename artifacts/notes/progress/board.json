@@ -687,9 +687,9 @@
    "state": "doing",
    "serves": "Paper 1",
    "objective": "Build and test",
-   "updated": "2026-11-25T19:38:55+02:00",
+   "updated": "2026-11-25T20:18:48+02:00",
    "started": "2026-11-25T12:46:44+02:00",
-   "note": "plain product and mask paste done (9,216 each); count checker missed 0.75 (0.645), its row held; noise-window diagnosis and corrector row running; scorer choice with the owner"
+   "note": "plain product and mask paste done; count checker misses 0.75 at every noise window (best 0.741 nearly clean, counts unread), owner's call on its row; corrector row running; scorer choice with the owner"
   },
   {
    "id": "D4",
@@ -3593,6 +3593,15 @@
    "by": "s13",
    "state": "open",
    "asked": "2026-11-25T19:03:20+02:00"
+  },
+  {
+   "id": 116,
+   "question": "Paper 1's two-colour block test: the count checker cannot read block counts from the experts' maps at any noise level (best 0.741 against 0.75; one-count-off at chance even nearly clean). Train a second checker that reads the noisy picture itself (the digit test's raw reader), written into the design first, about 1 GPU-hour, bar unchanged? Or report the checker row as not run?",
+   "holds": "M10",
+   "default": "train the raw-picture checker once, bar unchanged",
+   "by": "s13",
+   "state": "open",
+   "asked": "2026-11-25T20:18:48+02:00"
   }
  ]
 }
