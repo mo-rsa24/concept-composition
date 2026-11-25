@@ -1,0 +1,28 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TB
+  classDef done fill:#dff3e4,stroke:#2e7d32,stroke-width:2px,color:#111111
+  classDef run fill:#ffe9cc,stroke:#d97706,stroke-width:2px,color:#111111
+  classDef wait fill:#f3f3f3,stroke:#888888,stroke-width:2px,color:#444444,stroke-dasharray: 5 5
+  classDef you fill:#fff4e5,stroke:#d97706,stroke-width:3px,color:#111111
+
+  T["Sessions at 02:46 · 72 of 93 steps done<br/>green done · orange working · grey dashed waiting"]:::done
+  F["Finished and closed: Loops 1, 2, 3, 5, 7, 9, 10<br/>48 steps done"]:::done
+
+  subgraph P1["Paper 1: experts that never met"]
+    L6a["Loop 6: two-colour CLEVR test<br/>2 renders running, scoring queued"]:::run
+    L6c["Loop 6: digit test of the experts' vote<br/>against paste, to do"]:::wait
+  end
+  subgraph P2["Paper 2: better than CO3"]
+    L6b["Loop 6: first identity reader<br/>queued for a node (biggpu)"]:::run
+    L6p["Loop 6: checker architecture and labels<br/>paused by your answer on 100"]:::wait
+    L12["Loop 12: each animal's own prediction<br/>in its box, 96-picture run queued"]:::run
+    L8["Loop 8: SDXL identity test against CO3<br/>waits on Loop 6 and question 96"]:::wait
+  end
+  L4["Loop 4: keeps targets current<br/>idle until the paper tables"]:::wait
+  L11["Loop 11: stopped<br/>until a new result to drain"]:::wait
+  YOU{{"You: question 96, the CO3 records<br/>disagreement, your readings step"}}:::you
+
+  T --- F
+  L6b --> L6p
+  L6b -. "its result" .-> L8
+  YOU -. "96 decides the gate" .-> L8

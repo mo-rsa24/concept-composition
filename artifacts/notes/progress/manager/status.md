@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-25 03:12 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-25 02:47 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -73,7 +73,7 @@ Your own reading step (confirm the draft statements from your readings) is ready
 
 ## Where each loop is
 
-<a href="loops-and-blockers.png"><img src="loops-and-blockers.png" width="200" alt="Each watched loop as a box, with arrows from your open questions to the work they hold, cluster jobs in blue, and stranded requests dashed grey."></a>
+<a href="sessions-progress.png"><img src="sessions-progress.png" width="200" alt="Every loop session at 02:46 grouped by paper: finished loops in green, working ones in orange, waiting ones grey and dashed."></a> <a href="loops-and-blockers.png"><img src="loops-and-blockers.png" width="200" alt="Each watched loop as a box, with arrows from your open questions to the work they hold, cluster jobs in blue, and stranded requests dashed grey."></a>
 
 The finish range is `session_status.py`'s, from the 63 finished steps: fastest pace seen to slowest.
 
@@ -96,7 +96,7 @@ Read at 02:13 from `squeue`, `sacct` and `sinfo`; down nodes from `sinfo -R` at 
 | Longest wait | the queue as a whole: nothing of ours finished between 00:13 and 01:13 |
 | Nodes out of service | `bigbatch`: 12 down and 5 drained of 48. `biggpu`: 2 down and 2 drained of 7, including mscluster108 and mscluster111, drained at 09:27 and 09:10 today after a failed job kill |
 | Idle capacity | none: at 17:43 every working `bigbatch` and `biggpu` node was allocated. mscluster107 is now another user's `biggpu` job (94610, 6-hour limit, started 17:36); its second card sits idle at 170 MiB, but their process holds it, so it is not ours to use. Your interactive job 83423 on that node no longer appears in the queue |
-| Shared card | **Not in use.** The other user's job on mscluster107 ended by 03:12, so question 99's approval has lapsed; the node is free in Slurm, and Loop 6's identity reader goes there through our `biggpu` slot. A new shared-card run needs a new yes from you |
+| Shared card | **Not in use.** The other user's job on mscluster107 ended by 02:45, so question 99's approval has lapsed; the node is free in Slurm, and Loop 6's identity reader goes there through our `biggpu` slot. A new shared-card run needs a new yes from you |
 | Compute against budget since 2026-11-21 | Loop 6: 53.4 node-hours of 87 (34.8 were CLEVR renders that may have used no GPU). Loop 8: 11.9 of 30. Loop 12: about 0.4, no total set. Slurm here records no GPU count, so these are node-hours, an upper bound |
 
 **What would make the queue move faster:** little within our control. There is no idle `biggpu` card,
@@ -152,7 +152,7 @@ Newest first.
 | Time | To | What and why |
 |---|---|---|
 | 17:02 | Loop 8 | Its rewritten SDXL test passes the design check (stop rule, random and zero controls, comparison prompts fixed in advance, the same two-clear measure as Loop 6; about 7 GPU-hours, inside budget). Its board record goes to you as question 89. |
-| 02:55 | Loop 6 | The reviewer's first identity reader for M12, with its bar and stop conditions. |
+| 02:30 | Loop 6 | The reviewer's first identity reader for M12, with its bar and stop conditions. |
 | 02:30 | Loop 6 | Your answer A on question 100 sent; the reviewer is choosing the identity reader to try first. |
 | 02:25 | Loop 6 | Its checker read is done: none of three checkers sees CO3's failure; it filed question 100 to you. |
 | 02:16 | Loop 6 | Card 1 is free after Loop 8; Loop 6's turn. Loop 8 closed its removal test, as decided. |

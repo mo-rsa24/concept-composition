@@ -3,7 +3,7 @@
 The one page to read. Loop 13 rewrites it every 6 hours, and at once when you say "updates", "brief me"
 or "where are we". The full detail is on [the status page](status.md).
 
-**Written:** 2026-11-25 03:05 (UTC+2).
+**Written:** 2026-11-25 02:47 (UTC+2).
 
 ## Contents
 
