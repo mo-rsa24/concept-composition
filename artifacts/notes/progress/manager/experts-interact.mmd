@@ -1,0 +1,17 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+classDef gap fill:#fdecea,stroke:#c62828,stroke-width:2px,color:#111111
+A["Expert A knows<br/>its own object, the floor,<br/>the light, its own shadow"]:::plain
+B["Expert B knows<br/>the same, for its object"]:::plain
+AB["Both agree on<br/>the floor, the light direction<br/>(X-ray: ribs, spine, lungs)"]:::plain
+N["Neither has seen<br/>A's shadow falling on B,<br/>A hiding part of B<br/>(X-ray: fluid hiding the heart's edge)"]:::gap
+P["Product of the two:<br/>keeps what both agree on,<br/>has no term for what<br/>needs both at once"]:::plain
+Q["Paper 1 measures it<br/>Paper 2's correction<br/>would have to supply it"]:::plain
+A --> AB
+B --> AB
+A -.-> N
+B -.-> N
+AB --> P
+N -. "missing: the interaction term" .-> P
+P --> Q

@@ -1,0 +1,12 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+L12["Loop 12, back now<br/>step Z8: can the correction<br/>fix 9 known failures?<br/>cluster, about 30 GPU-minutes"]:::plain
+L14["New Loop 14: paper-scout<br/>Paper 2: is the problem still open?<br/>Paper 1: what will reviewers ask?<br/>(X-rays, anatomy, overlap)"]:::plain
+L4["Loop 4: Paper 1's evaluation plan<br/>overlap, shadows, seams,<br/>colour binding, X-ray anatomy<br/>same measures for every method"]:::plain
+P2{"Paper 2: continue,<br/>or a new direction?"}:::plain
+P1["Paper 1: measures where<br/>pasting fails, ready when<br/>Loop 6's two-colour test lands"]:::plain
+L12 --> P2
+L14 --> P2
+L14 -.->|"reviewer questions feed in"| L4
+L4 --> P1
