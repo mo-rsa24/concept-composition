@@ -130,6 +130,29 @@ held-out balanced accuracy 0.641 against 0.75 after 3,000 updates (216 seconds),
 pastes with the right counts right on 0.68, touching on 0.72 and one count off on 0.49. Its row is reported as not run. The result and logs
 are in `/datasets/mmolefe/poe_repair_min/loop-6/m10/comparison/m10-part-c.tar` (sha256 `7e778f50…`).
 
+## What the runs look like
+
+| Picture | What it shows |
+|---|---|
+| <a href="red-expert-overfit-samples.png"><img src="red-expert-overfit-samples.png" width="200" alt="Rows of 18 red training scenes and the red expert's samples for 1, 2 and 3 objects, each sample copying a training scene"></a> | The red expert's overfit rung: its samples for 1, 2 and 3 objects copy its 18 training scenes, the right colour and count |
+| <a href="experts-at-quarter-1.png"><img src="experts-at-quarter-1.png" width="200" alt="Two grids of 48 samples each, red above and blue below, rows asked for 1, 2 and 3 objects, after a quarter of training"></a> | Both experts after a quarter of training (500,224 images): the right colour on the CLEVR floor, three objects the weak count |
+| <a href="experts-at-quarter-3.png"><img src="experts-at-quarter-3.png" width="200" alt="The same two grids after three quarters of training, the same seeds in the same places"></a> | Both experts at three quarters (1,500,672 images), the same seeds in the same places, where the stopping rule was read and stopped neither |
+| <a href="plain-product-smoke.png"><img src="plain-product-smoke.png" width="200" alt="Nine rows of eight scenes, one row per request, each holding dark purple-black objects instead of red and blue ones"></a> | The plain product, 8 seeds per request: where both experts draw at the same place the colours add into a dark object |
+| <a href="eye-calls-by-row.png"><img src="eye-calls-by-row.png" width="200" alt="Three rows of pictures, plain product, corrector and mask paste, each at three requests and eight seeds, framed green or red by the blind reviewers' verdict"></a> | The blind eye calls, seeds 0 to 7 at 1 + 1, 2 + 2 and 3 + 3: green where both reviewers call the picture exactly right; no plain or corrector picture is, three of the paste's eight at 1 + 1 are |
+| <a href="paste-overlap-at-1-red-1-blue.png"><img src="paste-overlap-at-1-red-1-blue.png" width="200" alt="Eight mask-paste scenes asked for one red and one blue, the blue object laid over the red one or hiding it"></a> | Why the paste fails and why the scorer misses it: the blue object lies over the red one, which the scorer reads as one of each |
+| <a href="comparison-first-quarter-provisional-scorer.png"><img src="comparison-first-quarter-provisional-scorer.png" width="200" alt="Nine strips of eight scenes for the corrector, the paste and the plain product at three requests, titled with the scorer's provisional shares"></a> | The first quarter as reported while running, with the provisional scorer's shares in the titles; those shares are not the result |
+
+## Where everything lives
+
+| What | Where | Check |
+|---|---|---|
+| The red and blue experts: both final snapshots, stats, logs, samples and quarter records | `/datasets/mmolefe/poe_repair_min/loop-6/m10/full/models/r-full/` and `b-full/` | each snapshot's sha256 in `pod.sha256` beside it, matching the pod |
+| The comparison: every row's 9,216 pictures, the paste sources, the experts-alone samples, the map checker and its diagnosis, the quarter reports, the logs | `/datasets/mmolefe/poe_repair_min/loop-6/m10/comparison/m10-comparison.tar`, 209 MB | sha256 `0372a324…` in `m10-comparison.tar.sha256` |
+| The picture-reading checker and its logs | `/datasets/mmolefe/poe_repair_min/loop-6/m10/comparison/m10-part-c.tar` | sha256 `7e778f50…` in `m10-part-c.tar.sha256` |
+| The scorer's two runs and its calls on the eye-checked pictures | `/datasets/mmolefe/poe_repair_min/loop-6/m10/scorer/`, `scorer-cosine/` and `comparison/eye-check/` | W&B `sxv8ojso`, `acr12hqz` |
+| The blind eye calls: each reviewer's counts, the answer key and the scorer's call on the same pictures | [the eye-call files](eye-calls/), beside this review | the two reviewers agree on all 864 row verdicts and all 192 expert verdicts |
+| The code | `2-classifier-guidance/scripts/method_search/m10_pod/`, `m10_scorer.py`, `m7_train.sbatch`, `m7_data.sbatch` | commits in the tables above |
+
 ## The verdict
 
 **Inconclusive, by the bars written before the first run.** The count scorer misses its 95% bar (0.946 on real renders), and it disagrees
