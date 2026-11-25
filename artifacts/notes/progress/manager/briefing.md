@@ -3,7 +3,7 @@
 The one page to read. Loop 13 rewrites it every 6 hours, and at once when you say "updates", "brief me"
 or "where are we". The full detail is on [the status page](status.md).
 
-**Written:** 2026-11-25 10:40 (UTC+2).
+**Written:** 2026-11-25 17:05 (UTC+2).
 
 ## Contents
 
@@ -13,28 +13,30 @@ or "where are we". The full detail is on [the status page](status.md).
 
 ## Where we are
 
-<a href="../leakage/09-dcfm-colored-mnist/before-after-plain-product-and-checker-push.png"><img src="../leakage/09-dcfm-colored-mnist/before-after-plain-product-and-checker-push.png" width="200" alt="Colored MNIST, the 50 digit-colour combinations neither expert saw: the plain product beside the checker push, with the share right under each."></a>
+<a href="../leakage/11-gradient-trained-classifier/gate/held-back-pairs-sheet.png"><img src="../leakage/11-gradient-trained-classifier/gate/held-back-pairs-sheet.png" width="200" alt="Coloured digits on held-back pairs: the classifier trained so its push points the right way (middle row) against its no-penalty and shuffled twins."></a>
 
-1. **Paper 1 has its first result against its closest rival.** Two Colored MNIST experts, each from
-   its own data holder and never retrained, composed on the 50 combinations neither saw: the checker
-   push gets digit and colour right in 76.0% of 5,000 pictures against 46.9% for the plain product,
-   and a novel-combination FID of 12.63 against 25.87 ([Z9](../leakage/09-dcfm-colored-mnist/design.md)).
-   DCFM's own finished-expert baseline prints 25.19 and DCFM, which retrains, 11.41; those are
-   context, since DCFM uses ten holders. The push here strengthens each attribute, so it does not yet
-   show the interaction story, and Logical Guidance reports a similar setting on Colored MNIST, which a
-   novelty check must compare. Arms 3 and 4 (the ratio head and the trained interaction model) run next.
-2. **Paper 2's checker route is closed (your answer to 111).** On SDXL the kept checker's push points
-   against the joint-minus-product term (median cosine -0.105 at step 0 on CO3, random about 0), and
-   the pictures that came out two clear lean further against it (-0.139). Since the joint prompt also
-   loses subjects, the joint's direction may be the wrong target, which supports controlling a
-   relation's strength directly.
-3. **What is learnable, from the toy.** For a pair nobody saw together, the data says only "never
-   together": a push faithful to it reaches the pair 0.000 of the time, a low-rank head 0.844 (true
-   joint 0.924), and the same head fails when the interaction has no structure (0.120)
-   ([the toy](../../../results/can-a-classifier-reach-an-unseen-pair/README.md)).
-4. **Loop 15 is reading** for directions that carry to new subjects and for your three dials
-   (co-occurrence strength, count, binding strength); H1 and H2 are done, H3 is under way.
-5. **Compute.** Everything ran on the cluster; RunPod has stayed unused since its two tests.
+1. **The first method that beats every control: a classifier trained so its push points the right way.**
+   On the 50 digit-colour combinations neither expert saw, it gets 88.8% right against 73.8% for a push
+   that only names the digit and colour at the same length, 63.1% for the same classifier trained
+   without the alignment penalty, and 47.0% for a random push; FID 10.8 against DCFM's printed 11.41,
+   which retrains (context only: two data holders against ten) ([its review](../leakage/11-gradient-trained-classifier/design.md)).
+   Its push lines up with the target at 0.514 against 0.064 untrained. It is shown on digits only.
+2. **Corrections carry "how many" to new pairs, not "which".** The trained correction (the ICLR LoRA)
+   turned hybrids into two separate bodies on 8 new animal pairs as its strength rose (hybrids 29 to 4
+   of 32), but the second body was the wrong animal: two clear rose only 0 to 2. The ICLR adapter's
+   "58 of 64 on unseen pairs" was counted by a detector that counts bodies but cannot name animals, so
+   it shows two bodies, not two correct animals. A test pairing the LoRA with each animal's own box is
+   running.
+3. **Paper 1's deciding test is training on RunPod.** Two CLEVR colour experts, each near the counter's
+   ceiling at a quarter of training (0.81 and 0.83 right against 0.82 and 0.86); they finish about 17:35
+   and 18:20, then the comparison with pasting and Bradley's rule.
+4. **Closed today:** Paper 2's checker route (its push pointed the right way, +0.105, but too weakly to
+   split a hybrid), the attention reader (CO3 already keeps the two words' attention apart, so borrowing
+   comes from what each region draws), and the ratio classifier on unseen digits (it pushed toward pairs
+   it knew).
+5. **Running and spending.** Loops 6 and 12 and this manager; Loops 4 and 11 paused. RunPod: about R90
+   spent of about R400; two pods left. The laptop restarted at 15:27 and damaged the git store; it is
+   repaired, nothing lost.
 
 ## For you to decide
 
@@ -42,7 +44,8 @@ Answer with `python3 scripts/progress_board.py answer <number> "<your answer>"`,
 
 | # | The question | Default |
 |---|---|---|
-| 96 | Should Paper 2's checkers be judged on ranking good pictures above bad ones instead of their yes-or-no call at zero? | keep the yes-or-no gate; now moot for the closed checker route |
+| none yet | Take the gradient-trained classifier to CO3, aligning its push to each animal's own box | the reviewer reads it first; about 5 GPU-hours, about R40 on RunPod |
+| 96 | Judge checkers on ranking instead of their yes-or-no call? | moot for the closed checker route |
 | 104 | Which model Paper 2 runs on | **held by you** until Paper 2 works on SDXL |
 
 ## What the manager does for you
