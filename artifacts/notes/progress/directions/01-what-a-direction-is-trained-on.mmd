@@ -1,0 +1,34 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef yes fill:#e6f4ea,stroke:#1e7a34,stroke-width:2px,color:#111111
+  classDef part fill:#fff4e0,stroke:#b26a00,stroke-width:2px,color:#111111
+  classDef no fill:#fde8e8,stroke:#b42318,stroke-width:2px,color:#111111
+
+  subgraph A["Trained on something no subject owns"]
+    MS["Measured Sliders<br/>target: a pixel measurement<br/>99% of sweeps ordered, 553 prompts"]:::plain
+    AT["ATHENA<br/>contrast of prompt with and without the count,<br/>rebuilt every step: SDXL +15 points on hard objects"]:::plain
+    CC["this project: count checker on where-maps<br/>0.791 on unseen digits 5-9, 0.782 on seen 0-4"]:::plain
+  end
+  subgraph B["Trained on one generic subject word"]
+    LI["h-space vector learned on 'person'<br/>gender skew on unseen jobs 0.68 to 0.17"]:::plain
+    PA["h-space classifier on 'a photo of a male/female'<br/>doctor 0.355 to 0.015"]:::plain
+  end
+  subgraph C["Trained on a subject's identity, a prompt pair or one dataset"]
+    TS["text-defined sliders<br/>18-34% of sweeps ordered, 553 prompts"]:::plain
+    CE["h-space classifier from CelebA used on SD<br/>'ineffective'"]:::plain
+    ID["this project: identity checker<br/>0.555 on an unseen digit"]:::plain
+  end
+
+  Y["carries to new subjects,<br/>measured"]:::yes
+  P["carries inside the same category"]:::part
+  N["does not carry"]:::no
+
+  MS --> Y
+  AT --> Y
+  CC --> Y
+  LI --> P
+  PA --> P
+  TS --> N
+  CE --> N
+  ID --> N
