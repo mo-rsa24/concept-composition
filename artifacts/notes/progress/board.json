@@ -1110,9 +1110,9 @@
    "serves": "both papers: what a correction should aim at",
    "objective": "joint prompt rendered at M13's 192 CO3 seeds, blind-called, and M13's cosines split by whether the joint drew both",
    "started": "2026-11-25T11:13:54+02:00",
-   "updated": "2026-11-25T12:46:15+02:00",
-   "note": "the checker is wrong under the corrected bar: the push follows r_t where the joint succeeds (median +0.047 to +0.148) about as much as where it fails, and more at step 0 (difference -0.051, interval -0.129 to -0.002); the joint alone is two clear on 34 of 192, CO3 on 73; method-search/10-is-the-joint-the-wrong-target/review.md",
-   "finished": "2026-11-25T12:46:15+02:00"
+   "updated": "2026-11-25T13:48:24+02:00",
+   "note": "the owner reads it as intended: the push follows r_t less where the joint fails at step 0 (difference -0.051, interval -0.129 to -0.002, the condition met by 0.001), inconclusive at steps 5 to 15; the joint alone is two clear on 34 of 192, CO3 on 73; method-search/10-is-the-joint-the-wrong-target/review.md",
+   "finished": "2026-11-25T13:48:24+02:00"
   },
   {
    "id": "M15",
