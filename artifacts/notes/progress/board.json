@@ -1103,12 +1103,13 @@
    "owner": "s6",
    "proof": "method-search/10-is-the-joint-the-wrong-target/review.md reports M13's cosines split by the joint's blind call, against a bar written first",
    "needs": [],
-   "state": "doing",
+   "state": "done",
    "serves": "both papers: what a correction should aim at",
    "objective": "joint prompt rendered at M13's 192 CO3 seeds, blind-called, and M13's cosines split by whether the joint drew both",
    "started": "2026-11-25T11:13:54+02:00",
-   "updated": "2026-11-25T12:30:38+02:00",
-   "note": "joint renders called: 34 of 192 two clear (CO3: 73); the cosine split waits for M13's sign check 95319"
+   "updated": "2026-11-25T12:46:15+02:00",
+   "note": "the checker is wrong under the corrected bar: the push follows r_t where the joint succeeds (median +0.047 to +0.148) about as much as where it fails, and more at step 0 (difference -0.051, interval -0.129 to -0.002); the joint alone is two clear on 34 of 192, CO3 on 73; method-search/10-is-the-joint-the-wrong-target/review.md",
+   "finished": "2026-11-25T12:46:15+02:00"
   },
   {
    "id": "M15",
@@ -1118,9 +1119,14 @@
    "needs": [
     "M14"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "both papers: a subject-free measure of two separate subjects",
-   "objective": "attention overlap and instance count at steps 5 to 15 on the 192 labelled CO3 pictures, within-pair rule, pairs held out, beside a shuffled control"
+   "objective": "attention overlap and instance count at steps 5 to 15 on the 192 labelled CO3 pictures, within-pair rule, pairs held out, beside a shuffled control",
+   "closed": true,
+   "started": "2026-11-25T12:46:15+02:00",
+   "finished": "2026-11-25T12:46:15+02:00",
+   "note": "closed, not run: M14 says the checker is wrong, and the owner's answer to question 112 skips M15 in that case",
+   "updated": "2026-11-25T12:46:15+02:00"
   },
   {
    "id": "Z10",
