@@ -166,6 +166,8 @@ def control(args):
     args.out.mkdir(parents=True, exist_ok=True)
     (args.out / "control.json").write_text(json.dumps(result, indent=1) + "\n")
     print(json.dumps({k: result[k] for k in ("largest_gap", "reproduces_within_0.05", "group_means")}), flush=True)
+    if not result["reproduces_within_0.05"]:
+        raise SystemExit("the measure does not reproduce the figure within 0.05, so no CO3 state is read")
 
 
 def read(args):

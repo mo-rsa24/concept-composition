@@ -80,6 +80,12 @@ case "$STAGE" in
          "$PY" "$S/m5_read_co3.py" jointrender --splits "$SPLITS" --out "$J14" $LIM; rc=$? ;;
   signcheck) # step M13: the actual push code's change of the noise prediction against r_t, on 3 saved fresh CO3 trajectories
          "$PY" "$S/m13_sign_check.py" --head "$HEAD" --latents-from "$ROOT/m12/size-corrected/co3" --out "$ROOT/m13-sign" --pairs-limit 3; rc=$? ;;
+  m15-control) # step M15's positive control: the cat x dog figure's 8 joint-prompt trajectories, reproduced within 0.05
+         "$PY" "$S/m15_attention.py" control --out "$ROOT/m15/control" \
+           --saved /datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/03-does-an-early-push-separate-them/attention/overlap.json; rc=$? ;;
+  m15-read)  # step M15: attention overlap and instance counts on the 192 saved CO3 trajectories; SHARD=1 is the smoke (one trajectory)
+         M15=$ROOT/m15/read; LIM=""; [ "$SHARD" = 1 ] && { M15=$ROOT/m15/read-smoke; LIM="--limit 1"; }
+         "$PY" "$S/m15_attention.py" read --latents-from "$OUT-states-shard0" "$OUT-states-shard1" "$ROOT/m12/size-corrected/co3" --out "$M15" $LIM; rc=$? ;;
   heads)  # score the kept checker (the control) and M5's two trained checkers on the saved states
          F=$ROOT/m5/full
          "$PY" "$S/m5_read_co3.py" heads --heads "kept=$HEAD" "current=$F/current/head_step_002000.pt" "balanced=$F/balanced/head_step_002000.pt" \
