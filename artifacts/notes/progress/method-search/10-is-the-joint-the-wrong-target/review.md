@@ -40,10 +40,15 @@ prompt's rate on these pairs.
 
 ## The split
 
-**The checker is wrong, under the bar as written.** The push follows r_t about as much where the joint prompt fails as where it succeeds at
-steps 5 to 15, and at step 0 it follows r_t more where the joint succeeds; it follows r_t where the joint succeeds at every step (a median of
-+0.047 to +0.148). By the owner's answer to question 112, the checker push is dropped, the joint stays the teacher, and M15 is skipped. The
-numbers are in `split.json` in the laptop's `outputs/loop-6/m14/`.
+**The owner reads M14 as intended: the joint is the wrong target where it fails, at step 0 only.** With the push's true direction, the
+design's condition is that the push follows r_t less where the joint fails, by at least 0.05 with the interval below 0. At step 0 the
+difference is −0.051 (interval −0.129 to −0.002), which meets it by 0.001; at steps 5 to 15 every interval includes 0, so they are
+inconclusive. By question 112's rule, M15 runs. The numbers are in `split.json` in the laptop's `outputs/loop-6/m14/`.
+
+**Beside it, the reading first recorded: the checker is wrong.** The bar's signs were corrected by negating every threshold (commit
+9ad229a0), which kept the rule's decisions on the gradient's data and so double-flipped the condition once the cosines were read in the
+push's direction. Under that version the condition needs a difference of at least +0.05, which no step meets. The owner chose the intended
+reading on 2026-11-25, after the split, through Loop 13.
 
 | Step | Push's cosine with r_t where the joint succeeds (34) | Where the joint fails (158) | Difference, fails minus succeeds | 95% interval |
 |---|---:|---:|---:|---|
@@ -71,10 +76,8 @@ So CO3 reaches two clear on 54 seeds where the joint prompt alone does not, and 
 **What it cannot say.** The cosine mixes bodies and background over the whole latent. Only 34 trajectories sit in the joint-succeeds group,
 so its medians carry more spread than the other group's.
 
-## The condition's direction, under the owner's review
+## The two readings of the condition
 
-Loop 13 put the direction of the joint-wrong-target condition to the owner on 2026-11-25, after the split. The verdict above stands as
-recorded until the owner decides, and M15 stays closed as not run.
 
 | Reading | The joint-wrong-target condition, on the push's cosine with r_t | Step 0 (−0.051, interval −0.129 to −0.002) | Steps 5 to 15 | Verdict |
 |---|---|---|---|---|
@@ -85,4 +88,4 @@ recorded until the owner decides, and M15 stays closed as not run.
 push opposes r_t mostly where the joint fails. The sign correction negated every threshold so that the rule decided the same way on the same
 data as written. Read for what it was meant to test, with the push's true direction (minus the gradient), the same idea becomes "the push
 follows r_t less where the joint fails", the opposite inequality. The first keeps the rule's letter; the second keeps its intent. This
-choice was made after seeing the result, so it is the owner's.
+choice was made after seeing the result; the owner chose the intended reading.
