@@ -62,6 +62,7 @@ At 16:55, in chat, recorded on the board and sent to each loop:
 
 | # | The question | Your answer |
 |---|---|---|
+| none | Your dial test at 2.83 GPU-hours against 1.5 approved, and the attention reader | **Run the dial as designed**; the attention reader had already finished (missed its bar), so nothing to stop. For speed, Loop 12 may run up to four dial jobs and the gradient-trained classifier in parallel inside the six-job cap, all on RTX 3090 cards |
 | none | How is the joint-target test read, now its condition was double-flipped? | **As intended**: met at step 0 by 0.001, inconclusive at steps 5 to 15; the attention-reader test (M15) reopens under question 112's rule |
 | none | The gradient-trained classifier, with the reviewer's fixes | **Yes**, as Loop 12's step Z11 after the dial test, about 2.3 GPU-hours |
 | 111, again | Reopen the checker route now the sign is corrected? | **No**: kept closed; its corrected finding (right direction, too weak) feeds the dial and attention experiments |
