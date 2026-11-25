@@ -898,8 +898,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-25T02:25:49+02:00",
-   "updated": "2026-11-25T07:13:07+02:00",
-   "note": "per-place reader inconclusive (0.688 at step 20, floor 0.65, bar 0.75; ranking 0.742); judge reads identity from step 15 (0.773); question filed"
+   "updated": "2026-11-25T07:35:00+02:00",
+   "note": "question 106 A: size-corrected reader designed (method-search/08-size-corrected-identity-reader/design.md); smoke 95006, then fresh read 95007 and expected shares 95008; blind calls on the fresh 96 to follow"
   },
   {
    "id": "Z8",
@@ -962,12 +962,13 @@
    "needs": [
     "G1"
    ],
-   "state": "doing",
+   "state": "done",
    "serves": "a next direction if Paper 2 changes",
    "objective": "ranked open problems with a first small experiment and cost each",
    "started": "2026-11-25T07:07:02+02:00",
-   "updated": "2026-11-25T07:07:02+02:00",
-   "note": "Loop 14 started G3: open problems in composition, plus the SDXL counterparts' failure list"
+   "updated": "2026-11-25T07:30:15+02:00",
+   "note": "G3 landed: gaps/03-open-problems.md, 8 ranked problems, SDXL counterparts' failures, DCFM gaps weighed",
+   "finished": "2026-11-25T07:30:15+02:00"
   },
   {
    "id": "G4",
@@ -977,9 +978,13 @@
    "needs": [
     "G3"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "Paper 1 beats its closest rival where it is weak",
-   "objective": "each of DCFM's eight limits turned into one experiment, with its qualitative picture, its benchmark row, its data and its cost"
+   "objective": "each of DCFM's eight limits turned into one experiment, with its qualitative picture, its benchmark row, its data and its cost",
+   "started": "2026-11-25T07:30:23+02:00",
+   "updated": "2026-11-25T07:33:22+02:00",
+   "note": "G4 landed: gaps/04-exploiting-dcfm.md, 8 limits, 3 leads, 5 experiments; owner asked which to run",
+   "finished": "2026-11-25T07:33:22+02:00"
   },
   {
    "id": "U1",
@@ -3284,6 +3289,15 @@
    "asked": "2026-11-25T07:13:12+02:00",
    "answer": "Owner, in Loop 13's session, 2026-11-25: yes. NIH Chest X-ray 14 becomes the candidate X-ray dataset, and DCFM's utility (classifier trained on generated X-rays, recall of each disease combination on real ones) is reported beside the plan's both-findings measure.",
    "answered": "2026-11-25T07:23:02+02:00"
+  },
+  {
+   "id": 108,
+   "question": "Which experiments against DCFM should run? DCFM (arXiv 2606.10153) is the published work closest to Paper 1, and its code is not public. Its finished, never-retrained experts fail on combinations no data holder saw, and it never tests the case where almost no combinations were seen, which is Paper 1's own setting. The experiments, cheapest first, none run yet: (1) two data holders on Colored MNIST, finished experts composed with and without our checker push, about 1 to 3 GPU-hours; (2) a split below DCFM's own minimum share of seen combinations (0.10 against its 0.19), our push against CoInD's public penalty, about 2 to 4 GPU-hours; (3) the full ten-holder match against DCFM's printed novel-combination FID of 11.41, about 4 to 14 GPU-hours; (4) a chest X-ray smoke run to price the X-ray work, cost unknown; (5) effusion with cardiomegaly from two finished experts, scored on anatomy and the heart's edge, priced by (4). Experiments 1 to 3 total about 7 to 21 GPU-hours, all estimates. Details: artifacts/notes/progress/gaps/04-exploiting-dcfm.md",
+   "holds": "G4",
+   "default": "Run experiment 1 first; decide on 2 and 3 from its result; run 4 only once X-ray data is chosen",
+   "by": "s14",
+   "state": "open",
+   "asked": "2026-11-25T07:33:22+02:00"
   }
  ]
 }
