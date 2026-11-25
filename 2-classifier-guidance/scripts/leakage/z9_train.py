@@ -132,14 +132,16 @@ def train_expert(args, split):
     torch.backends.cuda.matmul.allow_tf32 = True; torch.backends.cudnn.allow_tf32 = True; torch.backends.cudnn.benchmark = True
     dev = "cuda"
     images, labels = load_mnist(args.mnist, "train")
-    stream = Stream(images, labels, split["holders"][args.holder], seed=100 + args.holder)
+    combos = split["seen"] if args.pooled else split["holders"][args.holder]  # control d: one model on both holders' pictures
+    tag = "pooled" if args.pooled else str(args.holder)
+    stream = Stream(images, labels, combos, seed=100 + args.holder + (50 if args.pooled else 0))
     torch.manual_seed(100 + args.holder)
     model = ColourUNet(args.ch).to(dev)
     ema = ColourUNet(args.ch).to(dev).eval(); ema.load_state_dict(model.state_dict())
     opt = torch.optim.Adam(model.parameters(), lr=args.lr)
     rng = np.random.default_rng(200 + args.holder)
     total = args.time or args.steps
-    out = args.out / f"holder-{args.holder}"; out.mkdir(parents=True, exist_ok=True)
+    out = args.out / f"holder-{tag}"; out.mkdir(parents=True, exist_ok=True)
     log, t_sum, warm = [], 0.0, 20 if args.time else 0
     for step in range(1, total + warm + 1):
         t0 = time.perf_counter()
@@ -165,7 +167,7 @@ def train_expert(args, split):
         if step % 1000 == 0 or step == total:
             log.append({"step": step, "loss": round(loss.item(), 5)}); print(json.dumps(log[-1]), flush=True)
         if step % 10_000 == 0 or step == total:
-            torch.save({"ema": ema.state_dict(), "step": step, "holder": args.holder, "combos": split["holders"][args.holder],
+            torch.save({"ema": ema.state_dict(), "step": step, "holder": tag, "combos": combos,
                         "ch": args.ch, "batch": args.batch}, out / "unet.pt")
     if args.time:
         per = t_sum / args.time
@@ -183,6 +185,7 @@ def main():
     ap.add_argument("--split", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--holder", type=int, default=0)
+    ap.add_argument("--pooled", action="store_true", help="control d: train on every seen combination, both holders' pictures")
     ap.add_argument("--steps", type=int, default=40_000)
     ap.add_argument("--time", type=int, default=0)
     ap.add_argument("--batch", type=int, default=128)
