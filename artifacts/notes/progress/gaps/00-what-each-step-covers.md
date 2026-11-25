@@ -33,6 +33,15 @@ In [the G3 page](03-open-problems.md), beyond the brief's ranked list:
   Attention), each with page-sourced failure examples, because that list is what Paper 2 must beat first in
   the owner's order of claims ([Paper 2's design](../manager/paper2-four-way-design.md), "The order of the
   claims, set by the owner").
+- A section weighing DCFM (arXiv 2606.10153) against this project's questions. When Loop 4's DCFM note lands
+  under `../targets/` with its section "What DCFM leaves open", take each gap listed there and mark it as
+  closed by one of our questions, partly closed, or untouched, naming the experiment that would show it.
+  The questions to weigh: Paper 1's measures where pasting fails
+  ([Loop 4's evaluation plan](../targets/paper-1-evaluation-plan.md)), the interaction a product drops
+  ([the G2 page](02-reviewer-questions-paper-1.md)), and Paper 2's early correction
+  ([Paper 2's design](../manager/paper2-four-way-design.md)). The owner wants to know whether these
+  questions make a difference against DCFM and answers board question 105 only after the note lands
+  (`../requests.md`, the line from s13 to s4 and s14).
 
 ## Sources other loops are writing
 
