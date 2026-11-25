@@ -24,7 +24,7 @@ flowchart LR
   Z9 --> Z10
   Z11["Z11 gradient-trained checker<br/>support: 88.8% vs 63.1% and 73.8%<br/>on unseen combinations"]:::done
   Z10 --> Z11
-  Z12["Z12 box push on CO3, stage A<br/>CO3 alone vs own prediction in each box<br/>96 each, seeds 6017-6024"]:::doing
+  Z12["Z12 box push on CO3, stage A<br/>CO3 alone drawing (4 jobs)<br/>then boxes, then the box push"]:::doing
   Z11 --> Z12
   DB["Detour: binding plan in 1-lora-correction;<br/>option A job 95479 drawing, blind script committed"]:::detour
   Z10 -.-> DB

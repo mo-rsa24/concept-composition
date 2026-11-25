@@ -1173,8 +1173,8 @@
    "serves": "Paper 2: the aligned classifier on real animals",
    "objective": "stage A: the per-animal box correction with boxes given against CO3 alone on seeds 6017 to 6024; stage B only if A passes and the owner agrees: a classifier trained to copy it, without boxes",
    "started": "2026-11-25T17:23:47+02:00",
-   "updated": "2026-11-25T17:23:47+02:00",
-   "note": "stage A coded (e82d1ce6), bar committed (9b5ad470); jobs on bigbatch RTX 3090"
+   "updated": "2026-11-25T17:28:41+02:00",
+   "note": "stage A running: jobs 95492, 95494, 95495, 95500 drawing; 95501 boxes and controls; 95502-95504 box push (95493 died on a /datasets mkdir race, resubmitted as 95500)"
   },
   {
    "id": "U1",
