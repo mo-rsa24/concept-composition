@@ -37,7 +37,8 @@ from judge import load as load_judge  # noqa: E402
 
 ARMS = ("vote", "coin", "coin_no_corr", "shared", "paste")
 CORRECTOR = (5, 3.0)
-SHARED_BASE = ["blank"]          # the first run's base; the rerun uses "floor", the project's default, chosen after the first diverged            # 5 Langevin steps at step size 3 x beta_t, the setting behind 298 of 320
+SHARED_BASE = ["blank"]
+SHARED_PARTS = {"corrector": True, "pushes": True}   # the shared-canvas diagnosis switches these off one at a time          # the first run's base; the rerun uses "floor", the project's default, chosen after the first diverged            # 5 Langevin steps at step size 3 x beta_t, the setting behind 298 of 320
 REAL, NONE = 64, 32             # Loop 10's bars, from plans 32 and 33: a difference of at least 64 of 320 is real, within 32 is none
 CLEAN = te.CALLS[0]
 
@@ -92,7 +93,7 @@ def render(arm, A, B, a, b, seeds, push, device):
         eps = te.two_eps(A, B, a, b, SHARED_BASE[0])
     else:
         eps = held_eps(A, B, a, b, [coin_side(s) for s in seeds])
-    langevin = None if arm == "coin_no_corr" else CORRECTOR
+    langevin = None if arm == "coin_no_corr" or (arm == "shared" and not SHARED_PARTS["corrector"]) else CORRECTOR
     x = sample(None, seeds, [], eps_fn=eps, push_fn=push, cap=p1.PUSH_CAP, device=device, eta=p1.ETA, langevin=langevin)[0]
     te.LAYOUT_LOG.clear()
     return to_uint8(x)
@@ -130,8 +131,11 @@ def main():
     ap.add_argument("--arms", default=",".join(ARMS))
     ap.add_argument("--wandb-name", default=None)
     ap.add_argument("--shared-base", default="blank", choices=["blank", "floor", "avgnull"])
+    ap.add_argument("--shared-no-corrector", action="store_true")
+    ap.add_argument("--shared-no-pushes", action="store_true")
     args = ap.parse_args()
     SHARED_BASE[0] = args.shared_base
+    SHARED_PARTS["corrector"], SHARED_PARTS["pushes"] = not args.shared_no_corrector, not args.shared_no_pushes
     device = "cuda"
     args.out.mkdir(parents=True, exist_ok=True)
     A, B = load_unet(args.a, device), load_unet(args.b, device)
@@ -155,7 +159,7 @@ def main():
         start = time.time()
         clean[arm], tallies[arm] = {}, {}
         for a, b in pairs:
-            push = None if arm == "paste" else te.make_push("both", a, b, heads, p1.PUSH_STRENGTH)
+            push = None if arm == "paste" or (arm == "shared" and not SHARED_PARTS["pushes"]) else te.make_push("both", a, b, heads, p1.PUSH_STRENGTH)
             x = render(arm, A, B, a, b, seeds, push, device)
             calls = [te.call_two(te.reads(net, c, device), (a, b)) for c in x]
             key = f"{a}-{b}"
@@ -171,7 +175,7 @@ def main():
                           "seconds": seconds[arm]}), flush=True)
     np.savez_compressed(args.out / "canvases.npz", **canvases)
     total = {arm: sum(clean[arm].values()) for arm in arms}
-    result = {"shared_base": args.shared_base, "pairs": args.pairs, "seeds": [seeds[0], seeds[-1]], "corrector": CORRECTOR, "push_strength": p1.PUSH_STRENGTH,
+    result = {"shared_base": args.shared_base, "shared_parts": dict(SHARED_PARTS), "pairs": args.pairs, "seeds": [seeds[0], seeds[-1]], "corrector": CORRECTOR, "push_strength": p1.PUSH_STRENGTH,
               "push_cap": p1.PUSH_CAP, "lock_t": p1.LOCK_T, "eta": p1.ETA, "bars": {"real": REAL, "none": NONE},
               "held_side_matches_vote_max_abs": control, "clean": total, "clean_per_pair": clean, "calls": tallies,
               "seconds": seconds, "comparisons": verdicts(total) if set(ARMS) <= set(arms) else None}

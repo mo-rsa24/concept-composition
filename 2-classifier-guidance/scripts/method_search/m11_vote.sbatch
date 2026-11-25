@@ -47,6 +47,9 @@ case "$STAGE" in
   full)  "$PY" "$S/m11_vote.py" "${COMMON[@]}" --out "$OUT/full" --wandb-name loop6-m11-vote; rc=$? ;;
   shared-floor) # the shared-canvas experiment again over the "floor" base, after the first run's "blank" base ran off to full ink
          "$PY" "$S/m11_vote.py" "${COMMON[@]}" --out "$OUT/shared-floor" --arms shared --shared-base floor --wandb-name loop6-m11-shared-floor; rc=$? ;;
+  diag-bare)      "$PY" "$S/m11_vote.py" "${COMMON[@]}" --out "$OUT/diagnosis/bare" --arms shared --shared-base floor --shared-no-corrector --shared-no-pushes; rc=$? ;;
+  diag-corrector) "$PY" "$S/m11_vote.py" "${COMMON[@]}" --out "$OUT/diagnosis/corrector-only" --arms shared --shared-base floor --shared-no-pushes; rc=$? ;;
+  diag-pushes)    "$PY" "$S/m11_vote.py" "${COMMON[@]}" --out "$OUT/diagnosis/pushes-only" --arms shared --shared-base floor --shared-no-corrector; rc=$? ;;
   *) echo "ABORT: unknown stage $STAGE"; exit 2 ;;
 esac
 echo "[$(date -u +%H:%M:%S)] DONE stage=$STAGE exit=$rc"
