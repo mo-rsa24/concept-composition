@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-25 01:58 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-25 02:06 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -94,7 +94,7 @@ Read at 01:13 from `squeue`, `sacct` and `sinfo`; down nodes from `sinfo -R` at 
 | Longest wait | the queue as a whole: nothing of ours finished between 00:13 and 01:13 |
 | Nodes out of service | `bigbatch`: 12 down and 5 drained of 48. `biggpu`: 2 down and 2 drained of 7, including mscluster108 and mscluster111, drained at 09:27 and 09:10 today after a failed job kill |
 | Idle capacity | none: at 17:43 every working `bigbatch` and `biggpu` node was allocated. mscluster107 is now another user's `biggpu` job (94610, 6-hour limit, started 17:36); its second card sits idle at 170 MiB, but their process holds it, so it is not ours to use. Your interactive job 83423 on that node no longer appears in the queue |
-| Shared card | **mscluster107 card 1, approved again by you on question 99** at 01:58, for as long as the other user's job 94699 runs (started about 01:33, limit nearly 3 days; its process holds 36.5 GB on card 0 and a 170 MiB start-up slice of card 1). One run at a time, shortest first: Loop 12's free check and smoke run, then Loop 8's readability check, then Loop 6's read of its two new checkers. Every launch carries the three guards and your stop rule; each loop cancels its queued Slurm copy |
+| Shared card | **mscluster107 card 1, approved again by you on question 99**, for as long as the other user's job 94699 runs. Loop 12's free check and smoke run started there at 02:02 (about 8 GB) under `z7_shared_card.sh`, which holds the 1,024 MiB launch guard and your 30-second stop rule (checked); its Slurm copies are cancelled. A first launch at 02:00 stopped in its own start-up checks before touching the card. Then Loop 8, then Loop 6 |
 | Compute against budget since 2026-11-21 | Loop 6: 53.4 node-hours of 87 (34.8 were CLEVR renders that may have used no GPU). Loop 8: 11.9 of 30. Loop 12: about 0.4, no total set. Slurm here records no GPU count, so these are node-hours, an upper bound |
 
 **What would make the queue move faster:** little within our control. There is no idle `biggpu` card,
