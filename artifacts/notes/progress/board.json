@@ -593,14 +593,15 @@
    "id": "M3",
    "label": "M3 Winning method tuned",
    "owner": "s6",
-   "proof": "method-search/03-tune-the-winner/review.md names the chosen strength, steps, cap and data size per paper, tuned on tuning data only",
+   "proof": "method-search/03-tune-the-winner/review.md names the chosen strength, steps, cap and data size for Paper 1's method, tuned on tuning data only; Paper 2 has no checker method to tune since question 111 closed that route",
    "needs": [
     "M2",
     "M7"
    ],
    "state": "todo",
    "serves": "Both papers",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "updated": "2026-11-25T11:01:42+02:00"
   },
   {
    "id": "M6",
@@ -628,15 +629,20 @@
    "needs": [
     "M3"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "Paper 2",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "closed": true,
+   "started": "2026-11-25T11:01:49+02:00",
+   "finished": "2026-11-25T11:01:49+02:00",
+   "note": "Closed as not run, decided by Loop 13 for the owner on 2026-11-25: question 111 closed Paper 2's checker route, so Loop 6 has no checker to compare with Loop 8's count checker.",
+   "updated": "2026-11-25T11:01:49+02:00"
   },
   {
    "id": "M4",
    "label": "M4 One recipe frozen per paper",
    "owner": "s6",
-   "proof": "recipe-paper-1.json and recipe-paper-2.json exist in method-search/, each naming its commit, checkpoint, settings and evidence",
+   "proof": "recipe-paper-1.json exists in method-search/, naming its commit, checkpoint, settings and evidence; Paper 2's recipe waits for the owner's choice after Z9 and Loop 15's H4, because question 111 closed its checker route",
    "needs": [
     "M3",
     "M8",
@@ -647,7 +653,7 @@
    "state": "todo",
    "serves": "Both papers",
    "objective": "Build and test",
-   "updated": "2026-11-24T17:41:55+02:00"
+   "updated": "2026-11-25T11:01:57+02:00"
   },
   {
    "id": "M9",
@@ -872,9 +878,12 @@
    "needs": [
     "M5"
    ],
-   "state": "todo",
+   "state": "doing",
    "serves": "Paper 1",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "started": "2026-11-25T11:01:20+02:00",
+   "updated": "2026-11-25T11:01:20+02:00",
+   "note": "smoke then full, design and bar from 2026-11-24 (method-search/06-vote-or-placement-on-digits/design.md)"
   },
   {
    "id": "Z7",
