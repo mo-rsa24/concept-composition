@@ -62,6 +62,7 @@ At 16:55, in chat, recorded on the board and sent to each loop:
 
 | # | The question | Your answer |
 |---|---|---|
+| none | Take the gradient-trained classifier to CO3? | **Yes** (you): the reviewer reads the proposal first (`manager/aligned-classifier-on-co3.md`), about 5 GPU-hours if it runs |
 | 113 | Test the LoRA's separating plus each animal's own prediction in its box, on the dial test's 8 new pairs (`1-lora-correction/binding-plan.md`, option A)? | **Yes, run it now** (you, in Loop 12's session): the LoRA alone and the plain product reused from the dial test's 3090 pictures; the box rows drawn on bigbatch 3090s, about 0.9 GPU-hours. A pass justifies training the LoRA with a binding loss |
 | none | Use the RunPod credit now? | **Yes**: three RTX 4090 pods started 2026-11-25 at about 14:40, each $0.90 an hour. m10-red-4090 and m10-blue-4090 train Loop 6's two CLEVR colour experts (about 2.5 hours, about R80), and z11-4090 runs Loop 12's gradient-trained classifier test end to end (about 1.4 hours, about R25). Cluster jobs 95442 to 95448 are cancelled as the pods start; the dial test stays on cluster 3090s |
 | none | Your dial test at 2.83 GPU-hours against 1.5 approved, and the attention reader | **Run the dial as designed**; the attention reader had already finished (missed its bar), so nothing to stop. For speed, Loop 12 may run up to four dial jobs and the gradient-trained classifier in parallel inside the six-job cap, all on RTX 3090 cards |
