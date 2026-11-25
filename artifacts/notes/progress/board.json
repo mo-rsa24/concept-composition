@@ -883,12 +883,13 @@
    "needs": [
     "M5"
    ],
-   "state": "doing",
+   "state": "done",
    "serves": "Paper 1",
    "objective": "Build and test",
    "started": "2026-11-25T11:01:20+02:00",
-   "updated": "2026-11-25T11:05:55+02:00",
-   "note": "smoke 95225 then full 95226; M14 designed (bar written) and its renderer ready, to start after M11"
+   "updated": "2026-11-25T11:13:54+02:00",
+   "note": "the experts' vote does not place the digits (coin 313, vote 312 of 320); the corrector adds 12 once a side is held; the method ties paste (299); the shared-canvas experiment ran off to full ink and is not read; W&B nu6loaud; method-search/06-vote-or-placement-on-digits/review.md",
+   "finished": "2026-11-25T11:13:54+02:00"
   },
   {
    "id": "Z7",
@@ -1102,9 +1103,12 @@
    "owner": "s6",
    "proof": "method-search/10-is-the-joint-the-wrong-target/review.md reports M13's cosines split by the joint's blind call, against a bar written first",
    "needs": [],
-   "state": "todo",
+   "state": "doing",
    "serves": "both papers: what a correction should aim at",
-   "objective": "joint prompt rendered at M13's 192 CO3 seeds, blind-called, and M13's cosines split by whether the joint drew both"
+   "objective": "joint prompt rendered at M13's 192 CO3 seeds, blind-called, and M13's cosines split by whether the joint drew both",
+   "started": "2026-11-25T11:13:54+02:00",
+   "updated": "2026-11-25T11:13:54+02:00",
+   "note": "design and bar written; joint renders queued"
   },
   {
    "id": "M15",
