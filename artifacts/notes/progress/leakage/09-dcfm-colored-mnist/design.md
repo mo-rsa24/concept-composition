@@ -30,9 +30,31 @@ Every arm samples the 50 novel combinations, 100 pictures each from seeds 0 to 9
 |---|---|---|
 | 1. The plain product | nothing: $\bar\epsilon_\varnothing + g[(\bar\epsilon_d-\bar\epsilon_\varnothing)+(\bar\epsilon_c-\bar\epsilon_\varnothing)]$, each $\bar\epsilon_d$ or $\bar\epsilon_c$ the mean, over the holders whose pictures include that digit or colour, of their predictions with that label and the other set to none, and $\bar\epsilon_\varnothing$ the mean of both experts with both labels set to none (in this split holder 1 has no 6 and holder 2 no grey, so those two terms come from one expert) | $g = 1$, the Bayes composition of Paper 1's digit work |
 | 2. The checker push | arm 1 plus Paper 1's push from a checker reading "digit $d$ in colour $c$" | strength 10, capped at 0.1 of the prediction's length per picture, every step (Paper 1's kept settings) |
-| 3. The ratio push | arm 1 plus the gradient of a classifier on $p(A,B \mid x)/(p(A \mid x)\,p(B \mid x))$ ([the manager's note](../../manager/ratio-classifier-idea.md)) | built only after the reviewer's section "The ratio classifier, 2026-11-25" in `reviewer/2026-11-24-review.md`, with the estimator and control it names; its settings are written into this file before it runs |
+| 3. The interaction push | arm 1 plus the gradient of the interaction head of the classifier below, the rebuilt estimator the reviewer asked for (`reviewer/2026-11-24-review.md`, "The ratio classifier, 2026-11-25"; [the manager's note](../../manager/ratio-classifier-idea.md)) | strength 10 and the cap of 0.1, as arm 2, so the two pushes differ only in direction |
 
 **The checker.** Paper 1's pair-aware checker (`2-classifier-guidance/scripts/mnist/checker.py`): a small head on both frozen experts' decoder features, asked with labels set to none, plus the asked digit and colour, giving one log-odds that the picture becomes that digit in that colour. It trains on seen combinations only, never on a novel one: positives are real coloured training digits of a seen combination and the experts' own seen-combination samples that the digit-and-colour classifier calls right; negatives are the same digits in a wrong colour, a wrong digit in the asked colour, and the experts' samples called wrong. Its accuracy on held-back seen-combination pictures is reported.
+
+## The interaction push, in full
+
+**Why it is rebuilt.** On a combination no holder saw, the data's ratio $p(A,B \mid x)/(p(A \mid x)\,p(B \mid x))$ is zero, so a classifier that learns it faithfully pushes pictures away from the very pair asked for. The estimator below is the one form in which a pair's absence cannot be learned.
+
+**Which network supplies each score.** In $\nabla_x \log p(x \mid d, c) = s_d + s_c - s_\varnothing + \nabla_x \log \frac{p(d,c \mid x)}{p(d \mid x)\,p(c \mid x)}$, the scores $s_d$, $s_c$ and $s_\varnothing$ come from the experts as arm 1 averages them, and the last term from the classifier's interaction head. Guidance weight is 1 throughout. The experts are noise-prediction models, not flow models, so no conversion to velocity units is needed; a score is $-\epsilon/\sigma_t$ and the push is added to the noise prediction as $-\text{strength}\cdot\sigma_t\,\nabla_x(\cdot)$.
+
+**The classifier.** One small network on noisy pictures, given the step, with three heads: a digit head and a colour head (softmax over 10 each), and an interaction head whose score for pair $(d,c)$ is $u_d^\top W(x,t)\, v_c$, a rank-$r$ product ($r = 4$) of a learned digit embedding $u_d$, a learned colour embedding $v_c$ and a picture-dependent $r \times r$ matrix. The interaction head's softmax runs over the training pairs only, so a pair outside them never gets a gradient of its own and is scored through the embeddings alone. It trains on real coloured training digits of its training pairs, noised to random steps. The push uses the interaction head's gradient only, $\nabla_x\, u_d^\top W(x,t)\, v_c$.
+
+**First, seen pairs it never trained on.** 10 of the 50 seen combinations, 5 from each holder, drawn with seed 20261126 and saved in `split.json` as `ratio_held_back`, are kept out of the classifier's training. Before any novel-combination picture counts, the interaction push runs on those 10 pairs, 100 pictures each, against the random push of the same length. **It passes** when its digit-and-colour accuracy is at least 5 points above the random push's with an exact one-sided McNemar p < 0.05. If it fails, the novel-combination run of arm 3 is reported as not reached, and nothing about unseen pairs is claimed. The classifier's accuracy on each head is printed at every sampling step on these pictures.
+
+**Controls beside arm 3** (each on the 50 novel combinations, 100 pictures each, the same seeds):
+
+| Control | What it is | What it rules out |
+|---|---|---|
+| a. Heads-only push | the gradient of $\log p(d \mid x) + \log p(c \mid x)$ from the same classifier's digit and colour heads, scaled at every step to the interaction push's length | that any gain comes from naming the digit and colour, not from the interaction |
+| b. Random push | a fresh random direction at every step at the interaction push's length | that any push of that size helps |
+| c. Shuffled-label classifier | the same classifier trained with the pair labels shuffled across pictures, its interaction push | that the push works without learning anything about pairs |
+| d. One pooled model | a single U-Net trained on both holders' pictures together, sampled by its own plain product | how far one model with all the data gets, the federated reference |
+| e. Already-right pictures broken | on the 50 seen combinations, pictures the plain product draws right that the interaction push (and, beside it, the random push) turns wrong | that the push spoils what already works |
+
+**Arm 3's bar**, in addition to the bar below against arm 1: its digit-and-colour accuracy is at least 5 points above control a's with an exact one-sided McNemar p < 0.05, and its count of already-right pictures broken (control e) is no more than the random push's plus 50 (1% of the 5,000). Failing the first means any gain is from the main-effect heads, not the interaction.
 
 ## How pictures are scored
 
@@ -61,7 +83,7 @@ The comparison is arm 2 (and later arm 3) against arm 1 on the 50 novel combinat
 
 ## Cost and what it buys
 
-**Cost** (inferred until the timed run): building the data, seconds on a CPU; two experts, about 0.3 GPU-hours each; the classifier, under 0.1; the checker and its sampled training pictures, about 0.3; sampling 5,000 novel and 5,000 seen pictures per arm plus FID, about 0.3 for arms 1 and 2. About 1.5 GPU-hours before arm 3, inside question 108's 1 to 3. Runs go to `bigbatch`, excluding `mscluster[44-45,48,50-51,57,61,65,68,71-76,82-83]`, one job at a time, logged to W&B project `prime_lab/poe-repair-animals-compose`. No API tokens.
+**Cost** (inferred until the timed run): building the data, seconds on a CPU; two experts, about 0.3 GPU-hours each; the judge, under 0.1; the checker and its sampled training pictures, about 0.3; sampling and FID for arms 1 and 2, about 0.3. About 1.5 GPU-hours before arm 3. Arm 3 adds the classifier and its shuffled twin (about 0.2), the pooled model (about 0.3) and the extra sampling (about 0.3), about 0.8, for about 2.3 GPU-hours in all, inside the request's 2 to 4 and under the 3-hour line; if the timed run puts it over 3, the rest goes to the owner first. Runs go to `bigbatch`, excluding `mscluster[44-45,48,50-51,57,61,65,68,71-76,82-83]`, one job at a time, logged to W&B project `prime_lab/poe-repair-animals-compose`. No API tokens.
 
 **Buys:** whether a push on finished, never-retrained experts reaches unseen combinations, the claim DCFM's retraining rests on. A support sends question 108 to experiment 2 (below DCFM's minimum share of seen combinations); a null says the plain product's failure on Colored MNIST is not one this push repairs.
 
@@ -74,7 +96,7 @@ Outputs go under `/datasets/mmolefe/poe_repair_min/loop-12/z9/<rung>/`.
 3. **Experts**: a timed run, then both trained; control 3.
 4. **Arm 1**: the plain product on the novel and seen combinations; FIDs and accuracy.
 5. **Checker and arm 2**: control 1, then arm 2; the bar.
-6. **Arm 3**, after the reviewer's verdict.
+6. **Arm 3**: the classifier and its shuffled twin; the held-back seen pairs first; then the novel combinations with controls a to e.
 
 ## What this cannot say
 
