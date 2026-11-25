@@ -3575,6 +3575,24 @@
    "asked": "2026-11-25T16:19:09+02:00",
    "answer": "Owner, in Loop 12's chat, 2026-11-25: yes, run it now. Rows 1 and 4 reused from Z10's RTX 3090 pictures (same pairs, seeds and sampler); rows 2 and 3 drawn on bigbatch RTX 3090s, about 0.9 GPU-hours.",
    "answered": "2026-11-25T16:28:09+02:00"
+  },
+  {
+   "id": 114,
+   "question": "Paper 1's two-colour block test: the block counter counts 94.6% of its 800 judging scenes exactly against a 95% bar (crowded 3+3 scenes at 82%). Make one last attempt (mirrored training scenes, three counters averaged) judged on 800 newly drawn scenes, or accept it as short and lean on counting by eye?",
+   "holds": "M10",
+   "default": "one last attempt, judged on 800 new scenes",
+   "by": "s13",
+   "state": "open",
+   "asked": "2026-11-25T19:03:20+02:00"
+  },
+  {
+   "id": 115,
+   "question": "Paper 2's box idea: tonight's gentle box push was too weak to tell (27 against 26 of 96). Run one deciding rerun of this morning's clean-up pass with boxes against without, on fresh seeds, 96 pictures each, about 3 cluster GPU-hours, or close the box route?",
+   "holds": "Z12",
+   "default": "the deciding rerun",
+   "by": "s13",
+   "state": "open",
+   "asked": "2026-11-25T19:03:20+02:00"
   }
  ]
 }
