@@ -58,6 +58,10 @@ As Z7: two clear subjects with their own parts, drawing style ignored, on [Loop 
 
 Otherwise **stop**: no classifier is trained, and the box route on CO3 is closed with Z7 and Z12 as its record. Reported beside the bar and deciding nothing: per pair, because duck × goose carried Z7; the per-subject own-parts counts; and how often the cap fired.
 
+## A rule that can only stop
+
+The owner's decision, 2026-11-25, through the manager loop. **The first half** is the first 48 box-push pictures by each job's own order: the first two pairs of each of the three jobs at all eight seeds, so six pairs by seeds 6017 to 6024 (puma × condor, zebra × flamingo, seal × gull, hippopotamus × swallow, giraffe × tortoise, bobcat × quail). Those 48 and the 48 CO3-alone pictures of the same pairs and seeds are called blind in one shuffled batch, by the rule in "How pictures are counted". **If the box push's two-clear count on those 48 is not above CO3 alone's on the same 48, a lead of 0 or less, the remaining box-push jobs are cancelled and stage A is reported as stopped for futility**, with no full count and no stage B. A lead above 0 decides nothing: the bar above, on all 96, stays the judge. The rule was added while the box-push jobs were drawing (they started at 15:54 UTC), before any box-push picture was looked at or called.
+
 ## Cost
 
 | Part | RTX 3090 hours |
