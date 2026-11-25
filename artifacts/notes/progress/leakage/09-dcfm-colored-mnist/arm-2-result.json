@@ -1,0 +1,12 @@
+{
+ "control_1_zero_push_identical": true,
+ "arm_2": {
+  "accuracy": 0.7602,
+  "lead_points": 29.099999999999998,
+  "won": 1671,
+  "lost": 216,
+  "p_one_sided": 1.0525717717013383e-278,
+  "fid": 12.632311951489214
+ },
+ "seconds": 624.6
+}
