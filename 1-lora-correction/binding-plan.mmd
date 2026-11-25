@@ -1,0 +1,12 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  subgraph NOW["Now: the LoRA alone (Z10, weight 1)"]
+    N1["plain product<br/>of 'a fox' and 'a llama'"]:::plain --> N2["+ the LoRA's correction<br/>everywhere"]:::plain --> N3["two bodies, both llamas<br/>(26 of 32 two bodies,<br/>2 of 32 two clear)"]:::plain
+  end
+  subgraph NEXT["Option A: the LoRA plus each animal's own prediction in its box"]
+    P1["plain product"]:::plain --> P2["+ the LoRA's correction<br/>everywhere<br/>(separates the bodies)"]:::plain --> P3["inside the fox's box:<br/>'a fox' alone<br/>inside the llama's box:<br/>'a llama' alone<br/>(steps 5 to 30)"]:::plain --> P4{"two clear<br/>animals?"}:::plain
+  end
+  style NEXT fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
+  P4 -. "yes: worth a binding loss (section 4)" .-> L["train the LoRA so it<br/>binds without boxes"]:::plain
+  P4 -. "no: identity is not fixed by<br/>the right prediction in the right place" .-> X["stop; record why"]:::plain
