@@ -1,0 +1,15 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TB
+classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+classDef no fill:#fdecea,stroke:#c62828,stroke-width:2px,color:#111111
+classDef yes fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#111111
+Q["For a pair nobody saw together,<br/>what fixes the correction's direction?"]:::plain
+D["The data: nothing.<br/>It only says 'never seen together'"]:::no
+P["A rule learned per pair<br/>(cheetah-cougar, puma-condor...)"]:::no
+S["A structure shared across pairs<br/>(the toy's low-rank head: 0.844)"]:::yes
+G["Generic relations every pair obeys:<br/>two bodies don't share space, one light,<br/>nearer hides farther, two separate things"]:::yes
+E["Learn each from pictures where ONLY<br/>that relation varies, any objects<br/>(CLEVR renders, many categories)"]:::plain
+Q --> D
+Q --> P
+Q --> S
+S --> G --> E
