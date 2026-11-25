@@ -684,12 +684,13 @@
    "needs": [
     "M7"
    ],
-   "state": "doing",
+   "state": "done",
    "serves": "Paper 1",
    "objective": "Build and test",
-   "updated": "2026-11-26T00:31:14+02:00",
+   "updated": "2026-11-26T00:32:23+02:00",
    "started": "2026-11-25T12:46:44+02:00",
-   "note": "verdict written: inconclusive by the bars (scorer short, disagrees with eye on 14.7%); by eye plain 0, corrector 0, mask paste 0.205; both checkers missed 0.75 (0.741 maps, 0.641 picture); experts-alone eye check running"
+   "note": "inconclusive by the written bars (scorer 0.946, disagrees with the eye on 127 of 864); by blind eye calls plain 0.000, corrector 0.000, mask paste 0.205; both checkers missed 0.75 (0.741 maps, 0.641 picture), rows not run; experts alone pass; method-search/05-two-experts-by-colour/review.md",
+   "finished": "2026-11-26T00:32:23+02:00"
   },
   {
    "id": "D4",
