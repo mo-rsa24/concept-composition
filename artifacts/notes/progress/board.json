@@ -1173,8 +1173,8 @@
    "serves": "Paper 2: the aligned classifier on real animals",
    "objective": "stage A: the per-animal box correction with boxes given against CO3 alone on seeds 6017 to 6024; stage B only if A passes and the owner agrees: a classifier trained to copy it, without boxes",
    "started": "2026-11-25T17:23:47+02:00",
-   "updated": "2026-11-25T18:24:25+02:00",
-   "note": "half-way 9 vs 8 of 48 (lead 1), futility rule does not stop; box push 88 of 96 drawn"
+   "updated": "2026-11-25T18:38:30+02:00",
+   "note": "stage A missed (27 vs 26 of 96) and too weak to tell (push moves pictures 2.3 grey levels); stage B on hold; a larger push is the owner's call"
   },
   {
    "id": "U1",
