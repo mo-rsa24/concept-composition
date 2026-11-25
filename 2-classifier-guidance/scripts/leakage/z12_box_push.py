@@ -263,6 +263,18 @@ def control_stage(args):
     raise SystemExit(0 if res["passes"] else 1)
 
 
+def make_dir(folder):
+    """mkdir that tolerates another job creating the same folder at the same moment on /datasets (job 95493 died on that race)."""
+    for _ in range(5):
+        try:
+            folder.mkdir(parents=True, exist_ok=True)
+            return
+        except FileExistsError:
+            time.sleep(2)
+    if not folder.is_dir():
+        raise SystemExit(f"cannot create {folder}")
+
+
 def render_stage(args):
     from co3_common import set_prompt
     pairs = splits(args.splits)["tuning_pairs"][args.shard::args.num_shards]
@@ -284,7 +296,7 @@ def render_stage(args):
                 b = boxes[pair][str(seed)]
                 pusher = BoxPusher(model, wrapper.inner, config.guidance_scale, b.get("A"), b.get("B"), lengths)
             img, sec = run_one(model, wrapper, seed, pusher)
-            folder.mkdir(parents=True, exist_ok=True)
+            make_dir(folder)
             img.save(path)
             meta.write_text(json.dumps({"row": row, "pair": pair, "seed": seed, "seconds": round(sec, 2),
                                         "applied": pusher.applied if pusher else [], "cap_fired": sum(pusher.capped) if pusher else 0,
