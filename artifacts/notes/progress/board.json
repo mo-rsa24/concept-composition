@@ -1107,8 +1107,8 @@
    "serves": "both papers: what a correction should aim at",
    "objective": "joint prompt rendered at M13's 192 CO3 seeds, blind-called, and M13's cosines split by whether the joint drew both",
    "started": "2026-11-25T11:13:54+02:00",
-   "updated": "2026-11-25T11:36:53+02:00",
-   "note": "joint renders running (95235); M13 sign check 95253 queued after the reviewer read the push as minus the gradient; M14 is read only after it"
+   "updated": "2026-11-25T12:21:15+02:00",
+   "note": "192 joint renders done; blind calls under way; the split waits for M13's sign check (95319); M11 shared-canvas rerun queued after it (95329)"
   },
   {
    "id": "M15",
