@@ -70,3 +70,19 @@ So CO3 reaches two clear on 54 seeds where the joint prompt alone does not, and 
 
 **What it cannot say.** The cosine mixes bodies and background over the whole latent. Only 34 trajectories sit in the joint-succeeds group,
 so its medians carry more spread than the other group's.
+
+## The condition's direction, under the owner's review
+
+Loop 13 put the direction of the joint-wrong-target condition to the owner on 2026-11-25, after the split. The verdict above stands as
+recorded until the owner decides, and M15 stays closed as not run.
+
+| Reading | The joint-wrong-target condition, on the push's cosine with r_t | Step 0 (−0.051, interval −0.129 to −0.002) | Steps 5 to 15 | Verdict |
+|---|---|---|---|---|
+| The rule as written, its signs corrected (commit 9ad229a0) | fails minus succeeds of at least +0.05, interval above 0 | not met | not met | the checker is wrong |
+| The design's meaning, with the push's true direction | fails minus succeeds of −0.05 or below, interval below 0: the push follows r_t less where the joint fails | met, by 0.001 | inconclusive (intervals include 0) | the joint is the wrong target where it fails, at step 0 only |
+
+**Why the two differ.** The design was written when the push's direction was taken to be the checker's gradient, and its condition said the
+push opposes r_t mostly where the joint fails. The sign correction negated every threshold so that the rule decided the same way on the same
+data as written. Read for what it was meant to test, with the push's true direction (minus the gradient), the same idea becomes "the push
+follows r_t less where the joint fails", the opposite inequality. The first keeps the rule's letter; the second keeps its intent. This
+choice was made after seeing the result, so it is the owner's.
