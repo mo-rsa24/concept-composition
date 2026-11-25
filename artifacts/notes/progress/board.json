@@ -687,9 +687,9 @@
    "state": "doing",
    "serves": "Paper 1",
    "objective": "Build and test",
-   "updated": "2026-11-25T13:56:33+02:00",
+   "updated": "2026-11-25T14:28:19+02:00",
    "started": "2026-11-25T12:46:44+02:00",
-   "note": "labelled datasets packed (15,000 per expert); next the experts' ladder: smoke, overfit on 18, 1%, then full training with count labels"
+   "note": "experts' ladder queued: red overfit on 18 (95442), then 1% for red and blue (95443, 95444); the count scorer comes next"
   },
   {
    "id": "D4",
@@ -1143,8 +1143,8 @@
    "serves": "the owner's co-occurrence dial",
    "objective": "pooled adapter at weight 0 to 1.25 on 8 held-out pairs sharing no animal with training, blind calls of one, hybrid or two clear, share against weight",
    "started": "2026-11-25T13:47:33+02:00",
-   "updated": "2026-11-25T14:04:21+02:00",
-   "note": "adapter off switch leaks on v58-03-self (mean 10.8 grey levels); off now from an untouched U-Net; smoke rerun is job 95430"
+   "updated": "2026-11-25T14:28:25+02:00",
+   "note": "full run in four RTX 3090 jobs: 95433, 95434, 95436 running, 95441 (resubmitted exclusive); Z11 jobs 95445 to 95448 queued alongside"
   },
   {
    "id": "Z11",
