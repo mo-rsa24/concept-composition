@@ -62,6 +62,7 @@ At 16:55, in chat, recorded on the board and sent to each loop:
 
 | # | The question | Your answer |
 |---|---|---|
+| none | Start the rival-benchmark rebuilds now? | **Not yet: land what is running first.** Parked for later: DCFM's Colored MNIST benchmark (`manager/fair-dcfm-match.md`) and Bradley et al.'s CLEVR count benchmark (Kmax, their plain model as the calibration row, a ResNet-18 counter); Loop 12 told to hold the DCFM design |
 | none | DCFM comparison approach | **Read the rival's paper, rebuild its benchmark, run only our methods, set our numbers beside its printed ones**, with one of its simple baselines rebuilt as a calibration row; the big benchmarks (DCFM's chest X-rays) wait until a result earns them. The same recipe applies to Bradley et al. on CLEVR and to ToMe and Attend-and-Excite on their prompt sets |
 | none | How to compare with DCFM? | **Our methods on DCFM's exact Colored MNIST benchmark, beside its printed numbers; DCFM not rerun.** One of DCFM's simple baselines is rebuilt first to calibrate our FID against its printed number (`manager/fair-dcfm-match.md`); waits for Loop 12 after the CO3 check |
 | none | Build a fair comparison with DCFM on Colored MNIST? | **Yes** (you): designed in `manager/fair-dcfm-match.md` (five rows in one pipeline, a DCFM-style row from CoInD's public penalty, DCFM's ten-holder splits and the project's two-holder split, all on RunPod 4090s); the reviewer reads it first; Loop 12 asked to stay open to run it and the CO3 test |
