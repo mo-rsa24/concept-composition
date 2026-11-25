@@ -58,6 +58,21 @@ The LoRA's present loss rewards the whole correction, so binding has to be made 
 
 **Recommendation.** Ways a and c together, a on the prediction and c on attention, with the present correction loss kept, since separation is what the LoRA already does well. Each gets a twin trained without it on the same cells, so the change is the new term alone, and the test is option A's set with no boxes at sampling time.
 
-## 5. Where this sits
+## 5. Getting a + c started after option A
+
+Board question 113 asks for option A. Ways a and c (section 4) start only if option A passes; the owner chose to go on to them in that case (2026-11-25). Estimates below are inferred unless marked measured.
+
+| Stage | What is done | Time | GPU |
+|---|---|---|---|
+| 0. Option A | the four rows, boxes by eye, blind calls, the bar | about half a day, with queueing | about 1.8 GPU-hours |
+| 1. Regions | for each of the 182 training cells' target pictures, a box per animal from the detector, each named by eye (the detector counts animals but cannot tell which is which), turned into a mask at the latent's 128 by 128 | about 2 hours | minutes |
+| 2. Targets for way a | each animal's own single-prompt prediction at every cached state, computed once and cached beside the existing targets: 182 cells by 50 steps by 2 animals, about 18,200 SDXL passes | about 1 hour | about 1 GPU-hour |
+| 3. Code | the two terms added to the pooled trainer (way a reads the cached targets inside each mask; way c hooks the adapted cross-attention layers and scores each animal word's map inside its own mask and outside the other's), a twin switch that turns both off, and a short smoke run | about half a day | about 0.3 GPU-hours |
+| 4. Training | both runs start from `v58-03-self` at step 30,000 (the resume recipe in `runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md`, recipe 3) and continue 10,000 steps: the binding run and its twin with the present loss only | at 1.14 s per step on an RTX 8000 (measured for rank 32, plain loss) about 3.2 hours for the twin and about 4 to 5 hours for the binding run with its extra terms; on the Blackwell card (0.24 s per step measured for rank 8) about 1 to 1.5 hours each; the two in parallel | about 8 GPU-hours on RTX 8000s, or about 2.5 on Blackwell |
+| 5. Test | option A's pairs and seeds with no boxes: the binding run, its twin, the original LoRA and the plain product, called blind | about half a day | about 1.5 GPU-hours |
+
+**From option A's pass to training running: about one working day** (stages 1 to 3). Training then takes about 1.5 hours on the Blackwell card or about 5 on RTX 8000s, and the test about half a day. In all about 5 to 11 GPU-hours beyond option A, over the 3-hour line, so it goes to the owner as its own board question once option A passes. Whether a rank-32 run with the attention term fits a 24 GB card is not known; the RTX 8000 and Blackwell cards have 48 GB and above.
+
+## 6. Where this sits
 
 This plan belongs to the LoRA project (`1-lora-correction/`). It follows Loop 12's steps Z7 (the box rule) and Z10 (the LoRA on new pairs), whose reviews are under `artifacts/notes/progress/leakage/`.
