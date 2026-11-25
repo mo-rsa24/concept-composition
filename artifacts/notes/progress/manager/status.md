@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-25 03:16 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-25 03:20 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -28,6 +28,7 @@ overrule one, answer it again: `python3 scripts/progress_board.py answer <number
 | # | The question | Decided | Why |
 |---|---|---|---|
 | none | Loop 8's method review found the removal test feeds nothing since your answer on 86 | **Close the removal test (V7) as not run** after the cheap visibility check; the full retraining from question 95 is skipped | Reversible, saves about 1.5 GPU-hours, no bar changed; it was option B of question 95. |
+| 102 | Loop 8's SDXL identity test: cheaper gated version, Loop 6's features, or close it? | wait for Loop 6's identity read; then the cheaper gated version (about 5 to 6 GPU-hours) if its judge reads borrowing at 0.75 or better by step 15, otherwise close it and end Loop 8 with its digit results |
 | 101 | Card 1 and your Anthropic key for Loop 6's first identity reader | yes to both. The host job on mscluster107 then ended, so the reader runs through Slurm on our free `biggpu` slot instead; the judge's tokens count against question 15's unspent budget |
 | 100 | Pause Loop 6's clean-pair checker search and look for a checker that reads which subjects are drawn? | A: yes. The architecture and label steps (about 31 GPU-hours) are paused; a reviewer pass picks the identity reader to try first before anything is built |
 | 99 | May loops use mscluster107's idle card 1 again, inside another user's new job? | yes: one run at a time, Loop 12 then Loop 8 then Loop 6, with the stop rule; it ends when their job ends |
@@ -67,7 +68,6 @@ Newest first. A default happens only if you answer with it; nothing changes whil
 
 | # | The question, in one line | Why it is yours | Default | Waiting |
 |---|---|---|---|---|
-| 102 | Loop 8's SDXL identity test against CO3 costs about 14 GPU-hours, not 7, and has little animal training data (about 163 clean and 70 wrong-pair pictures). Run a cheaper gated version (about 5 to 6 GPU-hours first), use Loop 6's cheaper features instead of the signature you chose on 86, or close it and end Loop 8 with its digit results? | a run over 3 GPU-hours, a change to your answer on 86, or ending a loop | A: the cheaper gated version | 26 min |
 | 96 | Paper 2's checkers are gated on their yes-or-no call at zero (75% right), but the push follows only the direction of the checker's gradient, so ranking good pictures above bad ones is what steers it. Loop 6's checker ranks at about 0.70 but calls 0.602 right; Loop 8's ranks at 0.78 but calls 0.651. Keep the recorded gate, or switch to ranking? | changes a recorded bar after seeing which one passes on similar checkers | keep the recorded gate, report ranking beside it, and bring a pass on ranking alone back to you | just filed |
 
 Your own reading step (confirm the draft statements from your readings) is ready on the board.
