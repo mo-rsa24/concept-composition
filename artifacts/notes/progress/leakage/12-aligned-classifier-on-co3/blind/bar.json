@@ -1,0 +1,66 @@
+{
+ "n": 96,
+ "two_clear": {
+  "co3": 26,
+  "box": 27
+ },
+ "lead": 1,
+ "won": 1,
+ "lost_two_clear": 0,
+ "lead_in_se": 0.9999999999999999,
+ "per_pair": {
+  "a_puma__x__a_condor": {
+   "co3": 1,
+   "box": 1
+  },
+  "a_hippopotamus__x__a_swallow": {
+   "co3": 0,
+   "box": 0
+  },
+  "a_zebra__x__a_flamingo": {
+   "co3": 0,
+   "box": 1
+  },
+  "a_giraffe__x__a_tortoise": {
+   "co3": 4,
+   "box": 4
+  },
+  "a_seal__x__a_gull": {
+   "co3": 3,
+   "box": 3
+  },
+  "a_bobcat__x__a_quail": {
+   "co3": 0,
+   "box": 0
+  },
+  "a_duck__x__a_goose": {
+   "co3": 0,
+   "box": 0
+  },
+  "a_lighthouse__x__a_sailboat": {
+   "co3": 6,
+   "box": 6
+  },
+  "a_crow__x__a_raven": {
+   "co3": 5,
+   "box": 5
+  },
+  "a_boar__x__a_pheasant": {
+   "co3": 2,
+   "box": 2
+  },
+  "an_eagle__x__a_fox": {
+   "co3": 5,
+   "box": 5
+  },
+  "a_cheetah__x__a_cougar": {
+   "co3": 0,
+   "box": 0
+  }
+ },
+ "broken": {
+  "co3": 4,
+  "box": 4
+ },
+ "passes": false
+}

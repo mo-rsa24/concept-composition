@@ -1,0 +1,41 @@
+{
+ "pair": "a_duck__x__a_goose",
+ "seed": 6017,
+ "device": "NVIDIA GeForce RTX 3090",
+ "empty_boxes_vs_co3_max_pixel": 0,
+ "entering_step5_max_abs": 0.0,
+ "box_push_vs_co3_max_pixel": 249,
+ "pushed_steps": 25,
+ "cap_fired": 0,
+ "two_entry_calls_per_step": [
+  1
+ ],
+ "boxes": {
+  "A": [
+   516.1,
+   272.4,
+   973.2,
+   738.7
+  ],
+  "B": [
+   63.0,
+   175.8,
+   509.2,
+   739.7
+  ],
+  "kept": 2,
+  "detections": 4,
+  "margin": 1.354,
+  "clip_logprobs": [
+   [
+    -0.777,
+    -0.616
+   ],
+   [
+    -0.265,
+    -1.457
+   ]
+  ]
+ },
+ "passes": true
+}
