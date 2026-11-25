@@ -1,0 +1,26 @@
+{
+ "a_plain_vs_b_guided_no_adapter": {
+  "max": 0,
+  "mean": 0.0
+ },
+ "b_vs_c_guided_weight_0_attached": {
+  "max": 231,
+  "mean": 10.812393506368002
+ },
+ "a_vs_d_plain_attached_disabled": {
+  "max": 231,
+  "mean": 10.812393506368002
+ },
+ "a_vs_e_plain_adapter_enabled": {
+  "max": 227,
+  "mean": 34.53846136728922
+ },
+ "a_vs_f_plain_disabled_again": {
+  "max": 231,
+  "mean": 10.812393506368002
+ },
+ "c_vs_e": {
+  "max": 229,
+  "mean": 34.04816818237305
+ }
+}

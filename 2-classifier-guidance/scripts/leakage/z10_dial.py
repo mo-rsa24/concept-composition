@@ -3,7 +3,7 @@
 
 Design: artifacts/notes/progress/leakage/10-co-occurrence-dial/design.md. The sampled prediction is
 eps_off + lambda * (eps_on - eps_off), the product of experts with the adapter switched off and on
-(run_poe_classifier_guided's adapter_lambda path, no push), classifier-free guidance 7.5 per expert, 50 DDIM steps.
+(run_two_unet below: 'off' from the untouched U-Net, 'on' from a copy carrying the adapter), classifier-free guidance 7.5 per expert, 50 DDIM steps.
 
   smoke   the first pair and seed at all six weights, controls 1 and 2, seconds per picture
   full    8 pairs x seeds 6001 to 6004 x 6 weights, plus control 3 (badger x magpie, a training pair, at weights 0 and 1)
@@ -11,6 +11,7 @@ eps_off + lambda * (eps_on - eps_off), the product of experts with the adapter s
   python z10_dial.py <smoke|full> --pairs <pairs.json> --adapter <lora_step_030000.pt> --out <dir>
 """
 import argparse
+import copy
 import json
 import sys
 import time
@@ -27,7 +28,8 @@ sys.path.insert(0, str(HERE.parents[2] / "scripts" / "shared"))
 from poe_repair.composers._helpers import init_latents_for_cell  # noqa: E402
 from poe_repair.experiments import _adapter_shape  # noqa: E402
 from poe_repair.methods._classifier_guided import run_poe_classifier_guided  # noqa: E402
-from poe_repair.methods._sampling import run_cfg_poe  # noqa: E402
+from poe_repair.methods._sampling import SamplerOutputs, add_time_ids, run_cfg_poe  # noqa: E402
+from poe_repair.runtime import LatentTrajectoryCollector, ddim_prev_from_x0_eps, decode_latents, guided_eps, poe_eps, tweedie_mean  # noqa: E402
 from poe_repair.run import make_ctx  # noqa: E402
 from poe_repair.runtime import encode_prompt_sdxl  # noqa: E402
 import classifier_guidance_from_the_paper as single  # noqa: E402
@@ -40,6 +42,40 @@ TRAINING_PAIR = "a badger and a magpie"  # the first pair under train: in pair_p
 
 def to_img(o):
     return (o.image[0].float().clamp(0, 1) * 255).round().byte().permute(1, 2, 0).cpu().numpy()
+
+
+@torch.no_grad()
+def run_two_unet(*, base, adapted, lam, init_latents, models, scheduler, seq_a, pool_a, seq_b, pool_b, seq_e, pool_e, guidance_scale,
+                 num_inference_steps, height, width, euler_init_noise_sigma, device, dtype):
+    """run_cfg_poe's loop with eps = eps_off + lam * (eps_on - eps_off): eps_off from the untouched U-Net, eps_on from a copy that
+    carries the adapter. The adapter's off switch leaks on this checkpoint (attached and switched off, the picture differs from the
+    plain product by a mean of 10.8 grey levels; diagnose.json), so 'off' never comes from the adapted copy. At lam 0 the copy is
+    not called and the arithmetic is run_cfg_poe's."""
+    scheduler.set_timesteps(num_inference_steps)
+    latents = (init_latents / euler_init_noise_sigma).to(device=device, dtype=dtype)
+    tracker = LatentTrajectoryCollector(num_inference_steps, 1, latents.shape[1], latents.shape[2], latents.shape[3])
+    pe = torch.cat([seq_a, seq_b, seq_e], dim=0)
+    pool = torch.cat([pool_a, pool_b, pool_e], dim=0)
+    cond = {"text_embeds": pool, "time_ids": add_time_ids(height=height, width=width, batch_size=3, device=device, dtype=dtype)}
+
+    def product(unet, latent_input, timestep):
+        noise = unet(latent_input, timestep, encoder_hidden_states=pe, added_cond_kwargs=cond, timestep_cond=None).sample
+        a, b, u = noise.chunk(3)
+        return poe_eps(guided_eps(a, u, guidance_scale), guided_eps(b, u, guidance_scale), u)
+    delta_norms = []
+    for step_index, timestep in enumerate(scheduler.timesteps):
+        latent_input = scheduler.scale_model_input(latents.repeat(3, 1, 1, 1), timestep)
+        eps_p = product(base, latent_input, timestep)
+        if lam != 0.0:
+            delta = product(adapted, latent_input, timestep) - eps_p
+            eps_p = eps_p + float(lam) * delta
+            delta_norms.append(float(delta.float().norm()))
+        alpha_bar_t = scheduler.alphas_cumprod[int(timestep.item())].to(device=device, dtype=dtype)
+        x0 = tweedie_mean(latents, alpha_bar_t, eps_p)
+        tracker.store_step(step_index, latents, eps_p, float(step_index) / float(num_inference_steps), int(timestep.item()))
+        latents = ddim_prev_from_x0_eps(scheduler=scheduler, timestep=timestep, step_index=step_index, x0=x0, eps=eps_p)
+    tracker.store_final(latents)
+    return SamplerOutputs(latents=latents, image=decode_latents(models, latents).cpu(), tracker=tracker, extras={"delta_norm_per_step": delta_norms})
 
 
 def slug(prompt):
@@ -94,18 +130,27 @@ def main():
         print("DIAGNOSE " + json.dumps(res), flush=True)
         return
 
-    # control 1, part 1: the plain product before any adapter is attached
+    # control 1, part 1: the plain product, no adapter anywhere
     e0 = experts(prompts[0])
     init, sigma = init_latents_for_cell(single.cell_for(SEEDS[0]), ctx)
     plain = to_img(run_cfg_poe(init_latents=init, euler_init_noise_sigma=sigma, **e0, **common))
-    # control 2: the whole adapter, in the shape the checkpoint holds
-    info = _adapter_shape.attach(ctx.models["unet"], args.adapter, disable=True)
+    # control 2: the whole adapter, in the shape the checkpoint holds, on a copy of the U-Net; the original stays untouched
+    base = ctx.models["unet"]
+    adapted = copy.deepcopy(base)
+    info = _adapter_shape.attach(adapted, args.adapter)
+    adapted.eval()
     print("ADAPTER " + json.dumps({k: v for k, v in info.items() if k != "rank_pattern"}), flush=True)
     init, sigma = init_latents_for_cell(single.cell_for(SEEDS[0]), ctx)
-    at0 = to_img(run_poe_classifier_guided(init_latents=init, euler_init_noise_sigma=sigma, adapter_lambda=0.0, strength=0.0, **e0, **common))
-    diff = np.abs(plain.astype(int) - at0.astype(int))
-    controls = {"control_1_weight_0_is_plain_max_abs": int(diff.max()), "control_1_passes": bool(diff.max() == 0),
+    plain_after = to_img(run_cfg_poe(init_latents=init, euler_init_noise_sigma=sigma, **e0, **common))
+    init, sigma = init_latents_for_cell(single.cell_for(SEEDS[0]), ctx)
+    at0 = to_img(run_two_unet(base=base, adapted=adapted, lam=0.0, init_latents=init, euler_init_noise_sigma=sigma, **e0, **common))
+    init, sigma = init_latents_for_cell(single.cell_for(SEEDS[0]), ctx)
+    at1 = to_img(run_two_unet(base=base, adapted=adapted, lam=1.0, init_latents=init, euler_init_noise_sigma=sigma, **e0, **common))
+    mx = lambda x, y: int(np.abs(x.astype(int) - y.astype(int)).max())
+    controls = {"control_1_weight_0_is_plain_max_abs": mx(plain, at0), "control_1_base_untouched_by_attach_max_abs": mx(plain, plain_after),
+                "weight_1_differs_from_plain_mean_abs": float(np.abs(plain.astype(int) - at1.astype(int)).mean()),
                 "control_2_adapter": {k: info[k] for k in ("target_modules", "rank", "n_matched", "n_loaded", "checkpoint_step")}}
+    controls["control_1_passes"] = controls["control_1_weight_0_is_plain_max_abs"] == 0 and controls["control_1_base_untouched_by_attach_max_abs"] == 0
     print("CONTROLS " + json.dumps(controls, default=list), flush=True)
     if not controls["control_1_passes"]:
         (out / "controls.json").write_text(json.dumps(controls, indent=1, default=list) + "\n")
@@ -124,8 +169,7 @@ def main():
             cache = {prompt: experts(prompt)}
         init, sigma = init_latents_for_cell(single.cell_for(seed), ctx)
         t0 = time.perf_counter()
-        o = run_poe_classifier_guided(init_latents=init, euler_init_noise_sigma=sigma, adapter_lambda=float(w), strength=0.0,
-                                      **cache[prompt], **common)
+        o = run_two_unet(base=base, adapted=adapted, lam=float(w), init_latents=init, euler_init_noise_sigma=sigma, **cache[prompt], **common)
         Image.fromarray(to_img(o)).save(tile)
         times.append(time.perf_counter() - t0); n += 1
         print(f"{n} {prompt} seed={seed} w={w:.2f} {times[-1]:.1f}s", flush=True)

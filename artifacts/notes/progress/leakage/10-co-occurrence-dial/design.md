@@ -34,11 +34,13 @@ The paper's adapter, `v58-03-self` at step 30,000 (`/datasets/mmolefe/poe_repair
 
 ## The run
 
-Plain product of the two single-animal prompts, classifier-free guidance 7.5 per expert, 50 DDIM steps, 1,024 pixels, with the adapter's correction at each of the six weights, through `run_poe_classifier_guided` with `adapter_lambda` (no push). 8 pairs by 4 seeds by 6 weights, 192 pictures, in one job on one card.
+Plain product of the two single-animal prompts, classifier-free guidance 7.5 per expert, 50 DDIM steps, 1,024 pixels, with the adapter's correction at each of the six weights. 8 pairs by 4 seeds by 6 weights, 192 pictures, in one job on one card.
+
+**Two copies of the U-Net.** The adapter's off switch does not fully switch this checkpoint off: on fox × llama at seed 6001, the picture with the adapter attached and switched off differs from the plain product by a mean of 10.8 grey levels (largest 231), against 34.5 with it switched on, while the plain and the guided samplers agree exactly with no adapter (job 95428, `diagnose.json`). So $\epsilon_{\text{off}}$ comes from the untouched U-Net and $\epsilon_{\text{on}}$ from a copy carrying the adapter (`run_two_unet` in `2-classifier-guidance/scripts/leakage/z10_dial.py`); at weight 0 the copy is not called.
 
 ## Controls
 
-1. **Weight 0 is the plain product.** On the first pair and seed, the picture at $\lambda = 0$ with the adapter attached must equal `run_cfg_poe`'s with no adapter, byte for byte, in one process.
+1. **Weight 0 is the plain product.** On the first pair and seed, in one process: the picture at $\lambda = 0$ must equal `run_cfg_poe`'s byte for byte, and `run_cfg_poe` rendered again after the copy receives the adapter must too, so attaching to the copy leaves the original untouched.
 2. **The whole adapter is loaded.** `_adapter_shape.attach` must match every saved tensor, or the run stops.
 3. **The adapter still works where it trained.** One training pair from the pool file (the first under its `train:` key), seeds 6001 to 6004, at $\lambda$ 0 and 1: 8 pictures, called blind with the rest and reported beside the curve, with no bar.
 
