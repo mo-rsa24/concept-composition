@@ -909,6 +909,48 @@
    "state": "todo"
   },
   {
+   "id": "K7",
+   "label": "K7 Paper 1's evaluation plan",
+   "owner": "s4",
+   "proof": "artifacts/notes/progress/targets/paper-1-evaluation-plan.md names, for each measure, what it reads, its bar in numbers, the data it needs, and that it applies to pasting, Bradley's rule and Paper 1's method alike, and the owner has said yes to it",
+   "needs": [],
+   "state": "todo",
+   "serves": "Paper 1 beats pasting and Bradley's rule on measures where pasting fails",
+   "objective": "measures for overlap, shadows across objects, seams, colour binding and X-ray findings, applied equally to every method"
+  },
+  {
+   "id": "G1",
+   "label": "G1 Is Paper 2's problem still open",
+   "owner": "s14",
+   "proof": "artifacts/notes/progress/gaps/01-is-paper-2-still-open.md exists with every number sourced to a page and one recommendation",
+   "needs": [],
+   "state": "todo",
+   "serves": "Paper 2 stands on its own",
+   "objective": "best two-subject numbers on SD3, FLUX and SDXL, CO3 and ToMe notes, and a continue, narrow or change recommendation"
+  },
+  {
+   "id": "G2",
+   "label": "G2 Reviewer questions for Paper 1",
+   "owner": "s14",
+   "proof": "artifacts/notes/progress/gaps/02-reviewer-questions-paper-1.md exists with one sourced row per question and a line to s4 in requests.md",
+   "needs": [],
+   "state": "todo",
+   "serves": "Paper 1 stands on its own",
+   "objective": "every question a reviewer will ask, including how separately trained experts interact, with the papers and the measure for each"
+  },
+  {
+   "id": "G3",
+   "label": "G3 Open problems in composition",
+   "owner": "s14",
+   "proof": "artifacts/notes/progress/gaps/03-open-problems.md exists, ranked, every row sourced",
+   "needs": [
+    "G1"
+   ],
+   "state": "todo",
+   "serves": "a next direction if Paper 2 changes",
+   "objective": "ranked open problems with a first small experiment and cost each"
+  },
+  {
    "id": "U1",
    "label": "U1 Closest papers read",
    "owner": "s7",
@@ -1944,7 +1986,11 @@
     "M11",
     "Z7",
     "M12",
-    "Z8"
+    "Z8",
+    "K7",
+    "G1",
+    "G2",
+    "G3"
    ],
    "joiner": "~~~"
   }
@@ -2011,7 +2057,11 @@
   "Find what fixes identity on CO3",
   "Choose Paper 2's method",
   "Improve the earlier designs",
-  "Keep every loop aimed and unblocked"
+  "Keep every loop aimed and unblocked",
+  "measures for overlap, shadows across objects, seams, colour binding and X-ray findings, applied equally to every method",
+  "best two-subject numbers on SD3, FLUX and SDXL, CO3 and ToMe notes, and a continue, narrow or change recommendation",
+  "every question a reviewer will ask, including how separately trained experts interact, with the papers and the measure for each",
+  "ranked open problems with a first small experiment and cost each"
  ],
  "brief": {
   "outcome": "two papers, each beating its best rival",
@@ -3140,6 +3190,17 @@
    "asked": "2026-11-25T02:47:39+02:00",
    "answer": "Owner, in chat, 2026-11-25: wait for Loop 6's identity read (step M12, jobs 94807 and 94808), then decide by its judge. If the judge, reading the one-step clean estimates of CO3's 96 saved states, reaches at least 0.75 balanced accuracy against the blind two-clear calls at some step up to step 15, run option A (the cheaper gated version: training and the CO3 read check first, about 5 to 6 GPU-hours, pushed rows only if the read passes the question-96 gate). If it does not, take option C: close V4 as not run, and Loop 8 ends with its digit results. Loop 8 starts nothing for V4 until M12's review records the judge's reads; Loop 13 confirms which branch applies.",
    "answered": "2026-11-25T03:49:25+02:00"
+  },
+  {
+   "id": 103,
+   "question": "May Loop 12 run step Z8, the first correction test of about 30 GPU-minutes, on device 1 of mscluster107 over SSH, outside Slurm, under the shared-device rules?",
+   "holds": "Z8",
+   "default": "yes, with the launch guard and the 30-second watchdog",
+   "by": "s12",
+   "state": "answered",
+   "asked": "2026-11-25T06:29:58+02:00",
+   "answer": "Yes, from the owner in Loop 13's session, 2026-11-25: run Z8 on mscluster107 device 1. Guard at launch (under 100 MiB, or under 4096 MiB at 0% utilisation, per scripts/launch_sdlora.sh lines 33 to 40) and a 30-second watchdog that stops our run if any other process on device 1 passes 1 GB.",
+   "answered": "2026-11-25T06:29:58+02:00"
   }
  ]
 }
