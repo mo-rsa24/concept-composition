@@ -553,7 +553,9 @@
    ],
    "state": "todo",
    "objective": "Build and test",
-   "serves": "Paper 2"
+   "serves": "Paper 2",
+   "updated": "2026-11-25T02:26:08+02:00",
+   "note": "paused by the owner's answer to question 100 (A): waits behind M12, a checker that reads which subjects are drawn"
   },
   {
    "id": "M2",
@@ -565,7 +567,9 @@
    ],
    "state": "todo",
    "serves": "Both papers",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "updated": "2026-11-25T02:26:08+02:00",
+   "note": "paused by the owner's answer to question 100 (A): waits behind M12, a checker that reads which subjects are drawn"
   },
   {
    "id": "D5",
@@ -889,9 +893,12 @@
    "needs": [
     "M5"
    ],
-   "state": "todo",
+   "state": "doing",
    "serves": "Paper 2",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "started": "2026-11-25T02:25:49+02:00",
+   "updated": "2026-11-25T02:26:08+02:00",
+   "note": "waits for Loop 13's reviewer pass naming the first reader to try, its cost and bar; nothing built or run before it"
   },
   {
    "id": "U1",
@@ -3099,8 +3106,8 @@
    "by": "s6",
    "state": "answered",
    "asked": "2026-11-25T02:23:40+02:00",
-   "answer": "Owner, in chat, 2026-11-25: A. Pause D3 and M2 and move Paper 2's checker search to a checker that reads which subjects are drawn, starting from Loop 8's identity checker and the attention-map reader.",
-   "answered": "2026-11-25T02:25:18+02:00"
+   "answer": "Owner, in chat, 2026-11-25: A. Pause the architecture and label steps (D3, M2; about 31 GPU-hours) and move Paper 2's checker search to a checker that reads which subjects are drawn. Before any reader is built or run, a reviewer pass (Loop 13) compares the candidate identity readers against what tonight's runs showed (Loop 8's checker cannot read sampler states and digits are unsettled at steps 27 to 36; the attention reader failed on 4 of 12 pairs in the region test; Loop 12's per-place signal marked the borrowing body at steps 4 to 5 on one seed) and names the one to try first, with its cost and bar.",
+   "answered": "2026-11-25T02:25:54+02:00"
   }
  ]
 }
