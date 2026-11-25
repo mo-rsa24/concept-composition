@@ -554,11 +554,11 @@
    "state": "done",
    "objective": "Build and test",
    "serves": "Paper 2",
-   "updated": "2026-11-25T11:00:40+02:00",
-   "note": "closed, not run: the owner closed the checker route for Paper 2 on question 111 (A); per-place readers below the 0.757 pair-only lookup, the kept checker's push points against the dropped term (median cosine -0.105 at step 0 on CO3), trained checkers under the 0.65 floor",
+   "updated": "2026-11-25T12:44:22+02:00",
+   "note": "closed, not run: the owner closed the checker route for Paper 2 on question 111 (A); per-place readers below the 0.757 pair-only lookup, trained checkers under the 0.65 floor; the push finding that question cited was later corrected: the push moves the noise prediction along the dropped term (+0.105 at step 0 on CO3), not against it",
    "closed": true,
    "started": "2026-11-25T11:00:40+02:00",
-   "finished": "2026-11-25T11:00:40+02:00"
+   "finished": "2026-11-25T12:44:22+02:00"
   },
   {
    "id": "M2",
@@ -571,11 +571,11 @@
    "state": "done",
    "serves": "Both papers",
    "objective": "Build and test",
-   "updated": "2026-11-25T11:00:48+02:00",
-   "note": "closed, not run: the owner closed the checker route for Paper 2 on question 111 (A); per-place readers below the 0.757 pair-only lookup, the kept checker's push points against the dropped term (median cosine -0.105 at step 0 on CO3), trained checkers under the 0.65 floor",
+   "updated": "2026-11-25T12:44:29+02:00",
+   "note": "closed, not run: the owner closed the checker route for Paper 2 on question 111 (A); per-place readers below the 0.757 pair-only lookup, trained checkers under the 0.65 floor; the push finding that question cited was later corrected: the push moves the noise prediction along the dropped term (+0.105 at step 0 on CO3), not against it",
    "closed": true,
    "started": "2026-11-25T11:00:48+02:00",
-   "finished": "2026-11-25T11:00:48+02:00"
+   "finished": "2026-11-25T12:44:29+02:00"
   },
   {
    "id": "D5",
@@ -918,11 +918,11 @@
    "state": "done",
    "serves": "Paper 2",
    "objective": "Build and test",
-   "updated": "2026-11-25T11:00:32+02:00",
-   "note": "closed, not run: the owner closed the checker route for Paper 2 on question 111 (A); per-place readers below the 0.757 pair-only lookup, the kept checker's push points against the dropped term (median cosine -0.105 at step 0 on CO3), trained checkers under the 0.65 floor",
+   "updated": "2026-11-25T12:44:12+02:00",
+   "note": "closed, not run: the owner closed the checker route for Paper 2 on question 111 (A); per-place readers below the 0.757 pair-only lookup, trained checkers under the 0.65 floor; the push finding that question cited was later corrected: the push moves the noise prediction along the dropped term (+0.105 at step 0 on CO3), not against it",
    "closed": true,
    "started": "2026-11-25T11:00:32+02:00",
-   "finished": "2026-11-25T11:00:32+02:00"
+   "finished": "2026-11-25T12:44:12+02:00"
   },
   {
    "id": "Z8",
@@ -1033,9 +1033,9 @@
    "serves": "Paper 2's correction acts in the right direction",
    "objective": "cosine between the kept checker's gradient and the dropped term r_t on cached SDXL trajectories at steps 0 to 15, against a random direction",
    "started": "2026-11-25T09:55:32+02:00",
-   "updated": "2026-11-25T10:29:29+02:00",
-   "note": "the kept checker's push points against the dropped term on CO3 (median cosine -0.105 at step 0, past -0.10) and leans against it on plain PoE (-0.025 to -0.089, inconclusive by the bar); +0.10 is reached on neither, so the owner's condition for the identity head is not met; method-search/09-gradient-direction-check/review.md",
-   "finished": "2026-11-25T10:29:29+02:00"
+   "updated": "2026-11-25T12:44:12+02:00",
+   "note": "the push moves the noise prediction along r_t: median cosine +0.105 at step 0 on CO3 (the bar's right way) and +0.025 to +0.089 on plain PoE (inconclusive); first read reversed, as the gradient's -0.105, until the sign check (job 95319) showed the push applies minus the gradient; method-search/09-gradient-direction-check/review.md",
+   "finished": "2026-11-25T12:44:12+02:00"
   },
   {
    "id": "H1",
