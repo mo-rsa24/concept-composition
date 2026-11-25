@@ -34,7 +34,7 @@ The paper's adapter, `v58-03-self` at step 30,000 (`/datasets/mmolefe/poe_repair
 
 ## The run
 
-Plain product of the two single-animal prompts, classifier-free guidance 7.5 per expert, 50 DDIM steps, 1,024 pixels, with the adapter's correction at each of the six weights. 8 pairs by 4 seeds by 6 weights, 192 pictures, in one job on one card.
+Plain product of the two single-animal prompts, classifier-free guidance 7.5 per expert, 50 DDIM steps, 1,024 pixels, with the adapter's correction at each of the six weights. 8 pairs by 4 seeds by 6 weights, 192 pictures, in four `bigbatch` jobs of two pairs each (the owner lifted the one-job rule for this step), every job refusing any card that is not an RTX 3090 so all pictures come from one card type; control 3 runs in the first job, and the outputs merge before scoring.
 
 **Two copies of the U-Net.** The adapter's off switch does not fully switch this checkpoint off: on fox × llama at seed 6001, the picture with the adapter attached and switched off differs from the plain product by a mean of 10.8 grey levels (largest 231), against 34.5 with it switched on, while the plain and the guided samplers agree exactly with no adapter (job 95428, `diagnose.json`). So $\epsilon_{\text{off}}$ comes from the untouched U-Net and $\epsilon_{\text{on}}$ from a copy carrying the adapter (`run_two_unet` in `2-classifier-guidance/scripts/leakage/z10_dial.py`); at weight 0 the copy is not called.
 
@@ -68,7 +68,7 @@ One plot: the share of one, hybrid and two-clear pictures (out of 32) against th
 
 ## Cost
 
-192 pictures plus 8 for control 3, each step running the product twice (adapter off and on), about 1.5 to 2 GPU-hours inferred from the screening pass's 19.6 seconds per plain picture; a smoke run on one pair and seed at all six weights measures it before the full run, and anything over 2 GPU-hours goes to the owner first. `bigbatch`, one job, excluding `mscluster[44-45,48,50-51,57,61,65,68,71-76,82-83]`; W&B project `prime_lab/poe-repair-animals-compose`. Two blind reviewers plus a third. No API tokens.
+192 pictures plus 8 for control 3. The smoke run measured 51 seconds per picture at a weight above 0 (both U-Nets) and 24 at weight 0 on an RTX 3090 (job 95430), 2.83 GPU-hours in all, which the owner approved (2026-11-25, through the manager loop). `bigbatch`, one job, excluding `mscluster[44-45,48,50-51,57,61,65,68,71-76,82-83]`; W&B project `prime_lab/poe-repair-animals-compose`. Two blind reviewers plus a third. No API tokens.
 
 ## What this cannot say
 

@@ -38,6 +38,8 @@ if [ "$USED" -lt 100 ]; then :;
 elif [ "$USED" -lt 4096 ] && [ "$UTIL" -eq 0 ]; then :;
 else echo "ABORT: device $DEV has ${USED} MiB in use at ${UTIL}% utilisation, refusing to share"; exit 4; fi
 echo "guard reading: device $DEV ${USED} MiB at ${UTIL}% utilisation"
+GPUNAME=$(nvidia-smi --query-gpu=name --format=csv,noheader -i $DEV)
+case "$GPUNAME" in *"RTX 3090"*) ;; *) echo "ABORT: card is $GPUNAME; Z10's pictures must all come from an RTX 3090"; exit 4 ;; esac
 export CUDA_VISIBLE_DEVICES=$DEV HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 "$PY" -c "import torch,sys; sys.exit(0 if torch.cuda.is_available() and (torch.ones(100,100,device='cuda')@torch.ones(100,100,device='cuda')).sum().item()==1e6 else 6)" \
   || { echo "ABORT: CUDA probe failed"; exit 6; }
@@ -45,7 +47,7 @@ echo "[$(date -u +%H:%M:%S)] job=${SLURM_JOB_ID:-none} node=$(hostname -s) gpu=$
 export PYTHONPATH="$HUB:$CO3:$REPO/scripts/shared:$REPO"
 mkdir -p "$OUT"
 case "$STAGE" in
-  diagnose|smoke|full) "$PY" "$S/z10_dial.py" "$STAGE" --pairs "$REPO/artifacts/notes/progress/leakage/10-co-occurrence-dial/pairs.json" --adapter "$ADAPTER" --out "$OUT"; rc=$? ;;
+  diagnose|smoke|full) "$PY" "$S/z10_dial.py" "$STAGE" ${SHARD:+--shard $SHARD} --pairs "$REPO/artifacts/notes/progress/leakage/10-co-occurrence-dial/pairs.json" --adapter "$ADAPTER" --out "$OUT"; rc=$? ;;
   *) echo "ABORT: unknown stage $STAGE"; exit 2 ;;
 esac
 echo "[$(date -u +%H:%M:%S)] DONE stage=$STAGE exit=$rc"

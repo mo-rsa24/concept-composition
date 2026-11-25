@@ -88,6 +88,7 @@ def main():
     ap.add_argument("--pairs", type=Path, required=True)
     ap.add_argument("--adapter", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
+    ap.add_argument("--shard", type=int, default=None, help="full run split by pair: shard k draws pairs 2k and 2k+1; shard 0 also draws control 3")
     args = ap.parse_args()
     if not torch.cuda.is_available():
         raise SystemExit("guard: torch sees no CUDA card")
@@ -157,7 +158,8 @@ def main():
         raise SystemExit("control 1 failed: weight 0 is not the plain product")
 
     jobs = [(p, s, w) for p in prompts[:1] for s in SEEDS[:1] for w in WEIGHTS] if args.stage == "smoke" else \
-        [(p, s, w) for p in prompts for s in SEEDS for w in WEIGHTS] + [(TRAINING_PAIR, s, w) for s in SEEDS for w in (0.0, 1.0)]
+        [(p, s, w) for p in (prompts if args.shard is None else prompts[2 * args.shard:2 * args.shard + 2]) for s in SEEDS for w in WEIGHTS] + \
+        ([(TRAINING_PAIR, s, w) for s in SEEDS for w in (0.0, 1.0)] if args.shard in (None, 0) else [])
     times, n = [], 0
     cache = {}
     for prompt, seed, w in jobs:
@@ -175,10 +177,11 @@ def main():
         print(f"{n} {prompt} seed={seed} w={w:.2f} {times[-1]:.1f}s", flush=True)
     summary = {**controls, "rendered": n, "median_seconds": float(np.median(times)) if times else 0.0,
                "projected_gpu_hours_full": round(float(np.median(times)) * 200 / 3600, 2) if times else None}
-    (out / "summary.json").write_text(json.dumps(summary, indent=1, default=list) + "\n")
+    summary["shard"] = args.shard
+    (out / (f"summary-shard{args.shard}.json" if args.shard is not None else "summary.json")).write_text(json.dumps(summary, indent=1, default=list) + "\n")
     try:
         import wandb
-        run = wandb.init(project="poe-repair-animals-compose", entity="prime_lab", name=f"loop-12-z10-{args.stage}", group="loop-12-z10",
+        run = wandb.init(project="poe-repair-animals-compose", entity="prime_lab", name=f"loop-12-z10-{args.stage}" + (f"-shard{args.shard}" if args.shard is not None else ""), group="loop-12-z10",
                          config={"weights": WEIGHTS, "seeds": SEEDS, "pairs": prompts, "adapter": str(args.adapter)},
                          settings=wandb.Settings(init_timeout=60))
         run.summary.update({k: v for k, v in summary.items() if isinstance(v, (int, float, bool))}); summary["wandb_run"] = run.id; run.finish()
