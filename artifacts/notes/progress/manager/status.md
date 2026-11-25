@@ -62,6 +62,7 @@ At 16:55, in chat, recorded on the board and sent to each loop:
 
 | # | The question | Your answer |
 |---|---|---|
+| none | How to compare with DCFM? | **Our methods on DCFM's exact Colored MNIST benchmark, beside its printed numbers; DCFM not rerun.** One of DCFM's simple baselines is rebuilt first to calibrate our FID against its printed number (`manager/fair-dcfm-match.md`); waits for Loop 12 after the CO3 check |
 | none | Build a fair comparison with DCFM on Colored MNIST? | **Yes** (you): designed in `manager/fair-dcfm-match.md` (five rows in one pipeline, a DCFM-style row from CoInD's public penalty, DCFM's ten-holder splits and the project's two-holder split, all on RunPod 4090s); the reviewer reads it first; Loop 12 asked to stay open to run it and the CO3 test |
 | none | Take the gradient-trained classifier to CO3? | **Yes** (you): the reviewer reads the proposal first (`manager/aligned-classifier-on-co3.md`), about 5 GPU-hours if it runs |
 | 113 | Test the LoRA's separating plus each animal's own prediction in its box, on the dial test's 8 new pairs (`1-lora-correction/binding-plan.md`, option A)? | **Yes, run it now** (you, in Loop 12's session): the LoRA alone and the plain product reused from the dial test's 3090 pictures; the box rows drawn on bigbatch 3090s, about 0.9 GPU-hours. A pass justifies training the LoRA with a binding loss |

@@ -1,44 +1,50 @@
-# A fair comparison with DCFM on Colored MNIST
+# Our methods on DCFM's Colored MNIST benchmark
 
-The owner chose to build this, reviewed first, then run on RunPod. It turns question 108's third
-experiment into a table and a figure Paper 1 can carry. It is a design for review, not a result.
+The owner chose to compare with DCFM the way papers usually do: rebuild DCFM's exact dataset and splits,
+run only the project's own methods on them, and set the results beside DCFM's printed numbers. DCFM
+itself is not rerun. The reviewer read a larger version on 2026-11-25 ("The fair DCFM match,
+2026-11-25" in `../reviewer/2026-11-24-review.md`); its findings on the data, the bar and the
+ten-holder limit of the classifier carry over below.
 
-## Why
+## The benchmark, as DCFM prints it
 
-The project's coloured-digit results have so far been set beside DCFM's printed numbers (DCFM-A 11.41
-novel-combination FID, its finished-expert baselines 25.19, Table 1, p. 7), which is context only. The
-two setups differ in the number of data holders (2 against 10), the split, the model family (small
-noise-prediction diffusion models against flow models), the FID code and sample count (DCFM states none),
-and DCFM's code is not public (`targets/dcfm-compositional-flow-matching-from-separate-silos.md`). A fair
-table runs every method in one pipeline on the same data, splits, models, FID code and sample counts.
+Colored MNIST: ten digits by ten colours, 100 combinations, spread over 10 data holders so that half the
+combinations appear at no holder. Two splits: an even split, and an uneven one drawn from a Dirichlet
+distribution with alpha 0.1. FID on combinations some holder saw (known) and combinations no holder saw
+(novel), lower is better; DCFM does not state the number of samples behind each FID (p. 7, Table 1;
+`../targets/dcfm-compositional-flow-matching-from-separate-silos.md`).
 
-## Rows
+| DCFM's printed rows | Even, known | Even, novel | Uneven, known | Uneven, novel |
+|---|---:|---:|---:|---:|
+| Federated flow | 9.41 | 20.83 | 15.02 | 20.02 |
+| Decentralized Diffusion Models | 8.19 | 25.19 | 7.46 | 17.98 |
+| Diffusion Federated Dataset | 8.81 | 29.71 | 7.02 | 38.27 |
+| DCFM-A | 8.53 | 11.41 | 7.33 | 9.29 |
+| DCFM-B | 9.32 | 12.24 | 8.49 | 9.15 |
 
-| Row | What it is | Source |
-|---|---|---|
-| 1 | plain product of the finished experts | the floor; Z9 arm 1 |
-| 2 | DCFM's finished-expert baselines, rebuilt: Decentralized Diffusion Models (routing between experts) and Diffusion Federated Dataset | DCFM pp. 4 and 7 describe both |
-| 3 | **a DCFM-style row**: the experts retrained with CoInD's public conditional-independence penalty, exchanged once as DCFM-A does | CoInD's public code; DCFM pp. 5 and 6 |
-| 4 | the push that names the digit and the colour only, at row 5's length | Z9's and Z11's control a |
-| 5 | **the gradient-trained classifier** | Z11's method, unchanged |
-| context | DCFM's printed numbers, in their own column and never compared directly | DCFM Table 1 |
+## What runs
 
-## Splits
+| Row | What it is |
+|---|---|
+| calibration | **Decentralized Diffusion Models rebuilt** as a sampling rule on the same finished experts, no retraining. If our FID lands near DCFM's printed 8.19 and 25.19 (even) and 7.46 and 17.98 (uneven), our measurement is close enough to set beside DCFM's printed numbers; if not, every comparison below is marked as measured differently |
+| 1 | plain product of the finished experts |
+| 2 | the push that names the digit and colour only |
+| 3 | the gradient-trained classifier, extended from two experts to ten |
 
-DCFM's own Colored MNIST split (10 holders, half of the 100 digit-colour combinations on no holder; the
-even split and the uneven Dirichlet 0.1 split), and the project's two-holder split from Z9 and Z11.
+Each holder's expert is trained only on that holder's pictures, at DCFM's split, and never retrained.
 
-## Measures
+## Claims and bar
 
-Novel-combination FID and known-combination FID with one FID code and a stated sample count, plus the
-digit-and-colour accuracy by Z9's judge, with intervals over seeds. One picture figure: the same unseen
-combinations under every row.
+Inside the project's own rows (2 and 3 against 1, and 3 against 2) the bar is the one Z11 used, written
+before the run: at least 5 points more digit-and-colour accuracy on novel combinations, an exact
+one-sided McNemar test at p below 0.05, and a lower novel FID. Against DCFM's printed rows nothing is
+tested statistically: the paper reports our novel FID beside theirs, says the experts were never
+retrained or exchanged, and states the calibration row's result.
 
-## Open questions for the reviewer
+## What must be built
 
-1. Is row 3 a faithful stand-in for DCFM-A when built from CoInD's code on our diffusion models, and
-   what must the paper say about the difference from DCFM's flow models?
-2. Can rows 2 be rebuilt from DCFM's descriptions alone, or should they be dropped and DCFM's printed
-   numbers for them kept as context?
-3. The bar, written first: what lead over rows 3 and 4 counts, on which split, with which test.
-4. Cost and card type: all rows on RunPod RTX 4090s, so every number shares one card type.
+- DCFM's splits, both of them, written to a file before any training.
+- Ten experts per split, each on one holder's pictures.
+- The classifier extended to ten experts. The reviewer notes the current one takes exactly two and
+  trains on pictures pooled from every holder; the extension says what it trains on per holder.
+- The calibration row's sampling rule, from DCFM's description (p. 4, p. 7).
