@@ -1,0 +1,20 @@
+{
+ "gate": {
+  "explained_variance": 0.2244679685143285,
+  "arm_1": 0.788,
+  "arm_4": 0.892,
+  "twin": 0.531,
+  "against_arm_1": {
+   "won": 120,
+   "lost": 16,
+   "p": 3.452882113506886e-21
+  },
+  "against_twin": {
+   "won": 375,
+   "lost": 14,
+   "p": 1.3547444172060472e-92
+  },
+  "passes": false
+ },
+ "seconds": 252.2
+}
