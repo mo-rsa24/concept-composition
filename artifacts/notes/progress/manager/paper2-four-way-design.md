@@ -29,6 +29,19 @@ guidance from a reader of the model's features (Readout Guidance), early attenti
 (Attend-and-Excite), and FKC's 0.78 on GenEval's two-object prompts on SDXL. CO3 and ToMe have no
 reading notes yet, so they are unchecked.
 
+## The order of the claims, set by the owner
+
+1. Does the correction work at all, on SDXL? The first test below answers this.
+2. On SDXL, where do its counterparts struggle, CO3 included, and does the correction fix those
+   failures and beat them there?
+3. Only then: does it scale, and does it fix SD3.5 and FLUX too?
+
+Which model Paper 2 finally targets (board question 104) waits until step 2 has an answer. The
+method is meant to apply to any model that combines noise predictions with classifier-free
+guidance (SD1.5, SDXL, SD3.5). A correction that reads one model's internal features, as the kept
+push reads SDXL's U-Net, has to show it can be rebuilt for each model, while one that acts on the
+guided prediction itself carries over as it is.
+
 ## The three questions, in the order they decide things
 
 | # | Question | Answered by | If no |
