@@ -171,6 +171,83 @@ def heads(args):
         score(argparse.Namespace(out=out, also=None, calls=args.calls, key=args.key))
 
 
+PERPLACE_STEPS = (5, 10, 15, 20, 25, 30)
+PERPLACE_CALL = 0.30          # "two clear" when the less-represented animal's share of cells is at least this (reviewer, 2026-11-25)
+CFGPP_SCALE = 0.8             # CO3's released guidance, used for the one-step clean estimate the judge reads
+
+
+def perplace(args):
+    """Step M12: the per-place prediction difference on CO3's saved states, with no training. At each saved step, SDXL predicts the
+    noise under the empty, joint, first-animal and second-animal prompts. Per latent cell, the first animal's distance to the joint
+    prediction minus the second's, each over the 4 channels; the score is the share of cells closer to the less-represented animal.
+    Beside it, the one-step clean estimate is decoded for the judge (a diagnostic only)."""
+    import torch
+    from PIL import Image
+    sys.path.insert(0, str(HERE))
+    sys.path.insert(0, str(HERE.parent / "rung2"))
+    sys.path.insert(0, str(HERE.parents[2]))
+    from co3_common import load, load_parser
+    from paper2_rows import encode
+    from poe_repair.methods._sampling import add_time_ids
+    from train_readout_pair import joint_prompt
+
+    source = {}
+    for folder in args.latents_from:
+        for r in map(json.loads, (folder / "reads.jsonl").read_text().splitlines()):
+            path = folder / "latents" / r["pair"] / f"seed-{r['seed']}.pt"
+            if path.exists() and r["reproduced"]:
+                source[r["key"]] = (r, path)
+    print(f"{len(source)} reproduced trajectories with saved states", flush=True)
+    first = next(iter(source.values()))[0]["pair"]
+    model, _ = load(joint_prompt(first), load_parser(), args.out / "_config")
+    unet = model.unet
+    vae = model.vae.to(torch.float32)      # SDXL's VAE overflows in fp16, so it decodes in fp32 (environment/overview.md)
+    vae_dtype = torch.float32
+    abar = model.scheduler.alphas_cumprod.to(unet.device)
+    args.out.mkdir(parents=True, exist_ok=True)
+    (args.out / "clean-estimates").mkdir(exist_ok=True)
+    done = set()
+    if (args.out / "reads.jsonl").exists():
+        done = {json.loads(l)["key"] for l in (args.out / "reads.jsonl").read_text().splitlines()}
+    with open(args.out / "reads.jsonl", "a") as log:
+        for key, (r, latent_path) in sorted(source.items()):
+            if key in done:
+                continue
+            a, b = (w.replace("_", " ") for w in r["pair"].split("__x__"))
+            prompts = ["", joint_prompt(r["pair"]), a, b]
+            seqs, pools = zip(*(encode(model, q) for q in prompts))
+            seq, pool = torch.cat(seqs), torch.cat(pools)
+            saved = torch.load(latent_path, weights_only=False)
+            reads, shares = {}, {}
+            for step in PERPLACE_STEPS:
+                st = saved[step]
+                x = st["x"].to(unet.device, torch.float16).repeat(4, 1, 1, 1)
+                t = torch.full((4,), st["t"], device=unet.device)
+                cond = {"text_embeds": pool, "time_ids": add_time_ids(height=1024, width=1024, batch_size=4, device=unet.device,
+                                                                         dtype=torch.float16)}
+                with torch.no_grad():
+                    eps = unet(x, t, encoder_hidden_states=seq, added_cond_kwargs=cond).sample.float()
+                empty, joint, ea, eb = eps
+                diff = (ea - joint).norm(dim=0) - (eb - joint).norm(dim=0)
+                first_closer = float((diff < 0).float().mean())
+                shares[str(step)] = round(first_closer, 4)
+                reads[str(step)] = [min(first_closer, 1 - first_closer)]
+                with torch.no_grad():
+                    a_t = abar[st["t"]]
+                    guided = empty + CFGPP_SCALE * (joint - empty)
+                    x0 = (x[0].float() - (1 - a_t).sqrt() * guided) / a_t.sqrt()
+                    img = vae.decode((x0[None] / vae.config.scaling_factor).to(vae_dtype)).sample[0].float()
+                img = ((img.clamp(-1, 1) + 1) * 127.5).round().byte().permute(1, 2, 0).cpu().numpy()
+                folder = args.out / "clean-estimates" / f"step-{step:02d}" / r["pair"]
+                folder.mkdir(parents=True, exist_ok=True)
+                Image.fromarray(img).save(folder / f"seed-{r['seed']}.png")
+            log.write(json.dumps({**{k: r[k] for k in ("key", "pair", "seed", "pixel_diff_to_m1_of_255", "reproduced")},
+                                  "reads": reads, "first_animal_closer_share": shares}) + "\n")
+            log.flush()
+            print(f"{key} less-represented share by step {[round(v[0], 3) for v in reads.values()]}", flush=True)
+    score(argparse.Namespace(out=args.out, also=None, calls=args.calls, key=args.key, threshold=PERPLACE_CALL, steps=PERPLACE_STEPS))
+
+
 def auc(scores, labels):
     pos = [s for s, l in zip(scores, labels) if l]
     neg = [s for s, l in zip(scores, labels) if not l]
@@ -192,12 +269,13 @@ def score(args):
     rows = list(best.values())
     kept = [r for r in rows if r["reproduced"] and r["key"] in clear]
     per_step = {}
-    for step in READ_STEPS:
+    threshold = getattr(args, "threshold", 0.0)
+    for step in getattr(args, "steps", None) or READ_STEPS:
         use = [r for r in kept if str(step) in r["reads"]]
         s = [r["reads"][str(step)][0] for r in use]
         lab = [clear[r["key"]] for r in use]
-        pos = [x > 0 for x, l in zip(s, lab) if l]
-        neg = [x <= 0 for x, l in zip(s, lab) if not l]
+        pos = [x >= threshold if threshold else x > 0 for x, l in zip(s, lab) if l]
+        neg = [not (x >= threshold if threshold else x > 0) for x, l in zip(s, lab) if not l]
         pairs = {}
         for r, x, l in zip(use, s, lab):
             pairs.setdefault(r["pair"], {"clear_mean": [], "other_mean": []})["clear_mean" if l else "other_mean"].append(x)
@@ -232,7 +310,7 @@ def score(args):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("stage", choices=["read", "score", "heads"])
+    ap.add_argument("stage", choices=["read", "score", "heads", "perplace"])
     ap.add_argument("--head", type=Path)
     ap.add_argument("--splits", type=Path)
     ap.add_argument("--m1-co3", type=Path)
@@ -248,7 +326,7 @@ def main():
     ap.add_argument("--latents-from", type=Path, nargs="*", help="heads: read folders holding reads.jsonl and latents/")
     ap.add_argument("--limit", type=int, help="stop after this many runs, for the smoke rung")
     args = ap.parse_args()
-    {"read": read, "score": score, "heads": heads}[args.stage](args)
+    {"read": read, "score": score, "heads": heads, "perplace": perplace}[args.stage](args)
 
 
 if __name__ == "__main__":

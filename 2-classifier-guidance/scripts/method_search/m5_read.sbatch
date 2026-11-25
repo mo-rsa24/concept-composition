@@ -58,6 +58,9 @@ case "$STAGE" in
   control) # the kept checker alone on the saved states: its scores must match those recorded in the read
          "$PY" "$S/m5_read_co3.py" heads --heads "kept=$HEAD" --latents-from "$OUT-states-shard0" "$OUT-states-shard1" \
            --out "$ROOT/m5/heads-read-control" --calls "$CALLS" --key "$KEY"; rc=$? ;;
+  perplace) # step M12: the per-place prediction difference on the saved states, and the one-step clean estimates for the judge
+         "$PY" "$S/m5_read_co3.py" perplace --latents-from "$OUT-states-shard0" "$OUT-states-shard1" \
+           --out "$ROOT/m12/perplace" --calls "$CALLS" --key "$KEY"; rc=$? ;;
   heads)  # score the kept checker (the control) and M5's two trained checkers on the saved states
          F=$ROOT/m5/full
          "$PY" "$S/m5_read_co3.py" heads --heads "kept=$HEAD" "current=$F/current/head_step_002000.pt" "balanced=$F/balanced/head_step_002000.pt" \
