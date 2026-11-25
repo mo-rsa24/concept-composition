@@ -898,8 +898,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-25T02:25:49+02:00",
-   "updated": "2026-11-25T07:35:00+02:00",
-   "note": "question 106 A: size-corrected reader designed (method-search/08-size-corrected-identity-reader/design.md); smoke 95006, then fresh read 95007 and expected shares 95008; blind calls on the fresh 96 to follow"
+   "updated": "2026-11-25T07:40:03+02:00",
+   "note": "second reader: smoke passed (one fresh trajectory, counts 2 at every step); fresh read 95007 and expected shares 95008 queued; scorer ready; blind calls on the fresh 96 next"
   },
   {
    "id": "Z8",
