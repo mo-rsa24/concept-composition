@@ -996,8 +996,8 @@
    "serves": "Paper 1 beats its closest rival, DCFM, where it is weak",
    "objective": "question 108's first experiment: plain product of finished experts, plus the checker push, plus the ratio push, against DCFM's printed novel-combination FID",
    "started": "2026-11-25T09:10:58+02:00",
-   "updated": "2026-11-25T10:19:44+02:00",
-   "note": "arm 1: 46.9% right on novel combinations, novel FID 25.87 (floor 2.31); arm 2 is job 95187"
+   "updated": "2026-11-25T10:44:21+02:00",
+   "note": "arm 2 meets its bar: 76.0% vs 46.9% right on novel combinations (p ~1e-278), FID 12.63 vs 25.87; arm 3's held-back check is job 95206"
   },
   {
    "id": "M13",
@@ -1047,12 +1047,13 @@
    "owner": "s15",
    "proof": "artifacts/notes/progress/directions/03-dials.md has one sourced row per dial",
    "needs": [],
-   "state": "doing",
+   "state": "done",
    "serves": "the owner's dials: co-occurrence strength, count, binding strength",
    "objective": "for each dial, what exists, whether the outcome rises steadily with strength, and where it breaks",
    "started": "2026-11-25T10:22:23+02:00",
-   "updated": "2026-11-25T10:22:23+02:00",
-   "note": "reading started"
+   "updated": "2026-11-25T10:31:41+02:00",
+   "note": "03-dials.md, one sourced row per dial, 14 papers + 3 project curves",
+   "finished": "2026-11-25T10:31:41+02:00"
   },
   {
    "id": "H4",
@@ -1064,9 +1065,13 @@
     "H2",
     "H3"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "Paper 1 and Paper 2 linked by one method",
-   "objective": "what is learnable in principle, what our approaches cannot do, and three ranked experiments"
+   "objective": "what is learnable in principle, what our approaches cannot do, and three ranked experiments",
+   "started": "2026-11-25T10:31:50+02:00",
+   "updated": "2026-11-25T10:35:29+02:00",
+   "note": "04-limits-and-what-to-test.md, three ranked experiments, board question 112",
+   "finished": "2026-11-25T10:35:29+02:00"
   },
   {
    "id": "U1",
@@ -3427,8 +3432,21 @@
    "holds": "M12",
    "default": "A",
    "by": "s6",
-   "state": "open",
-   "asked": "2026-11-25T10:29:29+02:00"
+   "state": "answered",
+   "asked": "2026-11-25T10:29:29+02:00",
+   "answer": "Owner, in Loop 13's session, 2026-11-25: A. Close the checker route for Paper 2: M12, D3 and M2 close as not run, with the findings recorded (two identity readers below the pair-only baseline of 0.757; the kept checker's push points against the joint-minus-product term, median cosine -0.105 at step 0 on CO3).",
+   "answered": "2026-11-25T10:45:09+02:00"
+  },
+  {
+   "id": 112,
+   "question": "Loop 15 read what is known about steering a model by the strength of an abstract concept (how strongly two subjects appear together, a count, how firmly an attribute stays on its object) and proposes three experiments that serve both papers, about 3 GPU-hours in all, none run yet. 1 (about 1 GPU-hour): render the joint prompt ('a cat and a dog') alone at the 192 CO3 seeds already checked, have two blind reviewers call each picture, and see whether the kept checker's push points against the joint-minus-product correction mainly where the joint prompt itself fails. That decides whether the joint prompt is the wrong teacher (then both papers switch to a target measured from the picture, which Paper 1 needs anyway because its models never met) or the checker is wrong (then the checker push is dropped). 2 (about 0.5 GPU-hours, no training): on the same 192 labelled pictures, score how much the two nouns' attention maps overlap and how many instances each has, and test whether that ranks the good picture above the bad one within each pair. That decides whether SDXL holds a measurement of 'two separate subjects' that names no subject, the kind that carried to unseen digits. 3 (about 1.5 GPU-hours): add the pooled adapter's correction at six strengths on 8 pairs it never trained on and have reviewers call each picture one subject, a hybrid, or two. That decides whether co-occurrence strength works as a 1-to-10 dial on new pairs or flips like a switch. Run them in this order? The full page is artifacts/notes/progress/directions/04-limits-and-what-to-test.md.",
+   "holds": "H4",
+   "default": "Run 1, then 2, then 3 in that order, on bigbatch through Loop 6's or Loop 12's scripts; stop after 1 if it says the checker is wrong, and then run only 3",
+   "by": "s15",
+   "state": "answered",
+   "asked": "2026-11-25T10:35:18+02:00",
+   "answer": "Yes, the owner chose the recommended order in Loop 15's session: run 1, then 2, then 3, on bigbatch; stop after 1 if it says the checker is wrong, and then run only 3. The designs are in artifacts/notes/progress/directions/04-limits-and-what-to-test.md, section 'Three experiments, ranked'.",
+   "answered": "2026-11-25T10:44:30+02:00"
   }
  ]
 }
