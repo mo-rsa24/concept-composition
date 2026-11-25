@@ -2,6 +2,7 @@
 #SBATCH --job-name=l12-z11
 #SBATCH --partition=bigbatch
 #SBATCH --nodes=1
+#SBATCH --exclusive
 #SBATCH --time=03:00:00
 #SBATCH --exclude=mscluster44,mscluster45,mscluster48,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82,mscluster83
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-12/logs/%x-%j.log
