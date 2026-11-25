@@ -1,0 +1,371 @@
+{
+ "agreement": 0.9166666666666666,
+ "settled": {
+  "hxdp8kre2jcw": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6002,
+   "weight": 0.0,
+   "rung": "hybrid"
+  },
+  "avh9whjucng8": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6002,
+   "weight": 1.0,
+   "rung": "two_bodies"
+  },
+  "sh678b6xz4er": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6002,
+   "weight": 0.75,
+   "rung": "two_bodies"
+  },
+  "4v4pr7xfkdfn": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6004,
+   "weight": 0.0,
+   "rung": "hybrid"
+  },
+  "8kp5ta2c5g23": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6001,
+   "weight": 1.25,
+   "rung": "two_bodies"
+  },
+  "u3wmvwhymnf6": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6003,
+   "weight": 1.25,
+   "rung": "two_bodies"
+  },
+  "chqvjt4gzqnx": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6003,
+   "weight": 0.75,
+   "rung": "hybrid"
+  },
+  "f9qxabxzcv36": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6002,
+   "weight": 1.0,
+   "rung": "hybrid"
+  },
+  "pke488qzsf9v": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6001,
+   "weight": 0.75,
+   "rung": "hybrid"
+  },
+  "tsuz4x33ebt8": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6004,
+   "weight": 0.75,
+   "rung": "two_bodies"
+  },
+  "jtguhpvaag4k": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6002,
+   "weight": 0.25,
+   "rung": "hybrid"
+  },
+  "9pg94zw3k7e8": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6001,
+   "weight": 1.0,
+   "rung": "two_bodies"
+  },
+  "z2xazyddg7qd": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6004,
+   "weight": 0.25,
+   "rung": "two_clear"
+  },
+  "6zx9udqjvdka": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6003,
+   "weight": 1.25,
+   "rung": "two_bodies"
+  },
+  "dhzh8eewyq55": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6001,
+   "weight": 0.5,
+   "rung": "hybrid"
+  },
+  "szhgym4fb7ms": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6003,
+   "weight": 0.75,
+   "rung": "two_bodies"
+  },
+  "e94zdfcstz5a": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6004,
+   "weight": 0.5,
+   "rung": "hybrid"
+  },
+  "zsrn7pcvuv6j": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6003,
+   "weight": 1.0,
+   "rung": "two_bodies"
+  },
+  "ayymwqsdx78q": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6004,
+   "weight": 0.5,
+   "rung": "two_bodies"
+  },
+  "cs5yxzf44hdv": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6002,
+   "weight": 0.75,
+   "rung": "hybrid"
+  },
+  "kn3kjnt7f8ww": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6001,
+   "weight": 0.0,
+   "rung": "hybrid"
+  },
+  "w7qtaw5f5ccd": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6004,
+   "weight": 0.75,
+   "rung": "two_bodies"
+  },
+  "pa3ckvw2wgft": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6001,
+   "weight": 0.0,
+   "rung": "hybrid"
+  },
+  "htv8uqdwed7p": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6003,
+   "weight": 0.5,
+   "rung": "hybrid"
+  },
+  "8gvdyr4e44ud": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6001,
+   "weight": 0.75,
+   "rung": "two_bodies"
+  },
+  "4f2hazvfyr4t": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6002,
+   "weight": 0.5,
+   "rung": "hybrid"
+  },
+  "nndch3kc36hs": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6003,
+   "weight": 0.0,
+   "rung": "hybrid"
+  },
+  "ufnqcauete2y": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6004,
+   "weight": 1.0,
+   "rung": "two_bodies"
+  },
+  "ct6s6fefmqxy": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6002,
+   "weight": 0.25,
+   "rung": "one"
+  },
+  "nays7k4bad6e": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6001,
+   "weight": 0.25,
+   "rung": "hybrid"
+  },
+  "c2qqfcpjunfe": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6001,
+   "weight": 0.25,
+   "rung": "hybrid"
+  },
+  "5yxadzkycf63": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6003,
+   "weight": 0.25,
+   "rung": "hybrid"
+  },
+  "76k5c8rf9pum": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6004,
+   "weight": 1.25,
+   "rung": "two_bodies"
+  },
+  "wt8dzfbn83h9": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6004,
+   "weight": 0.25,
+   "rung": "one"
+  },
+  "kgugq4egyx8t": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6003,
+   "weight": 0.0,
+   "rung": "hybrid"
+  },
+  "wsq8uqpqq2nu": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6002,
+   "weight": 1.25,
+   "rung": "two_bodies"
+  },
+  "yvguzn3h47g5": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6003,
+   "weight": 0.25,
+   "rung": "hybrid"
+  },
+  "mmteat66yzac": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6003,
+   "weight": 1.0,
+   "rung": "two_clear"
+  },
+  "22qbgxqq5mvt": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6001,
+   "weight": 1.25,
+   "rung": "two_bodies"
+  },
+  "has5fmtbvu9c": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6002,
+   "weight": 0.0,
+   "rung": "hybrid"
+  },
+  "n588gagznyde": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6004,
+   "weight": 1.25,
+   "rung": "one"
+  },
+  "hk3ctrs5nj4y": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6002,
+   "weight": 1.25,
+   "rung": "one"
+  },
+  "z46hjfbyymwj": {
+   "pair": "a_ladybug__x__an_octopus",
+   "seed": 6002,
+   "weight": 0.5,
+   "rung": "hybrid"
+  },
+  "wykz2z539urd": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6004,
+   "weight": 0.0,
+   "rung": "hybrid"
+  },
+  "wjmr9j3r9zks": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6004,
+   "weight": 1.0,
+   "rung": "two_bodies"
+  },
+  "3tf4rp2hdsmw": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6003,
+   "weight": 0.5,
+   "rung": "hybrid"
+  },
+  "msvb4zv3wbwv": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6001,
+   "weight": 0.5,
+   "rung": "two_bodies"
+  },
+  "s2fptjj7bpvt": {
+   "pair": "a_goat__x__a_rhinoceros",
+   "seed": 6001,
+   "weight": 1.0,
+   "rung": "two_bodies"
+  }
+ },
+ "per_pair": {
+  "a_ladybug__x__an_octopus": {
+   "0.00": {
+    "one": 0,
+    "hybrid": 4,
+    "two_bodies": 0,
+    "two_clear": 0
+   },
+   "0.25": {
+    "one": 0,
+    "hybrid": 3,
+    "two_bodies": 0,
+    "two_clear": 1
+   },
+   "0.50": {
+    "one": 0,
+    "hybrid": 4,
+    "two_bodies": 0,
+    "two_clear": 0
+   },
+   "0.75": {
+    "one": 0,
+    "hybrid": 3,
+    "two_bodies": 1,
+    "two_clear": 0
+   },
+   "1.00": {
+    "one": 0,
+    "hybrid": 1,
+    "two_bodies": 2,
+    "two_clear": 1
+   },
+   "1.25": {
+    "one": 2,
+    "hybrid": 0,
+    "two_bodies": 2,
+    "two_clear": 0
+   }
+  },
+  "a_goat__x__a_rhinoceros": {
+   "0.00": {
+    "one": 0,
+    "hybrid": 4,
+    "two_bodies": 0,
+    "two_clear": 0
+   },
+   "0.25": {
+    "one": 2,
+    "hybrid": 2,
+    "two_bodies": 0,
+    "two_clear": 0
+   },
+   "0.50": {
+    "one": 0,
+    "hybrid": 2,
+    "two_bodies": 2,
+    "two_clear": 0
+   },
+   "0.75": {
+    "one": 0,
+    "hybrid": 0,
+    "two_bodies": 4,
+    "two_clear": 0
+   },
+   "1.00": {
+    "one": 0,
+    "hybrid": 0,
+    "two_bodies": 4,
+    "two_clear": 0
+   },
+   "1.25": {
+    "one": 0,
+    "hybrid": 0,
+    "two_bodies": 4,
+    "two_clear": 0
+   }
+  }
+ }
+}

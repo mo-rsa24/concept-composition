@@ -1,0 +1,69 @@
+{
+ "agreement": 1.0,
+ "settled": {
+  "c7w3v57bpqtr": {
+   "pair": "a_badger__x__a_magpie",
+   "seed": 6004,
+   "weight": 1.0,
+   "rung": "one"
+  },
+  "jv3rs4xgx5x6": {
+   "pair": "a_badger__x__a_magpie",
+   "seed": 6001,
+   "weight": 1.0,
+   "rung": "two_bodies"
+  },
+  "why5mbzzjyf8": {
+   "pair": "a_badger__x__a_magpie",
+   "seed": 6001,
+   "weight": 0.0,
+   "rung": "hybrid"
+  },
+  "bcq2537nn6sy": {
+   "pair": "a_badger__x__a_magpie",
+   "seed": 6004,
+   "weight": 0.0,
+   "rung": "hybrid"
+  },
+  "r7v8xnptub7h": {
+   "pair": "a_badger__x__a_magpie",
+   "seed": 6002,
+   "weight": 0.0,
+   "rung": "hybrid"
+  },
+  "qvefpvn49y4y": {
+   "pair": "a_badger__x__a_magpie",
+   "seed": 6003,
+   "weight": 0.0,
+   "rung": "hybrid"
+  },
+  "cs83yr6e2dpk": {
+   "pair": "a_badger__x__a_magpie",
+   "seed": 6003,
+   "weight": 1.0,
+   "rung": "two_bodies"
+  },
+  "8xf2e5bx9658": {
+   "pair": "a_badger__x__a_magpie",
+   "seed": 6002,
+   "weight": 1.0,
+   "rung": "two_bodies"
+  }
+ },
+ "per_pair": {
+  "a_badger__x__a_magpie": {
+   "0.00": {
+    "one": 0,
+    "hybrid": 4,
+    "two_bodies": 0,
+    "two_clear": 0
+   },
+   "1.00": {
+    "one": 1,
+    "hybrid": 0,
+    "two_bodies": 3,
+    "two_clear": 0
+   }
+  }
+ }
+}

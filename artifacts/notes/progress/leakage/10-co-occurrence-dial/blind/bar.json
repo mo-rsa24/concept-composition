@@ -1,0 +1,70 @@
+{
+ "pictures": 192,
+ "pairs": [
+  "a_bee__x__an_owl",
+  "a_butterfly__x__a_crab",
+  "a_flamingo__x__a_sloth",
+  "a_fox__x__a_llama",
+  "a_goat__x__a_rhinoceros",
+  "a_kangaroo__x__a_squid",
+  "a_ladybug__x__an_octopus",
+  "a_lobster__x__a_whale"
+ ],
+ "counts_per_weight": {
+  "0.00": {
+   "one": 2,
+   "hybrid": 29,
+   "two_bodies": 1,
+   "two_clear": 0
+  },
+  "0.25": {
+   "one": 7,
+   "hybrid": 22,
+   "two_bodies": 2,
+   "two_clear": 1
+  },
+  "0.50": {
+   "one": 2,
+   "hybrid": 21,
+   "two_bodies": 9,
+   "two_clear": 0
+  },
+  "0.75": {
+   "one": 1,
+   "hybrid": 11,
+   "two_bodies": 20,
+   "two_clear": 0
+  },
+  "1.00": {
+   "one": 0,
+   "hybrid": 4,
+   "two_bodies": 26,
+   "two_clear": 2
+  },
+  "1.25": {
+   "one": 3,
+   "hybrid": 1,
+   "two_bodies": 28,
+   "two_clear": 0
+  }
+ },
+ "two_clear": {
+  "0.00": 0,
+  "0.25": 1,
+  "0.50": 0,
+  "0.75": 0,
+  "1.00": 2,
+  "1.25": 0
+ },
+ "delta_0_to_1": 2,
+ "won": 2,
+ "lost": 0,
+ "p_one_sided": 0.25,
+ "steps_0_to_1": [
+  1,
+  -1,
+  0,
+  2
+ ],
+ "call": "no effect on new pairs"
+}
