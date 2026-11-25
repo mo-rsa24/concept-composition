@@ -58,8 +58,11 @@ def spent(out):
 def label(items, path, out):
     import api_label
     used_in, used_out = spent(out)
+    rows = [json.loads(l) for f in out.glob("labels-*.jsonl") for l in f.read_text().splitlines() if l.strip()]
+    per_in = 1.05 * used_in / len(rows) if rows else 2_300      # the measured rate per picture, with a 5% margin
+    per_out = 1.05 * used_out / len(rows) if rows else 110
     todo = len(items)
-    if used_in + todo * 2_300 > BUDGET_INPUT or used_out + todo * 110 > BUDGET_OUTPUT:
+    if used_in + todo * per_in > BUDGET_INPUT or used_out + todo * per_out > BUDGET_OUTPUT:
         raise SystemExit(f"stopping: {todo} more pictures would pass question 15's budget (used {used_in} input, {used_out} output)")
     asyncio.run(api_label.run(items, path, 12))
 
