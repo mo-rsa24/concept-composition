@@ -1,0 +1,44 @@
+{
+ "penalised": {
+  "accuracy": 0.8882,
+  "fid": 10.828250599708866
+ },
+ "zero": {
+  "accuracy": 0.6308,
+  "fid": 17.031063814230578
+ },
+ "control_a": {
+  "accuracy": 0.7384,
+  "fid": 15.2759847447725
+ },
+ "random": {
+  "accuracy": 0.4704,
+  "fid": 26.098707878001846
+ },
+ "penalised_against_zero": {
+  "lead_points": 25.739999999999995,
+  "won": 1421,
+  "lost": 134,
+  "p": 5.8950800408691157e-272
+ },
+ "penalised_against_control_a": {
+  "lead_points": 14.980000000000004,
+  "won": 902,
+  "lost": 153,
+  "p": 5.1694906314042586e-130
+ },
+ "penalised_against_random": {
+  "lead_points": 41.78,
+  "won": 2161,
+  "lost": 72,
+  "p": 0.0
+ },
+ "plain_seen_redrawn_here": 0.8242,
+ "already_right_broken": {
+  "penalised": 34,
+  "random": 41,
+  "plain_right": 4121
+ },
+ "supports": true,
+ "seconds": 1490.0
+}
