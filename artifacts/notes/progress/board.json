@@ -924,9 +924,13 @@
    "owner": "s14",
    "proof": "artifacts/notes/progress/gaps/01-is-paper-2-still-open.md exists with every number sourced to a page and one recommendation",
    "needs": [],
-   "state": "todo",
+   "state": "done",
    "serves": "Paper 2 stands on its own",
-   "objective": "best two-subject numbers on SD3, FLUX and SDXL, CO3 and ToMe notes, and a continue, narrow or change recommendation"
+   "objective": "best two-subject numbers on SD3, FLUX and SDXL, CO3 and ToMe notes, and a continue, narrow or change recommendation",
+   "started": "2026-11-25T06:33:05+02:00",
+   "updated": "2026-11-25T06:39:46+02:00",
+   "note": "G1 landed: gaps/01-is-paper-2-still-open.md, notes/co3.md, notes/tome.md; recommendation narrow to look-alike pairs; owner question filed on which model",
+   "finished": "2026-11-25T06:39:46+02:00"
   },
   {
    "id": "G2",
@@ -934,9 +938,12 @@
    "owner": "s14",
    "proof": "artifacts/notes/progress/gaps/02-reviewer-questions-paper-1.md exists with one sourced row per question and a line to s4 in requests.md",
    "needs": [],
-   "state": "todo",
+   "state": "doing",
    "serves": "Paper 1 stands on its own",
-   "objective": "every question a reviewer will ask, including how separately trained experts interact, with the papers and the measure for each"
+   "objective": "every question a reviewer will ask, including how separately trained experts interact, with the papers and the measure for each",
+   "started": "2026-11-25T06:40:04+02:00",
+   "updated": "2026-11-25T06:40:04+02:00",
+   "note": "Loop 14 started G2: reviewer questions for Paper 1"
   },
   {
    "id": "G3",
@@ -1739,7 +1746,7 @@
    "description": "BEFORE: nothing. It starts by itself when the paper repository (step D1) is done.\n\n1. IT RUNS as the background session 🔬 PhD Loop 5: Reproduce Rivals And Choose Checker, following:\nartifacts/notes/progress/prompts/session-5-reproduce-and-choose.md\n\n2. IT DOES: compares candidate checker architectures on small data, by a selection rule written before any of them trains.\n\n3. YOU DO: answer anything on the waiting picture.\n\nOUTCOME: one chosen architecture, with the comparison saved.\nDONE WHEN: the checker review names the choice and the rule that picked it.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nSCOREBOARD: /home/molef/PhD/concept-composition/artifacts/notes/progress/scoreboard.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: arch",
    "event_id": "l29esd328d9glp7jd5p4fn4ekg",
    "start": "2026-11-22T11:35:00+02:00",
-   "end": "2026-11-25T06:21:24+02:00",
+   "end": "2026-11-25T08:40:22+02:00",
    "synced": "1150295b1faf"
   },
   {
@@ -2043,6 +2050,14 @@
   "s12": {
    "id": "0071c318",
    "name": "Loop 12"
+  },
+  "s14": {
+   "id": "281e4841",
+   "name": "Loop 14"
+  },
+  "s13": {
+   "id": "3c51301e",
+   "name": "Loop 13"
   }
  },
  "objectives": [
@@ -3201,6 +3216,24 @@
    "asked": "2026-11-25T06:29:58+02:00",
    "answer": "Yes, from the owner in Loop 13's session, 2026-11-25: run Z8 on mscluster107 device 1. Guard at launch (under 100 MiB, or under 4096 MiB at 0% utilisation, per scripts/launch_sdlora.sh lines 33 to 40) and a 30-second watchdog that stops our run if any other process on device 1 passes 1 GB.",
    "answered": "2026-11-25T06:29:58+02:00"
+  },
+  {
+   "id": 104,
+   "question": "Paper 2 (fixing how one frozen model draws two subjects): newer models such as SD3.5 and FLUX already draw two different everyday objects in 78% to 89% of images, but two look-alike subjects (a duck and a goose, a cat and a dog) in only about 53%, and the best published fix on SD3 reaches 69%. I recommend narrowing Paper 2's claim to look-alike pairs. Which model should Paper 2's method run on? Keeping SDXL costs nothing new; moving to SD3.5 or FLUX means rebuilding the checker for a transformer model, because the current push reads SDXL's U-Net features. Evidence: artifacts/notes/progress/gaps/01-is-paper-2-still-open.md",
+   "holds": "G1",
+   "default": "Keep SDXL as the model the method runs on, narrow the claim to look-alike subject pairs, and add one reference row of plain SD3.5 Medium or FLUX.1 dev on the same pairs",
+   "by": "s14",
+   "state": "open",
+   "asked": "2026-11-25T06:39:46+02:00"
+  },
+  {
+   "id": 105,
+   "question": "Accept Paper 1's evaluation plan (artifacts/notes/progress/targets/paper-1-evaluation-plan.md)? Counting objects cannot tell Paper 1 from pasting, so the plan scores four ways of making a two-colour CLEVR scene (pasting, Bradley's plain product, the product with a corrector, Paper 1's method) on the same experts with five measures pasting should fail or tie: which object hides which, one light for every object, a shadow falling on the other object, seams and realism against real renders, and colour staying with its object as a guard. A difference counts at a lead of 5 points and more than 1.96 standard errors, and every reader is checked on real renders first. Chest X-ray gets three measures (anatomy kept, both findings present, effusion hiding the heart border), but no X-ray data or experts exist yet. Scoring costs about 23 CPU node-hours and under 2 GPU-hours, estimated, and runs in the loop that owns the two-colour test.",
+   "holds": "K7",
+   "default": "the plan stays a draft and nothing is scored by it",
+   "by": "s4",
+   "state": "open",
+   "asked": "2026-11-25T06:40:44+02:00"
   }
  ]
 }
