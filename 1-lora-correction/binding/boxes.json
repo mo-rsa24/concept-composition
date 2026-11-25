@@ -1,0 +1,563 @@
+{
+ "how": "Drawn by eye by a Claude agent on 2026-11-25 on the LoRA-at-weight-1 pictures of Z10 (8 pairs x seeds 6001-6004), reading each 1024 x 1024 picture against a 64-pixel grid. Each box [x0, y0, x1, y1] in picture pixels covers one whole visible animal body (head, tail, legs, wings, tentacles), shadows and reflections excluded. Assignment rules, fixed before drawing: 1) if one body looks more like A and the other more like B in shape, assign by that; 2) if both look like the same animal or neither is clear, A is the left body and B the right (by box centre); 3) one body only: it goes to the animal it looks more like, the other box is null, layout 'one'; 4) three or more bodies (tiny ones included): box the two largest, assign them by rules 1 and 2, layout 'extra', the others named in the note. For 'extra' entries 'rule' is 4 and the note says whether rule 1 or 2 assigned the pair.",
+ "a_bee__x__an_owl": {
+  "6001": {
+   "A": [
+    0,
+    70,
+    645,
+    940
+   ],
+   "B": [
+    635,
+    380,
+    945,
+    930
+   ],
+   "layout": "two",
+   "rule": 1,
+   "note": "Left: large furry mammal-like body with two bee wings (A by wings). Right: small owl with antennae on the branch (B)."
+  },
+  "6002": {
+   "A": [
+    170,
+    110,
+    720,
+    730
+   ],
+   "B": [
+    620,
+    515,
+    1024,
+    1024
+   ],
+   "layout": "extra",
+   "rule": 4,
+   "note": "Assigned by rule 1. Centre: big bumblebee with antennae and wings (A). Right: large feathered owl/cat-like body cut by the frame (B). Others: a small spotted-winged bird at upper left (about 70-350, 105-450) and a yellow chick (about 470-600, 460-640)."
+  },
+  "6003": {
+   "A": [
+    125,
+    290,
+    690,
+    1024
+   ],
+   "B": [
+    580,
+    70,
+    1024,
+    1024
+   ],
+   "layout": "extra",
+   "rule": 4,
+   "note": "Assigned by rule 2. Left: lemur-faced feathered body with wings and stick-like antennae floating above, no clear bee shape (A by position). Right: owl (B). Others: four tiny bees flying (around 80-135,370-440; 280-315,85-105; 438-468,80-118; 640-678,38-65)."
+  },
+  "6004": {
+   "A": [
+    40,
+    55,
+    915,
+    840
+   ],
+   "B": [
+    830,
+    515,
+    980,
+    840
+   ],
+   "layout": "extra",
+   "rule": 4,
+   "note": "Assigned by rule 2. Both owl-like: a huge fluffy owl filling the centre (A by position) and a small owl on a post at right (B). Others: a bee on a small round bird face (about 548-660, 600-700), small bees and moths near the bottom, a tiny insect at right."
+  }
+ },
+ "a_butterfly__x__a_crab": {
+  "6001": {
+   "A": [
+    80,
+    75,
+    800,
+    975
+   ],
+   "B": [
+    570,
+    560,
+    945,
+    940
+   ],
+   "layout": "extra",
+   "rule": 4,
+   "note": "Assigned by rule 1. Left: long-legged insect/frog-like body with orange butterfly wings and antennae (A). Right: round crab (B). Others: a small beetle on the crab's back and a small insect held in the left creature's hand."
+  },
+  "6002": {
+   "A": [
+    150,
+    130,
+    640,
+    770
+   ],
+   "B": [
+    625,
+    595,
+    925,
+    790
+   ],
+   "layout": "two",
+   "rule": 1,
+   "note": "Left: monarch-like butterfly (A). Right: small spotted crab on a hand (B)."
+  },
+  "6003": {
+   "A": [
+    70,
+    375,
+    805,
+    1000
+   ],
+   "B": [
+    505,
+    55,
+    1010,
+    435
+   ],
+   "layout": "two",
+   "rule": 1,
+   "note": "Bottom: butterfly wings on a crab-like legged body (A by wings). Top right: crumpled brown shell-like body with antennae, crab/hermit-crab shaped (B)."
+  },
+  "6004": {
+   "A": [
+    0,
+    0,
+    995,
+    770
+   ],
+   "B": [
+    160,
+    495,
+    975,
+    1010
+   ],
+   "layout": "two",
+   "rule": 1,
+   "note": "Lower: crab with orange carapace, red claws on the right and a big orange claw at lower left (B). Upper: large blue mottled fish-like body with an eye at top right, no crab shape and no clear butterfly shape (A, the remaining body)."
+  }
+ },
+ "a_flamingo__x__a_sloth": {
+  "6001": {
+   "A": [
+    600,
+    440,
+    975,
+    1020
+   ],
+   "B": [
+    115,
+    75,
+    640,
+    1010
+   ],
+   "layout": "extra",
+   "rule": 4,
+   "note": "Assigned by rule 1. Right: pink body with a sloth face on long flamingo legs (A by legs and colour). Left: large sloth (B). Other: a tiny baby sloth held by the right body (about 655-730, 705-770)."
+  },
+  "6002": {
+   "A": [
+    520,
+    90,
+    1024,
+    900
+   ],
+   "B": [
+    130,
+    115,
+    530,
+    720
+   ],
+   "layout": "extra",
+   "rule": 4,
+   "note": "Assigned by rule 1. Right: pink feathered flamingo body with long pink necks ending in flamingo heads at top (A). Left: brown sloth hanging (B). Other: a white sloth in front of the flamingo (about 480-800, 565-1000), fused with it."
+  },
+  "6003": {
+   "A": [
+    520,
+    10,
+    1024,
+    800
+   ],
+   "B": [
+    0,
+    30,
+    645,
+    1024
+   ],
+   "layout": "extra",
+   "rule": 4,
+   "note": "Assigned by rule 1. Upper right: flamingo head and neck (A). Left: close-up sloth/llama face (B). Other: a white fluffy sloth-like animal with a pink flamingo head ornament at lower right (about 640-1024, 545-1024)."
+  },
+  "6004": {
+   "A": [
+    625,
+    375,
+    960,
+    980
+   ],
+   "B": [
+    0,
+    160,
+    650,
+    1024
+   ],
+   "layout": "extra",
+   "rule": 4,
+   "note": "Assigned by rule 1. Right: flamingo (A). Left: large furry sloth/llama-like body with a long neck (B). Others: two tiny flying birds at the top (about 405-445, 85-140 and 510-555, 30-45)."
+  }
+ },
+ "a_fox__x__a_llama": {
+  "6001": {
+   "A": [
+    120,
+    65,
+    640,
+    905
+   ],
+   "B": [
+    585,
+    340,
+    980,
+    940
+   ],
+   "layout": "two",
+   "rule": 2,
+   "note": "Both llamas: a standing tan llama (left, A) and a sitting orange llama with fox-coloured fur but llama shape (right, B)."
+  },
+  "6002": {
+   "A": [
+    480,
+    270,
+    1024,
+    1024
+   ],
+   "B": [
+    100,
+    105,
+    510,
+    940
+   ],
+   "layout": "extra",
+   "rule": 4,
+   "note": "Assigned by rule 1. Right: large orange furry body with a short pointed-eared fox-like head (A). Left: llama (B). Others in the middle: a grey llama head behind, a brown fox/deer-like face and a white-necked llama head, all fused."
+  },
+  "6003": {
+   "A": [
+    0,
+    130,
+    530,
+    1024
+   ],
+   "B": [
+    615,
+    95,
+    1024,
+    1024
+   ],
+   "layout": "two",
+   "rule": 2,
+   "note": "Both llamas: haltered cream llama (left, A) and orange-and-white llama (right, B)."
+  },
+  "6004": {
+   "A": [
+    750,
+    500,
+    970,
+    1000
+   ],
+   "B": [
+    20,
+    0,
+    795,
+    985
+   ],
+   "layout": "extra",
+   "rule": 4,
+   "note": "Assigned by rule 1. Right: small sitting orange fox-like animal with pointed ears and a short snout (A). Left: llama (B). Other: a sliver of a brown animal cut by the left edge (about 0-35, 505-700)."
+  }
+ },
+ "a_goat__x__a_rhinoceros": {
+  "6001": {
+   "A": [
+    130,
+    60,
+    690,
+    925
+   ],
+   "B": [
+    545,
+    330,
+    935,
+    880
+   ],
+   "layout": "two",
+   "rule": 1,
+   "note": "Left: large body with a hornless goat-like head and long ears (A). Right: rhino with a horn (B)."
+  },
+  "6002": {
+   "A": [
+    0,
+    90,
+    685,
+    945
+   ],
+   "B": [
+    505,
+    370,
+    930,
+    915
+   ],
+   "layout": "two",
+   "rule": 2,
+   "note": "Both rhinos: large grey rhino (left, A) and a pale calf (right, B) with a pink-tipped horn between them."
+  },
+  "6003": {
+   "A": [
+    170,
+    520,
+    510,
+    920
+   ],
+   "B": [
+    35,
+    40,
+    980,
+    895
+   ],
+   "layout": "extra",
+   "rule": 4,
+   "note": "Assigned by rule 2. All rhinos: a small calf with white goat-like legs (left, A) and a huge rhino (B). Other: a white woolly rhino-headed animal at lower right (about 650-960, 630-985)."
+  },
+  "6004": {
+   "A": [
+    0,
+    290,
+    640,
+    985
+   ],
+   "B": [
+    0,
+    0,
+    905,
+    960
+   ],
+   "layout": "extra",
+   "rule": 4,
+   "note": "Assigned by rule 2. All rhinos: the middle rhino (A, box centre further left) and the large dark rhino behind (B). Other: a third rhino at right (about 575-1000, 465-985). No goat."
+  }
+ },
+ "a_kangaroo__x__a_squid": {
+  "6001": {
+   "A": [
+    155,
+    70,
+    665,
+    885
+   ],
+   "B": [
+    650,
+    445,
+    905,
+    890
+   ],
+   "layout": "two",
+   "rule": 2,
+   "note": "Both kangaroos: large one (left, A) and small sitting one (right, B)."
+  },
+  "6002": {
+   "A": [
+    260,
+    115,
+    555,
+    930
+   ],
+   "B": [
+    495,
+    430,
+    1010,
+    940
+   ],
+   "layout": "two",
+   "rule": 2,
+   "note": "Both kangaroos: tall grey one (left, A) and a smaller brown one with a long tail and tube-like snout (right, B)."
+  },
+  "6003": {
+   "A": [
+    10,
+    435,
+    405,
+    930
+   ],
+   "B": [
+    345,
+    180,
+    640,
+    905
+   ],
+   "layout": "extra",
+   "rule": 4,
+   "note": "Assigned by rule 2. Both kangaroos: a crouching brown kangaroo with a white-headed joey-like front (left, A) and a standing kangaroo (centre, B). Others: a small long-snouted animal (about 730-820, 700-950), a large beige sack-like ribbed shape at right that could be a squid mantle (about 790-1024, 390-940), a faint animal in the far background."
+  },
+  "6004": {
+   "A": [
+    0,
+    0,
+    800,
+    1024
+   ],
+   "B": [
+    765,
+    495,
+    1024,
+    1024
+   ],
+   "layout": "two",
+   "rule": 2,
+   "note": "Both kangaroo-like: a huge kangaroo (left, A) and a small toy-like kangaroo with an orange hair tuft (right, B); a pink fluffy tail-like shape between them is not boxed."
+  }
+ },
+ "a_ladybug__x__an_octopus": {
+  "6001": {
+   "A": [
+    60,
+    100,
+    810,
+    880
+   ],
+   "B": [
+    530,
+    630,
+    960,
+    940
+   ],
+   "layout": "two",
+   "rule": 1,
+   "note": "Left: red spotted ladybug dome on a deer-like four-legged body (A). Right: ladybug-backed body with an octopus face, suckered tentacles and curled tentacle legs (B, the more octopus-like)."
+  },
+  "6002": {
+   "A": [
+    265,
+    370,
+    610,
+    675
+   ],
+   "B": [
+    105,
+    180,
+    670,
+    575
+   ],
+   "layout": "two",
+   "rule": 1,
+   "note": "Lower: ladybug (A). Upper: octopus mantle and suckered arms fused with a second red ladybug shell (B)."
+  },
+  "6003": {
+   "A": [
+    530,
+    80,
+    995,
+    440
+   ],
+   "B": [
+    65,
+    380,
+    800,
+    960
+   ],
+   "layout": "two",
+   "rule": 1,
+   "note": "Ladybug at upper right (A), octopus at lower left (B)."
+  },
+  "6004": {
+   "A": [
+    175,
+    715,
+    450,
+    990
+   ],
+   "B": [
+    0,
+    0,
+    945,
+    650
+   ],
+   "layout": "two",
+   "rule": 1,
+   "note": "Ladybug at lower left (A). Large dark mottled creature with an eye and tentacle-like limbs at the top (B). Red coral-like shapes and a thin curled worm at lower right are not counted as bodies."
+  }
+ },
+ "a_lobster__x__a_whale": {
+  "6001": {
+   "A": [
+    75,
+    75,
+    760,
+    640
+   ],
+   "B": [
+    675,
+    705,
+    765,
+    775
+   ],
+   "layout": "extra",
+   "rule": 4,
+   "note": "Assigned by rule 1. Main: whale-faced body with a large lobster claw and segmented lobster back sitting in a boat (A, by claw and segments). B is a small dolphin-like fish beside the hull, the only other body. Others: small fish and shells inside the boat."
+  },
+  "6002": {
+   "A": [
+    580,
+    580,
+    985,
+    770
+   ],
+   "B": [
+    15,
+    125,
+    665,
+    790
+   ],
+   "layout": "extra",
+   "rule": 4,
+   "note": "Assigned by rule 1. Right: lobster (A). Left: breaching humpback whale with two lobster claws attached (B). Others: a seal/turtle-like animal on the sand (about 450-720, 800-915) and a tiny bird at top right."
+  },
+  "6003": {
+   "A": [
+    65,
+    500,
+    515,
+    960
+   ],
+   "B": [
+    220,
+    315,
+    840,
+    805
+   ],
+   "layout": "extra",
+   "rule": 4,
+   "note": "Assigned by rule 1. Left: red lobster claws on a grey fabric-like heap (A). Centre: humpback whale (B). Others: a small whale/dolphin at the bottom (about 510-810, 780-900), flying birds and a sailing boat."
+  },
+  "6004": {
+   "A": [
+    615,
+    490,
+    1000,
+    1024
+   ],
+   "B": [
+    0,
+    30,
+    1000,
+    525
+   ],
+   "layout": "extra",
+   "rule": 4,
+   "note": "Assigned by rule 1. Right: lobster (A). Top: long whale with a second tail at the left (B). Other: a grey whale-bodied animal with a walrus-like head and baleen fringe over a suitcase (about 0-710, 495-760)."
+  }
+ }
+}
