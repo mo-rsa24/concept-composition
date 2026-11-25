@@ -20,9 +20,9 @@ flowchart LR
   Z7 --> Z8
   Z9["Z9 Colored MNIST, two holders<br/>pushes 46.9% to 76-78% right, FID halved;<br/>names alone as good; arms 3, 4 fail gates"]:::done
   Z8 --> Z9
-  Z10["Z10 the co-occurrence dial<br/>8 new animal pairs, weights 0 to 1.25;<br/>smoke passes; full run 2.83 GPU-h<br/>waits on the owner"]:::doing
+  Z10["Z10 the co-occurrence dial<br/>8 new pairs, weights 0 to 1.25;<br/>four jobs running"]:::doing
   Z9 --> Z10
-  Z11["Z11 gradient-trained classifier<br/>on coloured digits, after Z10"]:::todo
+  Z11["Z11 gradient-trained checker<br/>design and gate written;<br/>three checkers training, gate queued"]:::doing
   Z10 --> Z11
   classDef done fill:#d3f9d8,stroke:#2b8a3e,stroke-width:2px
   classDef doing fill:#ffe8cc,stroke:#e8590c,stroke-width:2px
