@@ -119,5 +119,7 @@ The eye and the scorer part ways on the mask paste: about 0.5 by the scorer, 0.2
 one and leaves a red sliver beside it (seeds 2, 11, 25 and 30 at 1 red + 1 blue), which the reviewers call touching and the scorer reads as
 one red and one blue: it trained on real renders, where the generator never lets objects overlap, so it cannot judge "all separate" on a
 paste. Every plain and corrector picture holds a dark object that is neither red nor blue, so their scorer share near 0.03 is its error on
-objects it never saw. The scorer's call on each of these 864 pictures is being computed (job 95689) to give the exact disagreement rate the
-design's inconclusive rule reads.
+objects it never saw. The scorer's call on each of the same 864 pictures (job 95689, the second-run scorer) disagrees with the eye on 127 of 864, 0.147:
+111 of 288 mask pastes (0.385; the scorer calls 0.583 of them exact against the eye's 0.205), 10 of 288 plain-product pictures and 6 of
+288 corrector pictures. That is more than the 1 in 10 the design allows, so **the stage is inconclusive on the scorer**, whatever a retrained
+scorer would reach on real renders: the disagreement comes from overlap that real renders never show.
