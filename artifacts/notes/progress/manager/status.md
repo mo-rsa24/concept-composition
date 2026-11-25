@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-25 03:50 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-25 04:22 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -93,14 +93,14 @@ Read at 02:13 from `squeue`, `sacct` and `sinfo`; down nodes from `sinfo -R` at 
 
 | What | Now |
 |---|---|
-| Our jobs against the caps | 2 running on `bigbatch` of 6 allowed (Loop 6's two CLEVR renders); 0 on `biggpu`; 20 queued on cluster priority; plus Loop 8 on mscluster107 card 1 outside Slurm |
+| Our jobs against the caps | 4 running on `bigbatch` of 6 allowed (Loop 6's two CLEVR renders and two scoring renders); 0 on `biggpu`; 20 queued, waiting on cluster priority |
 | Longest wait | the queue as a whole: nothing of ours finished between 00:13 and 01:13 |
 | Nodes out of service | `bigbatch`: 12 down and 5 drained of 48. `biggpu`: 2 down and 2 drained of 7, including mscluster108 and mscluster111, drained at 09:27 and 09:10 today after a failed job kill |
 | Idle capacity | none: at 17:43 every working `bigbatch` and `biggpu` node was allocated. mscluster107 is now another user's `biggpu` job (94610, 6-hour limit, started 17:36); its second card sits idle at 170 MiB, but their process holds it, so it is not ours to use. Your interactive job 83423 on that node no longer appears in the queue |
 | Shared card | **Not in use.** The other user's job on mscluster107 ended by 02:45, so question 99's approval has lapsed; the node is free in Slurm, and Loop 6's identity reader goes there through our `biggpu` slot. A new shared-card run needs a new yes from you |
 | Compute against budget since 2026-11-21 | Loop 6: 53.4 node-hours of 87 (34.8 were CLEVR renders that may have used no GPU). Loop 8: 11.9 of 30. Loop 12: about 0.4, no total set. Slurm here records no GPU count, so these are node-hours, an upper bound |
 
-**RunPod speed test, 2026-11-25:** plain SDXL at 1024 by 1024, 50 steps, on one Secure-cloud RTX 4090 ($0.89 an hour): 5.96 seconds per picture one at a time, 5.81 in batches of 4 (23.3 GB peak). Community cloud had no capacity on any card at 03:40. The same script on a cluster card (job 94815, `manager/sdxl_bench.py`) gives the baseline when it runs.
+**RunPod speed test, 2026-11-25:** plain SDXL at 1024 by 1024, 50 steps, on one Secure-cloud RTX 4090 ($0.89 an hour): 5.96 seconds per picture one at a time, 5.81 in batches of 4 (23.3 GB peak). Community cloud had no capacity on any card at 03:40. The same script on a cluster card gives the baseline when it runs (job 94818, with the broken nodes excluded, after two attempts landed on them).
 
 **What would make the queue move faster:** little within our control. There is no idle `biggpu` card,
 and the drained nodes need the administrator. Loop 6's two-colour CLEVR renders hold two `bigbatch`
@@ -113,7 +113,7 @@ Newest first.
 
 | Concerns | Finding | Source |
 |---|---|---|
-| All loops | **mscluster82's GPU is broken but the node shows as idle**: a 30-minute benchmark pinned there failed in one second with "Unable to determine the device handle for GPU0" (job 94814). It is the same fault the environment notes record for mscluster50 and 51, but 82 is not on that list, so a job can land there and fail. The environment folder's keeper has stopped; yours to route. | `/datasets/mmolefe/poe_repair_min/manager-speedtest/speedtest-94814.log` |
+| All loops | **Two broken nodes trap jobs**: mscluster71 and mscluster82 show `idle` because their GPUs are dead ("Unable to determine the device handle for GPU0"), and Slurm sends waiting jobs to idle nodes first; two of Loop 13's test jobs failed there in one second (94814, 94815). Neither is on the environment notes' broken list, which names only mscluster50 and 51. Loops 6, 8 and 12 are asked to exclude all four in their job scripts. Telling the administrator and updating the environment notes are yours. | `/datasets/mmolefe/poe_repair_min/manager-speedtest/` |
 | Loops 6 and 8 | **Two loops chase the same question for Paper 2**: can identity be read from CO3's own states? Loop 6's per-place reader answers it for about 0.3 GPU-hours (its judge's control passed at 0.914); Loop 8's signature checker would spend 5 to 14. Loop 8 is asked to hold until Loop 6's read lands. | questions 100, 101, 102 |
 | Loops 6 and 9 | **Two records disagree on what CO3 draws.** Loop 6's first test says CO3 draws two separate bodies in 96 of 96 tuning pictures; Loop 9's part labels call 23 of the 96 "not two" (for example a boar with two pheasants). If Loop 9's labels hold, about a third of CO3's failures are extra subjects, which no borrowed-parts fix can repair. Yours to settle. | `method-search/01-beat-the-baseline/review.md`; `noise-text-critic/02d-binding/part-binding-calls.csv` |
 | Loop 12 | **A run of bad results** (two nulls) and **a test that measured something else than its name**: the drawn-box fix never gave each animal its own prediction inside its box, so its draft verdict that regions cannot work overreaches. Method review request sent at 23:35. | `2-classifier-guidance/scripts/leakage/z3_regions.py` lines 66 to 72 |
@@ -157,6 +157,7 @@ Newest first.
 | Time | To | What and why |
 |---|---|---|
 | 17:02 | Loop 8 | Its rewritten SDXL test passes the design check (stop rule, random and zero controls, comparison prompts fixed in advance, the same two-clear measure as Loop 6; about 7 GPU-hours, inside budget). Its board record goes to you as question 89. |
+| 04:22 | Loops 6, 8, 12 | Exclude mscluster50, 51, 71 and 82 from job scripts: 71 and 82 have dead GPUs but show idle, so jobs land there and fail. One line in `requests.md`. |
 | 03:15 | Loop 8 | Asked to hold its SDXL test until Loop 6's identity read lands; question 102 is yours. |
 | 02:30 | Loop 6 | The reviewer's first identity reader for M12, with its bar and stop conditions. |
 | 02:30 | Loop 6 | Your answer A on question 100 sent; the reviewer is choosing the identity reader to try first. |
