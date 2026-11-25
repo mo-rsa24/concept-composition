@@ -14,9 +14,9 @@ flowchart LR
   Z1 --> Z5 --> Z6
   Z2 -. "owner's yes on cost" .-> Z2
   Z3 -. "owner's yes on cost;<br/>needs a box source (M9's reader failed 11 of 24)" .-> Z3
-  Z7["Z7 own prediction in its box<br/>text check null; 96 renders done;<br/>blind calls running"]:::doing
+  Z7["Z7 own prediction in its box<br/>null: 14 of 48 vs CO3 8, p 0.073;<br/>duck x goose 0 to 5 of 8"]:::done
   Z6 --> Z7
-  Z8["Z8 can the push fix a known failure<br/>screening 88 renders on card 1,<br/>then 99 pictures in bigbatch"]:::doing
+  Z8["Z8 can the push fix a known failure<br/>identity passed; screening on card 1,<br/>then 99 pictures in bigbatch"]:::doing
   Z7 --> Z8
   classDef done fill:#d3f9d8,stroke:#2b8a3e,stroke-width:2px
   classDef doing fill:#ffe8cc,stroke:#e8590c,stroke-width:2px
