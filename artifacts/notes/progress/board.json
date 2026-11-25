@@ -687,9 +687,9 @@
    "state": "doing",
    "serves": "Paper 1",
    "objective": "Build and test",
-   "updated": "2026-11-25T18:56:38+02:00",
+   "updated": "2026-11-25T19:38:55+02:00",
    "started": "2026-11-25T12:46:44+02:00",
-   "note": "comparison on red's RunPod 4090: plain product block 0 done (0.23 s a picture; whole comparison about 3.5 to 4 GPU-hours); count scorer 0.946 against 0.95 on the second run, owner's call on a final attempt"
+   "note": "plain product and mask paste done (9,216 each); count checker missed 0.75 (0.645), its row held; noise-window diagnosis and corrector row running; scorer choice with the owner"
   },
   {
    "id": "D4",
