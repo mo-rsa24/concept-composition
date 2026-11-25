@@ -26,3 +26,17 @@ Every one of the 40 pictures holds exactly the colours and counts asked for, rea
 on the floor, and in the scenes of 3 red with 3 blue some touch or partly hide one another.
 
 <a href="smoke-renders-by-colour-and-count.png"><img src="smoke-renders-by-colour-and-count.png" width="520" alt="Five rows of 8 CLEVR renders: one red object, three red, three blue, two red with one blue, and three red with three blue, each labelled with its counts"></a>
+
+## The full runs, quarter by quarter
+
+Each quarter is sampled on the pod's CPU from the 0.100 EMA snapshot, 16 seeds per count, and read by the colour counter against its share on
+real training pictures of that colour (red 0.82, blue 0.86). The stopping rule in [the design](design.md#watching-the-full-runs-and-when-to-stop-one)
+is read at 75%. The records are in each pod's `runs/full-quarters/<colour>-full/quarters/quarters.jsonl`.
+
+| Quarter | Images seen | Red: share read right (1, 2, 3 objects) | Red: mean loss | Blue: share read right (1, 2, 3 objects) | Blue: mean loss |
+|---|---:|---|---:|---|---:|
+| 1 | 500,224 | 0.81 (1.00, 0.88, 0.56) | −3.37 | 0.83 (0.94, 0.94, 0.63) | −3.36 |
+
+At the first quarter both experts draw their colour on the CLEVR floor, and the counter reads them about as often as it reads the real
+pictures. Three objects is the weak count, where some samples hold two. The first try at sampling recorded no samples (the sampler is a
+generator and was never iterated); that line stays in the file with a share that is not a number.
