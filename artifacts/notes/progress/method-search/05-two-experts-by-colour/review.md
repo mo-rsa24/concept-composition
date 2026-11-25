@@ -78,3 +78,15 @@ held-out balanced accuracy on the same 1,024 held-out pastes.
 Less noise lets the checker see touching objects (0.58 to 0.86), and it never reads a count one off: 0.58 even on a nearly clean paste.
 So noise is not the main cause. The two maps, each expert's denoised estimate minus the empty scene's, carry little of how many objects a
 paste holds, and at σ below 0.3 the layout is already fixed, so a push there cannot move an object.
+
+**The first two quarters, scored provisionally.** Scored with the second-run scorer (0.946 on the held-out renders, under its 0.95 bar), so
+these numbers track the run and decide nothing until the owner rules on the scorer. Exact share averaged over the 9 cells:
+
+| Row | Seeds 0 to 255 | Seeds 256 to 511 | 1 red + 1 blue | Every cell of 3 or more objects |
+|---|---:|---:|---|---|
+| Plain product | 0.026 | 0.033 | 0.20, 0.27 | 0.00 to 0.02 |
+| Corrector | 0.028 | 0.033 | 0.24, 0.28 | 0.00 to 0.01 |
+| Mask paste | 0.537 | 0.505 | 0.80, 0.75 | 0.27 to 0.66, falling with the count |
+
+The plain product and the corrector both draw dark purple-black objects, so even their 1 red + 1 blue share is suspect: the scorer never
+saw an object that is neither red nor blue. The 32-per-cell eye calls will say how often those are truly one red and one blue.
