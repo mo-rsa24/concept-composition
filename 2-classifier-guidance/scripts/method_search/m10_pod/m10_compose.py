@@ -245,7 +245,7 @@ def train_checker(args):
             ba, _ = evaluate()
             rec = {"update": step, "loss": round(float(loss), 4), "held_out_balanced_accuracy": round(ba, 4), "seconds": round(time.time() - begin)}
             log.write(json.dumps(rec) + "\n"); log.flush(); print(json.dumps(rec), flush=True)
-            if step == updates // 2 and ba <= FUTILE_CHECKER_BA and not args.out_name:
+            if step == updates // 2 and ba <= FUTILE_CHECKER_BA and not args.sigma_window:   # the diagnosis runs to its end
                 (out / "checker.json").write_text(json.dumps({"stopped_at_half": True, **rec}, indent=1) + "\n")
                 raise SystemExit(f"stopped at half: held-out balanced accuracy {ba:.3f} at or below {FUTILE_CHECKER_BA}")
     ba, logits = evaluate()
