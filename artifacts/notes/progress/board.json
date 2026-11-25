@@ -1164,6 +1164,16 @@
    "note": "support: unseen combinations 88.8% vs twin 63.1% and digit-and-colour push 73.8%; review artifacts/notes/progress/leakage/11-gradient-trained-classifier/review.md; W&B zzsttdkd"
   },
   {
+   "id": "Z12",
+   "label": "Z12 Does a trained push carry the box correction on CO3",
+   "owner": "s12",
+   "proof": "leakage/12-aligned-classifier-on-co3/review.md reports stage A against its bar (at least 5 more two-clear of 96 than CO3 alone), and stage B only if run, with the reviewer's fixes in the design",
+   "needs": [],
+   "state": "todo",
+   "serves": "Paper 2: the aligned classifier on real animals",
+   "objective": "stage A: the per-animal box correction with boxes given against CO3 alone on seeds 6017 to 6024; stage B only if A passes and the owner agrees: a classifier trained to copy it, without boxes"
+  },
+  {
    "id": "U1",
    "label": "U1 Closest papers read",
    "owner": "s7",
@@ -2218,7 +2228,8 @@
     "M14",
     "M15",
     "Z10",
-    "Z11"
+    "Z11",
+    "Z12"
    ],
    "joiner": "~~~"
   }
@@ -2312,7 +2323,8 @@
   "joint prompt rendered at M13's 192 CO3 seeds, blind-called, and M13's cosines split by whether the joint drew both",
   "attention overlap and instance count at steps 5 to 15 on the 192 labelled CO3 pictures, within-pair rule, pairs held out, beside a shuffled control",
   "pooled adapter at weight 0 to 1.25 on 8 held-out pairs sharing no animal with training, blind calls of one, hybrid or two clear, share against weight",
-  "the checker trained with a penalty pulling its push toward the expert's own score for the pair, on coloured digits, against the plain checker and the names-only push"
+  "the checker trained with a penalty pulling its push toward the expert's own score for the pair, on coloured digits, against the plain checker and the names-only push",
+  "stage A: the per-animal box correction with boxes given against CO3 alone on seeds 6017 to 6024; stage B only if A passes and the owner agrees: a classifier trained to copy it, without boxes"
  ],
  "brief": {
   "outcome": "two papers, each beating its best rival",
