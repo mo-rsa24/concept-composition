@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-25 15:24 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-25 16:02 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -134,6 +134,8 @@ Newest first.
 
 | Concerns | Finding | Source |
 |---|---|---|
+| Paper 1 and the ICLR draft | **The pooled adapter's "58 of 64 on unseen pairs" counted bodies, not correct animals.** It was scored by the count detector, which counts animals but cannot name them. Z10 shows the adapter separates bodies on new pairs (hybrids 29 to 4 of 32, separate bodies 1 to 26 as its weight goes 0 to 1) while two clear, each the right animal, rises only 0 to 2, and even training pair badger x magpie gave none at full weight. Any sentence reading the 58 of 64 as "composes unseen pairs" overstates it; it shows two bodies. | Z10's review; the pooled-adapter finding's own scorer |
+| Loop 12 | **Z10 ran 0.11 GPU-hours over** (2.94 against 2.83 approved): the test runs that found the adapter's leaking off switch. | Z10's review |
 | All loops | **The laptop restarted at 15:27 on 2026-11-25 and left 14 empty objects in the git store, including the branch's latest commit.** Repaired at 15:55 with the owner's yes: the branch pointers, history logs and index were backed up to `/home/molef/PhD/git-repair-backup-2026-11-25/`, the empty objects moved there rather than deleted, the branch pointed back at the last intact commit (5d5f2521), the zeroed history lines removed and a fresh index built from that commit. `git fsck` is clean. The lost commit's changes are on disk as uncommitted changes, and loops re-commit them. | the repair, this session |
 | All λ sweeps | **Switching the adapter off may not switch it all off.** With v58-03-self attached and disabled by `disable_adapters()`, SDXL's picture differs from a plain product with no adapter attached by a mean of 10.8 grey levels (largest 231), against 34.5 with it on: about a third of the adapter remains (Loop 12, job 95428, `leakage/10-co-occurrence-dial/diagnose/diagnose.json`). Any recorded weighted run that took its 'off' term from the same U-Net (the adapter_lambda path in `run_poe_classifier_guided`, and the windowed sampler in `lambda_window_grid.py`) may have an 'off' that is partly on. Which recorded results and paper figures used that path is not yet checked. | Loop 12's diagnosis; an earlier, different toggle bug is in the project memory (the windowed sampler returning with the adapter on) |
 | Loop 12 | **Z9 ran 0.4 GPU-hours over its approval**: 3.70 against 3.3, because the trained interaction model's second attempt took 1.39 hours against an estimate of 0.6. Recorded in Z9's review (commit a4df558a). | Z9's review |
