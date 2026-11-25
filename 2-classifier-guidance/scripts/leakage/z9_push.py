@@ -28,7 +28,7 @@ import torch.nn.functional as F
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(HERE.parent / "mnist"))
-from canvas_unet import ABAR, T  # noqa: E402
+from canvas_unet import ABAR, T, per_sample_cap  # noqa: E402
 from z9_data import colourise, load_mnist, reference  # noqa: E402
 from z9_sample import (SEEDS, Experts, draw_set, fid, fid_stats, inception, judge_right, load_judge, log_wandb, sample,  # noqa: E402
                        to_uint8)
@@ -176,6 +176,73 @@ def load_checker(args, dev):
     head.load_state_dict(torch.load(args.out / "checker" / "head.pt", map_location=dev, weights_only=False)["head"])
     head.requires_grad_(False)
     return head
+
+
+# ---------------------------------------------------------------- arm 2's control a: names without the pair
+
+class SeparateHead(nn.Module):
+    """Paper 1's separate-label control on the same features: ten digit logits and ten colour logits, never told the pair."""
+
+    def __init__(self):
+        super().__init__()
+        c = 256
+        self.down = nn.Conv2d(c, c, 3, stride=2, padding=1)
+        self.body = nn.Sequential(nn.Conv2d(2 * c, 128, 3, padding=1), nn.SiLU(), nn.Conv2d(128, 128, 3, padding=1), nn.SiLU())
+        self.mlp = nn.Sequential(nn.Linear(256 + 16, 256), nn.SiLU(), nn.Linear(256, 20))
+
+    def forward(self, feats, t):
+        h = self.body(torch.cat([feats[0], self.down(feats[1])], 1))
+        o = self.mlp(torch.cat([h.mean((2, 3)), h.amax((2, 3)), time_features(t)], 1))
+        return o[:, :10], o[:, 10:]
+
+
+def separate_train(args, split, dev):
+    experts = Experts(args.experts, split, dev)
+    images, labels = load_mnist(args.mnist, "train")
+    drawn = np.load(args.out / "checker" / "drawn.npz")
+    seen = np.array(split["seen"])
+    by_digit = {d: np.flatnonzero(labels == d) for d in range(10)}
+    rng = np.random.default_rng(13); torch.manual_seed(13)
+    head = SeparateHead().to(dev)
+    opt = torch.optim.Adam(head.parameters(), lr=1e-3)
+    dpos = np.flatnonzero(drawn["right"])
+    for step in range(1, args.steps + 1):
+        k = seen[rng.integers(0, len(seen), 64)]
+        xr = colourise(images[[rng.choice(by_digit[int(v)]) for v in k[:, 0]]], k[:, 1])
+        ip = rng.choice(dpos, 64)
+        x = np.concatenate([xr, drawn["images"][ip].astype(np.float32) / 127.5 - 1])
+        d = np.concatenate([k[:, 0], drawn["digits"][ip]]); c = np.concatenate([k[:, 1], drawn["colours"][ip]])
+        x = torch.from_numpy(x).to(dev)
+        t = torch.randint(0, T, (len(x),), device=dev)
+        a = ABAR.to(dev)[t][:, None, None, None]
+        xt = a.sqrt() * x + (1 - a).sqrt() * torch.randn_like(x)
+        with torch.no_grad():
+            feats = expert_features(experts, xt, t)
+        ld, lc = head(feats, t)
+        loss = F.cross_entropy(ld, torch.from_numpy(d.astype(np.int64)).to(dev)) + F.cross_entropy(lc, torch.from_numpy(c.astype(np.int64)).to(dev))
+        opt.zero_grad(); loss.backward(); opt.step()
+        if step % 500 == 0:
+            print(json.dumps({"separate_step": step, "loss": round(loss.item(), 4)}), flush=True)
+    torch.save({"head": head.state_dict(), "steps": args.steps}, args.out / "checker" / "separate-head.pt")
+    head.eval(); head.requires_grad_(False)
+    return experts, head
+
+
+def separate_at_checker_length(experts, checker, separate, d, c):
+    """At each step and picture: the separate-label push's direction, at the length the checker push (after its cap) has there."""
+    ck = checker_push(experts, checker, d, c)
+
+    def push(x, t, eps):
+        pc, _ = per_sample_cap(ck(x, t, eps), eps, CAP)
+        want = pc.flatten(1).norm(dim=1)
+        with torch.enable_grad():
+            xx = x.detach().requires_grad_(True)
+            ld, lc = separate(expert_features(experts, xx, t), t)
+            s = F.log_softmax(ld, 1)[:, d] + F.log_softmax(lc, 1)[:, c]
+            g, = torch.autograd.grad(s.sum(), xx)
+        g = -sigma(t) * g
+        return g * (want / g.flatten(1).norm(dim=1).clamp_min(1e-12))[:, None, None, None]
+    return push
 
 
 # ---------------------------------------------------------------- arm 3: the interaction classifier
@@ -336,7 +403,7 @@ def real_stats(args, split, name, net, dev):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("stage", choices=["checker-data", "checker-train", "checker-arm", "ratio-train", "ratio-held", "ratio-novel", "pooled-arm"])
+    ap.add_argument("stage", choices=["checker-data", "checker-train", "checker-arm", "checker-control-a", "ratio-train", "ratio-held", "ratio-novel", "pooled-arm"])
     ap.add_argument("--mnist", type=Path, required=True)
     ap.add_argument("--split", type=Path, required=True)
     ap.add_argument("--experts", type=Path, required=True)
@@ -374,6 +441,18 @@ def main():
         imgs, d, c, lens = run_arm(experts, novel, dev, lambda d, c: checker_push(experts, head, d, c))
         res, _ = score_arm("arm-2-novel", imgs, d, c, judge, dev, plain_novel, out, net, real_stats(args, split, "novel", net, dev))
         summary["arm_2"] = res
+    elif args.stage == "checker-control-a":
+        experts, separate = separate_train(args, split, dev)
+        head = load_checker(args, dev)
+        arm2 = np.load(args.out / "checker" / "arm-2-novel.npz")["right"]
+        net = inception(dev)
+        imgs, d, c, _ = run_arm(experts, novel, dev, lambda dd_, cc_: separate_at_checker_length(experts, head, separate, dd_, cc_))
+        summary["control_a_names_only"], right_a = score_arm("arm-2-control-a-novel", imgs, d, c, judge, dev, plain_novel, args.out / "checker",
+                                                             net, real_stats(args, split, "novel", net, dev))
+        w, l, p = mcnemar_one_sided(arm2, right_a)
+        summary["arm_2_against_control_a"] = {"lead_points": 100 * float(arm2.mean() - right_a.mean()), "won": w, "lost": l, "p_one_sided": p,
+                                              "arm_2_stands": bool(100 * (arm2.mean() - right_a.mean()) >= 5 and p < 0.05)}
+        print(json.dumps(summary["arm_2_against_control_a"]), flush=True)
     elif args.stage == "ratio-held":
         net = load_ratio(args, dev); out = args.out / "ratio"
         held = [tuple(k) for k in split["ratio_held_back"]]
