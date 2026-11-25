@@ -1020,8 +1020,8 @@
    "serves": "Paper 1 beats its closest rival, DCFM, where it is weak",
    "objective": "question 108's first experiment: plain product of finished experts, plus the checker push, plus the ratio push, against DCFM's printed novel-combination FID",
    "started": "2026-11-25T09:10:58+02:00",
-   "updated": "2026-11-25T11:27:14+02:00",
-   "note": "arm 2 passes (76.0% vs 46.9%); arm 3 fails its gate; arm 4's gate fails on fit (0.224 vs 0.25) though its pictures pass (89.2% vs 78.8%), decision with the manager; control a is job 95248"
+   "updated": "2026-11-25T12:08:15+02:00",
+   "note": "arm 2's lift explained by names alone (control a 78.4% vs arm 2 76.0%); arm 3 fails its gate; arm 4 second attempt is job 95317"
   },
   {
    "id": "M13",
@@ -1928,7 +1928,8 @@
    "event_id": "l29esd328d9glp7jd5p4fn4ekg",
    "start": "2026-11-22T11:35:00+02:00",
    "end": "2026-11-25T10:42:19+02:00",
-   "synced": "1150295b1faf"
+   "synced": "1150295b1faf",
+   "finished": true
   },
   {
    "id": "gonogo",
