@@ -2,11 +2,11 @@
 
 ## What this asks
 
-M13 found the kept checker's push pointing against r_t, the part of the joint prompt's prediction that the product of experts drops
-([M13's review](../09-gradient-direction-check/review.md)). Loop 15 reads that two ways
+M13 found the kept checker's push moving the noise prediction along r_t, the part of the joint prompt's prediction that the product of
+experts drops ([M13's review](../09-gradient-direction-check/review.md)). Loop 15 reads that two ways
 ([limits and what to test](../../directions/04-limits-and-what-to-test.md#what-changes-when-the-joint-itself-is-wrong)). Either the checker is
-wrong, and its push opposes r_t whether or not the joint prompt draws both subjects; or the joint prompt is the wrong target, and the push
-opposes r_t mostly where the joint prompt itself fails, moving away from the joint's error. The two readings predict different things on the
+wrong, and its push follows r_t whether or not the joint prompt draws both subjects; or the joint prompt is the wrong target, and the push
+follows r_t mostly where the joint prompt itself fails. The two readings predict different things on the
 same states. The owner answered board question 112 on 2026-11-25: run Loop 15's three experiments in order, this one first, and skip the
 second if this one says the checker is wrong.
 
@@ -19,8 +19,10 @@ nothing else steered.
 **Joint succeeds, joint fails.** A blind call on the joint render under the [blind count rubric](../01-beat-the-baseline/blind-count-rubric.md):
 two clear (one clear A and one clear B, separate, no borrowed parts, drawing style ignored), or not.
 
-**The cosine.** M13's per-state cosine between the kept checker's push and r_t on CO3's state, already saved in
-`/datasets/mmolefe/poe_repair_min/loop-6/m13/cosines.jsonl`. No cosine is computed again.
+**The cosine.** The cosine between the change the kept checker's push makes to the noise prediction and r_t, on CO3's state. The push
+applies minus the checker's gradient, so it is minus the gradient cosine M13 saved in
+`/datasets/mmolefe/poe_repair_min/loop-6/m13/cosines.jsonl` (M13's sign check, cosine −1.0 between the push's change and the gradient). No
+cosine is computed again.
 
 ## The run
 
@@ -39,16 +41,20 @@ trajectories within each group.
 
 ## The bar, written on 2026-11-25 before the run
 
+The bar's signs were corrected before any split, after M13's sign check (commit 1b581f08) showed the push applies minus the gradient:
+every threshold is negated and "opposes" reads "follows". No threshold's size, comparison or split rule changed, so the rule decides the same
+way on the same data. Loop 13 approved the correction for the owner on 2026-11-25.
+
 | Result | What it takes | What follows |
 |---|---|---|
-| The joint is the wrong target where it fails | at some step, the difference is at most −0.05 with its interval below 0, and where the joint succeeds the median is above −0.02 | both papers move to a target measured from the picture; M15 runs |
-| The checker is wrong | at every step the interval of the difference includes 0 or the difference is above −0.02, and where the joint succeeds the median is at or below −0.02 at some step | the checker push is dropped and the joint stays the teacher; M15 is skipped, by the owner's answer |
+| The joint is the wrong target where it fails | at some step, the difference is at least +0.05 with its interval above 0, and where the joint succeeds the median is below +0.02 | both papers move to a target measured from the picture; M15 runs |
+| The checker is wrong | at every step the interval of the difference includes 0 or the difference is below +0.02, and where the joint succeeds the median is at or above +0.02 at some step | the checker push is dropped and the joint stays the teacher; M15 is skipped, by the owner's answer |
 | Inconclusive | anything else, or fewer than 20 trajectories in either group | reported, and the owner decides |
 
 Reported beside the bar, deciding nothing: the joint prompt's own two-clear rate per pair (no report page holds it); the same split for the
 clean-pair gradient alone; and the joint render's call against CO3's own call on the same seed, as a 2 by 2 count.
 
-**What would surprise.** The push opposing r_t more where the joint succeeds. That would mean the checker fights the joint exactly where the
+**What would surprise.** The push following r_t more where the joint succeeds. That would mean the checker follows the joint exactly where the
 joint is right.
 
 ## Cost and what it buys
