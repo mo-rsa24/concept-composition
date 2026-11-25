@@ -39,3 +39,8 @@ is not answered here. The held-side control passed (0.0), so the vote and coin e
 **What the three readable comparisons say together.** On digits, the experts' own vote is not what composes; any held side does, the
 corrector adds little once the side is held, and the result matches pasting each digit into its half. Paper 1's case therefore rests on a
 setting where pasting cannot apply, which is step M10.
+
+**A rerun of the shared canvas, chosen after seeing the first run.** Loop 13, deciding for the owner on 2026-11-25, approved one rerun of the
+shared-canvas experiment over the project's default "floor" base (the empty canvas with a spread of 0.3), at the same pairs, seeds, pushes and
+corrector, read against the same bar beside the first run's 0 of 320. It runs after step M14 (`m11_vote.sbatch shared-floor`, output
+`m11/shared-floor/`), and its result is compared with the coin experiment's 313 from the first run.

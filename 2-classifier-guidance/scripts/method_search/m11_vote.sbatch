@@ -45,6 +45,8 @@ COMMON=(--a "$A" --b "$B" --pair-head "$CK/pair/head.pt" --sep-head "$CK/separat
 case "$STAGE" in
   smoke) "$PY" "$S/m11_vote.py" "${COMMON[@]}" --out "$OUT/smoke" --pairs 4-7 --seeds 8; rc=$? ;;
   full)  "$PY" "$S/m11_vote.py" "${COMMON[@]}" --out "$OUT/full" --wandb-name loop6-m11-vote; rc=$? ;;
+  shared-floor) # the shared-canvas experiment again over the "floor" base, after the first run's "blank" base ran off to full ink
+         "$PY" "$S/m11_vote.py" "${COMMON[@]}" --out "$OUT/shared-floor" --arms shared --shared-base floor --wandb-name loop6-m11-shared-floor; rc=$? ;;
   *) echo "ABORT: unknown stage $STAGE"; exit 2 ;;
 esac
 echo "[$(date -u +%H:%M:%S)] DONE stage=$STAGE exit=$rc"
