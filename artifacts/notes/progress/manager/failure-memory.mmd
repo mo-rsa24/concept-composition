@@ -1,0 +1,23 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  subgraph READ["Six readers, in parallel"]
+    A["Paper 1 method search<br/>12 reviews"]:::plain
+    B["Paper 2 on CO3<br/>8 reviews + LoRA boxes"]:::plain
+    C["rival reproductions<br/>7 reviews"]:::plain
+    D["concepts as scores<br/>+ score space, 7"]:::plain
+    E["abstract checkers<br/>on digits, 5"]:::plain
+    F["the five projects'<br/>own reports"]:::plain
+  end
+  L[("one ledger<br/>every attempt: asked, bar,<br/>result, why it failed,<br/>what it rules out")]:::plain
+  R["the reviewer reads<br/>the whole ledger"]:::plain
+  K["consensus page<br/>settled, ruled out,<br/>where to build next"]:::plain
+  N["next loops read both<br/>before any new design"]:::plain
+  A --> L
+  B --> L
+  C --> L
+  D --> L
+  E --> L
+  F --> L
+  L --> R --> K --> N
+  style READ fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
