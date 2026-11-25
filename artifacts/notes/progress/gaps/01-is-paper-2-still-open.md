@@ -12,8 +12,10 @@ subject pairs.
 - [Words this uses](#words-this-uses)
 - [The numbers by model](#the-numbers-by-model)
 - [Where the problem is still open](#where-the-problem-is-still-open)
+- [How far published methods get on each kind of pair](#how-far-published-methods-get-on-each-kind-of-pair)
 - [Do CO3 or ToMe already claim Paper 2's contribution](#do-co3-or-tome-already-claim-paper-2s-contribution)
 - [Where the sources disagree](#where-the-sources-disagree)
+- [Does the missing interaction term change Paper 2's case](#does-the-missing-interaction-term-change-paper-2s-case)
 - [Recommendation](#recommendation)
 - [What this cannot tell you](#what-this-cannot-tell-you)
 - [How this was read](#how-this-was-read)
@@ -109,6 +111,37 @@ CO3 loses to the attention methods on it (CO3 Table 1, p. 7, read).
 whether the joint prompt on FLUX still fuses cat and dog at SDXL's rate is unknown. This session runs no
 model, so the number stays unknown.
 
+## How far published methods get on each kind of pair
+
+Paper 2's larger test covers four kinds of pairs: two animals, an animal and an object, two objects, and
+two subjects with attributes; three or more subjects and relations are out of its scope
+([Paper 2's design](../manager/paper2-four-way-design.md)). The only published table split this way is
+CO3's run on Attend-and-Excite's prompts (66 animal pairs, 144 animal and object, 66 object pairs with a
+colour on each object, 64 seeds each per Attend-and-Excite p. 6, as in
+[Loop 7's note](../abstract-checkers/01-reading/attend-and-excite.md)). Its scores are BLIP-VQA, 0 to 1,
+all on SDXL unless named (CO3 Table 1, p. 7, read).
+
+| Kind of pair | Plain SDXL | Best frozen method on SDXL | Best on any model in that table | Newer models |
+|---|---|---|---|---|
+| Two animals | 0.6950 | CO3 0.7441 | CO3 0.7441 | unknown split; look-alike pairs 52% to 53% on SD3 and SD3.5 (summary, above) |
+| An animal and an object | 0.8654 | CO3 0.8878 | CO3 0.8878 | unknown |
+| Two objects, a colour on each | 0.4926 | ToMe 0.6440 | SynGen on SD1.5, 0.6595 | GenEval colour attribution 0.43 to 0.60 released, 0.86 after RL (read, above) |
+| Two subjects with attributes, T2I-CompBench colour | 0.5879 (T2I-CompBench++) | ToMe 0.7656 (ToMe p. 8) | Flow-GRPO on SD3.5 Medium 0.8379, trained (p. 10) | SD3 0.8132, FLUX 0.7407 (p. 12) |
+
+**What it shows (inferred).** An animal and an object is close to solved even on SDXL, at 0.87 to 0.89.
+Two animals leave the most room among the plain-noun kinds, at 0.69 to 0.74, and are the kind where the
+look-alike failure lives. Two objects with a colour each are the weakest kind on every model, but that
+failure is attribute binding, which ToMe and CoMat already target. No paper read here splits SD3, SD3.5 or
+FLUX results by these four kinds, so the newer-model column is mostly unknown.
+
+**Complex prompts, out of Paper 2's scope.** T2I-CompBench++'s complex category (prompts mixing attributes,
+relations and several objects, scored by its 3-in-1 metric, 0 to 1, 10 images per prompt) reads 0.3237 on
+SDXL, 0.3771 on SD3, 0.3703 on FLUX and 0.3773 on DALL-E 3 (Table XIII, p. 12, read). On SDXL, CO3 lifts
+its ImageReward from 0.3083 to 0.4406 (CO3 Table 2, p. 7, read) and Rectify Then Diffuse reaches 0.4661
+(benchmark spec, its Table 2, p. 6, summary). With three look-alike subjects plain SD3 succeeds on 37.9%
+of images and four on 33.1% (MMDiT similar-subjects paper, Table 1, p. 8, summary). Complex prompts are
+still far from solved on every model read here, so G3 ranks them as an open problem.
+
 ## Do CO3 or ToMe already claim Paper 2's contribution
 
 **Neither does.** Paper 2 claims that one classifier trained afterwards on the frozen model, reading "two
@@ -142,6 +175,32 @@ Reported, not resolved.
   this project's 200-image run.
 - **SD3 two objects:** the SD3 paper's numbers are for an 8B model that was not released (p. 11). The
   released SD3 Medium has no GenEval two-object number in any paper read here.
+
+## Does the missing interaction term change Paper 2's case
+
+The owner links the two papers through one idea: a product of separately trained experts keeps what both
+agree on (the floor and the light, or the ribs and lungs) and has no term for effects that need both
+subjects at once (one object's shadow on the other, a nearer object hiding a farther one). That missing
+part is the interaction term ([the product of experts miniature](../../../../context/methods/01-the-product-of-experts/03-the-miniature.md);
+[the manager's picture](../manager/experts-interact.png)). This is recorded as a finding and a
+recommendation only; adopting it in the problem statements is the owner's decision.
+
+**It sharpens Paper 2's case for one of its three bases and not the other two (inferred).**
+
+| Base sampler | Has a model seen both subjects together? | What the failure is | Does the missing interaction term explain it? |
+|---|---|---|---|
+| Plain PoE, "a cat" times "a dog" | no: each expert is the same model told one subject | a hybrid, or one subject | yes: the product has no term for two subjects in one frame, which is the ICLR work's correction |
+| Joint prompt, "a cat and a dog" | yes: one model, one prompt | a dropped or look-alike merged subject | no: the model has the interaction; it loses a subject through attention overlap and encoder confusion (MMDiT similar-subjects paper p. 2, p. 4; DeLeaker; summary) |
+| CO3 | yes: it sums the joint prompt with single-subject terms | borrowed parts, two of one subject | partly: CO3 subtracts single-subject terms, which removes some of what the joint model knew about the pair (CO3 p. 4, read; inferred) |
+
+So the link holds most strongly for plain PoE, where Paper 2's correction would supply exactly what the
+product leaves out. On the joint prompt, the correction would be fixing leakage, not a missing term. If
+the owner adopts the link, Paper 2's PoE row becomes the row that tests it, and the joint-prompt row tests
+a different claim (inferred).
+
+**Is the framing published?** Whether any paper already frames composition failures as a missing
+interaction term, or measures cross-object effects such as shadows and occlusion, is searched in step G2,
+where Paper 1's reviewer questions need the same answer. G2 reports it.
 
 ## Recommendation
 
