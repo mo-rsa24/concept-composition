@@ -3,7 +3,7 @@
 The one page to read. Loop 13 rewrites it every 6 hours, and at once when you say "updates", "brief me"
 or "where are we". The full detail is on [the status page](status.md).
 
-**Written:** 2026-11-25 08:55 (UTC+2).
+**Written:** 2026-11-25 10:40 (UTC+2).
 
 ## Contents
 
@@ -13,26 +13,28 @@ or "where are we". The full detail is on [the status page](status.md).
 
 ## Where we are
 
-<a href="briefing/where-we-are.png"><img src="briefing/where-we-are.png" width="200" alt="Paper 2's checker push parked; the CoInD and DCFM equation pointing to a ratio classifier; Loop 6's size-corrected reader running; question 108's experiment 1 waiting for a loop; your decision at the bottom."></a>
+<a href="../leakage/09-dcfm-colored-mnist/before-after-plain-product-and-checker-push.png"><img src="../leakage/09-dcfm-colored-mnist/before-after-plain-product-and-checker-push.png" width="200" alt="Colored MNIST, the 50 digit-colour combinations neither expert saw: the plain product beside the checker push, with the share right under each."></a>
 
-1. **Paper 2's checker push is parked by its own bar.** On known failures it made no plain-PoE picture
-   two clear (0 of 12, random push 0) and 2 joint-prompt pictures (random 0, a lead of 4 needed). On
-   CO3 it fixed borrowed parts on two cases (8 of 12) but spoiled 4 of 8 draws CO3 already got right,
-   and across all 96 tuning pictures it did worse than CO3 alone (7 against 11). It can correct parts
-   on two bodies already drawn; it cannot split one body into two ([the review](../leakage/08-first-correction-test/review.md)).
-2. **CoInD and DCFM say what the classifier should learn.** Both train the interaction term to zero
-   (CoInD's penalty is exactly the size of it). By Bayes' rule that term is the gradient of
-   p(A, B | x) / (p(A | x) p(B | x)): how much more likely the two concepts are together than apart.
-   A classifier trained on that ratio gives a push that is zero where the concepts do not interact and
-   works on any model with classifier-free guidance. It is an idea, untested.
-3. **The size-corrected identity reader is running** (Loop 6, your answer to 106), on 96 fresh CO3
-   pictures with the extra-animal rule. Its result lands in a few hours.
-4. **Paper 1 has its evaluation plan and its closest rival read.** You accepted five measures where
-   pasting can fail (105) and added NIH Chest X-ray 14 and DCFM's score (107). DCFM's code is not
-   public. You chose its first experiment (108: Colored MNIST, finished experts, with and without a
-   push), but no running loop has it yet. Loop 6's two-colour CLEVR renders are at about 3 hours.
-5. **Loop 12 is idle**, with no step after Z8, and Loop 14 has finished. mscluster48 joined the
-   dead-GPU list.
+1. **Paper 1 has its first result against its closest rival.** Two Colored MNIST experts, each from
+   its own data holder and never retrained, composed on the 50 combinations neither saw: the checker
+   push gets digit and colour right in 76.0% of 5,000 pictures against 46.9% for the plain product,
+   and a novel-combination FID of 12.63 against 25.87 ([Z9](../leakage/09-dcfm-colored-mnist/design.md)).
+   DCFM's own finished-expert baseline prints 25.19 and DCFM, which retrains, 11.41; those are
+   context, since DCFM uses ten holders. The push here strengthens each attribute, so it does not yet
+   show the interaction story, and Logical Guidance reports a similar setting on Colored MNIST, which a
+   novelty check must compare. Arms 3 and 4 (the ratio head and the trained interaction model) run next.
+2. **Paper 2's checker route is closed (your answer to 111).** On SDXL the kept checker's push points
+   against the joint-minus-product term (median cosine -0.105 at step 0 on CO3, random about 0), and
+   the pictures that came out two clear lean further against it (-0.139). Since the joint prompt also
+   loses subjects, the joint's direction may be the wrong target, which supports controlling a
+   relation's strength directly.
+3. **What is learnable, from the toy.** For a pair nobody saw together, the data says only "never
+   together": a push faithful to it reaches the pair 0.000 of the time, a low-rank head 0.844 (true
+   joint 0.924), and the same head fails when the interaction has no structure (0.120)
+   ([the toy](../../../results/can-a-classifier-reach-an-unseen-pair/README.md)).
+4. **Loop 15 is reading** for directions that carry to new subjects and for your three dials
+   (co-occurrence strength, count, binding strength); H1 and H2 are done, H3 is under way.
+5. **Compute.** Everything ran on the cluster; RunPod has stayed unused since its two tests.
 
 ## For you to decide
 
@@ -40,8 +42,7 @@ Answer with `python3 scripts/progress_board.py answer <number> "<your answer>"`,
 
 | # | The question | Default |
 |---|---|---|
-| none yet | Give question 108's experiment 1 to Loop 12, and add a third arm: a classifier trained on the together-against-apart ratio | Loop 13 asks the reviewer first, then sends it |
-| 96 | Should Paper 2's checkers be judged on ranking good pictures above bad ones instead of their yes-or-no call at zero? | keep the yes-or-no gate, report ranking beside it |
+| 96 | Should Paper 2's checkers be judged on ranking good pictures above bad ones instead of their yes-or-no call at zero? | keep the yes-or-no gate; now moot for the closed checker route |
 | 104 | Which model Paper 2 runs on | **held by you** until Paper 2 works on SDXL |
 
 ## What the manager does for you
