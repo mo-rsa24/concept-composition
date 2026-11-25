@@ -76,6 +76,26 @@ rule applied per cell.
 **Past 6 objects.** If a row holds every cell up to 6 objects, a third expert sees only green, and cells up to 9 objects run on the same bars.
 It is costed below and starts only with the owner's yes.
 
+## Paper 1's evaluation measures, beside the exact share
+
+The owner accepted Paper 1's evaluation plan for this test on board question 109, on 2026-11-25:
+[the evaluation plan](../../targets/paper-1-evaluation-plan.md) sets five measures where pasting fails (which object hides which, one light
+for every object, a shadow falling on the other object, seams and realism, colour staying with its object), each with its own reader check
+and the plan's margin. They score this test's samples and change none of the bars above. Three additions from that answer apply here.
+
+**A fifth row: mask paste with a shadow generator.** The mask paste, then a published multi-object shadow generator such as MultiShadow
+(arXiv 2603.02743), scored on measures 2 to 4 only. It runs only if the generator works on 64-pixel CLEVR, checked first on 16 mask
+pastes from the experts' samples, enlarged to the generator's input size and shrunk back. It works when two blind reviewers both see a shadow
+added beside every object, all falling the same way, with the objects themselves unchanged, on at least 12 of the 16. If no released
+generator with weights exists, or it fails that check, the row is reported as not run and why.
+
+**DepthArb's box-level occlusion score beside measure 1.** For each overlapping red and blue pair, the share of the two objects' box overlap
+covered by the nearer object's box (arXiv 2603.23924), reported beside the plan's pixel reading and deciding nothing.
+
+**The count checker's training images beside every result.** A list of each image the count checker trained on: its file, the two expert
+samples it was pasted from with their seeds, and the counts it was labelled with. It shows that no image holding both colours, and no real
+scene, reached the checker.
+
 ## Cost and what it buys
 
 The renders run on CPU. Blender 2.78c, which the CLEVR generator needs, ships no GPU code for the cluster's RTX 3090 and Blackwell cards and
@@ -92,6 +112,9 @@ seconds per thousand images seen on one RTX PRO 6000 Blackwell.
 | Sampling 3 rows by 9 cells by 1,024 images, three models per step, with the corrector's extra steps | none | about 4 |
 | Scorer, expert checks and pastes | about 1 | none |
 | **Stage 2 in all** | **about 67** | **about 7.6** |
+| The evaluation plan's measures on these samples: reference renders (1,024 for each of the 9 cells and 500 crowded), readers, realism distance and the classifier test | about 21 | under 2 |
+| The shadow generator's check on 16 mask pastes, and the fifth row on the measures 2 to 4 images if it passes | none | under 1, estimate |
+| **With the evaluation measures** | **about 88** | **about 10.5** |
 | A green expert and cells to 9 objects, only with the owner's yes | about 33 | about 4 |
 
 **Buys.** Paper 1's test where pasting cannot apply, with a measured point where two separately trained experts stop composing, and
@@ -103,7 +126,8 @@ whether a checker moves that point.
 2. **Overfit.** One expert fits 16 pictures, and its samples hold the right count of the right colour in at least 15 of 16.
 3. **1% of the data.** 50 pictures per count train each expert, and the logged loss falls.
 4. **Controls.** The scorer's 95% check and each expert's 90% check.
-5. **Comparison.** The three rows on the 9 cells.
+5. **Comparison.** The four rows on the 9 cells, and the evaluation plan's five measures on the same samples, with the fifth row on
+   measures 2 to 4 if the shadow generator passes its check.
 
 ## What this cannot say
 
