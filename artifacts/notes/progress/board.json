@@ -475,10 +475,14 @@
    "needs": [
     "C1"
    ],
-   "state": "todo",
+   "state": "done",
    "objective": "Know the field",
    "serves": "Both papers",
-   "updated": "2026-11-23T07:58:26+02:00"
+   "updated": "2026-11-26T01:20:36+02:00",
+   "closed": true,
+   "started": "2026-11-26T01:20:36+02:00",
+   "finished": "2026-11-26T01:20:36+02:00",
+   "note": "Closed, not run, by the owner on 2026-11-26: the work starts over from reviewer/consensus.md and the what-we-tried ledger"
   },
   {
    "id": "D2",
@@ -717,9 +721,14 @@
     "K5",
     "M4"
    ],
-   "state": "todo",
+   "state": "done",
    "objective": "Build and test",
-   "serves": "Both papers"
+   "serves": "Both papers",
+   "closed": true,
+   "started": "2026-11-26T01:20:45+02:00",
+   "finished": "2026-11-26T01:20:45+02:00",
+   "note": "Closed, not run, by the owner on 2026-11-26: the work starts over from reviewer/consensus.md and the what-we-tried ledger",
+   "updated": "2026-11-26T01:20:45+02:00"
   },
   {
    "id": "E1",
@@ -729,9 +738,14 @@
    "needs": [
     "D4"
    ],
-   "state": "todo",
+   "state": "done",
    "objective": "Scale with intervals",
-   "serves": "Paper 1"
+   "serves": "Paper 1",
+   "closed": true,
+   "started": "2026-11-26T01:20:53+02:00",
+   "finished": "2026-11-26T01:20:53+02:00",
+   "note": "Closed, not run, by the owner on 2026-11-26: the work starts over from reviewer/consensus.md and the what-we-tried ledger",
+   "updated": "2026-11-26T01:20:53+02:00"
   },
   {
    "id": "E2",
@@ -741,9 +755,14 @@
    "needs": [
     "D4"
    ],
-   "state": "todo",
+   "state": "done",
    "objective": "Scale with intervals",
-   "serves": "Paper 2"
+   "serves": "Paper 2",
+   "closed": true,
+   "started": "2026-11-26T01:21:02+02:00",
+   "finished": "2026-11-26T01:21:02+02:00",
+   "note": "Closed, not run, by the owner on 2026-11-26: the work starts over from reviewer/consensus.md and the what-we-tried ledger",
+   "updated": "2026-11-26T01:21:02+02:00"
   },
   {
    "id": "F1",
@@ -753,9 +772,14 @@
    "needs": [
     "E1"
    ],
-   "state": "todo",
+   "state": "done",
    "objective": "Write and submit",
-   "serves": "Paper 1"
+   "serves": "Paper 1",
+   "closed": true,
+   "started": "2026-11-26T01:21:12+02:00",
+   "finished": "2026-11-26T01:21:12+02:00",
+   "note": "Closed, not run, by the owner on 2026-11-26: the work starts over from reviewer/consensus.md and the what-we-tried ledger",
+   "updated": "2026-11-26T01:21:12+02:00"
   },
   {
    "id": "F2",
@@ -765,9 +789,14 @@
    "needs": [
     "E2"
    ],
-   "state": "todo",
+   "state": "done",
    "objective": "Write and submit",
-   "serves": "Paper 2"
+   "serves": "Paper 2",
+   "closed": true,
+   "started": "2026-11-26T01:21:21+02:00",
+   "finished": "2026-11-26T01:21:21+02:00",
+   "note": "Closed, not run, by the owner on 2026-11-26: the work starts over from reviewer/consensus.md and the what-we-tried ledger",
+   "updated": "2026-11-26T01:21:21+02:00"
   },
   {
    "id": "Z1",
