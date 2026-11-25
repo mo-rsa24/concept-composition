@@ -13,7 +13,7 @@ claim in the owner's order has an answer; its default is not an answer.
 
 ## G2: reviewer questions for Paper 1
 
-In [the G2 page](02-reviewer-questions-paper-1.md), beyond the brief's rows:
+Done. In [the G2 page](02-reviewer-questions-paper-1.md), beyond the brief's rows:
 
 - Search for any paper that frames composition failures as a missing interaction term (a product of
   separately trained experts keeps what both agree on and has no term for effects needing both subjects),
@@ -24,7 +24,7 @@ In [the G2 page](02-reviewer-questions-paper-1.md), beyond the brief's rows:
 
 ## G3: open problems in composition
 
-In [the G3 page](03-open-problems.md), beyond the brief's ranked list:
+Done. In [the G3 page](03-open-problems.md), beyond the brief's ranked list:
 
 - Rank complex prompts (three or more subjects, or relations) as an open problem if the literature shows
   they still fail. The G1 page already holds the evidence that they do: T2I-CompBench++ complex 0.32 to
@@ -52,7 +52,7 @@ In [the G3 page](03-open-problems.md), beyond the brief's ranked list:
 
 ## G4: exploit DCFM's gaps
 
-Follows G3. Write [the G4 page](04-exploiting-dcfm.md) with one row per limit in
+Done, with board question 108 asking the owner which experiments to run. [The G4 page](04-exploiting-dcfm.md) holds one row per limit in
 [Loop 4's DCFM note](../targets/dcfm-compositional-flow-matching-from-separate-silos.md), section "What DCFM
 leaves open". Each row names:
 
