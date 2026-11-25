@@ -3,7 +3,7 @@
 #SBATCH --partition=biggpu
 #SBATCH --nodes=1
 #SBATCH --time=01:00:00
-#SBATCH --exclude=mscluster106,mscluster107,mscluster108,mscluster109
+#SBATCH --exclude=mscluster106,mscluster107,mscluster108,mscluster109,mscluster50,mscluster51,mscluster71,mscluster82
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-6/logs/%x-%j.log
 # Step M7: draw 1,024 samples from one trained model with EDM2's 32-step Heun sampler and no guidance.
 #   sbatch --export=ALL,SNAP=<snapshot> m7_sample.sbatch <rung> <set> <first seed>
