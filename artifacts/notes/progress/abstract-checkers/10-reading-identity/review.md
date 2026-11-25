@@ -13,6 +13,7 @@
 - [Two checks before V7](#two-checks-before-v7)
 - [Retraining on the sampler's own states](#retraining-on-the-samplers-own-states)
 - [Is identity visible at these steps at all](#is-identity-visible-at-these-steps-at-all)
+- [When the sampler settles which digits it draws](#when-the-sampler-settles-which-digits-it-draws)
 - [The runs](#the-runs)
 - [What this cannot say](#what-this-cannot-say)
 
@@ -108,6 +109,19 @@ Board question 95, amended by Loop 13 for the owner after [the method review](me
 
 **Identity is not plainly visible at these steps: 0.724 over the 10 steps, under 0.75.** The judge on the clean estimate does better than either checker on the states (0.651 and 0.552) and still misses. At step 27 it finds the asked pair on only 55% of canvases that end clean, so on nearly half of them the digits they will end with are not yet drawn. The two checkers' misses are partly a property of the states, not only of the checkers.
 
+## When the sampler settles which digits it draws
+
+Board question 97 (Loop 12's audit of this loop's designs, row 8) asked whether V7's identity push at steps 27 to 36 would come after the sampler had settled which digits it draws. The check re-rendered V3's plain and pushed rows on the 10 pairs among digits 5 to 9 at seeds 1000 to 1031, 320 canvases each, and read the sampler's one-step clean estimate with the digit judge at all 50 steps. A canvas is settled from the first step after which the judge's digits on the clean estimate always match its finished picture. It ran on mscluster107's card 1 by the owner's yes on board question 99 (`v6/shared/launch-3.sh`, code commit `070118f6`, 3 minutes, log `logs/l8-settle-shared.log`). The numbers are in [the result file](grid-files/settle.json).
+
+| Row | Settled by step 15 | by step 26 | by step 36 | Median step settled | First step where 90% match |
+|---|---|---|---|---|---|
+| Plain product | 4% | 16% | 46% | 37 | 44 |
+| V3's count push | 0% | 15% | 45% | 38 | 46 |
+
+**The digits are still open through the identity window.** At step 27, 39% of plain canvases and 32% of pushed ones already show the digits they end with; half settle only at step 37 or 38. A push at steps 27 to 36 comes before most canvases have settled, so V7's window was not too late. This agrees with the judge on the clean estimate at those steps reading 0.724: the right digits are not yet drawn on many canvases there.
+
+**V7 is closed as not run.** No checker reads identity on the sampler's states at steps 27 to 36 (0.651, then 0.552 after retraining), and the judge itself reads only 0.724 there, because most canvases have not yet settled. Since board question 86 there is no SDXL removal test for V7 to feed.
+
 ## The runs
 
 | Job | What | Node | Time | Result |
@@ -124,6 +138,7 @@ Board question 95, amended by Loop 13 for the owner after [the method review](me
 | 94654 | training states on digits 0 to 4 | mscluster60 | 15 min | 2,036 labelled |
 | 94655 | retraining on states, then the fresh read | mscluster60 | 46 min | 0.552 |
 | 94717 | the judge on the clean estimate of the saved states | mscluster80 | 2 min | 0.724 |
+| shared run | when the sampler settles its digits | mscluster107 card 1 | 3 min | median step 37 and 38 |
 
 Commit `ba6d84da` scores the signature's U-Net calls in pieces of 128, the size training uses, and gives each signature cell its own job. The grid used 2.66 GPU-hours, the failed job included, and the read of digits 5 to 9 0.92. Loop 8 has used about 10.9 of its 30.
 
