@@ -6,7 +6,7 @@
 #SBATCH --exclude=mscluster44,mscluster45,mscluster48,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82,mscluster83
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-12/logs/%x-%j.log
 # Loop 12 step Z9. Submit with the code snapshot in SNAP:
-#   sbatch --export=ALL,SNAP=<snapshot> z9.sbatch <first|experts>
+#   sbatch --export=ALL,SNAP=<snapshot> z9.sbatch <first|experts|plain>
 set -uo pipefail
 STAGE=${1:?stage}
 ROOT=/datasets/mmolefe/poe_repair_min/loop-12
@@ -24,7 +24,7 @@ case "$(hostname -s)" in
   mscluster11[0-2]) PY=/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python ;;
   *)                PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python ;;
 esac
-[ -d "$ROOT" ] && [ -d "$CO3" ] && [ -f "$S/z9_train.py" ] && [ -f "$MNIST/train-images-idx3-ubyte" ] && [ -f "$SPLIT" ] \
+[ -d "$ROOT" ] && [ -d "$CO3" ] && [ -f "$S/z9_train.py" ] && [ -f "$S/z9_sample.py" ] && [ -f "$MNIST/train-images-idx3-ubyte" ] && [ -f "$SPLIT" ] \
   || { echo "ABORT: snapshot, M1 renders or $ROOT not visible on $(hostname -s)"; exit 3; }
 [ -f "$REPO/scripts/shared/disallowed_subjects.py" ] || { echo "ABORT: subject guard missing from the snapshot"; exit 8; }
 USE=$(df --output=pcent "$ROOT" | tail -1 | tr -dc '0-9')
@@ -50,6 +50,8 @@ case "$STAGE" in
            "$PY" "$S/z9_train.py" expert --mnist "$MNIST" --split "$SPLIT" --holder 0 --out "$OUT/experts" --time 200; rc=$? ;;
   experts) "$PY" "$S/z9_train.py" expert --mnist "$MNIST" --split "$SPLIT" --holder 0 --out "$OUT/experts" --steps "${STEPS:-40000}" && \
            "$PY" "$S/z9_train.py" expert --mnist "$MNIST" --split "$SPLIT" --holder 1 --out "$OUT/experts" --steps "${STEPS:-40000}"; rc=$? ;;
+  plain)   PYTHONPATH="$ROOT/pylib:$PYTHONPATH" TORCH_HOME=$ROOT/torchhome "$PY" "$S/z9_sample.py" plain --mnist "$MNIST" --split "$SPLIT" \
+             --experts "$OUT/experts" --judge "$OUT/judge/judge.pt" --out "$OUT"; rc=$? ;;
   *) echo "ABORT: unknown stage $STAGE"; exit 2 ;;
 esac
 echo "[$(date -u +%H:%M:%S)] DONE stage=$STAGE exit=$rc"
