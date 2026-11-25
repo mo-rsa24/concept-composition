@@ -1,0 +1,26 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+classDef doing fill:#ffd8a8,stroke:#e8590c,stroke-width:3px,color:#111111
+classDef todo fill:#e9ecef,stroke:#868e96,color:#111111
+classDef you fill:#fff4e5,stroke:#e65100,stroke-width:2px,color:#111111
+subgraph P1["Paper 1: experts trained apart"]
+  A["Coloured digits: does the win<br/>beat stronger attributes alone?"]:::doing
+  B["Coloured blocks with two experts<br/>that are never told where to draw"]:::todo
+  C["Paper 1's recipe"]:::todo
+  A --> C
+  B --> C
+end
+subgraph BOTH["Three questions for both papers"]
+  Q1["Is 'a cat and a dog' as one prompt<br/>even the right target?"]:::doing
+  Q2["Can the model tell 'two separate things'<br/>without naming the animals?"]:::todo
+  Q3["Your dial: does turning a strength<br/>up give two animals on new pairs?"]:::todo
+  Q1 --> Q2
+  Q1 --> Q3
+end
+P2["Paper 2's method,<br/>chosen from these answers"]:::you
+Q2 --> P2
+Q3 --> P2
+A --> Q3
+D["Your go or no-go<br/>for each paper"]:::you
+C --> D
+P2 --> D
