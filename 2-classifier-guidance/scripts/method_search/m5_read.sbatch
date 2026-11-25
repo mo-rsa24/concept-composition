@@ -67,6 +67,10 @@ case "$STAGE" in
          [ "$rc" -eq 0 ] && { "$PY" "$S/m5_read_co3.py" perplace --latents-from "$SC/co3" --out "$SC/perplace" --count; rc=$?; } ;;
   expected) # each subject drawn alone by plain SDXL, and its share of the picture measured by the detector
          "$PY" "$S/m5_read_co3.py" expected --splits "$SPLITS" --out "$ROOT/m12/size-corrected/expected"; rc=$? ;;
+  gradcos) # step M13: the kept checker's latent gradient against the dropped term r_t, on CO3's saved states; SHARD=1 is the smoke
+         G=$ROOT/m13; FROM=("$OUT-states-shard0" "$OUT-states-shard1" "$ROOT/m12/size-corrected/co3")
+         [ "$SHARD" = 1 ] && { G=$ROOT/m13-smoke; FROM=("$ROOT/m12/size-corrected-smoke/co3"); }
+         "$PY" "$S/m5_read_co3.py" gradcos --head "$HEAD" --latents-from "${FROM[@]}" --out "$G"; rc=$? ;;
   heads)  # score the kept checker (the control) and M5's two trained checkers on the saved states
          F=$ROOT/m5/full
          "$PY" "$S/m5_read_co3.py" heads --heads "kept=$HEAD" "current=$F/current/head_step_002000.pt" "balanced=$F/balanced/head_step_002000.pt" \

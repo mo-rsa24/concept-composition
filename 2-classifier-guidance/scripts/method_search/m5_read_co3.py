@@ -323,6 +323,68 @@ def expected(args):
     (args.out / "expected.json").write_text(json.dumps(result, indent=1) + "\n")
 
 
+GRADCOS_STEPS = (0, 5, 10, 15)
+
+
+def gradcos(args):
+    """Step M13: per saved state, the cosine between the kept checker's latent gradient (the sum of its outputs, which the push follows,
+    and the clean-pair output alone) and r_t = eps(joint) - (eps(A) + eps(B) - eps(empty)), beside a random direction's cosine."""
+    import torch
+    sys.path.insert(0, str(HERE))
+    sys.path.insert(0, str(HERE.parent / "rung2"))
+    sys.path.insert(0, str(HERE.parents[2]))
+    from co3_common import load, load_parser
+    from paper2_rows import build_checker, encode, point_checker
+    from poe_repair.methods._sampling import add_time_ids
+    from train_readout_pair import joint_prompt
+
+    source = []
+    for folder in args.latents_from:
+        for r in map(json.loads, (folder / "reads.jsonl").read_text().splitlines()):
+            path = folder / "latents" / r["pair"] / f"seed-{r['seed']}.pt"
+            if path.exists() and r["reproduced"]:
+                source.append((r["pair"], int(r["seed"]), path))
+    source = sorted(set(source))
+    print(f"{len(source)} saved trajectories", flush=True)
+    first = source[0][0]
+    model, _ = load(joint_prompt(first), load_parser(), args.out / "_config")
+    unet = model.unet
+    unet.requires_grad_(False)
+    checker, head_step = build_checker(model, unet, args.head, joint_prompt(first))
+    cos = lambda u, v: float(torch.nn.functional.cosine_similarity(u.flatten().double(), v.flatten().double(), dim=0))
+    args.out.mkdir(parents=True, exist_ok=True)
+    with open(args.out / "cosines.jsonl", "w") as log:
+        for pair, seed, latent_path in source:
+            a, b = (w.replace("_", " ") for w in pair.split("__x__"))
+            seqs, pools = zip(*(encode(model, q) for q in ["", joint_prompt(pair), a, b]))
+            seq, pool = torch.cat(seqs), torch.cat(pools)
+            point_checker(model, checker, joint_prompt(pair))
+            saved = torch.load(latent_path, weights_only=False)
+            row = {"pair": pair, "seed": seed, "head_step": head_step, "steps": {}}
+            for step in GRADCOS_STEPS:
+                st = saved[step]
+                x = st["x"].to(unet.device, torch.float16)
+                t = torch.full((1,), st["t"], device=unet.device)
+                cond = {"text_embeds": pool, "time_ids": add_time_ids(height=1024, width=1024, batch_size=4, device=unet.device,
+                                                                         dtype=torch.float16)}
+                with torch.no_grad():
+                    eps = unet(x.repeat(4, 1, 1, 1), t.repeat(4), encoder_hidden_states=seq, added_cond_kwargs=cond).sample.float()
+                empty, joint, ea, eb = eps
+                r_t = joint - (ea + eb - empty)
+                xg = x.float().requires_grad_(True)
+                with torch.enable_grad():
+                    o = checker.head(checker.reader(xg.to(checker.reader.seq_e.dtype), t)).reshape(-1)
+                    g_push, = torch.autograd.grad(o.sum(), xg, retain_graph=True)
+                    g_clean, = torch.autograd.grad(o[0], xg)
+                g = torch.Generator(device="cpu").manual_seed(seed * 100 + step)
+                rnd = torch.randn(r_t.shape, generator=g).to(r_t.device)
+                row["steps"][str(step)] = {"push": cos(g_push[0], r_t), "clean_only": cos(g_clean[0], r_t), "random": cos(rnd, r_t),
+                                           "r_norm": float(r_t.norm()), "push_norm": float(g_push.norm())}
+            log.write(json.dumps(row) + "\n")
+            log.flush()
+            print(pair, seed, {k: round(v["push"], 4) for k, v in row["steps"].items()}, flush=True)
+
+
 def auc(scores, labels):
     pos = [s for s, l in zip(scores, labels) if l]
     neg = [s for s, l in zip(scores, labels) if not l]
@@ -385,7 +447,7 @@ def score(args):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("stage", choices=["read", "score", "heads", "perplace", "expected"])
+    ap.add_argument("stage", choices=["read", "score", "heads", "perplace", "expected", "gradcos"])
     ap.add_argument("--head", type=Path)
     ap.add_argument("--splits", type=Path)
     ap.add_argument("--m1-co3", type=Path)
@@ -403,7 +465,7 @@ def main():
     ap.add_argument("--latents-from", type=Path, nargs="*", help="heads: read folders holding reads.jsonl and latents/")
     ap.add_argument("--limit", type=int, help="stop after this many runs, for the smoke rung")
     args = ap.parse_args()
-    {"read": read, "score": score, "heads": heads, "perplace": perplace, "expected": expected}[args.stage](args)
+    {"read": read, "score": score, "heads": heads, "perplace": perplace, "expected": expected, "gradcos": gradcos}[args.stage](args)
 
 
 if __name__ == "__main__":
