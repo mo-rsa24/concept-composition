@@ -3609,6 +3609,15 @@
    "asked": "2026-11-25T20:18:48+02:00",
    "answer": "Yes: one checker that reads the noisy picture itself, written into M10's design before it trains, bar 0.75 unchanged, its row judged by eye like the others, on the same RTX 4090 pod, about 1 GPU-hour",
    "answered": "2026-11-26T00:13:41+02:00"
+  },
+  {
+   "id": 117,
+   "question": "Paper 1 after the block test (both checkers could not read counts; plain 0%, paste 20.5% by eye): tune Paper 1's method on the coloured-digit canvas where it works (88.8% on unseen combinations) and report blocks as its limit, or hold until you decide the papers' shape?",
+   "holds": "M3",
+   "default": "hold until the papers' shape is decided",
+   "by": "s13",
+   "state": "open",
+   "asked": "2026-11-26T00:32:54+02:00"
   }
  ]
 }
