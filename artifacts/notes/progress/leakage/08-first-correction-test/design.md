@@ -15,12 +15,12 @@ Paper 2's candidate correction is the kept early push: the multi-pair readout ch
 | Base | What it is | Code |
 |---|---|---|
 | Plain PoE | $\epsilon_\varnothing + w(\epsilon_A-\epsilon_\varnothing) + w(\epsilon_B-\epsilon_\varnothing)$, $w = 7.5$, 50 DDIM steps | `run_poe_classifier_guided` (`poe_repair/methods/_classifier_guided.py`), the kept recipe's sampler |
-| The joint prompt | $\epsilon_\varnothing + w(\epsilon_J-\epsilon_\varnothing)$ on "a {A} and a {B}", $w = 7.5$, 50 DDIM steps | the same sampler with the joint prompt as both experts at guidance $w/2$, which is the same sum; the identity check below proves it on the card |
+| The joint prompt | $\epsilon_\varnothing + w(\epsilon_J-\epsilon_\varnothing)$ on "a {A} and a {B}", $w = 7.5$, 50 DDIM steps | `run_cfg` with the push loop of `run_poe_classifier_guided` added after the guided prediction (`2-classifier-guidance/scripts/leakage/z8_joint.py`); the identity check below proves the two agree |
 | CO3 | the released sampler at its own settings | Loop 6's `paper2_rows.py` and `co3_push.py`, unchanged |
 
 ## The identity check, before any screening picture
 
-The joint prompt drawn through the product sampler (joint prompt as both experts, guidance 3.75, strength 0) against `run_cfg` at guidance 7.5, both at the model's own precision, on the first pair and seed. **It passes when the mean absolute pixel difference is under 1 grey level of 255**; the largest difference is reported. A failure stops the run.
+The joint prompt drawn through `z8_joint.py` at strength 0 against `run_cfg` at guidance 7.5, both at the model's own precision, on the first pair and seed. **It passes only when the two pictures are identical byte for byte.** A failure stops the run. Drawing the joint prompt through the product sampler instead (the joint prompt as both experts at guidance 3.75, the same sum) differs from `run_cfg` by a mean of 3.2 grey levels and at most 134 on puma × condor seed 6001, because the model is called on a batch of three and half precision rounds differently; that sampler is not used.
 
 ## The cases
 

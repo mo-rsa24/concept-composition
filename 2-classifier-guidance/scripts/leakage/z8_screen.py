@@ -5,10 +5,9 @@ Design: artifacts/notes/progress/leakage/08-first-correction-test/design.md, "Th
 eps_A + eps_B - eps_empty, each expert at classifier-free guidance 7.5; the joint prompt is plain classifier-free guidance 7.5
 on "a {A} and a {B}". 50 DDIM steps, 1024 px, the per-seed starting noise every pair shares (render_joint_sheet.py's).
 
-Before any screening picture, the identity check: the joint prompt drawn as the product with the joint prompt as both experts
-at half the guidance scale (u + w/2 (c - u) + w/2 (c - u) = u + w (c - u)), through run_poe_classifier_guided at strength 0,
-the sampler Z8's push uses, against run_cfg at guidance w, both at the model's own precision, on the first pair and seed.
-It passes when the mean absolute pixel difference is under 1 grey level of 255; the largest difference is reported.
+Before any screening picture, the identity check: the joint prompt drawn through z8_joint.run_joint_classifier_guided at
+strength 0, the sampler Z8's push uses on this base, against run_cfg at the same guidance, both at the model's own precision,
+on the first pair and seed. It passes only when the two pictures are identical byte for byte.
 
   python z8_screen.py --splits <json> --out <dir> [--seeds 6001 6002 6003 6004] [--identity-only]
 """
@@ -28,13 +27,13 @@ sys.path.insert(0, str(HERE.parent))
 sys.path.insert(0, str(HERE.parent / "rung2"))
 sys.path.insert(0, str(HERE.parents[2] / "scripts" / "shared"))
 from poe_repair.composers._helpers import init_latents_for_cell  # noqa: E402
-from poe_repair.methods._classifier_guided import run_poe_classifier_guided  # noqa: E402
 from poe_repair.methods._sampling import run_cfg, run_cfg_poe  # noqa: E402
 from poe_repair.run import make_ctx  # noqa: E402
 from poe_repair.runtime import encode_prompt_sdxl  # noqa: E402
 import classifier_guidance_from_the_paper as single  # noqa: E402
 from disallowed_subjects import is_allowed  # noqa: E402
 from train_readout_pair import joint_prompt  # noqa: E402
+from z8_joint import run_joint_classifier_guided  # noqa: E402
 
 KEPT_OFF = {"a_giraffe__x__a_tortoise"}  # counted elsewhere, never drawn on a sheet or used as a case
 
@@ -88,12 +87,12 @@ def main():
     init, sigma = init_latents_for_cell(single.cell_for(seed), ctx)
     ref = to_img(run_cfg(init_latents=init, euler_init_noise_sigma=sigma, seq_cond=seq_j, pool_cond=pool_j, guidance_scale=w, **common))
     init, sigma = init_latents_for_cell(single.cell_for(seed), ctx)
-    as_poe = to_img(run_poe_classifier_guided(init_latents=init, euler_init_noise_sigma=sigma, seq_a=seq_j, pool_a=pool_j,
-                                              seq_b=seq_j, pool_b=pool_j, guidance_scale=w / 2, strength=0.0, **common))
-    diff = np.abs(ref.astype(int) - as_poe.astype(int))
+    joint = to_img(run_joint_classifier_guided(init_latents=init, euler_init_noise_sigma=sigma, seq_cond=seq_j, pool_cond=pool_j,
+                                               guidance_scale=w, strength=0.0, **common))
+    diff = np.abs(ref.astype(int) - joint.astype(int))
     identity = {"pair": pair, "seed": seed, "guidance": w, "dtype": str(ctx.dtype), "device": torch.cuda.get_device_name(0),
                 "mean_abs_pixel_diff": float(diff.mean()), "max_abs_pixel_diff": int(diff.max()),
-                "passes": bool(diff.mean() < 1.0)}
+                "passes": bool(diff.max() == 0)}
     (args.out / "identity.json").write_text(json.dumps(identity, indent=1) + "\n")
     print("IDENTITY " + json.dumps(identity), flush=True)
     if not identity["passes"] or args.identity_only:
