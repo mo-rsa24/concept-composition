@@ -30,8 +30,11 @@ opposite. Two random directions in a space of 65,536 numbers have a cosine near 
 
 **Data.** CO3's saved states on the 12 tuning pairs, at steps 0, 5, 10 and 15 of 50 (the steps where the push acts and that were saved): the
 96 tuning trajectories at seeds 6001 to 6008 (`loop-6/m5/co3-read-states-shard0/` and `shard1/`) and the 96 fresh trajectories at seeds
-6009 to 6016 (`loop-6/m12/size-corrected/co3/`), 768 states in all. The owner's message also names plain-PoE trajectories; Loop 6 holds none
-saved, so this check reads CO3's only, and says so.
+6009 to 6016 (`loop-6/m12/size-corrected/co3/`), 768 states in all. Beside them, plain PoE, where Loop 12's Z8 push drew no two-clear
+picture of 12: 48 trajectories on the 12 tuning pairs at seeds 6001 to 6004, drawn exactly as Z8's screening pass draws plain PoE (each
+subject at classifier-free guidance 7.5 over the empty prompt, 50 steps, the per-seed starting noise every pair shares), with the state at
+steps 0, 5, 10 and 15 recorded from the latent the UNet receives. Loop 13 added these for the owner on 2026-11-25, before any result, and
+they are judged by the same bar, reported beside CO3's (`m13_poe_states.py`, `m5_read.sbatch poegrad`; outputs under `loop-6/m13-poe/`).
 
 **What runs.** For each state: SDXL's four noise predictions (empty, joint, first subject, second subject) give r_t; the kept checker
 (`readout-multipair/head_step_002000.pt`) gives the push direction by one backward pass; a Gaussian direction drawn per state from a fixed
@@ -62,7 +65,7 @@ checker reads composition and the push fails for another reason.
 
 ## Cost and what it buys
 
-**Cost:** under 1 GPU-hour: 768 states, each with one four-prompt SDXL pass and one backward pass through the checker's part of SDXL.
+**Cost:** under 1.5 GPU-hours: the plain-PoE half adds about 0.5. The CO3 half is under 1 GPU-hour: 768 states, each with one four-prompt SDXL pass and one backward pass through the checker's part of SDXL.
 **Buys:** whether a checker of this kind pushes along the term composition drops, before about 3 GPU-hours go into training an identity head.
 
 ## What this cannot say
