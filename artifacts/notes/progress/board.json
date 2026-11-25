@@ -687,9 +687,9 @@
    "state": "doing",
    "serves": "Paper 1",
    "objective": "Build and test",
-   "updated": "2026-11-25T20:18:48+02:00",
+   "updated": "2026-11-25T20:51:12+02:00",
    "started": "2026-11-25T12:46:44+02:00",
-   "note": "plain product and mask paste done; count checker misses 0.75 at every noise window (best 0.741 nearly clean, counts unread), owner's call on its row; corrector row running; scorer choice with the owner"
+   "note": "first two quarters, provisional scorer: plain 0.03, corrector 0.03, mask paste 0.51 to 0.54 exact share; corrector's last two blocks running; scorer and checker-row choices with the owner"
   },
   {
    "id": "D4",
