@@ -1169,9 +1169,12 @@
    "owner": "s12",
    "proof": "leakage/12-aligned-classifier-on-co3/review.md reports stage A against its bar (at least 5 more two-clear of 96 than CO3 alone), and stage B only if run, with the reviewer's fixes in the design",
    "needs": [],
-   "state": "todo",
+   "state": "doing",
    "serves": "Paper 2: the aligned classifier on real animals",
-   "objective": "stage A: the per-animal box correction with boxes given against CO3 alone on seeds 6017 to 6024; stage B only if A passes and the owner agrees: a classifier trained to copy it, without boxes"
+   "objective": "stage A: the per-animal box correction with boxes given against CO3 alone on seeds 6017 to 6024; stage B only if A passes and the owner agrees: a classifier trained to copy it, without boxes",
+   "started": "2026-11-25T17:23:47+02:00",
+   "updated": "2026-11-25T17:23:47+02:00",
+   "note": "stage A coded (e82d1ce6), bar committed (9b5ad470); jobs on bigbatch RTX 3090"
   },
   {
    "id": "U1",
