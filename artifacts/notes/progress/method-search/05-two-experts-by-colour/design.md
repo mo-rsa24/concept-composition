@@ -176,6 +176,23 @@ separate. The network is the scorer's four convolution blocks with those inputs.
   denoised estimate moves to D + b · ‖x − D‖ · g / ‖g‖, where g is the gradient of the checker's logit with respect to x and b = 0.4, the
   digit test's frozen value, not tuned here. A zero push (b = 0) must match the plain product to within 1e-5 per pixel.
 
+**A second checker that reads the picture.** The first checker missed its bar at every noise window (the review's diagnosis), and the
+owner chose on 2026-11-26 (board question 116) to train one checker that reads the noisy picture itself, the digit test's other reader,
+with everything else held as above. Written before it trains.
+
+- **What it reads.** The noisy picture x (3 channels), the log of σ and the asked counts; the same four convolution blocks and the same
+  one logit. No expert is run inside it, so its push needs no gradient through the experts.
+- **Its training set.** The same mask pastes of the same paste sources, the same three kinds in the same shares, the same held-out seeds.
+- **Its window.** Sampler steps 14 to 17, σ 3.8 to 1.6, for both its training noise and its push. The map checker's diagnosis read touching
+  objects at 0.77 for σ 1.2 to 3.8 against 0.58 for the first window, and these are the noisiest steps inside that band, where the layout can
+  still move.
+- **Its bar and push.** A held-out balanced accuracy of at least 0.75, unchanged; the push length b = 0.4, unchanged; the zero-push check
+  unchanged. If it misses its bar, its row is reported as not run.
+- **Its row.** On the same RTX 4090 as the other rows, 9 cells by 1,024 seeds, and judged by the same blind eye calls on seeds 0 to 31.
+
+**How the rows are judged.** The owner chose on 2026-11-26 (board question 114) to report M10 on the blind eye calls, since the count scorer
+disagrees with them on 127 of 864 pictures (it cannot see overlap on a paste).
+
 **The corrector.** After every sampler step to a σ above 0, two unadjusted Langevin steps on the product at that σ: x ← x + ε·s + √(2ε)·z,
 with s = (D − x)/σ², ε = 0.05·σ² and z drawn from the seed's own generator. Du et al.'s sampler family; the step count and size are set here
 and not tuned.

@@ -410,8 +410,10 @@ def main():
     ap.add_argument("--updates", type=int)
     ap.add_argument("--reader", choices=["maps", "raw"], default="maps")
     args = ap.parse_args()
-    global READER
+    global READER, PUSH_STEPS
     READER = args.reader
+    if READER == "raw":
+        PUSH_STEPS = range(14, 18)  # sigma 3.8 to 1.6: question 116's checker, written into the design before it trained
     if args.sigma_window:
         global SIGMA_WINDOW
         SIGMA_WINDOW = tuple(float(v) for v in args.sigma_window.split(","))
