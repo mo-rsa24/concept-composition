@@ -36,7 +36,8 @@ is read at 75%. The records are in each pod's `runs/full-quarters/<colour>-full/
 | Quarter | Images seen | Red: share read right (1, 2, 3 objects) | Red: mean loss | Blue: share read right (1, 2, 3 objects) | Blue: mean loss |
 |---|---:|---|---:|---|---:|
 | 1 | 500,224 | 0.81 (1.00, 0.88, 0.56) | −3.37 | 0.83 (0.94, 0.94, 0.63) | −3.36 |
+| 2 | 1,000,448 | 0.85 (1.00, 0.88, 0.69) | −3.83 | 0.90 (1.00, 1.00, 0.69) | −3.84 |
 
 At the first quarter both experts draw their colour on the CLEVR floor, and the counter reads them about as often as it reads the real
-pictures. Three objects is the weak count, where some samples hold two. The first try at sampling recorded no samples (the sampler is a
+pictures. Three objects is the weak count, where some samples hold two. At the second quarter every number rose: both shares reach the counter's share on real pictures, three objects rises to 0.69 on both, and the loss falls by about 0.47 on both. The first try at sampling recorded no samples (the sampler is a
 generator and was never iterated); that line stays in the file with a share that is not a number.

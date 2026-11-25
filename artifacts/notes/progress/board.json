@@ -687,9 +687,9 @@
    "state": "doing",
    "serves": "Paper 1",
    "objective": "Build and test",
-   "updated": "2026-11-25T16:31:24+02:00",
+   "updated": "2026-11-25T17:04:56+02:00",
    "started": "2026-11-25T12:46:44+02:00",
-   "note": "full runs on two RunPod 4090s; quarter 1 (500,224 images): red reads 0.81 right, blue 0.83, against the counter's 0.82 and 0.86 on real pictures; losses -3.37 and -3.36"
+   "note": "full runs on two RunPod 4090s; quarter 2 (1,000,448 images): red 0.85, blue 0.90 read right (quarter 1: 0.81, 0.83; counter's ceiling 0.82, 0.86); losses -3.83, -3.84"
   },
   {
    "id": "D4",
