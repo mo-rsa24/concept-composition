@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-25 16:33 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-25 17:36 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -62,6 +62,7 @@ At 16:55, in chat, recorded on the board and sent to each loop:
 
 | # | The question | Your answer |
 |---|---|---|
+| none | DCFM comparison approach | **Read the rival's paper, rebuild its benchmark, run only our methods, set our numbers beside its printed ones**, with one of its simple baselines rebuilt as a calibration row; the big benchmarks (DCFM's chest X-rays) wait until a result earns them. The same recipe applies to Bradley et al. on CLEVR and to ToMe and Attend-and-Excite on their prompt sets |
 | none | How to compare with DCFM? | **Our methods on DCFM's exact Colored MNIST benchmark, beside its printed numbers; DCFM not rerun.** One of DCFM's simple baselines is rebuilt first to calibrate our FID against its printed number (`manager/fair-dcfm-match.md`); waits for Loop 12 after the CO3 check |
 | none | Build a fair comparison with DCFM on Colored MNIST? | **Yes** (you): designed in `manager/fair-dcfm-match.md` (five rows in one pipeline, a DCFM-style row from CoInD's public penalty, DCFM's ten-holder splits and the project's two-holder split, all on RunPod 4090s); the reviewer reads it first; Loop 12 asked to stay open to run it and the CO3 test |
 | none | Take the gradient-trained classifier to CO3? | **Yes** (you): the reviewer reads the proposal first (`manager/aligned-classifier-on-co3.md`), about 5 GPU-hours if it runs |
