@@ -62,5 +62,19 @@ The settings are in [the design's comparison section](design.md#running-the-comp
 | Plain product, blocks 1 to 3 | | | pod `rows/plain/` | done, 536 seconds a block; the row holds 9,216 pictures |
 | Count checker's training: 3,000 updates of 64 pastes, noise drawn from the push window (σ 3.8 to 10.5) | | `38807290` | pod `checker/` | missed: held-out balanced accuracy 0.645 against 0.75. It calls apart pastes with the right counts right on 0.82, touching pastes on 0.57 and apart pastes asked one count off on 0.37; from update 500 on it sits between 0.636 and 0.646, so it learns one fixed split and no more. It cleared the stop line at half (0.642 above 0.55). The checker row does not run on it |
 | Mask paste, blocks 0 to 3 | | `99107ca4` | pod `rows/paste/` | done, 9,216 pictures in 28 seconds on the CPU |
-| Diagnosis, after the checker missed: the same training for 1,000 updates at four noise windows, σ 3.8 to 10.5, 1.2 to 3.8, 0.3 to 1.2 and 0.002 to 0.3 | | `99107ca4` | pod `checker-diag/` | running. It asks whether a touching or miscounted paste can be read from the maps at the push window's noise at all, since CLEVR's objects cover a few pixels at 64 by 64 where the digits covered half the canvas |
+| Diagnosis, after the checker missed: the same training for 1,000 updates at four noise windows, σ 3.8 to 10.5, 1.2 to 3.8, 0.3 to 1.2 and 0.002 to 0.3 | | `99107ca4` | pod `checker-diag/` | done; no window reaches 0.75 (the table below) |
 | Corrector row, blocks 0 to 3 | | `99107ca4` | pod `rows/corrector/` | running |
+
+**The checker's noise-window diagnosis.** A diagnosis after the checker missed its bar, not a result: the same training cut to 1,000 updates,
+held-out balanced accuracy on the same 1,024 held-out pastes.
+
+| Noise window (σ) | Balanced accuracy, bar 0.75 | Apart, right counts | Touching | Apart, one count off |
+|---|---:|---:|---:|---:|
+| 3.8 to 10.5, the push window | 0.645 | 0.81 | 0.58 | 0.38 |
+| 1.2 to 3.8 | 0.669 | 0.70 | 0.77 | 0.51 |
+| 0.3 to 1.2 | 0.685 | 0.65 | 0.82 | 0.62 |
+| 0.002 to 0.3, nearly clean | 0.741 | 0.77 | 0.86 | 0.58 |
+
+Less noise lets the checker see touching objects (0.58 to 0.86), and it never reads a count one off: 0.58 even on a nearly clean paste.
+So noise is not the main cause. The two maps, each expert's denoised estimate minus the empty scene's, carry little of how many objects a
+paste holds, and at σ below 0.3 the layout is already fixed, so a push there cannot move an object.
