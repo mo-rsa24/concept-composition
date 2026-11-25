@@ -585,9 +585,14 @@
    "needs": [
     "M2"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "Paper 2",
-   "objective": "Build and test"
+   "objective": "Build and test",
+   "closed": true,
+   "started": "2026-11-25T11:12:16+02:00",
+   "finished": "2026-11-25T11:12:16+02:00",
+   "note": "Closed as not run by the owner, 2026-11-25: question 111 closed Paper 2's checker route, so a short inclusive fine-tune with the checker push has no push to use.",
+   "updated": "2026-11-25T11:12:16+02:00"
   },
   {
    "id": "M3",
@@ -1244,11 +1249,14 @@
     "V3",
     "M5"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "Paper 2",
    "objective": "Build and test",
-   "updated": "2026-11-25T02:47:39+02:00",
-   "note": "Held by a board question on cost (about 14 GPU-hours against 7) and training size (about 70 animal wrong-pair pictures)"
+   "updated": "2026-11-25T11:12:24+02:00",
+   "note": "Closed as not run by the owner, 2026-11-25: question 111 closed Paper 2's checker route, so Loop 8's abstract checker is not tested as a push on SDXL's unseen objects; question 102's branch A is withdrawn. Loop 8's count checker stays available as a measure.",
+   "closed": true,
+   "started": "2026-11-25T11:12:24+02:00",
+   "finished": "2026-11-25T11:12:24+02:00"
   },
   {
    "id": "V6",
