@@ -149,11 +149,14 @@
    "needs": [
     "R1"
    ],
-   "state": "todo",
-   "updated": "2026-11-22T06:19:10+02:00",
-   "note": "planned by the owner for later; start from stage 1's network-view figures and the mnist-guidance-explained scene, then cover the two models and the checkers",
+   "state": "done",
+   "updated": "2026-11-26T01:12:47+02:00",
+   "note": "Closed, not run, by the owner's shutdown on 2026-11-26",
    "objective": "Absorb and check the record",
-   "serves": "Paper 1"
+   "serves": "Paper 1",
+   "closed": true,
+   "started": "2026-11-26T01:12:47+02:00",
+   "finished": "2026-11-26T01:12:47+02:00"
   },
   {
    "id": "B3",
@@ -370,12 +373,14 @@
    "needs": [
     "K5"
    ],
-   "state": "doing",
+   "state": "done",
    "serves": "Both papers",
    "objective": "Know the field",
    "started": "2026-11-22T10:10:35+02:00",
-   "updated": "2026-11-24T15:46:54+02:00",
-   "note": "Standing step: keeps the scoreboard current until E1 and E2 finish, and neither has started, so it outlasts every finished step by design. 2026-11-24: M7's paste result and Loop 6's Stage 2 are in the CLEVR plan; Stage 2 added as M10; question 84 on M6"
+   "updated": "2026-11-26T01:12:56+02:00",
+   "note": "Closed by the owner's shutdown on 2026-11-26: targets parked with the rival benchmark rebuilds; the rival record is in reviewer/what-we-tried/reproductions.md",
+   "closed": true,
+   "finished": "2026-11-26T01:12:56+02:00"
   },
   {
    "id": "B6",
@@ -603,11 +608,14 @@
     "M2",
     "M7"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "Both papers",
    "objective": "Build and test",
-   "updated": "2026-11-26T00:34:12+02:00",
-   "note": "held: whether to tune Paper 1's method on the digit canvas is part of the owner's decision on the papers' shape (no new method routes after 2026-11-25); M10's review completed with its pictures and archives"
+   "updated": "2026-11-26T01:12:31+02:00",
+   "note": "Closed, not run, by the owner's shutdown on 2026-11-26: no method beat its controls on Paper 1's main ground, so there was no winning method to tune; see reviewer/consensus.md",
+   "closed": true,
+   "started": "2026-11-26T01:12:31+02:00",
+   "finished": "2026-11-26T01:12:31+02:00"
   },
   {
    "id": "M6",
@@ -656,10 +664,14 @@
     "M10",
     "M11"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "Both papers",
    "objective": "Build and test",
-   "updated": "2026-11-25T11:01:57+02:00"
+   "updated": "2026-11-26T01:12:39+02:00",
+   "closed": true,
+   "started": "2026-11-26T01:12:39+02:00",
+   "finished": "2026-11-26T01:12:39+02:00",
+   "note": "Closed, not run, by the owner's shutdown on 2026-11-26: no recipe to freeze; what each paper can claim is in reviewer/consensus.md section 5"
   },
   {
    "id": "M9",
@@ -1171,12 +1183,26 @@
    "owner": "s12",
    "proof": "leakage/12-aligned-classifier-on-co3/review.md reports stage A against its bar (at least 5 more two-clear of 96 than CO3 alone), and stage B only if run, with the reviewer's fixes in the design",
    "needs": [],
-   "state": "doing",
+   "state": "done",
    "serves": "Paper 2: the aligned classifier on real animals",
    "objective": "stage A: the per-animal box correction with boxes given against CO3 alone on seeds 6017 to 6024; stage B only if A passes and the owner agrees: a classifier trained to copy it, without boxes",
    "started": "2026-11-25T17:23:47+02:00",
-   "updated": "2026-11-25T18:38:30+02:00",
-   "note": "stage A missed (27 vs 26 of 96) and too weak to tell (push moves pictures 2.3 grey levels); stage B on hold; a larger push is the owner's call"
+   "updated": "2026-11-26T01:13:11+02:00",
+   "note": "Stage A reported against its bar: missed, too weak to tell (27 against 26 of 96, median change 2.3 grey levels); stage B not run; the deciding rerun with and without boxes runs as Z13",
+   "finished": "2026-11-26T01:13:11+02:00"
+  },
+  {
+   "id": "Z13",
+   "label": "Z13 Do boxes add anything beyond the clean-up pass on CO3",
+   "owner": "s12",
+   "proof": "leakage/13-clean-up-pass-in-boxes/review.md reports row a against row b on the committed bar (b61e9deb), with the pixel change per row",
+   "needs": [],
+   "state": "doing",
+   "serves": "Paper 2: the one retry-worth-it idea still running",
+   "objective": "the clean-up pass with each animal's own prediction in its automatic box against the same pass over the whole picture, CO3 alone beside them, seeds 6025 to 6032, 96 pictures per row",
+   "started": "2026-11-26T01:13:27+02:00",
+   "updated": "2026-11-26T01:13:27+02:00",
+   "note": "launched 2026-11-26 00:20, jobs 95796 to 95805, approved at 4.2 GPU-hours"
   },
   {
    "id": "U1",
@@ -1697,11 +1723,14 @@
    "needs": [
     "Y4"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "Both papers",
    "objective": "Absorb and check the record",
-   "updated": "2026-11-24T16:55:44+02:00",
-   "note": "final census 2026-11-24 drained every finished verdict (14 findings, 8 method folders); waiting on V6 and M10, and on Loops 5 to 10 stopping; Loop 11 stopped by question 88 and restarts on Loop 13's word"
+   "updated": "2026-11-26T01:13:04+02:00",
+   "note": "Closed by the owner's shutdown on 2026-11-26: every finished attempt is in the what-we-tried ledger and the consensus (reviewer/), in place of a drain into report/",
+   "closed": true,
+   "started": "2026-11-26T01:13:04+02:00",
+   "finished": "2026-11-26T01:13:04+02:00"
   }
  ],
  "blocks": [
@@ -2234,7 +2263,8 @@
     "M15",
     "Z10",
     "Z11",
-    "Z12"
+    "Z12",
+    "Z13"
    ],
    "joiner": "~~~"
   }
@@ -2329,7 +2359,8 @@
   "attention overlap and instance count at steps 5 to 15 on the 192 labelled CO3 pictures, within-pair rule, pairs held out, beside a shuffled control",
   "pooled adapter at weight 0 to 1.25 on 8 held-out pairs sharing no animal with training, blind calls of one, hybrid or two clear, share against weight",
   "the checker trained with a penalty pulling its push toward the expert's own score for the pair, on coloured digits, against the plain checker and the names-only push",
-  "stage A: the per-animal box correction with boxes given against CO3 alone on seeds 6017 to 6024; stage B only if A passes and the owner agrees: a classifier trained to copy it, without boxes"
+  "stage A: the per-animal box correction with boxes given against CO3 alone on seeds 6017 to 6024; stage B only if A passes and the owner agrees: a classifier trained to copy it, without boxes",
+  "the clean-up pass with each animal's own prediction in its automatic box against the same pass over the whole picture, CO3 alone beside them, seeds 6025 to 6032, 96 pictures per row"
  ],
  "brief": {
   "outcome": "two papers, each beating its best rival",
