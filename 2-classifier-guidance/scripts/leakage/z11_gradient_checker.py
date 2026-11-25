@@ -188,6 +188,7 @@ def main():
     ap.add_argument("--z9", type=Path, required=True, help="Z9's output folder (drawn pictures, arm 4's trajectories, plain results)")
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--steps", type=int, default=3000)
+    ap.add_argument("--plain-here", action="store_true", help="redraw the plain product's seen pictures on this card for the already-right count (on another card type than Z9's)")
     args = ap.parse_args()
     split = json.loads(args.split.read_text()); dev = "cuda"; t0 = time.time()
     if args.stage == "train":
@@ -248,7 +249,12 @@ def main():
             w, l, p = mcnemar_one_sided(res["penalised"][1], res[other][1])
             summary[f"penalised_against_{other}"] = {"lead_points": 100 * float(res["penalised"][1].mean() - res[other][1].mean()), "won": w, "lost": l, "p": p}
         seen = [tuple(x) for x in split["seen"]]
-        plain_seen = np.load(args.z9 / "plain" / "seen-right.npy")
+        if args.plain_here:  # the already-right baseline drawn on the same card type as the pushes
+            imp, dp_, cp_, _ = draw(experts, seen, dev, lambda a, b: None)
+            plain_seen = judge_right(judge, imp, dp_, cp_, dev)
+            summary["plain_seen_redrawn_here"] = float(plain_seen.mean())
+        else:
+            plain_seen = np.load(args.z9 / "plain" / "seen-right.npy")
         ims, ds, cs, lens_s = draw(experts, seen, dev, lambda a, b: push_fn(experts, heads["penalised"], a, b))
         rs = judge_right(judge, ims, ds, cs, dev)
         imr, _, _, _ = draw(experts, seen, dev, lambda a, b: matched_push(random_direction(12_000 + 100 * a + b), lens_s, a, b))

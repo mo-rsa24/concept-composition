@@ -56,4 +56,8 @@ At a combination no holder saw, no expert's two-label prediction exists, so the 
 
 ## Runs and cost
 
+**On RunPod RTX 4090s, if the owner's pods take it** (the owner's request of 2026-11-25, through the manager loop): every comparison row is then drawn on the pods, so all rows share one card type. The checker's training pictures and the frozen experts come from Z9 unchanged, as inputs; the one baseline Z9 drew, the plain product's seen pictures for the already-right count, is drawn again on the pod (`--plain-here`). Nothing from a pod is compared with a picture drawn on a cluster RTX 3090.
+
+
+
 `bigbatch`, RTX 3090, excluding `mscluster[44-45,48,50-51,57,61,65,68,71-76,82-83]`; up to two jobs at once beside Z10 (the owner lifted the one-job rule for Z10 and Z11, inside the cap of six). Training the penalised checker and the shuffled twin, about 0.5 GPU-hours each, and the $\lambda = 0$ twin, about 0.2; the gate's pictures about 0.15; about 1.3 to the gate. The unseen run with its controls and the already-right count, about 1.0 more. About 2.3 GPU-hours in all, approved. W&B project `prime_lab/poe-repair-animals-compose`. No API tokens.
