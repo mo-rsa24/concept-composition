@@ -39,7 +39,7 @@ fit together (p2, contributions).
 | | DCFM | Paper 1 |
 |---|---|---|
 | What is composed | attributes of one object or one image: a digit and its colour, diseases on one X-ray, a start and an end quadrant | separate objects in one picture |
-| What may pass between data holders | the trained models, during training (DCFM-A exchanges them 1 to 3 times, p9) | nothing: two finished experts and samples drawn from them |
+| What may pass between data holders | the trained models, during training: DCFM-A exchanges them 1 to 3 times, and in DCFM-B every holder uploads its model to a central server and receives the distilled model back, a cost of 2 model transfers per holder (p9, Table 3) | nothing: two finished experts and samples drawn from them |
 | What is trained after the experts | the experts themselves again (DCFM-A) or a whole new generator (DCFM-B) | a small helper trained on the experts' samples |
 | Assumption about the attributes | conditionally independent given the image, and enforced by a penalty | the two objects affect each other in one picture, and the plan measures exactly those effects |
 
