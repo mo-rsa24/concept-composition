@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-25 19:25 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-25 19:56 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -142,6 +142,7 @@ Newest first.
 
 | Concerns | Finding | Source |
 |---|---|---|
+| Paper 1's two-colour CLEVR test (Loop 6) | **The count checker, Paper 1's method row, missed its training bar**: held-out balanced accuracy 0.645 against 0.75, flat from update 500; 82% on well-separated pastes, 57% touching, 37% one count off. Its push window was carried over from the digit test (σ 10.5 to 3.8), where a digit filled half the canvas; CLEVR blocks are a few pixels at 64 px. A labelled diagnosis at four lower windows is running; moving the window, recorded before the checker's row runs, is yours to call | Loop 6's message, 19:30 |
 | Loop 12 | **Z12 ran 0.2 GPU-hours over** (3.3 against 3.1 approved): three jobs died on /datasets races on mscluster79 and 87, now in `environment/hpc/nodes.md`. Stage A missed its bar, 27 against 26 two clear of 96, and its review reads the miss as too weak to tell (median change 2.3 grey levels) | `leakage/12-aligned-classifier-on-co3/review.md` |
 | Paper 2's CO3 check (stage A) | **The box push barely changes the pictures, so stage A may be too weak to test the box idea.** At half-way it drew 9 two-clear pictures of 48 against CO3's 8, but it moves each picture by a median of 2.2 grey levels of 255, with a push length of about 1 in noise units against a prediction of about 250. Loop 12 finishes the blind call unchanged and measures this morning's own-prediction row's change from saved pictures; a rerun at another push length is yours to call | `leakage/12-aligned-classifier-on-co3/blind/half/` |
 | Paper 1 and the ICLR draft | **The pooled adapter's "58 of 64 on unseen pairs" counted bodies, not correct animals.** It was scored by the count detector, which counts animals but cannot name them. Z10 shows the adapter separates bodies on new pairs (hybrids 29 to 4 of 32, separate bodies 1 to 26 as its weight goes 0 to 1) while two clear, each the right animal, rises only 0 to 2, and even training pair badger x magpie gave none at full weight. Any sentence reading the 58 of 64 as "composes unseen pairs" overstates it; it shows two bodies. | Z10's review; the pooled-adapter finding's own scorer |
