@@ -1,0 +1,16 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TB
+classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+classDef proven fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#111111
+classDef failed fill:#fdecea,stroke:#c62828,stroke-width:2px,color:#111111
+T["The missing interaction term r_t:<br/>what the product of experts drops"]:::plain
+S["1. Fix the sampler only<br/>(correctors, FK steering)<br/>no training"]:::failed
+C["2. A classifier supplies r_t<br/>experts frozen, classifier trained<br/>(Z9 testing now)"]:::plain
+M["3. A small model supplies r_t<br/>experts frozen, trained on a few<br/>pictures showing both (CFGComposer)"]:::plain
+A["4. Our ICLR adapter supplies r_t<br/>58 of 64 on pairs it never trained on"]:::proven
+R["5. Each expert draws its own region<br/>no r_t needed for placement,<br/>loses shadows and occlusion"]:::plain
+T --> S
+T --> C
+T --> M
+M -.-> A
+T --> R
