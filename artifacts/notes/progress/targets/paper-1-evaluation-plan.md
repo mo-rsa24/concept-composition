@@ -166,8 +166,44 @@ printed numbers sit beside the tables as context.
 
 ## Reviewer questions
 
-Loop 14 lists the questions a reviewer will ask of Paper 1 (its step G2, `artifacts/notes/progress/gaps/02-reviewer-questions-paper-1.md`).
-Each one that a measure can answer is mapped to a row above, and any question no measure answers becomes a row here.
+Loop 14 lists 19 questions a reviewer is likely to ask of Paper 1, with the papers behind each
+([its list](../gaps/02-reviewer-questions-paper-1.md)). Fourteen are answered by a measure or a row already on this page.
+
+| Loop 14's question | Answered by |
+|---|---|
+| 1. Is it better than pasting? | CLEVR measures 1 to 4, each scored against paste |
+| 3. Do the objects agree on one light? | CLEVR measure 2 |
+| 4. Does one object's shadow fall on the other? | CLEVR measure 3 |
+| 5. Does the nearer object hide the farther one? | CLEVR measure 1 |
+| 9. Are ribs, spine, lungs and heart kept? | X-ray measure A |
+| 10. Are both findings present? | X-ray measure B, with DCFM's utility beside it |
+| 11. Is the gain from a better sampler rather than the checker? | the corrector row, read beside every measure |
+| 12. Does it hold beyond two or three objects? | every measure at each of the 9 scenes of 2 to 6 objects, and the CLEVR scaling plan's object count |
+| 13. Is this layout-conditioned generation? | the two-colour test tells each expert what to draw and never where, so no row is given a layout |
+| 15. Do the composites look real, with no seams? | CLEVR measure 4 |
+| 16. Does each colour stay with its object? | CLEVR measure 5 |
+| 17. Are these effects readable at 64 pixels? | the reader checks in measures 2 and 3, which can declare a measure unreadable |
+| 18. Are Bradley's printed numbers a fair comparison? | printed numbers stay context, and every row runs on the same experts |
+| 19. Which X-ray data holds both findings? | NIH Chest X-ray 14 as the candidate, with the count still open |
+
+Questions 6 (is the missing interaction framing new) and 7 (how Paper 1 differs from DCFM) are about positioning and are answered in
+writing: Loop 14's list for the first, and [the DCFM note](dcfm-compositional-flow-matching-from-separate-silos.md) for the second.
+
+Three questions need something this plan does not yet hold:
+
+**2. Is it better than pasting followed by a published shadow generator?** Adding shadows to pasted objects is a published task
+(MultiShadow, arXiv 2603.02743, per Loop 14's list), so "paste has no shadows" is a weak control on its own. The proposal is a fifth
+row, paste plus a shadow generator, scored on measures 2 to 4, if such a generator runs on 64-pixel CLEVR. Whether one does is unknown.
+
+**8. For tuberculosis with silicosis, what shows one finding changing the other?** Loop 14's list names cavitation inside a silicotic
+mass as the sign. The proposal is to add it as the cross-finding reading for that pair, called by a reader with radiology training,
+once a dataset holding both findings exists.
+
+**14. Has the checker seen images holding both concepts?** No score answers this. The proposal is an audit listed beside every result:
+each image the checker trained on and how it was made.
+
+Loop 14's list also names a box-level occlusion score from DepthArb (the share of the two objects' overlap covered by the nearer object's
+box). The proposal reports it beside measure 1's pixel reading, which costs only the box detection.
 
 ## Still open
 
