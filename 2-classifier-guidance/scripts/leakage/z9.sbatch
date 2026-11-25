@@ -12,11 +12,11 @@ STAGE=${1:?stage}
 ROOT=/datasets/mmolefe/poe_repair_min/loop-12
 OUT=$ROOT/z9
 MNIST=/home-mscluster/mmolefe/poe_repair_min_scratch/mnist-canvas/mnist-raw
-SPLIT=$REPO/artifacts/notes/progress/leakage/09-dcfm-colored-mnist/split.json
 CO3=/datasets/mmolefe/poe_repair_min/loop-5/code/67b0bafa-b91076f/upstream/co3
 HUB=/datasets/mmolefe/poe_repair_min/loop-6/code/f0410a14-f2bdb6d/hub/scripts/reproductions
 : "${SNAP:?SNAP must name the code snapshot}"
 REPO=$SNAP/repo
+SPLIT=$REPO/artifacts/notes/progress/leakage/09-dcfm-colored-mnist/split.json
 S=$REPO/2-classifier-guidance/scripts/leakage
 SPLITS=$REPO/2-classifier-guidance/scripts/checker_choice/splits.json
 BOXES=$REPO/artifacts/notes/progress/leakage/03-one-fix/boxes.json
