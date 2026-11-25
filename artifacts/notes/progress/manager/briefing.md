@@ -3,7 +3,7 @@
 The one page to read. Loop 13 rewrites it every 6 hours, and at once when you say "updates", "brief me"
 or "where are we". The full detail is on [the status page](status.md).
 
-**Written:** 2026-11-25 03:16 (UTC+2).
+**Written:** 2026-11-25 07:02 (UTC+2).
 
 ## Contents
 
@@ -13,23 +13,32 @@ or "where are we". The full detail is on [the status page](status.md).
 
 ## Where we are
 
-<a href="briefing/where-we-are.png"><img src="briefing/where-we-are.png" width="200" alt="The running loops feeding Paper 1 and Paper 2, Loop 11 stopped until a new result, and your one open question on the left."></a>
+<a href="briefing/where-we-are.png"><img src="briefing/where-we-are.png" width="200" alt="Paper 1: Loop 6's two-colour CLEVR renders running and its identity reader unread, Loop 4's evaluation plan waiting for you. Paper 2: Loop 12's first correction test running, Loop 14's finding that look-alike pairs are still open. Your questions on the right."></a>
 
-1. **Paper 1** (experts that never met) is level with simply pasting the two experts' samples (295
-   clean digit pairs of 320 against 287). Loop 6's CLEVR test where neither expert is told where to
-   draw is still rendering, with a paste comparison beside it.
-2. **Paper 2** (better than CO3) has no working fix yet. Loop 12's drawn-box fix took the cheetah's
-   spots off the cougar on one seed, but over 48 pictures it gave 5 two-clear, the same as CO3 alone;
-   it tries a text-side fix next. Loop 6's kept checker does not see CO3's failure (right 60% of the
-   time against a 65% floor), and its two new checkers are being read.
-3. **Loop 8** missed twice at reading digits from the sampler's own states (0.651, then 0.552 after
-   memorising its training digits). The reviewer read it again, Loop 13 sent a method review request,
-   and a free check now asks whether the digits are readable there at all before any more training.
-   Its SDXL test against CO3 does not wait on this.
-4. **The cluster** still has no idle node; 5 of our 6 `bigbatch` slots run, and the borrowed card on
-   mscluster107 is no longer in use because the other user's job ended.
-5. **Waiting on you:** one question, 96, on how Paper 2's checkers are judged. Since the last briefing you answered 79, 80, 86, 87, 88, 89 and 90, and
-   Loop 13 decided 91 to 95 for you; each can be overruled by answering it again.
+1. **Paper 2's first real test is running.** It asks whether a correction that leaves SDXL
+   unchanged can fix failures we already know, beyond what a random push of the same size does
+   ([the design](paper2-four-way-design.md)). The first part, drawing plain PoE and the joint prompt
+   to find their failures, is 39 of 88 pictures in on mscluster107's free card; the test itself
+   follows in the queue. The answer should land in about 2 hours. The fix before it, each animal's
+   own prediction inside its box, was a near miss: 14 pictures with two clear subjects of 48
+   against CO3's 8, carried mostly by duck and goose.
+2. **Paper 2 still has a problem worth solving.** Loop 14 found that newer models (SD3.5, FLUX)
+   draw two different everyday objects in 78% to 89% of pictures, but two look-alike subjects in
+   only about 53%, and the best published fix that leaves the model unchanged reaches 69%. On our
+   tuning pairs CO3 rarely fuses animals. In 88 pictures, 33 give one animal the other's parts and
+   20 add an extra animal ([the sheet](co3-failure-kinds.png)). CO3's own paper reports neither
+   rate. A background search is checking whether any paper does.
+3. **Paper 1 needs measures where pasting can fail.** Pasting separately drawn objects already
+   places every object in 1,024 of 1,024 CLEVR images, so counting objects cannot show Paper 1 is
+   better. Loop 4 drafted a plan with five measures pasting should fail or tie: which object hides
+   which, one light for every object, one object's shadow on the other, seams, and colour staying
+   with its object. Loop 6's two-colour CLEVR renders, the experiment they would score, are still
+   running.
+4. **Loop 6's session has stopped.** Its jobs keep running, but its identity reader (job 94807)
+   finished at about 05:00 and nobody has read it. Restarting Loop 6 gets it read.
+5. **Compute.** A RunPod RTX 4090 draws SDXL 2.5 times faster than a cluster RTX 3090 (5.96
+   against 14.81 seconds a picture). Nothing runs on RunPod yet, because every deciding test fits
+   the cluster; RunPod is for paper-sized runs after a "go".
 
 ## For you to decide
 
@@ -37,10 +46,13 @@ Answer with `python3 scripts/progress_board.py answer <number> "<your answer>"`,
 
 | # | The question | Default |
 |---|---|---|
-| 96 | Should Paper 2's checkers be judged on ranking good pictures above bad ones (what actually steers the push) instead of their yes-or-no call at zero? Both loops' checkers rank moderately but miss at zero. | keep the recorded gate, report ranking beside it, and bring a pass on ranking alone back to you |
+| 105 | Accept Loop 4's evaluation plan for Paper 1 (`targets/paper-1-evaluation-plan.md`): four ways of making a two-colour CLEVR scene, scored on five measures where pasting can fail | the plan stays a draft and nothing is scored by it |
+| 96 | Should Paper 2's checkers be judged on ranking good pictures above bad ones instead of their yes-or-no call at zero? | keep the yes-or-no gate, report ranking beside it |
+| 104 | Which model Paper 2 runs on | **held by you** until Paper 2 works on SDXL and beats its rivals there |
 
-**When Loop 11 restarts.** Loop 13 may not start sessions, so it tells you when Loop 8's identity result
-or Loop 6's two-colour CLEVR test is done; restarting Loop 11 then puts the new result on a report page.
+**Restart Loop 6.** Open the 🧪 PhD Loop 6: Find The Best Method session and say
+`Read artifacts/notes/progress/requests.md and continue step M12`. It reads its identity reader's
+output and keeps the two-colour CLEVR renders moving.
 
 ## What the manager does for you
 

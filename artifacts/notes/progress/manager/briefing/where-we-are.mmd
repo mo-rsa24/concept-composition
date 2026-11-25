@@ -1,21 +1,16 @@
 %%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
 flowchart LR
-  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
-  classDef you fill:#fff4e5,stroke:#d97706,stroke-width:3px,color:#111111
-  classDef run fill:#eaf1ff,stroke:#a8c7fa,stroke-width:2px,color:#111111
-  classDef stopped fill:#f3f3f3,stroke:#888888,stroke-width:2px,color:#555555,stroke-dasharray: 5 5
-  YOU{{"You<br/>1 question: fix three board records (89)<br/>1 on hold until Loop 6's read (80)"}}:::you
-  P1["Paper 1: experts that never met<br/>level with pasting so far (295 vs 287 of 320)"]:::plain
-  P2["Paper 2: better than CO3<br/>CO3 draws both bodies (96 of 96),<br/>fails on borrowed parts"]:::plain
-  L6["Loop 6: best method<br/>reading whether its checker sees<br/>CO3's failure (running)"]:::run
-  L6b["Loop 6: two-colour CLEVR test<br/>with a paste comparison (rendering)"]:::run
-  L8["Loop 8: identity checker<br/>0.861 on unseen digits (bar 0.75);<br/>SDXL test re-aimed at CO3"]:::run
-  L12["Loop 12: which pairs borrow parts<br/>main pass running"]:::run
-  L11["Loop 11: report pages<br/>stopped until a new result"]:::stopped
-  L6 --> P2
-  L8 --> P2
-  L12 --> P2
-  L6b --> P1
-  YOU -. "question 80 waits on" .-> L6
-  L8 -. "result to drain" .-> L11
-  L6b -. "result to drain" .-> L11
+classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+classDef you fill:#fff4e5,stroke:#e65100,stroke-width:2px,color:#111111
+subgraph P2["Paper 2: fix how frozen SDXL draws two subjects"]
+  L12["Loop 12: first correction test<br/>screening 39 of 88 on card 1,<br/>then the test, about 2 hours"]:::plain
+  L14["Loop 14: look-alike pairs still open<br/>on SD3.5 and FLUX (about 53%);<br/>now writing Paper 1's reviewer questions"]:::plain
+end
+subgraph P1["Paper 1: experts trained apart"]
+  L6["Loop 6: two-colour CLEVR renders<br/>running; identity reader ran<br/>but unread (session stopped)"]:::plain
+  L4["Loop 4: evaluation plan drafted,<br/>5 measures where pasting can fail"]:::plain
+end
+Y["You: 105 accept the plan?<br/>restart Loop 6<br/>96 still open; 104 held by you"]:::you
+L4 --> Y
+L6 -.->|"needs a restart"| Y
+L12 --> R{"Does the correction<br/>fix known failures?"}:::plain
