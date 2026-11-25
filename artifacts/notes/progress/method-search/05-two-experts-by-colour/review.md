@@ -123,3 +123,32 @@ objects it never saw. The scorer's call on each of the same 864 pictures (job 95
 111 of 288 mask pastes (0.385; the scorer calls 0.583 of them exact against the eye's 0.205), 10 of 288 plain-product pictures and 6 of
 288 corrector pictures. That is more than the 1 in 10 the design allows, so **the stage is inconclusive on the scorer**, whatever a retrained
 scorer would reach on real renders: the disagreement comes from overlap that real renders never show.
+
+**The second checker, which reads the noisy picture** (board question 116, written into the design at `cbfdc79a` before it trained). It
+trained on a new RTX 4090 pod rebuilt from the verified copies (the same environment, each model's sha256 matching) and **missed its bar**:
+held-out balanced accuracy 0.641 against 0.75 after 3,000 updates (216 seconds), between 0.60 and 0.65 from update 250 on. It calls apart
+pastes with the right counts right on 0.68, touching on 0.72 and one count off on 0.49. Its row is reported as not run. The result and logs
+are in `/datasets/mmolefe/poe_repair_min/loop-6/m10/comparison/m10-part-c.tar` (sha256 `7e778f50…`).
+
+## The verdict
+
+**Inconclusive, by the bars written before the first run.** The count scorer misses its 95% bar (0.946 on real renders), and it disagrees
+with the blind eye calls on 127 of 864 pictures, more than 1 in 10. Following the owner's answer to board question 114, the rows are read on
+the eye calls.
+
+| Row | Exact share by eye, 288 pictures | Where it breaks: the largest total whose every cell holds at least 50% |
+|---|---:|---|
+| Plain product | 0.000 | below 2 objects |
+| Corrector | 0.000 | below 2 objects |
+| Count checker on the experts' maps | not run: missed its bar at every noise window (best 0.741) | |
+| Count checker on the noisy picture | not run: missed its bar (0.641) | |
+| Mask paste | 0.205 | 2 objects (1 red + 1 blue at 0.59; every 3-object cell at 0.34 or below) |
+
+**What it says.** Two colour experts trained apart, multiplied together, draw no correct scene at any count from 2 to 6: wherever both
+draw an object at the same place the colours add into a dark object that is neither, and two Langevin steps a sampler step do not change
+that. Pasting one expert's objects over the other's gets one scene in five, nearly all at 2 objects, and fails by overlap as the count
+rises. Neither checker could learn to tell a right count from one off by one, on the maps or on the picture, so this test holds no
+measurement of Paper 1's method. What a method would have to supply here is a signal that keeps the two experts from drawing at the same
+place; the paste's failures say where it must beat pasting: scenes whose objects overlap.
+
+**Owed.** Each expert alone at 90% of 256 samples, read by eye on 32 per count; its samples are in the comparison archive.
