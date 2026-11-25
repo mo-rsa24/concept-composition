@@ -57,6 +57,7 @@ At 16:55, in chat, recorded on the board and sent to each loop:
 
 | # | The question | Your answer |
 |---|---|---|
+| none | When does the full ten-holder DCFM match (question 108, experiment 3) run? | **After** Z9's arms 3 and 4 and Loop 15's step H4 land; Loop 13 then plans it with the best method row, likely on RunPod (about 4 to 14 GPU-hours) |
 | none | Add a trained correction to Z9 beside the classifier? | **Yes**: a fourth arm, a small model predicting the dropped term with both experts frozen, trained on the finished experts' own samples (keeps DCFM's no-sharing setting); the reviewer reads it first; Z9 rises to about 3.3 GPU-hours, approved |
 | none | Which loop runs question 108's first experiment, and with which arms? | **Loop 12**, as step Z9, with three arms: plain product of finished Colored MNIST experts, the checker push, and a push from a classifier on the together-against-apart ratio; the reviewer reads the ratio idea first |
 | 88 | Should Loop 11 stop after its last two steps until a research loop has something new? | yes, the default |

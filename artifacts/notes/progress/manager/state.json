@@ -385,6 +385,11 @@
    "what": "when M12's judge reads land: tell Loop 8 which branch of question 102 applies (A if the judge reaches 0.75 by step 15, else C)",
    "when": "jobs 94807/94808 scored",
    "set": "2026-11-25T03:16:00+02:00"
+  },
+  {
+   "what": "plan the full ten-holder DCFM match (108 experiment 3)",
+   "when": "Z9 done and H4 done",
+   "then": "bring the owner a plan with the winning arm, cost, and RunPod or cluster"
   }
  ]
 }
