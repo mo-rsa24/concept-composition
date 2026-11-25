@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-25 02:30 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-25 02:40 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -79,7 +79,7 @@ The finish range is `session_status.py`'s, from the 63 finished steps: fastest p
 | Loop | Doing now, and why | Steps left | Estimated finish | Session | Held by |
 |---|---|---|---|---|---|
 | 4. Rivals and targets | Keeping every target current. It updated Paper 2's bar page to count two clear subjects with their own parts (questions 87 and 92). | 1 | none useful: it ends after the paper tables, which have not started | idle | nothing |
-| 6. Best method | Its read of all three Paper 2 checkers is done (on card 1, 6 minutes): none sees CO3's failure, best 0.648 against a 0.65 floor, best ranking 0.714 ([review](../method-search/01b-balance-the-checker-data/review.md)). Its next two steps wait on your question 100. Paper 1's two-colour CLEVR renders continue. | 9 | not yet estimated | busy | question 100 |
+| 6. Best method | By your answer A on question 100, its clean-pair checker search is paused: the training-list step is closed (none of three checkers sees CO3's failure) and the architecture and label steps wait behind a new step, M12, a checker that reads which subjects are drawn. M12 builds nothing until the reviewer names the first reader; CO3's states at seven steps are saved for all 96 tuning pictures, so a reader can be scored in minutes. Paper 1's two-colour CLEVR test and digit vote test carry on. | 9 | not yet estimated | busy | the reviewer's choice of reader |
 | 7. Abstract-checker papers | Finished; its session is closed. | 0 | done | closed | nothing |
 | 8. Abstract checkers | Its digit identity checker reads pasted digits (0.861 against 0.75) but not the sampler's own states, and its removal test (V7) is closed as not run. The last check shows why: at steps 27 to 36 the digits are still unsettled (16% settled by step 26, half by step 37), and even the digit judge reads only 0.724 there ([review](../abstract-checkers/10-reading-identity/review.md)). Its one remaining step is the SDXL identity test against CO3. | 1 | not yet estimated | idle | Loop 6's training list and question 96 |
 | 11. Drain into the pillars | Stopped by your answer on 88; every finished result is on a report page. | 1 | when restarted | stopped its loop | a new result worth draining |
