@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-25 02:25 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-25 02:30 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -28,6 +28,7 @@ overrule one, answer it again: `python3 scripts/progress_board.py answer <number
 | # | The question | Decided | Why |
 |---|---|---|---|
 | none | Loop 8's method review found the removal test feeds nothing since your answer on 86 | **Close the removal test (V7) as not run** after the cheap visibility check; the full retraining from question 95 is skipped | Reversible, saves about 1.5 GPU-hours, no bar changed; it was option B of question 95. |
+| 100 | Pause Loop 6's clean-pair checker search and look for a checker that reads which subjects are drawn? | A: yes. The architecture and label steps (about 31 GPU-hours) are paused; a reviewer pass picks the identity reader to try first before anything is built |
 | 99 | May loops use mscluster107's idle card 1 again, inside another user's new job? | yes: one run at a time, Loop 12 then Loop 8 then Loop 6, with the stop rule; it ends when their job ends |
 | 98 | What does Paper 2 test next, now that Loop 12 found neither where borrowed parts start nor a working fix? | **Each animal's own prediction inside its drawn box** at steps 5 to 30, on the same 48 pictures, after a free text-only check, run by Loop 12; about 0.8 GPU-hours, its 48-picture bar written first | The test the first fix never ran, named by both reviews; the text-encoder fix stays held behind the free check. |
 | 97 | Which of three small reruns from Loop 12's audit of Loops 8, 9 and 10 should run? | **Only the first** (when the digit sampler settles which digits it draws), in Loop 8, about 0.04 GPU-hours; the third read free from Loop 12's own records, reopening nothing | The second is already settled by Loop 8's checks; the third needs Loop 10, which is closed. |
@@ -65,7 +66,6 @@ Newest first. A default happens only if you answer with it; nothing changes whil
 
 | # | The question, in one line | Why it is yours | Default | Waiting |
 |---|---|---|---|---|
-| 100 | None of Loop 6's three checkers can tell CO3's good pictures from its borrowed-part ones (best yes-or-no 0.648 against a 0.65 floor; best ranking 0.714 against 0.75). Pause its next two steps (about 31 GPU-hours) and move Paper 2's checker search to one that reads which subjects are drawn, run them as designed, or stop the checker route for Paper 2? | changes a paper's direction | A: pause and move to an identity reader. Loop 13 agrees, with one caution: both named starting points have struggled (Loop 8's checker cannot read sampler states; the attention reader failed on 4 of 12 pairs in the region test), so the next reader should follow a reviewer pass | just filed |
 | 96 | Paper 2's checkers are gated on their yes-or-no call at zero (75% right), but the push follows only the direction of the checker's gradient, so ranking good pictures above bad ones is what steers it. Loop 6's checker ranks at about 0.70 but calls 0.602 right; Loop 8's ranks at 0.78 but calls 0.651. Keep the recorded gate, or switch to ranking? | changes a recorded bar after seeing which one passes on similar checkers | keep the recorded gate, report ranking beside it, and bring a pass on ranking alone back to you | just filed |
 
 Your own reading step (confirm the draft statements from your readings) is ready on the board.
@@ -150,6 +150,7 @@ Newest first.
 | Time | To | What and why |
 |---|---|---|
 | 17:02 | Loop 8 | Its rewritten SDXL test passes the design check (stop rule, random and zero controls, comparison prompts fixed in advance, the same two-clear measure as Loop 6; about 7 GPU-hours, inside budget). Its board record goes to you as question 89. |
+| 02:30 | Loop 6 | Your answer A on question 100 sent; the reviewer is choosing the identity reader to try first. |
 | 02:25 | Loop 6 | Its checker read is done: none of three checkers sees CO3's failure; it filed question 100 to you. |
 | 02:16 | Loop 6 | Card 1 is free after Loop 8; Loop 6's turn. Loop 8 closed its removal test, as decided. |
 | 02:11 | Loop 8 | Card 1 is free after Loop 12; Loop 8's turn. |
