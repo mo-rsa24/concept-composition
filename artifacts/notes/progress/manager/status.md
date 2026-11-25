@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-25 04:22 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-25 05:47 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -100,7 +100,7 @@ Read at 02:13 from `squeue`, `sacct` and `sinfo`; down nodes from `sinfo -R` at 
 | Shared card | **Not in use.** The other user's job on mscluster107 ended by 02:45, so question 99's approval has lapsed; the node is free in Slurm, and Loop 6's identity reader goes there through our `biggpu` slot. A new shared-card run needs a new yes from you |
 | Compute against budget since 2026-11-21 | Loop 6: 53.4 node-hours of 87 (34.8 were CLEVR renders that may have used no GPU). Loop 8: 11.9 of 30. Loop 12: about 0.4, no total set. Slurm here records no GPU count, so these are node-hours, an upper bound |
 
-**RunPod speed test, 2026-11-25:** plain SDXL at 1024 by 1024, 50 steps, on one Secure-cloud RTX 4090 ($0.89 an hour): 5.96 seconds per picture one at a time, 5.81 in batches of 4 (23.3 GB peak). Community cloud had no capacity on any card at 03:40. The same script on a cluster card gives the baseline when it runs (job 94818, with the broken nodes excluded, after two attempts landed on them).
+**RunPod speed test, 2026-11-25.** Plain SDXL at 1024 by 1024, 50 steps, one picture at a time: **5.96 seconds on a Secure-cloud RTX 4090** ($0.89 an hour) against **14.81 seconds on a cluster RTX 3090** (job 94818, mscluster46), so a 4090 does about 2.5 times the work of a cluster card. Community cloud had no capacity on any card at 03:40. A private image of the cluster's `co3` environment (`ghcr.io/mo-rsa24/poe-co3:2.5.1-cu118`, recipe in `scripts/runpod/co3-image/`) matches its library versions exactly and pulls with the RunPod credential, but at 16.8 GB its last layer had not finished downloading after 20 minutes, so the test pod was stopped before running. Both tests together cost about $0.46.
 
 **What would make the queue move faster:** little within our control. There is no idle `biggpu` card,
 and the drained nodes need the administrator. Loop 6's two-colour CLEVR renders hold two `bigbatch`
