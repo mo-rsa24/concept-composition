@@ -1122,11 +1122,13 @@
    "needs": [
     "M14"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "both papers: a subject-free measure of two separate subjects",
    "objective": "attention overlap and instance count at steps 5 to 15 on the 192 labelled CO3 pictures, within-pair rule, pairs held out, beside a shuffled control",
-   "note": "reopened by the owner, 2026-11-25: M14 is read as intended (the joint-wrong-target condition met at step 0 by 0.001, inconclusive at steps 5 to 15), after the condition was double-flipped by Loop 13's instruction; question 112's rule therefore runs M15",
-   "updated": "2026-11-25T13:47:25+02:00"
+   "note": "does not rank the pictures: within-pair area 0.540, 0.516, 0.570 at steps 5, 10, 15, at or below the shuffled 95th percentile (about 0.60); positive control reproduced the cat-and-dog figure within 0.024; method-search/11-a-score-that-names-no-subject/review.md",
+   "updated": "2026-11-25T14:06:07+02:00",
+   "started": "2026-11-25T14:06:07+02:00",
+   "finished": "2026-11-25T14:06:07+02:00"
   },
   {
    "id": "Z10",
@@ -1141,8 +1143,8 @@
    "serves": "the owner's co-occurrence dial",
    "objective": "pooled adapter at weight 0 to 1.25 on 8 held-out pairs sharing no animal with training, blind calls of one, hybrid or two clear, share against weight",
    "started": "2026-11-25T13:47:33+02:00",
-   "updated": "2026-11-25T13:47:33+02:00",
-   "note": "design and bar committed; 8 new animal pairs (held-out set has only 3 qualifying animal pairs); runner next"
+   "updated": "2026-11-25T14:04:21+02:00",
+   "note": "adapter off switch leaks on v58-03-self (mean 10.8 grey levels); off now from an untouched U-Net; smoke rerun is job 95430"
   },
   {
    "id": "Z11",
