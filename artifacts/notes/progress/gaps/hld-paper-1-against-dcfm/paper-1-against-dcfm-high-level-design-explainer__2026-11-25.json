@@ -1,0 +1,276 @@
+{
+  "title": "Paper 1 against DCFM: what crosses between data holders, and when",
+  "page_title": "Paper 1 Against DCFM",
+  "subtitle": "Two ways to compose generative models trained on separate data. Read from Loop 4's DCFM note, the Paper 1 problem statement and the DCFM attack plan, 2026-11-25.",
+  "lede": "Left, DCFM (Morshed and Boddeti, ICML 2026): models cross between data silos during training and every expert is retrained, or distilled into one student, under a penalty that forces the attributes to be independent. Right, Paper 1: two finished experts that never meet during training, a small checker trained on their samples, and a push from that checker while sampling. Each arrow says what crosses and when; the dashed arrow at the bottom is the one assumption that separates the two.",
+  "version_line": "Version 1, 2026-11-25: 12 boxes, 13 arrows. Read from artifacts/notes/progress/targets/dcfm-compositional-flow-matching-from-separate-silos.md, problem-statements.md (Paper 1) and gaps/04-exploiting-dcfm.md, with DCFM pages 5 and 6 checked in the PDF.",
+  "look": "explainer",
+  "flow": {
+    "kind": "computation",
+    "line": {
+      "sync": "a model, its samples or its predictions handed to the next step",
+      "async": "the one assumption that separates the two methods"
+    }
+  },
+  "box_h": 84,
+  "row_h": 160,
+  "col_w": 420,
+  "nodes": [
+    {
+      "id": "d_silos",
+      "kind": "store",
+      "eyebrow": "data · stays in each silo",
+      "label": "n data silos",
+      "sub": "10 on Colored MNIST, 4 on chest X-rays,\n2 on robot planning (p6 to p8)",
+      "col": 0.5,
+      "row": 0
+    },
+    {
+      "id": "d_stage1",
+      "kind": "block",
+      "eyebrow": "training time · Stage I",
+      "label": "One flow-matching expert per silo",
+      "sub": "trained on its own data, with a local\nindependence penalty (p5, Eqs. 8 to 11)",
+      "col": 0.5,
+      "row": 1
+    },
+    {
+      "id": "d_a",
+      "kind": "block",
+      "eyebrow": "training time · DCFM-A",
+      "label": "Retrain every expert",
+      "sub": "peers' experts frozen; global independence\npenalty, CoInD's (p5, Eqs. 12 to 14)",
+      "col": 0,
+      "row": 2
+    },
+    {
+      "id": "d_b",
+      "kind": "edge",
+      "eyebrow": "training time · DCFM-B",
+      "label": "Distil into one student",
+      "sub": "on a trusted server, from samples the\nfrozen experts generate (p6, Eqs. 15 to 17)",
+      "col": 1,
+      "row": 2
+    },
+    {
+      "id": "d_compose",
+      "kind": "service",
+      "eyebrow": "sampling time · DCFM-A",
+      "label": "Compose the retrained experts",
+      "sub": "unconditional velocity plus one\ndifference per attribute (p3, Eq. 5)",
+      "col": 0,
+      "row": 3
+    },
+    {
+      "id": "d_student",
+      "kind": "service",
+      "eyebrow": "sampling time · DCFM-B",
+      "label": "Sample the one student",
+      "sub": "conditioned on the attributes asked for\n(p6, Eq. 15)",
+      "col": 1,
+      "row": 3
+    },
+    {
+      "id": "d_scored",
+      "kind": "loss",
+      "eyebrow": "what DCFM scores",
+      "label": "Unseen combinations, scored",
+      "sub": "novel FID on Colored MNIST, IID, lower\nis better: DCFM-A 11.41, a finished-expert\nbaseline 25.19 (Table 1, p7)",
+      "col": 0.5,
+      "row": 4,
+      "h": 100
+    },
+    {
+      "id": "p_holders",
+      "kind": "store",
+      "eyebrow": "data · stays with each holder",
+      "label": "Two data holders",
+      "sub": "disjoint data: no image or prompt\nholds both concepts",
+      "col": 2.5,
+      "row": 0
+    },
+    {
+      "id": "p_experts",
+      "kind": "block",
+      "eyebrow": "training time · once",
+      "label": "Two finished experts",
+      "sub": "each trained alone on its own data;\nnever retrained, never exchanged",
+      "col": 2.5,
+      "row": 1
+    },
+    {
+      "id": "p_checker",
+      "kind": "block",
+      "eyebrow": "after the experts finish",
+      "label": "A small checker",
+      "sub": "trained only on the experts' samples;\nreads \"both concepts present\" from x_t",
+      "col": 3.5,
+      "row": 2
+    },
+    {
+      "id": "p_sample",
+      "kind": "service",
+      "eyebrow": "sampling time",
+      "label": "Merge, then push",
+      "sub": "each expert on its own region (CLEVR),\nor a plain product (Colored MNIST);\nthen the checker's gradient pushes",
+      "col": 2.5,
+      "row": 3,
+      "h": 100
+    },
+    {
+      "id": "p_eval",
+      "kind": "loss",
+      "eyebrow": "what Paper 1 scores",
+      "label": "Objects and their effects, scored",
+      "sub": "objects kept as experts are added (7 on\nCLEVR); a shadow on the other object;\na finding hiding the heart's edge (X-ray)",
+      "col": 2.5,
+      "row": 4,
+      "h": 100
+    }
+  ],
+  "groups": [
+    {
+      "label": "DCFM (Morshed and Boddeti, ICML 2026): models cross between silos during training",
+      "members": [
+        "d_silos",
+        "d_stage1",
+        "d_a",
+        "d_b",
+        "d_compose",
+        "d_student",
+        "d_scored"
+      ],
+      "pad": 12
+    },
+    {
+      "label": "PAPER 1: experts that never met; nothing crosses during training",
+      "members": [
+        "p_holders",
+        "p_experts",
+        "p_checker",
+        "p_sample",
+        "p_eval"
+      ],
+      "pad": 12
+    }
+  ],
+  "edges": [
+    {
+      "from": "d_silos",
+      "to": "d_stage1",
+      "label": "nothing crosses:\nown data only",
+      "style": "sync"
+    },
+    {
+      "from": "d_stage1",
+      "to": "d_a",
+      "label": "crosses: weights, peer to peer\ntraining, 1 to 3 rounds (p9)",
+      "style": "sync"
+    },
+    {
+      "from": "d_stage1",
+      "to": "d_b",
+      "label": "crosses: weights to the server\ntraining, once (p9)",
+      "style": "sync"
+    },
+    {
+      "from": "d_a",
+      "to": "d_compose",
+      "label": "every expert's velocity\nsampling, every step",
+      "style": "sync"
+    },
+    {
+      "from": "d_b",
+      "to": "d_student",
+      "label": "crosses: the student, back\nto every silo, once (p9)",
+      "style": "sync"
+    },
+    {
+      "from": "d_compose",
+      "to": "d_scored",
+      "style": "sync",
+      "sides": "bt"
+    },
+    {
+      "from": "d_student",
+      "to": "d_scored",
+      "style": "sync",
+      "sides": "bt"
+    },
+    {
+      "from": "p_holders",
+      "to": "p_experts",
+      "label": "nothing crosses:\nown data only",
+      "style": "sync"
+    },
+    {
+      "from": "p_experts",
+      "to": "p_checker",
+      "label": "crosses: generated samples\nafter training",
+      "style": "sync",
+      "sides": "rt"
+    },
+    {
+      "from": "p_experts",
+      "to": "p_sample",
+      "label": "crosses: each expert's prediction\nsampling, every step",
+      "style": "sync"
+    },
+    {
+      "from": "p_checker",
+      "to": "p_sample",
+      "label": "checker's gradient\nsampling, every step",
+      "style": "sync",
+      "sides": "bl",
+      "label_seg": "first"
+    },
+    {
+      "from": "p_sample",
+      "to": "p_eval",
+      "style": "sync"
+    },
+    {
+      "from": "d_scored",
+      "to": "p_eval",
+      "style": "async",
+      "label": "the assumption that separates them:\nDCFM forces the attributes to be\nindependent, so effects that need both\nare removed (inferred from Eqs. 7, 12)",
+      "label_dx": 105
+    }
+  ],
+  "details": [
+    {
+      "heading": "Where each box comes from",
+      "lines": [
+        "<strong>n data silos</strong>: the client counts per dataset, DCFM pp. 6 to 8, as listed in Loop 4's DCFM note under \"What DCFM leaves open\". Raw images never leave a silo (the note's opening paragraph).",
+        "<strong>One flow-matching expert per silo</strong>: Stage I, DCFM p5, Eqs. 8 to 11, per the note's \"What it does\".",
+        "<strong>Retrain every expert</strong>: DCFM-A, p5, Eqs. 12 to 14. The clients run an allgather over the weights, so every client holds every peer's expert, then retrains its own against the frozen peers (p5, read in the PDF). \"DCFM-A generally requires 1-3 rounds (R ~ 2 on average)\", at a cost of R times N model transfers per client (p9, Table 3, read in the PDF). The penalty is CoInD's carried across clients (the note's opening; the attack plan's paragraph on code).",
+        "<strong>Distil into one student</strong>: DCFM-B, p6, Eqs. 15 to 17. \"After Stage I, each client shares their model with either a trusted server, or with other clients\" (p5), and the student is trained on points the frozen experts generate (p6, Eq. 15). \"Every peer uploads local model to central server, and receives a distilled model in return\", a cost of 2 model transfers per client (p9, Table 3). All read in the PDF.",
+        "<strong>Compose the retrained experts</strong>: the flow form of classifier-free composition, p3, Eq. 5, per the note's \"What it does\".",
+        "<strong>Unseen combinations, scored</strong>: Table 1, p7, as copied in the note and in the numbers file rows DCFM-T1. 25.19 is Decentralized Diffusion Models, which composes finished experts at sampling time. The sample count behind each FID is not stated in DCFM (p7).",
+        "<strong>Two data holders</strong> and <strong>Two finished experts</strong>: problem-statements.md, Paper 1, \"The problem\" and \"The setting\" (allowed: the two trained models, samples drawn from them, and a helper trained on those samples; excluded: any joint image, joint prompt or model trained on the union).",
+        "<strong>A small checker</strong> and <strong>Merge, then push</strong>: problem-statements.md, Paper 1, \"The proposed method\": the merged noise predictions minus the checker's push, lambda_t sigma_t times the gradient of log C_t(both concepts present | x_t). On Colored MNIST the merge is a plain product, because a digit and its colour sit on one digit and regions cannot apply (gaps/04-exploiting-dcfm.md, lead 1 and experiment 1).",
+        "<strong>Objects and their effects, scored</strong>: the CLEVR target of 7 objects from problem-statements.md, \"What it is measured on\"; the shadow and the X-ray border from the note's table and from the attack plan's row 1 (measure C, the heart's left border)."
+      ]
+    },
+    {
+      "heading": "How to read the lines",
+      "lines": [
+        "A solid arrow hands a model, its samples or its predictions to the next step. Its label says what crosses and when: training time, after training, or sampling time. \"Nothing crosses\" marks a step that uses only the holder's own data.",
+        "The dashed arrow at the bottom is not a hand-over. It marks the one assumption that separates the methods: every DCFM penalty pushes the joint velocity toward the unconditional velocity plus one difference per attribute (p3, Eq. 7; p5, Eq. 12; p6, Eq. 16), which removes any effect that needs both attributes at once. Paper 1's evaluation measures exactly those effects. DCFM never tests this; the note infers it from the equations, not from a result.",
+        "The boxes are lined up by time: data on the top row, training on the second and third, sampling on the fourth, scoring on the last."
+      ]
+    },
+    {
+      "heading": "What is not drawn",
+      "lines": [
+        "The finished-expert baseline behind 25.19 (Decentralized Diffusion Models) also moves weights: one chosen client receives the other N minus 1 models at the end of local training (p9). Paper 1's setting allows the two trained models to whoever composes them, and the picture does not draw that hand-over as a box.",
+        "DCFM-B run on a single client after one exchange instead of a trusted server (p6): same crossing as the server, so not drawn separately.",
+        "Stage I's masked labels and DCFM-A's routing vector (p5): inside the training boxes, not crossings.",
+        "DCFM's other baselines (federated flow, Diffusion Federated Dataset) and its robot-planning and chest X-ray results: in the note; only one Colored MNIST pair of numbers is on the face.",
+        "Where Paper 1's samples are drawn and who runs the checker: the problem statement allows the two trained models and their samples to whoever composes, and says no more.",
+        "Paper 1's numbers: none on the face. Experiment 1 of the attack plan (two-silo Colored MNIST, plain product against product with the push) has not run, and the digit result on the void list stays out of any claim until the owner decides it.",
+        "DCFM's code is not public (attack plan, checked 2026-11-25), so any DCFM row Paper 1 reports beyond the printed numbers is a reimplementation."
+      ]
+    }
+  ]
+}
