@@ -41,6 +41,7 @@ The [two-paper route](../../../../plans/route-two-papers.md) says what the work 
 | 12. Where CO3 leaks | `s12` | `artifacts/notes/progress/leakage/`, `2-classifier-guidance/scripts/leakage/`, `/datasets/mmolefe/poe_repair_min/loop-12/` |
 | 13. Manager | `s13` | `artifacts/notes/progress/manager/`, `artifacts/notes/progress/reviewer/`, and nudges to other loops; no other loop's files |
 | 14. Gaps and reviewer questions | `s14` | `artifacts/notes/progress/gaps/` |
+| 15. Directions and dials | `s15` | `artifacts/notes/progress/directions/` |
 
 Sessions 2 and 3 have finished their steps and are not running, so Session 11 holds `report/` and the drain ledger in Session 2's place, and writes `context/methods/` beside Session 3's other `context/` pages.
 
@@ -61,7 +62,7 @@ A session that needs a change in another session's area writes one line to
   `flock artifacts/notes/progress/.git.lock git commit -m "<message>" -- <paths>`.
 - **Commit messages carry no attribution line.**
 - **Never push, and never publish anything.** Pushing is the user's decision.
-- **Run no experiments in Sessions 1 to 4, Session 7 or Session 14.** They read the cluster and do not train or render. Sessions 5, 6, 8 and 9 run only what their briefs name, and share the job caps.
+- **Run no experiments in Sessions 1 to 4, Session 7, Session 14 or Session 15.** They read the cluster and do not train or render. Sessions 5, 6, 8 and 9 run only what their briefs name, and share the job caps.
 - **On the cluster, use only `bigbatch` and `biggpu`.** Never run `find /`, never run `pkill -f`, and
   never remove a file there. If `mscluster84` is unreachable, record it and carry on with local work.
 - **Launch GPU work only through `sbatch`, inside the administrator's caps** of one `biggpu` job and six

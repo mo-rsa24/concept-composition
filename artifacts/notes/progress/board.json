@@ -1013,6 +1013,50 @@
    "note": "CO3 states: smoke 95161 running, full 95162; plain PoE at Z8 settings: smoke 95165, full 95166"
   },
   {
+   "id": "H1",
+   "label": "H1 Directions that generalise",
+   "owner": "s15",
+   "proof": "artifacts/notes/progress/directions/01-directions-that-generalise.md exists with every row sourced to a page",
+   "needs": [],
+   "state": "todo",
+   "serves": "a correction that carries to pairs nobody saw",
+   "objective": "what makes a learned direction useful for steering and when it carries to new subjects"
+  },
+  {
+   "id": "H2",
+   "label": "H2 Shared representations of text, latents and scores",
+   "owner": "s15",
+   "proof": "artifacts/notes/progress/directions/02-shared-representations.md exists with every row sourced",
+   "needs": [],
+   "state": "todo",
+   "serves": "a dial that acts where text, latents and scores meet",
+   "objective": "prompt weighting, attention control, score arithmetic, symbolic composition and the sampler mathematics, read for where a dial could act"
+  },
+  {
+   "id": "H3",
+   "label": "H3 Dials for abstract concepts",
+   "owner": "s15",
+   "proof": "artifacts/notes/progress/directions/03-dials.md has one sourced row per dial",
+   "needs": [],
+   "state": "todo",
+   "serves": "the owner's dials: co-occurrence strength, count, binding strength",
+   "objective": "for each dial, what exists, whether the outcome rises steadily with strength, and where it breaks"
+  },
+  {
+   "id": "H4",
+   "label": "H4 Limits and what to test",
+   "owner": "s15",
+   "proof": "artifacts/notes/progress/directions/04-limits-and-what-to-test.md ranks three experiments with cost and first test, and a board question lists them",
+   "needs": [
+    "H1",
+    "H2",
+    "H3"
+   ],
+   "state": "todo",
+   "serves": "Paper 1 and Paper 2 linked by one method",
+   "objective": "what is learnable in principle, what our approaches cannot do, and three ranked experiments"
+  },
+  {
    "id": "U1",
    "label": "U1 Closest papers read",
    "owner": "s7",
@@ -2055,7 +2099,11 @@
     "G3",
     "G4",
     "Z9",
-    "M13"
+    "M13",
+    "H1",
+    "H2",
+    "H3",
+    "H4"
    ],
    "joiner": "~~~"
   }
@@ -2137,7 +2185,11 @@
   "ranked open problems with a first small experiment and cost each",
   "each of DCFM's eight limits turned into one experiment, with its qualitative picture, its benchmark row, its data and its cost",
   "question 108's first experiment: plain product of finished experts, plus the checker push, plus the ratio push, against DCFM's printed novel-combination FID",
-  "cosine between the kept checker's gradient and the dropped term r_t on cached SDXL trajectories at steps 0 to 15, against a random direction"
+  "cosine between the kept checker's gradient and the dropped term r_t on cached SDXL trajectories at steps 0 to 15, against a random direction",
+  "what makes a learned direction useful for steering and when it carries to new subjects",
+  "prompt weighting, attention control, score arithmetic, symbolic composition and the sampler mathematics, read for where a dial could act",
+  "for each dial, what exists, whether the outcome rises steadily with strength, and where it breaks",
+  "what is learnable in principle, what our approaches cannot do, and three ranked experiments"
  ],
  "brief": {
   "outcome": "two papers, each beating its best rival",
