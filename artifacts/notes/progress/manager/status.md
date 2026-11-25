@@ -119,6 +119,8 @@ The finish range is `session_status.py`'s, from the 63 finished steps: fastest p
 
 ## Resources
 
+**RunPod, 2026-11-26 00:15:** the stopped red pod's card was taken, so RunPod moved it to a new RTX 4090 pod, m10-red-4090-migration (47.47.180.32:13911, $0.90/hr), with an empty disk; Loop 6 rebuilds from /datasets for the picture-reading checker (question 116, about 1 GPU-hour). Credit $12.28.
+
 **RunPod, 2026-11-25 21:20:** both pods stopped (blue 18:25, red 21:20), each after a sha256-checked copy to /datasets. The two-colour CLEVR comparison used about 3.7 GPU-hours of the 7 approved. No pod is running.
 
 Read at 02:13 from `squeue`, `sacct` and `sinfo`; down nodes from `sinfo -R` at 16:28.
