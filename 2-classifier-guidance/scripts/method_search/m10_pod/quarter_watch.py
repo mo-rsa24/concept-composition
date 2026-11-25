@@ -17,9 +17,13 @@ sys.path.insert(0, W); sys.path.insert(0, os.path.join(W, '..', 'edm2'))
 from blob_count import count
 import generate_images as gi
 torch.set_num_threads(32)
+# EDM2's sampler calls torch.distributed.barrier() unconditionally, so this CPU process runs as a one-process gloo group of its own, through a
+# private file rather than the training's port.
+torch.distributed.init_process_group('gloo', init_method=f'file:///tmp/quarter-watch-{os.getpid()}', rank=0, world_size=1)
 Q = [500, 1000, 1500, 2000]
 out = os.path.join(run, 'quarters'); os.makedirs(out, exist_ok=True)
-done = {json.loads(l)['kimg'] for l in open(os.path.join(out, 'quarters.jsonl'))} if os.path.exists(os.path.join(out, 'quarters.jsonl')) else set()
+qfile = os.path.join(out, 'quarters.jsonl')
+done = {r['kimg'] for r in map(json.loads, open(qfile)) if r['right_count_share'] == r['right_count_share']} if os.path.exists(qfile) else set()   # NaN != NaN: redo
 prev = 0
 for q in Q:
     if q in done:
@@ -32,8 +36,9 @@ for q in Q:
     rows, per = [], {}
     for k in (1, 2, 3):
         d = os.path.join(out, f'{q}', f'count-{k}')
-        gi.generate_images(net=net, outdir=d, seeds=range(16), class_idx=k - 1, num_steps=32, max_batch_size=16, device=torch.device('cpu'),
-                           verbose=False)
+        for _batch in gi.generate_images(net=net, outdir=d, seeds=range(16), class_idx=k - 1, num_steps=32, max_batch_size=16,
+                                         device=torch.device('cpu'), verbose=False):   # a generator: it draws only when iterated
+            pass
         ims = [Image.open(p).convert('RGB') for p in sorted(glob.glob(os.path.join(d, '*.png')))]
         per[k] = float(np.mean([count(im, colour) == k for im in ims])); rows.append(ims)
     losses = [s['Loss/loss'] for s in map(json.loads, open(os.path.join(run, 'stats.jsonl'))) if 'Loss/loss' in s and prev < s['Progress/kimg'] <= q + 1]
