@@ -898,8 +898,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-25T02:25:49+02:00",
-   "updated": "2026-11-25T08:47:48+02:00",
-   "note": "expected-share renders resubmitted as 95081 after mscluster48's faulted GPU killed 95077; fresh read 95007 finishing"
+   "updated": "2026-11-25T09:10:22+02:00",
+   "note": "second reader: fresh read done (96); blind calls under way; expected shares 95081 queued"
   },
   {
    "id": "Z8",
