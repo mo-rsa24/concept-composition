@@ -62,6 +62,10 @@ At 16:55, in chat, recorded on the board and sent to each loop:
 
 | # | The question | Your answer |
 |---|---|---|
+| none | How is the joint-target test read, now its condition was double-flipped? | **As intended**: met at step 0 by 0.001, inconclusive at steps 5 to 15; the attention-reader test (M15) reopens under question 112's rule |
+| none | The gradient-trained classifier, with the reviewer's fixes | **Yes**, as Loop 12's step Z11 after the dial test, about 2.3 GPU-hours |
+| 111, again | Reopen the checker route now the sign is corrected? | **No**: kept closed; its corrected finding (right direction, too weak) feeds the dial and attention experiments |
+| none | The full ten-holder DCFM match | **Held** until two-colour CLEVR shows whether Paper 1 has its own method |
 | none | Z9's fourth arm missed its fit check (0.224 against 0.25) while its pictures passed (89.2% against 78.8%) | **Recorded as not reached; one retrained attempt (about 30,000 steps) with the same 0.25, labelled as a second attempt**, about 0.6 GPU-hours |
 | none | Add a classifier trained so its gradient points along the missing term to the coloured-digit test? | **Yes**, as a fifth arm beside the plain checker and the size-matched control; the reviewer reads it first, including whether it extends to abstract concepts and to CO3 |
 | none | Two steps still named the closed checker route: the short fine-tune with the push (D5) and Loop 8's checker on SDXL's unseen objects (V4) | **Both closed as not run**; question 102's branch A for Loop 8 is withdrawn, and Loop 8's count checker stays a measure |

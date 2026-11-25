@@ -1018,12 +1018,13 @@
    "owner": "s12",
    "proof": "artifacts/notes/progress/leakage/09-dcfm-colored-mnist/review.md reports novel-combination FID and digit-and-colour accuracy for the three arms beside DCFM-A's 11.41 and the finished-expert baselines' 25.19 (DCFM Table 1, p. 7), against a bar written in design.md before the first run",
    "needs": [],
-   "state": "doing",
+   "state": "done",
    "serves": "Paper 1 beats its closest rival, DCFM, where it is weak",
    "objective": "question 108's first experiment: plain product of finished experts, plus the checker push, plus the ratio push, against DCFM's printed novel-combination FID",
    "started": "2026-11-25T09:10:58+02:00",
-   "updated": "2026-11-25T12:08:15+02:00",
-   "note": "arm 2's lift explained by names alone (control a 78.4% vs arm 2 76.0%); arm 3 fails its gate; arm 4 second attempt is job 95317"
+   "updated": "2026-11-25T13:42:33+02:00",
+   "note": "pushes lift finished experts 46.9% to 76.0% (pair-aware) and 78.4% (names only) right on unseen combinations, novel FID 25.87 to 12.63 and 14.32 (DCFM baseline 25.19, DCFM-A 11.41); arm 2's pair support does not stand; arms 3 and 4 fail their gates; 3.70 GPU-hours against 3.3",
+   "finished": "2026-11-25T13:42:33+02:00"
   },
   {
    "id": "M13",
@@ -1121,14 +1122,11 @@
    "needs": [
     "M14"
    ],
-   "state": "done",
+   "state": "todo",
    "serves": "both papers: a subject-free measure of two separate subjects",
    "objective": "attention overlap and instance count at steps 5 to 15 on the 192 labelled CO3 pictures, within-pair rule, pairs held out, beside a shuffled control",
-   "closed": true,
-   "started": "2026-11-25T12:46:15+02:00",
-   "finished": "2026-11-25T12:46:15+02:00",
-   "note": "closed, not run: M14 says the checker is wrong, and the owner's answer to question 112 skips M15 in that case",
-   "updated": "2026-11-25T12:46:15+02:00"
+   "note": "reopened by the owner, 2026-11-25: M14 is read as intended (the joint-wrong-target condition met at step 0 by 0.001, inconclusive at steps 5 to 15), after the condition was double-flipped by Loop 13's instruction; question 112's rule therefore runs M15",
+   "updated": "2026-11-25T13:47:25+02:00"
   },
   {
    "id": "Z10",
@@ -1139,9 +1137,24 @@
     "M14",
     "Z9"
    ],
-   "state": "todo",
+   "state": "doing",
    "serves": "the owner's co-occurrence dial",
-   "objective": "pooled adapter at weight 0 to 1.25 on 8 held-out pairs sharing no animal with training, blind calls of one, hybrid or two clear, share against weight"
+   "objective": "pooled adapter at weight 0 to 1.25 on 8 held-out pairs sharing no animal with training, blind calls of one, hybrid or two clear, share against weight",
+   "started": "2026-11-25T13:47:33+02:00",
+   "updated": "2026-11-25T13:47:33+02:00",
+   "note": "design and bar committed; 8 new animal pairs (held-out set has only 3 qualifying animal pairs); runner next"
+  },
+  {
+   "id": "Z11",
+   "label": "Z11 A classifier whose push points the right way",
+   "owner": "s12",
+   "proof": "leakage/11-gradient-trained-classifier/review.md reports the gated result on held-back seen pairs, then unseen ones, against a bar written first, with the reviewer's seven fixes in the design",
+   "needs": [
+    "Z9"
+   ],
+   "state": "todo",
+   "serves": "rung 4: a push aligned with the model's own direction",
+   "objective": "the checker trained with a penalty pulling its push toward the expert's own score for the pair, on coloured digits, against the plain checker and the names-only push"
   },
   {
    "id": "U1",
@@ -2197,7 +2210,8 @@
     "H4",
     "M14",
     "M15",
-    "Z10"
+    "Z10",
+    "Z11"
    ],
    "joiner": "~~~"
   }
@@ -2290,7 +2304,8 @@
   "what is learnable in principle, what our approaches cannot do, and three ranked experiments",
   "joint prompt rendered at M13's 192 CO3 seeds, blind-called, and M13's cosines split by whether the joint drew both",
   "attention overlap and instance count at steps 5 to 15 on the 192 labelled CO3 pictures, within-pair rule, pairs held out, beside a shuffled control",
-  "pooled adapter at weight 0 to 1.25 on 8 held-out pairs sharing no animal with training, blind calls of one, hybrid or two clear, share against weight"
+  "pooled adapter at weight 0 to 1.25 on 8 held-out pairs sharing no animal with training, blind calls of one, hybrid or two clear, share against weight",
+  "the checker trained with a penalty pulling its push toward the expert's own score for the pair, on coloured digits, against the plain checker and the names-only push"
  ],
  "brief": {
   "outcome": "two papers, each beating its best rival",
