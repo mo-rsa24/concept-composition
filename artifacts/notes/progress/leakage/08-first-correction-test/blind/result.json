@@ -1,0 +1,100 @@
+{
+ "agreement_two_clear": 0.9090909090909091,
+ "bases": {
+  "poe": {
+   "push": 0,
+   "random": 0,
+   "without": 0,
+   "of": 12,
+   "lead": 0,
+   "passes": false,
+   "broken_push": 8,
+   "broken_random": 6
+  },
+  "joint": {
+   "push": 2,
+   "random": 0,
+   "without": 0,
+   "of": 12,
+   "lead": 2,
+   "passes": false,
+   "broken_push": 6,
+   "broken_random": 0
+  },
+  "co3": {
+   "push": 8,
+   "random": 0,
+   "without": 0,
+   "of": 12,
+   "lead": 8,
+   "passes": true,
+   "broken_push": 0,
+   "broken_random": 1
+  }
+ },
+ "co3_already_right": {
+  "short_of_two_clear_push": 4,
+  "short_of_two_clear_random": 1,
+  "of": 8,
+  "push_no_worse": false
+ },
+ "per_case_two_clear": {
+  "poe a_puma__x__a_condor 6001": {
+   "random": 0,
+   "push": 0,
+   "without": 0
+  },
+  "poe a_zebra__x__a_flamingo 6001": {
+   "push": 0,
+   "random": 0,
+   "without": 0
+  },
+  "co3 a_puma__x__a_condor 6001": {
+   "push": 4,
+   "without": 0,
+   "random": 0
+  },
+  "joint a_zebra__x__a_flamingo 6001": {
+   "push": 0,
+   "without": 0,
+   "random": 0
+  },
+  "co3 an_eagle__x__a_fox 6001": {
+   "random": 4,
+   "push": 4,
+   "without": 1
+  },
+  "poe a_seal__x__a_gull 6001": {
+   "random": 0,
+   "push": 0,
+   "without": 0
+  },
+  "co3 a_cheetah__x__a_cougar 6001": {
+   "push": 0,
+   "random": 0,
+   "without": 0
+  },
+  "joint a_puma__x__a_condor 6001": {
+   "push": 0,
+   "random": 0,
+   "without": 0
+  },
+  "co3 a_zebra__x__a_flamingo 6001": {
+   "push": 0,
+   "without": 0,
+   "random": 3
+  },
+  "joint a_seal__x__a_gull 6001": {
+   "without": 0,
+   "push": 2,
+   "random": 0
+  },
+  "co3 a_duck__x__a_goose 6002": {
+   "push": 4,
+   "random": 0,
+   "without": 0
+  }
+ },
+ "call": "parked",
+ "lead_to_pass": 4
+}

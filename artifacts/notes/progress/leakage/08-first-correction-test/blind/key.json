@@ -1,0 +1,596 @@
+{
+ "2ac87896knaq": {
+  "base": "poe",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "random-2"
+ },
+ "vvy32d3mfjgu": {
+  "base": "poe",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "push-1"
+ },
+ "cmvcmvxexkmq": {
+  "base": "co3",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "push-0"
+ },
+ "mfn36xk7hqpj": {
+  "base": "joint",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "push-2"
+ },
+ "kay29dehzuqa": {
+  "base": "poe",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "push-1"
+ },
+ "urureaq5ac8q": {
+  "base": "co3",
+  "pair": "an_eagle__x__a_fox",
+  "seed": 6001,
+  "arm": "random-3"
+ },
+ "3hmnesce7adh": {
+  "base": "poe",
+  "pair": "a_seal__x__a_gull",
+  "seed": 6001,
+  "arm": "random-2"
+ },
+ "4y59u6bck383": {
+  "base": "co3",
+  "pair": "an_eagle__x__a_fox",
+  "seed": 6001,
+  "arm": "push-3"
+ },
+ "cfukbu9asf2u": {
+  "base": "co3",
+  "pair": "an_eagle__x__a_fox",
+  "seed": 6001,
+  "arm": "random-1"
+ },
+ "f9pwrtzq5yww": {
+  "base": "co3",
+  "pair": "a_cheetah__x__a_cougar",
+  "seed": 6001,
+  "arm": "push-2"
+ },
+ "6rstg92r38sa": {
+  "base": "joint",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "push-3"
+ },
+ "xtnrev57ug6m": {
+  "base": "co3",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "push-2"
+ },
+ "mshmdr7nmvtp": {
+  "base": "co3",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "push-2"
+ },
+ "5rf2vfsxtryd": {
+  "base": "joint",
+  "pair": "a_seal__x__a_gull",
+  "seed": 6001,
+  "arm": "without"
+ },
+ "c8uhmu3jygr8": {
+  "base": "co3",
+  "pair": "a_duck__x__a_goose",
+  "seed": 6002,
+  "arm": "push-3"
+ },
+ "vtz677s4h2a3": {
+  "base": "co3",
+  "pair": "a_cheetah__x__a_cougar",
+  "seed": 6001,
+  "arm": "push-1"
+ },
+ "nxj57gzrfpuq": {
+  "base": "joint",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "random-0"
+ },
+ "6sxrmrgzkqpe": {
+  "base": "poe",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "push-3"
+ },
+ "8pxkx8h6n9qp": {
+  "base": "co3",
+  "pair": "a_duck__x__a_goose",
+  "seed": 6002,
+  "arm": "push-2"
+ },
+ "exdpytus5tkg": {
+  "base": "poe",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "random-3"
+ },
+ "pqvb7xx7rrtg": {
+  "base": "co3",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "push-3"
+ },
+ "sywshhd94hvn": {
+  "base": "co3",
+  "pair": "a_cheetah__x__a_cougar",
+  "seed": 6001,
+  "arm": "random-1"
+ },
+ "x8hp2pywangk": {
+  "base": "joint",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "push-0"
+ },
+ "t92u2n4q6xr3": {
+  "base": "joint",
+  "pair": "a_seal__x__a_gull",
+  "seed": 6001,
+  "arm": "push-3"
+ },
+ "ezzks9tg2dvk": {
+  "base": "joint",
+  "pair": "a_seal__x__a_gull",
+  "seed": 6001,
+  "arm": "push-0"
+ },
+ "mnryrc4s42ux": {
+  "base": "poe",
+  "pair": "a_seal__x__a_gull",
+  "seed": 6001,
+  "arm": "push-0"
+ },
+ "6nmzryt3c8xx": {
+  "base": "joint",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "random-2"
+ },
+ "mbjspft33za3": {
+  "base": "poe",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "push-2"
+ },
+ "25uhmk7k6m5t": {
+  "base": "co3",
+  "pair": "a_cheetah__x__a_cougar",
+  "seed": 6001,
+  "arm": "random-0"
+ },
+ "c4vm9ubap86w": {
+  "base": "joint",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "without"
+ },
+ "k9u82eu62js6": {
+  "base": "co3",
+  "pair": "a_duck__x__a_goose",
+  "seed": 6002,
+  "arm": "random-2"
+ },
+ "ux74b9kd8rt6": {
+  "base": "joint",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "push-2"
+ },
+ "gwjyc92fcj7a": {
+  "base": "co3",
+  "pair": "a_cheetah__x__a_cougar",
+  "seed": 6001,
+  "arm": "random-3"
+ },
+ "wfjn4xzbxxr6": {
+  "base": "co3",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "push-0"
+ },
+ "52w6uwjscuje": {
+  "base": "co3",
+  "pair": "a_duck__x__a_goose",
+  "seed": 6002,
+  "arm": "push-1"
+ },
+ "k7wt63ehpxcu": {
+  "base": "co3",
+  "pair": "a_duck__x__a_goose",
+  "seed": 6002,
+  "arm": "without"
+ },
+ "a25bbbdgd5y7": {
+  "base": "co3",
+  "pair": "a_duck__x__a_goose",
+  "seed": 6002,
+  "arm": "random-1"
+ },
+ "cm7fchky8r59": {
+  "base": "poe",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "random-2"
+ },
+ "d62kc52na94t": {
+  "base": "joint",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "random-1"
+ },
+ "yeyevruqe9gb": {
+  "base": "poe",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "push-0"
+ },
+ "zcksyzuj6pb2": {
+  "base": "co3",
+  "pair": "an_eagle__x__a_fox",
+  "seed": 6001,
+  "arm": "random-2"
+ },
+ "43xhtedbuuu5": {
+  "base": "poe",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "without"
+ },
+ "euxju828c4w4": {
+  "base": "co3",
+  "pair": "a_cheetah__x__a_cougar",
+  "seed": 6001,
+  "arm": "push-0"
+ },
+ "4x7df4msde6a": {
+  "base": "co3",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "without"
+ },
+ "tacdwnqvp3n9": {
+  "base": "joint",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "random-3"
+ },
+ "sr8x2j7kh4jc": {
+  "base": "joint",
+  "pair": "a_seal__x__a_gull",
+  "seed": 6001,
+  "arm": "random-3"
+ },
+ "at63vqtuqxgm": {
+  "base": "co3",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "push-1"
+ },
+ "w5snvrqd67qs": {
+  "base": "poe",
+  "pair": "a_seal__x__a_gull",
+  "seed": 6001,
+  "arm": "random-0"
+ },
+ "gxcesesqyh6m": {
+  "base": "joint",
+  "pair": "a_seal__x__a_gull",
+  "seed": 6001,
+  "arm": "push-2"
+ },
+ "w6nrarxpw427": {
+  "base": "joint",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "push-1"
+ },
+ "qahqx3us7u4m": {
+  "base": "joint",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "random-1"
+ },
+ "h86upnj4ngbj": {
+  "base": "co3",
+  "pair": "an_eagle__x__a_fox",
+  "seed": 6001,
+  "arm": "random-0"
+ },
+ "7cvurqbnzw5f": {
+  "base": "co3",
+  "pair": "an_eagle__x__a_fox",
+  "seed": 6001,
+  "arm": "without"
+ },
+ "syu8zcusjzx8": {
+  "base": "co3",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "random-1"
+ },
+ "6fjqeny2fdrw": {
+  "base": "poe",
+  "pair": "a_seal__x__a_gull",
+  "seed": 6001,
+  "arm": "push-3"
+ },
+ "vdedtwqv6fbb": {
+  "base": "poe",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "random-1"
+ },
+ "865c9q6puych": {
+  "base": "co3",
+  "pair": "a_cheetah__x__a_cougar",
+  "seed": 6001,
+  "arm": "without"
+ },
+ "kuasbz3yf3e3": {
+  "base": "poe",
+  "pair": "a_seal__x__a_gull",
+  "seed": 6001,
+  "arm": "push-2"
+ },
+ "yy2u74xp6h7j": {
+  "base": "poe",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "without"
+ },
+ "65vbnj57dykd": {
+  "base": "co3",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "push-3"
+ },
+ "fsv2xn4wmd93": {
+  "base": "joint",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "push-3"
+ },
+ "pk77rhd69b9c": {
+  "base": "poe",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "push-2"
+ },
+ "ft77sk4jkefu": {
+  "base": "joint",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "push-1"
+ },
+ "z6ab3cbszvww": {
+  "base": "co3",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "random-3"
+ },
+ "cycmn8dnr672": {
+  "base": "poe",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "random-3"
+ },
+ "g3fk8kngf767": {
+  "base": "joint",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "random-3"
+ },
+ "g2ahgnwqz8gc": {
+  "base": "co3",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "random-0"
+ },
+ "nwbh4ptthmpk": {
+  "base": "co3",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "without"
+ },
+ "k2ktrmmku5ts": {
+  "base": "poe",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "random-0"
+ },
+ "6jx5x2vvqmem": {
+  "base": "joint",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "without"
+ },
+ "ru3byb6ced3k": {
+  "base": "co3",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "random-1"
+ },
+ "ph76e67mczh8": {
+  "base": "poe",
+  "pair": "a_seal__x__a_gull",
+  "seed": 6001,
+  "arm": "random-1"
+ },
+ "jhyzbwqshuz7": {
+  "base": "joint",
+  "pair": "a_seal__x__a_gull",
+  "seed": 6001,
+  "arm": "random-1"
+ },
+ "aypke7ctqs77": {
+  "base": "co3",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "random-0"
+ },
+ "7h38za4edzuj": {
+  "base": "co3",
+  "pair": "a_duck__x__a_goose",
+  "seed": 6002,
+  "arm": "random-0"
+ },
+ "56rhukkjupxr": {
+  "base": "joint",
+  "pair": "a_seal__x__a_gull",
+  "seed": 6001,
+  "arm": "random-2"
+ },
+ "55csmckn2sy4": {
+  "base": "co3",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "random-2"
+ },
+ "t4kqqpa4kc9x": {
+  "base": "co3",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "push-1"
+ },
+ "48zfr7hx5ns9": {
+  "base": "co3",
+  "pair": "a_duck__x__a_goose",
+  "seed": 6002,
+  "arm": "random-3"
+ },
+ "vrutgz6ahn8e": {
+  "base": "co3",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "random-2"
+ },
+ "qvzg9bf8j44b": {
+  "base": "poe",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "push-0"
+ },
+ "67uck9vwnpdz": {
+  "base": "poe",
+  "pair": "a_seal__x__a_gull",
+  "seed": 6001,
+  "arm": "random-3"
+ },
+ "rqubjcweqbdf": {
+  "base": "joint",
+  "pair": "a_seal__x__a_gull",
+  "seed": 6001,
+  "arm": "random-0"
+ },
+ "xgbax82tea3w": {
+  "base": "co3",
+  "pair": "an_eagle__x__a_fox",
+  "seed": 6001,
+  "arm": "push-1"
+ },
+ "twwcgvvrrqdm": {
+  "base": "co3",
+  "pair": "a_duck__x__a_goose",
+  "seed": 6002,
+  "arm": "push-0"
+ },
+ "vd4z6rgsmyke": {
+  "base": "joint",
+  "pair": "a_seal__x__a_gull",
+  "seed": 6001,
+  "arm": "push-1"
+ },
+ "r3krg2hx8uz8": {
+  "base": "poe",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "random-1"
+ },
+ "uqaccqpsahp4": {
+  "base": "joint",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "push-0"
+ },
+ "jk6hbz66gqj6": {
+  "base": "co3",
+  "pair": "an_eagle__x__a_fox",
+  "seed": 6001,
+  "arm": "push-0"
+ },
+ "bugnr4wxe6xq": {
+  "base": "poe",
+  "pair": "a_seal__x__a_gull",
+  "seed": 6001,
+  "arm": "without"
+ },
+ "2kqda2gza6m3": {
+  "base": "co3",
+  "pair": "a_cheetah__x__a_cougar",
+  "seed": 6001,
+  "arm": "random-2"
+ },
+ "nn2fvgacxz7f": {
+  "base": "co3",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "random-3"
+ },
+ "48acq3dms68s": {
+  "base": "co3",
+  "pair": "a_cheetah__x__a_cougar",
+  "seed": 6001,
+  "arm": "push-3"
+ },
+ "ch58utgfq8k7": {
+  "base": "poe",
+  "pair": "a_seal__x__a_gull",
+  "seed": 6001,
+  "arm": "push-1"
+ },
+ "vjm44fbqgnqm": {
+  "base": "co3",
+  "pair": "an_eagle__x__a_fox",
+  "seed": 6001,
+  "arm": "push-2"
+ },
+ "u2qdr3ssream": {
+  "base": "poe",
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "arm": "push-3"
+ },
+ "gj3rr42gqqsw": {
+  "base": "joint",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "random-2"
+ },
+ "7d9ktm7qtbg3": {
+  "base": "poe",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "random-0"
+ },
+ "duskqsv3jgja": {
+  "base": "joint",
+  "pair": "a_zebra__x__a_flamingo",
+  "seed": 6001,
+  "arm": "random-0"
+ }
+}
