@@ -75,6 +75,9 @@ case "$STAGE" in
          P=$ROOT/m13-poe; LIM=""; [ "$SHARD" = 1 ] && { P=$ROOT/m13-poe-smoke; LIM="--limit 1"; }
          "$PY" "$S/m13_poe_states.py" --splits "$SPLITS" --out "$P/states" $LIM; rc=$?
          [ "$rc" -eq 0 ] && { "$PY" "$S/m5_read_co3.py" gradcos --head "$HEAD" --latents-from "$P/states" --out "$P/cosines"; rc=$?; } ;;
+  jointrender) # step M14: the joint prompt alone from CO3's starting noise at M13's 192 seeds; SHARD=1 is the smoke (one render)
+         J14=$ROOT/m14; LIM=""; [ "$SHARD" = 1 ] && { J14=$ROOT/m14-smoke; LIM="--limit 1"; }
+         "$PY" "$S/m5_read_co3.py" jointrender --splits "$SPLITS" --out "$J14" $LIM; rc=$? ;;
   heads)  # score the kept checker (the control) and M5's two trained checkers on the saved states
          F=$ROOT/m5/full
          "$PY" "$S/m5_read_co3.py" heads --heads "kept=$HEAD" "current=$F/current/head_step_002000.pt" "balanced=$F/balanced/head_step_002000.pt" \

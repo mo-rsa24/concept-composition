@@ -385,6 +385,50 @@ def gradcos(args):
             print(pair, seed, {k: round(v["push"], 4) for k, v in row["steps"].items()}, flush=True)
 
 
+JOINT_GUIDANCE, JOINT_STEPS = 7.5, 50
+
+
+def jointrender(args):
+    """Step M14: the joint prompt alone, classifier-free guidance 7.5 over the empty prompt, 50 DDIM steps, from CO3's own starting noise at
+    each of M13's 192 seeds (12 tuning pairs, seeds 6001 to 6016), decoded in fp32."""
+    import copy
+    import torch
+    from diffusers import StableDiffusionXLPipeline
+    from PIL import Image
+    sys.path.insert(0, str(HERE))
+    sys.path.insert(0, str(HERE.parent / "rung2"))
+    from co3_common import load, load_parser, start_noise
+    from paper2_rows import tuning
+    from train_readout_pair import joint_prompt
+
+    pairs, _ = tuning(args.splits)
+    seeds = list(range(6001, 6017))
+    model, _ = load(joint_prompt(pairs[0]), load_parser(), args.out / "_config")
+    vae32 = copy.deepcopy(model.vae).to(torch.float32)
+    pipe = StableDiffusionXLPipeline(vae=model.vae, text_encoder=model.text_encoder, text_encoder_2=model.text_encoder_2,
+                                     tokenizer=model.tokenizer, tokenizer_2=model.tokenizer_2, unet=model.unet, scheduler=model.scheduler)
+    pipe.set_progress_bar_config(disable=True)
+    n = 0
+    for pair in pairs:
+        for seed in seeds:
+            path = args.out / "renders" / pair / f"seed-{seed}.png"
+            if path.exists():
+                continue
+            if args.limit is not None and n >= args.limit:
+                return
+            path.parent.mkdir(parents=True, exist_ok=True)
+            begin = time.time()
+            noise = start_noise(model, seed) / model.scheduler.init_noise_sigma     # the pipeline scales by init_noise_sigma itself
+            with torch.no_grad():
+                latents = pipe(joint_prompt(pair), num_inference_steps=JOINT_STEPS, guidance_scale=JOINT_GUIDANCE, height=1024,
+                               width=1024, latents=noise, output_type="latent").images
+                pixels = vae32.decode(latents.to(torch.float32) / vae32.config.scaling_factor).sample[0]
+            pixels = ((pixels.clamp(-1, 1) + 1) * 127.5).round().byte().permute(1, 2, 0).cpu().numpy()
+            Image.fromarray(pixels).save(path)
+            n += 1
+            print(f"{pair} {seed} {time.time() - begin:.1f} s", flush=True)
+
+
 def auc(scores, labels):
     pos = [s for s, l in zip(scores, labels) if l]
     neg = [s for s, l in zip(scores, labels) if not l]
@@ -447,7 +491,7 @@ def score(args):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("stage", choices=["read", "score", "heads", "perplace", "expected", "gradcos"])
+    ap.add_argument("stage", choices=["read", "score", "heads", "perplace", "expected", "gradcos", "jointrender"])
     ap.add_argument("--head", type=Path)
     ap.add_argument("--splits", type=Path)
     ap.add_argument("--m1-co3", type=Path)
@@ -465,7 +509,7 @@ def main():
     ap.add_argument("--latents-from", type=Path, nargs="*", help="heads: read folders holding reads.jsonl and latents/")
     ap.add_argument("--limit", type=int, help="stop after this many runs, for the smoke rung")
     args = ap.parse_args()
-    {"read": read, "score": score, "heads": heads, "perplace": perplace, "expected": expected, "gradcos": gradcos}[args.stage](args)
+    {"read": read, "score": score, "heads": heads, "perplace": perplace, "expected": expected, "gradcos": gradcos, "jointrender": jointrender}[args.stage](args)
 
 
 if __name__ == "__main__":
