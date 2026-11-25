@@ -29,7 +29,8 @@ is in [the consensus page](../consensus.md). A loop reads both before writing an
 - **Why it failed:** the explanation, marked verified (measured in a run) or inferred (argued, not measured).
 - **Kind of failure:** one or more of the six kinds below, each with the evidence for it.
 - **Idea still alive?** closed (the idea itself failed on a fair test), retry worth it (the idea was not
-  fairly tested, and the fix is named), or unclear (the record cannot tell the two apart, and what would).
+  fairly tested, and the fix is named), unclear (the record cannot tell the two apart, and what would),
+  or alive (it passed its bar, with any caveat on how far the pass reaches).
 - **Rules out:** what a future design must not repeat, said as an instruction.
 - **Leaves open:** what this attempt did not settle.
 - **Evidence:** links to the review, the picture and the W&B run id, with the board step code in brackets.
