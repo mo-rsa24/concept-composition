@@ -33,7 +33,9 @@ On eight animal pairs it never trained on, the LoRA (`v58-03-self`, step 30,000)
 
 **Bar, written before the run.** Row 3 has at least 5 more two-clear pictures than row 1 and at least 5 more than row 2, each with an exact one-sided McNemar p < 0.05 on the 32 matched pictures, and no more broken pictures than row 1 plus 3. A pass says the two halves together give identity; a fail says identity is not fixed even by the right prediction in the right place, and the loss in section 4 should not be built.
 
-**Cost.** About 128 renders at about 50 seconds with two U-Nets, about 1.8 GPU-hours on an RTX 3090, plus the boxes (32 pictures, by eye). No training.
+**Rows 1 and 4 come from Z10.** Z10 drew the LoRA at weight 1 and the plain product (its weight 0) on these pairs and seeds, with the same two-U-Net sampler, on RTX 3090 cards (`/datasets/mmolefe/poe_repair_min/loop-12/z10/full/renders/`). Rows 2 and 3 are drawn on RTX 3090 `bigbatch` cards with the same code path, so all four rows share one card type; the boxes are drawn on Z10's weight-1 pictures.
+
+**Cost.** 64 new renders (rows 2 and 3) at about 50 seconds with two U-Nets, about 0.9 GPU-hours, plus the boxes (32 pictures, by eye). No training.
 
 ## 3. What a result would mean
 
