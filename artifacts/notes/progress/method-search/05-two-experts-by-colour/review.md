@@ -38,8 +38,10 @@ is read at 75%. The records are in each pod's `runs/full-quarters/<colour>-full/
 | 1 | 500,224 | 0.81 (1.00, 0.88, 0.56) | −3.37 | 0.83 (0.94, 0.94, 0.63) | −3.36 |
 | 2 | 1,000,448 | 0.85 (1.00, 0.88, 0.69) | −3.83 | 0.90 (1.00, 1.00, 0.69) | −3.84 |
 | 3 | 1,500,672 | 0.85 (1.00, 0.81, 0.75) | −3.96 | 0.94 (1.00, 1.00, 0.81) | −3.96 |
+| 4, the end | 2,000,896 | 0.83 (1.00, 0.88, 0.62) | −4.02 | 0.90 (1.00, 1.00, 0.69) | −4.02 |
 
 At the first quarter both experts draw their colour on the CLEVR floor, and the counter reads them about as often as it reads the real
 pictures. Three objects is the weak count, where some samples hold two. At the second quarter every number rose: both shares reach the counter's share on real pictures, three objects rises to 0.69 on both, and the loss falls by about 0.47 on both. **The stopping rule, read at the third quarter, stops neither run.** Red's share holds at 0.85, not above its value at the second quarter, but
-far above its stop line of 0.62; blue's rises to 0.94 against a stop line of 0.65; both losses fall again, to −3.96. Both runs go on to the end. The first try at sampling recorded no samples (the sampler is a
+far above its stop line of 0.62; blue's rises to 0.94 against a stop line of 0.65; both losses fall again, to −3.96. Both runs go on to the end. At the end both shares sit within the 0.07 that 48 samples move by chance of their third-quarter values, and both losses fell to −4.02.
+Both runs' final snapshots (0.050 and 0.100), stats, logs, samples and quarter records are in `/datasets/mmolefe/poe_repair_min/loop-6/m10/full/models/r-full/` and `b-full/`, each snapshot's sha256 matching the pod's copy. The first try at sampling recorded no samples (the sampler is a
 generator and was never iterated); that line stays in the file with a share that is not a number.
