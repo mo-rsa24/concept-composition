@@ -901,6 +901,14 @@
    "note": "judge control passes (0.914 vs 0.75, 209k input tokens); per-place run queued as 94807 and 94808"
   },
   {
+   "id": "Z8",
+   "label": "Z8 Can the correction fix known failures",
+   "owner": "s12",
+   "proof": "artifacts/notes/progress/leakage/08-first-correction-test/review.md reports, for plain PoE, the joint prompt and CO3, two-clear pictures out of 12 with the correction against the random push, with the eleven grids and the verdict from manager/paper2-four-way-design.md",
+   "needs": [],
+   "state": "todo"
+  },
+  {
    "id": "U1",
    "label": "U1 Closest papers read",
    "owner": "s7",
@@ -1689,7 +1697,7 @@
    "description": "BEFORE: nothing. It starts by itself when the paper repository (step D1) is done.\n\n1. IT RUNS as the background session 🔬 PhD Loop 5: Reproduce Rivals And Choose Checker, following:\nartifacts/notes/progress/prompts/session-5-reproduce-and-choose.md\n\n2. IT DOES: compares candidate checker architectures on small data, by a selection rule written before any of them trains.\n\n3. YOU DO: answer anything on the waiting picture.\n\nOUTCOME: one chosen architecture, with the comparison saved.\nDONE WHEN: the checker review names the choice and the rule that picked it.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nSCOREBOARD: /home/molef/PhD/concept-composition/artifacts/notes/progress/scoreboard.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: arch",
    "event_id": "l29esd328d9glp7jd5p4fn4ekg",
    "start": "2026-11-22T11:35:00+02:00",
-   "end": "2026-11-25T04:14:19+02:00",
+   "end": "2026-11-25T06:21:24+02:00",
    "synced": "1150295b1faf"
   },
   {
@@ -1935,7 +1943,8 @@
     "N2",
     "M11",
     "Z7",
-    "M12"
+    "M12",
+    "Z8"
    ],
    "joiner": "~~~"
   }
@@ -3127,8 +3136,10 @@
    "holds": "V4",
    "default": "A: gate first and cheaper, objects kept in training, label 0 = wrong pair plus hybrid, 4 other prompts, 4 noise levels per window with 2 draws, training and the CO3 read check only (about 5 to 6 GPU-hours), pushed rows only if the read passes",
    "by": "s8",
-   "state": "open",
-   "asked": "2026-11-25T02:47:39+02:00"
+   "state": "answered",
+   "asked": "2026-11-25T02:47:39+02:00",
+   "answer": "Owner, in chat, 2026-11-25: wait for Loop 6's identity read (step M12, jobs 94807 and 94808), then decide by its judge. If the judge, reading the one-step clean estimates of CO3's 96 saved states, reaches at least 0.75 balanced accuracy against the blind two-clear calls at some step up to step 15, run option A (the cheaper gated version: training and the CO3 read check first, about 5 to 6 GPU-hours, pushed rows only if the read passes the question-96 gate). If it does not, take option C: close V4 as not run, and Loop 8 ends with its digit results. Loop 8 starts nothing for V4 until M12's review records the judge's reads; Loop 13 confirms which branch applies.",
+   "answered": "2026-11-25T03:49:25+02:00"
   }
  ]
 }
