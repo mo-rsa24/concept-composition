@@ -687,9 +687,9 @@
    "state": "doing",
    "serves": "Paper 1",
    "objective": "Build and test",
-   "updated": "2026-11-26T00:14:42+02:00",
+   "updated": "2026-11-26T00:31:14+02:00",
    "started": "2026-11-25T12:46:44+02:00",
-   "note": "owner: report on blind eye calls (Q114); train one picture-reading checker (Q116), written into the design (steps 14 to 17, bar 0.75); waiting for red's pod to restart"
+   "note": "verdict written: inconclusive by the bars (scorer short, disagrees with eye on 14.7%); by eye plain 0, corrector 0, mask paste 0.205; both checkers missed 0.75 (0.741 maps, 0.641 picture); experts-alone eye check running"
   },
   {
    "id": "D4",
