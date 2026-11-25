@@ -531,12 +531,14 @@
    "needs": [
     "M1"
    ],
-   "state": "doing",
+   "state": "done",
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-24T14:31:20+02:00",
-   "updated": "2026-11-25T02:23:40+02:00",
-   "note": "neither trained checker reaches the 0.65 floor on CO3's 96 (balanced 0.648, current 0.617, kept 0.602); question filed on pausing D3 and M2 for an identity reader"
+   "updated": "2026-11-25T02:25:18+02:00",
+   "note": "closed after its read, by the owner's answer to question 100: neither trained checker sees CO3's failure on the 96 tuning pictures (balanced list 0.648, current 0.617, kept 0.602, floor 0.65), so the comparison renders do not run and no list goes to D3 while D3 waits; method-search/01b-balance-the-checker-data/review.md",
+   "closed": true,
+   "finished": "2026-11-25T02:25:18+02:00"
   },
   {
    "id": "D3",
@@ -546,7 +548,8 @@
    "needs": [
     "D1",
     "M1",
-    "M5"
+    "M5",
+    "M12"
    ],
    "state": "todo",
    "objective": "Build and test",
@@ -877,6 +880,18 @@
    "started": "2026-11-25T00:14:17+02:00",
    "updated": "2026-11-25T02:10:47+02:00",
    "note": "text check null (rho -0.023, p 0.54): text fix held; smoke controls pass; full 96 renders Slurm job 94806"
+  },
+  {
+   "id": "M12",
+   "label": "M12 Paper 2 checker that reads which subjects are drawn",
+   "owner": "s6",
+   "proof": "method-search/07-a-checker-that-reads-identity/review.md reads Loop 8's identity checker and the attention-map reader on CO3's 96 saved tuning states against the same 0.65 floor and 0.75 bar, with the area under the curve beside it, and names which, if either, D3 takes forward",
+   "needs": [
+    "M5"
+   ],
+   "state": "todo",
+   "serves": "Paper 2",
+   "objective": "Build and test"
   },
   {
    "id": "U1",
@@ -1911,7 +1926,8 @@
     "N1",
     "N2",
     "M11",
-    "Z7"
+    "Z7",
+    "M12"
    ],
    "joiner": "~~~"
   }
@@ -3081,8 +3097,10 @@
    "holds": "D3",
    "default": "A",
    "by": "s6",
-   "state": "open",
-   "asked": "2026-11-25T02:23:40+02:00"
+   "state": "answered",
+   "asked": "2026-11-25T02:23:40+02:00",
+   "answer": "Owner, in chat, 2026-11-25: A. Pause D3 and M2 and move Paper 2's checker search to a checker that reads which subjects are drawn, starting from Loop 8's identity checker and the attention-map reader.",
+   "answered": "2026-11-25T02:25:18+02:00"
   }
  ]
 }
