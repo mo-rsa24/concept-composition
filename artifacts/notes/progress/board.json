@@ -684,10 +684,12 @@
    "needs": [
     "M7"
    ],
-   "state": "todo",
+   "state": "doing",
    "serves": "Paper 1",
    "objective": "Build and test",
-   "updated": "2026-11-24T17:43:12+02:00"
+   "updated": "2026-11-25T12:46:44+02:00",
+   "started": "2026-11-25T12:46:44+02:00",
+   "note": "expert renders: r1, b1 and the scorer's 16 sets done; the 2- and 3-object sets finishing; then packing, the experts' ladder and training"
   },
   {
    "id": "D4",
