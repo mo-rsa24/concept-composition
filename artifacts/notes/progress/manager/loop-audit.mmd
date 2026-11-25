@@ -1,0 +1,18 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TB
+classDef keep fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#111111
+classDef maybe fill:#fff4e5,stroke:#e65100,stroke-width:2px,color:#111111
+classDef stop fill:#fdecea,stroke:#c62828,stroke-width:2px,color:#111111
+subgraph P1["Paper 1: experts trained apart"]
+  A["Two-colour CLEVR test (Loop 6)<br/>the deciding test: KEEP"]:::keep
+end
+subgraph P2["Paper 2: one frozen model"]
+  B["Classifier whose push points<br/>the right way (Loop 12): KEEP"]:::keep
+  C["Your co-occurrence dial on new pairs<br/>(Loop 12, running): KEEP"]:::keep
+  D["Attention reader (Loop 6)<br/>weak evidence: STOP?"]:::maybe
+end
+E["Loops 14 and 15: finished, closed today"]:::stop
+F["Your go or no-go, once the three green tests land"]:::maybe
+A --> F
+B --> F
+C --> F
