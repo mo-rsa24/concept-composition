@@ -1092,6 +1092,41 @@
    "finished": "2026-11-25T10:35:29+02:00"
   },
   {
+   "id": "M14",
+   "label": "M14 Is the joint the wrong target",
+   "owner": "s6",
+   "proof": "method-search/10-is-the-joint-the-wrong-target/review.md reports M13's cosines split by the joint's blind call, against a bar written first",
+   "needs": [],
+   "state": "todo",
+   "serves": "both papers: what a correction should aim at",
+   "objective": "joint prompt rendered at M13's 192 CO3 seeds, blind-called, and M13's cosines split by whether the joint drew both"
+  },
+  {
+   "id": "M15",
+   "label": "M15 A score that names no subject",
+   "owner": "s6",
+   "proof": "method-search/11-a-score-that-names-no-subject/review.md reports the within-pair ranking with pairs held out against a bar written first",
+   "needs": [
+    "M14"
+   ],
+   "state": "todo",
+   "serves": "both papers: a subject-free measure of two separate subjects",
+   "objective": "attention overlap and instance count at steps 5 to 15 on the 192 labelled CO3 pictures, within-pair rule, pairs held out, beside a shuffled control"
+  },
+  {
+   "id": "Z10",
+   "label": "Z10 The co-occurrence dial on new pairs",
+   "owner": "s12",
+   "proof": "leakage/10-co-occurrence-dial/review.md plots one, hybrid and two-clear shares against the adapter's weight on 8 held-out pairs against a bar written first",
+   "needs": [
+    "M14",
+    "Z9"
+   ],
+   "state": "todo",
+   "serves": "the owner's co-occurrence dial",
+   "objective": "pooled adapter at weight 0 to 1.25 on 8 held-out pairs sharing no animal with training, blind calls of one, hybrid or two clear, share against weight"
+  },
+  {
    "id": "U1",
    "label": "U1 Closest papers read",
    "owner": "s7",
@@ -2138,7 +2173,10 @@
     "H1",
     "H2",
     "H3",
-    "H4"
+    "H4",
+    "M14",
+    "M15",
+    "Z10"
    ],
    "joiner": "~~~"
   }
@@ -2228,7 +2266,10 @@
   "what makes a learned direction useful for steering and when it carries to new subjects",
   "prompt weighting, attention control, score arithmetic, symbolic composition and the sampler mathematics, read for where a dial could act",
   "for each dial, what exists, whether the outcome rises steadily with strength, and where it breaks",
-  "what is learnable in principle, what our approaches cannot do, and three ranked experiments"
+  "what is learnable in principle, what our approaches cannot do, and three ranked experiments",
+  "joint prompt rendered at M13's 192 CO3 seeds, blind-called, and M13's cosines split by whether the joint drew both",
+  "attention overlap and instance count at steps 5 to 15 on the 192 labelled CO3 pictures, within-pair rule, pairs held out, beside a shuffled control",
+  "pooled adapter at weight 0 to 1.25 on 8 held-out pairs sharing no animal with training, blind calls of one, hybrid or two clear, share against weight"
  ],
  "brief": {
   "outcome": "two papers, each beating its best rival",

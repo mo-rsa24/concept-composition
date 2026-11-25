@@ -27,6 +27,7 @@ overrule one, answer it again: `python3 scripts/progress_board.py answer <number
 
 | # | The question | Decided | Why |
 |---|---|---|---|
+| none | Should Z9's checker push get the matched-length digit-and-colour-only control Loop 15 asked for? | **Yes**, about 0.2 GPU-hours inside Z9 | Without it, the 46.9% to 76.0% lift cannot be told apart from stronger attributes alone |
 | none | Two steps downstream of the closed checker route (tuning the winner, M3; Loop 6's checker against Loop 8's, M8) and the recipes step (M4) still named a Paper 2 checker | **M3 covers Paper 1 only; M8 closes as not run; M4 needs Paper 1's recipe only**, and Paper 2's recipe waits for your choice after Z9 and Loop 15's last step | Follows from your answer to 111; changes no result or bar |
 | none | M13, the gradient-direction check, had only CO3 trajectories; should it add plain PoE? | **Yes**: 48 plain-PoE trajectories (12 tuning pairs, seeds 6001 to 6004, Z8's settings), judged by the same bar | The push failed on PoE in Z8, so that is where its direction matters most; about 0.5 GPU-hours more, under 1.5 in all |
 | none | Does your yes to card 1 on mscluster107 (question 103) still hold after the other user's job 94785 ended and their new job 94793 took the node? | **Yes**: Loop 12 re-reads card 1 and runs the test there with the same launch check and watchdog; if the watchdog stops it, only the unfinished cases go to the queue | Your instruction named the card being empty, not a host job; the check and watchdog protect the other user either way |
