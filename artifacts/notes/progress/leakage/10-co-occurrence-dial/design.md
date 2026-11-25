@@ -40,7 +40,7 @@ Plain product of the two single-animal prompts, classifier-free guidance 7.5 per
 
 1. **Weight 0 is the plain product.** On the first pair and seed, the picture at $\lambda = 0$ with the adapter attached must equal `run_cfg_poe`'s with no adapter, byte for byte, in one process.
 2. **The whole adapter is loaded.** `_adapter_shape.attach` must match every saved tensor, or the run stops.
-3. **The adapter still works where it trained.** One training pair from the pool file (the first in it), seeds 6001 to 6004, at $\lambda$ 0 and 1: 8 pictures, called blind with the rest and reported beside the curve, with no bar.
+3. **The adapter still works where it trained.** One training pair from the pool file (the first under its `train:` key), seeds 6001 to 6004, at $\lambda$ 0 and 1: 8 pictures, called blind with the rest and reported beside the curve, with no bar.
 
 ## How pictures are counted
 
