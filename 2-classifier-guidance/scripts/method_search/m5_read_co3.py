@@ -46,6 +46,11 @@ def read(args):
     from diffusers.models.unets.unet_2d_condition import UNet2DConditionOutput
 
     pairs, seeds = tuning(args.splits)
+    if args.seeds:                                    # fresh seeds, such as 6009-6016, that no loop has read
+        lo, hi = (int(v) for v in args.seeds.split("-"))
+        seeds = list(range(lo, hi + 1))
+        if set(seeds) & set(range(7001, 7009)):
+            raise SystemExit("seeds 7001 to 7008 are held out")
     pairs = pairs[args.shard::args.num_shards]       # M1's split: shard 0 drew on a Quadro RTX 8000, shard 1 on an RTX 3090
     prompts = {pair: joint_prompt(pair) for pair in pairs}
     if any(not is_allowed(p) for p in prompts.values()):
@@ -112,11 +117,14 @@ def read(args):
                 if args.save_latents:
                     (args.out / "latents" / pair).mkdir(parents=True, exist_ok=True)
                     torch.save(state["states"], args.out / "latents" / pair / f"seed-{seed}.pt")
-                with Image.open(args.m1_co3 / pair / f"seed-{seed}.png") as old:
-                    diff = float(np.abs(np.asarray(image.convert("RGB"), dtype=np.float64)
-                                        - np.asarray(old.convert("RGB"), dtype=np.float64)).mean())
+                if args.m1_co3:
+                    with Image.open(args.m1_co3 / pair / f"seed-{seed}.png") as old:
+                        diff = float(np.abs(np.asarray(image.convert("RGB"), dtype=np.float64)
+                                            - np.asarray(old.convert("RGB"), dtype=np.float64)).mean())
+                else:                                   # fresh seeds: no earlier picture to reproduce
+                    diff = 0.0
                 row = {"key": key, "pair": pair, "seed": seed, "head_step": head_step, "pixel_diff_to_m1_of_255": round(diff, 3),
-                       "reproduced": diff <= MAX_PIXEL_DIFF, "reads": {str(s): v for s, v in state["reads"].items()},
+                       "reproduced": diff <= MAX_PIXEL_DIFF, "fresh": not args.m1_co3, "reads": {str(s): v for s, v in state["reads"].items()},
                        "seconds": round(time.time() - begin, 1)}
                 log.write(json.dumps(row) + "\n")
                 log.flush()
@@ -190,6 +198,8 @@ def perplace(args):
     from paper2_rows import encode
     from poe_repair.methods._sampling import add_time_ids
     from train_readout_pair import joint_prompt
+    if args.count:
+        from poe_repair.experiments.compose_scorer_validation.detection_scorer import count_instances
 
     source = {}
     for folder in args.latents_from:
@@ -218,7 +228,7 @@ def perplace(args):
             seqs, pools = zip(*(encode(model, q) for q in prompts))
             seq, pool = torch.cat(seqs), torch.cat(pools)
             saved = torch.load(latent_path, weights_only=False)
-            reads, shares = {}, {}
+            reads, shares, counts = {}, {}, {}
             for step in PERPLACE_STEPS:
                 st = saved[step]
                 x = st["x"].to(unet.device, torch.float16).repeat(4, 1, 1, 1)
@@ -241,11 +251,71 @@ def perplace(args):
                 folder = args.out / "clean-estimates" / f"step-{step:02d}" / r["pair"]
                 folder.mkdir(parents=True, exist_ok=True)
                 Image.fromarray(img).save(folder / f"seed-{r['seed']}.png")
+                if args.count and not r["pair"].startswith("a_lighthouse"):
+                    n, _ = count_instances(folder / f"seed-{r['seed']}.png", device=torch.device(unet.device))
+                    counts[str(step)] = int(n)
             log.write(json.dumps({**{k: r[k] for k in ("key", "pair", "seed", "pixel_diff_to_m1_of_255", "reproduced")},
-                                  "reads": reads, "first_animal_closer_share": shares}) + "\n")
+                                  "reads": reads, "first_animal_closer_share": shares, "animal_count_on_clean_estimate": counts}) + "\n")
             log.flush()
             print(f"{key} less-represented share by step {[round(v[0], 3) for v in reads.values()]}", flush=True)
-    score(argparse.Namespace(out=args.out, also=None, calls=args.calls, key=args.key, threshold=PERPLACE_CALL, steps=PERPLACE_STEPS))
+    if args.calls:
+        score(argparse.Namespace(out=args.out, also=None, calls=args.calls, key=args.key, threshold=PERPLACE_CALL, steps=PERPLACE_STEPS))
+
+
+EXPECTED_SEEDS = (8001, 8002, 8003, 8004)
+EXPECTED_STEPS, EXPECTED_GUIDANCE, EXPECTED_MIN_CONF = 30, 5.0, 0.30
+
+
+def expected(args):
+    """Step M12's second reader: how much of the picture each subject fills when plain SDXL draws it alone. For each subject word,
+    "a <subject>" at seeds 8001 to 8004, 30 steps, guidance 5.0, 1024 by 1024, from the SDXL weights CO3 loads; the detector, asked for the
+    subject's own word, gives the highest-confidence box at 0.30 or more, and its area fraction. Writes expected.json with each pair's
+    expected shares."""
+    import torch
+    from diffusers import StableDiffusionXLPipeline
+    sys.path.insert(0, str(HERE))
+    sys.path.insert(0, str(HERE.parent / "rung2"))
+    sys.path.insert(0, str(HERE.parents[2]))
+    from co3_common import load, load_parser
+    from paper2_rows import tuning
+    from train_readout_pair import joint_prompt
+    from poe_repair.experiments.residual_between_mono_and_poe.metrics import detect_boxes
+
+    pairs, _ = tuning(args.splits)
+    model, _ = load(joint_prompt(pairs[0]), load_parser(), args.out / "_config")
+    pipe = StableDiffusionXLPipeline(vae=model.vae.to(torch.float32), text_encoder=model.text_encoder,
+                                     text_encoder_2=model.text_encoder_2, tokenizer=model.tokenizer, tokenizer_2=model.tokenizer_2,
+                                     unet=model.unet, scheduler=model.scheduler)
+    pipe.set_progress_bar_config(disable=True)
+    args.out.mkdir(parents=True, exist_ok=True)
+    subjects = sorted({w for p in pairs for w in p.split("__x__")})
+    areas = {}
+    for subject in subjects:
+        word = subject.split("_", 1)[1].replace("_", " ")
+        per_seed = {}
+        for seed in EXPECTED_SEEDS:
+            path = args.out / "alone" / subject / f"seed-{seed}.png"
+            if not path.exists():
+                path.parent.mkdir(parents=True, exist_ok=True)
+                g = torch.Generator(device=model.unet.device).manual_seed(seed)
+                with torch.no_grad():
+                    image = pipe(subject.replace("_", " "), num_inference_steps=EXPECTED_STEPS, guidance_scale=EXPECTED_GUIDANCE,
+                                 height=1024, width=1024, generator=g).images[0]
+                image.save(path)
+            boxes = [d for d in detect_boxes(path, [word], device=torch.device(model.unet.device)) if d["confidence"] >= EXPECTED_MIN_CONF]
+            if boxes:
+                x0, y0, x1, y1 = max(boxes, key=lambda d: d["confidence"])["box"]
+                per_seed[seed] = round((x1 - x0) * (y1 - y0) / (1024 * 1024), 4)
+        areas[subject] = {"per_seed": per_seed, "area": round(float(np.mean(list(per_seed.values()))), 4) if per_seed else None}
+        print(subject, areas[subject], flush=True)
+    result = {"seeds": EXPECTED_SEEDS, "steps": EXPECTED_STEPS, "guidance": EXPECTED_GUIDANCE, "min_confidence": EXPECTED_MIN_CONF,
+              "areas": areas, "pairs": {}}
+    for pair in pairs:
+        a, b = pair.split("__x__")
+        fa, fb = areas[a]["area"], areas[b]["area"]
+        share = 0.5 if fa is None or fb is None else fa / (fa + fb)
+        result["pairs"][pair] = {"first_expected_share": round(share, 4), "fallback": fa is None or fb is None}
+    (args.out / "expected.json").write_text(json.dumps(result, indent=1) + "\n")
 
 
 def auc(scores, labels):
@@ -310,7 +380,7 @@ def score(args):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("stage", choices=["read", "score", "heads", "perplace"])
+    ap.add_argument("stage", choices=["read", "score", "heads", "perplace", "expected"])
     ap.add_argument("--head", type=Path)
     ap.add_argument("--splits", type=Path)
     ap.add_argument("--m1-co3", type=Path)
@@ -319,6 +389,8 @@ def main():
     ap.add_argument("--key", type=Path)
     ap.add_argument("--redo-from", type=Path, help="an earlier reads.jsonl; rerun only its trajectories that did not reproduce")
     ap.add_argument("--also", type=Path, nargs="*", help="score: further read folders, merged, a reproduced row winning")
+    ap.add_argument("--seeds", help="read: a range such as 6009-6016 in place of the tuning seeds, with no earlier picture to match")
+    ap.add_argument("--count", action="store_true", help="perplace: count animals on each clean estimate with the validated detector")
     ap.add_argument("--shard", type=int, default=0)
     ap.add_argument("--num-shards", type=int, default=1)
     ap.add_argument("--save-latents", action="store_true", help="read: keep each read step's state, so later checkers need no CO3 run")
@@ -326,7 +398,7 @@ def main():
     ap.add_argument("--latents-from", type=Path, nargs="*", help="heads: read folders holding reads.jsonl and latents/")
     ap.add_argument("--limit", type=int, help="stop after this many runs, for the smoke rung")
     args = ap.parse_args()
-    {"read": read, "score": score, "heads": heads, "perplace": perplace}[args.stage](args)
+    {"read": read, "score": score, "heads": heads, "perplace": perplace, "expected": expected}[args.stage](args)
 
 
 if __name__ == "__main__":

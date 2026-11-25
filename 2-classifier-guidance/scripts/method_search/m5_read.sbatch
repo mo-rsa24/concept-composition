@@ -3,7 +3,7 @@
 #SBATCH --partition=bigbatch
 #SBATCH --nodes=1
 #SBATCH --time=02:30:00
-#SBATCH --exclude=mscluster84,mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82
+#SBATCH --exclude=mscluster84,mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82,mscluster83
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-6/logs/%x-%j.log
 # Step M5: read the kept checker on CO3's 96 tuning trajectories, then score the read. Submit with the code snapshot in SNAP:
 #   sbatch --export=ALL,SNAP=<snapshot> m5_read.sbatch <smoke|read>
@@ -61,6 +61,12 @@ case "$STAGE" in
   perplace) # step M12: the per-place prediction difference on the saved states, and the one-step clean estimates for the judge
          "$PY" "$S/m5_read_co3.py" perplace --latents-from "$OUT-states-shard0" "$OUT-states-shard1" \
            --out "$ROOT/m12/perplace" --calls "$CALLS" --key "$KEY"; rc=$? ;;
+  fresh)  # M12's second reader: CO3 at fresh seeds 6009-6016 on the 12 tuning pairs, states saved; SHARD=1 is the smoke (one trajectory)
+         SC=$ROOT/m12/size-corrected; LIM=""; [ "$SHARD" = 1 ] && { SC=$SC-smoke; LIM="--limit 1"; }
+         "$PY" "$S/m5_read_co3.py" read --head "$HEAD" --splits "$SPLITS" --seeds 6009-6016 --save-latents --out "$SC/co3" $LIM; rc=$?
+         [ "$rc" -eq 0 ] && { "$PY" "$S/m5_read_co3.py" perplace --latents-from "$SC/co3" --out "$SC/perplace" --count; rc=$?; } ;;
+  expected) # each subject drawn alone by plain SDXL, and its share of the picture measured by the detector
+         "$PY" "$S/m5_read_co3.py" expected --splits "$SPLITS" --out "$ROOT/m12/size-corrected/expected"; rc=$? ;;
   heads)  # score the kept checker (the control) and M5's two trained checkers on the saved states
          F=$ROOT/m5/full
          "$PY" "$S/m5_read_co3.py" heads --heads "kept=$HEAD" "current=$F/current/head_step_002000.pt" "balanced=$F/balanced/head_step_002000.pt" \
