@@ -970,6 +970,18 @@
    "note": "Loop 14 started G3: open problems in composition, plus the SDXL counterparts' failure list"
   },
   {
+   "id": "G4",
+   "label": "G4 Exploit DCFM's gaps",
+   "owner": "s14",
+   "proof": "artifacts/notes/progress/gaps/04-exploiting-dcfm.md has one row per limit in the DCFM note's 'What DCFM leaves open', each naming the idea from Paper 1 or Paper 2 that attacks it, the picture that would show it, the number that would score it against DCFM's printed one, the data and code needed, and the cost, and the owner has been asked which to run",
+   "needs": [
+    "G3"
+   ],
+   "state": "todo",
+   "serves": "Paper 1 beats its closest rival where it is weak",
+   "objective": "each of DCFM's eight limits turned into one experiment, with its qualitative picture, its benchmark row, its data and its cost"
+  },
+  {
    "id": "U1",
    "label": "U1 Closest papers read",
    "owner": "s7",
@@ -2009,7 +2021,8 @@
     "K7",
     "G1",
     "G2",
-    "G3"
+    "G3",
+    "G4"
    ],
    "joiner": "~~~"
   }
@@ -2088,7 +2101,8 @@
   "measures for overlap, shadows across objects, seams, colour binding and X-ray findings, applied equally to every method",
   "best two-subject numbers on SD3, FLUX and SDXL, CO3 and ToMe notes, and a continue, narrow or change recommendation",
   "every question a reviewer will ask, including how separately trained experts interact, with the papers and the measure for each",
-  "ranked open problems with a first small experiment and cost each"
+  "ranked open problems with a first small experiment and cost each",
+  "each of DCFM's eight limits turned into one experiment, with its qualitative picture, its benchmark row, its data and its cost"
  ],
  "brief": {
   "outcome": "two papers, each beating its best rival",
