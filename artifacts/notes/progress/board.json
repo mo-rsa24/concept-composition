@@ -996,8 +996,8 @@
    "serves": "Paper 1 beats its closest rival, DCFM, where it is weak",
    "objective": "question 108's first experiment: plain product of finished experts, plus the checker push, plus the ratio push, against DCFM's printed novel-combination FID",
    "started": "2026-11-25T09:10:58+02:00",
-   "updated": "2026-11-25T09:48:04+02:00",
-   "note": "judge passes; experts training (job 95113); arms 1 to 4 designed and coded (arm 4 added by the owner, about 3.3 GPU-hours in all)"
+   "updated": "2026-11-25T10:19:44+02:00",
+   "note": "arm 1: 46.9% right on novel combinations, novel FID 25.87 (floor 2.31); arm 2 is job 95187"
   },
   {
    "id": "M13",
@@ -1005,12 +1005,13 @@
    "owner": "s6",
    "proof": "artifacts/notes/progress/method-search/09-gradient-direction-check/review.md reports, per step 0 to 15, the median and spread of the cosine between the kept readout checker's latent gradient and r_t = eps(joint) - (eps(A) + eps(B) - eps(empty)) on the cached trajectories, beside the random-direction cosine, against a bar written in design.md first",
    "needs": [],
-   "state": "doing",
+   "state": "done",
    "serves": "Paper 2's correction acts in the right direction",
    "objective": "cosine between the kept checker's gradient and the dropped term r_t on cached SDXL trajectories at steps 0 to 15, against a random direction",
    "started": "2026-11-25T09:55:32+02:00",
-   "updated": "2026-11-25T09:57:13+02:00",
-   "note": "CO3 states: smoke 95161 running, full 95162; plain PoE at Z8 settings: smoke 95165, full 95166"
+   "updated": "2026-11-25T10:29:29+02:00",
+   "note": "the kept checker's push points against the dropped term on CO3 (median cosine -0.105 at step 0, past -0.10) and leans against it on plain PoE (-0.025 to -0.089, inconclusive by the bar); +0.10 is reached on neither, so the owner's condition for the identity head is not met; method-search/09-gradient-direction-check/review.md",
+   "finished": "2026-11-25T10:29:29+02:00"
   },
   {
    "id": "H1",
@@ -1018,9 +1019,13 @@
    "owner": "s15",
    "proof": "artifacts/notes/progress/directions/01-directions-that-generalise.md exists with every row sourced to a page",
    "needs": [],
-   "state": "todo",
+   "state": "done",
    "serves": "a correction that carries to pairs nobody saw",
-   "objective": "what makes a learned direction useful for steering and when it carries to new subjects"
+   "objective": "what makes a learned direction useful for steering and when it carries to new subjects",
+   "started": "2026-11-25T10:02:56+02:00",
+   "updated": "2026-11-25T10:12:44+02:00",
+   "note": "01-directions-that-generalise.md, 28 papers, every row page-sourced",
+   "finished": "2026-11-25T10:12:44+02:00"
   },
   {
    "id": "H2",
@@ -1028,9 +1033,13 @@
    "owner": "s15",
    "proof": "artifacts/notes/progress/directions/02-shared-representations.md exists with every row sourced",
    "needs": [],
-   "state": "todo",
+   "state": "done",
    "serves": "a dial that acts where text, latents and scores meet",
-   "objective": "prompt weighting, attention control, score arithmetic, symbolic composition and the sampler mathematics, read for where a dial could act"
+   "objective": "prompt weighting, attention control, score arithmetic, symbolic composition and the sampler mathematics, read for where a dial could act",
+   "started": "2026-11-25T10:13:10+02:00",
+   "updated": "2026-11-25T10:21:54+02:00",
+   "note": "02-shared-representations.md, 13 read + 27 cited, every row sourced",
+   "finished": "2026-11-25T10:21:54+02:00"
   },
   {
    "id": "H3",
@@ -1038,9 +1047,12 @@
    "owner": "s15",
    "proof": "artifacts/notes/progress/directions/03-dials.md has one sourced row per dial",
    "needs": [],
-   "state": "todo",
+   "state": "doing",
    "serves": "the owner's dials: co-occurrence strength, count, binding strength",
-   "objective": "for each dial, what exists, whether the outcome rises steadily with strength, and where it breaks"
+   "objective": "for each dial, what exists, whether the outcome rises steadily with strength, and where it breaks",
+   "started": "2026-11-25T10:22:23+02:00",
+   "updated": "2026-11-25T10:22:23+02:00",
+   "note": "reading started"
   },
   {
    "id": "H4",
@@ -2164,6 +2176,10 @@
   "s13": {
    "id": "3c51301e",
    "name": "Loop 13"
+  },
+  "s15": {
+   "id": "b99f397a",
+   "name": "Loop 15"
   }
  },
  "objectives": [
@@ -3404,6 +3420,15 @@
    "asked": "2026-11-25T09:26:57+02:00",
    "answer": "Owner, in Loop 13's session, 2026-11-25: A. The reviewer chooses between the two trained readers left, a head on SDXL features or a classifier on the decoded clean estimate, using the 192 blind-called pictures as labels, and returns a cost and a bar before any GPU is spent; the choice comes back to the owner before it runs.",
    "answered": "2026-11-25T09:34:06+02:00"
+  },
+  {
+   "id": 111,
+   "question": "Paper 2's checker route, after the direction check you set: the kept checker's push points against the part of the joint prompt that composition drops, not along it. On CO3 the median cosine is -0.105 at the first step (where -0.10 was the written line for pointing against), and on plain PoE it is negative at every step from 0 to 15 (-0.025 to -0.089), 5 to 25 times a random direction's spread. Your rule was that the identity head runs only if the push points the right way, and it does not. Options: A (recommended) close the checker route for Paper 2 here (M12, D3 and M2 closed as not run, with this finding and the two per-place readers recorded), and give its remaining budget to the other Paper 2 routes; B train the identity head anyway, about 2.5 to 3 GPU-hours, since a checker trained for identity could have a different gradient. Evidence: method-search/09-gradient-direction-check/review.md.",
+   "holds": "M12",
+   "default": "A",
+   "by": "s6",
+   "state": "open",
+   "asked": "2026-11-25T10:29:29+02:00"
   }
  ]
 }
