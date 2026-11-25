@@ -16,7 +16,7 @@ DCFM (Morshed and Boddeti, arXiv 2606.10153) says experts trained on separate da
 
 **Pictures.** Each MNIST digit, 28 by 28, is padded to 32 by 32 and its stroke coloured with one of ten fixed colours on a black background, three channels scaled to $[-1, 1]$. The ten colours are matplotlib's `tab10` palette. DCFM's palette and picture size are not in Loop 4's note of the paper, so this build matches its description (ten digits by ten colours, 100 combinations, half seen; p. 6) and not its exact pictures.
 
-**The split.** 50 of the 100 combinations are seen, drawn once with a fixed seed (20261125) under the condition that every digit and every colour appears in some seen combination, which DCFM's split also requires (p. 3, Definition 3.1). The 50 seen combinations are dealt at random to two holders, 25 each. A holder's training stream draws one of its combinations uniformly and a random MNIST training digit of that class, coloured. The split is saved as `split.json` beside the experts and printed in the review.
+**The split.** 50 of the 100 combinations are seen, drawn once with a fixed seed (20261125) under the condition that every digit and every colour appears in some seen combination, which DCFM's split also requires (p. 3, Definition 3.1). The 50 seen combinations are dealt at random to two holders, 25 each. A holder's training stream draws one of its combinations uniformly and a random MNIST training digit of that class, coloured. The split is saved as `split.json` beside the experts and printed in the review. The draw gives holder 1 every digit but 6 and every colour, and holder 2 every digit and every colour but grey ([the combinations sheet](combinations.png): blue frames holder 1, red frames holder 2, unframed is novel).
 
 ## The experts
 
@@ -28,7 +28,7 @@ Every arm samples the 50 novel combinations, 100 pictures each from seeds 0 to 9
 
 | Arm | What is added to the prediction | Settings |
 |---|---|---|
-| 1. The plain product | nothing: $\bar\epsilon_\varnothing + g[(\bar\epsilon_d-\bar\epsilon_\varnothing)+(\bar\epsilon_c-\bar\epsilon_\varnothing)]$, each $\bar\epsilon$ the mean of the two experts' predictions with that label and the other set to none | $g = 1$, the Bayes composition of Paper 1's digit work |
+| 1. The plain product | nothing: $\bar\epsilon_\varnothing + g[(\bar\epsilon_d-\bar\epsilon_\varnothing)+(\bar\epsilon_c-\bar\epsilon_\varnothing)]$, each $\bar\epsilon_d$ or $\bar\epsilon_c$ the mean, over the holders whose pictures include that digit or colour, of their predictions with that label and the other set to none, and $\bar\epsilon_\varnothing$ the mean of both experts with both labels set to none (in this split holder 1 has no 6 and holder 2 no grey, so those two terms come from one expert) | $g = 1$, the Bayes composition of Paper 1's digit work |
 | 2. The checker push | arm 1 plus Paper 1's push from a checker reading "digit $d$ in colour $c$" | strength 10, capped at 0.1 of the prediction's length per picture, every step (Paper 1's kept settings) |
 | 3. The ratio push | arm 1 plus the gradient of a classifier on $p(A,B \mid x)/(p(A \mid x)\,p(B \mid x))$ ([the manager's note](../../manager/ratio-classifier-idea.md)) | built only after the reviewer's section "The ratio classifier, 2026-11-25" in `reviewer/2026-11-24-review.md`, with the estimator and control it names; its settings are written into this file before it runs |
 
