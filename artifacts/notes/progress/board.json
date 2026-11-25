@@ -988,6 +988,16 @@
    "finished": "2026-11-25T07:33:22+02:00"
   },
   {
+   "id": "Z9",
+   "label": "Z9 Finished experts on Colored MNIST, three arms",
+   "owner": "s12",
+   "proof": "artifacts/notes/progress/leakage/09-dcfm-colored-mnist/review.md reports novel-combination FID and digit-and-colour accuracy for the three arms beside DCFM-A's 11.41 and the finished-expert baselines' 25.19 (DCFM Table 1, p. 7), against a bar written in design.md before the first run",
+   "needs": [],
+   "state": "todo",
+   "serves": "Paper 1 beats its closest rival, DCFM, where it is weak",
+   "objective": "question 108's first experiment: plain product of finished experts, plus the checker push, plus the ratio push, against DCFM's printed novel-combination FID"
+  },
+  {
    "id": "U1",
    "label": "U1 Closest papers read",
    "owner": "s7",
@@ -2028,7 +2038,8 @@
     "G1",
     "G2",
     "G3",
-    "G4"
+    "G4",
+    "Z9"
    ],
    "joiner": "~~~"
   }
@@ -2108,7 +2119,8 @@
   "best two-subject numbers on SD3, FLUX and SDXL, CO3 and ToMe notes, and a continue, narrow or change recommendation",
   "every question a reviewer will ask, including how separately trained experts interact, with the papers and the measure for each",
   "ranked open problems with a first small experiment and cost each",
-  "each of DCFM's eight limits turned into one experiment, with its qualitative picture, its benchmark row, its data and its cost"
+  "each of DCFM's eight limits turned into one experiment, with its qualitative picture, its benchmark row, its data and its cost",
+  "question 108's first experiment: plain product of finished experts, plus the checker push, plus the ratio push, against DCFM's printed novel-combination FID"
  ],
  "brief": {
   "outcome": "two papers, each beating its best rival",
