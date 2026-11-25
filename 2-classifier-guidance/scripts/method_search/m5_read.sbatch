@@ -78,6 +78,8 @@ case "$STAGE" in
   jointrender) # step M14: the joint prompt alone from CO3's starting noise at M13's 192 seeds; SHARD=1 is the smoke (one render)
          J14=$ROOT/m14; LIM=""; [ "$SHARD" = 1 ] && { J14=$ROOT/m14-smoke; LIM="--limit 1"; }
          "$PY" "$S/m5_read_co3.py" jointrender --splits "$SPLITS" --out "$J14" $LIM; rc=$? ;;
+  signcheck) # step M13: the actual push code's change of the noise prediction against r_t, on 3 saved fresh CO3 trajectories
+         "$PY" "$S/m13_sign_check.py" --head "$HEAD" --latents-from "$ROOT/m12/size-corrected/co3" --out "$ROOT/m13-sign" --pairs-limit 3; rc=$? ;;
   heads)  # score the kept checker (the control) and M5's two trained checkers on the saved states
          F=$ROOT/m5/full
          "$PY" "$S/m5_read_co3.py" heads --heads "kept=$HEAD" "current=$F/current/head_step_002000.pt" "balanced=$F/balanced/head_step_002000.pt" \
