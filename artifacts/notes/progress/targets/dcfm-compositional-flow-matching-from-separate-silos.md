@@ -98,7 +98,7 @@ target until a table or the authors' data confirms it.
 
 ## Does it change the evaluation plan
 
-It sharpens two points in the plan's X-ray section, and both are proposals that wait for the owner's yes:
+It adds two points to the plan's X-ray section, both accepted by the owner (board question 107):
 
 1. **NIH Chest X-ray 14 becomes the candidate dataset.** DCFM shows it can be split into silos and that effusion appears in its
    generated combinations (p8, Figure 8). Whether the 54 combinations DCFM keeps include effusion with cardiomegaly is not printed, and

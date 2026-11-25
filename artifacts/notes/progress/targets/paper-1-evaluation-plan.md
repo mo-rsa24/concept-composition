@@ -112,6 +112,10 @@ No chest X-ray data, expert or design exists in this project yet. The environmen
 an X-ray composition number ([limits](limits.md#chest-x-ray)). The measures below say what a design must read, so the data and the
 experts can be chosen to support them.
 
+**The candidate dataset is NIH Chest X-ray 14**, the dataset [DCFM](dcfm-compositional-flow-matching-from-separate-silos.md), the
+closest published rival, splits across 4 data holders at 256 by 256 pixels (DCFM p8). Using it lets Paper 1's X-ray numbers sit beside
+DCFM's. It is not downloaded yet, and how many of its images hold effusion and cardiomegaly together is not yet counted.
+
 The two pairs are tuberculosis with silicosis, and pleural effusion with cardiomegaly. Effusion is the sharper test: fluid in the lower
 chest can hide the heart's left border, so a correct composite of a large heart and an effusion shows a weaker border than a large heart
 alone. The owner's working hypothesis is that both experts agree on anatomy, so a product keeps ribs, spine and lungs, while each expert
@@ -120,7 +124,7 @@ treats the other's finding as unlikely. It is a hypothesis to test, and measures
 | Measure | What it reads | Bar | Data it needs |
 |---|---|---|---|
 | A. Anatomy kept | an anatomy segmenter finds both lungs and the heart, and the heart-to-chest width ratio falls inside the range of real images with the same findings | share of images passing; Paper 1 leads paste and Bradley's rule by the margin | real images per finding to set the range; a segmenter trained on real images |
-| B. Both findings present | a classifier trained on real labelled images gives each finding a probability above its own threshold, fixed on real images | the same | real images with each finding alone and both together, for the classifier only |
+| B. Both findings present | a classifier trained on real labelled images gives each finding a probability above its own threshold, fixed on real images. DCFM's utility is reported beside it: a classifier trained on one row's generated images only, tested on real images, with the recall for each disease combination averaged over combinations (DCFM p8, Eq. 18) | the same, on the first reading; utility is reported with no bar | real images with each finding alone and both together, for the classifiers only |
 | C. One finding changes the other | for effusion with cardiomegaly, the contrast along the heart's left border | the composites' border contrast lies closer to real images holding both findings than to real images with a large heart alone, and closer than paste's, interval excluding zero | real images with cardiomegaly alone and with both findings |
 
 Pasting needs its own definition here, because a finding is not an object with an outline. The proposal is two pastes: lay the second
@@ -129,9 +133,8 @@ pixel average of the two images. Both are scored as rows.
 
 Each expert trains on images holding its finding and not the other, so neither ever sees both. Images holding both findings are used
 only by the measures' readers, as the two-colour test uses its two-colour renders only for its scorer. Silicosis has few public images,
-and images holding tuberculosis and silicosis together are rarer still, so that pair may only be measurable by A and B. The public
-datasets that label effusion and cardiomegaly (NIH ChestX-ray14 and CheXpert are the usual ones) are named from memory and have not been
-checked on this machine.
+and images holding tuberculosis and silicosis together are rarer still, so that pair may only be measurable by A and B. DCFM
+names no tuberculosis or silicosis label on any page, so that pair needs a second dataset if it runs at all.
 
 ## What it costs
 
@@ -170,5 +173,6 @@ Each one that a measure can answer is mapped to a row above, and any question no
 
 1. Whether the corrector row should share Paper 1's checker budget or run at its own tuned setting.
 2. Who calls measure 3 and the X-ray reads: the owner, a second person, or a person with radiology training for the X-rays.
-3. Which chest X-ray dataset, and whether silicosis is measurable at all with public data.
+3. Whether NIH Chest X-ray 14 holds enough images with effusion and cardiomegaly together, and which dataset could supply tuberculosis
+   with silicosis.
 4. Whether pasting on X-rays should be the region paste, the pixel average or both, as proposed above.
