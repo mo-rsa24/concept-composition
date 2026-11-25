@@ -1,0 +1,20 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TB
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef q fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px,color:#111111
+
+  P1["Paper 1: experts that never met<br/>no joint prompt exists"]:::plain
+  P2["Paper 2: one model that fuses<br/>joint prompt exists but is wrong on 2 of 4 held-out cells"]:::plain
+  Q{"what should the correction point at?"}:::plain
+  E1["1. Is the joint the wrong target?<br/>joint renders at the 192 seeds the checker was read on,<br/>split its cosine with the term by whether the joint drew both<br/>about 1 GPU-hour"]:::q
+  E2["2. A score that names no subject<br/>two nouns' attention overlap and instance clusters,<br/>ranked within pair on the 192 labelled pictures<br/>about 0.5 GPU-hours"]:::q
+  E3["3. The co-occurrence dial on pairs never trained on<br/>adapter weight 0 to 1.25 on 8 held-out pairs x 4 seeds,<br/>called one, hybrid or two<br/>about 1.5 GPU-hours"]:::q
+  D["the owner's dials:<br/>co-occurrence strength, count, binding"]:::plain
+
+  P1 --> Q
+  P2 --> Q
+  Q --> E1
+  E1 -->|"joint wrong: a measured target for both papers"| E2
+  E1 -.->|"checker wrong: keep the joint, drop the checker push"| E3
+  E2 -->|"a subject-free score is the dial's scale"| E3
+  E3 --> D
