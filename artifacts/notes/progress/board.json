@@ -898,8 +898,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-25T02:25:49+02:00",
-   "updated": "2026-11-25T09:10:22+02:00",
-   "note": "second reader: fresh read done (96); blind calls under way; expected shares 95081 queued"
+   "updated": "2026-11-25T09:26:57+02:00",
+   "note": "second reader does not see the failure (0.635, floor 0.65) and stops; expected shares could not see size; question filed on what M12 tries next"
   },
   {
    "id": "Z8",
@@ -993,9 +993,12 @@
    "owner": "s12",
    "proof": "artifacts/notes/progress/leakage/09-dcfm-colored-mnist/review.md reports novel-combination FID and digit-and-colour accuracy for the three arms beside DCFM-A's 11.41 and the finished-expert baselines' 25.19 (DCFM Table 1, p. 7), against a bar written in design.md before the first run",
    "needs": [],
-   "state": "todo",
+   "state": "doing",
    "serves": "Paper 1 beats its closest rival, DCFM, where it is weak",
-   "objective": "question 108's first experiment: plain product of finished experts, plus the checker push, plus the ratio push, against DCFM's printed novel-combination FID"
+   "objective": "question 108's first experiment: plain product of finished experts, plus the checker push, plus the ratio push, against DCFM's printed novel-combination FID",
+   "started": "2026-11-25T09:10:58+02:00",
+   "updated": "2026-11-25T09:23:47+02:00",
+   "note": "judge passes (97.9% on real novel digits); experts training (job 95113, 20,000 steps each); arms 1 to 3 and controls written"
   },
   {
    "id": "U1",
@@ -3324,6 +3327,15 @@
    "asked": "2026-11-25T07:44:37+02:00",
    "answer": "Owner, in chat, 2026-11-25: yes to all four. Paper 1's evaluation plan adds a paste-plus-shadow-generator row (if one runs on 64-pixel CLEVR), cavitation inside a silicotic mass as the cross-finding sign for tuberculosis with silicosis, a list beside every result of each image the checker trained on, and DepthArb's box-level occlusion score beside measure 1.",
    "answered": "2026-11-25T08:02:30+02:00"
+  },
+  {
+   "id": 110,
+   "question": "Paper 2's second identity reader, which corrects for each animal's size, does not see CO3's borrowing: on 96 fresh pictures it calls good against borrowed at best 0.635, under the 0.65 floor, and it stops by its written rule. The size correction could not work as designed, because SDXL draws any single animal to fill the frame, so a hippopotamus and a swallow came out nearly the same size. The first reader also fell from 0.688 to 0.632 on these fresh seeds, so part of its earlier score was the seeds. What is known: identity is readable in what each step would become from step 15 (a judge reads it at 0.773 to 0.867), and no reader trained for identity has been tried. Options: A (recommended) ask the reviewer to pick between the two trained readers that remain, a small head on SDXL's features and a classifier on the decoded picture each step would become, using the 192 pictures now blind-called (96 tuning, 96 fresh) as labels, and come back with its cost and bar, with no GPU spent before that; B stop the checker route for Paper 2 and give its budget to Loop 12's text-side fix. Evidence: method-search/08-size-corrected-identity-reader/review.md.",
+   "holds": "M12",
+   "default": "A",
+   "by": "s6",
+   "state": "open",
+   "asked": "2026-11-25T09:26:57+02:00"
   }
  ]
 }
