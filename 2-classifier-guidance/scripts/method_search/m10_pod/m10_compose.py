@@ -191,8 +191,11 @@ def checker_examples(pool, n, gen, empty):
     return x0, torch.tensor(asked), torch.tensor(labels), kinds
 
 
+SIGMA_WINDOW = None   # (lo, hi) for the diagnosis; None is the push window
+
+
 def batch_inputs(nets, x0, asked, gen):
-    lo, hi = float(sigmas()[PUSH_STEPS[-1]]), float(sigmas()[PUSH_STEPS[0]])
+    lo, hi = SIGMA_WINDOW or (float(sigmas()[PUSH_STEPS[-1]]), float(sigmas()[PUSH_STEPS[0]]))
     sigma = torch.exp(torch.empty(len(x0)).uniform_(np.log(lo), np.log(hi), generator=gen)).to(DEV)
     x = x0.to(DEV) + sigma.view(-1, 1, 1, 1) * torch.randn(x0.shape, generator=gen).to(DEV)
     xc = F.one_hot(asked[:, 0].to(DEV) - 1, 3).float(); yc = F.one_hot(asked[:, 1].to(DEV) - 1, 3).float()
@@ -219,7 +222,7 @@ def train_checker(args):
     model = Checker().to(DEV)
     opt = torch.optim.AdamW(model.parameters(), lr=CHECKER_LR, weight_decay=1e-4)
     gen = torch.Generator().manual_seed(20261125)
-    out = W / "checker"; out.mkdir(parents=True, exist_ok=True)
+    out = W / (args.out_name or "checker"); out.mkdir(parents=True, exist_ok=True)
     log = open(out / "train.jsonl", "w")
 
     def evaluate():
@@ -229,23 +232,24 @@ def train_checker(args):
         model.train()
         return balanced_accuracy(logits, hl), logits
 
-    for step in range(1, CHECKER_UPDATES + 1):
+    updates = args.updates or CHECKER_UPDATES
+    for step in range(1, updates + 1):
         x0, asked, labels, _ = checker_examples(pool_train, CHECKER_BATCH, gen, empty)
         maps, sigma, av = batch_inputs(nets, x0, asked, gen)
         loss = F.binary_cross_entropy_with_logits(model(maps, sigma, av), labels.to(DEV))
         opt.zero_grad(); loss.backward(); opt.step()
-        if step % 250 == 0 or step == CHECKER_UPDATES // 2:
+        if step % 250 == 0 or step == updates // 2:
             ba, _ = evaluate()
             rec = {"update": step, "loss": round(float(loss), 4), "held_out_balanced_accuracy": round(ba, 4), "seconds": round(time.time() - begin)}
             log.write(json.dumps(rec) + "\n"); log.flush(); print(json.dumps(rec), flush=True)
-            if step == CHECKER_UPDATES // 2 and ba <= FUTILE_CHECKER_BA:
+            if step == updates // 2 and ba <= FUTILE_CHECKER_BA and not args.out_name:
                 (out / "checker.json").write_text(json.dumps({"stopped_at_half": True, **rec}, indent=1) + "\n")
                 raise SystemExit(f"stopped at half: held-out balanced accuracy {ba:.3f} at or below {FUTILE_CHECKER_BA}")
     ba, logits = evaluate()
     by_kind = {name: round(float(((logits > 0).float() == hl)[hk == k].float().mean()), 4) for k, name in
                enumerate(("apart, right counts", "touching", "apart, one count off"))}
     torch.save({"state": model.state_dict(), "push_steps": list(PUSH_STEPS), "b": PUSH_B}, out / "checker.pt")
-    result = {"updates": CHECKER_UPDATES, "batch": CHECKER_BATCH, "held_out_pastes": 1024, "held_out_balanced_accuracy": round(ba, 4),
+    result = {"updates": updates, "batch": CHECKER_BATCH, "sigma_window": SIGMA_WINDOW, "held_out_pastes": 1024, "held_out_balanced_accuracy": round(ba, 4),
               "right_by_kind": by_kind, "min_balanced_accuracy": MIN_CHECKER_BA, "passes": ba >= MIN_CHECKER_BA,
               "seconds": round(time.time() - begin), "device": torch.cuda.get_device_name()}
     (out / "checker.json").write_text(json.dumps(result, indent=1) + "\n")
@@ -394,7 +398,13 @@ def main():
     ap.add_argument("--row", choices=["plain", "checker", "zero", "corrector"])
     ap.add_argument("--block", type=int, default=0)
     ap.add_argument("--limit", type=int)
+    ap.add_argument("--sigma-window", help="lo,hi: the diagnosis's noise window for train-checker")
+    ap.add_argument("--out-name", help="train-checker's output folder under /workspace/m10, for the diagnosis")
+    ap.add_argument("--updates", type=int)
     args = ap.parse_args()
+    if args.sigma_window:
+        global SIGMA_WINDOW
+        SIGMA_WINDOW = tuple(float(v) for v in args.sigma_window.split(","))
     torch.distributed.init_process_group("gloo", init_method=f"file:///tmp/m10-compose-{os.getpid()}", rank=0, world_size=1)
     {"sources": sources, "train-checker": train_checker, "row": row, "paste": paste_row, "report": report}[args.stage](args)
 
