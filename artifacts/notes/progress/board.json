@@ -687,9 +687,9 @@
    "state": "doing",
    "serves": "Paper 1",
    "objective": "Build and test",
-   "updated": "2026-11-25T20:51:12+02:00",
+   "updated": "2026-11-25T21:12:29+02:00",
    "started": "2026-11-25T12:46:44+02:00",
-   "note": "first two quarters, provisional scorer: plain 0.03, corrector 0.03, mask paste 0.51 to 0.54 exact share; corrector's last two blocks running; scorer and checker-row choices with the owner"
+   "note": "comparison drawn and copied back (209 MB, sha256 checked); provisional exact share plain 0.029, corrector 0.033, mask paste 0.515; scorer (114) and checker row (116) with the owner; eye calls and experts-alone scoring owed"
   },
   {
    "id": "D4",
