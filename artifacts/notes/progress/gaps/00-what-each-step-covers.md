@@ -33,3 +33,10 @@ In [the G3 page](03-open-problems.md), beyond the brief's ranked list:
   Attention), each with page-sourced failure examples, because that list is what Paper 2 must beat first in
   the owner's order of claims ([Paper 2's design](../manager/paper2-four-way-design.md), "The order of the
   claims, set by the owner").
+
+## Sources other loops are writing
+
+- Which papers count borrowed parts (one subject carrying the other's face, markings or head) or extra
+  subjects, for CO3 and its rivals: the manager writes it to
+  [the manager's borrowed-parts search](../manager/who-counts-borrowed-parts-and-extra-subjects.md). Cite
+  it in G2 or G3 once it exists; Loop 14 does not run that search.
