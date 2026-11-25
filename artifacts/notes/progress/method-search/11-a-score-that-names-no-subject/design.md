@@ -13,7 +13,10 @@ the joint prompt's median overlap 0.225 to 0.394 against the product's 0.506 to 
 ## Words this uses
 
 **Cross-attention map.** For one noun in the joint prompt ("puma" in "a puma and a condor"), how much each of the 32 by 32 latent cells
-attends to that word, averaged over heads and over SDXL's 32 by 32 attention layers, at one sampling step.
+attends to that word, averaged over heads and over SDXL's 32 by 32 attention layers, at one sampling step. As in the cat-and-dog figure's
+script (`2-classifier-guidance/scripts/rung2/attention_overlap.py`), the start token is dropped and each cell is renormalised over the
+prompt's own word tokens, so a word's map shows where it wins against the other words; a noun that splits into several tokens takes the
+mean of its tokens' maps.
 
 **Overlap.** The intersection over union of the two nouns' top-10% cells, the measure the cat-and-dog figure plots. 0 when the two nouns look
 at different places, 1 when they look at the same ones.
@@ -41,6 +44,15 @@ seeds 6001 to 6008, the settled calls on 6009 to 6016): 73 two clear of 192. Nin
 
 **Pairs held out.** Nothing in the score is fitted, so every pair is scored by a rule that never saw it; the within-pair rule then compares
 only pictures of the same pair.
+
+**Positive control, before any CO3 state is read.** The same code reruns the figure's 8 cat-and-dog joint-prompt trajectories (seeds 1 to
+8, as `attention_overlap.py` drew them) and must match the figure's saved top-10% overlap per seed within 0.05 at steps 5, 10 and 15. If it
+does not, the run stops there. The figure separates the seeds that came out apart (2, 3 and 7) from the rest only in group means (0.28, 0.25
+and 0.26 against 0.36, 0.34 and 0.35), not seed by seed, so those means are reported as description. Loop 13 set this control for the owner
+on 2026-11-25, before any run.
+
+**Failure kinds, as description.** On the 96 tuning seeds, Loop 9's part labels (own parts, borrowed parts, not two) give the within-pair
+area for own parts against each failure kind, to show which failure the score can see.
 
 **Shuffled control.** At each step the labels are shuffled within each pair 2,000 times (seed 0) and the within-pair area recomputed, giving
 the score's chance band on these exact couples.
