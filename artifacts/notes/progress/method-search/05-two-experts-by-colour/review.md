@@ -103,3 +103,21 @@ saw an object that is neither red nor blue. The 32-per-cell eye calls will say h
 The corrector moves the plain product by 0.004, under the 5 points the bars ask for. The mask paste leads both by about 0.48. Owed before
 any verdict: the owner's answers on the scorer (question 114) and the checker row (question 116), the experts-alone check scored, and the
 32-per-cell eye calls.
+
+**The eye calls.** Seeds 0 to 31 of every cell in the three rows, 864 pictures, were shuffled under neutral names onto 54 sheets of 16 at
+224 pixels and counted by two blind reviewers in opposite orders: red, blue and other-coloured objects, and whether any red object touches
+a blue one. A picture is exact when it holds the asked red and blue, nothing else, and no red touching blue. The two agree on that verdict
+for 864 of 864 pictures, so no third call was needed, and on all three counts for 796.
+
+| Row | Exact by eye, 288 pictures | 1 red + 1 blue | Pictures holding an object of another colour | Red touching blue |
+|---|---:|---:|---:|---:|
+| Plain product | 0.000 | 0.00 | 288 | 0 |
+| Corrector | 0.000 | 0.00 | 288 | 0 |
+| Mask paste | 0.205 | 0.59 | 0 | 206 |
+
+The eye and the scorer part ways on the mask paste: about 0.5 by the scorer, 0.205 by eye. In most pastes the blue object lies over the red
+one and leaves a red sliver beside it (seeds 2, 11, 25 and 30 at 1 red + 1 blue), which the reviewers call touching and the scorer reads as
+one red and one blue: it trained on real renders, where the generator never lets objects overlap, so it cannot judge "all separate" on a
+paste. Every plain and corrector picture holds a dark object that is neither red nor blue, so their scorer share near 0.03 is its error on
+objects it never saw. The scorer's call on each of these 864 pictures is being computed (job 95689) to give the exact disagreement rate the
+design's inconclusive rule reads.
