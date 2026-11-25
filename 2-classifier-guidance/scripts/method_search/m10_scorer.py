@@ -33,7 +33,7 @@ PER_SET = 250
 TRAIN_PER_SET = 200
 MIN_HELD_OUT_EXACT = 0.95
 MIN_OVERFIT_RIGHT = 15
-EPOCHS = 40
+EPOCHS = 60
 OVERFIT_STEPS = 300
 BATCH = 64
 LEARNING_RATE = 1e-3
@@ -115,13 +115,14 @@ def train(args):
     run = None
     try:
         import wandb
-        run = wandb.init(entity="prime_lab", project="poe-repair-animals-compose", group="loop-6-m10", name="m10-count-scorer",
+        run = wandb.init(entity="prime_lab", project="poe-repair-animals-compose", group="loop-6-m10", name="m10-count-scorer-cosine",
                          config={"epochs": EPOCHS, "batch": BATCH, "lr": LEARNING_RATE, "train": len(x_train), "held_out": len(x_held)},
                          settings=wandb.Settings(x_service_wait=300))
     except Exception as error:   # the scorer's result is written to disk either way
         print(f"W&B unavailable: {error}", flush=True)
     model = Scorer()
     optimiser = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
+    schedule = torch.optim.lr_scheduler.CosineAnnealingLR(optimiser, T_max=EPOCHS)   # a fixed rate swung held-out exact from 0.95 to 0.52
     generator = torch.Generator().manual_seed(SEED)
     for epoch in range(EPOCHS):
         model.train()
@@ -134,6 +135,7 @@ def train(args):
             loss.backward()
             optimiser.step()
             total += float(loss) * len(batch)
+        schedule.step()
         exact = float((counts(model, x_held) == y_held).all(1).float().mean())
         if run:
             run.log({"train/loss": total / len(order), "held_out/exact": exact}, step=epoch)

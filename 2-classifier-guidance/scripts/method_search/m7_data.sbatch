@@ -36,7 +36,7 @@ case "$STAGE" in
     done
     "$PY" "$S" pack-labelled --renders "$R2" --out "$D2" --sets "r1,r2,r3" --count 6 --name "r-overfit-18"; rc=$? ;;
   m10-scorer) # step M10: the red and blue count scorer, overfit on 16 real renders, then trained on 3,200 and held out on 800 against 95%
-    O=$ROOT/m10/scorer; mkdir -p "$O"
+    O=$ROOT/m10/${SCORER_DIR:-scorer}; mkdir -p "$O"
     "$PY" "$(dirname "$S")/m10_scorer.py" overfit --renders "$ROOT/m7/s2/renders" --out "$O"; rc=$?
     [ "$rc" -eq 0 ] && { "$PY" "$(dirname "$S")/m10_scorer.py" train --renders "$ROOT/m7/s2/renders" --out "$O"; rc=$?; } ;;
   scorer)
