@@ -39,7 +39,7 @@ point every method shares.
 
 Eq. 5 with w_i = 1 asks for (2, 1) as v(x_t | right) + v(x_t | top) − v(x_t). With exact velocities:
 
-- within one IID silo, 0.0% of samples land within 0.5 of (1, 1); they collapse near the middle, mean (0.09, 0.09);
+- within one IID silo, 0.0% of samples land within 0.5 of the missing cell's centre at (1, 1); they collapse near the middle, mean (0.09, 0.09);
 - across the non-IID silos (right from silo 1, top from silo 2, the unconditional velocity from silo 1), 0.0% again, in a streak at x = 0, mean (0.00, 0.99);
 - with all four cells in the data, 99.9% land in the cell, mean (0.99, 0.99) (`toy.ii_sum_rule_missing`).
 
@@ -65,7 +65,7 @@ grid it is zero to machine precision, 2.8 × 10⁻¹⁶ (`toy.iii_I_t_mean_norm`
 
 <a href="figures/03d-penalty-on-one-silo.png"><img src="figures/03d-penalty-on-one-silo.png" width="200" alt="Three panels: mean I_t against t for five values of lambda, falling as lambda grows; samples of the sum rule for (2,1) moving from the middle toward the missing cell but stopping short; the share within 1.0 of the cell rising from 0.7% to 80% while the share inside the cell stays at 0%, and a run trained three times longer dropping back to 11.1%."></a>
 
-| λ_CI | mean \|I_t\| on the held cells' paths | (2, 1) samples within 1.0 of (1, 1) | within 0.5, the cell itself | mean of the (2, 1) samples |
+| λ_CI | mean \|I_t\| on the held cells' paths | (2, 1) samples within 1.0 of the cell's centre at (1, 1) | within 0.5, the cell itself | mean of the (2, 1) samples |
 |---:|---:|---:|---:|---|
 | 0 | 0.371 | 0.7% | 0.0% | (0.12, 0.18) |
 | 0.3 | 0.109 | 28.0% | 0.0% | (0.25, 0.29) |
@@ -85,7 +85,7 @@ penalty on the IID split (Fig. 3, right half).
 
 <a href="figures/03e-penalty-across-silos.png"><img src="figures/03e-penalty-across-silos.png" width="200" alt="Non-IID split: after Stage I the (2,1) samples form a streak at x = 0 with none in the cell; after one DCFM-A round 79.1% land in the cell. A curve panel shows the routed gap falling from 1.176 to 0.303 while each silo's own-model gap rises from 0.012 to 0.232."></a>
 
-| Non-IID, λ_CI = 1 | gap routed across silos | gap with own model only | (2, 1) samples within 0.5 of (1, 1) | within 1.0 | mean |
+| Non-IID, λ_CI = 1 | gap routed across silos | gap with own model only | (2, 1) samples within 0.5 of the cell's centre at (1, 1) | within 1.0 | mean |
 |---|---:|---:|---:|---:|---|
 | Stage I with the local penalty | 1.176 | 0.012 | 0.0% | 82.7% | (0.02, 0.98) |
 | after one DCFM-A round | 0.303 | 0.232 | 79.1% | 100.0% | (0.70, 1.02) |

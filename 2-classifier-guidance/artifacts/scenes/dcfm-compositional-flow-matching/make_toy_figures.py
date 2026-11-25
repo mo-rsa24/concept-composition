@@ -98,7 +98,7 @@ def fig_b():
         scatter(ax, A[f"ii_{key}"], RED)
         d = TOY["ii_sum_rule_missing"][key]
         frame(ax, title)
-        ax.text(0, -1.85, f"{share(d['shares']):.1f}% land within 0.5 of (1, 1); mean ({d['mean'][0]:.2f}, {d['mean'][1]:.2f})",
+        ax.text(0, -1.85, f"{share(d['shares']):.1f}% land within 0.5 of the (2,1) centre; mean ({d['mean'][0]:.2f}, {d['mean'][1]:.2f})",
                 ha="center", fontsize=8, color=INK)
         ax.set_xlabel("first coordinate (left -1, right +1)")
     axs[0].set_ylabel("second coordinate (top +1, bottom -1)")
@@ -163,8 +163,8 @@ def fig_d():
     lv = [float(l) for l in lams]
     w1 = [100 * d[l]["missing_within_1_of_cell"] for l in lams]
     w05 = [share(d[l]["missing_shares_r0.5"]) for l in lams]
-    ax.plot(lv, w1, "o-", color=RED, lw=1.6, label="within 1.0 of (1, 1)")
-    ax.plot(lv, w05, "s-", color=RED, lw=1.0, alpha=0.6, label="within 0.5 of (1, 1), the cell itself")
+    ax.plot(lv, w1, "o-", color=RED, lw=1.6, label="within 1.0 of the (2,1) centre")
+    ax.plot(lv, w05, "s-", color=RED, lw=1.0, alpha=0.6, label="within 0.5 of the (2,1) centre, the cell itself")
     long = TOY["iv_iid_local_penalty_12000_steps"]
     ax.plot([1.0], [100 * long["missing_within_1_of_cell"]], marker="D", color=INK, ls="none",
             label=f"$\\lambda_{{CI}}$ = 1 trained 3x longer: {100 * long['missing_within_1_of_cell']:.1f}%")
@@ -191,7 +191,7 @@ def fig_e():
         scatter(ax, A[f"iv_non_iid_{key}_missing"], RED, n=900)
         frame(ax, title)
         r = d[key]
-        ax.text(0, -1.85, f"{share(r['missing_shares_r0.5']):.1f}% within 0.5 of (1, 1), {100 * r['missing_within_1_of_cell']:.1f}% within 1;"
+        ax.text(0, -1.85, f"{share(r['missing_shares_r0.5']):.1f}% within 0.5 of the (2,1) centre, {100 * r['missing_within_1_of_cell']:.1f}% within 1;"
                 f" mean ({r['missing_mean'][0]:.2f}, {r['missing_mean'][1]:.2f})", ha="center", fontsize=8, color=INK)
         ax.set_xlabel("first coordinate (left -1, right +1)")
     axs[0].set_ylabel("second coordinate (top +1, bottom -1)")
