@@ -687,9 +687,9 @@
    "state": "doing",
    "serves": "Paper 1",
    "objective": "Build and test",
-   "updated": "2026-11-25T18:27:13+02:00",
+   "updated": "2026-11-25T18:38:58+02:00",
    "started": "2026-11-25T12:46:44+02:00",
-   "note": "both experts trained and backed up on /datasets (final quarter 0.83 red, 0.90 blue); comparison set up on red's RunPod 4090; scorer rerun (job 95532)"
+   "note": "comparison running on red's RunPod 4090: all three models on the pod, checksums matched; plain product smoke fuses red and blue into dark objects (the floor); part A (blue sources, four plain blocks, checker training) running"
   },
   {
    "id": "D4",
