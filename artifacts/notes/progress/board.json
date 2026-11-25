@@ -3269,8 +3269,10 @@
    "holds": "M12",
    "default": "A",
    "by": "s6",
-   "state": "open",
-   "asked": "2026-11-25T07:13:07+02:00"
+   "state": "answered",
+   "asked": "2026-11-25T07:13:07+02:00",
+   "answer": "Owner, in Loop 13's session, 2026-11-25: A, with one rule added. Build the size-corrected reader as a new reader with its bar written first: each animal's share of cells divided by the share it is expected to take, with how 'expected' is measured fixed in the design before running. Add an extra-animal rule: a picture that scores high on cells but shows more than two animals, read by the existing count checker, counts as a failure (boar and pheasant scored 0.403 with 0 of 8 clear because extra pheasants inflate the smaller animal's share). Test on 8 fresh CO3 seeds per pair, never on the 96 tuning trajectories already read; about 1.2 GPU-hours in bigbatch with the faulted nodes excluded.",
+   "answered": "2026-11-25T07:24:21+02:00"
   },
   {
    "id": 107,
