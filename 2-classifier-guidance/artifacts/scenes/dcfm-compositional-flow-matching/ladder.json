@@ -1,0 +1,39 @@
+{
+  "subject": "DCFM, Compositional Generative Modeling from Decentralized Data (Morshed and Boddeti, arXiv 2606.10153, ICML 2026): flow models trained in data silos that share models but never images, retrained with a conditional-independence penalty so a sum of single-attribute velocities can sample combinations no silo holds",
+  "kind": "paper",
+  "pdf": "/home/molef/PhD/concept-composition/artifacts/notes/progress/targets/pdfs/2606.10153.pdf",
+  "landing": "standalone, /home/molef/PhD/concept-composition/2-classifier-guidance/artifacts/scenes/dcfm-compositional-flow-matching/",
+  "pace": "unattended (--auto), question round answered by the owner",
+  "published": "nothing: local files only, nothing committed",
+  "open_first": "README.md",
+  "notation": "NOTATION.md",
+  "numbers": "dcfm_numbers.json and toy_arrays.npz, from make_dcfm_numbers.py",
+  "figure_check": "figcheck.py: every figure script refuses to save if a line crosses a box, picture or label, a label overlaps a box, or a label spills out of its box",
+  "route": "route-zoom-ladder-dcfm.md",
+  "code_checkout": null,
+  "code_note": "DCFM's code is not public (checked 2026-11-25). CoInD's public code (github.com/sachit3022/compositional-generation) implements the independence penalty DCFM carries; cited, not cloned or run.",
+  "colour_key": {
+    "inputs": "#1f5fd0",
+    "experts_and_hidden_units": "#1d6b3a",
+    "outputs": "#c0262d",
+    "interaction_term_penalty_gradient_push": "#c8680a",
+    "fixed_frozen_off": "#6b7a88"
+  },
+  "colour_concordance": "shared with the Paper 1 ladder (paper-1-experts-that-never-met); the composed prediction v-hat is green, as on that ladder",
+  "style": {
+    "level_0": "annotated explainer, from ~/.claude/skills/zoom-ladder/scripts/annotated_explainer.py (brackets, cards, a traced window, a zoomed inset, readable result bars), modelled on annotated-overviews/loop-6.png",
+    "level_0_5": "clean cheat-sheet: thin outlines, a soft glow on the part in question, faded grey for frozen; families guidance (vector sum tip to tail, 01b), score-field (01b contours), product of experts (the sum rule as the product's score)",
+    "maths": "TeX on the page, each step's equations also rendered with matplotlib mathtext in maths/",
+    "level_2": "matplotlib panels on DCFM's own 2-D toy, colour key as above"
+  },
+  "rungs": {
+    "level_0": {"state": "built", "files": ["00-the-overview.md", "figures/00-overview.png", "figures/00-overview.svg", "make_overview.py", "digits.py"]},
+    "level_0_5": {"state": "built", "files": ["01-the-network-view.md", "figures/01a-stage-one-local-training.png", "figures/01b-sum-rule-tip-to-tail.png", "figures/01c-the-penalty.png", "figures/01d-what-crosses-between-silos.png", "make_network_view.py"], "svg": "beside each PNG"},
+    "maths": {"state": "built", "files": ["02-the-maths-step-by-step.md", "render_maths.py", "maths/ (18 PNGs: eq01 to eq17, a1, a2)"]},
+    "level_1": {"state": "skipped", "why": "the owner skipped the illustration rung for DCFM"},
+    "level_2": {"state": "built", "files": ["03-the-toy.md", "toy_dcfm.py", "make_toy_figures.py", "figures/03a-each-silo-alone.png", "figures/03b-sum-rule-missing-cell.png", "figures/03c-interaction-term.png", "figures/03d-penalty-on-one-silo.png", "figures/03e-penalty-across-silos.png"]},
+    "level_3": {"state": "skipped", "why": "no public code to walk (checked 2026-11-25)"},
+    "companion": {"state": "skipped", "why": "not asked for; the maths page carries each equation's worked number"},
+    "close": {"state": "built", "files": ["README.md"]}
+  }
+}
