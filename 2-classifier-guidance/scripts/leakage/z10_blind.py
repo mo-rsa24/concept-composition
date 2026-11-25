@@ -91,6 +91,7 @@ def bar(keydir, *settled_files):
     rows = {}
     for f in settled_files:
         rows.update(json.loads(Path(f).read_text())["settled"])
+    rows = {i: r for i, r in rows.items() if r["pair"] != "a_badger__x__a_magpie"}  # control 3, a training pair, reported apart
     by = {}
     for r in rows.values():
         by[(r["pair"], r["seed"], f"{r['weight']:.2f}")] = r["rung"]
