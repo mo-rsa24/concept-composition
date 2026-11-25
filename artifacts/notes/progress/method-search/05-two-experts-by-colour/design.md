@@ -132,7 +132,7 @@ whether a checker moves that point.
 ## Watching the full runs, and when to stop one
 
 The two experts train on RunPod RTX 4090 pods with the same arguments as the cluster job (`m10_pod/run_ladder.sh`), 128 images per pass
-and batch 256; every sampling row later runs on one card type, the cluster's RTX 3090s. Each full run saves a checkpoint every quarter
+and batch 256. Each full run saves a checkpoint every quarter
 (500,224 images). The owner asked to see each quarter and to stop a run that is failing; this rule was written on 2026-11-25, before the
 first quarter.
 
@@ -149,6 +149,50 @@ quarter's mean training loss comes from `stats.jsonl`.
 |---|---|
 | any quarter | the loss is not a number, or the samples are blank or noise by eye |
 | 75% (1,500,672 images), the first check after half the run | the right-count share is not above its value at 50% and is below 0.75 times the counter's ceiling on real pictures of that colour (0.62 for red, 0.65 for blue), or the quarter's mean loss is more than 0.05 above the 50% quarter's |
+
+## Running the comparison
+
+These settings were written on 2026-11-25, after the experts finished training and before any comparison row ran. The owner chose, through
+Loop 13, to run every GPU row on one RunPod RTX 4090 (the red expert's pod), so every row shares a card type, within about 7 GPU-hours.
+The scorer trains on the cluster's CPUs.
+
+**Models.** Each expert's final 0.100 EMA snapshot (2,000,896 images) and M7's empty-scene model, its final 0.100 snapshot.
+
+**The product.** At each sampler step the three denoised estimates combine as D = D_red(x; σ, x) + D_blue(x; σ, y) − D_empty(x; σ), the
+product of experts written in denoised form. EDM2's sampler: 32 Heun steps, σ from 80 to 0.002 with ρ = 7, no added noise. Each cell runs
+seeds 0 to 1,023, and a seed gives the same starting noise in every row.
+
+**The count checker.** It reads the two maps M_red = D_red − D_empty and M_blue = D_blue − D_empty at the noisy picture (6 channels), the log
+of σ and the asked counts (x and y, each one of three), and gives one logit: the picture will hold exactly x red and y blue objects, all
+separate. The network is the scorer's four convolution blocks with those inputs.
+
+- **Its training set.** Paste sources are each expert's samples at seeds 100,000 to 100,511, 512 per count, never seeds 0 to 1,023. A
+  training picture lays a blue sample's foreground over a red sample, as the mask paste does. It is a positive when no blue foreground pixel
+  lies within 1 pixel of a red foreground pixel and it is asked the counts its sources were asked for. Negatives come in equal number from
+  two kinds: the foregrounds touch or overlap, asked their sources' counts; or they are apart, asked one count that differs by 1. Each picture
+  is noised at a σ drawn from the push window. Seeds 100,410 to 100,511 are held out.
+- **Its bar, before its row runs.** A balanced accuracy of at least 0.75 on the held-out pastes, the digit test's bar.
+- **The push.** On sampler steps 10 to 14 (σ 10.5 to 3.8), which cover the digit test's window by noise level (σ 13.1 to 3.1), each
+  denoised estimate moves to D + b · ‖x − D‖ · g / ‖g‖, where g is the gradient of the checker's logit with respect to x and b = 0.4, the
+  digit test's frozen value, not tuned here. A zero push (b = 0) must match the plain product to within 1e-5 per pixel.
+
+**The corrector.** After every sampler step to a σ above 0, two unadjusted Langevin steps on the product at that σ: x ← x + ε·s + √(2ε)·z,
+with s = (D − x)/σ², ε = 0.05·σ² and z drawn from the seed's own generator. Du et al.'s sampler family; the step count and size are set here
+and not tuned.
+
+**The mask paste.** The red expert's sample at count x and the blue expert's at count y, both at the cell's seed, with the mean empty scene
+taken over 1,024 empty-scene samples at seeds 0 to 1,023.
+
+**Reporting as it goes.** Each row runs in four blocks of seeds (0 to 255, 256 to 511, 512 to 767, 768 to 1,023) over all 9 cells. After each
+block the owner gets a grid (the first 8 seeds of each cell) and the exact share so far, beside the plain product's on the same seeds.
+
+**When to stop early.** These only stop failing work and never declare a result.
+
+| What | Stop when |
+|---|---|
+| any row | the measured rate, after its first block, puts the whole comparison past 8 GPU-hours: stop and ask the owner |
+| the count checker's training | its held-out balanced accuracy at half its updates is 0.55 or lower |
+| the count checker's row | after its second block, its exact share over the seeds done is at or below the plain product's on the same seeds; the row is then reported as a null on those 4,608 images |
 
 ## What this cannot say
 
