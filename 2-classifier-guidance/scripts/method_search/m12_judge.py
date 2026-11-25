@@ -67,7 +67,7 @@ def label(items, path, out):
 def balanced(rows, clear):
     pos = [judge_two_clear(r) for r in rows if clear[(r["pair"], r["seed"])]]
     neg = [not judge_two_clear(r) for r in rows if not clear[(r["pair"], r["seed"])]]
-    return round((np.mean(pos) + np.mean(neg)) / 2, 4), len(pos), len(neg)
+    return round(float((np.mean(pos) + np.mean(neg)) / 2), 4), len(pos), len(neg)
 
 
 def control(args):
@@ -82,7 +82,7 @@ def control(args):
     ok = [r for r in rows if "verdict" in r]
     ba, npos, nneg = balanced(ok, clear)
     result = {"labelled": len(ok), "errors": len(rows) - len(ok), "two_clear_blind": npos, "others_blind": nneg,
-              "balanced_accuracy": ba, "bar": BAR, "passes": ba >= BAR, "tokens": dict(zip(("input", "output"), spent(args.out)))}
+              "balanced_accuracy": ba, "bar": BAR, "passes": bool(ba >= BAR), "tokens": dict(zip(("input", "output"), spent(args.out)))}
     (args.out / "judge-control.json").write_text(json.dumps(result, indent=1) + "\n")
     print(json.dumps(result))
 
@@ -102,7 +102,7 @@ def estimates(args):
         ok = [r for r in rows if "verdict" in r and r["step"] == st]
         ba, _, _ = balanced(ok, clear)
         per_step[st] = {"labelled": len(ok), "balanced_accuracy": ba,
-                        "judge_two_clear": sum(judge_two_clear(r) for r in ok)}
+                        "judge_two_clear": int(sum(bool(judge_two_clear(r)) for r in ok))}
     reached = [st for st, v in per_step.items() if v["balanced_accuracy"] >= BAR]
     result = {"bar": BAR, "per_step": per_step, "first_step_at_bar": reached[0] if reached else None,
               "tokens": dict(zip(("input", "output"), spent(args.out)))}
