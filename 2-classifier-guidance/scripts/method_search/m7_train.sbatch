@@ -3,7 +3,7 @@
 #SBATCH --partition=biggpu
 #SBATCH --nodes=1
 #SBATCH --time=12:00:00
-#SBATCH --exclude=mscluster107,mscluster50,mscluster51,mscluster71,mscluster82
+#SBATCH --exclude=mscluster107,mscluster50,mscluster51,mscluster71,mscluster82,mscluster48
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-6/logs/%x-%j.log
 # Step M7: train one unconditional edm2-img64-xs model and sample one batch from it. Submit with the code snapshot in SNAP:
 #   sbatch --export=ALL,SNAP=<snapshot> m7_train.sbatch <rung> <set> <images seen> [batch, default 2048]

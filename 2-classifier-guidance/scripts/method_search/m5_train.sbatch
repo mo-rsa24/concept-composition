@@ -3,7 +3,7 @@
 #SBATCH --partition=bigbatch
 #SBATCH --nodes=1
 #SBATCH --time=04:00:00
-#SBATCH --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82,mscluster84
+#SBATCH --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82,mscluster84,mscluster48
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-6/logs/%x-%j.log
 # Step M5: train the clean-pair checker on the current or the balanced list. Submit with the code snapshot in SNAP:
 #   sbatch --export=ALL,SNAP=<snapshot> m5_train.sbatch <smoke|overfit|tiny|full> <current|balanced>
