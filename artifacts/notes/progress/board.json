@@ -897,8 +897,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-25T02:25:49+02:00",
-   "updated": "2026-11-25T02:35:14+02:00",
-   "note": "reviewer named the per-place prediction difference; design and bar written (method-search/07-a-checker-that-reads-identity/design.md); run queued as 94807; judge waits on API approval"
+   "updated": "2026-11-25T02:48:07+02:00",
+   "note": "judge control passes (0.914 vs 0.75, 209k input tokens); per-place run queued as 94807 and 94808"
   },
   {
    "id": "U1",
@@ -1021,7 +1021,8 @@
    "state": "todo",
    "serves": "Paper 2",
    "objective": "Build and test",
-   "updated": "2026-11-24T17:41:35+02:00"
+   "updated": "2026-11-25T02:47:39+02:00",
+   "note": "Held by a board question on cost (about 14 GPU-hours against 7) and training size (about 70 animal wrong-pair pictures)"
   },
   {
    "id": "V6",
@@ -3115,8 +3116,19 @@
    "holds": "M12",
    "default": "no to both: the reader waits in Slurm, and the judge's diagnostic waits unlabelled",
    "by": "s13",
+   "state": "answered",
+   "asked": "2026-11-25T02:35:21+02:00",
+   "answer": "Owner, in chat, 2026-11-25: yes to both. (1) Loop 6's per-place identity reader (step M12, about 0.3 GPU-hours) runs on mscluster107 card 1 inside the other user's job 94699 under the shared-device rules (environment/hpc/execution-protocol.md step 3) and the 30-second stop rule, cancelling its Slurm copy 94807; the approval ends when 94699 ends. (2) The judge reads the 672 pictures (six steps of 96 clean estimates plus the 96 finished pictures as its control) on the owner's Anthropic key, about 1.5 million input tokens, counted against question 15's unspent budget of 1.46 million input and 67,000 output tokens; if it would go materially past that, stop and ask.",
+   "answered": "2026-11-25T02:45:11+02:00"
+  },
+  {
+   "id": 102,
+   "question": "Loop 8, step V4 (an identity checker in signature form pushing on CO3, set by question 86). Before it runs, two problems with its design. Cost: each signature read is 11 SDXL calls (empty, the two subjects, eight others); from measured times (CO3 43 s a picture, about 0.9 s per gradient step), training on M5's list at several noise levels with fresh noise is 7 to 13 GPU-hours, the CO3 read check about 3, the pushed and random rows about 4.5, so about 14 in all against the design's 7, with about 16 of Loop 8's 30 left, and some single jobs over the 8-hour limit. Data: M5's balanced list has 431 clean and 267 wrong-pair pictures (plus 142 hybrids), but animals only leaves about 163 clean and 70 wrong-pair (rough count by name); the digit checker memorised its training with 550 negatives. Options: (A) gate first and cheaper: keep object pairs in training (the signature never names the subject), label 0 = wrong pair plus hybrid (borrowed parts, CO3's failure), 4 other prompts instead of 8, a fixed pool of 4 noise levels per window with 2 noise draws per picture; run only training and the CO3 read check (about 5 to 6 GPU-hours), and the pushed rows (about 3.5 more) only if the read passes the question-96 gate; (B) replace the signature by Loop 6's SDXL readout features, one SDXL call per read, about 4 times cheaper, which departs from question 86's signature form; (C) close V4 as not run: on digits identity is not readable on sampler states, and Loop 6's checkers read CO3's states at best 0.648 (area under the curve about 0.71), so Loop 8 ends with the digit results.",
+   "holds": "V4",
+   "default": "A: gate first and cheaper, objects kept in training, label 0 = wrong pair plus hybrid, 4 other prompts, 4 noise levels per window with 2 draws, training and the CO3 read check only (about 5 to 6 GPU-hours), pushed rows only if the read passes",
+   "by": "s8",
    "state": "open",
-   "asked": "2026-11-25T02:35:21+02:00"
+   "asked": "2026-11-25T02:47:39+02:00"
   }
  ]
 }
