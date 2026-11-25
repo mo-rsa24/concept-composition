@@ -28,12 +28,14 @@ or "where are we". The full detail is on [the status page](status.md).
    tuning pairs CO3 rarely fuses animals. In 88 pictures, 33 give one animal the other's parts and
    20 add an extra animal ([the sheet](co3-failure-kinds.png)). CO3's own paper reports neither
    rate. A background search is checking whether any paper does.
-3. **Paper 1 needs measures where pasting can fail.** Pasting separately drawn objects already
+3. **Paper 1 has measures where pasting can fail, and its closest rival.** Pasting separately drawn objects already
    places every object in 1,024 of 1,024 CLEVR images, so counting objects cannot show Paper 1 is
    better. Loop 4 drafted a plan with five measures pasting should fail or tie: which object hides
    which, one light for every object, one object's shadow on the other, seams, and colour staying
-   with its object. Loop 6's two-colour CLEVR renders, the experiment they would score, are still
-   running.
+   with its object. You accepted the plan (question 105). Loop 6's two-colour CLEVR renders, the
+   experiment it scores, are still running. DCFM (arXiv 2606.10153) composes models from separate
+   hospitals' chest X-rays by forcing them to be independent; Loop 14 is turning its eight limits
+   into experiments (step G4).
 4. **Loop 6's session has stopped.** Its jobs keep running, but its identity reader (job 94807)
    finished at about 05:00 and nobody has read it. Restarting Loop 6 gets it read.
 5. **Compute.** A RunPod RTX 4090 draws SDXL 2.5 times faster than a cluster RTX 3090 (5.96
@@ -46,7 +48,8 @@ Answer with `python3 scripts/progress_board.py answer <number> "<your answer>"`,
 
 | # | The question | Default |
 |---|---|---|
-| 105 | Accept Loop 4's evaluation plan for Paper 1 (`targets/paper-1-evaluation-plan.md`): four ways of making a two-colour CLEVR scene, scored on five measures where pasting can fail | the plan stays a draft and nothing is scored by it |
+| 106 | Paper 2's first identity reader, which needs no training, is inconclusive (0.688 against a 0.75 bar). Next: a version that corrects for animals of very different sizes, a trained reader, pushing on it as it is, or stopping? | A: the size-corrected version on 8 fresh seeds per pair, about 1.2 GPU-hours |
+| 107 | Add two points from DCFM, Paper 1's closest rival, to the X-ray part of the evaluation plan: NIH Chest X-ray 14 as the candidate dataset, and DCFM's classifier-recall score reported beside ours | the plan stays as accepted |
 | 96 | Should Paper 2's checkers be judged on ranking good pictures above bad ones instead of their yes-or-no call at zero? | keep the yes-or-no gate, report ranking beside it |
 | 104 | Which model Paper 2 runs on | **held by you** until Paper 2 works on SDXL and beats its rivals there |
 
