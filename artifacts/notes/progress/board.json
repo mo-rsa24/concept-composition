@@ -1155,9 +1155,13 @@
    "needs": [
     "Z9"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "rung 4: a push aligned with the model's own direction",
-   "objective": "the checker trained with a penalty pulling its push toward the expert's own score for the pair, on coloured digits, against the plain checker and the names-only push"
+   "objective": "the checker trained with a penalty pulling its push toward the expert's own score for the pair, on coloured digits, against the plain checker and the names-only push",
+   "started": "2026-11-25T16:57:51+02:00",
+   "finished": "2026-11-25T16:57:51+02:00",
+   "updated": "2026-11-25T16:57:51+02:00",
+   "note": "support: unseen combinations 88.8% vs twin 63.1% and digit-and-colour push 73.8%; review artifacts/notes/progress/leakage/11-gradient-trained-classifier/review.md; W&B zzsttdkd"
   },
   {
    "id": "U1",
