@@ -83,6 +83,15 @@ Session 13 reads every loop on a timer and keeps `artifacts/notes/progress/manag
 
 The manager also decides open board questions for the owner when every option is reversible, inside the loop's budget, and changes no recorded bar or verdict (its prompt lists the rest, which stay the owner's). A loop treats such a decision, marked "Decided by Loop 13 for the owner", as the owner's answer, unless the owner answers again. Write every question so the owner, as the head of the project, can follow it without the loop's internal step codes: say what the work is and why it matters.
 
+## Show a run while it runs
+
+Any run longer than about 30 minutes reports as it goes, so the owner can stop one that is not
+improving. At about each quarter of the run, send one picture grid of what the run is making now and
+the one number it is about, beside the same number at the last report. Before the first report, write
+a futility rule into the run's design: the condition under which it stops early, such as the number
+not rising between two reports after the half-way point. A futility rule only stops a failing run; it
+never declares success, which stays with the bar written before the run.
+
 ## When to stop and ask the user
 
 Stop that step and ask one question, then carry on with any other ready step, when:
