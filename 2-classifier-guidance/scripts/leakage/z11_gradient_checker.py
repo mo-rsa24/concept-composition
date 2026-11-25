@@ -80,6 +80,10 @@ def train(args, split, dev):
     head = CheckerHead().to(dev)
     opt = torch.optim.Adam(head.parameters(), lr=1e-3)
     lam = 0.0 if args.kind == "zero" else LAMBDA
+    hb = torch.load(args.z9 / "arm4" / "traj-held.pt", weights_only=False)
+    hsub = torch.randperm(len(hb["x"]), generator=torch.Generator().manual_seed(7))[:1000]
+    hb = {k: (v[hsub] if torch.is_tensor(v) else v) for k, v in hb.items()}
+    line_file = args.out / "checkers" / "zero-held-cosine.json"
     to = lambda idx: drawn["images"][idx].astype(np.float32) / 127.5 - 1
     log = []
     for step in range(1, args.steps + 1):
@@ -126,11 +130,27 @@ def train(args, split, dev):
         loss = loss_bce + lam * loss_pen
         opt.zero_grad(); loss.backward(); opt.step()
         if step % 250 == 0:
-            log.append({"step": step, "bce": round(loss_bce.item(), 4), "penalty": round(float(loss_pen), 4)}); print(json.dumps({args.kind: log[-1]}), flush=True)
+            log.append({"step": step, "bce": round(loss_bce.item(), 4), "penalty": round(float(loss_pen), 4)})
+            if step % 500 == 0:
+                head.eval()
+                log[-1]["held_cosine"] = cosines(experts, split, head, hb, dev)["median_cos_target"]
+                head.train()
+            print(json.dumps({args.kind: log[-1]}), flush=True)
+            if args.kind == "penalised" and step == args.steps // 2 and line_file.exists():
+                line = json.loads(line_file.read_text())["held_cosine"]
+                if not log[-1]["held_cosine"] > line:
+                    (args.out / "checkers").mkdir(parents=True, exist_ok=True)
+                    (args.out / "checkers" / "futility-stop.json").write_text(json.dumps(
+                        {"step": step, "penalised_held_cosine": log[-1]["held_cosine"], "line_zero_twin": line}, indent=1) + "\n")
+                    print(json.dumps({"FUTILITY_STOP": {"penalised": log[-1]["held_cosine"], "line": line}}), flush=True)
+                    raise SystemExit(3)
     out = args.out / "checkers"; out.mkdir(parents=True, exist_ok=True)
     torch.save({"head": head.state_dict(), "kind": args.kind, "lambda": lam, "steps": args.steps, "pairs": pairs,
                 "perm": {f"{a}-{b}": list(v) for (a, b), v in perm.items()} if perm else None}, out / f"{args.kind}.pt")
     (out / f"{args.kind}-log.json").write_text(json.dumps(log, indent=1) + "\n")
+    if args.kind == "zero":
+        head.eval()
+        line_file.write_text(json.dumps({"held_cosine": cosines(experts, split, head, hb, dev)["median_cos_target"], "step": args.steps}) + "\n")
 
 
 def load_head(args, dev, kind):

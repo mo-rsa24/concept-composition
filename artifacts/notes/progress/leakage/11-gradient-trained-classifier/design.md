@@ -31,6 +31,12 @@ $$L = L_{\text{BCE}} + \lambda \cdot \frac{1}{|P|} \sum_{(d,c) \in P} w \cdot \b
 
 The $\lambda = 0$ twin's held-back cosine: on the 10 held-back pairs' product trajectories at seeds 2,000 to 2,015 (arm 4's states, `z9/arm4/traj-held.pt`), the median cosine between the push's change to the noise prediction and the target. It is the number the penalty must beat. The same cosine on training pairs at seeds 2,000 to 2,015 is printed beside it and is never quoted as evidence. The cosine between the push's change and the dropped term $r_t$ (arm 4's target) is reported as a reading that decides nothing. Two random directions in 3,072 numbers have a cosine spread of about 0.018.
 
+## Reports while training, and a rule that can only stop
+
+Added at the owner's request (2026-11-25, through the manager loop), before the first report. Every 500 training steps each checker prints its losses and its held-back median cosine: the push's change to the noise prediction against the target, on a fixed 1,000 of the held-back states at seeds 2,000 to 2,015. The checkers train in the order $\lambda = 0$ twin, penalised checker, shuffled twin.
+
+**The futility rule.** The $\lambda = 0$ twin's held-back median cosine at its last step is the line. If at step 1,500 of 3,000 the penalised checker's held-back median cosine is not above that line, the penalised run stops, the shuffled twin is not trained, and Z11 is reported as stopped for futility, with no gate and no unseen-pair run. The rule can only stop a run: passing it decides nothing, and the gate below stays the judge.
+
 ## The gate, on the 10 held-back seen pairs, 1,000 matched pictures
 
 1. The held-back median cosine of the penalised checker is at least 0.10 above the $\lambda = 0$ twin's.
