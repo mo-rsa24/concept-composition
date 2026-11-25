@@ -898,8 +898,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-25T02:25:49+02:00",
-   "updated": "2026-11-25T07:40:03+02:00",
-   "note": "second reader: smoke passed (one fresh trajectory, counts 2 at every step); fresh read 95007 and expected shares 95008 queued; scorer ready; blind calls on the fresh 96 next"
+   "updated": "2026-11-25T08:10:55+02:00",
+   "note": "second reader: fresh read 95007 running (41 of 96), expected shares 95008 queued; M10 design now carries question 109's additions"
   },
   {
    "id": "Z8",
@@ -3298,6 +3298,17 @@
    "by": "s14",
    "state": "open",
    "asked": "2026-11-25T07:33:22+02:00"
+  },
+  {
+   "id": 109,
+   "question": "Add four things to Paper 1's evaluation plan from Loop 14's reviewer questions? (1) A fifth row on the two-colour CLEVR test: pasting followed by a published shadow generator, scored on the light, cross-shadow and realism measures, if such a generator runs on 64-pixel CLEVR (unknown). (2) For tuberculosis with silicosis, cavitation inside a silicotic mass as the sign that one finding changes the other, read by someone with radiology training, once a dataset holds both. (3) An audit beside every result listing each image the checker trained on and how it was made. (4) A box-level occlusion score (DepthArb's share of the overlap covered by the nearer object's box) beside the pixel-level occlusion reading. The other 15 reviewer questions are already answered by the plan. Details: artifacts/notes/progress/targets/paper-1-evaluation-plan.md, section 'Reviewer questions'.",
+   "holds": null,
+   "default": "the plan stays as accepted, and the four are listed there as proposals",
+   "by": "s4",
+   "state": "answered",
+   "asked": "2026-11-25T07:44:37+02:00",
+   "answer": "Owner, in chat, 2026-11-25: yes to all four. Paper 1's evaluation plan adds a paste-plus-shadow-generator row (if one runs on 64-pixel CLEVR), cavitation inside a silicotic mass as the cross-finding sign for tuberculosis with silicosis, a list beside every result of each image the checker trained on, and DepthArb's box-level occlusion score beside measure 1.",
+   "answered": "2026-11-25T08:02:30+02:00"
   }
  ]
 }
