@@ -1,0 +1,11 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TB
+classDef known fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#111111
+classDef part fill:#fff4e5,stroke:#e65100,stroke-width:2px,color:#111111
+classDef open fill:#fdecea,stroke:#c62828,stroke-width:2px,color:#111111
+R1["1. On a finished picture, can a network SEE the concept?<br/>two things, how many, red stays on the backpack,<br/>does the cat have dog parts"]:::part
+R2["2. Does that hold for ANY objects?<br/>6 apples, a red backpack on a brown table"]:::part
+R3["3. Can it read the concept from a HALF-DRAWN picture,<br/>early in sampling, as a score?"]:::open
+R4["4. Does its direction line up with<br/>Stable Diffusion's own score space?"]:::open
+R5["5. Push on 'count' and more items appear;<br/>push on 'binding' and colours stay put"]:::part
+R1 --> R2 --> R3 --> R4 --> R5
