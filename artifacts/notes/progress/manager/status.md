@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-25 03:05 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-25 03:12 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -28,6 +28,7 @@ overrule one, answer it again: `python3 scripts/progress_board.py answer <number
 | # | The question | Decided | Why |
 |---|---|---|---|
 | none | Loop 8's method review found the removal test feeds nothing since your answer on 86 | **Close the removal test (V7) as not run** after the cheap visibility check; the full retraining from question 95 is skipped | Reversible, saves about 1.5 GPU-hours, no bar changed; it was option B of question 95. |
+| 101 | Card 1 and your Anthropic key for Loop 6's first identity reader | yes to both. The host job on mscluster107 then ended, so the reader runs through Slurm on our free `biggpu` slot instead; the judge's tokens count against question 15's unspent budget |
 | 100 | Pause Loop 6's clean-pair checker search and look for a checker that reads which subjects are drawn? | A: yes. The architecture and label steps (about 31 GPU-hours) are paused; a reviewer pass picks the identity reader to try first before anything is built |
 | 99 | May loops use mscluster107's idle card 1 again, inside another user's new job? | yes: one run at a time, Loop 12 then Loop 8 then Loop 6, with the stop rule; it ends when their job ends |
 | 98 | What does Paper 2 test next, now that Loop 12 found neither where borrowed parts start nor a working fix? | **Each animal's own prediction inside its drawn box** at steps 5 to 30, on the same 48 pictures, after a free text-only check, run by Loop 12; about 0.8 GPU-hours, its 48-picture bar written first | The test the first fix never ran, named by both reviews; the text-encoder fix stays held behind the free check. |
@@ -66,7 +67,6 @@ Newest first. A default happens only if you answer with it; nothing changes whil
 
 | # | The question, in one line | Why it is yours | Default | Waiting |
 |---|---|---|---|---|
-| 101 | Two small asks for Loop 6's first identity reader: (1) run it (about 0.3 GPU-hours) on mscluster107's idle card 1 under the same guards instead of waiting in the queue; (2) let the judge read CO3's in-between pictures on your Anthropic key, about 1.5 million input tokens, reusing the budget question 15 approved for the now-paused checker comparison. The queued job is 94807 (the question's text says 94854 in error) | a shared-card run and spending on your key both need your yes | no to both: the run waits in Slurm and the judge waits | just filed |
 | 96 | Paper 2's checkers are gated on their yes-or-no call at zero (75% right), but the push follows only the direction of the checker's gradient, so ranking good pictures above bad ones is what steers it. Loop 6's checker ranks at about 0.70 but calls 0.602 right; Loop 8's ranks at 0.78 but calls 0.651. Keep the recorded gate, or switch to ranking? | changes a recorded bar after seeing which one passes on similar checkers | keep the recorded gate, report ranking beside it, and bring a pass on ranking alone back to you | just filed |
 
 Your own reading step (confirm the draft statements from your readings) is ready on the board.
@@ -96,7 +96,7 @@ Read at 02:13 from `squeue`, `sacct` and `sinfo`; down nodes from `sinfo -R` at 
 | Longest wait | the queue as a whole: nothing of ours finished between 00:13 and 01:13 |
 | Nodes out of service | `bigbatch`: 12 down and 5 drained of 48. `biggpu`: 2 down and 2 drained of 7, including mscluster108 and mscluster111, drained at 09:27 and 09:10 today after a failed job kill |
 | Idle capacity | none: at 17:43 every working `bigbatch` and `biggpu` node was allocated. mscluster107 is now another user's `biggpu` job (94610, 6-hour limit, started 17:36); its second card sits idle at 170 MiB, but their process holds it, so it is not ours to use. Your interactive job 83423 on that node no longer appears in the queue |
-| Shared card | **mscluster107 card 1, approved again by you on question 99**, for as long as the other user's job 94699 runs. Loop 12 (02:02 to 02:10), Loop 8 (02:13) and Loop 6 (02:16 to 02:22) each finished there with the stop rule never firing and nothing left behind. The three jobs you approved are done; the card is idle again |
+| Shared card | **Not in use.** The other user's job on mscluster107 ended by 03:12, so question 99's approval has lapsed; the node is free in Slurm, and Loop 6's identity reader goes there through our `biggpu` slot. A new shared-card run needs a new yes from you |
 | Compute against budget since 2026-11-21 | Loop 6: 53.4 node-hours of 87 (34.8 were CLEVR renders that may have used no GPU). Loop 8: 11.9 of 30. Loop 12: about 0.4, no total set. Slurm here records no GPU count, so these are node-hours, an upper bound |
 
 **What would make the queue move faster:** little within our control. There is no idle `biggpu` card,
