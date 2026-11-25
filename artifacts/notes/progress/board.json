@@ -909,8 +909,8 @@
    "needs": [],
    "state": "doing",
    "started": "2026-11-25T06:48:38+02:00",
-   "updated": "2026-11-25T07:04:18+02:00",
-   "note": "identity passed byte for byte; cases picked (puma x condor, zebra x flamingo, seal x gull at 6001 for plain PoE and the joint prompt); screening finishing on card 1; then one bigbatch job, 99 pictures"
+   "updated": "2026-11-25T07:21:54+02:00",
+   "note": "Z8 proper (99 pictures) running on mscluster107 card 1 under question 103, host job 94793"
   },
   {
    "id": "K7",
@@ -3278,8 +3278,10 @@
    "holds": null,
    "default": "the plan stays as accepted in question 105",
    "by": "s4",
-   "state": "open",
-   "asked": "2026-11-25T07:13:12+02:00"
+   "state": "answered",
+   "asked": "2026-11-25T07:13:12+02:00",
+   "answer": "Owner, in Loop 13's session, 2026-11-25: yes. NIH Chest X-ray 14 becomes the candidate X-ray dataset, and DCFM's utility (classifier trained on generated X-rays, recall of each disease combination on real ones) is reported beside the plan's both-findings measure.",
+   "answered": "2026-11-25T07:23:02+02:00"
   }
  ]
 }
