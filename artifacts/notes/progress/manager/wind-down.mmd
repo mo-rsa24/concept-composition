@@ -1,0 +1,17 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef done fill:#e6f4ea,stroke:#2e7d32,stroke-width:2px,color:#111111
+  classDef close fill:#f3f3f3,stroke:#888888,stroke-width:2px,color:#555555,stroke-dasharray: 5 5
+  classDef you fill:#fff4e0,stroke:#c77700,stroke-width:2px,color:#111111
+  A["tonight<br/>box rerun finishes<br/>consensus written"]:::plain
+  B["close as finished<br/>box check stage A<br/>keep targets current"]:::done
+  C["decommission<br/>tune the winning method<br/>freeze one recipe<br/>draw the MNIST networks"]:::close
+  D{"you decide<br/>each paper's shape<br/>go or no-go"}:::you
+  E["Loop 11 files the ledger<br/>and consensus into report/"]:::plain
+  F["close loops 4, 6, 12,<br/>then 11, then the manager"]:::close
+  G["next loops start<br/>from the consensus"]:::plain
+  A --> B
+  A --> C
+  A --> D
+  D --> E --> F --> G
