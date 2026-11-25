@@ -997,8 +997,18 @@
    "serves": "Paper 1 beats its closest rival, DCFM, where it is weak",
    "objective": "question 108's first experiment: plain product of finished experts, plus the checker push, plus the ratio push, against DCFM's printed novel-combination FID",
    "started": "2026-11-25T09:10:58+02:00",
-   "updated": "2026-11-25T09:23:47+02:00",
-   "note": "judge passes (97.9% on real novel digits); experts training (job 95113, 20,000 steps each); arms 1 to 3 and controls written"
+   "updated": "2026-11-25T09:48:04+02:00",
+   "note": "judge passes; experts training (job 95113); arms 1 to 4 designed and coded (arm 4 added by the owner, about 3.3 GPU-hours in all)"
+  },
+  {
+   "id": "M13",
+   "label": "M13 Does the checker's push point where the missing term points",
+   "owner": "s6",
+   "proof": "artifacts/notes/progress/method-search/09-gradient-direction-check/review.md reports, per step 0 to 15, the median and spread of the cosine between the kept readout checker's latent gradient and r_t = eps(joint) - (eps(A) + eps(B) - eps(empty)) on the cached trajectories, beside the random-direction cosine, against a bar written in design.md first",
+   "needs": [],
+   "state": "todo",
+   "serves": "Paper 2's correction acts in the right direction",
+   "objective": "cosine between the kept checker's gradient and the dropped term r_t on cached SDXL trajectories at steps 0 to 15, against a random direction"
   },
   {
    "id": "U1",
@@ -2042,7 +2052,8 @@
     "G2",
     "G3",
     "G4",
-    "Z9"
+    "Z9",
+    "M13"
    ],
    "joiner": "~~~"
   }
@@ -2123,7 +2134,8 @@
   "every question a reviewer will ask, including how separately trained experts interact, with the papers and the measure for each",
   "ranked open problems with a first small experiment and cost each",
   "each of DCFM's eight limits turned into one experiment, with its qualitative picture, its benchmark row, its data and its cost",
-  "question 108's first experiment: plain product of finished experts, plus the checker push, plus the ratio push, against DCFM's printed novel-combination FID"
+  "question 108's first experiment: plain product of finished experts, plus the checker push, plus the ratio push, against DCFM's printed novel-combination FID",
+  "cosine between the kept checker's gradient and the dropped term r_t on cached SDXL trajectories at steps 0 to 15, against a random direction"
  ],
  "brief": {
   "outcome": "two papers, each beating its best rival",
