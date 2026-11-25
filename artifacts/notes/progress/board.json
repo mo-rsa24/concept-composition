@@ -1020,8 +1020,8 @@
    "serves": "Paper 1 beats its closest rival, DCFM, where it is weak",
    "objective": "question 108's first experiment: plain product of finished experts, plus the checker push, plus the ratio push, against DCFM's printed novel-combination FID",
    "started": "2026-11-25T09:10:58+02:00",
-   "updated": "2026-11-25T10:50:38+02:00",
-   "note": "arm 2 meets its bar (76.0% vs 46.9%, FID 12.63 vs 25.87); arm 3 fails its gate (47.0% vs random 78.7% on held-back seen pairs), novel run not reached; arm 4's gate is job 95211"
+   "updated": "2026-11-25T11:27:14+02:00",
+   "note": "arm 2 passes (76.0% vs 46.9%); arm 3 fails its gate; arm 4's gate fails on fit (0.224 vs 0.25) though its pictures pass (89.2% vs 78.8%), decision with the manager; control a is job 95248"
   },
   {
    "id": "M13",
@@ -1107,8 +1107,8 @@
    "serves": "both papers: what a correction should aim at",
    "objective": "joint prompt rendered at M13's 192 CO3 seeds, blind-called, and M13's cosines split by whether the joint drew both",
    "started": "2026-11-25T11:13:54+02:00",
-   "updated": "2026-11-25T11:15:02+02:00",
-   "note": "joint renders: smoke 95234, full 95235; M11's shared-canvas rerun over the floor base follows, one job at a time"
+   "updated": "2026-11-25T11:36:53+02:00",
+   "note": "joint renders running (95235); M13 sign check 95253 queued after the reviewer read the push as minus the gradient; M14 is read only after it"
   },
   {
    "id": "M15",
