@@ -687,9 +687,9 @@
    "state": "doing",
    "serves": "Paper 1",
    "objective": "Build and test",
-   "updated": "2026-11-25T13:19:17+02:00",
+   "updated": "2026-11-25T13:56:33+02:00",
    "started": "2026-11-25T12:46:44+02:00",
-   "note": "all 30,000 expert renders and 4,000 scorer renders done; labelled packing 95420 queued; then the experts' ladder"
+   "note": "labelled datasets packed (15,000 per expert); next the experts' ladder: smoke, overfit on 18, 1%, then full training with count labels"
   },
   {
    "id": "D4",
