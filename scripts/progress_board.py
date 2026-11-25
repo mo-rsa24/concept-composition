@@ -294,7 +294,10 @@ def timing_action(block, steps, moment):
     event = block.get("event_id")
     if all(s["state"] == "done" for s in covered):
         return "done", ("finish" if event and not block.get("finished") else "none")
-    ready = all(steps[n]["state"] == "done" for n in block.get("needs", []))
+    # A block is ready only when its own prerequisites are done and none of its unfinished steps still
+    # waits on another step: a paused step (one whose needs include unfinished work) is not running time.
+    ready = all(steps[n]["state"] == "done" for n in block.get("needs", [])) and all(
+        steps[n]["state"] == "done" for s in covered if s["state"] != "done" for n in s.get("needs", []))
     running = any(s["state"] == "doing" for s in covered)
     state = "running" if running else "ready" if ready else "waiting"
     if not event:
