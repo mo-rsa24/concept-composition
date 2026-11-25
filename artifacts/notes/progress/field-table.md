@@ -1,6 +1,6 @@
 # Field table: who else composes diffusion models
 
-This page lists the 39 papers a reviewer would expect the two papers to cite or beat, each checked
+This page lists the 40 papers a reviewer would expect the two papers to cite or beat, each checked
 against its own PDF. Paper 1 composes diffusion models trained apart. Paper 2 makes one text-to-image model
 draw two separate objects where a product of experts fuses them.
 
@@ -47,7 +47,7 @@ rewriting (93.1 and 96.7), so a deviation must be read from its own column.
 
 ## Paper 1: models trained apart
 
-7 papers.
+8 papers.
 
 | Paper | Found by | Closeness | Needs joint data | What it does | Main number | Where |
 |---|---|---|---|---|---|---|
@@ -58,6 +58,7 @@ rewriting (93.1 and 96.7), so a deviation must be read from its own column.
 | [Catastrophic Compositional Generation: Why Vanilla Diffusion Models Fail to Extrapolate](https://arxiv.org/abs/2606.23920) | both | theory | no | Separates sampler approximation error from score estimation error and shows that when the composed target lies outside the training support, score error dominates and Feynman-Kac correction makes it worse. | Non-factorized out-of-distribution Gaussian, model trained on N = 10000 samples: sliced Wasserstein-2 distance to the target rises from 0.8518 with K = 1 particle to 2.8322 with K = 256, while with analytic scores it falls from 0.6375 to 0.0820. | Page 10, Table 1(d), Section 5.1 |
 | [Compositional Sculpting of Iterative Generative Processes](https://arxiv.org/abs/2309.16115) | both | tool | no | Trains a classifier on samples from pre-trained models and uses classifier guidance to sample their harmonic-mean or contrast composition. | Molecule GFlowNets at beta 32, 5,000 samples per model: 49% of samples from the composition y={SEH,SA,QED} fall in the bin high on all three rewards, against 5% for p_SEH, 5% for p_SA and 13% for p_QED | page 13, Table 1, row (d) |
 | [MCMC-Correction of Score-Based Diffusion Models for Model Composition](https://arxiv.org/abs/2307.14012) | Claude | tool | no | Adds a Metropolis-Hastings-like acceptance step to score-based diffusion by estimating energy differences through line integrals of the score, so MCMC correction works without an energy model. | CIFAR-100 classifier-full guidance, 50k samples, score model: FID 13.3 with HMC-3C against 31.8 with the reverse process. | Page 13, Table 3 |
+| [Compositional Generative Modeling from Decentralized Data (DCFM)](https://arxiv.org/abs/2606.10153) | Loop 14 | partial rival | no raw joint data, but each expert trains against the other experts' frozen models | Trains flow-matching experts on separate data silos, exchanges the models, and adds a conditional-independence penalty across peers (DCFM-A) or distils them into one student on their own samples (DCFM-B), so attribute combinations no silo saw can be sampled. | Colored MNIST, 10 clients, coverage 1/2, non-IID: novel-combination FID 9.15 for DCFM-B and 9.29 for DCFM-A against 17.12 to 38.27 for the six baselines. Chest X-ray results exist only as points in Figure 9 | Page 7, Table 1; page 8, Figure 9 |
 
 ## Paper 2: two objects from one model
 

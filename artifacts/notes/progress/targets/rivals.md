@@ -1,6 +1,6 @@
 # Rivals: every paper the two papers are measured against
 
-This table lists the 25 rival papers, which of our two papers each one rivals, and what it evaluates on. Paper 1
+This table lists the 26 rival papers, which of our two papers each one rivals, and what it evaluates on. Paper 1
 composes separately trained models at inference. Paper 2 restores plurality in one conditional model. The
 [two-paper route](../../../../plans/route-two-papers.md) states both claims.
 
@@ -31,6 +31,7 @@ HTML page loaded.
 | TestTime | 2605.07078v1 | [on the shelf](../../../../../../goal-setting/learning/papers/deep-learning/diffusion-models/compositional-diffusion-models/compositional-generalization/test-time-compositional-generalization-via-concept-discovery.pdf) | 18 | Color-MNIST with 40 held-out slots of 160, and compositional CelebA (p7, p8) | `figures read` |
 | LiftScores | 2505.13740v2 | [on the shelf](../../../../../../goal-setting/learning/papers/deep-learning/diffusion-models/compositional-diffusion-models/scorers/compositional-generation-with-lift-scores.pdf) | 28 | CLEVR position task (Tables 5 to 7, p21, p22). Attend-and-Excite prompts (Tables 3 and 8, p8, p23). The shelf PDF is the ICML 2025 version. Also rivals Paper 2 | `figures read` |
 | LogicalGuidance | 2602.05549v2 | [on the shelf](../../../../../../goal-setting/learning/papers/deep-learning/diffusion-models/compositional-diffusion-models/sampling-composed-models/logical-guidance-for-exact-composition-of-diffusion-models.pdf) | 32 | Colored MNIST and Shapes3D (Tables 2 and 4, p5, p7). CelebA (Table 3, p6) | `figures read` |
+| DCFM | 2606.10153v1 | [downloaded](pdfs/2606.10153.pdf) | 13 | Colored MNIST across 10 clients at coverage 1/2 (p6, p7). OGBench cube-single-play across 2 clients (p7, p8). NIH Chest X-ray 14 at 256 px across 4 clients, 54 disease combinations (p8, p9). Read in [its note](dcfm-compositional-flow-matching-from-separate-silos.md) | `numbers read` |
 
 ## Paper 2: restoring plurality in one model
 
@@ -50,9 +51,9 @@ SuperDiff and LiftScores rival both papers and are counted once each, so the tot
 
 ## For the shelf to take in
 
-The seven papers marked `downloaded` are not on the [paper shelf](../../../../../../goal-setting/learning/papers/Papers.md).
+The eight papers marked `downloaded` are not on the [paper shelf](../../../../../../goal-setting/learning/papers/Papers.md).
 Their PDFs sit in `artifacts/notes/progress/targets/pdfs/`, named by arXiv id: CoInD, PiCo, FreeFuse, DomainExpansion,
-Sculpting, FlipConcept and CFGRevisited.
+Sculpting, FlipConcept, CFGRevisited and DCFM.
 
 ## Published methods checked and left off
 
