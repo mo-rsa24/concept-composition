@@ -535,8 +535,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-24T14:31:20+02:00",
-   "updated": "2026-11-25T01:59:14+02:00",
-   "note": "scoring pass 94783 waits in Slurm; under question 99 it moves to mscluster107 card 1 after Loop 12 and Loop 8, launcher guarded on host job 94699"
+   "updated": "2026-11-25T02:23:40+02:00",
+   "note": "neither trained checker reaches the 0.65 floor on CO3's 96 (balanced 0.648, current 0.617, kept 0.602); question filed on pausing D3 and M2 for an identity reader"
   },
   {
    "id": "D3",
@@ -875,8 +875,8 @@
    "serves": "Paper 2",
    "objective": "Find what fixes identity on CO3",
    "started": "2026-11-25T00:14:17+02:00",
-   "updated": "2026-11-25T00:14:17+02:00",
-   "note": "free text-only check first, then the design and its bar"
+   "updated": "2026-11-25T02:10:47+02:00",
+   "note": "text check null (rho -0.023, p 0.54): text fix held; smoke controls pass; full 96 renders Slurm job 94806"
   },
   {
    "id": "U1",
@@ -1023,11 +1023,14 @@
    "needs": [
     "V6"
    ],
-   "state": "todo",
+   "state": "done",
    "serves": "Paper 2",
    "objective": "Build and test",
-   "updated": "2026-11-24T21:09:57+02:00",
-   "note": "Not run: its gate failed. The identity checker retrained on sampler states reads fresh digits 5 to 9 at 0.552 (bar 0.75); see 10-reading-identity/review.md. Board question on what next."
+   "updated": "2026-11-25T02:15:05+02:00",
+   "note": "closed, not run: no checker reads which digits are present on the sampler's own states at steps 27 to 36 (V6's checker 0.651, retrained 0.552, bar 0.75), and the digit judge itself reads only 0.724 there because most canvases settle their digits later (median step 37 to 38); since board question 86 there is no SDXL removal test for V7 to feed. Record: abstract-checkers/10-reading-identity/review.md",
+   "closed": true,
+   "started": "2026-11-25T02:15:05+02:00",
+   "finished": "2026-11-25T02:15:05+02:00"
   },
   {
    "id": "W1",
@@ -1663,7 +1666,7 @@
    "description": "BEFORE: nothing. It starts by itself when the paper repository (step D1) is done.\n\n1. IT RUNS as the background session 🔬 PhD Loop 5: Reproduce Rivals And Choose Checker, following:\nartifacts/notes/progress/prompts/session-5-reproduce-and-choose.md\n\n2. IT DOES: compares candidate checker architectures on small data, by a selection rule written before any of them trains.\n\n3. YOU DO: answer anything on the waiting picture.\n\nOUTCOME: one chosen architecture, with the comparison saved.\nDONE WHEN: the checker review names the choice and the rule that picked it.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nSCOREBOARD: /home/molef/PhD/concept-composition/artifacts/notes/progress/scoreboard.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: arch",
    "event_id": "l29esd328d9glp7jd5p4fn4ekg",
    "start": "2026-11-22T11:35:00+02:00",
-   "end": "2026-11-25T02:10:16+02:00",
+   "end": "2026-11-25T04:14:19+02:00",
    "synced": "1150295b1faf"
   },
   {
@@ -3071,6 +3074,15 @@
    "asked": "2026-11-25T01:58:24+02:00",
    "answer": "Owner, in chat, 2026-11-25: yes. One run at a time on card 1, shortest first: Loop 12's free text-only check and smoke run (jobs 94790, 94791), then Loop 8's readability check (94781), then Loop 6's read of its two new checkers (94783); each loop cancels its own queued Slurm copy once its shared run starts. All step 3 safety rules apply, plus the owner's rule: the launch script checks card 1 every 30 seconds and stops our run, logging why, as soon as any process not ours passes 1 GB there. This approval ends when job 94699 ends.",
    "answered": "2026-11-25T01:58:24+02:00"
+  },
+  {
+   "id": 100,
+   "question": "Paper 2 pushes CO3 with a checker that scores whether a half-drawn picture is a clean pair. None of the three checkers trained so far can tell CO3's good pictures from its pictures with borrowed parts: on all 96 tuning pictures the best yes-or-no accuracy is 0.648 for the checker trained on a list balanced across pairs, 0.617 for the current list and 0.602 for the kept checker, against a floor of 0.65 and a bar of 0.75 (chance is 0.5). All three rank a good picture above a bad one about 7 times in 10. The next two steps, choosing the checker's architecture and its labels, are designed around this kind of checker and cost about 31 GPU-hours. Options: A (recommended) pause them and move Paper 2's checker search to one that reads which subjects are drawn, starting from Loop 8's identity checker and the attention-map reader among the architecture candidates; B run the architecture step as designed, since one of its two other readers might see the failure; C stop the checker route for Paper 2. Evidence: method-search/01b-balance-the-checker-data/review.md, section on M5's two checkers.",
+   "holds": "D3",
+   "default": "A",
+   "by": "s6",
+   "state": "open",
+   "asked": "2026-11-25T02:23:40+02:00"
   }
  ]
 }
