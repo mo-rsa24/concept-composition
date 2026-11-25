@@ -120,6 +120,8 @@ The finish range is `session_status.py`'s, from the 63 finished steps: fastest p
 
 ## Resources
 
+**RunPod, 2026-11-26 00:50:** the migrated pod is stopped after the picture-reading checker's records were copied and checked (about 30 minutes used). No pod is running.
+
 **RunPod, 2026-11-26 00:15:** the stopped red pod's card was taken, so RunPod moved it to a new RTX 4090 pod, m10-red-4090-migration (47.47.180.32:13911, $0.90/hr), with an empty disk; Loop 6 rebuilds from /datasets for the picture-reading checker (question 116, about 1 GPU-hour). Credit $12.28.
 
 **RunPod, 2026-11-25 21:20:** both pods stopped (blue 18:25, red 21:20), each after a sha256-checked copy to /datasets. The two-colour CLEVR comparison used about 3.7 GPU-hours of the 7 approved. No pod is running.
@@ -148,6 +150,7 @@ Newest first.
 
 | Concerns | Finding | Source |
 |---|---|---|
+| Paper 1's two-colour CLEVR test (Loop 6) | **The picture-reading checker also missed its bar** (0.641 against 0.75, flat from update 250), so neither checker can read block counts and the method row is reported as not run. M10 stands on the blind eye calls: plain 0.000, corrector 0.000, mask paste 0.205 | `/datasets/.../loop-6/m10/comparison/m10-part-c.tar` |
 | Paper 1's two-colour CLEVR test (Loop 6) | **The block counter cannot judge pastes, so the test is inconclusive on its scorer whatever question 114 decides.** Two blind reviewers agreed on all 864 pictures: exact share plain 0.000, corrector 0.000, mask paste 0.205, where the counter said about 0.5 for the paste. Most pastes lay blue over red and leave a red sliver, which the counter, trained on scenes where objects never overlap, reads as two objects. The eye calls are the faithful measure; question 114's retraining would buy nothing | M10's review, commit 2b8c40b3 |
 | Paper 1's two-colour CLEVR test (Loop 6) | **The count checker, Paper 1's method row, missed its training bar**: held-out balanced accuracy 0.645 against 0.75, flat from update 500; 82% on well-separated pastes, 57% touching, 37% one count off. Its push window was carried over from the digit test (σ 10.5 to 3.8), where a digit filled half the canvas; CLEVR blocks are a few pixels at 64 px. A labelled diagnosis at four lower windows is running; moving the window, recorded before the checker's row runs, is yours to call | Loop 6's message, 19:30 |
 | Loop 12 | **Z12 ran 0.2 GPU-hours over** (3.3 against 3.1 approved): three jobs died on /datasets races on mscluster79 and 87, now in `environment/hpc/nodes.md`. Stage A missed its bar, 27 against 26 two clear of 96, and its review reads the miss as too weak to tell (median change 2.3 grey levels) | `leakage/12-aligned-classifier-on-co3/review.md` |
