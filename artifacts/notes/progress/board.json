@@ -898,8 +898,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-25T02:25:49+02:00",
-   "updated": "2026-11-25T08:10:55+02:00",
-   "note": "second reader: fresh read 95007 running (41 of 96), expected shares 95008 queued; M10 design now carries question 109's additions"
+   "updated": "2026-11-25T08:43:36+02:00",
+   "note": "second reader: fresh read 95007 at 83 of 96; expected-share renders resubmitted as 95077 after an fp16 decode fault; M10 scorer renders done"
   },
   {
    "id": "Z8",
@@ -907,10 +907,11 @@
    "owner": "s12",
    "proof": "artifacts/notes/progress/leakage/08-first-correction-test/review.md reports, for plain PoE, the joint prompt and CO3, two-clear pictures out of 12 with the correction against the random push, with the eleven grids and the verdict from manager/paper2-four-way-design.md",
    "needs": [],
-   "state": "doing",
+   "state": "done",
    "started": "2026-11-25T06:48:38+02:00",
-   "updated": "2026-11-25T07:21:54+02:00",
-   "note": "Z8 proper (99 pictures) running on mscluster107 card 1 under question 103, host job 94793"
+   "updated": "2026-11-25T08:29:21+02:00",
+   "note": "parked by the bar: push vs random two-clear of 12, plain PoE 0 vs 0, joint prompt 2 vs 0, CO3 8 vs 0 (two cases, near-identical draws); already-right CO3 cases short 4 vs 1 of 8; M1 beside it (CO3 push 7, random 12, alone 11 of 96)",
+   "finished": "2026-11-25T08:29:21+02:00"
   },
   {
    "id": "K7",
@@ -1775,7 +1776,7 @@
    "description": "BEFORE: nothing. It starts by itself when the paper repository (step D1) is done.\n\n1. IT RUNS as the background session 🔬 PhD Loop 5: Reproduce Rivals And Choose Checker, following:\nartifacts/notes/progress/prompts/session-5-reproduce-and-choose.md\n\n2. IT DOES: compares candidate checker architectures on small data, by a selection rule written before any of them trains.\n\n3. YOU DO: answer anything on the waiting picture.\n\nOUTCOME: one chosen architecture, with the comparison saved.\nDONE WHEN: the checker review names the choice and the rule that picked it.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nSCOREBOARD: /home/molef/PhD/concept-composition/artifacts/notes/progress/scoreboard.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: arch",
    "event_id": "l29esd328d9glp7jd5p4fn4ekg",
    "start": "2026-11-22T11:35:00+02:00",
-   "end": "2026-11-25T08:40:22+02:00",
+   "end": "2026-11-25T10:42:19+02:00",
    "synced": "1150295b1faf"
   },
   {
@@ -3296,8 +3297,10 @@
    "holds": "G4",
    "default": "Run experiment 1 first; decide on 2 and 3 from its result; run 4 only once X-ray data is chosen",
    "by": "s14",
-   "state": "open",
-   "asked": "2026-11-25T07:33:22+02:00"
+   "state": "answered",
+   "asked": "2026-11-25T07:33:22+02:00",
+   "answer": "Owner, 2026-11-25: run experiment 1 first (two data holders on Colored MNIST, finished experts composed with and without the checker push, about 1 to 3 GPU-hours); decide on experiments 2 and 3 from its result; run 4 only once X-ray data is chosen.",
+   "answered": "2026-11-25T08:15:06+02:00"
   },
   {
    "id": 109,
