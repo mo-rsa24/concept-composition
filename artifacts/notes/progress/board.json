@@ -1139,12 +1139,13 @@
     "M14",
     "Z9"
    ],
-   "state": "doing",
+   "state": "done",
    "serves": "the owner's co-occurrence dial",
    "objective": "pooled adapter at weight 0 to 1.25 on 8 held-out pairs sharing no animal with training, blind calls of one, hybrid or two clear, share against weight",
    "started": "2026-11-25T13:47:33+02:00",
-   "updated": "2026-11-25T15:21:17+02:00",
-   "note": "2 of 8 pairs called blind (no two-clear at any weight); 4 more in blind calls; job 95441 drawing the last 2; owner chose to finish Z10's calls, let Z11 reach its futility check, then close"
+   "updated": "2026-11-25T15:58:06+02:00",
+   "note": "no effect on new pairs: two clear 0 to 2 of 32 from weight 0 to 1 (p 0.25); hybrids 29 to 4, two bodies 1 to 26: a dial on separating bodies, not on making them the asked animals; adapter off switch leaks (mean 10.8 grey levels); 2.94 GPU-hours",
+   "finished": "2026-11-25T15:58:06+02:00"
   },
   {
    "id": "Z11",
