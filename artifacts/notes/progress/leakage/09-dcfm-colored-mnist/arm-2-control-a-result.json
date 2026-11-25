@@ -1,0 +1,18 @@
+{
+ "control_a_names_only": {
+  "accuracy": 0.7836,
+  "lead_points": 31.439999999999994,
+  "won": 1709,
+  "lost": 137,
+  "p_one_sided": 0.0,
+  "fid": 14.317794234205707
+ },
+ "arm_2_against_control_a": {
+  "lead_points": -2.3399999999999976,
+  "won": 508,
+  "lost": 625,
+  "p_one_sided": 0.9997747303694491,
+  "arm_2_stands": false
+ },
+ "seconds": 1083.2
+}
