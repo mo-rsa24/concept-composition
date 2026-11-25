@@ -89,10 +89,26 @@ correction tries to match.
 **Baselines beside it.** Best of two draws without the correction, so a win is not just a second
 chance, and Attend-and-Excite, the published early fix.
 
-**Pairs.** 48 pairs named in a file the running loop writes before the first render: 36 that CO3
-fails on, chosen from renders at seeds other than the test seed, and 12 it already draws as two
-clear subjects. None from the checker's 243 training pairs. One seed per pair; a second seed only if
-the test passes.
+**Pairs.** 48 pairs named in a file the running loop writes before the first render, 12 of each
+kind, so the result says which kinds the correction helps:
+
+| Kind | Example | What it adds |
+|---|---|---|
+| two animals | giraffe and hippo | the setting the first test used |
+| an animal and an object | giraffe and park bench | subjects of different size and shape |
+| two objects | a clock and a vase | GenEval's two-object prompts are mostly this |
+| two subjects with attributes | a red book and a dog with glasses | whether each attribute stays on its subject |
+
+In each kind, 9 pairs are ones CO3 fails on, chosen from renders at seeds other than the test seed,
+and 3 are ones it already draws as two clear subjects. None from the checker's 243 training pairs or
+the 275 pairs of its Attend-and-Excite picture pool. One seed per pair; a second seed only if the
+test passes. The bar below is judged over all 48; each kind's count is reported beside it as
+description, because 12 pairs cannot carry a bar of their own. For the attribute kind, a picture
+counts as two clear subjects only if each attribute is on its own subject.
+
+**Not in this test.** Prompts with three or more subjects, or with a relation between them ("a dog
+chasing a cat"), make a different claim. The checker reads "two things in frame", so it is limited
+there by design, and the paper states that scope until a later test covers it.
 
 **Measure.** Two clear subjects, drawing style ignored, by the judge, with two blind reviewers on any
 picture the judge marks uncertain. Every comparison is the same pair, same seed, same card type, at
