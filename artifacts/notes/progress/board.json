@@ -894,12 +894,11 @@
    "needs": [
     "M5"
    ],
-   "state": "doing",
+   "state": "todo",
    "serves": "Paper 2",
    "objective": "Build and test",
-   "started": "2026-11-25T02:25:49+02:00",
-   "updated": "2026-11-25T09:55:03+02:00",
-   "note": "waits for the reviewer's identity head (question 110 A), which runs only if M13 passes; M13 (gradient direction against r_t) is running as 95161 then 95162 while the board holds one step per loop"
+   "updated": "2026-11-25T09:55:32+02:00",
+   "note": "waiting: the reviewer's identity head (question 110 A) runs only if M13 finds the checker's push points along the dropped term"
   },
   {
    "id": "Z8",
@@ -1006,9 +1005,12 @@
    "owner": "s6",
    "proof": "artifacts/notes/progress/method-search/09-gradient-direction-check/review.md reports, per step 0 to 15, the median and spread of the cosine between the kept readout checker's latent gradient and r_t = eps(joint) - (eps(A) + eps(B) - eps(empty)) on the cached trajectories, beside the random-direction cosine, against a bar written in design.md first",
    "needs": [],
-   "state": "todo",
+   "state": "doing",
    "serves": "Paper 2's correction acts in the right direction",
-   "objective": "cosine between the kept checker's gradient and the dropped term r_t on cached SDXL trajectories at steps 0 to 15, against a random direction"
+   "objective": "cosine between the kept checker's gradient and the dropped term r_t on cached SDXL trajectories at steps 0 to 15, against a random direction",
+   "started": "2026-11-25T09:55:32+02:00",
+   "updated": "2026-11-25T09:57:13+02:00",
+   "note": "CO3 states: smoke 95161 running, full 95162; plain PoE at Z8 settings: smoke 95165, full 95166"
   },
   {
    "id": "U1",
