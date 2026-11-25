@@ -11,6 +11,7 @@ This folder holds Loop 12's work, run by [the session 12 brief](../prompts/sessi
 | `01-reading/mechanism-table.md` | Z1: 13 papers on where leakage enters, one row each, with the recorded search |
 | `02-what-predicts-borrowing/design.md` | Z2: three early readings set against W2d's borrowed counts, with the bars |
 | `04-paper-2-method.md` | Z4: the candidates, the owner's constraint, filled in after Z2 and Z3 |
+| `12-where-loop-12-ends.md` | where the loop ends: every step Z1 to Z11 with its verdict, and what Papers 1 and 2 take from it |
 | `ideas/what-co3-does-that-our-loops-did-not.md` | five ways CO3's corrector differs from every push the loops tried, each a design rule for Paper 2 or an audit row for Z5 |
 | `ideas/a-checker-on-the-failure-signal.md` | a candidate method: a checker that reads only a sampler's own early failure signal |
 | `where-leakage-could-enter.png` | the five places leakage could enter, with the papers that blame each |
