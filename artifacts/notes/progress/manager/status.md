@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-25 02:06 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-25 02:11 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -82,7 +82,7 @@ The finish range is `session_status.py`'s, from the 63 finished steps: fastest p
 | 7. Abstract-checker papers | Finished; its session is closed. | 0 | done | closed | nothing |
 | 8. Abstract checkers | Its digit identity checker reads pasted digits (0.861 against 0.75) but not the sampler's own states. Its method review found the first checker ranks but its cut drifts, and the second memorised. It finishes one cheap check of whether digits are readable there (job 94717), then closes its removal test as not run. Its SDXL test against CO3 is next. | 2 | 1.7 h to 61.7 h | busy | question 96 decides the SDXL test's readability gate; Loop 6's training list |
 | 11. Drain into the pillars | Stopped by your answer on 88; every finished result is on a report page. | 1 | when restarted | stopped its loop | a new result worth draining |
-| 12. Where CO3 leaks | Its six planned steps are done: nothing predicts which pairs borrow parts, and its first fix was null, a test that never used each animal's own prediction ([verdict](../leakage/06-verdict.md)). Now on step Z7 (question 98): the free text-only check runs (job 94790), then each animal's own prediction inside its drawn box beside a whole-picture control re-rendered in the same window, about 1.7 GPU-hours, its 48-picture bar written first ([design](../leakage/07-own-prediction/design.md)). | 1 | not yet estimated | busy | its own jobs |
+| 12. Where CO3 leaks | Its six planned steps are done ([verdict](../leakage/06-verdict.md)). On step Z7 (question 98): the free text-only check is null (how far the second-named animal's word moves against how often a pair borrows: rank correlation -0.023), so the text-encoder fix stays held; the smoke run passed both controls; the full run of each animal's own prediction inside its drawn box (about 1.7 GPU-hours) goes to Slurm. | 1 | not yet estimated | busy | its own Slurm job |
 
 ## Resources
 
@@ -94,7 +94,7 @@ Read at 01:13 from `squeue`, `sacct` and `sinfo`; down nodes from `sinfo -R` at 
 | Longest wait | the queue as a whole: nothing of ours finished between 00:13 and 01:13 |
 | Nodes out of service | `bigbatch`: 12 down and 5 drained of 48. `biggpu`: 2 down and 2 drained of 7, including mscluster108 and mscluster111, drained at 09:27 and 09:10 today after a failed job kill |
 | Idle capacity | none: at 17:43 every working `bigbatch` and `biggpu` node was allocated. mscluster107 is now another user's `biggpu` job (94610, 6-hour limit, started 17:36); its second card sits idle at 170 MiB, but their process holds it, so it is not ours to use. Your interactive job 83423 on that node no longer appears in the queue |
-| Shared card | **mscluster107 card 1, approved again by you on question 99**, for as long as the other user's job 94699 runs. Loop 12's free check and smoke run started there at 02:02 (about 8 GB) under `z7_shared_card.sh`, which holds the 1,024 MiB launch guard and your 30-second stop rule (checked); its Slurm copies are cancelled. A first launch at 02:00 stopped in its own start-up checks before touching the card. Then Loop 8, then Loop 6 |
+| Shared card | **mscluster107 card 1, approved again by you on question 99**, for as long as the other user's job 94699 runs. Loop 12 used it 02:02 to 02:10 for its free check and smoke run, under a launcher with all the guards (checked), and left nothing behind. Handed to Loop 8 at 02:11 for its readability check; Loop 6 after. |
 | Compute against budget since 2026-11-21 | Loop 6: 53.4 node-hours of 87 (34.8 were CLEVR renders that may have used no GPU). Loop 8: 11.9 of 30. Loop 12: about 0.4, no total set. Slurm here records no GPU count, so these are node-hours, an upper bound |
 
 **What would make the queue move faster:** little within our control. There is no idle `biggpu` card,
@@ -149,6 +149,7 @@ Newest first.
 | Time | To | What and why |
 |---|---|---|
 | 17:02 | Loop 8 | Its rewritten SDXL test passes the design check (stop rule, random and zero controls, comparison prompts fixed in advance, the same two-clear measure as Loop 6; about 7 GPU-hours, inside budget). Its board record goes to you as question 89. |
+| 02:11 | Loop 8 | Card 1 is free after Loop 12; Loop 8's turn. |
 | 01:58 | Loops 12, 8 and 6 | Card 1 on mscluster107 approved again (question 99): Loop 12 first, then Loop 8, then Loop 6; each told the order and the rules. |
 | 00:30 | Loop 12 | Question 98 decided: it runs the own-prediction test as step Z7. Its design passed the check: bar written first, the control re-rendered in the same window so only the box contents differ, about 1.7 GPU-hours. |
 | 23:50 | Loop 12 | Its [method review](../leakage/method-review.md) answered: records corrected to say what the drawn-box test did, the two disagreeing records reconciled, question 97's third rerun read free from its own records. Next, in order: a free text-only check, each animal's own prediction inside its box (about 0.8 GPU-hours), and the text-side swap only if the free check supports it, with a positive control. |
