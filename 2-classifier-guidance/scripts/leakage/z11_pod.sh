@@ -1,6 +1,7 @@
 #!/bin/bash
 # Loop 12 step Z11 on a RunPod RTX 4090, from the payload built for it (z11-pod-payload.tar, unpacked at $P).
-#   P=/workspace/z11 PY=<co3 python> bash z11_pod.sh <train-penalised|train-zero|train-shuffled|held|novel>
+#   P=/workspace/z11 PY=<co3 python> bash z11_pod.sh <all|train-zero|train-penalised|train-shuffled|held|novel>
+# all runs the five stages in order (no-penalty twin first, for the futility line) and stops at the first that fails
 # The card must be an RTX 4090 so every Z11 row shares one card type; novel redraws the plain product's seen pictures here.
 set -uo pipefail
 STAGE=${1:?stage}; : "${P:?P must name the unpacked payload}"; PY=${PY:-python}
@@ -12,9 +13,12 @@ ARGS="--mnist $P/mnist-raw --split $P/code/repo/artifacts/notes/progress/leakage
 mkdir -p $P/out $P/logs
 echo "[$(date -u +%H:%M:%S)] host=$(hostname) gpu=$GPUNAME stage=$STAGE" | tee -a $P/logs/$STAGE.log
 case "$STAGE" in
+  all) for st in train-zero train-penalised train-shuffled held novel; do bash "$0" "$st" || { echo "STOPPED at $st (exit $?)" | tee -a $P/logs/all.log; exit 1; }; done; echo "ALL DONE" | tee -a $P/logs/all.log; exit 0 ;;
   train-*) $PY $S/z11_gradient_checker.py train --kind "${STAGE#train-}" $ARGS 2>&1 | tee -a $P/logs/$STAGE.log ;;
   held)    $PY $S/z11_gradient_checker.py held $ARGS 2>&1 | tee -a $P/logs/$STAGE.log ;;
   novel)   $PY $S/z11_gradient_checker.py novel --plain-here $ARGS 2>&1 | tee -a $P/logs/$STAGE.log ;;
   *) echo "ABORT: unknown stage $STAGE"; exit 2 ;;
 esac
-echo "[$(date -u +%H:%M:%S)] DONE stage=$STAGE exit=${PIPESTATUS[0]}" | tee -a $P/logs/$STAGE.log
+rc=${PIPESTATUS[0]}
+echo "[$(date -u +%H:%M:%S)] DONE stage=$STAGE exit=$rc" | tee -a $P/logs/$STAGE.log
+exit $rc
