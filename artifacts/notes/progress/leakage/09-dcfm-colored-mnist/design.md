@@ -34,6 +34,12 @@ Every arm samples the 50 novel combinations, 100 pictures each from seeds 0 to 9
 
 **The checker.** Paper 1's pair-aware checker (`2-classifier-guidance/scripts/mnist/checker.py`): a small head on both frozen experts' decoder features, asked with labels set to none, plus the asked digit and colour, giving one log-odds that the picture becomes that digit in that colour. It trains on seen combinations only, never on a novel one: positives are real coloured training digits of a seen combination and the experts' own seen-combination samples that the digit-and-colour classifier calls right; negatives are the same digits in a wrong colour, a wrong digit in the asked colour, and the experts' samples called wrong. Its accuracy on held-back seen-combination pictures is reported.
 
+## Arm 2's control a: names without the pair
+
+Added at the manager loop's request for the owner (2026-11-25), before this control runs. A rise in arm 2's accuracy could come from the push naming the digit and the colour more strongly, not from knowing which digit goes with which colour. **The control** is Paper 1's separate-label control (`2-classifier-guidance/scripts/mnist/checker.py`) on Colored MNIST: a head on the same frozen decoder features of both experts, with ten digit outputs and ten colour outputs, trained on the same real seen-combination digits as the checker's positives, never told the pair. Its push is the gradient of $\log p(d \mid x) + \log p(c \mid x)$, and at every step and picture it is scaled to the length the checker push (after its cap) would have at that same picture, so only the direction differs. It runs on the same 50 novel combinations and seeds 0 to 99, 5,000 pictures.
+
+**Its bar.** Arm 2's support stands only if arm 2's accuracy is at least 5 points above control a's with an exact one-sided McNemar p < 0.05 on the 5,000 matched pictures. Otherwise arm 2's lift is reported as one the pair-aware checker does not explain beyond naming the digit and the colour. About 0.2 GPU-hours, inside the 3.3 approved for Z9.
+
 ## The interaction push, in full
 
 **Why it is rebuilt.** On a combination no holder saw, the data's ratio $p(A,B \mid x)/(p(A \mid x)\,p(B \mid x))$ is zero, so a classifier that learns it faithfully pushes pictures away from the very pair asked for. The estimator below is the one form in which a pair's absence cannot be learned.
