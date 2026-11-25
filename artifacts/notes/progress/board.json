@@ -3334,8 +3334,10 @@
    "holds": "M12",
    "default": "A",
    "by": "s6",
-   "state": "open",
-   "asked": "2026-11-25T09:26:57+02:00"
+   "state": "answered",
+   "asked": "2026-11-25T09:26:57+02:00",
+   "answer": "Owner, in Loop 13's session, 2026-11-25: A. The reviewer chooses between the two trained readers left, a head on SDXL features or a classifier on the decoded clean estimate, using the 192 blind-called pictures as labels, and returns a cost and a bar before any GPU is spent; the choice comes back to the owner before it runs.",
+   "answered": "2026-11-25T09:34:06+02:00"
   }
  ]
 }
