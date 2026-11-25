@@ -1,0 +1,47 @@
+{
+ "n": 48,
+ "two_clear": {
+  "co3": 18,
+  "whole": 10,
+  "own": 14
+ },
+ "compared": "own against whole",
+ "lead": 4,
+ "won": 5,
+ "lost": 1,
+ "p_one_sided": 0.109375,
+ "per_pair": {
+  "a_puma__x__a_condor": {
+   "co3": 4,
+   "whole": 2,
+   "own": 3
+  },
+  "a_hippopotamus__x__a_swallow": {
+   "co3": 0,
+   "whole": 0,
+   "own": 0
+  },
+  "a_zebra__x__a_flamingo": {
+   "co3": 4,
+   "whole": 2,
+   "own": 2
+  },
+  "a_giraffe__x__a_tortoise": {
+   "co3": 5,
+   "whole": 5,
+   "own": 5
+  },
+  "a_seal__x__a_gull": {
+   "co3": 5,
+   "whole": 1,
+   "own": 3
+  },
+  "a_bobcat__x__a_quail": {
+   "co3": 0,
+   "whole": 0,
+   "own": 1
+  }
+ },
+ "stop": false,
+ "rule": "stop for futility at a two-clear lead of 0 or less, own against whole, on the first half's 48 matched pictures"
+}
