@@ -687,9 +687,9 @@
    "state": "doing",
    "serves": "Paper 1",
    "objective": "Build and test",
-   "updated": "2026-11-25T15:25:23+02:00",
+   "updated": "2026-11-25T16:31:24+02:00",
    "started": "2026-11-25T12:46:44+02:00",
-   "note": "both 1% rungs passed; full runs on two RunPod 4090s since 13:23 pod time with snapshots at each exact quarter (2,000,896 images, about 2.4 hours); stopping rule in the design"
+   "note": "full runs on two RunPod 4090s; quarter 1 (500,224 images): red reads 0.81 right, blue 0.83, against the counter's 0.82 and 0.86 on real pictures; losses -3.37 and -3.36"
   },
   {
    "id": "D4",
@@ -3545,6 +3545,17 @@
    "asked": "2026-11-25T10:35:18+02:00",
    "answer": "Yes, the owner chose the recommended order in Loop 15's session: run 1, then 2, then 3, on bigbatch; stop after 1 if it says the checker is wrong, and then run only 3. The designs are in artifacts/notes/progress/directions/04-limits-and-what-to-test.md, section 'Three experiments, ranked'.",
    "answered": "2026-11-25T10:44:30+02:00"
+  },
+  {
+   "id": 113,
+   "question": "Run a test of whether your LoRA's separating plus each animal's own prediction inside its box gives two clear animals (the plan: 1-lora-correction/binding-plan.md, option A). On 8 animal pairs the LoRA never trained on, it turns hybrids into two bodies but rarely the two animals asked for (two clear 0 to 2 of 32; Loop 12's Z10). The test draws four rows on those pairs at 4 seeds: the LoRA alone, each animal's own prediction in its hand-drawn box alone, both together, and the plain product; it passes if 'both' gives at least 5 more two-clear pictures than each half alone (McNemar p < 0.05). No training; about 1.8 GPU-hours on RTX 3090s. A pass is what would justify the next step, training the LoRA with a binding loss (per-region identity plus attention alignment) so it binds without boxes.",
+   "holds": null,
+   "default": "run it in bigbatch after Loop 12 closes, about 1.8 GPU-hours",
+   "by": "s12",
+   "state": "answered",
+   "asked": "2026-11-25T16:19:09+02:00",
+   "answer": "Owner, in Loop 12's chat, 2026-11-25: yes, run it now. Rows 1 and 4 reused from Z10's RTX 3090 pictures (same pairs, seeds and sampler); rows 2 and 3 drawn on bigbatch RTX 3090s, about 0.9 GPU-hours.",
+   "answered": "2026-11-25T16:28:09+02:00"
   }
  ]
 }
