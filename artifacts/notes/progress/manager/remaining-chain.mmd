@@ -1,0 +1,21 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef gate fill:#fff4e5,stroke:#d97706,stroke-width:3px,color:#111111
+  classDef big fill:#eaf1ff,stroke:#a8c7fa,stroke-width:2px,color:#111111
+  classDef open fill:#f3f3f3,stroke:#888888,stroke-width:2px,color:#444444,stroke-dasharray: 5 5
+
+  subgraph S["Finding a method: about 30 to 80 GPU-hours, mostly in sequence"]
+    R["Identity reader and own-prediction test<br/>(Loops 6, 12) about 2"]:::plain
+    A["Checker architecture, labels, tuning,<br/>head-to-head (Loop 6) 30 to 70,<br/>3 of 4 not yet designed"]:::open
+    V["SDXL identity test (Loop 8)<br/>0 or 5 to 9"]:::plain
+    C["Two-colour CLEVR test (Loop 6)<br/>7.6 GPU + 67 CPU node-hours"]:::plain
+  end
+  G{{"Go or no-go per paper<br/>(you)"}}:::gate
+  E1["Paper 1 tables: CLEVR ladder to 10 experts<br/>46 GPU-h at quarter length, 182 at full<br/>+ about 360 CPU node-hours of rendering"]:::big
+  E2["Paper 2 tables: about 1,240 prompts x 3 to 10 seeds<br/>about 90 to 300 GPU-hours (inferred)"]:::big
+  R --> A --> G
+  V --> G
+  C --> G
+  G --> E1
+  G --> E2
