@@ -59,6 +59,7 @@ At 16:55, in chat, recorded on the board and sent to each loop:
 
 | # | The question | Your answer |
 |---|---|---|
+| none | Add a classifier trained so its gradient points along the missing term to the coloured-digit test? | **Yes**, as a fifth arm beside the plain checker and the size-matched control; the reviewer reads it first, including whether it extends to abstract concepts and to CO3 |
 | none | Two steps still named the closed checker route: the short fine-tune with the push (D5) and Loop 8's checker on SDXL's unseen objects (V4) | **Both closed as not run**; question 102's branch A for Loop 8 is withdrawn, and Loop 8's count checker stays a measure |
 | none | When does the full ten-holder DCFM match (question 108, experiment 3) run? | **After** Z9's arms 3 and 4 and Loop 15's step H4 land; Loop 13 then plans it with the best method row, likely on RunPod (about 4 to 14 GPU-hours) |
 | none | Add a trained correction to Z9 beside the classifier? | **Yes**: a fourth arm, a small model predicting the dropped term with both experts frozen, trained on the finished experts' own samples (keeps DCFM's no-sharing setting); the reviewer reads it first; Z9 rises to about 3.3 GPU-hours, approved |
