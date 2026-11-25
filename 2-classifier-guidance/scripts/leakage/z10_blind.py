@@ -87,7 +87,8 @@ def count(batch, keydir, c1, c2, c3=None):
 
 
 def bar(keydir, *settled_files):
-    from scipy.stats import binom
+    from math import comb
+    sf = lambda k, n: sum(comb(n, i) for i in range(k, n + 1)) / 2 ** n  # exact one-sided binomial, P(X >= k)
     rows = {}
     for f in settled_files:
         rows.update(json.loads(Path(f).read_text())["settled"])
@@ -101,7 +102,7 @@ def bar(keydir, *settled_files):
     delta = T["1.00"] - T["0.00"]
     won = sum(1 for p in pairs for s in SEEDS if by.get((p, s, "1.00")) == "two_clear" and by.get((p, s, "0.00")) != "two_clear")
     lost = sum(1 for p in pairs for s in SEEDS if by.get((p, s, "0.00")) == "two_clear" and by.get((p, s, "1.00")) != "two_clear")
-    pval = float(binom.sf(won - 1, won + lost, 0.5)) if won + lost else 1.0
+    pval = float(sf(won, won + lost)) if won + lost else 1.0
     steps = [T[WEIGHTS[i + 1]] - T[WEIGHTS[i]] for i in range(4)]
     effect = delta >= 6 and pval < 0.05
     if not effect:
