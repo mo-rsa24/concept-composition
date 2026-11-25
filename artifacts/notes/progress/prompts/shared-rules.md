@@ -52,6 +52,13 @@ A session that needs a change in another session's area writes one line to
 
 `artifacts/notes/progress/scoreboard.json` holds each paper's 4 to 6 targets, set by Session 4 from what rival papers report. Work toward those targets. Treat a target as final only after the owner has said yes to it, and propose no bar of your own. Step C3 builds from `artifacts/notes/progress/targets/numbers.csv`.
 
+## Before any new design
+
+Read [the consensus](../reviewer/consensus.md) and the [what-we-tried ledger](../reviewer/what-we-tried/README.md)
+entries for the area first. A design names the ledger entries it builds on, follows the consensus's
+rules for every new design (section 4), and says why it is not an idea the consensus lists as
+settled. Add one entry to the matching ledger file when the attempt finishes, in the ledger's shape.
+
 ## Rules that never bend
 
 - **Never delete anything.** Move files only after the user approves, and keep a restore manifest. Most
