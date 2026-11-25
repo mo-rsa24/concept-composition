@@ -49,3 +49,27 @@ In [the G3 page](03-open-problems.md), beyond the brief's ranked list:
   subjects, for CO3 and its rivals: the manager writes it to
   [the manager's borrowed-parts search](../manager/who-counts-borrowed-parts-and-extra-subjects.md). Cite
   it in G2 or G3 once it exists; Loop 14 does not run that search.
+
+## G4: exploit DCFM's gaps
+
+Follows G3. Write [the G4 page](04-exploiting-dcfm.md) with one row per limit in
+[Loop 4's DCFM note](../targets/dcfm-compositional-flow-matching-from-separate-silos.md), section "What DCFM
+leaves open". Each row names:
+
+- the idea from Paper 1 or Paper 2 that attacks the limit;
+- the picture that would show it, such as a DCFM-style chest X-ray beside ours with the heart's edge marked;
+- the number that scores it against DCFM's printed one (FID on novel combinations, utility recall, or a
+  Paper 1 measure);
+- the data and code needed, and the cost in GPU-hours.
+
+Also check whether DCFM's code and splits are public. Read three leads closely:
+
+1. DCFM retrains its experts, and its baselines that compose finished experts fail on novel combinations.
+   Does a sampling-time correction on finished experts close that gap?
+2. DCFM is never tested below its minimum share of seen combinations, which is Paper 1's own setting:
+   experts that never met.
+3. Its X-ray utility sits under 0.25 for every method, and it never checks anatomy or one finding changing
+   another.
+
+End with one board `ask` listing the experiments worth running, cheapest first, with total cost. No GPU
+work. Source: the line from s13 to s14 in `../requests.md` about step G4.
