@@ -151,4 +151,7 @@ rises. Neither checker could learn to tell a right count from one off by one, on
 measurement of Paper 1's method. What a method would have to supply here is a signal that keeps the two experts from drawing at the same
 place; the paste's failures say where it must beat pasting: scenes whose objects overlap.
 
-**Owed.** Each expert alone at 90% of 256 samples, read by eye on 32 per count; its samples are in the comparison archive.
+**Each expert alone passes.** Seeds 0 to 31 per count from each expert, 192 pictures shuffled onto 12 blind sheets and counted by two
+reviewers in opposite orders, who agree on all 192. Holding exactly k objects of the expert's colour and none of another: red 32, 31 and 29
+of 32 at 1, 2 and 3 objects; blue 32, 31 and 31 of 32. Every count clears 0.90, red at 3 objects by one picture (0.906). So the rows'
+failures come from composing the experts, not from the experts.
