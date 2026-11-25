@@ -56,6 +56,7 @@ At 16:55, in chat, recorded on the board and sent to each loop:
 
 | # | The question | Your answer |
 |---|---|---|
+| none | Add a trained correction to Z9 beside the classifier? | **Yes**: a fourth arm, a small model predicting the dropped term with both experts frozen, trained on the finished experts' own samples (keeps DCFM's no-sharing setting); the reviewer reads it first; Z9 rises to about 3.3 GPU-hours, approved |
 | none | Which loop runs question 108's first experiment, and with which arms? | **Loop 12**, as step Z9, with three arms: plain product of finished Colored MNIST experts, the checker push, and a push from a classifier on the together-against-apart ratio; the reviewer reads the ratio idea first |
 | 88 | Should Loop 11 stop after its last two steps until a research loop has something new? | yes, the default |
 | 87 | Should Loop 6's checker search be judged on two clear subjects, drawing style ignored? | yes; damage reported beside it, two reviewers per picture |
