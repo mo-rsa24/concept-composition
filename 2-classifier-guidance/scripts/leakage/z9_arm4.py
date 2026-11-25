@@ -65,7 +65,7 @@ def data(args, split, dev):
 
 
 def train(args, split, dev, shuffled):
-    blob = torch.load(args.out / "arm4" / "traj-train.pt", weights_only=False)
+    blob = torch.load(args.out / args.traj / "traj-train.pt", weights_only=False)
     x, t, d, c, r = blob["x"], blob["t"], blob["d"], blob["c"], blob["r"]
     if shuffled:  # every trajectory's target paired with another training pair's digit and colour, fixed once
         pairs = blob["pairs"]
@@ -86,12 +86,13 @@ def train(args, split, dev, shuffled):
         opt.zero_grad(); loss.backward(); opt.step()
         if step % 1000 == 0:
             print(json.dumps({"shuffled": shuffled, "step": step, "loss": round(loss.item(), 6)}), flush=True)
-    torch.save({"model": model.state_dict(), "shuffled": shuffled, "steps": args.steps}, args.out / "arm4" / ("twin.pt" if shuffled else "model.pt"))
+    (args.out / args.dir).mkdir(parents=True, exist_ok=True)
+    torch.save({"model": model.state_dict(), "shuffled": shuffled, "steps": args.steps}, args.out / args.dir / ("twin.pt" if shuffled else "model.pt"))
 
 
 def load(args, dev, name):
     m = ColourUNet(32).to(dev).eval()
-    m.load_state_dict(torch.load(args.out / "arm4" / name, map_location=dev, weights_only=False)["model"]); m.requires_grad_(False)
+    m.load_state_dict(torch.load(args.out / args.dir / name, map_location=dev, weights_only=False)["model"]); m.requires_grad_(False)
     return m
 
 
@@ -125,6 +126,8 @@ def main():
     ap.add_argument("--mnist", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--steps", type=int, default=10_000)
+    ap.add_argument("--dir", default="arm4", help="where the models, gate and novel results go; arm4-second for the second attempt")
+    ap.add_argument("--traj", default="arm4", help="where the trajectories are read from")
     args = ap.parse_args()
     split = json.loads(args.split.read_text()); dev = "cuda"; t0 = time.time()
     if args.stage == "data":
@@ -135,7 +138,7 @@ def main():
     model, twin = load(args, dev, "model.pt"), load(args, dev, "twin.pt")
     summary = {}
     if args.stage == "held":
-        blob = torch.load(args.out / "arm4" / "traj-held.pt", weights_only=False)
+        blob = torch.load(args.out / args.traj / "traj-held.pt", weights_only=False)
         with torch.no_grad():
             num = den = 0.0
             for i in range(0, len(blob["x"]), 2000):
@@ -153,7 +156,7 @@ def main():
         summary["gate"] = {"explained_variance": explained, "arm_1": float(r1.mean()), "arm_4": float(r4.mean()), "twin": float(rt.mean()),
                            "against_arm_1": {"won": v1[0], "lost": v1[1], "p": v1[2]}, "against_twin": {"won": v2[0], "lost": v2[1], "p": v2[2]},
                            "passes": bool(passes)}
-        np.savez_compressed(args.out / "arm4" / "held.npz", arm1=i1, arm4=i4, twin=it, digits=d, colours=c)
+        np.savez_compressed(args.out / args.dir / "held.npz", arm1=i1, arm4=i4, twin=it, digits=d, colours=c)
         print(json.dumps(summary["gate"]), flush=True)
     else:
         novel = [tuple(k) for k in split["novel"]]
@@ -164,7 +167,7 @@ def main():
                          ("ask_the_experts", lambda a, b: eps_ask(experts, a, b))):
             im, d, c = draw(ef, novel, dev)
             r = judge_right(judge, im, d, c, dev); rights[name] = r
-            np.savez_compressed(args.out / "arm4" / f"{name}-novel.npz", images=im, digits=d, colours=c, right=r)
+            np.savez_compressed(args.out / args.dir / f"{name}-novel.npz", images=im, digits=d, colours=c, right=r)
             summary[name] = {"accuracy": float(r.mean()), "fid": fid(fid_stats(fnet, im, dev), s_real)}
             print(json.dumps({name: summary[name]}), flush=True)
         for other, ref in (("arm_1", base), ("twin", rights["twin"]), ("ask_the_experts", rights["ask_the_experts"])):
@@ -172,9 +175,9 @@ def main():
             summary[f"arm_4_against_{other}"] = {"lead_points": 100 * float(rights["arm_4"].mean() - ref.mean()), "won": w, "lost": l, "p": p}
         print(json.dumps({k: v for k, v in summary.items() if k.startswith("arm_4_against")}), flush=True)
     summary["seconds"] = round(time.time() - t0, 1)
-    (args.out / "arm4" / f"{args.stage}.json").write_text(json.dumps(summary, indent=1, default=float) + "\n")
+    (args.out / args.dir / f"{args.stage}.json").write_text(json.dumps(summary, indent=1, default=float) + "\n")
     flat = {f"{k}/{kk}": vv for k, v in summary.items() if isinstance(v, dict) for kk, vv in v.items() if isinstance(vv, (int, float, bool))}
-    print(json.dumps({"wandb_run": log_wandb(f"loop-12-z9-arm4-{args.stage}", {"stage": args.stage}, flat)}), flush=True)
+    print(json.dumps({"wandb_run": log_wandb(f"loop-12-z9-{args.dir}-{args.stage}", {"stage": args.stage, "dir": args.dir, "steps": args.steps}, flat)}), flush=True)
 
 
 if __name__ == "__main__":

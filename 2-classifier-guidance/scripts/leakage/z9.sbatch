@@ -6,7 +6,7 @@
 #SBATCH --exclude=mscluster44,mscluster45,mscluster48,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82,mscluster83
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-12/logs/%x-%j.log
 # Loop 12 step Z9. Submit with the code snapshot in SNAP:
-#   sbatch --export=ALL,SNAP=<snapshot> z9.sbatch <first|experts|plain|checker|ratio-held|ratio-novel|arm4-gate|arm4-novel|control-a>
+#   sbatch --export=ALL,SNAP=<snapshot> z9.sbatch <first|experts|plain|checker|ratio-held|ratio-novel|arm4-gate|arm4-novel|control-a|arm4-second>
 set -uo pipefail
 STAGE=${1:?stage}
 ROOT=/datasets/mmolefe/poe_repair_min/loop-12
@@ -69,6 +69,9 @@ case "$STAGE" in
              --experts "$OUT/experts" --judge "$OUT/judge/judge.pt" --out "$OUT"; rc=$? ;;
   control-a) PYTHONPATH="$ROOT/pylib:$PYTHONPATH" TORCH_HOME=$ROOT/torchhome "$PY" "$S/z9_push.py" checker-control-a --mnist "$MNIST" --split "$SPLIT" \
              --experts "$OUT/experts" --judge "$OUT/judge/judge.pt" --out "$OUT"; rc=$? ;;
+  arm4-second) for st in train held; do
+             PYTHONPATH="$ROOT/pylib:$PYTHONPATH" TORCH_HOME=$ROOT/torchhome "$PY" "$S/z9_arm4.py" $st --steps 30000 --dir arm4-second --traj arm4 \
+               --mnist "$MNIST" --split "$SPLIT" --experts "$OUT/experts" --judge "$OUT/judge/judge.pt" --out "$OUT" || { rc=$?; break; }; rc=0; done ;;
   *) echo "ABORT: unknown stage $STAGE"; exit 2 ;;
 esac
 echo "[$(date -u +%H:%M:%S)] DONE stage=$STAGE exit=$rc"
