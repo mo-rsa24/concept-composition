@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-25 03:20 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-25 03:50 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -100,6 +100,8 @@ Read at 02:13 from `squeue`, `sacct` and `sinfo`; down nodes from `sinfo -R` at 
 | Shared card | **Not in use.** The other user's job on mscluster107 ended by 02:45, so question 99's approval has lapsed; the node is free in Slurm, and Loop 6's identity reader goes there through our `biggpu` slot. A new shared-card run needs a new yes from you |
 | Compute against budget since 2026-11-21 | Loop 6: 53.4 node-hours of 87 (34.8 were CLEVR renders that may have used no GPU). Loop 8: 11.9 of 30. Loop 12: about 0.4, no total set. Slurm here records no GPU count, so these are node-hours, an upper bound |
 
+**RunPod speed test, 2026-11-25:** plain SDXL at 1024 by 1024, 50 steps, on one Secure-cloud RTX 4090 ($0.89 an hour): 5.96 seconds per picture one at a time, 5.81 in batches of 4 (23.3 GB peak). Community cloud had no capacity on any card at 03:40. The same script on a cluster card (job 94815, `manager/sdxl_bench.py`) gives the baseline when it runs.
+
 **What would make the queue move faster:** little within our control. There is no idle `biggpu` card,
 and the drained nodes need the administrator. Loop 6's two-colour CLEVR renders hold two `bigbatch`
 nodes for up to 10 hours each while running on the CPU; they must stay on `bigbatch`, the only other
@@ -111,6 +113,7 @@ Newest first.
 
 | Concerns | Finding | Source |
 |---|---|---|
+| All loops | **mscluster82's GPU is broken but the node shows as idle**: a 30-minute benchmark pinned there failed in one second with "Unable to determine the device handle for GPU0" (job 94814). It is the same fault the environment notes record for mscluster50 and 51, but 82 is not on that list, so a job can land there and fail. The environment folder's keeper has stopped; yours to route. | `/datasets/mmolefe/poe_repair_min/manager-speedtest/speedtest-94814.log` |
 | Loops 6 and 8 | **Two loops chase the same question for Paper 2**: can identity be read from CO3's own states? Loop 6's per-place reader answers it for about 0.3 GPU-hours (its judge's control passed at 0.914); Loop 8's signature checker would spend 5 to 14. Loop 8 is asked to hold until Loop 6's read lands. | questions 100, 101, 102 |
 | Loops 6 and 9 | **Two records disagree on what CO3 draws.** Loop 6's first test says CO3 draws two separate bodies in 96 of 96 tuning pictures; Loop 9's part labels call 23 of the 96 "not two" (for example a boar with two pheasants). If Loop 9's labels hold, about a third of CO3's failures are extra subjects, which no borrowed-parts fix can repair. Yours to settle. | `method-search/01-beat-the-baseline/review.md`; `noise-text-critic/02d-binding/part-binding-calls.csv` |
 | Loop 12 | **A run of bad results** (two nulls) and **a test that measured something else than its name**: the drawn-box fix never gave each animal its own prediction inside its box, so its draft verdict that regions cannot work overreaches. Method review request sent at 23:35. | `2-classifier-guidance/scripts/leakage/z3_regions.py` lines 66 to 72 |
