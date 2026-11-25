@@ -35,6 +35,9 @@ case "$STAGE" in
       "$PY" "$S" pack-labelled --renders "$R2" --out "$D2" --sets "${C}1,${C}2,${C}3" --count 50 --name "$C-one-percent" || exit 5
     done
     "$PY" "$S" pack-labelled --renders "$R2" --out "$D2" --sets "r1,r2,r3" --count 6 --name "r-overfit-18"; rc=$? ;;
+  m10-scorer-v3) # question 114's last attempt: three averaged scorers with mirrored copies, judged on 800 newly drawn renders
+    O=$ROOT/m10/scorer-v3; mkdir -p "$O"
+    "$PY" "$(dirname "$S")/m10_scorer.py" train-v3 --renders "$ROOT/m7/s2/renders" --judge "$ROOT/m7/s2-judge/renders" --out "$O"; rc=$? ;;
   m10-scorer) # step M10: the red and blue count scorer, overfit on 16 real renders, then trained on 3,200 and held out on 800 against 95%
     O=$ROOT/m10/${SCORER_DIR:-scorer}; mkdir -p "$O"
     "$PY" "$(dirname "$S")/m10_scorer.py" overfit --renders "$ROOT/m7/s2/renders" --out "$O"; rc=$?

@@ -90,9 +90,9 @@ def parse_seeds(text):
 class Checker(nn.Module):
     """The scorer's four convolution blocks over the two maps and log sigma, then the asked counts, then one logit."""
 
-    def __init__(self):
+    def __init__(self, channels=7):
         super().__init__()
-        layers, channels = [], 7
+        layers = []
         for width in (32, 64, 128, 128):
             layers += [nn.Conv2d(channels, width, 3, padding=1), nn.GroupNorm(8, width), nn.SiLU(), nn.MaxPool2d(2)]
             channels = width
@@ -192,6 +192,7 @@ def checker_examples(pool, n, gen, empty):
 
 
 SIGMA_WINDOW = None   # (lo, hi) for the diagnosis; None is the push window
+READER = "maps"       # "maps": the two experts' maps (6 channels); "raw": the noisy picture itself (3 channels), question 116's second checker
 
 
 def batch_inputs(nets, x0, asked, gen):
@@ -199,6 +200,8 @@ def batch_inputs(nets, x0, asked, gen):
     sigma = torch.exp(torch.empty(len(x0)).uniform_(np.log(lo), np.log(hi), generator=gen)).to(DEV)
     x = x0.to(DEV) + sigma.view(-1, 1, 1, 1) * torch.randn(x0.shape, generator=gen).to(DEV)
     xc = F.one_hot(asked[:, 0].to(DEV) - 1, 3).float(); yc = F.one_hot(asked[:, 1].to(DEV) - 1, 3).float()
+    if READER == "raw":
+        return x, sigma, asked_vector(xc, yc)
     with torch.no_grad():
         maps, _ = maps_of(nets, x, sigma, xc, yc)
     return maps, sigma, asked_vector(xc, yc)
@@ -219,7 +222,7 @@ def train_checker(args):
     held_gen = torch.Generator().manual_seed(7)
     hx, ha, hl, hk = checker_examples(pool_held, 1024, held_gen, empty)
     held = [batch_inputs(nets, hx[i:i + 128], ha[i:i + 128], held_gen) for i in range(0, 1024, 128)]
-    model = Checker().to(DEV)
+    model = Checker(4 if READER == "raw" else 7).to(DEV)
     opt = torch.optim.AdamW(model.parameters(), lr=CHECKER_LR, weight_decay=1e-4)
     gen = torch.Generator().manual_seed(20261125)
     out = W / (args.out_name or "checker"); out.mkdir(parents=True, exist_ok=True)
@@ -248,8 +251,8 @@ def train_checker(args):
     ba, logits = evaluate()
     by_kind = {name: round(float(((logits > 0).float() == hl)[hk == k].float().mean()), 4) for k, name in
                enumerate(("apart, right counts", "touching", "apart, one count off"))}
-    torch.save({"state": model.state_dict(), "push_steps": list(PUSH_STEPS), "b": PUSH_B}, out / "checker.pt")
-    result = {"updates": updates, "batch": CHECKER_BATCH, "sigma_window": SIGMA_WINDOW, "held_out_pastes": 1024, "held_out_balanced_accuracy": round(ba, 4),
+    torch.save({"state": model.state_dict(), "push_steps": list(PUSH_STEPS), "b": PUSH_B, "reader": READER}, out / "checker.pt")
+    result = {"reader": READER, "updates": updates, "batch": CHECKER_BATCH, "sigma_window": SIGMA_WINDOW, "held_out_pastes": 1024, "held_out_balanced_accuracy": round(ba, 4),
               "right_by_kind": by_kind, "min_balanced_accuracy": MIN_CHECKER_BA, "passes": ba >= MIN_CHECKER_BA,
               "seconds": round(time.time() - begin), "device": torch.cuda.get_device_name()}
     (out / "checker.json").write_text(json.dumps(result, indent=1) + "\n")
@@ -283,11 +286,15 @@ def product_denoiser(nets, xc, yc, checker=None, b=0.0):
         if checker is not None and step in PUSH_STEPS:
             with torch.enable_grad():
                 xx = x.detach().requires_grad_(True)
-                d_e = e(xx, sv, None)
-                d_r, d_b = r(xx, sv, xc), bl(xx, sv, yc)
-                logit = checker(torch.cat([d_r - d_e, d_b - d_e], 1), sv, asked_vector(xc, yc))
+                if READER == "raw":
+                    logit = checker(xx, sv, asked_vector(xc, yc))
+                else:
+                    d_e = e(xx, sv, None)
+                    d_r, d_b = r(xx, sv, xc), bl(xx, sv, yc)
+                    logit = checker(torch.cat([d_r - d_e, d_b - d_e], 1), sv, asked_vector(xc, yc))
                 g, = torch.autograd.grad(logit.sum(), xx)
-            d = (d_r + d_b - d_e).detach().float()
+            with torch.no_grad():
+                d = (r(x, sv, xc) + bl(x, sv, yc) - e(x, sv, None)).float()
             size = (x - d).flatten(1).norm(dim=1)[:, None, None, None]
             return d + b * size * g / g.flatten(1).norm(dim=1).clamp_min(1e-12)[:, None, None, None]
         with torch.no_grad():
@@ -301,8 +308,8 @@ def row(args):
     nets, encoder = [n for n, _ in nets_enc], nets_enc[0][1]
     checker = None
     if args.row in ("checker", "zero"):
-        checker = Checker().to(DEV)
-        checker.load_state_dict(torch.load(W / "checker/checker.pt", map_location=DEV)["state"])
+        checker = Checker(4 if READER == "raw" else 7).to(DEV)
+        checker.load_state_dict(torch.load(W / (args.out_name or "checker") / "checker.pt", map_location=DEV)["state"])
         checker.eval().requires_grad_(False)
     b = {"checker": PUSH_B, "zero": 0.0}.get(args.row, 0.0)
     t = sigmas()
@@ -313,7 +320,7 @@ def row(args):
     batch_size = 64 if checker is not None else 128
     begin = time.time()
     for x_count, y_count in cells:
-        out = W / "rows" / args.row / f"c{x_count}{y_count}"
+        out = W / "rows" / (args.row if READER == "maps" else f"{args.row}-raw") / f"c{x_count}{y_count}"
         for start in range(0, len(seeds), batch_size):
             batch = seeds[start:start + batch_size]
             rnd = StackedRandomGenerator(DEV, batch)
@@ -338,7 +345,7 @@ def row(args):
     if args.row == "zero":
         diffs = [np.abs(np.asarray(Image.open(p), dtype=np.int16) -
                         np.asarray(Image.open(W / "rows/plain/c11" / Path(p).name), dtype=np.int16)).max()
-                 for p in sorted(glob.glob(str(W / "rows/zero/c11/*.png")))]
+                 for p in sorted(glob.glob(str(W / "rows" / ("zero" if READER == "maps" else "zero-raw") / "c11/*.png")))]
         print(json.dumps({"zero_push_largest_pixel_difference": int(max(diffs)), "images": len(diffs)}), flush=True)
 
 
@@ -401,7 +408,10 @@ def main():
     ap.add_argument("--sigma-window", help="lo,hi: the diagnosis's noise window for train-checker")
     ap.add_argument("--out-name", help="train-checker's output folder under /workspace/m10, for the diagnosis")
     ap.add_argument("--updates", type=int)
+    ap.add_argument("--reader", choices=["maps", "raw"], default="maps")
     args = ap.parse_args()
+    global READER
+    READER = args.reader
     if args.sigma_window:
         global SIGMA_WINDOW
         SIGMA_WINDOW = tuple(float(v) for v in args.sigma_window.split(","))

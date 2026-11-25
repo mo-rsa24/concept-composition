@@ -158,8 +158,71 @@ def train(args):
     raise SystemExit(0 if result["passes"] else 1)
 
 
+class Averaged(nn.Module):
+    """Question 114's last attempt: scorers trained with different seeds, their count probabilities averaged."""
+
+    def __init__(self, members):
+        super().__init__()
+        self.members = nn.ModuleList(members)
+
+    def forward(self, x):
+        outs = [m(x) for m in self.members]
+        return (torch.stack([o[0].softmax(1) for o in outs]).mean(0).log(), torch.stack([o[1].softmax(1) for o in outs]).mean(0).log())
+
+
+def train_one(x_train, y_train, seed):
+    torch.manual_seed(seed)
+    model = Scorer()
+    optimiser = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
+    schedule = torch.optim.lr_scheduler.CosineAnnealingLR(optimiser, T_max=EPOCHS)
+    generator = torch.Generator().manual_seed(seed)
+    for epoch in range(EPOCHS):
+        model.train()
+        order = torch.randperm(len(x_train), generator=generator)
+        for start in range(0, len(order), BATCH):
+            batch = order[start:start + BATCH]
+            x = x_train[batch]
+            flip = torch.rand(len(batch), generator=generator) < 0.5      # a mirrored CLEVR scene keeps its counts
+            x = torch.where(flip[:, None, None, None], x.flip(3), x)
+            loss = loss_of(model, x, y_train[batch])
+            optimiser.zero_grad()
+            loss.backward()
+            optimiser.step()
+        schedule.step()
+        print(f"seed {seed} epoch {epoch} loss {float(loss):.4f}", flush=True)
+    return model.eval()
+
+
+def train_v3(args):
+    """Question 114's last attempt, declared before it runs: three scorers (seeds 1, 2, 3) on the same 3,200 renders with mirrored copies,
+    60 epochs each with the cosine-decayed rate, their probabilities averaged, judged once on 800 newly drawn renders (indices 250 to 299 of
+    each combination). The bar stays 0.95."""
+    begin = time.time()
+    x_train, y_train = load(args.renders, range(TRAIN_PER_SET))
+    x_judge, y_judge = load(args.judge, range(PER_SET, PER_SET + 50))
+    x_old, y_old = load(args.renders, range(TRAIN_PER_SET, PER_SET))
+    model = Averaged([train_one(x_train, y_train, seed) for seed in (1, 2, 3)]).eval()
+    called = counts(model, x_judge)
+    exact = float((called == y_judge).all(1).float().mean())
+    per_set = {f"c{r}{b}": round(float((called[(y_judge[:, 0] == r) & (y_judge[:, 1] == b)] == torch.tensor([r, b])).all(1).float().mean()), 3)
+               for r, b in COMBINATIONS}
+    torch.save({"states": [m.state_dict() for m in model.members], "normalise": "2x-1 on 0-to-1 RGB", "kind": "averaged"},
+               args.out / "scorer.pt")
+    result = {"members": 3, "train": len(x_train), "judge": len(x_judge), "judge_exact": round(exact, 4), "per_set": per_set,
+              "old_held_out_exact_for_reference": round(float((counts(model, x_old) == y_old).all(1).float().mean()), 4),
+              "min_exact": MIN_HELD_OUT_EXACT, "passes": exact >= MIN_HELD_OUT_EXACT, "seconds": round(time.time() - begin, 1)}
+    (args.out / "scorer.json").write_text(json.dumps(result, indent=1) + "\n")
+    print(json.dumps(result), flush=True)
+    raise SystemExit(0 if result["passes"] else 1)
+
+
 def load_scorer(folder):
     state = torch.load(folder / "scorer.pt", map_location="cpu", weights_only=False)
+    if state.get("kind") == "averaged":
+        members = []
+        for st in state["states"]:
+            m = Scorer(); m.load_state_dict(st); members.append(m)
+        return Averaged(members).eval()
     model = Scorer()
     model.load_state_dict(state["state"])
     return model.eval()
@@ -204,7 +267,8 @@ def score(args):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("stage", choices=["overfit", "train", "experts", "score"])
+    ap.add_argument("stage", choices=["overfit", "train", "train-v3", "experts", "score"])
+    ap.add_argument("--judge", type=Path, help="train-v3: the newly drawn judging renders")
     ap.add_argument("--renders", type=Path)
     ap.add_argument("--samples", type=Path)
     ap.add_argument("--out", type=Path, required=True)
@@ -212,7 +276,7 @@ def main():
     args.out.mkdir(parents=True, exist_ok=True)
     torch.manual_seed(SEED)
     torch.set_num_threads(int(os.environ.get("SLURM_CPUS_ON_NODE", os.cpu_count())))
-    {"overfit": overfit, "train": train, "experts": experts, "score": score}[args.stage](args)
+    {"overfit": overfit, "train": train, "train-v3": train_v3, "experts": experts, "score": score}[args.stage](args)
 
 
 if __name__ == "__main__":
