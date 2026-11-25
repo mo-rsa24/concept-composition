@@ -45,3 +45,17 @@ pictures. Three objects is the weak count, where some samples hold two. At the s
 far above its stop line of 0.62; blue's rises to 0.94 against a stop line of 0.65; both losses fall again, to −3.96. Both runs go on to the end. At the end both shares sit within the 0.07 that 48 samples move by chance of their third-quarter values, and both losses fell to −4.02.
 Both runs' final snapshots (0.050 and 0.100), stats, logs, samples and quarter records are in `/datasets/mmolefe/poe_repair_min/loop-6/m10/full/models/r-full/` and `b-full/`, each snapshot's sha256 matching the pod's copy. The first try at sampling recorded no samples (the sampler is a
 generator and was never iterated); that line stays in the file with a share that is not a number.
+
+## The comparison
+
+The settings are in [the design's comparison section](design.md#running-the-comparison). Every GPU row runs on the red expert's RunPod RTX
+4090; the scorer trains on the cluster's CPUs.
+
+| Run | Job | Commits | Output | Outcome |
+|---|---|---|---|---|
+| Count scorer, first run: overfit on 16 renders, then 40 epochs at a fixed learning rate of 0.001 | 95528 | `bbe809f0-15d8bdd` | `m10/scorer/` | overfit passed, 16 of 16; training missed: 0.518 of the 800 held-out renders counted exactly on the last epoch, against 0.95. The held-out share swung between epochs (0.95 at epoch 29, 0.59 at 19, 0.52 at 39), with red counts of 2 and 3 collapsing on the last; W&B `sxv8ojso` |
+| Count scorer, second run: 60 epochs with the rate decaying to zero by a cosine, the last epoch kept, nothing chosen on the held-out renders | 95532 | the commit after `b1ef3752` | `m10/scorer-cosine/` | missed by 3 renders: 0.946 counted exactly against 0.95 (red right 0.973, blue 0.974); the misses sit in the crowded sets, 0.82 at 3 red and 3 blue, 0.84 at 2 and 3, 0.86 at 3 and 2; W&B `acr12hqz` |
+| Every model on the pod | | | pod `models/` | blue's and the empty-scene snapshots copied with sha256 matching their sources |
+| Sampler check: the comparison's own Heun loop against EDM2's `generate_images` on 4 seeds per count | | `m10_pod/m10_compose.py` | pod `sources/` | the largest difference is 1 grey level of 255 on every seed |
+| Plain product, smoke: 8 seeds per cell | | | pod `rows/plain/` | runs; where both experts draw at the same place their colours add, so objects come out dark purple-black, not one red and one blue |
+| Plain product, block 0: seeds 0 to 255 in all 9 cells | | | pod `rows/plain/` | 2,304 pictures in 536 seconds, 0.23 seconds a picture |
