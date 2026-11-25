@@ -219,12 +219,22 @@ where Paper 1's reviewer questions need the same answer. G2 reports it.
   the paper can say how much of the SDXL gap survives on a newer model. That is a measurement for a running
   loop, not for this session.
 
-**The owner's choice inside this.** Which model generation Paper 2 targets decides whether the correction
-must be rebuilt for a transformer model. The kept push reads SDXL's U-Net decoder features, and every
-paper read here that fixes look-alike pairs on SD3 or FLUX works through the joint attention of a
-transformer model (Loop 12's notes on the MMDiT paper and DeLeaker). Filed as a board question holding G1,
-with the default: keep SDXL as the model Paper 2's method runs on, narrow its claim to look-alike pairs,
-and add one reference row of plain SD3.5 Medium or FLUX.1 dev on the same pairs.
+**How this fits the owner's order for Paper 2.** The owner sets the order of the claims
+([Paper 2's design](../manager/paper2-four-way-design.md), "The order of the claims, set by the owner"):
+first whether the correction works on SDXL, then where its SDXL counterparts struggle and whether it fixes
+those failures and beats them, and only then scale and SD3.5 and FLUX. The narrowing fits the second step
+(inferred): on SDXL the counterparts' weakest kind among plain noun pairs is two animals (CO3 0.7441, ToMe
+0.6257 against plain SDXL's 0.6950, CO3 Table 1, p. 7, read), and CO3 still misses 27 to 39 of 128 cat and
+dog seeds in this project's own count. G3 ranks what each SDXL counterpart still gets wrong, with
+page-sourced examples, as the list Paper 2 has to beat first.
+
+**Which model Paper 2 finally targets stays open.** Board question 104 asks it and waits until the second
+step has an answer. The design states that the method is meant to apply to any model that combines noise
+predictions with classifier-free guidance, and that a correction reading one model's internal features, as
+the kept push reads SDXL's U-Net, has to show it can be rebuilt for each model. Every paper read here that
+fixes look-alike pairs on SD3 or FLUX works through a transformer's joint attention (Loop 12's notes on the
+MMDiT paper and DeLeaker), so a reference row of plain SD3.5 Medium or FLUX.1 dev on Paper 2's own pairs
+belongs to the third step.
 
 ## What this cannot tell you
 
