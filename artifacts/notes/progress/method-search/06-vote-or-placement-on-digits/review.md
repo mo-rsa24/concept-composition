@@ -44,3 +44,10 @@ setting where pasting cannot apply, which is step M10.
 shared-canvas experiment over the project's default "floor" base (the empty canvas with a spread of 0.3), at the same pairs, seeds, pushes and
 corrector, read against the same bar beside the first run's 0 of 320. It runs after step M14 (`m11_vote.sbatch shared-floor`, output
 `m11/shared-floor/`), and its result is compared with the coin experiment's 313 from the first run.
+
+**The rerun ran off to full ink as well, so the shared canvas is still not read.** Over the "floor" base (job 95329, commit `48583260-15d8bdd`,
+W&B `l7601xj1`, output `m11/shared-floor/`), the shared canvas again draws 0 clean pairs of 320, and every canvas is 100% ink (pixels above
+128 of 255) on all five pairs, as over the first base. The base is therefore not what drives the product to full ink. What remains in that
+experiment is the corrector's five Langevin steps at step size 3 times the noise increment, the two checker pushes capped at 0.1 of the
+prediction, and two experts each predicting over the whole canvas; finding which of them does it needs runs of its own, and is the owner's
+or Loop 13's call. The three readable comparisons above are unaffected.
