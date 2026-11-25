@@ -897,8 +897,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-25T02:25:49+02:00",
-   "updated": "2026-11-25T02:26:08+02:00",
-   "note": "waits for Loop 13's reviewer pass naming the first reader to try, its cost and bar; nothing built or run before it"
+   "updated": "2026-11-25T02:35:14+02:00",
+   "note": "reviewer named the per-place prediction difference; design and bar written (method-search/07-a-checker-that-reads-identity/design.md); run queued as 94807; judge waits on API approval"
   },
   {
    "id": "U1",
@@ -3108,6 +3108,15 @@
    "asked": "2026-11-25T02:23:40+02:00",
    "answer": "Owner, in chat, 2026-11-25: A. Pause the architecture and label steps (D3, M2; about 31 GPU-hours) and move Paper 2's checker search to a checker that reads which subjects are drawn. Before any reader is built or run, a reviewer pass (Loop 13) compares the candidate identity readers against what tonight's runs showed (Loop 8's checker cannot read sampler states and digits are unsettled at steps 27 to 36; the attention reader failed on 4 of 12 pairs in the region test; Loop 12's per-place signal marked the borrowing body at steps 4 to 5 on one seed) and names the one to try first, with its cost and bar.",
    "answered": "2026-11-25T02:25:54+02:00"
+  },
+  {
+   "id": 101,
+   "question": "Two small asks from Loop 6 for its first identity reader (step M12, about 0.3 GPU-hours, bar written before the run). (1) May it run on mscluster107's idle card 1, inside the other user's job 94699, under the same guards and stop rule, instead of waiting in the Slurm queue (job 94854)? Question 99 named only three jobs, all done. (2) May the judge that reads CO3's in-between pictures use your Anthropic key for about 672 pictures, about 1.5 million input tokens? Question 15 approved 1.46 million input tokens for scoring the checker comparison (D3), which your answer to question 100 has now paused, so this would reuse that unspent budget for its replacement rather than add to it. Recommendation: yes to both, with the tokens counted against question 15's budget.",
+   "holds": "M12",
+   "default": "no to both: the reader waits in Slurm, and the judge's diagnostic waits unlabelled",
+   "by": "s13",
+   "state": "open",
+   "asked": "2026-11-25T02:35:21+02:00"
   }
  ]
 }
