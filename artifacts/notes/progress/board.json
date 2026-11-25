@@ -898,8 +898,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-25T02:25:49+02:00",
-   "updated": "2026-11-25T09:26:57+02:00",
-   "note": "second reader does not see the failure (0.635, floor 0.65) and stops; expected shares could not see size; question filed on what M12 tries next"
+   "updated": "2026-11-25T09:55:03+02:00",
+   "note": "waits for the reviewer's identity head (question 110 A), which runs only if M13 passes; M13 (gradient direction against r_t) is running as 95161 then 95162 while the board holds one step per loop"
   },
   {
    "id": "Z8",
