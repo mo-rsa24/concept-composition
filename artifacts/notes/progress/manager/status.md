@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-25 02:11 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-25 02:14 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -86,15 +86,15 @@ The finish range is `session_status.py`'s, from the 63 finished steps: fastest p
 
 ## Resources
 
-Read at 01:13 from `squeue`, `sacct` and `sinfo`; down nodes from `sinfo -R` at 16:28.
+Read at 02:13 from `squeue`, `sacct` and `sinfo`; down nodes from `sinfo -R` at 16:28.
 
 | What | Now |
 |---|---|
-| Our jobs against the caps | 2 running on `bigbatch` of 6 allowed (Loop 6's two CLEVR renders, 10-hour limit); 0 on `biggpu`; 22 queued, waiting on cluster priority rather than our caps, including Loop 6's checker read, Loop 8's next check and Loop 12's free text-only check |
+| Our jobs against the caps | 2 running on `bigbatch` of 6 allowed (Loop 6's two CLEVR renders); 0 on `biggpu`; 20 queued on cluster priority; plus Loop 8 on mscluster107 card 1 outside Slurm |
 | Longest wait | the queue as a whole: nothing of ours finished between 00:13 and 01:13 |
 | Nodes out of service | `bigbatch`: 12 down and 5 drained of 48. `biggpu`: 2 down and 2 drained of 7, including mscluster108 and mscluster111, drained at 09:27 and 09:10 today after a failed job kill |
 | Idle capacity | none: at 17:43 every working `bigbatch` and `biggpu` node was allocated. mscluster107 is now another user's `biggpu` job (94610, 6-hour limit, started 17:36); its second card sits idle at 170 MiB, but their process holds it, so it is not ours to use. Your interactive job 83423 on that node no longer appears in the queue |
-| Shared card | **mscluster107 card 1, approved again by you on question 99**, for as long as the other user's job 94699 runs. Loop 12 used it 02:02 to 02:10 for its free check and smoke run, under a launcher with all the guards (checked), and left nothing behind. Handed to Loop 8 at 02:11 for its readability check; Loop 6 after. |
+| Shared card | **mscluster107 card 1, approved again by you on question 99**, for as long as the other user's job 94699 runs. Loop 12 used it 02:02 to 02:10 and left nothing behind. Loop 8's readability check runs there now under `launch-3.sh` (about 5 GB), its Slurm copy cancelled. Loop 6 after |
 | Compute against budget since 2026-11-21 | Loop 6: 53.4 node-hours of 87 (34.8 were CLEVR renders that may have used no GPU). Loop 8: 11.9 of 30. Loop 12: about 0.4, no total set. Slurm here records no GPU count, so these are node-hours, an upper bound |
 
 **What would make the queue move faster:** little within our control. There is no idle `biggpu` card,
