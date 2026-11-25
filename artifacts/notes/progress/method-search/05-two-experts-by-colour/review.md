@@ -63,7 +63,8 @@ The settings are in [the design's comparison section](design.md#running-the-comp
 | Count checker's training: 3,000 updates of 64 pastes, noise drawn from the push window (σ 3.8 to 10.5) | | `38807290` | pod `checker/` | missed: held-out balanced accuracy 0.645 against 0.75. It calls apart pastes with the right counts right on 0.82, touching pastes on 0.57 and apart pastes asked one count off on 0.37; from update 500 on it sits between 0.636 and 0.646, so it learns one fixed split and no more. It cleared the stop line at half (0.642 above 0.55). The checker row does not run on it |
 | Mask paste, blocks 0 to 3 | | `99107ca4` | pod `rows/paste/` | done, 9,216 pictures in 28 seconds on the CPU |
 | Diagnosis, after the checker missed: the same training for 1,000 updates at four noise windows, σ 3.8 to 10.5, 1.2 to 3.8, 0.3 to 1.2 and 0.002 to 0.3 | | `99107ca4` | pod `checker-diag/` | done; no window reaches 0.75 (the table below) |
-| Corrector row, blocks 0 to 3 | | `99107ca4` | pod `rows/corrector/` | running |
+| Corrector row, blocks 0 to 3 | | `99107ca4` | pod `rows/corrector/` | done, 9,216 pictures; 2,067 seconds for block 0 while it shared the card with the diagnosis, then 1,061 to 1,221 seconds a block |
+| Every output of the comparison copied back | | | `/datasets/mmolefe/poe_repair_min/loop-6/m10/comparison/m10-comparison.tar` | 209 MB: every row's pictures, the paste sources, the experts-alone samples, the checker and its diagnosis, the quarter reports and the logs; sha256 `0372a324…` matching on the pod and the cluster |
 
 **The checker's noise-window diagnosis.** A diagnosis after the checker missed its bar, not a result: the same training cut to 1,000 updates,
 held-out balanced accuracy on the same 1,024 held-out pastes.
@@ -90,3 +91,15 @@ these numbers track the run and decide nothing until the owner rules on the scor
 
 The plain product and the corrector both draw dark purple-black objects, so even their 1 red + 1 blue share is suspect: the scorer never
 saw an object that is neither red nor blue. The 32-per-cell eye calls will say how often those are truly one red and one blue.
+
+**All four quarters, scored provisionally** (the 0.946 scorer; nothing here is a verdict until the owner rules on the scorer, question 114).
+
+| Row | Seeds 0 to 255 | 256 to 511 | 512 to 767 | 768 to 1,023 | All 9,216 | 1 red + 1 blue | 2 + 2 | 3 + 3 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Plain product | 0.026 | 0.033 | 0.026 | 0.030 | 0.029 | 0.23 | 0.00 | 0.00 |
+| Corrector | 0.028 | 0.033 | 0.040 | 0.030 | 0.033 | 0.28 | 0.00 | 0.00 |
+| Mask paste | 0.537 | 0.505 | 0.523 | 0.496 | 0.515 | 0.77 | 0.40 | 0.33 |
+
+The corrector moves the plain product by 0.004, under the 5 points the bars ask for. The mask paste leads both by about 0.48. Owed before
+any verdict: the owner's answers on the scorer (question 114) and the checker row (question 116), the experts-alone check scored, and the
+32-per-cell eye calls.
