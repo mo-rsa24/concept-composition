@@ -283,7 +283,9 @@ def expected(args):
 
     pairs, _ = tuning(args.splits)
     model, _ = load(joint_prompt(pairs[0]), load_parser(), args.out / "_config")
-    pipe = StableDiffusionXLPipeline(vae=model.vae.to(torch.float32), text_encoder=model.text_encoder,
+    import copy
+    vae32 = copy.deepcopy(model.vae).to(torch.float32)   # SDXL's VAE overflows in fp16, so the pipeline stops at latents and this decodes
+    pipe = StableDiffusionXLPipeline(vae=model.vae, text_encoder=model.text_encoder,
                                      text_encoder_2=model.text_encoder_2, tokenizer=model.tokenizer, tokenizer_2=model.tokenizer_2,
                                      unet=model.unet, scheduler=model.scheduler)
     pipe.set_progress_bar_config(disable=True)
@@ -299,9 +301,12 @@ def expected(args):
                 path.parent.mkdir(parents=True, exist_ok=True)
                 g = torch.Generator(device=model.unet.device).manual_seed(seed)
                 with torch.no_grad():
-                    image = pipe(subject.replace("_", " "), num_inference_steps=EXPECTED_STEPS, guidance_scale=EXPECTED_GUIDANCE,
-                                 height=1024, width=1024, generator=g).images[0]
-                image.save(path)
+                    latents = pipe(subject.replace("_", " "), num_inference_steps=EXPECTED_STEPS, guidance_scale=EXPECTED_GUIDANCE,
+                                   height=1024, width=1024, generator=g, output_type="latent").images
+                    pixels = vae32.decode(latents.to(torch.float32) / vae32.config.scaling_factor).sample[0]
+                pixels = ((pixels.clamp(-1, 1) + 1) * 127.5).round().byte().permute(1, 2, 0).cpu().numpy()
+                from PIL import Image
+                Image.fromarray(pixels).save(path)
             boxes = [d for d in detect_boxes(path, [word], device=torch.device(model.unet.device)) if d["confidence"] >= EXPECTED_MIN_CONF]
             if boxes:
                 x0, y0, x1, y1 = max(boxes, key=lambda d: d["confidence"])["box"]
