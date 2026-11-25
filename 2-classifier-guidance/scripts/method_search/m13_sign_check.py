@@ -64,11 +64,11 @@ def main():
             sample = x.repeat(2, 1, 1, 1)
             wrapper.pusher = None
             with torch.no_grad():
-                plain = wrapper(sample, t.repeat(2), encoder_hidden_states=torch.cat(seqs[:2]), added_cond_kwargs=cond2)["sample"].float()
+                plain = wrapper(sample, t, encoder_hidden_states=torch.cat(seqs[:2]), added_cond_kwargs=cond2)["sample"].float()
             pusher = Pusher(checker, config.guidance_scale, STRENGTH, CAP, WINDOW, "push")
             pusher.step, pusher.alpha_bar = step, float(abar[st["t"]])
             wrapper.pusher = pusher
-            pushed = wrapper(sample, t.repeat(2), encoder_hidden_states=torch.cat(seqs[:2]), added_cond_kwargs=cond2)["sample"].float()
+            pushed = wrapper(sample, t, encoder_hidden_states=torch.cat(seqs[:2]), added_cond_kwargs=cond2)["sample"].float()
             wrapper.pusher = None
             change = (pushed - plain)[1]                    # the joint entry; the unconditional entry moves by the same amount
             with torch.enable_grad():
