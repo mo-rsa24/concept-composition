@@ -56,6 +56,30 @@ Every arm samples the 50 novel combinations, 100 pictures each from seeds 0 to 9
 
 **Arm 3's bar**, in addition to the bar below against arm 1: its digit-and-colour accuracy is at least 5 points above control a's with an exact one-sided McNemar p < 0.05, and its count of already-right pictures broken (control e) is no more than the random push's plus 50 (1% of the 5,000). Failing the first means any gain is from the main-effect heads, not the interaction.
 
+## Arm 4: a model of the term the product drops
+
+The owner added this arm (request of 2026-11-25, `requests.md`), and the reviewer's section "The fourth arm, 2026-11-25" in `reviewer/2026-11-24-review.md` set seven fixes, all below. It is the Colored MNIST counterpart of the ICLR adapter: a small model that predicts the term the product leaves out, with both experts frozen.
+
+**The target.** On a seen pair $(d,c)$, exactly one holder's expert saw it. The target is
+$$r_t(x_t, d, c) = \epsilon_k(x_t, t \mid d, c) - \epsilon_{\text{product}}(x_t, t \mid d, c),$$
+the prediction of that expert $k$ asked with both labels, minus arm 1's composed prediction, both at guidance weight 1.
+
+**The model.** A small U-Net of the experts' design (`ColourUNet`, 32 channels), given the noisy picture, the step, and the digit and the colour as two separate inputs (two embeddings, added), never one embedding per pair, so a pair it never trained on is reached through its parts. It outputs a 3 by 32 by 32 correction. Sampling with arm 4 uses $\epsilon_{\text{product}} + \hat r_t$, at weight 1.
+
+**Training.** Only on the 40 seen pairs not held back for arm 3, and only along the product's own sampling trajectories: arm 1's sampler run on each of those pairs from seeds 2,000 to 2,015, every step's $x_t$ kept with its target. Nothing is trained on the holders' pictures. 10,000 steps of batch 256, mean squared error.
+
+**The twin.** The same model trained with the combinations shuffled: each trajectory's target is paired with a different training pair's digit and colour, drawn once with a fixed seed.
+
+**The baseline: ask the experts directly.** The two experts asked with both labels at once, their predictions averaged: $\tfrac12[\epsilon_1(x_t,t \mid d,c) + \epsilon_2(x_t,t \mid d,c)]$. It tests whether the experts' own label embeddings already reach a pair, with no added model.
+
+**The gate, on arm 3's 10 held-back seen pairs, 100 pictures each.** First a fit check: on those pairs' product trajectories (seeds 2,000 to 2,015), the model's prediction must explain at least a quarter of the target's variance, $1 - \lVert \hat r - r \rVert^2 / \lVert r \rVert^2 \ge 0.25$, averaged over steps. Then arm 4's digit-and-colour accuracy must be at least 5 points above arm 1's and at least 5 points above the twin's, each with an exact one-sided McNemar p < 0.05. If the gate fails, arm 4's unseen-pair run is reported as not reached.
+
+**The bar on the 50 novel combinations, written before the run.** Arm 4 supports the idea when its accuracy is at least 5 points above arm 1's, above the twin's and above the ask-the-experts baseline's, each with an exact one-sided McNemar p < 0.05, and its novel FID is lower than arm 1's. Accuracy above arm 1 alone, with the twin or the baseline as good, is reported as a gain the model's knowledge of pairs does not explain.
+
+**What it needs from the data holders.** The model is trained in one place on both experts' predictions, so both finished experts must be sent to one site: the same single exchange of models that DCFM-B makes (p. 6), and more than arms 1 to 3 need, which sample at one site from the experts as they are.
+
+**Cost.** About 0.9 GPU-hours: the trajectories and their targets (40 pairs by 16 seeds by 50 steps), the model and its twin, and the sampling for the gate and the novel run. With it Z9 is about 3.3 GPU-hours, which the owner approved (request of 2026-11-25, `requests.md`).
+
 ## How pictures are scored
 
 - **Novel FID**: Fréchet Inception distance between each arm's 5,000 pictures and 5,000 real pictures of the same 50 combinations (MNIST test digits, coloured, 100 per combination), with `pytorch-fid`'s Inception weights on 2,048 pooled features. **Seen FID** is computed the same way on the 50 seen combinations for completeness. A real-against-real FID (two disjoint halves of the reference) is reported as the floor.
@@ -97,6 +121,7 @@ Outputs go under `/datasets/mmolefe/poe_repair_min/loop-12/z9/<rung>/`.
 4. **Arm 1**: the plain product on the novel and seen combinations; FIDs and accuracy.
 5. **Checker and arm 2**: control 1, then arm 2; the bar.
 6. **Arm 3**: the classifier and its shuffled twin; the held-back seen pairs first; then the novel combinations with controls a to e.
+7. **Arm 4**: the trajectories and targets, the model and its twin, the fit check and the held-back gate, then the novel combinations beside the ask-the-experts baseline.
 
 ## What this cannot say
 
