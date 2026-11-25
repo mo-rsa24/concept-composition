@@ -41,17 +41,32 @@ reading notes yet, so they are unchecked.
 
 This runs before anything larger, on cases already drawn, and answers whether the idea is worth sizing.
 
-**Cases.** Eleven pair-and-seed cases already rendered: three failures for each base sampler (a CO3
-failure such as cheetah × cougar at seed 6001, a plain PoE hybrid, a joint prompt that drops a
-subject such as cat × dog on the held-out seeds where it fails) and two cases CO3 already gets right.
-None may come from the checker's 243 training pairs.
+**Cases.** Eleven pair-and-seed cases from Loop 6's 12 tuning pairs, leaving out giraffe and
+tortoise, which the subject guard holds back. Three CO3 failures, such as cheetah × cougar at seed
+6001, and two cases CO3 already gets right are taken from W2d's hand labels of CO3's tuning renders.
+No plain PoE or joint-prompt render of these pairs exists, so a screening pass draws both at seeds
+6001 to 6004 (88 pictures, about 35 GPU-minutes), and three failures per base are picked by eye from
+it. Cat × dog cannot be a case, because the kept checker was trained on it, and none may come from
+the checker's 243 training pairs or the held-out seeds 7001 to 7008.
+
+**The joint-prompt base.** The product with the joint prompt as both experts, each at half the
+guidance scale, which equals plain classifier-free guidance on the joint prompt. An identity check
+against plain guidance at the same precision runs first.
 
 **Arms.** Each case is drawn again on the base it failed on, with the correction and with a random
 push of the same size, four draws each, because pushed renders at one seed have differed between
 runs. The existing picture is the "without" arm only when it was drawn on the same card type,
 settings and seed; otherwise that one picture is drawn again.
 
-**Cost.** About 88 pictures at 50 steps, about 30 GPU-minutes on a cluster card.
+**Cost.** About 88 pictures at 50 steps after the screening pass: plain PoE and the joint prompt
+about 30 seconds a picture, CO3 about 60, about 65 GPU-minutes on a cluster card. With the screening
+pass the first test is about 1.7 GPU-hours. The screening pass runs on mscluster107 card 1 under the
+owner's approval in board question 103, and the test itself in `bigbatch`.
+
+**Already known for the CO3 row.** Loop 6 ran the kept push on CO3 over all 96 tuning pictures:
+7 faithful pairs with the push, 12 with the random push and 11 for CO3 alone
+(`method-search/01-beat-the-baseline/paper-2-blind-result.json`). The review shows that result beside
+this test's CO3 row.
 
 **What it decides.** A base passes when the correction gives at least 4 more two-clear pictures than
 the random push out of its 12 (three cases, four draws). Go to the four-way test when plain PoE and
