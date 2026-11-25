@@ -51,3 +51,19 @@ W&B `l7601xj1`, output `m11/shared-floor/`), the shared canvas again draws 0 cle
 experiment is the corrector's five Langevin steps at step size 3 times the noise increment, the two checker pushes capped at 0.1 of the
 prediction, and two experts each predicting over the whole canvas; finding which of them does it needs runs of its own, and is the owner's
 or Loop 13's call. The three readable comparisons above are unaffected.
+
+## Diagnosis of the shared canvas, after two failed runs
+
+Loop 13 approved this diagnosis for the owner on 2026-11-25, after the shared canvas ran off to full ink over both bases. It is a diagnosis,
+not a result: the plan was to switch the corrector and the pushes off, and add each back alone only if the bare product drew digits.
+
+**The bare product does not draw digits, so the diagnosis stops at its first run and the bar is not read.** With no corrector and no pushes,
+over the "floor" base (job 95421, commit `f8ad1490-15d8bdd`, output `m11/diagnosis/bare/`), the shared canvas draws 0 clean pairs of 320.
+It no longer fills the canvas: the share of ink is 0.22 to 0.76 per pair (1 and 9 lowest, 2 and 8 highest), against 0.08 to 0.15 for the
+held-side experiments. Every canvas holds one solid white blob on a speckled grey background, with no digit strokes, as the sheets for 1 and
+9 and for 2 and 8 show. So the plain product of two experts that each predict over the whole canvas fails on its own; the corrector and the
+pushes then drive that failure to full ink, which is what the first two runs showed.
+
+**What it says about M11's question.** The comparison of a held side against a shared canvas cannot be made with these experts, because
+without a held side their product draws no digits at all. That is consistent with what holding a side adds, but it is a failure of the
+shared-canvas sampler, not a measured lead, so it stays not read.
