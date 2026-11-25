@@ -878,12 +878,13 @@
    "needs": [
     "Z6"
    ],
-   "state": "doing",
+   "state": "done",
    "serves": "Paper 2",
    "objective": "Find what fixes identity on CO3",
    "started": "2026-11-25T00:14:17+02:00",
-   "updated": "2026-11-25T02:10:47+02:00",
-   "note": "text check null (rho -0.023, p 0.54): text fix held; smoke controls pass; full 96 renders Slurm job 94806"
+   "updated": "2026-11-25T06:48:30+02:00",
+   "note": "null by the bar: own prediction 14/48 two-clear vs CO3 alone 8 (lead 6, p 0.073), whole-picture 10; duck x goose 0 to 5 of 8; text check null",
+   "finished": "2026-11-25T06:48:30+02:00"
   },
   {
    "id": "M12",
@@ -897,8 +898,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-25T02:25:49+02:00",
-   "updated": "2026-11-25T02:48:07+02:00",
-   "note": "judge control passes (0.914 vs 0.75, 209k input tokens); per-place run queued as 94807 and 94808"
+   "updated": "2026-11-25T07:13:07+02:00",
+   "note": "per-place reader inconclusive (0.688 at step 20, floor 0.65, bar 0.75; ranking 0.742); judge reads identity from step 15 (0.773); question filed"
   },
   {
    "id": "Z8",
@@ -906,7 +907,10 @@
    "owner": "s12",
    "proof": "artifacts/notes/progress/leakage/08-first-correction-test/review.md reports, for plain PoE, the joint prompt and CO3, two-clear pictures out of 12 with the correction against the random push, with the eleven grids and the verdict from manager/paper2-four-way-design.md",
    "needs": [],
-   "state": "todo"
+   "state": "doing",
+   "started": "2026-11-25T06:48:38+02:00",
+   "updated": "2026-11-25T07:04:18+02:00",
+   "note": "identity passed byte for byte; cases picked (puma x condor, zebra x flamingo, seal x gull at 6001 for plain PoE and the joint prompt); screening finishing on card 1; then one bigbatch job, 99 pictures"
   },
   {
    "id": "K7",
@@ -914,9 +918,13 @@
    "owner": "s4",
    "proof": "artifacts/notes/progress/targets/paper-1-evaluation-plan.md names, for each measure, what it reads, its bar in numbers, the data it needs, and that it applies to pasting, Bradley's rule and Paper 1's method alike, and the owner has said yes to it",
    "needs": [],
-   "state": "todo",
+   "state": "done",
    "serves": "Paper 1 beats pasting and Bradley's rule on measures where pasting fails",
-   "objective": "measures for overlap, shadows across objects, seams, colour binding and X-ray findings, applied equally to every method"
+   "objective": "measures for overlap, shadows across objects, seams, colour binding and X-ray findings, applied equally to every method",
+   "started": "2026-11-25T07:02:52+02:00",
+   "finished": "2026-11-25T07:02:52+02:00",
+   "updated": "2026-11-25T07:02:52+02:00",
+   "note": "paper-1-evaluation-plan.md accepted by the owner (question 105): five CLEVR measures where pasting fails, three chest X-ray measures waiting on data; Loop 14's reviewer questions fold into its last section when G2 lands"
   },
   {
    "id": "G1",
@@ -938,12 +946,13 @@
    "owner": "s14",
    "proof": "artifacts/notes/progress/gaps/02-reviewer-questions-paper-1.md exists with one sourced row per question and a line to s4 in requests.md",
    "needs": [],
-   "state": "doing",
+   "state": "done",
    "serves": "Paper 1 stands on its own",
    "objective": "every question a reviewer will ask, including how separately trained experts interact, with the papers and the measure for each",
    "started": "2026-11-25T06:40:04+02:00",
-   "updated": "2026-11-25T06:40:04+02:00",
-   "note": "Loop 14 started G2: reviewer questions for Paper 1"
+   "updated": "2026-11-25T07:06:50+02:00",
+   "note": "G2 landed: gaps/02-reviewer-questions-paper-1.md, 19 questions, 15 with a measure, 3 new rows sent to s4",
+   "finished": "2026-11-25T07:06:50+02:00"
   },
   {
    "id": "G3",
@@ -953,9 +962,12 @@
    "needs": [
     "G1"
    ],
-   "state": "todo",
+   "state": "doing",
    "serves": "a next direction if Paper 2 changes",
-   "objective": "ranked open problems with a first small experiment and cost each"
+   "objective": "ranked open problems with a first small experiment and cost each",
+   "started": "2026-11-25T07:07:02+02:00",
+   "updated": "2026-11-25T07:07:02+02:00",
+   "note": "Loop 14 started G3: open problems in composition, plus the SDXL counterparts' failure list"
   },
   {
    "id": "U1",
@@ -3232,8 +3244,28 @@
    "holds": "K7",
    "default": "the plan stays a draft and nothing is scored by it",
    "by": "s4",
+   "state": "answered",
+   "asked": "2026-11-25T06:40:44+02:00",
+   "answer": "Owner, in chat, 2026-11-25: yes. Paper 1's evaluation plan (targets/paper-1-evaluation-plan.md) is accepted: five CLEVR measures on the four rows of the two-colour test (paste, Bradley's rule, the corrector, Paper 1's method) and three chest X-ray measures that wait for data. Its four open questions stay open.",
+   "answered": "2026-11-25T07:02:52+02:00"
+  },
+  {
+   "id": 106,
+   "question": "Paper 2's first identity reader, which needs no training, is inconclusive. At each step it asks, cell by cell, which animal's prediction CO3's own prediction sits closer to, and scores the picture by the smaller animal's share of cells. On all 96 tuning pictures it sorts good pictures from ones with borrowed parts at best 0.688 (step 20), between the 0.65 floor and the 0.75 bar; its ranking peaks at 0.742. A judge reading what each step would become sees the difference from step 15 (0.773, rising to 0.867), so the information is there by then. One flaw shows in the per-pair table: the score is low whenever one animal is much bigger than the other (hippopotamus and swallow 0.08), whatever was drawn. Options: A (recommended) try the same reader with each animal's share divided by its expected size, as a new reader with its bar written first, on 8 fresh CO3 seeds per tuning pair (about 1.2 GPU-hours for the new CO3 runs, minutes for the read); B move to the next reader on the reviewer's list, a small head on SDXL's features trained to read identity (about 2.5 to 3 GPU-hours per training); C push on the score as it is at steps 15 to 25 and judge the pictures on Paper 2's bar; D stop the checker route for Paper 2. Evidence: method-search/07-a-checker-that-reads-identity/review.md.",
+   "holds": "M12",
+   "default": "A",
+   "by": "s6",
    "state": "open",
-   "asked": "2026-11-25T06:40:44+02:00"
+   "asked": "2026-11-25T07:13:07+02:00"
+  },
+  {
+   "id": 107,
+   "question": "Add two points from DCFM (arXiv 2606.10153, the closest published rival for Paper 1) to the chest X-ray part of Paper 1's evaluation plan? (1) NIH Chest X-ray 14 becomes the candidate X-ray dataset, since DCFM splits it across 4 data holders at 256 pixels; whether effusion with cardiomegaly is among its kept combinations is not printed, and tuberculosis and silicosis appear on no DCFM page. (2) DCFM's 'utility' (a classifier trained on generated X-rays, tested on real ones, recall of each disease combination) is reported beside the plan's both-findings measure, so Paper 1's X-ray numbers can sit beside DCFM's. Neither changes a target or the CLEVR measures. Details: artifacts/notes/progress/targets/dcfm-compositional-flow-matching-from-separate-silos.md, section 'Does it change the evaluation plan'.",
+   "holds": null,
+   "default": "the plan stays as accepted in question 105",
+   "by": "s4",
+   "state": "open",
+   "asked": "2026-11-25T07:13:12+02:00"
   }
  ]
 }
