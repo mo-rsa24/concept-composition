@@ -33,6 +33,7 @@ wrong target; the dashed arrow is the path if it finds the checker is wrong. Dra
 - [What is learnable in principle](#what-is-learnable-in-principle)
 - [What the project's approaches cannot do](#what-the-projects-approaches-cannot-do)
 - [What changes when the joint itself is wrong](#what-changes-when-the-joint-itself-is-wrong)
+- [Colored MNIST: does the checker push supply an interaction?](#colored-mnist-does-the-checker-push-supply-an-interaction)
 - [Three experiments, ranked](#three-experiments-ranked)
 - [The board question](#the-board-question)
 - [Where the sources disagree](#where-the-sources-disagree)
@@ -119,6 +120,54 @@ pictures later called two clear lean further against it at step 0 (−0.139 agai
 | The joint is the wrong target | the push opposes $r_t$ mostly where the joint itself fails; there, a push against $r_t$ moves away from the joint's error | two-clear pictures lean further against $r_t$ (−0.139 against −0.088); the joint fails on 2 of 4 held-out cells on the adapter page | read from the project's findings; the prediction inferred |
 
 The two readings make different predictions on the same states, which is experiment 1.
+
+## Colored MNIST: does the checker push supply an interaction?
+
+Loop 12's step Z9 composed two finished Colored MNIST experts, each trained on its own data holder's
+half of the seen digit-and-colour combinations, and sampled the 50 combinations neither holder saw.
+
+| Arm, 5,000 pictures on the 50 unseen combinations | Digit and colour right | Novel FID | Source | Mark |
+|---|---|---|---|---|
+| The plain product of the two experts | 46.9% | 25.87 | `leakage/09-dcfm-colored-mnist/arm-1-result.json` | read from the project's findings |
+| The product with the checker push (strength 10, capped at 0.1 of the prediction's length, every step) | 76.0%, won 1,671 and lost 216 matched pictures, one-sided McNemar p about 1e-278 | 12.63 | `arm-2-result.json`, commit 23602fe4 | read from the project's findings |
+
+It passes the bar written in [Z9's design](../leakage/09-dcfm-colored-mnist/design.md) (at least 5 points
+and a lower FID). **Whether the push supplies an interaction or only strengthens each attribute, this run
+cannot say**, for three reasons.
+
+1. **The checker builds the asked pair from its parts.** Its head adds a digit embedding to a colour
+   embedding before reading the experts' features (`2-classifier-guidance/scripts/leakage/z9_push.py`,
+   line 67, `self.demb(d) + self.cemb(c)`), so an unseen pair's label is set by the two attributes alone,
+   the structure the toy says can reach an unseen cell. Its gradient is a joint classifier's, which by the
+   reviewer's identity is the digit push plus the colour push plus the ratio term (the reviewer's ratio
+   classifier section, Question 4). The run has no push from digit and colour alone at the same length,
+   which is the comparison that would isolate the third part. Z9's design defines that control (control
+   a) for arm 3 only. Inferred.
+2. **On Colored MNIST the true world has digit and colour independent.** The interaction a correct sampler
+   needs there is the part that noising creates, so a push that strengthens each attribute is enough to
+   explain the gain (the reviewer's section, Question 4). Inferred there; not tested here.
+3. **The checker sees unseen combinations' pixels as negatives.** Its wrong-colour negatives recolour a
+   seen combination's digit with a random other colour (`z9_push.py`, lines 121 to 122), so some negatives
+   are pictures of unseen combinations, labelled wrong for a different asked pair. They are never asked
+   about and never positives, which matches the design's "never on a novel one" as asked pairs, but the
+   checker's features are trained on those pixels. Read from the code; its effect is not measured.
+
+**Against Logical Guidance's Colored MNIST result.** Logical Guidance reports 80.4% conformity for AND as
+the plain sum of noisy classifiers, the same as its constant-weight baseline, on one conditional U-Net at
+28 by 28, judged by its own ResNet-18 over 10,000 samples from 100 queries (Table 2, p. 5; protocol p. 23;
+[Loop 4's first read](../targets/reads/first/LogicalGuidance.notes.md), lines 31 to 40). In its own
+Table 11, Composable Diffusion's AND scores 26.61% and SuperDiff's 26.20% on that one model
+(`targets/numbers.csv`, rows LogicalGuidance-T11-003 and T11-004). Z9's 76.0% is 4.4 points below 80.4%,
+but the two are not one comparison: one model against two data holders, all queries against 50 unseen
+combinations (whether every Logical Guidance query was in its training data is not recorded in the
+project's notes), 28 against 32 pixels, and two different judges. Logical Guidance's number is context,
+not a row. Both results are classifier pushes for the two attributes, and neither isolates an interaction.
+
+**What would settle it.** The same arm 2 sampler with a push from a digit-only and a colour-only checker,
+each scaled to the checker push's length at every step, on the same 5,000 matched pictures: if the joint
+checker beats it by the 5-point McNemar rule, the push carries something beyond the two attributes. This
+is Z9's control a moved onto arm 2, about 0.2 GPU-hours (inferred from arm 2's 624.6 seconds of sampling).
+It is a request to Loop 12's design, not a fourth ranked experiment here.
 
 ## Three experiments, ranked
 
