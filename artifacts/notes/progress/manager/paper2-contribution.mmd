@@ -1,0 +1,18 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TB
+classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+P["PoE adds two prompts' scores:<br/>a cat x a dog gives a hybrid"]:::plain
+S["Cause 1: the sampler<br/>summed scores are not the<br/>product's score at noisy steps"]:::plain
+M["Cause 2: the model<br/>the exact product is not<br/>co-occurrence without support"]:::plain
+I["ICLR result: the right correction<br/>added early, steps 0 to 10,<br/>turns the hybrid into two"]:::plain
+C["Paper 2: supply that correction<br/>with SDXL frozen, from a classifier<br/>trained afterwards"]:::plain
+T{"Does it lift PoE, the joint<br/>prompt and CO3, not CO3 alone?"}:::plain
+Y["a method: benchmark rows<br/>against ToMe, FKC, CO3"]:::plain
+N["a patch or a null: says which<br/>cause the correction misses"]:::plain
+P --> S
+P --> M
+S --> I
+M --> I
+I --> C --> T
+T -- yes --> Y
+T -- no --> N

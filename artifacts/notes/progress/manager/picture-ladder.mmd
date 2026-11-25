@@ -1,0 +1,18 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TB
+classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+classDef stop fill:#fdecea,stroke:#c62828,stroke-width:2px,color:#111111
+A["1. Look: 8 seeds, CO3 and the fix<br/>from the same starting noise<br/>about 5 GPU-minutes"]:::plain
+B{"Does the fix change<br/>any picture visibly?"}:::plain
+C["2. Pilot: 24 paired pictures<br/>catches a big win (CO3 10% to 50%)<br/>9 times in 10, about 15 GPU-minutes"]:::plain
+D{"More wins than losses<br/>on the pairs that differ?"}:::plain
+E["3. Confirm: 96 paired pictures<br/>catches 10% to 30%<br/>almost always, about 1 GPU-hour"]:::plain
+F["4. Benchmark: winner only,<br/>full prompt set, the paper's table"]:::plain
+X["Park it, with the size of win<br/>this sample could have seen"]:::stop
+A --> B
+B -- yes --> C
+B -- no --> X
+C --> D
+D -- yes --> E
+D -- no --> X
+E --> F

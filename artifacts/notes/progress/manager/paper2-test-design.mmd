@@ -1,0 +1,6 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+F1["First test: 11 cases already drawn<br/>3 failures per base + 2 good cases"]:::plain --> F2["correction vs random push<br/>4 draws each, about 88 pictures<br/>about 30 GPU-minutes"]:::plain --> F3{"PoE and joint prompt each<br/>4+ more two-clear of 12?"}:::plain
+F3 -- no --> X["park it, with the grids"]:::plain
+F3 -- yes --> G1["Four-way test: 48 named pairs<br/>36 hard + 12 good, 1 seed"]:::plain --> G2["PoE | joint prompt | CO3<br/>x off | correction | random push<br/>+ best of 2, Attend-and-Excite"]:::plain --> G3["method if PoE and joint both rise<br/>about 4.8 GPU-hours, needs your yes"]:::plain
