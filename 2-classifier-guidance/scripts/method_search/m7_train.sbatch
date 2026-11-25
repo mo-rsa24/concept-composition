@@ -7,12 +7,18 @@
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-6/logs/%x-%j.log
 # Step M7: train one unconditional edm2-img64-xs model and sample one batch from it. Submit with the code snapshot in SNAP:
 #   sbatch --export=ALL,SNAP=<snapshot> m7_train.sbatch <rung> <set> <images seen> [batch, default 2048]
+# With STEP=m10 in the environment (step M10), it reads m10/data/<set>.zip, trains with the count labels on (--cond=True), writes under
+# m10/<rung>/models/<set>, and draws 16 samples for each count label.
 set -uo pipefail
 RUNG=${1:?rung}; SET=${2:?set}; NIMG=${3:?images seen}; BATCH=${4:-2048}
 ROOT=/datasets/mmolefe/poe_repair_min/loop-6
 E=/home-mscluster/mmolefe/Playground/PhD/projective-composition/reference/edm2
-DATA=$ROOT/m7/full/data/$SET.zip
-OUT=$ROOT/m7/$RUNG/models/$SET
+STEP=${STEP:-m7}
+case "$STEP" in
+  m7)  DATA=$ROOT/m7/full/data/$SET.zip; OUT=$ROOT/m7/$RUNG/models/$SET; COND=False ;;
+  m10) DATA=$ROOT/m10/data/$SET.zip; OUT=$ROOT/m10/$RUNG/models/$SET; COND=True ;;
+  *) echo "ABORT: unknown step $STEP"; exit 2 ;;
+esac
 : "${SNAP:?SNAP must name the code snapshot}"
 case "$(hostname -s)" in
   mscluster11[0-2]) PY=/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python ;;
@@ -38,16 +44,23 @@ cd "$E" || exit 3
 [ $((NIMG % BATCH)) -eq 0 ] || { echo "ABORT: $NIMG is not a multiple of the $BATCH-image batch"; exit 2; }
 [ "$BATCH_GPU" -gt "$BATCH" ] && BATCH_GPU=$BATCH
 STATUS=$((NIMG / 8 / BATCH * BATCH)); [ "$STATUS" -lt "$BATCH" ] && STATUS=$BATCH
-M7_NIMG="$NIMG" "$PY" "$SNAP/repo/2-classifier-guidance/scripts/method_search/edm2_scaled_ramp.py" --outdir="$OUT" --data="$DATA" --cond=False --preset=edm2-img64-xs --duration="$NIMG" --batch="$BATCH" --batch-gpu="$BATCH_GPU" \
+M7_NIMG="$NIMG" "$PY" "$SNAP/repo/2-classifier-guidance/scripts/method_search/edm2_scaled_ramp.py" --outdir="$OUT" --data="$DATA" --cond="$COND" --preset=edm2-img64-xs --duration="$NIMG" --batch="$BATCH" --batch-gpu="$BATCH_GPU" \
   --status="$STATUS" --snapshot="$NIMG" --checkpoint="$NIMG" --seed=20261124
 rc=$?
 echo "[$(date -u +%H:%M:%S)] TRAIN exit=$rc"
 [ "$rc" -eq 0 ] || exit "$rc"
-WANDB__SERVICE_WAIT=300 "$PY" "$SNAP/repo/2-classifier-guidance/scripts/method_search/edm2_log_wandb.py" "$OUT" "m7-edm2-$RUNG-$SET" \
+WANDB__SERVICE_WAIT=300 "$PY" "$SNAP/repo/2-classifier-guidance/scripts/method_search/edm2_log_wandb.py" "$OUT" "$STEP-edm2-$RUNG-$SET" \
   || echo "W&B logging failed; the stats stay in $OUT/stats.jsonl"
 NET=$(ls -t "$OUT"/network-snapshot-*.pkl 2>/dev/null | head -1)
 [ -n "$NET" ] || { echo "ABORT: no network snapshot in $OUT"; exit 7; }
-"$PY" generate_images.py --net="$NET" --outdir="$OUT/samples" --seeds=0-15 --steps=32 --batch=16
-rc=$?
+if [ "$COND" = True ]; then
+  rc=0
+  for K in 0 1 2; do
+    "$PY" generate_images.py --net="$NET" --outdir="$OUT/samples/count-$((K + 1))" --seeds=0-15 --class=$K --steps=32 --batch=16 || rc=$?
+  done
+else
+  "$PY" generate_images.py --net="$NET" --outdir="$OUT/samples" --seeds=0-15 --steps=32 --batch=16
+  rc=$?
+fi
 echo "[$(date -u +%H:%M:%S)] DONE rung=$RUNG set=$SET net=$NET sample_exit=$rc"
 exit $rc
