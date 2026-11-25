@@ -1,0 +1,15 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TB
+classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+classDef gap fill:#fdecea,stroke:#c62828,stroke-width:2px,color:#111111
+subgraph D["DCFM: exchange models while training, force independence"]
+  D1["4 silos, each its own<br/>chest X-rays (NIH ChestX-ray14)"]:::plain --> D2["models exchanged between<br/>peers DURING training"]:::plain
+  D2 --> D3["global penalty: the score for<br/>findings together must equal<br/>the sum of single-finding scores"]:::plain
+  D3 --> D4["composes combinations<br/>no single silo held<br/>scored by FID and classifier recall"]:::plain
+  D3 -.->|"cost, inferred"| D5["no term left for one finding<br/>changing another<br/>(fluid hiding the heart's edge)"]:::gap
+end
+subgraph P["Paper 1: train fully apart, measure the loss"]
+  P1["experts trained apart,<br/>never exchanged"]:::plain --> P2["composed only<br/>while sampling"]:::plain --> P3["measures what the product loses:<br/>occlusion, cross shadows,<br/>one finding changing another,<br/>with pasting as the control"]:::plain
+end
+style P fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
+D5 -.->|"Paper 1's measures would<br/>show this cost"| P3
