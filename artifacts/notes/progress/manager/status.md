@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-25 20:27 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-25 20:58 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -27,6 +27,7 @@ overrule one, answer it again: `python3 scripts/progress_board.py answer <number
 
 | # | The question | Decided | Why |
 |---|---|---|---|
+| none | Keep the RunPod pod on overnight while questions 114 and 116 wait? | **Decided by Loop 13 for the owner: no.** Once the corrector row's last block is copied back and checked, the pod is stopped (its disk is kept, so it can restart if you pick the raw-picture checker); idle would cost about R16 an hour |
 | none | The co-occurrence dial needed 8 held-out animal pairs sharing no animal with the adapter's training pairs, but only 3 exist | **Option A: 8 new animal pairs** sharing no animal with v58's 48 training pairs and in no benchmark or held-out set, drawn by a fixed rule written into the design before any render; the paper's adapter (v58-03-self, step 30,000) | Keeps the frozen held-out set unspent and keeps Loop 12's rule against held-out pairs; no bar written yet |
 | none | The digit shared-canvas experiment filled every canvas with ink twice (0 of 320 each time); diagnose it? | **Yes, as a diagnosis**: no corrector and no pushes first, then each piece added back alone, stopping at the first that breaks it; about 6 GPU-minutes, after M10 starts | It is the one comparison asking whether the experts need their own regions; reads no bar until the sampler draws digits |
 | none | M14's bar was written with M13's old sign; may it be corrected before the split? | **Yes, mechanically**: every threshold negated and "opposes" read as "follows", nothing else changed, committed alone before any split | M13's sign was reversed (Loop 6's check on 12 saved states: cosine -1.0 between the push and the gradient); no split had been computed |
