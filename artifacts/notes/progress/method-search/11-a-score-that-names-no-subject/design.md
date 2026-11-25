@@ -7,7 +7,7 @@ M14, read as the owner intended, found the joint prompt the wrong target where i
 subject. Loop 15's second experiment ([limits and what to test](../../directions/04-limits-and-what-to-test.md#three-experiments-ranked))
 asks whether SDXL already holds such a measure early in sampling: how much the two nouns' attention overlaps, and how many instances each
 noun has. On cat and dog the overlap already separates pictures that came out as two animals apart from those that did not
-([the attention figure](../../../../2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/03-does-an-early-push-separate-them/attention.png):
+([the attention figure](../../../../../2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/03-does-an-early-push-separate-them/attention.png):
 the joint prompt's median overlap 0.225 to 0.394 against the product's 0.506 to 0.814). The owner reopened this step on 2026-11-25.
 
 ## Words this uses
