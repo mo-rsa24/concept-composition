@@ -687,9 +687,9 @@
    "state": "doing",
    "serves": "Paper 1",
    "objective": "Build and test",
-   "updated": "2026-11-25T14:28:19+02:00",
+   "updated": "2026-11-25T15:19:08+02:00",
    "started": "2026-11-25T12:46:44+02:00",
-   "note": "experts' ladder queued: red overfit on 18 (95442), then 1% for red and blue (95443, 95444); the count scorer comes next"
+   "note": "experts training on two RunPod 4090s (red overfit passed 16 of 16 per count); full runs about 2.4 hours each with a checkpoint and a sampled check every quarter; stopping rule in the design"
   },
   {
    "id": "D4",
