@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-25 02:47 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-25 03:16 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -67,6 +67,7 @@ Newest first. A default happens only if you answer with it; nothing changes whil
 
 | # | The question, in one line | Why it is yours | Default | Waiting |
 |---|---|---|---|---|
+| 102 | Loop 8's SDXL identity test against CO3 costs about 14 GPU-hours, not 7, and has little animal training data (about 163 clean and 70 wrong-pair pictures). Run a cheaper gated version (about 5 to 6 GPU-hours first), use Loop 6's cheaper features instead of the signature you chose on 86, or close it and end Loop 8 with its digit results? | a run over 3 GPU-hours, a change to your answer on 86, or ending a loop | A: the cheaper gated version | 26 min |
 | 96 | Paper 2's checkers are gated on their yes-or-no call at zero (75% right), but the push follows only the direction of the checker's gradient, so ranking good pictures above bad ones is what steers it. Loop 6's checker ranks at about 0.70 but calls 0.602 right; Loop 8's ranks at 0.78 but calls 0.651. Keep the recorded gate, or switch to ranking? | changes a recorded bar after seeing which one passes on similar checkers | keep the recorded gate, report ranking beside it, and bring a pass on ranking alone back to you | just filed |
 
 Your own reading step (confirm the draft statements from your readings) is ready on the board.
@@ -80,7 +81,7 @@ The finish range is `session_status.py`'s, from the 63 finished steps: fastest p
 | Loop | Doing now, and why | Steps left | Estimated finish | Session | Held by |
 |---|---|---|---|---|---|
 | 4. Rivals and targets | Keeping every target current. It updated Paper 2's bar page to count two clear subjects with their own parts (questions 87 and 92). | 1 | none useful: it ends after the paper tables, which have not started | idle | nothing |
-| 6. Best method | By your answer A on question 100, its clean-pair checker search is paused. The reviewer named the first identity reader for its new step M12: the per-place prediction difference, needing no training, scored on CO3's 96 saved states with a judge on each step's clean estimate beside it, about 0.3 GPU-hours, bar written first ([choice](../reviewer/2026-11-24-review.md#choosing-paper-2s-identity-reader-2026-11-25-0250)). Paper 1's two-colour CLEVR test and digit vote test carry on. | 9 | not yet estimated | busy | its own design for M12 |
+| 6. Best method | By your answer A on question 100, its clean-pair search is paused and its training-list step closed. Its first identity reader (the per-place signal, no training) waits for a node (jobs 94807 and 94808); the judge beside it passed its control, 0.914 against 0.75, on 209,000 of the approved tokens. Paper 1's two-colour CLEVR renders continue. | 8 | not yet estimated | busy | a free node |
 | 7. Abstract-checker papers | Finished; its session is closed. | 0 | done | closed | nothing |
 | 8. Abstract checkers | Its digit identity checker reads pasted digits (0.861 against 0.75) but not the sampler's own states, and its removal test (V7) is closed as not run. The last check shows why: at steps 27 to 36 the digits are still unsettled (16% settled by step 26, half by step 37), and even the digit judge reads only 0.724 there ([review](../abstract-checkers/10-reading-identity/review.md)). Its one remaining step is the SDXL identity test against CO3. | 1 | not yet estimated | idle | Loop 6's training list and question 96 |
 | 11. Drain into the pillars | Stopped by your answer on 88; every finished result is on a report page. | 1 | when restarted | stopped its loop | a new result worth draining |
@@ -110,6 +111,7 @@ Newest first.
 
 | Concerns | Finding | Source |
 |---|---|---|
+| Loops 6 and 8 | **Two loops chase the same question for Paper 2**: can identity be read from CO3's own states? Loop 6's per-place reader answers it for about 0.3 GPU-hours (its judge's control passed at 0.914); Loop 8's signature checker would spend 5 to 14. Loop 8 is asked to hold until Loop 6's read lands. | questions 100, 101, 102 |
 | Loops 6 and 9 | **Two records disagree on what CO3 draws.** Loop 6's first test says CO3 draws two separate bodies in 96 of 96 tuning pictures; Loop 9's part labels call 23 of the 96 "not two" (for example a boar with two pheasants). If Loop 9's labels hold, about a third of CO3's failures are extra subjects, which no borrowed-parts fix can repair. Yours to settle. | `method-search/01-beat-the-baseline/review.md`; `noise-text-critic/02d-binding/part-binding-calls.csv` |
 | Loop 12 | **A run of bad results** (two nulls) and **a test that measured something else than its name**: the drawn-box fix never gave each animal its own prediction inside its box, so its draft verdict that regions cannot work overreaches. Method review request sent at 23:35. | `2-classifier-guidance/scripts/leakage/z3_regions.py` lines 66 to 72 |
 | Loop 8 | **A run of bad results on reading sampler states**: 0.651, then 0.552 with memorised training digits. Method review request sent at 22:20 after the reviewer's second pass. | `abstract-checkers/10-reading-identity/review.md` |
@@ -152,6 +154,7 @@ Newest first.
 | Time | To | What and why |
 |---|---|---|
 | 17:02 | Loop 8 | Its rewritten SDXL test passes the design check (stop rule, random and zero controls, comparison prompts fixed in advance, the same two-clear measure as Loop 6; about 7 GPU-hours, inside budget). Its board record goes to you as question 89. |
+| 03:15 | Loop 8 | Asked to hold its SDXL test until Loop 6's identity read lands; question 102 is yours. |
 | 02:30 | Loop 6 | The reviewer's first identity reader for M12, with its bar and stop conditions. |
 | 02:30 | Loop 6 | Your answer A on question 100 sent; the reviewer is choosing the identity reader to try first. |
 | 02:25 | Loop 6 | Its checker read is done: none of three checkers sees CO3's failure; it filed question 100 to you. |

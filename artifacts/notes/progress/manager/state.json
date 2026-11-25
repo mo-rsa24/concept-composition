@@ -1,5 +1,5 @@
 {
- "last_tick": "2026-11-25T02:14:00+02:00",
+ "last_tick": "2026-11-25T03:16:00+02:00",
  "last_alignment_round": "2026-11-24T22:10:00+02:00",
  "steps": {
   "P0": "done",
@@ -36,7 +36,7 @@
   "D2": "done",
   "M1": "done",
   "M7": "done",
-  "M5": "doing",
+  "M5": "done",
   "D3": "todo",
   "M2": "todo",
   "D5": "todo",
@@ -61,6 +61,7 @@
   "N2": "doing",
   "M11": "todo",
   "Z7": "doing",
+  "M12": "doing",
   "U1": "done",
   "U2": "done",
   "U3": "done",
@@ -70,7 +71,7 @@
   "V5": "done",
   "V4": "todo",
   "V6": "done",
-  "V7": "todo",
+  "V7": "done",
   "W1": "done",
   "W2": "done",
   "W3": "done",
@@ -196,7 +197,8 @@
   "98": "answered",
   "99": "answered",
   "100": "answered",
-  "101": "answered"
+  "101": "answered",
+  "102": "open"
  },
  "nudges": [
   {
@@ -378,6 +380,11 @@
    "what": "hand mscluster107 card 1 on: Loop 12, then Loop 8, then Loop 6; stop if job 94699 ends",
    "when": "each loop reports done, or each tick via pgrep and nvidia-smi on mscluster107",
    "set": "2026-11-25T01:58:00+02:00"
+  },
+  {
+   "what": "bring question 102 back to the owner with Loop 6's identity read and the judge's clean-estimate reads",
+   "when": "jobs 94807/94808 scored",
+   "set": "2026-11-25T03:16:00+02:00"
   }
  ]
 }
