@@ -2,7 +2,7 @@
 #SBATCH --job-name=l6-m7-data
 #SBATCH --partition=bigbatch
 #SBATCH --nodes=1
-#SBATCH --time=00:30:00
+#SBATCH --time=01:30:00
 #SBATCH --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82,mscluster84,mscluster48,mscluster83
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-6/logs/%x-%j.log
 # Step M7: CPU work on the renders. Submit with the code snapshot in SNAP:
@@ -28,6 +28,13 @@ case "$STAGE" in
   paste-score) "$PY" "$(dirname "$S")/clevr_paste.py" score --pasted "$ROOT/m7/full/paste/tall-p3" --scorer "$ROOT/m7/full/scorer"; rc=$? ;;
   experts)  "$PY" "$(dirname "$S")/clevr_scorer.py" experts --samples "$ROOT/m7/full/samples" --out "$ROOT/m7/full/scorer"; rc=$? ;;
   pack)     "$PY" "$S" pack --renders "$ROOT/m7/full/renders" --out "$ROOT/m7/full/data" --set "${2:?set}" --count "${3:-5000}" --name "${4:-$2}"; rc=$? ;;
+  pack-s2)  # step M10: each colour expert's labelled dataset, plus the 16-picture and 1% subsets for its ladder
+    R2=$ROOT/m7/s2/renders; D2=$ROOT/m10/data
+    for C in r b; do
+      "$PY" "$S" pack-labelled --renders "$R2" --out "$D2" --sets "${C}1,${C}2,${C}3" --count 5000 --name "$C-full" || exit 5
+      "$PY" "$S" pack-labelled --renders "$R2" --out "$D2" --sets "${C}1,${C}2,${C}3" --count 50 --name "$C-one-percent" || exit 5
+    done
+    "$PY" "$S" pack-labelled --renders "$R2" --out "$D2" --sets "r1,r2,r3" --count 6 --name "r-overfit-18"; rc=$? ;;
   scorer)
     export WANDB__SERVICE_WAIT=300
     "$PY" "$(dirname "$S")/clevr_scorer.py" overfit --renders "$ROOT/m7/full/renders" --out "$ROOT/m7/full/scorer"; rc=$?

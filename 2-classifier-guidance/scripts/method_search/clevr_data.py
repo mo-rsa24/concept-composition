@@ -188,9 +188,37 @@ def pack(args):
                       "mib": round(target.stat().st_size / 2 ** 20, 1)}), flush=True)
 
 
+def pack_labelled(args):
+    """Step M10: one expert's dataset, the sets named in --sets (such as r1,r2,r3) in one zip of 64 by 64 PNGs, --count pictures from each,
+    with dataset.json labelling every picture by its set's object count minus one (r1 -> 0, r2 -> 1, r3 -> 2), the form EDM2 reads with
+    --cond=True. The zip replaces the old one only when complete."""
+    args.out.mkdir(parents=True, exist_ok=True)
+    sets = args.sets.split(",")
+    target, partial = args.out / f"{args.name}.zip", args.out / f"{args.name}.zip.partial"
+    labels, index = [], 0
+    with zipfile.ZipFile(partial, "w", zipfile.ZIP_STORED) as archive:
+        for set_name in sets:
+            label = int(set_name[1:]) - 1
+            for path in first_images(args.renders, set_name, args.count):
+                buffer = io.BytesIO()
+                Image.fromarray(np.uint8(np.rint(to_64(path) * 255))).save(buffer, format="PNG", compress_level=1)
+                name = f"{index // 1000:05d}/img{index:08d}.png"
+                archive.writestr(name, buffer.getvalue())
+                labels.append([name, label])
+                index += 1
+        archive.writestr("dataset.json", json.dumps({"labels": labels}))
+    counts = {s: sum(1 for _, l in labels if l == int(s[1:]) - 1) for s in sets}
+    if any(c != args.count for c in counts.values()):
+        raise SystemExit(f"short sets: {counts}")
+    os.replace(partial, target)
+    print(json.dumps({"name": args.name, "pictures": index, "per_set": counts, "path": str(target),
+                      "mib": round(target.stat().st_size / 2 ** 20, 1)}), flush=True)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("stage", choices=["control", "diagnose", "footprint", "pack"])
+    ap.add_argument("stage", choices=["control", "diagnose", "footprint", "pack", "pack-labelled"])
+    ap.add_argument("--sets", help="pack-labelled: comma-separated sets, such as r1,r2,r3")
     ap.add_argument("--windows", default="tall-p3")
     ap.add_argument("--renders", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
@@ -198,7 +226,7 @@ def main():
     ap.add_argument("--count", type=int, default=5000)
     ap.add_argument("--name", help="the zip's name, when it holds only part of a set")
     args = ap.parse_args()
-    {"control": control, "diagnose": diagnose, "footprint": footprint, "pack": pack}[args.stage](args)
+    {"control": control, "diagnose": diagnose, "footprint": footprint, "pack": pack, "pack-labelled": pack_labelled}[args.stage](args)
 
 
 if __name__ == "__main__":
