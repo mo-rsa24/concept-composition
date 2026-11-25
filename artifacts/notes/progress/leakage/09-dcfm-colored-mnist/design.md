@@ -20,7 +20,7 @@ DCFM (Morshed and Boddeti, arXiv 2606.10153) says experts trained on separate da
 
 ## The experts
 
-One per holder, the digit U-Net of Paper 1's MNIST work (`2-classifier-guidance/scripts/mnist/canvas_unet.py`) at 32 by 32 with three channels, conditioned on a digit and a colour through two embeddings that are added. Each label is replaced by "none" on 10% of training examples, independently, so the expert learns $p(x \mid d)$, $p(x \mid c)$ and $p(x)$ as well as $p(x \mid d, c)$, as DCFM's Stage I does with masked labels (p. 5). No independence penalty is added and nothing is exchanged: each expert is trained to completion on its own holder and frozen. Training length is fixed by a timed run before the real one and stated in the review.
+One per holder, the digit U-Net of Paper 1's MNIST work (`2-classifier-guidance/scripts/mnist/canvas_unet.py`) at 32 by 32 with three channels, conditioned on a digit and a colour through two embeddings that are added. Each label is replaced by "none" on 10% of training examples, independently, so the expert learns $p(x \mid d)$, $p(x \mid c)$ and $p(x)$ as well as $p(x \mid d, c)$, as DCFM's Stage I does with masked labels (p. 5). No independence penalty is added and nothing is exchanged: each expert is trained to completion on its own holder and frozen. Training length is fixed by a timed run before the real one: on an RTX 3090 a step of 128 pictures took 61.9 ms (job 95109), so each expert trains for 20,000 steps, 2.56 million pictures in about 21 minutes, which keeps the step under the 3-hour line with the pooled model of control d trained the same way.
 
 ## The three arms
 
