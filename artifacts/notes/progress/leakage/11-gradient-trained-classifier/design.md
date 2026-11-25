@@ -20,6 +20,8 @@ $$L = L_{\text{BCE}} + \lambda \cdot \frac{1}{|P|} \sum_{(d,c) \in P} w \cdot \b
 - **Weight by target length.** $w$ is the target's length over the mean target length at that step in the batch, so late steps, where the target is small and mostly noise, count less.
 - **$\lambda = 1$, fixed now**, the middle of the range Ganz report (0 to 2, Table 1, p. 7), before any cosine is seen; it is not tuned on any held-back number.
 
+Every stage uses PyTorch's plain attention kernel: the penalty differentiates the experts' attention twice, which the memory-efficient kernel cannot (the first launch stopped on this at the penalised checker's first step, 2026-11-25 13:17 UTC), so the twins are trained on the same kernel.
+
 **The twins, same 40 pairs, steps, batch and seed:**
 
 | Twin | What changes | What it rules out |

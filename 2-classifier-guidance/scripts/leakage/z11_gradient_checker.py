@@ -211,6 +211,9 @@ def main():
     ap.add_argument("--plain-here", action="store_true", help="redraw the plain product's seen pictures on this card for the already-right count (on another card type than Z9's)")
     args = ap.parse_args()
     split = json.loads(args.split.read_text()); dev = "cuda"; t0 = time.time()
+    # the penalty differentiates the experts' attention twice, which the memory-efficient and flash kernels cannot;
+    # every stage and every checker uses the plain kernel, so the twins differ from the penalised checker in the penalty only
+    torch.backends.cuda.enable_flash_sdp(False); torch.backends.cuda.enable_mem_efficient_sdp(False); torch.backends.cuda.enable_math_sdp(True)
     if args.stage == "train":
         return train(args, split, dev)
     experts = Experts(args.experts, split, dev); judge = load_judge(args.judge, dev)
