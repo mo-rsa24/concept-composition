@@ -26,6 +26,26 @@ def scaled_schedule(cur_nimg, batch_size, ref_lr=100e-4, ref_batches=70e3, rampu
 
 loop.learning_rate_schedule = scaled_schedule
 
+# Step M10: EDM2 saves a snapshot only when the image count is a multiple of a 1,024-image interval, so quarters of 2,000,896 images
+# (1,954 x 1,024) cannot be asked for directly. With M10_SNAPSHOT_AT set to a comma list of image counts, the interval becomes a 1,024
+# whose "count % interval" is 0 exactly at those counts, so snapshots land there and nowhere else. Training itself is unchanged.
+SNAPSHOT_AT = {int(x) for x in os.environ.get("M10_SNAPSHOT_AT", "").split(",") if x}
+
+
+class SnapshotAt(int):
+    def __rmod__(self, count):
+        return 0 if count in SNAPSHOT_AT else 1
+
+
+if SNAPSHOT_AT:
+    original_loop = loop.training_loop
+
+    def loop_with_snapshots(**kwargs):
+        kwargs["snapshot_nimg"] = SnapshotAt(1024)
+        return original_loop(**kwargs)
+
+    loop.training_loop = loop_with_snapshots
+
 if __name__ == "__main__":
-    print(f"learning-rate ramp: {RAMP_MIMG * 1e6:.0f} images", flush=True)
+    print(f"learning-rate ramp: {RAMP_MIMG * 1e6:.0f} images; snapshots at {sorted(SNAPSHOT_AT) or 'the interval'}", flush=True)
     train_edm2.cmdline()

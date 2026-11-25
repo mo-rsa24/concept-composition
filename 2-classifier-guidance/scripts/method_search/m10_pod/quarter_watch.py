@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Step M10's quarter check on a pod: when the full run saves a quarter's checkpoint, sample it on the CPU, count, and record the loss.
 
-For each quarter (500, 1,000, 1,500 and 2,000 thousand images seen) it samples the 0.100 EMA snapshot with 16 seeds (0 to 15) per count label
+For each quarter (500,224, 1,000,448, 1,500,672 and 2,000,896 images seen, named 500, 1000, 1500 and 2000) it samples the 0.100 EMA snapshot with 16 seeds (0 to 15) per count label
 in 32 steps on the CPU, scores the 48 samples with blob_count.py, takes the mean training loss over the quarter from stats.jsonl, and writes
 quarters.jsonl and a grid png in <run>/quarters/. It decides nothing; the stopping rule is in M10's design.
 Usage: python quarter_watch.py <run dir> <r|b>
@@ -25,9 +25,9 @@ for q in Q:
     if q in done:
         prev = q; continue
     pat = os.path.join(run, f'network-snapshot-{q:07d}-0.100.pkl')
-    while not (glob.glob(pat) and glob.glob(os.path.join(run, f'training-state-{q:07d}.pt'))):
+    saved = f'network-snapshot-{q:07d}-0.100.pkl ... done'
+    while not (glob.glob(pat) and os.path.exists(os.path.join(run, 'train.log')) and saved in open(os.path.join(run, 'train.log'), errors='ignore').read()):
         time.sleep(30)
-    time.sleep(20)
     net = glob.glob(pat)[0]; t0 = time.time()
     rows, per = [], {}
     for k in (1, 2, 3):
@@ -36,7 +36,7 @@ for q in Q:
                            verbose=False)
         ims = [Image.open(p).convert('RGB') for p in sorted(glob.glob(os.path.join(d, '*.png')))]
         per[k] = float(np.mean([count(im, colour) == k for im in ims])); rows.append(ims)
-    losses = [s['Loss/loss'] for s in map(json.loads, open(os.path.join(run, 'stats.jsonl'))) if prev < s['Progress/kimg'] <= q + 1]
+    losses = [s['Loss/loss'] for s in map(json.loads, open(os.path.join(run, 'stats.jsonl'))) if 'Loss/loss' in s and prev < s['Progress/kimg'] <= q + 1]
     rec = {'kimg': q, 'net': os.path.basename(net), 'right_count_share': round(float(np.mean(list(per.values()))), 3),
            'per_count': {k: round(v, 3) for k, v in per.items()}, 'mean_loss_this_quarter': round(float(np.mean(losses)), 4) if losses else None,
            'sample_seconds': round(time.time() - t0, 1)}
