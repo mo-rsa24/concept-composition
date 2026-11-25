@@ -3,7 +3,7 @@
 The one page to read. Loop 13 rewrites it every 6 hours, and at once when you say "updates", "brief me"
 or "where are we". The full detail is on [the status page](status.md).
 
-**Written:** 2026-11-25 17:05 (UTC+2).
+**Written:** 2026-11-25 23:00 (UTC+2).
 
 ## Contents
 
@@ -15,36 +15,40 @@ or "where are we". The full detail is on [the status page](status.md).
 
 <a href="../leakage/11-gradient-trained-classifier/gate/held-back-pairs-sheet.png"><img src="../leakage/11-gradient-trained-classifier/gate/held-back-pairs-sheet.png" width="200" alt="Coloured digits on held-back pairs: the classifier trained so its push points the right way (middle row) against its no-penalty and shuffled twins."></a>
 
-1. **The first method that beats every control: a classifier trained so its push points the right way.**
-   On the 50 digit-colour combinations neither expert saw, it gets 88.8% right against 73.8% for a push
-   that only names the digit and colour at the same length, 63.1% for the same classifier trained
-   without the alignment penalty, and 47.0% for a random push; FID 10.8 against DCFM's printed 11.41,
-   which retrains (context only: two data holders against ten) ([its review](../leakage/11-gradient-trained-classifier/design.md)).
-   Its push lines up with the target at 0.514 against 0.064 untrained. It is shown on digits only.
-2. **Corrections carry "how many" to new pairs, not "which".** The trained correction (the ICLR LoRA)
-   turned hybrids into two separate bodies on 8 new animal pairs as its strength rose (hybrids 29 to 4
-   of 32), but the second body was the wrong animal: two clear rose only 0 to 2. The ICLR adapter's
-   "58 of 64 on unseen pairs" was counted by a detector that counts bodies but cannot name animals, so
-   it shows two bodies, not two correct animals. A test pairing the LoRA with each animal's own box is
-   running.
-3. **Paper 1's deciding test is training on RunPod.** Two CLEVR colour experts, each near the counter's
-   ceiling at a quarter of training (0.81 and 0.83 right against 0.82 and 0.86); they finish about 17:35
-   and 18:20, then the comparison with pasting and Bradley's rule.
-4. **Closed today:** Paper 2's checker route (its push pointed the right way, +0.105, but too weakly to
-   split a hybrid), the attention reader (CO3 already keeps the two words' attention apart, so borrowing
-   comes from what each region draws), and the ratio classifier on unseen digits (it pushed toward pairs
-   it knew).
-5. **Running and spending.** Loops 6 and 12 and this manager; Loops 4 and 11 paused. RunPod: about R90
-   spent of about R400; two pods left. The laptop restarted at 15:27 and damaged the git store; it is
-   repaired, nothing lost.
+1. **Paper 1's two-colour block test shows the problem plainly.** One model trained only on red CLEVR
+   blocks and one only on blue, combined by adding their predictions, drew the right scene in 0 of 288
+   pictures checked by eye (two blind reviewers, 864 of 864 agreed), at every count from 1 red + 1 blue
+   to 3 + 3: they draw dark blends that are neither colour. A better sampler (Du et al.'s corrector) also
+   drew 0, so the blending is not a sampling error. Pasting one model's blocks onto the other's picture
+   drew 20.5% right (59% at 1 + 1, 0% at 3 + 3). The block counter disagreed with the eye on 14.7% of
+   pictures, because it reads a red sliver under a pasted blue block as two objects, so the result rests
+   on the eye calls ([M10's review](../method-search/05-two-experts-by-colour/review.md)).
+2. **Paper 1's method row has not run.** The count checker could not read block counts from the experts'
+   maps at any noise level (best 0.741 against its 0.75 bar). One checker that reads the noisy picture
+   itself is the one remaining attempt (question 116).
+3. **Paper 2's box check was too weak to tell.** The gentle box push drew 27 two-clear pictures of 96
+   against CO3's 26, but changed each picture by about 2 grey levels of 255. This morning's stronger
+   clean-up pass changed pictures about 10 times more, and the same pass without boxes changed them most
+   of all, so the open question is whether boxes add anything beyond the pass: 14 against 10 of 48, not
+   yet significant ([Z12's review](../leakage/12-aligned-classifier-on-co3/review.md)). Automatic boxes
+   (a detector plus CLIP) matched boxes drawn by eye on 46 of 48 pictures.
+4. **Also closed today:** the LoRA plus boxes (4 against 2 of 32, hybrids rose), Paper 2's first checker
+   route, the attention reader and the ratio classifier. Still standing: on coloured digits, the
+   classifier trained so its push points the right way beats every control (88.8% against 73.8%, 63.1%
+   and 47.0%).
+5. **Nothing is running.** Both RunPod pods are stopped after checked copies; today's RunPod spend is
+   about R180. Loops 6 and 12 wait on your answers; Loops 4 and 11 stay paused. Parked for later: the
+   DCFM and Bradley benchmark rebuilds, CO3 stage B and the X-ray work.
 
 ## For you to decide
 
 Answer with `python3 scripts/progress_board.py answer <number> "<your answer>"`, or in this session.
 
-| # | The question | Default |
+| # | The question | Recommended |
 |---|---|---|
-| none yet | Take the gradient-trained classifier to CO3, aligning its push to each animal's own box | the reviewer reads it first; about 5 GPU-hours, about R40 on RunPod |
+| 114 | The block counter came in short | **report on the eye calls**; retraining cannot fix overlap it never saw |
+| 116 | One checker that reads the picture itself, for Paper 1's method row | **yes**, about 1 RunPod GPU-hour, bar unchanged, judged by eye |
+| 115 | Paper 2's box idea | **one deciding rerun**: this morning's clean-up pass with boxes against without, fresh seeds, 96 each, about 3 cluster GPU-hours |
 | 96 | Judge checkers on ranking instead of their yes-or-no call? | moot for the closed checker route |
 | 104 | Which model Paper 2 runs on | **held by you** until Paper 2 works on SDXL |
 
