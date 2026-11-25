@@ -48,7 +48,7 @@ def slug(prompt):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("stage", choices=["smoke", "full"])
+    ap.add_argument("stage", choices=["diagnose", "smoke", "full"])
     ap.add_argument("--pairs", type=Path, required=True)
     ap.add_argument("--adapter", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
@@ -69,6 +69,30 @@ def main():
         a, b = prompt.split(" and ")
         sa, pa = enc(a); sb, pb = enc(b)
         return dict(seq_a=sa, pool_a=pa, seq_b=sb, pool_b=pb)
+
+    if args.stage == "diagnose":  # which of sampler code and adapter switch breaks control 1
+        e0 = experts(prompts[0])
+        def go(fn, **kw):
+            init, sigma = init_latents_for_cell(single.cell_for(SEEDS[0]), ctx)
+            return to_img(fn(init_latents=init, euler_init_noise_sigma=sigma, **e0, **common, **kw))
+        a = go(run_cfg_poe)
+        b = go(run_poe_classifier_guided, strength=0.0)
+        _adapter_shape.attach(ctx.models["unet"], args.adapter, disable=True)
+        c = go(run_poe_classifier_guided, strength=0.0, adapter_lambda=0.0)
+        d = go(run_cfg_poe)
+        ctx.models["unet"].enable_adapters()
+        e = go(run_cfg_poe)
+        ctx.models["unet"].disable_adapters()
+        f = go(run_cfg_poe)
+        cmp = lambda x, y: {"max": int(np.abs(x.astype(int) - y.astype(int)).max()), "mean": float(np.abs(x.astype(int) - y.astype(int)).mean())}
+        res = {"a_plain_vs_b_guided_no_adapter": cmp(a, b), "b_vs_c_guided_weight_0_attached": cmp(b, c),
+               "a_vs_d_plain_attached_disabled": cmp(a, d), "a_vs_e_plain_adapter_enabled": cmp(a, e),
+               "a_vs_f_plain_disabled_again": cmp(a, f), "c_vs_e": cmp(c, e)}
+        out.joinpath("diagnose.json").write_text(json.dumps(res, indent=1) + "\n")
+        for k, im in zip("abcdef", (a, b, c, d, e, f)):
+            Image.fromarray(im).save(out / f"diagnose-{k}.png")
+        print("DIAGNOSE " + json.dumps(res), flush=True)
+        return
 
     # control 1, part 1: the plain product before any adapter is attached
     e0 = experts(prompts[0])

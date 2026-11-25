@@ -6,7 +6,7 @@
 #SBATCH --exclude=mscluster44,mscluster45,mscluster48,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82,mscluster83
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-12/logs/%x-%j.log
 # Loop 12 step Z10. Submit with the code snapshot in SNAP:
-#   sbatch --export=ALL,SNAP=<snapshot> z10.sbatch <smoke|full>
+#   sbatch --export=ALL,SNAP=<snapshot> z10.sbatch <diagnose|smoke|full>
 set -uo pipefail
 STAGE=${1:?stage}
 ROOT=/datasets/mmolefe/poe_repair_min/loop-12
@@ -45,7 +45,7 @@ echo "[$(date -u +%H:%M:%S)] job=${SLURM_JOB_ID:-none} node=$(hostname -s) gpu=$
 export PYTHONPATH="$HUB:$CO3:$REPO/scripts/shared:$REPO"
 mkdir -p "$OUT"
 case "$STAGE" in
-  smoke|full) "$PY" "$S/z10_dial.py" "$STAGE" --pairs "$REPO/artifacts/notes/progress/leakage/10-co-occurrence-dial/pairs.json" --adapter "$ADAPTER" --out "$OUT"; rc=$? ;;
+  diagnose|smoke|full) "$PY" "$S/z10_dial.py" "$STAGE" --pairs "$REPO/artifacts/notes/progress/leakage/10-co-occurrence-dial/pairs.json" --adapter "$ADAPTER" --out "$OUT"; rc=$? ;;
   *) echo "ABORT: unknown stage $STAGE"; exit 2 ;;
 esac
 echo "[$(date -u +%H:%M:%S)] DONE stage=$STAGE exit=$rc"
