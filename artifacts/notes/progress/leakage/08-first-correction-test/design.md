@@ -38,6 +38,19 @@ Eleven, from the 11 tuning pairs other than giraffe × tortoise (`2-classifier-g
 
 **Plain PoE and the joint prompt, three failures each, picked from the screening pass.** The screening pass draws plain PoE and the joint prompt on the 11 pairs at seeds 6001 to 6004 (88 pictures) on mscluster107 card 1 under board question 103 (`2-classifier-guidance/scripts/leakage/z8_screen.py`). The pick rule is fixed here, before any screening picture is seen: for each base, walk the pairs in `splits.json` order and, within a pair, the seeds in order; the first picture that is not two clear is that pair's case; stop at three pairs. Each pick is recorded with what failed (one subject, a hybrid, two of a kind, borrowed parts). If fewer than three pairs fail, the base gets as many cases as there are, and its bar scales (below).
 
+## The cases picked from the screening pass
+
+By the pick rule, each base's first three pairs in `splits.json` order failed at their first seed, so the picks for both bases are the same three pairs at seed 6001, each checked at full size:
+
+| Base | Pair, seed | What failed |
+|---|---|---|
+| Plain PoE | puma × condor, 6001 | one hybrid: a puma's head on a condor's feathered body |
+| Plain PoE | zebra × flamingo, 6001 | one hybrid: a flamingo with zebra stripes |
+| Plain PoE | seal × gull, 6001 | one subject: a seal and no gull |
+| The joint prompt | puma × condor, 6001 | borrowed parts: the condor has a puma's head, beside a clean puma |
+| The joint prompt | zebra × flamingo, 6001 | an extra subject: two flamingos, and the zebra has a pink mane |
+| The joint prompt | seal × gull, 6001 | a hybrid: a white seal with a gull's wing and tail, beside a grey seal |
+
 ## The arms
 
 Each case is drawn on its own base three ways, in one job: **without** (the base alone, once), **with the push** (four draws), **with the random push** (four draws). Four draws because pushed renders at one seed have differed between runs. The screening pictures and W2d's CO3 pictures are not reused as the "without" arm, because Z8 proper runs in `bigbatch` on a card type that may differ; each "without" is drawn again in the same job.

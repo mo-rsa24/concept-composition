@@ -3,14 +3,15 @@
 #SBATCH --partition=bigbatch
 #SBATCH --nodes=1
 #SBATCH --time=05:00:00
-#SBATCH --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82
+#SBATCH --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82,mscluster83
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-12/logs/%x-%j.log
 # Loop 12 step Z8. Submit with the code snapshot in SNAP:
-#   sbatch --export=ALL,SNAP=<snapshot> z8.sbatch <identity|screen>
+#   sbatch --export=ALL,SNAP=<snapshot> z8.sbatch <identity|screen|cases>
 set -uo pipefail
 STAGE=${1:?stage}
 ROOT=/datasets/mmolefe/poe_repair_min/loop-12
 OUT=$ROOT/z8/screen
+HEAD=/home-mscluster/mmolefe/poe_repair_min_scratch/outputs/classifier_guidance_ladder/rung2/readout_pair/readout-multipair/head_step_002000.pt
 CO3=/datasets/mmolefe/poe_repair_min/loop-5/code/67b0bafa-b91076f/upstream/co3
 HUB=/datasets/mmolefe/poe_repair_min/loop-6/code/f0410a14-f2bdb6d/hub/scripts/reproductions
 : "${SNAP:?SNAP must name the code snapshot}"
@@ -22,7 +23,7 @@ case "$(hostname -s)" in
   mscluster11[0-2]) PY=/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python ;;
   *)                PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python ;;
 esac
-[ -d "$ROOT" ] && [ -d "$CO3" ] && [ -f "$S/z8_screen.py" ] && [ -f "$SPLITS" ] && [ -d "$REPO/poe_repair" ] \
+[ -d "$ROOT" ] && [ -d "$CO3" ] && [ -f "$S/z8_screen.py" ] && [ -f "$S/z8_cases.py" ] && [ -f "$SPLITS" ] && [ -d "$REPO/poe_repair" ] && [ -f "$HEAD" ] && [ -f "$HUB/co3_common.py" ] \
   || { echo "ABORT: snapshot, M1 renders or $ROOT not visible on $(hostname -s)"; exit 3; }
 [ -f "$REPO/scripts/shared/disallowed_subjects.py" ] || { echo "ABORT: subject guard missing from the snapshot"; exit 8; }
 USE=$(df --output=pcent "$ROOT" | tail -1 | tr -dc '0-9')
@@ -46,6 +47,7 @@ mkdir -p "$OUT"
 case "$STAGE" in
   identity) "$PY" "$S/z8_screen.py" --splits "$SPLITS" --out "$OUT" --identity-only; rc=$? ;;
   screen)   "$PY" "$S/z8_screen.py" --splits "$SPLITS" --out "$OUT"; rc=$? ;;
+  cases)    "$PY" "$S/z8_cases.py" sdxl --head "$HEAD" --out "$ROOT/z8/cases" && "$PY" "$S/z8_cases.py" co3 --head "$HEAD" --out "$ROOT/z8/cases"; rc=$? ;;
   *) echo "ABORT: unknown stage $STAGE"; exit 2 ;;
 esac
 echo "[$(date -u +%H:%M:%S)] DONE stage=$STAGE exit=$rc"
