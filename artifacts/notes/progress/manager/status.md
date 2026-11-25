@@ -217,6 +217,8 @@ Under the closing rule: idle, and the loop finished, closed, or a second copy of
 
 | Time | Session | Loop | Why |
 |---|---|---|---|
+| 2026-11-25 | 🎯 PhD Loop 4: Read Rivals And Set Targets (both copies) | **paused by the owner** until the go or no-go; its upkeep step K6 stays open; restart with its prompt's start command |
+| 2026-11-25 | 🗂️ PhD Loop 11: Drain The Loops Into The Pillars | **paused by the owner** until the go or no-go; its final drain (Y5) waits for the other loops |
 | 2026-11-25 | 🔭 PhD Loop 14: Gaps And Reviewer Questions | G1 to G4 done; idle; its requests moved to Loops 4, 12 and 13 |
 | 2026-11-25 | 🧭 PhD Loop 15: Directions And Dials | H1 to H4 done; idle; its three experiments routed to Loops 6 and 12 |
 | 16:46 | `70624adb` | 10, the score path | closed by you on question 76; its requests went to Loop 11 and question 80 stays with you |
