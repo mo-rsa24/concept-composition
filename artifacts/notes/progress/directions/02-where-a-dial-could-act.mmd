@@ -1,0 +1,17 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef yes fill:#e6f4ea,stroke:#1e7a34,stroke-width:2px,color:#111111
+  classDef part fill:#fff4e0,stroke:#b26a00,stroke-width:2px,color:#111111
+  classDef no fill:#fde8e8,stroke:#b42318,stroke-width:2px,color:#111111
+
+  P["the prompt<br/>'a cat and a dog'"]:::plain
+  T["text embedding<br/>steady curve: a relation offset on the end token,<br/>position accuracy 0.467 to 0.729 as weight 0 to 1"]:::part
+  X["cross-attention maps<br/>no strength curve on two subjects;<br/>count guidance at count 2 gets worse as it rises"]:::no
+  S["self-attention and layout boxes<br/>LLM boxes right 97 to 100%,<br/>pictures 20 to 35 points lower"]:::part
+  N["starting noise<br/>sets the count before any step"]:::part
+  SC["score: product of experts plus a weight times the missing term<br/>one animal at weight 0 to 0.25,<br/>cat beside dog on every seed by 0.75"]:::yes
+  OUT["the picture"]:::plain
+
+  P --> T --> X --> S --> SC --> OUT
+  N --> SC

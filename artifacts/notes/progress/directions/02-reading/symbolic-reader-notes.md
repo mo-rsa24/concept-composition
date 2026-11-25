@@ -1,0 +1,8 @@
+# H2 symbolic cluster notes (PDF pages)
+- 2309.16115 Garipov: harmonic mean / contrast eq 8-9 p6; alpha-parameterised eq 11 p6; Gaussian alpha sweep Fig 2c p7 (qualitative); grid L1 0.071 / 0.086 / 0.167 (alpha 0.05) p29; MNIST guidance gradient x20 p33; harmonic mean undefined on disjoint supports p6; thin-stroke leak p33, stray 9s/4s p32.
+- 2506.01121 NSD: projection per step, no strength; porosity Viol>5%: NSD 0.0, Cond 94.2 p10; motion OOD (Moon) Viol NSD 0.0 Cond 100.0, FID NSD 26.5 vs Cond 22.5 p23; CFG lambda formula p4.
+- 2305.15328 VPGen: Table 1 p7 count 72.2 spatial 56.1 scale 26.3 vs SD1.4 47.4/22.9/11.9; Table 5 p17 count 1..7: 85.3 80.1 65.6 55.2 48.0 35.3 28.1; Table 10 p19 layout vs image: count 98.8 vs 72.2, spatial 87.5 vs 63.3, scale 38.2 vs 26.3; unseen objects Fig 10 p16 qualitative only; GLIGEN beta fixed 0.3 p19.
+- 2305.13655 LMD: Table 1 p9 SD vs LMD vs LMD+: numeracy 39/62/86, binding 52/65/69, spatial 28/79/67; Table 2 p10 layouts-only 97/100/99; Table D.3 p23 lambda 0..4: 70.8 75.0 76.5 77.3 75.0, omega 1,2,4,8: 72.3 75.8 76.5 72.5; eta=5 not swept p28; benchmark 10 COCO classes p27; failure viewpoint Fig 9 p12.
+- 2305.15393 LayoutGPT: Table 2 p6 numerical layout acc 86.33 (GPT-3.5) image GLIP 51.20 vs SD1.4 32.22; spatial layout 91.73 (GPT-4) image 60.64 vs SD 16.89; Table 3 p7 colour binding +GLIGEN 18.68 vs SD 12.84, +ReCo 36.96; Table 10 p19 two-category count 66.60; HRS size 98.0/93.1/92.1 vs best T2I 31.1/0.2/0 p19.
+- 2306.08877 SynGen: Table 2 p7 proper binding A&E set 94.76 vs SD 59.05, DVMP 74.90 vs 47.80, ABC-6K 63.68 vs 52.70; scale factor 1..40 qualitative Fig 10 p14-16; 25 of 50 steps p14.
+- 2401.03349 Tiramisu: downloaded, not read (inpainting only).
