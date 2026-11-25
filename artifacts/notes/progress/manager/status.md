@@ -119,6 +119,8 @@ The finish range is `session_status.py`'s, from the 63 finished steps: fastest p
 
 ## Resources
 
+**RunPod, 2026-11-25 21:20:** both pods stopped (blue 18:25, red 21:20), each after a sha256-checked copy to /datasets. The two-colour CLEVR comparison used about 3.7 GPU-hours of the 7 approved. No pod is running.
+
 Read at 02:13 from `squeue`, `sacct` and `sinfo`; down nodes from `sinfo -R` at 16:28.
 
 | What | Now |
