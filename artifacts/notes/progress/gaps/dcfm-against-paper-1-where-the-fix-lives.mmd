@@ -1,0 +1,23 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TB
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef fix fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px,color:#111111
+
+  subgraph DCFM["DCFM: fix the experts while TRAINING"]
+    D1["Each data holder trains a flow model<br/>on its own images<br/>(flow-matching loss, Eq. 9)"]:::plain
+    D2["Swap models with the other holders<br/>(weights only, 1 to 3 rounds)"]:::plain
+    D3["Retrain each expert so<br/>joint velocity = sum of single ones<br/>(independence penalty, Eq. 10 to 14)"]:::fix
+    D4["Sample: add the velocities<br/>noise + 4 + red, integrate the ODE<br/>(Eq. 5)"]:::plain
+    D1 --> D2 --> D3 --> D4
+  end
+
+  subgraph P1["Paper 1: fix the picture while SAMPLING"]
+    P1a["Each data holder trains a diffusion model<br/>on its own images; nothing is swapped"]:::plain
+    P1b["Train a small checker on the experts'<br/>own samples: are both things there?"]:::plain
+    P1c["Sample: merge the experts' predictions,<br/>then add the checker's push each step"]:::fix
+    P1a --> P1b --> P1c
+  end
+
+  N["DCFM trains the interaction term to zero, so effects needing both attributes are removed.<br/>Paper 1 leaves its experts alone and asks the checker to supply what is missing."]:::plain
+  D4 -.-> N
+  P1c -.-> N
