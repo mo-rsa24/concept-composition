@@ -898,8 +898,8 @@
    "serves": "Paper 2",
    "objective": "Build and test",
    "started": "2026-11-25T02:25:49+02:00",
-   "updated": "2026-11-25T08:43:36+02:00",
-   "note": "second reader: fresh read 95007 at 83 of 96; expected-share renders resubmitted as 95077 after an fp16 decode fault; M10 scorer renders done"
+   "updated": "2026-11-25T08:47:48+02:00",
+   "note": "expected-share renders resubmitted as 95081 after mscluster48's faulted GPU killed 95077; fresh read 95007 finishing"
   },
   {
    "id": "Z8",
