@@ -687,9 +687,9 @@
    "state": "doing",
    "serves": "Paper 1",
    "objective": "Build and test",
-   "updated": "2026-11-25T22:25:22+02:00",
+   "updated": "2026-11-26T00:14:42+02:00",
    "started": "2026-11-25T12:46:44+02:00",
-   "note": "blind eye calls on 864 pictures: plain 0, corrector 0, mask paste 0.205 exact (scorer said about 0.5: it cannot see overlap on pastes); inconclusive on the scorer by the design's rule; checker row (question 116) the open lever"
+   "note": "owner: report on blind eye calls (Q114); train one picture-reading checker (Q116), written into the design (steps 14 to 17, bar 0.75); waiting for red's pod to restart"
   },
   {
    "id": "D4",
