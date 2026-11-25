@@ -43,8 +43,12 @@ there too.
 
 **Evidence: where the network looks.** The figure below plots, at each sampling step, how much the two
 words' attention maps overlap: 1 means "cat" and "dog" look at the same places, 0 means separate places.
-The plain product's overlap (orange) climbs toward 0.9: both words look at one body. Pictures from the
-joint prompt that ended with a separate cat and dog (dark blue) stay low from early on.
+The plain product's overlap (orange) climbs toward 0.9: both words look at one body. Among the joint
+prompt's 8 seeds, the three that ended with a separate cat and dog average lower overlap at steps 5, 10
+and 15 (0.28, 0.25, 0.26) than the other five (0.36, 0.34, 0.35), but seed by seed the two groups mix:
+seed 2, which came out apart, reads 0.48 at step 5, and seed 5, which did not, reads 0.01
+(`attention/overlap.json` in that result's archive). The separation is a weak group difference, not a
+per-picture one.
 
 <a href="../../../../2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/03-does-an-early-push-separate-them/attention.png"><img src="../../../../2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/03-does-an-early-push-separate-them/attention.png" width="200" alt="Overlap of the top 10% of cat and dog attention across 50 steps: the product rises to about 0.9, joint-prompt pictures that showed a cat and a dog apart stay between 0.05 and 0.4, those that did not sit between."></a>
 
