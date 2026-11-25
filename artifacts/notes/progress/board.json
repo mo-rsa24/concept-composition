@@ -882,8 +882,8 @@
    "serves": "Paper 1",
    "objective": "Build and test",
    "started": "2026-11-25T11:01:20+02:00",
-   "updated": "2026-11-25T11:01:20+02:00",
-   "note": "smoke then full, design and bar from 2026-11-24 (method-search/06-vote-or-placement-on-digits/design.md)"
+   "updated": "2026-11-25T11:05:55+02:00",
+   "note": "smoke 95225 then full 95226; M14 designed (bar written) and its renderer ready, to start after M11"
   },
   {
    "id": "Z7",
