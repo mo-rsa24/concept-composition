@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=l6-m9-r1
 #SBATCH --partition=biggpu
-#SBATCH --exclude=mscluster50,mscluster51,mscluster71,mscluster82,mscluster48
+#SBATCH --exclude=mscluster50,mscluster51,mscluster71,mscluster82,mscluster48,mscluster83
 #SBATCH --nodes=1
 #SBATCH --time=03:00:00
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-6/logs/%x-%j.log

@@ -3,7 +3,7 @@
 #SBATCH --partition=bigbatch
 #SBATCH --nodes=1
 #SBATCH --time=02:00:00
-#SBATCH --exclude=mscluster84,mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82,mscluster48
+#SBATCH --exclude=mscluster84,mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82,mscluster48,mscluster83
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-6/logs/%x-%j.log
 # Step M11, Paper 1 on digits: the experts' vote against a coin-flip side, with and without the corrector, and with no held side,
 # beside paste. Submit with the code snapshot in SNAP:

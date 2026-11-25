@@ -3,7 +3,7 @@
 #SBATCH --partition=bigbatch
 #SBATCH --nodes=1
 #SBATCH --time=00:30:00
-#SBATCH --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82,mscluster84,mscluster48
+#SBATCH --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82,mscluster84,mscluster48,mscluster83
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-6/logs/%x-%j.log
 # Step M7: CPU work on the renders. Submit with the code snapshot in SNAP:
 #   sbatch --export=ALL,SNAP=<snapshot> m7_data.sbatch <control|diagnose|footprint|scorer|experts|paste|paste-score|pack> [set] [count] [zip name]
