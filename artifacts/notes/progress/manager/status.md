@@ -63,6 +63,7 @@ At 16:55, in chat, recorded on the board and sent to each loop:
 
 | # | The question | Your answer |
 |---|---|---|
+| 114, 115, 116 | The block counter, the deciding box rerun, the picture-reading checker | **Yes to all** (you, 2026-11-26 00:10): M10 reports on the eye calls; the picture-reading checker trains on the migrated RTX 4090 pod and stops itself below 0.75; Z13 approved at 4.2 cluster GPU-hours with its half-way stop. You also asked whether to stop both papers' method search: after these two runs, no new method routes open, and the papers' shape is your next decision |
 | none | Run Paper 1's two-colour CLEVR comparison on RunPod? | **Yes** (you): on red's pod, with blue's model copied there, about 7 GPU-hours (about R90), all rows on one RTX 4090, stop and ask past 8; blue pod stopped at 18:25 after its copy (508 MB) was checked on /datasets |
 | none | Run the CO3 check (stage A) on fewer pictures? | **No: keep 96 per row**, since this morning's 48-picture box test landed at p = 0.073, and **add a half-way stop rule**: after 48 box pictures, stop if the box correction is not ahead of CO3 at all |
 | none | Start the rival-benchmark rebuilds now? | **Not yet: land what is running first.** Parked for later: DCFM's Colored MNIST benchmark (`manager/fair-dcfm-match.md`) and Bradley et al.'s CLEVR count benchmark (Kmax, their plain model as the calibration row, a ResNet-18 counter); Loop 12 told to hold the DCFM design |

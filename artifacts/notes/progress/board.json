@@ -3595,8 +3595,8 @@
    "by": "s13",
    "state": "answered",
    "asked": "2026-11-25T19:03:20+02:00",
-   "answer": "Yes: one deciding rerun of Z7's clean-up pass with boxes against without, on fresh seeds, 96 pictures each, bar written first, about 3 cluster GPU-hours",
-   "answered": "2026-11-26T00:13:41+02:00"
+   "answer": "Approved at 4.2 GPU-hours with the half-way stop rule (Z13)",
+   "answered": "2026-11-26T00:29:03+02:00"
   },
   {
    "id": 116,
