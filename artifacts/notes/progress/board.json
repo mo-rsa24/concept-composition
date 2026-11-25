@@ -687,9 +687,9 @@
    "state": "doing",
    "serves": "Paper 1",
    "objective": "Build and test",
-   "updated": "2026-11-25T18:25:04+02:00",
+   "updated": "2026-11-25T18:27:13+02:00",
    "started": "2026-11-25T12:46:44+02:00",
-   "note": "experts trained (red and blue copied back); comparison on red's RunPod 4090: settings in the design (b1ef3752), comparison code smoked, scorer rerun with a decaying learning rate (job 95532) after the first missed 95% on an unstable last epoch"
+   "note": "both experts trained and backed up on /datasets (final quarter 0.83 red, 0.90 blue); comparison set up on red's RunPod 4090; scorer rerun (job 95532)"
   },
   {
    "id": "D4",
