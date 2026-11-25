@@ -1,0 +1,75 @@
+{
+ "agreement_rung": 0.9166666666666666,
+ "agreement_two_clear": 0.9166666666666666,
+ "two_clear": {
+  "co3": 8,
+  "whole": 10,
+  "own": 14
+ },
+ "broken": {
+  "co3": 2,
+  "whole": 1,
+  "own": 0
+ },
+ "per_pair_two_clear": {
+  "co3": {
+   "a_cheetah__x__a_cougar": 0,
+   "a_duck__x__a_goose": 0,
+   "a_puma__x__a_condor": 1,
+   "a_boar__x__a_pheasant": 1,
+   "a_bobcat__x__a_quail": 3,
+   "a_seal__x__a_gull": 3
+  },
+  "whole": {
+   "a_cheetah__x__a_cougar": 1,
+   "a_duck__x__a_goose": 0,
+   "a_puma__x__a_condor": 1,
+   "a_boar__x__a_pheasant": 2,
+   "a_bobcat__x__a_quail": 1,
+   "a_seal__x__a_gull": 5
+  },
+  "own": {
+   "a_cheetah__x__a_cougar": 0,
+   "a_duck__x__a_goose": 5,
+   "a_puma__x__a_condor": 3,
+   "a_boar__x__a_pheasant": 0,
+   "a_bobcat__x__a_quail": 3,
+   "a_seal__x__a_gull": 3
+  }
+ },
+ "per_subject_both_reviewers": {
+  "co3": {
+   "a_own": 30,
+   "b_own": 13
+  },
+  "whole": {
+   "a_own": 31,
+   "b_own": 18
+  },
+  "own": {
+   "a_own": 38,
+   "b_own": 18
+  }
+ },
+ "call": "null",
+ "detail": {
+  "boxes_vs_co3": {
+   "lead": 6,
+   "b_only": 9,
+   "a_only": 3,
+   "p": 0.072998046875
+  },
+  "whole_vs_co3": {
+   "lead": 2,
+   "b_only": 6,
+   "a_only": 4,
+   "p": 0.376953125
+  },
+  "boxes_vs_whole": {
+   "lead": 4,
+   "b_only": 11,
+   "a_only": 7,
+   "p": 0.2403411865234375
+  }
+ }
+}
