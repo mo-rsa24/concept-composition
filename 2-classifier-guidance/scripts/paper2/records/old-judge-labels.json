@@ -1,0 +1,296 @@
+{
+ "_what": "By-eye verdicts on adapter renders, read 2026-09-25 at full size from the annotated tiles in run-01/ (the first pass at thumbnail size is superseded). verdict: composed (two bodies, one per concept), two_of_one (two bodies, same species), hybrid (a body carrying both, e.g. a striped dog), one_body. confident: false where the eye was unsure, and those rows are reported but not counted.",
+ "_tile": "ablation_grid/<slug>/seed<NN>/ours_<run>_s<step>_w50.png",
+ "cells": [
+  {
+   "slug": "a_cat__x__a_dog",
+   "a": "a cat",
+   "b": "a dog",
+   "seed": 9,
+   "run": "v58-05-self-contrast",
+   "step": 10000,
+   "verdict": "composed",
+   "confident": true
+  },
+  {
+   "slug": "a_cat__x__a_dog",
+   "a": "a cat",
+   "b": "a dog",
+   "seed": 9,
+   "run": "v58-05-self-contrast",
+   "step": 20000,
+   "verdict": "composed",
+   "confident": true
+  },
+  {
+   "slug": "a_cat__x__a_dog",
+   "a": "a cat",
+   "b": "a dog",
+   "seed": 9,
+   "run": "v58-05-self-contrast",
+   "step": 30000,
+   "verdict": "composed",
+   "confident": true
+  },
+  {
+   "slug": "a_cat__x__a_dog",
+   "a": "a cat",
+   "b": "a dog",
+   "seed": 9,
+   "run": "v58-05-self-contrast",
+   "step": 37500,
+   "verdict": "composed",
+   "confident": true
+  },
+  {
+   "slug": "a_cat__x__a_dog",
+   "a": "a cat",
+   "b": "a dog",
+   "seed": 42,
+   "run": "v58-05-self-contrast",
+   "step": 10000,
+   "verdict": "composed",
+   "confident": true
+  },
+  {
+   "slug": "a_cat__x__a_dog",
+   "a": "a cat",
+   "b": "a dog",
+   "seed": 42,
+   "run": "v58-05-self-contrast",
+   "step": 20000,
+   "verdict": "two_of_one",
+   "confident": true
+  },
+  {
+   "slug": "a_cat__x__a_dog",
+   "a": "a cat",
+   "b": "a dog",
+   "seed": 42,
+   "run": "v58-05-self-contrast",
+   "step": 30000,
+   "verdict": "two_of_one",
+   "confident": true
+  },
+  {
+   "slug": "a_cat__x__a_dog",
+   "a": "a cat",
+   "b": "a dog",
+   "seed": 42,
+   "run": "v58-05-self-contrast",
+   "step": 37500,
+   "verdict": "two_of_one",
+   "confident": true
+  },
+  {
+   "slug": "a_tiger__x__a_dog",
+   "a": "a tiger",
+   "b": "a dog",
+   "seed": 9,
+   "run": "v58-05-self-contrast",
+   "step": 10000,
+   "verdict": "composed",
+   "confident": true
+  },
+  {
+   "slug": "a_tiger__x__a_dog",
+   "a": "a tiger",
+   "b": "a dog",
+   "seed": 9,
+   "run": "v58-05-self-contrast",
+   "step": 20000,
+   "verdict": "two_of_one",
+   "confident": true
+  },
+  {
+   "slug": "a_tiger__x__a_dog",
+   "a": "a tiger",
+   "b": "a dog",
+   "seed": 9,
+   "run": "v58-05-self-contrast",
+   "step": 30000,
+   "verdict": "composed",
+   "confident": true
+  },
+  {
+   "slug": "a_tiger__x__a_dog",
+   "a": "a tiger",
+   "b": "a dog",
+   "seed": 9,
+   "run": "v58-05-self-contrast",
+   "step": 37500,
+   "verdict": "hybrid",
+   "confident": true
+  },
+  {
+   "slug": "a_tiger__x__a_dog",
+   "a": "a tiger",
+   "b": "a dog",
+   "seed": 42,
+   "run": "v58-05-self-contrast",
+   "step": 10000,
+   "verdict": "hybrid",
+   "confident": true
+  },
+  {
+   "slug": "a_tiger__x__a_dog",
+   "a": "a tiger",
+   "b": "a dog",
+   "seed": 42,
+   "run": "v58-05-self-contrast",
+   "step": 20000,
+   "verdict": "hybrid",
+   "confident": true
+  },
+  {
+   "slug": "a_tiger__x__a_dog",
+   "a": "a tiger",
+   "b": "a dog",
+   "seed": 42,
+   "run": "v58-05-self-contrast",
+   "step": 30000,
+   "verdict": "hybrid",
+   "confident": false
+  },
+  {
+   "slug": "a_tiger__x__a_dog",
+   "a": "a tiger",
+   "b": "a dog",
+   "seed": 42,
+   "run": "v58-05-self-contrast",
+   "step": 37500,
+   "verdict": "hybrid",
+   "confident": true
+  },
+  {
+   "slug": "a_cat__x__a_fox",
+   "a": "a cat",
+   "b": "a fox",
+   "seed": 9,
+   "run": "v58-05-self-contrast",
+   "step": 10000,
+   "verdict": "hybrid",
+   "confident": false
+  },
+  {
+   "slug": "a_cat__x__a_fox",
+   "a": "a cat",
+   "b": "a fox",
+   "seed": 9,
+   "run": "v58-05-self-contrast",
+   "step": 20000,
+   "verdict": "hybrid",
+   "confident": false
+  },
+  {
+   "slug": "a_cat__x__a_fox",
+   "a": "a cat",
+   "b": "a fox",
+   "seed": 9,
+   "run": "v58-05-self-contrast",
+   "step": 30000,
+   "verdict": "two_of_one",
+   "confident": false
+  },
+  {
+   "slug": "a_cat__x__a_fox",
+   "a": "a cat",
+   "b": "a fox",
+   "seed": 9,
+   "run": "v58-05-self-contrast",
+   "step": 37500,
+   "verdict": "two_of_one",
+   "confident": false
+  },
+  {
+   "slug": "a_cat__x__a_fox",
+   "a": "a cat",
+   "b": "a fox",
+   "seed": 42,
+   "run": "v58-05-self-contrast",
+   "step": 10000,
+   "verdict": "hybrid",
+   "confident": false
+  },
+  {
+   "slug": "a_cat__x__a_fox",
+   "a": "a cat",
+   "b": "a fox",
+   "seed": 42,
+   "run": "v58-05-self-contrast",
+   "step": 20000,
+   "verdict": "hybrid",
+   "confident": false
+  },
+  {
+   "slug": "a_cat__x__a_fox",
+   "a": "a cat",
+   "b": "a fox",
+   "seed": 42,
+   "run": "v58-05-self-contrast",
+   "step": 30000,
+   "verdict": "composed",
+   "confident": false
+  },
+  {
+   "slug": "a_cat__x__a_fox",
+   "a": "a cat",
+   "b": "a fox",
+   "seed": 42,
+   "run": "v58-05-self-contrast",
+   "step": 37500,
+   "verdict": "hybrid",
+   "confident": false
+  },
+  {
+   "slug": "a_cat__x__a_dog",
+   "a": "a cat",
+   "b": "a dog",
+   "seed": 42,
+   "run": "v58-03-self",
+   "step": 10000,
+   "verdict": "composed",
+   "confident": true
+  },
+  {
+   "slug": "a_cat__x__a_dog",
+   "a": "a cat",
+   "b": "a dog",
+   "seed": 42,
+   "run": "v58-03-self",
+   "step": 20000,
+   "verdict": "one_body",
+   "confident": false
+  },
+  {
+   "slug": "a_cat__x__a_dog",
+   "a": "a cat",
+   "b": "a dog",
+   "seed": 42,
+   "run": "v58-03-self",
+   "step": 30000,
+   "verdict": "composed",
+   "confident": true
+  },
+  {
+   "slug": "a_cat__x__a_dog",
+   "a": "a cat",
+   "b": "a dog",
+   "seed": 42,
+   "run": "v58-03-self",
+   "step": 40000,
+   "verdict": "composed",
+   "confident": true
+  },
+  {
+   "slug": "a_cat__x__a_dog",
+   "a": "a cat",
+   "b": "a dog",
+   "seed": 42,
+   "run": "v58-03-self",
+   "step": 50000,
+   "verdict": "composed",
+   "confident": true
+  }
+ ]
+}

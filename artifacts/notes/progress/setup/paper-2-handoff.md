@@ -16,6 +16,7 @@ on the cluster, and nothing is committed.
 - [CO3's loader, co3_common.py](#co3s-loader-co3_commonpy)
 - [Choices made where the plans were silent](#choices-made-where-the-plans-were-silent)
 - [Questions sent to the owner](#questions-sent-to-the-owner)
+- [The species judge's scripts, written after the setup](#the-species-judges-scripts-written-after-the-setup)
 - [What is still open](#what-is-still-open)
 - [The commands, ready for the owner's yes](#the-commands-ready-for-the-owners-yes)
 
@@ -362,6 +363,47 @@ Loop 18 may overrule any of these.
 | 119 | how the 192 joint-prompt pictures reach `/datasets` from the laptop | `rsync` through mscluster84 in the push direction | not yet answered |
 | 120 | whether the vision-language judge may have its own mamba environment if `co3` cannot load Qwen3-VL-8B, and yes or no to tasks 6 to 8 | yes to both | yes (relayed by Loop 18, 2026-11-26) |
 
+## The species judge's scripts, written after the setup
+
+Written on 2026-11-26 at Loop 18's request, under the same rules, each reviewed and accepted before the next.
+
+| File | Step | What it does | Loop 18 |
+|---|---|---|---|
+| `paper2_bodies.py`, `tests/test_paper2_bodies.py` | 0.13 | the body counter (`count_instances`, "animal", as committed) over a picture list: `bodies.json` in the shape the judges read, the crops, a 24-picture box sheet, the measured seconds a picture | accepted |
+| `paper2_cat_list.py`, `paper2_cats_64.csv` | 0.15 | the 64 single cats of the cat census (base SDXL, "a photo of a cat", seeds 0 to 63), listed from its committed per-seed record, asked cat against dog; `--check` confirms them on the node | accepted; on mscluster112 "64 listed, 64 found, 64 at 1024 by 1024" |
+| `paper2_bars.py`, `tests/test_paper2_bars.py` | 0.2 | all 17 bars at the plan's values, the seven rules, the grids, every species' order and the look-alike rule, the 23 pairs and their types, eight new look-alike pairs, the renaming table, the old judge's mapping, and the ImageNet class table (60 species; 13 of 23 plan pairs covered), checked against torchvision's class list | accepted, with pig and boar replaced by otter and weasel |
+| `paper2_fetch_judges.sh` (and `paper2_fetch_weights.py --set judges`) | 0.14 | CLIP ViT-L/14 and `timm/convnext_large.fb_in22k_ft_in1k` into `HF_HOME`, safetensors only, with the setup fetch's guards | accepted |
+| `paper2_co3_patch.py`, `tests/test_paper2_co3_patch.py` | task 8 | CO3 on PyTorch's attention where xformers is missing, both of CO3's xformers calls covered | accepted; on mscluster112 "PASS: CO3 built offline", attention `pytorch-sdpa` |
+| `paper2_crop_check.py`, `tests/test_paper2_crop_check.py` | 0.15 | reads every judge's calls on the 64 cats: the bar on the pictures where every body is called cat with no flag (62 of 64), beside the share of crops called cat and the bodies-per-picture histogram | used for step 0.15 on mscluster112 |
+| `paper2_judge_old.py`, `tests/test_paper2_judge_old.py` | 0.15, 0.17 | the old judge's namer and verdict on the shared lists and bodies, its four departures from `species_judge.py` written in its docstring | used for step 0.15 on mscluster112 |
+| `paper2_dac_diagnose.py` | after 0.15 | prints the Detect-and-Compare judge's similarities for a few pictures at its own crop, at the tight unpainted box and against the averaged reference, with the references' similarity among themselves | written for the wiring check below |
+| `paper2_collect.py`, `records/`, `tests/test_paper2_collect.py` | 0.4 | the candidate pictures from the plan's six sources, each tied to its pair and seed by a committed record (the uncommitted joint-prompt key and calls and the old judge's labels copied into `records/` with their sources): 96, 192, 867, 200, 128 and 29 as the plan counts; 1,335 distinct on animal pairs after the lighthouse and sailboat (64) and one cell its finding records as failing the subject check; 149 hybrid and 242 two-clear candidates from earlier calls; the 100 unselected CO3-alone pictures by seed 2; `--check` on the node opens every file | sent for review |
+
+**What the collector's source map corrects in the species judge plan's table** (for whoever edits the plan): the box
+rows' "rest" halves are tied to their pairs by committed keys (`rest/key-rest.json` in rounds 12 and 13), so all 240
+resolve; the box rows' folders are `z2`, `z3`, `z7`, `z8`, `z12` and `z13` (round 03's pass rows are in `z3`); no
+picture was drawn by a push whose checker read CLIP or ImageNet features (round 08's push reads SDXL's U-Net readout
+features, and CLIP only named which detected box was which animal in round 12's `box` and round 13's `own` rows); and
+the "491 two-body pictures with a body not keeping its own parts" does not reproduce (522, 497 or 466 by settling rule).
+
+**Step 0.15 on mscluster112** (the 64 cats, one body each, shared bodies): the old judge, CLIP, ImageNet and the
+vision-language judge each name 64 of 64. The vision-language judge's yes-cat median is 1.000, so its first-token yes
+reading works. Detect-and-Compare names 8 of 64: all 64 crops are called cat, and 56 carry the borrowed-part flag
+(references: 16 Wikimedia Commons photographs a species, 8 used, at
+`/datasets/mmolefe/poe_repair_min/paper2/references/`, licences in `references.csv`).
+
+**Detect-and-Compare fails the crop check at every grid value, and it is not a wiring fault.** Its feature is DINOv2
+large's pooled CLS token, L2-normalised on both sides (a photo against itself scores 1.0000). The crop and the references
+share one preprocessing, and a species' similarity is the mean of the per-reference cosines. On real photographs (8 COCO
+cat and 8 COCO dog references from `4-inclusive-captions/data/training-set`, 24 other real cats as queries, on the
+laptop) that reading gives cat a median of 0.254 and a gap over dog of 0.234, so only 14 of 24 real cats pass b = 0.2.
+The references agree among themselves at 0.218 (cat against cat). The 64 SDXL cats (median 0.188, gap 0.140) sit a
+little below. Squashing the picture in place of the centre crop changes the gap by 0.014, and the margin and paint-out by
+0.006 at most. MuDI's own Detect-and-Compare (arXiv 2404.04243, section 4.3) compares a crop's similarities with the
+references' similarities among themselves (S^DC against S^GT) rather than thresholding a raw gap. Any such change is a
+new rule written after seeing step 0.15, so the judge is out of steps 0.17 to 0.21. Whether a follow-on plan tests a
+version faithful to MuDI on new test pairs is the owner's call.
+
 ## What is still open
 
 1. **Questions 118 and 119** have no answer. Task 7 does not run until 119 names a route.
@@ -380,11 +422,13 @@ Loop 18 may overrule any of these.
    on the cluster; whether it does is not recorded. Task 8 stops if it is missing.
 7. **The trainer's memory on the shared card** is unmeasured. The earlier reward fine-tune needed a 48 GB card, so the
    commands below ask for 48,000 MiB free; the smoke measures it.
-8. **Not written here, owed by the species judge plan's own steps:** `paper2_bars.py` (0.2, with `IMAGENET_CLASSES`),
-   `paper2_collect.py` (0.4), `paper2_label_set.py` (0.8), `paper2_bodies.py` (0.13, which writes `bodies.json`),
-   `paper2_score.py` (0.21), and the choice of each judge's settings on choosing pairs (0.18 to 0.20), which
-   `paper2_common.redecide` turns into a re-scoring of stored raw scores with no model. The first result's CO3-alone row
-   is drawn by an untouched CO3 in its own process, not by this trainer's `draw`, which refuses strength 0.
+8. **Owed by the species judge plan's own steps.** `paper2_collect.py` (0.4), `paper2_label_set.py` (0.8) and
+   `paper2_score.py` (0.21), which wait for the reviewers, and the choice of each judge's settings on choosing pairs
+   (0.18 to 0.20), which `paper2_common.redecide` turns into a re-scoring of stored raw scores with no model. Step 0.2's
+   review questions, `plans/paper-2-dials/review/02-species-judge.md`, stay with the owner's session. The
+   Detect-and-Compare judge needs real photographs, 8 or 16 per species, from a source the owner trusts, with their
+   licences recorded; until a references folder exists it cannot run. The first result's CO3-alone row is drawn by an
+   untouched CO3 in its own process, not by this trainer's `draw`, which refuses strength 0.
 9. **The vision-language environment's pins** all exist on PyPI or the cu128 index, but the build is untried.
 
 ## The commands, ready for the owner's yes
