@@ -16,7 +16,7 @@ One row per outcome of [the route that finishes the 11 readings](../../plans/rou
 | S7 | reading 7 closed: Composing by regions | todo | | 10 |
 | S8 | reading 8 closed: Keeping subjects apart through attention | todo | | 11 |
 | S9 | reading 9 closed: Amplifying a product | todo | | 12 |
-| S10 | reading 10 closed: What an outside planner or critic buys | todo | | 13 |
+| S10 | reading 10 closed: What an outside planner or critic buys | todo | Tuesday 24 November's block passed with no walk map, so part 1 moves to Wednesday 25 November at 19:00 and part 2 to Monday 30 November at 14:15 | 13 |
 | S11 | reading 11 closed: When a sample commits | todo | | 14 |
 | Q2 | quiz 2 taken on readings 6 to 11 | todo | | 15 |
 

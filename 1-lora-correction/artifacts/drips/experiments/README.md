@@ -9,4 +9,4 @@
 | [What does the correction-size figure's population band actually divide by, and what can it claim?](how-big-the-correction-is/README.md) | Figure F3 of the paper pools 17 pairs' correction-size curves into population bands, and a reader | — | 2026-11-13 |
 | [Walk: why the second animal loses its species](second-animal-species/EXECUTE_WALK.md) | plan: the walk's plan | — | 2026-11-13 |
 | [🎨 Scene map: seeing the correction loss](seeing-the-correction-loss/SCENE_MAP.md) | corrector is trained, and lets the reader see and compare every variation of its loss. | — | 2026-11-13 |
-| [Showcase the trained adapter: the walk's working files](showcase-the-trained-adapter/README.md) | Working folder for the drip-walkthrough that designed the adapter-showcase figure set under | [the plan](../../../plans/01-showcase-the-trained-lora/MASTER_PLAN.md) | 2026-11-13 |
+| [Showcase the trained adapter: the walk's working files](showcase-the-trained-adapter/README.md) | Working folder for the drip-walkthrough that designed the adapter-showcase figure set under | [the plan](../../../plans/01-showcase-the-trained-lora/MASTER_PLAN.md) | 2026-11-21 |

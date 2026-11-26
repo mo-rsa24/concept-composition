@@ -238,5 +238,6 @@ Navigation: ⬅️ [Previous](#in-pictures-code-and-further-reading) | 📋 [TOC
 - The mention of **compose rate** in [the finding "what the adapter ablations show"](../../1-lora-correction/report/the-adapter-on-cat-and-dog/what-the-adapter-ablations-show.md).
 - The mention of **compose rate** in [the finding "how four methods compare on the four pairs of the paper's main grid"](../../1-lora-correction/report/against-other-methods/how-do-four-methods-compare-on-four-hand-picked-pairs.md).
 - The mention of **compose fraction**, the first number on the probe's summary line, in [probing a pooled LoRA checkpoint, recipe 1](../../runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#1-render-the-8-seed-held-out-grid-for-one-checkpoint---ran-2026-09-03).
+- The mention of **compose rate** in [the methods index](../methods/00-INDEX.md).
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

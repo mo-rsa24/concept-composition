@@ -15,3 +15,7 @@ Every result, grouped by the question it answers, with a picture and one line ea
 ## Walks, idea maps, notes and scenes
 
  [walks](artifacts/drips/README.md)
+
+## Cross-references
+
+- The mention of **classifier guidance**, one of the three projects the work starts from, in [the route to two papers](../plans/route-two-papers.md#quick-context).

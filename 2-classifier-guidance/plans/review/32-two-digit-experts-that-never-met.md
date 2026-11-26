@@ -247,3 +247,7 @@ Navigation: ⬅️ [Could the answer be an artefact](#could-the-answer-be-an-art
 Navigation: ⬅️ [Still open](#still-open) | 📋 [TOC](#table-of-contents)
 
 Run [plan 32](../32-two-digit-experts-that-never-met.md); read its sheets against the bars above.
+
+## Cross-references
+
+- The mention of **fixed-side experts** in [the classifier-guided outcome board, row A2d](../../report/classifier-guided-poe/board.md).

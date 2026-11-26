@@ -309,3 +309,4 @@ features. The prescribed cap-0.3 rerun waits for `/datasets`.
 - The mention of **the random push** in [plan 25, the readout checker on PoE's own early states, goal](../25-the-readout-checker-on-poes-own-states.md#goal).
 - The mention of **the size-matched random push** in [the review of plan 25, the readout checker on PoE's own early states, questions](25-the-readout-checker-on-poes-own-states.md#questions).
 - The mention of **each row's size-matched random push** in [the review of plan 26, two pushes, bodies early and species late, questions](26-two-pushes-bodies-early-species-late.md#questions).
+- The mention of **best-of-N at equal compute** in [the classifier-guided outcome board, row A3q](../../report/classifier-guided-poe/board.md).

@@ -147,3 +147,4 @@ named.
 ## Cross-references
 
 - The mention of **a full read** of the Feynman-Kac paper in [the whole corrector design](../source/the-whole-corrector-design.md#description-what-to-build).
+- The mention of **Feynman-Kac Correctors**, a paper of reading sitting 3, in [the route to two papers, under The steps](../../../../plans/route-two-papers.md#the-steps).

@@ -4,7 +4,7 @@
 
 | Walk | What it is | Walks | Last change |
 |---|---|---|---|
-| [Walk map: route step 1, check the ground](answer-iclr-reviews/EXECUTE_WALK.md) | Plan: route step 1, walked with `/drip-execute-plan --request`. | [the plan](../../../../plans/route-answer-the-iclr-reviews.md) | 2026-11-13 |
+| [Walk map: route step 1, check the ground](answer-iclr-reviews/EXECUTE_WALK.md) | Plan: route step 1, walked with `/drip-execute-plan --request`. | [the plan](../../../../plans/route-answer-the-iclr-reviews.md) | 2026-11-21 |
 | [answer-reviewers-k4nd-and-uhz6](answer-reviewers-k4nd-and-uhz6/) | — | — | not committed |
 | [Walk map: PRZE-10, price every review job and launch wave 1](price-the-review-jobs-and-launch-the-first-renders/EXECUTE_WALK.md) | Plan: prze-10-wave-1-renders.md, started by `--request`. | [the plan](../../../plans/price-the-review-jobs-and-launch-the-first-renders.md) | 2026-11-13 |
 | [Walk map: PRZE-2, prove the Langevin corrector and render the six-column figure](prove-the-langevin-corrector-for-the-six-column-figure/EXECUTE_WALK.md) | Plan: prze-2-langevin-corrector.md, started by `--request --depth objective`. | [the plan](../../../plans/prove-the-langevin-corrector-for-the-six-column-figure.md) | 2026-11-13 |

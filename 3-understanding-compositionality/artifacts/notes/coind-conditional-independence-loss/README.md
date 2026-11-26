@@ -68,3 +68,7 @@ note as the deep read behind the register's entry and cites it by path,
 `3-understanding-compositionality/artifacts/notes/coind-conditional-independence-loss/`, routing it to the scope
 `does-the-correction-cause-composition` and to the manuscript's problem-setting, background, and
 related-work sections.
+
+## Cross-references
+
+- The mention of **CoInD**, a paper of reading sitting 1 in [the route to two papers, under The steps](../../../../plans/route-two-papers.md#the-steps).

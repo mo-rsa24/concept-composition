@@ -111,3 +111,13 @@ $$\hat\varepsilon = \varepsilon_{\text{product}} - \lVert\varepsilon_{\text{prod
 $$\text{BA} = \tfrac12\big(P(\text{called }1 \mid y=1) + P(\text{called }0 \mid y=0)\big)$$
 
 **Gap**, worked here. The identity test on pairs holding digit 4 has 400 `apart` and 100 `wrong` canvases, so a checker that calls everything 1 scores 0.8 plain accuracy and 0.5 balanced accuracy. That is why every bar in this ladder is balanced (`balanced` in `v2_learn.py`, lines 136 to 139).
+
+## Cross-references
+
+- The mention of **the noisy canvas** in [the context page on the digit-map checkers, the code that runs them](../../../../context/methods/03-the-digit-map-checkers/04-the-code.md).
+- The mention of **the noisy canvas** in [the finding "Does a checker learn plurality on unseen digits?"](../../../report/abstract-checkers-on-digits/does-a-checker-learn-plurality-on-unseen-digits.md#words-this-page-uses).
+- The mention of **the noisy canvas** in [the finding "Does the count checker's push compose unseen digits?"](../../../report/abstract-checkers-on-digits/does-the-count-checkers-push-compose-unseen-digits.md#words-this-page-uses).
+- The mention of **the noisy canvas** in [the finding "Does removing one checker remove its property, and only its property?"](../../../report/abstract-checkers-on-digits/does-removing-one-checker-remove-its-property.md#words-this-page-uses).
+- The mention of **the noisy canvas** in [the finding "Does the digit model's score path carry which digits are present?"](../../../report/does-the-score-path-carry-which-digits-are-present.md).
+- The mention of **the noisy canvas** in [the context page on the sentence-score push, training our own encoder on digits](../../../../context/methods/04-the-sentence-score-push/05-training-our-own-encoder.md#the-loss-by-what-moves).
+- The mention of **the noisy canvas** in [the findings index](../../../../report/00-INDEX.md#project-2-classifier-guidance).

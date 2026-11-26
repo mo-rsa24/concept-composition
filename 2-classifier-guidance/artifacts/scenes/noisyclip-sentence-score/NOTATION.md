@@ -47,3 +47,7 @@ The multiplier is written $e^{t_s}$ because $t$ already means the sampler step.
 | $M$ | the hand-set $2 \times 6$ image layer |
 | $h$ | the layer's output before it is made unit length |
 | $\Delta T$ | $T_{\text{right}} - T_{\text{wrong}}$ |
+
+## Cross-references
+
+- The mention of **the input path** in [the finding "Can a sentence score read the five properties on a half-drawn picture?"](../../../report/the-sentence-score/can-a-sentence-score-read-the-five-properties.md).

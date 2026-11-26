@@ -193,5 +193,6 @@ Navigation: ⬅️ [Previous](#still-open) | 📋 [TOC](#table-of-contents)
 
 - The mention of **A zero push changes no pixel** in [the context page on the digit-map checkers, the code that runs them](../../../context/methods/03-the-digit-map-checkers/04-the-code.md#how-it-fails-and-how-you-know-it-worked).
 - The mention of **the environment finding** in [the context page on the digit-map checkers, one sampler step, section "What is measured where"](../../../context/methods/03-the-digit-map-checkers/01-overview.md#what-is-measured-where).
+- The mention of **zero push changes no pixel** in [the context page on the sentence-score push, training our own encoder on digits, section "Words this page uses"](../../../context/methods/04-the-sentence-score-push/05-training-our-own-encoder.md#words-this-page-uses).
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

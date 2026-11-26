@@ -4,7 +4,7 @@ flowchart TB
   classDef doing fill:#ffd8a8,color:#111111
   classDef todo fill:#e9ecef,color:#111111
   classDef note fill:#ffffff,stroke:#c92a2a,stroke-dasharray:5 5,color:#c92a2a
-  now["Sessions at 08:04 · 38 of 73 steps done"]
+  now["Sessions at 02:14 · 111 of 111 steps done"]
   style now fill:#ffffff,stroke:#ffffff,color:#111111
   subgraph L0["Loop 1 · not running · all done"]
     direction LR
@@ -18,51 +18,55 @@ flowchart TB
     direction LR
     d2["7 done"]:::done
   end
-  subgraph L3["Loop 4 · next run 08:06 · 1 left · ETA 39 min to 23.5 h"]
+  subgraph L3["Loop 4 · not running · all done"]
     direction LR
-    d3["5 done"]:::done --> n_K6["K6: Keep every target<br/>current"]:::doing
+    d3["7 done"]:::done
   end
-  subgraph L4["Loop 5 · idle · all done"]
+  subgraph L4["Loop 5 · not running · all done"]
     direction LR
     d4["1 done"]:::done
   end
-  subgraph L5["Loop 6 · next run 08:32 · 10 left · ETA 6.5 h to 220.4 h"]
+  subgraph L5["Loop 6 · idle · all done"]
     direction LR
-    d5["1 done"]:::done --> n_M7["M7: CLEVR paste test first"]:::doing --> n_M5["M5: Checker data balanced"]:::todo --> n_D3["D3: Checker architecture<br/>chosen"]:::todo --> n_M2["M2: Checker labels chosen"]:::todo --> n_D5["D5: Short inclusive<br/>fine-tune with the push"]:::todo --> n_M3["M3: Winning method tuned"]:::todo --> n_M6["M6: Small CLEVR test"]:::todo --> n_M8["M8: Loop 6 and Loop 8<br/>checkers compared"]:::todo --> n_M4["M4: One recipe frozen per<br/>paper"]:::todo --> n_M9["M9: Regions bind each body"]:::todo
+    d5["17 done"]:::done
   end
-  subgraph L6["Loop 7 · idle · all done"]
+  subgraph L6["Loop 12 · working · all done"]
     direction LR
-    d6["3 done"]:::done
+    d6["13 done"]:::done
   end
-  subgraph L7["Loop 8 · next run 08:05 · 3 left · ETA 2.6 h to 79.6 h"]
+  subgraph L7["Loop 13 · working · all done"]
     direction LR
-    d7["2 done"]:::done --> n_V3["V3: Its gradient composes<br/>unseen digits"]:::doing --> n_V5["V5: Remove-one-checker<br/>rehearsal on digits"]:::todo --> n_V4["V4: Abstract checker on<br/>SDXL's unseen objects<br/>waits on D3"]:::todo
+    d7["2 done"]:::done
   end
-  subgraph L8["Loop 9 · working · 5 left · ETA 3.2 h to 117.3 h"]
+  subgraph L8["Loop 14 · not running · all done"]
     direction LR
-    d8["3 done"]:::done --> n_W3["W3: Sentence score steers<br/>CO3"]:::todo --> n_W4["W4: Our own noise-aware<br/>model on digits"]:::todo --> n_W5["W5: Verdict: Paper 2, Paper<br/>3 or drop"]:::todo --> n_W2b["W2b: Linear probe on frozen<br/>vectors"]:::todo --> n_W2c["W2c: Positive control and<br/>fair test of W2"]:::doing
+    d8["4 done"]:::done
   end
-  subgraph L9["Loop 10 · idle · 9 left · ETA 5.8 h to 211.2 h"]
+  subgraph L9["Loop 15 · not running · all done"]
     direction LR
-    n_X1["X1: Score-path papers read"]:::todo --> n_X2["X2: Running loops described<br/>side by side"]:::todo --> n_X3["X3: Ideas and their wrong<br/>assumptions"]:::todo --> n_X4["X4: Small experiment<br/>designed, owner checked"]:::todo --> n_X5["X5: Does the score path<br/>carry signal"]:::todo --> n_X6["X6: Train the two-way and<br/>three-way spaces<br/>waits on W4"]:::todo --> n_X7["X7: Figures for each trained<br/>space"]:::todo --> n_X8["X8: Unseen pairs and the<br/>arithmetic tests"]:::todo --> n_X9["X9: Verdict per paper"]:::todo
+    d9["4 done"]:::done
   end
-  subgraph L10["You · next C2, ready now"]
+  subgraph L10["Loop 7 · not running · all done"]
     direction LR
-    n_C2["C2: Your readings:<br/>statements confirmed"]:::todo ~~~ n_D4["D4: Go or no-go per paper<br/>waits on D3, M4"]:::todo ~~~ n_F1["F1: Paper 1 submitted, code<br/>public<br/>waits on E1"]:::todo ~~~ n_F2["F2: Paper 2 submitted, code<br/>public<br/>waits on E2"]:::todo
+    d10["3 done"]:::done
   end
-  subgraph L11["Later · no session yet · no ETA"]
+  subgraph L11["Loop 8 · not running · all done"]
     direction LR
-    later["R2, E1, E2"]:::todo
+    d11["7 done"]:::done
   end
-  subgraph L12["Working, not on the map"]
+  subgraph L12["Loop 9 · not running · all done"]
     direction LR
-    off0["7b. 🧪 MNIST digits on a<br/>canvas: how good mu…"]:::todo
+    d12["9 done"]:::done
   end
-  subgraph L13["Flags"]
+  subgraph L13["Loop 10 · not running · all done"]
     direction LR
-    flag0["K6 has run 45.9 h, longer than any<br/>finished step (23.5 h), so its ETA is<br/>too low"]:::note
+    d13["9 done"]:::done
   end
-  now ~~~ L0 ~~~ L1 ~~~ L2 ~~~ L3 ~~~ L4 ~~~ L5 ~~~ L6 ~~~ L7 ~~~ L8 ~~~ L9 ~~~ L10 ~~~ L11 ~~~ L12 ~~~ L13
+  subgraph L14["Loop 11 · not running · all done"]
+    direction LR
+    d14["5 done"]:::done
+  end
+  now ~~~ L0 ~~~ L1 ~~~ L2 ~~~ L3 ~~~ L4 ~~~ L5 ~~~ L6 ~~~ L7 ~~~ L8 ~~~ L9 ~~~ L10 ~~~ L11 ~~~ L12 ~~~ L13 ~~~ L14
   style L0 fill:#e8f0fd,stroke:#2f6fde,stroke-width:3px
   style d0 stroke:#2f6fde,stroke-width:3px
   style L1 fill:#fff0f6,stroke:#d6336c,stroke-width:3px
@@ -71,52 +75,25 @@ flowchart TB
   style d2 stroke:#12a594,stroke-width:3px
   style L3 fill:#f5effb,stroke:#8e4ec6,stroke-width:3px
   style d3 stroke:#8e4ec6,stroke-width:3px
-  style n_K6 stroke:#8e4ec6,stroke-width:3px
   style L4 fill:#f1f3f5,stroke:#6b7280,stroke-width:3px
   style d4 stroke:#6b7280,stroke-width:3px
   style L5 fill:#f1f3f5,stroke:#6b7280,stroke-width:3px
   style d5 stroke:#6b7280,stroke-width:3px
-  style n_M7 stroke:#6b7280,stroke-width:3px
-  style n_M5 stroke:#6b7280,stroke-width:3px
-  style n_D3 stroke:#6b7280,stroke-width:3px
-  style n_M2 stroke:#6b7280,stroke-width:3px
-  style n_D5 stroke:#6b7280,stroke-width:3px
-  style n_M3 stroke:#6b7280,stroke-width:3px
-  style n_M6 stroke:#6b7280,stroke-width:3px
-  style n_M8 stroke:#6b7280,stroke-width:3px
-  style n_M4 stroke:#6b7280,stroke-width:3px
-  style n_M9 stroke:#6b7280,stroke-width:3px
   style L6 fill:#f1f3f5,stroke:#6b7280,stroke-width:3px
   style d6 stroke:#6b7280,stroke-width:3px
   style L7 fill:#f1f3f5,stroke:#6b7280,stroke-width:3px
   style d7 stroke:#6b7280,stroke-width:3px
-  style n_V3 stroke:#6b7280,stroke-width:3px
-  style n_V5 stroke:#6b7280,stroke-width:3px
-  style n_V4 stroke:#6b7280,stroke-width:3px
   style L8 fill:#f1f3f5,stroke:#6b7280,stroke-width:3px
   style d8 stroke:#6b7280,stroke-width:3px
-  style n_W3 stroke:#6b7280,stroke-width:3px
-  style n_W4 stroke:#6b7280,stroke-width:3px
-  style n_W5 stroke:#6b7280,stroke-width:3px
-  style n_W2b stroke:#6b7280,stroke-width:3px
-  style n_W2c stroke:#6b7280,stroke-width:3px
   style L9 fill:#f1f3f5,stroke:#6b7280,stroke-width:3px
-  style n_X1 stroke:#6b7280,stroke-width:3px
-  style n_X2 stroke:#6b7280,stroke-width:3px
-  style n_X3 stroke:#6b7280,stroke-width:3px
-  style n_X4 stroke:#6b7280,stroke-width:3px
-  style n_X5 stroke:#6b7280,stroke-width:3px
-  style n_X6 stroke:#6b7280,stroke-width:3px
-  style n_X7 stroke:#6b7280,stroke-width:3px
-  style n_X8 stroke:#6b7280,stroke-width:3px
-  style n_X9 stroke:#6b7280,stroke-width:3px
-  style L10 fill:#fff9db,stroke:#222222,stroke-width:3px
-  style n_C2 stroke:#222222,stroke-width:3px
-  style n_D4 stroke:#222222,stroke-width:3px
-  style n_F1 stroke:#222222,stroke-width:3px
-  style n_F2 stroke:#222222,stroke-width:3px
-  style L11 fill:#f8f9fa,stroke:#868e96,stroke-width:3px
-  style later stroke:#868e96,stroke-width:3px
-  style L12 fill:#ffffff,stroke:#868e96,stroke-width:3px
-  style off0 stroke:#868e96,stroke-width:3px
-  style L13 fill:#ffffff,stroke:#c92a2a,stroke-width:3px
+  style d9 stroke:#6b7280,stroke-width:3px
+  style L10 fill:#f1f3f5,stroke:#6b7280,stroke-width:3px
+  style d10 stroke:#6b7280,stroke-width:3px
+  style L11 fill:#f1f3f5,stroke:#6b7280,stroke-width:3px
+  style d11 stroke:#6b7280,stroke-width:3px
+  style L12 fill:#f1f3f5,stroke:#6b7280,stroke-width:3px
+  style d12 stroke:#6b7280,stroke-width:3px
+  style L13 fill:#f1f3f5,stroke:#6b7280,stroke-width:3px
+  style d13 stroke:#6b7280,stroke-width:3px
+  style L14 fill:#f1f3f5,stroke:#6b7280,stroke-width:3px
+  style d14 stroke:#6b7280,stroke-width:3px

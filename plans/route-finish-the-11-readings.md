@@ -2,7 +2,7 @@
 <!-- template: exempt. Reason: a skill-route runbook built to route-file-template, not a plan -->
 
 > [!NOTE]
-> **You will hold:** 11 closing notes, each passing its done check, and two quizzes taken · **Time:** ~30 h to finish (estimate), 30 h booked plus 9.5 h spare · **Stop point:** every reading closed by Fri 4 Dec and quiz 2 taken by Mon 14 Dec · **Outcome board:** [the reading sittings board](../report/reading-sittings/board.md) · **Background:** [the references file](route-finish-the-11-readings-references.md)
+> **You will hold:** 11 closing notes, each passing its done check, and two quizzes taken · **Time:** ~30 h to finish (estimate), 30 h booked plus 8 h spare · **Stop point:** every reading closed by Fri 4 Dec and quiz 2 taken by Mon 14 Dec · **Outcome board:** [the reading sittings board](../report/reading-sittings/board.md) · **Background:** [the references file](route-finish-the-11-readings-references.md)
 
 Built to: route-file-template v3
 
@@ -87,12 +87,12 @@ Navigation: ⬅️ [Previous](#the-two-lanes) | 📋 [TOC](#table-of-contents) |
 | Block | Run | Checkpoint at the end of the block |
 |---|---|---|
 | today, background | step 1 | the three PDFs filed, or named as not found |
-| Tue 24 Nov, 19:00 to 20:30 | step 13, reading 10, ideas a and b | two ideas walked, first measured reading time |
-| Wed 25 Nov, 19:00 to 20:30 | step 13, reading 10, ideas c and d | closing note written |
+| Wed 25 Nov, 19:00 to 20:30 | step 13, reading 10, ideas a and b | two ideas walked, first measured reading time |
 | Thu 26 Nov, 03:15 to 07:30 | step 2, reading 1 | closing note written |
 | Thu 26 Nov, 19:00 to 20:30 | step 14, reading 11, ideas a and b | two ideas walked |
 | Fri 27 Nov, 19:00 to 20:30 | step 14, reading 11, ideas c and d | closing note written |
 | Mon 30 Nov, 03:15 to 07:30 | step 3, reading 2 | closing note written |
+| Mon 30 Nov, 14:15 to 15:45 | step 13, reading 10, ideas c and d | closing note written |
 | Tue 1 Dec, 03:15 to 07:30 | step 4, reading 3 | closing note written |
 | Wed 2 Dec, 03:15 to 05:15 | step 5, reading 4 | closing note written |
 | Wed 2 Dec, 05:30 to 07:30 | step 6, reading 5 | closing note written |
@@ -104,7 +104,7 @@ Navigation: ⬅️ [Previous](#the-two-lanes) | 📋 [TOC](#table-of-contents) |
 | Fri 4 Dec, 05:30 to 07:30 | step 12, reading 9 | all 11 readings closed |
 | Mon 14 Dec, 17:30 to 19:00 | step 15, quiz 2 | quiz taken, route closed |
 
-**Spare time for overruns:** 14:15 to 15:45 on Mon 30 Nov, Tue 1 Dec and Fri 4 Dec, plus 14:45 to 15:45 on Thu 3 Dec and 03:15 to 07:30 on Thu 10 Dec, for 9.5 hours. They are free because course Week 2 runs a week later.
+**Spare time for overruns:** 14:15 to 15:45 on Tue 1 Dec and Fri 4 Dec, plus 14:45 to 15:45 on Thu 3 Dec and 03:15 to 07:30 on Thu 10 Dec, for 8 hours. They are free because course Week 2 runs a week later.
 
 **The tightest point is 2 to 4 December.** Readings 4 to 9 hold 21 ideas, about 15.75 hours (estimate), in 12 booked hours, so the loop places what runs over in the spare time above.
 
@@ -462,9 +462,8 @@ Show each picture when its idea opens. They do not count toward the four sources
 
 What is already known
 - Paper 2's GenEval two-object target comes from Feynman-Kac Correctors (0.78 on GenEval's 0 to 1
-  scale, on its released 553 prompts), and a win must also beat plain SDXL's 0.80 on the same
-  prompts
-  and seeds. Paper 1 needs to know whether a corrector repairs a product or only samples
+  scale, on its released 553 prompts), and a win must beat our plain SDXL rerun on the same pictures
+  by the noise margin. Paper 1 needs to know whether a corrector repairs a product or only samples
   it more faithfully.
 - The claim to test: Table 2 on page 7 prints two Feynman-Kac results at the same visible settings
   (noise level 40, 32 steps): CLIP 29.00 with ImageReward 0.04, and CLIP 29.14 with ImageReward
@@ -1229,7 +1228,7 @@ the board.
 
 ### 13. 📄 Read reading 10: What an outside planner or critic buys
 
-You ~180 min · AI ~5 min · Tue 24 and Wed 25 Nov, 19:00 to 20:30 · moves: Stage 2
+You ~180 min · AI ~5 min · Wed 25 Nov, 19:00 to 20:30, and Mon 30 Nov, 14:15 to 15:45 · moves: Stage 2
 
 **Objective:** Say what each outside model adds and what it costs Paper 2's setting, then say whether that CountLoop row is scored by its own critic.
 **Outcome:** the closing note at `~/Obsidian/deep-learning/12-scoring-and-rival-methods/combined/what-an-outside-planner-or-critic-buys-on-a-fixed-protocol/combined-reading.md`
@@ -1317,7 +1316,7 @@ what it costs Paper 2's setting, then say whether that CountLoop row is scored b
 For this route
 Chain: all 11 readings closed and both quizzes taken by 14 December 2026. This step delivers reading
 10.
-Time box: 180 minutes, 19:00 to 20:30 on Tue 24 and Wed 25 Nov. At the end of the box, stop at the nearest
+Time box: 180 minutes, Wed 25 Nov 19:00 to 20:30 and Mon 30 Nov 14:15 to 15:45. At the end of the box, stop at the nearest
 closed idea and
 say which ideas are left, so the directing loop can place them in a spare slot.
 Filing: tied, because this walk writes only its own map and closing note.
@@ -1512,4 +1511,4 @@ Navigation: ⬅️ [Previous](#instructions) | 📋 [TOC](#table-of-contents) | 
 
 Navigation: ⬅️ [Previous](#quizzes-and-feedback) | 📋 [TOC](#table-of-contents)
 
-**Start with:** step 13, reading 10, on Tue 24 Nov at 19:00, then step 2 on Thu 26 Nov at 03:15. Say `re-route <what changed>` for a different chain, or `todoist` to file the runbook as ordered subtasks.
+**Start with:** step 13, reading 10, on Wed 25 Nov at 19:00, then step 2 on Thu 26 Nov at 03:15. Say `re-route <what changed>` for a different chain, or `todoist` to file the runbook as ordered subtasks.

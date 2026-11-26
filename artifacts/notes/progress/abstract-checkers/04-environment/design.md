@@ -107,3 +107,7 @@ python 2-classifier-guidance/scripts/abstract_checkers/build_env.py --mnist <raw
 
 A passing environment says nothing about whether any checker can learn plurality. Pasted canvases also differ from what a sampler
 draws, so a checker that reads them well may still read sampled canvases badly. V3 tests that on the sampler's own output.
+
+## Cross-references
+
+- The mention of **small digit-canvas environment** in [the context page on the sentence-score push, training our own encoder on digits, section "Words this page uses"](../../../../../context/methods/04-the-sentence-score-push/05-training-our-own-encoder.md#words-this-page-uses).

@@ -240,4 +240,8 @@ Navigation: ⬅️ [What this cannot claim](#what-this-cannot-claim) | 📋 [TOC
 
 **Where it came from.** The bars and the judge's counts are in [plan 33's review file](../../../../../plans/review/33-experts-that-compose-at-inference.md), and [plan 33](../../../../../plans/33-experts-that-compose-at-inference.md) holds the design. The eye calls live only in the file above, because the review still lists them as owed. Every file's original location and checksum is in [the file origins list](../file-origins.tsv). The models and raw canvases stay in `data/mnist-canvas/33-mnist-experts-at-inference/` and on the cluster at `/home-mscluster/mmolefe/poe_repair_min_scratch/mnist-canvas/33-experts-at-inference/`.
 
+## Cross-references
+
+- The mention of **the judge**, the digit reader behind the count of 1,200 clean pairs of 1,280 in [the route to two papers, under The two papers](../../../../../../plans/route-two-papers.md#the-two-papers).
+
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

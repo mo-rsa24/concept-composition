@@ -1448,3 +1448,6 @@ script its row names.
 - The mention of **what PoE loses when it composes**, scope 10 placed in the understanding-compositionality project, in [the project table for regrouping the core repo](../../../plans/split-into-idea-repos.md).
 - The mention of **the interaction term**, the gradient the product drops that a pair-aware classifier would supply, in [the route for classifier-guided PoE](../../../2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md#quick-context-where-you-are).
 - The mention of **product of experts**, the sampler whose dropped term a classifier's push would restore, in [the route for classifier-guided PoE](../../../2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md#quick-context-where-you-are).
+- The mention of **Projective Composition**, a paper of reading sitting 1 in [the route to two papers, under The steps](../../../plans/route-two-papers.md#the-steps).
+- The mention of **Energy-Based MCMC**, a paper of reading sitting 3, in [the route to two papers, under The steps](../../../plans/route-two-papers.md#the-steps).
+- The mention of **Local Mechanisms**, a paper of reading sitting 6, in [the route to two papers, under The steps](../../../plans/route-two-papers.md#the-steps).

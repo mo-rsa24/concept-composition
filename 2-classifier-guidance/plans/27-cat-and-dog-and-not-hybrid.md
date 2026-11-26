@@ -96,3 +96,7 @@ Navigation: ⬅️ [Previous](#instructions) | 📋 [TOC](#table-of-contents)
 
 Under `outputs/classifier_guidance_ladder/rung2/not-hybrid/` on the scratch mount: `tiles/`, `record.json`,
 `sheet.png`. Verdicts go into the review file and a section of the checker loop file.
+
+## Cross-references
+
+- The mention of **Logical Guidance**, a paper of reading sitting 2, in [the route to two papers, under The steps](../../plans/route-two-papers.md#the-steps).

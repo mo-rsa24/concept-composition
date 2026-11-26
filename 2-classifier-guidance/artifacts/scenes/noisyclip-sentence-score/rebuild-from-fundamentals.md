@@ -149,3 +149,9 @@ $$
 **A soft clamp's trade-off.** Nothing in the tree compares a hard clamp with a smooth one for guidance. [The miniature's fourth break](2-miniature/README.md#7-break-it-four-ways) shows the mechanics on two pixels only.
 
 **Bicubic resize as a linear operator.** The push passes back through a resize from 128 to 224, and no page teaches the transpose of that resampling.
+
+## Cross-references
+
+- The mention of **the noisy latent** in [the context page on the readout checker, the push and its cap](../../../../context/methods/02-the-readout-checker/03-the-push-and-its-cap.md).
+- The mention of **the noisy latent** in [the context page on the readout checker, inside the kept checker](../../../../context/methods/02-the-readout-checker/02-inside-the-kept-checker.md).
+- The mention of **the noisy latent** in [the finding "Does adding the kept push to CO3 beat CO3 alone?"](../../../report/the-method-search/does-adding-the-kept-push-to-co3-beat-co3-alone.md#2-what-the-push-follows).

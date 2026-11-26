@@ -38,7 +38,9 @@ owner code on the board is `s2`. Your first step waits until step A2 is green.
   `5-text-embedding-third-expert` (76) and the repository root (123).
 - `4-inclusive-captions` has no `report/` folder, and the drain refuses a project without one.
 - The artifacts hold 25,120 images, so looking at each one is not affordable.
-- The drain may create and edit cards and written notes under `artifacts/`. It moves a file only from a list the user approved, with a restore manifest, and it never deletes.
+- The drain may create and edit cards and written notes under `artifacts/`. It moves a file only from a list the user approved, with a restore manifest.
+- This session may delete a file, change a recorded number, touch a fixed folder or overwrite a picture only under the conditions in `artifacts/notes/progress/decision-log.md`, with an entry written first.
+- Step O1 follows `artifacts/notes/progress/organise-plan.md`, which organises `2-classifier-guidance/artifacts` and `4-inclusive-captions/artifacts`.
 - Six folders must stay where they are; `shared-rules.md` lists them.
 - Known faults include a batch-size timing comparison marked void in `environment/hpc/throughput.md`, and
   the fidelity term that was silently off in reward fine-tuning before commit `a72f748`.

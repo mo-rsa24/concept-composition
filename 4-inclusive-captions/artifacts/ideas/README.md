@@ -4,4 +4,4 @@
 
 | Item | What it is | Last change |
 |---|---|---|
-| [💡 Inclusive captions for the cat and dog experts](inclusive-captions-axis/IDEA_MAP.md) | Load-bearing: claim 1. | 2026-11-13 |
+| [Do inclusive captions help the cat and dog experts compose?](inclusive-captions-axis/README.md) | Photos holding both a cat and a dog are also trained under "a photo of a cat" and "a photo of a dog", so each single-animal condition keeps images tha | 2026-11-22 |

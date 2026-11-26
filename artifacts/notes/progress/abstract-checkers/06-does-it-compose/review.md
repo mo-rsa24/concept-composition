@@ -76,3 +76,7 @@ The model here never saw two digits on one canvas, and the push still draws them
 The clean count rests on the judge's confidence threshold of 0.9, so a faint but correct digit counts as not clean. The 161 separate-digit count carries no bar and is reported for what it shows about layout.
 
 GPU-hours spent so far: 5.76 of 30 (5.62 through step V2, 0.10 on this step's five jobs and 0.04 on the rerun).
+
+## Cross-references
+
+- The mention of **rerun on another node** in [the context page on the digit-map checkers, one sampler step, section "What is measured where"](../../../../../context/methods/03-the-digit-map-checkers/01-overview.md#what-is-measured-where).

@@ -116,3 +116,8 @@ Scales: G. Pos. is the fraction of 400 images (100 prompts, 4 images each) with 
 ## Closer work it cites
 
 None. The cited steering methods use hand-written losses, external reward models or fine-tuning, and none trains a classifier for an abstract property or tests one on unseen concepts (p. 2, p. 3).
+
+## Cross-references
+
+- The mention of **Learn-to-Steer** in [the context page on the word-map checker, the idea in six pictures, section "A small judge reads only the two maps"](../../../../../context/methods/06-the-word-map-checker/03-the-illustrations.md#a-small-judge-reads-only-the-two-maps).
+- The mention of **Learn-to-Steer** in [the context page on the word-map checker, worked on an 8-number latent](../../../../../context/methods/06-the-word-map-checker/04-the-miniature.md).
