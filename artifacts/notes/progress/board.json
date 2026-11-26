@@ -1226,12 +1226,13 @@
    "owner": "s12",
    "proof": "leakage/13-clean-up-pass-in-boxes/review.md reports row a against row b on the committed bar (b61e9deb), with the pixel change per row",
    "needs": [],
-   "state": "doing",
+   "state": "done",
    "serves": "Paper 2: the one retry-worth-it idea still running",
    "objective": "the clean-up pass with each animal's own prediction in its automatic box against the same pass over the whole picture, CO3 alone beside them, seeds 6025 to 6032, 96 pictures per row",
    "started": "2026-11-26T01:13:27+02:00",
-   "updated": "2026-11-26T01:13:27+02:00",
-   "note": "launched 2026-11-26 00:20, jobs 95796 to 95805, approved at 4.2 GPU-hours"
+   "updated": "2026-11-26T02:12:21+02:00",
+   "note": "null: boxed pass 20 of 96 two clear vs whole-picture pass 18 (p 0.39), CO3 alone 25; review artifacts/notes/progress/leakage/13-clean-up-pass-in-boxes/review.md",
+   "finished": "2026-11-26T02:12:21+02:00"
   },
   {
    "id": "U1",
