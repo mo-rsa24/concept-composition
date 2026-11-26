@@ -68,3 +68,47 @@ def test_every_co3_entry_point_calls_the_patch_before_building_co3():
         text = (REPO / "2-classifier-guidance/scripts/paper2" / name).read_text()
         call = text.index("use_pytorch_attention_if_no_xformers()")
         assert call < text.index("import paper2_rows as rows"), name
+
+
+def stand_in_model_mixin():
+    calls = []
+
+    class ModelMixin:
+        def enable_xformers_memory_efficient_attention(self, *a, **k):
+            calls.append("unet xformers switched on")
+
+    class UNet(ModelMixin):
+        pass
+
+    return ModelMixin, UNet, calls
+
+
+def test_without_xformers_both_switches_are_no_ops(capsys):
+    Pipeline, XLPipeline, pipe_calls = stand_in_pipelines()
+    ModelMixin, UNet, unet_calls = stand_in_model_mixin()
+    got = patch.use_pytorch_attention_if_no_xformers([Pipeline, ModelMixin], available=False)
+    assert got == "pytorch-sdpa"
+    XLPipeline().enable_xformers_memory_efficient_attention()     # Co3.py line 67
+    UNet().enable_xformers_memory_efficient_attention()           # Co3.py line 79
+    assert pipe_calls == [] and unet_calls == []
+    assert capsys.readouterr().out.count(patch.MESSAGE) == 2
+
+
+def test_with_xformers_the_unet_switch_is_untouched():
+    ModelMixin, UNet, calls = stand_in_model_mixin()
+    before = ModelMixin.enable_xformers_memory_efficient_attention
+    assert patch.use_pytorch_attention_if_no_xformers([ModelMixin], available=True) == "xformers"
+    assert ModelMixin.enable_xformers_memory_efficient_attention is before
+    UNet().enable_xformers_memory_efficient_attention()
+    assert calls == ["unet xformers switched on"]
+
+
+def test_the_default_classes_cover_both_of_co3s_calls():
+    import importlib.util
+    import pytest
+    if importlib.util.find_spec("diffusers") is None:
+        pytest.skip("needs diffusers: runs where it is installed")
+    import diffusers
+    from diffusers.models.modeling_utils import ModelMixin
+    classes = patch.default_classes()
+    assert diffusers.DiffusionPipeline in classes and ModelMixin in classes
