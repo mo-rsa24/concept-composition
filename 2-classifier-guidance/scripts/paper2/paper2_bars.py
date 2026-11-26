@@ -74,7 +74,7 @@ ORDER = {
     "cheetah": "Carnivora", "cougar": "Carnivora", "puma": "Carnivora", "bobcat": "Carnivora", "cat": "Carnivora",
     "dog": "Carnivora", "tiger": "Carnivora", "lion": "Carnivora", "leopard": "Carnivora", "jaguar": "Carnivora",
     "fox": "Carnivora", "coyote": "Carnivora", "wolf": "Carnivora", "seal": "Carnivora", "badger": "Carnivora",
-    "otter": "Carnivora", "panda": "Carnivora", "raccoon": "Carnivora", "skunk": "Carnivora", "walrus": "Carnivora",
+    "otter": "Carnivora", "weasel": "Carnivora", "panda": "Carnivora", "raccoon": "Carnivora", "skunk": "Carnivora", "walrus": "Carnivora",
     "duck": "Anseriformes", "goose": "Anseriformes", "swan": "Anseriformes",
     "crow": "Passeriformes", "raven": "Passeriformes", "magpie": "Passeriformes", "swallow": "Passeriformes",
     "pheasant": "Galliformes", "quail": "Galliformes", "peacock": "Galliformes",
@@ -120,11 +120,13 @@ PAIRS = [
 REPORTED_APART = {("crow", "raven")}
 
 # Eight new look-alike pairs for steps 0.9 and 0.10, rendered only if a kind is short and the owner says yes. The first
-# four are the plan's own examples; the last four are proposed here. Every one is two animals of one order, passes
-# scripts/shared/disallowed_subjects.py, and is in no other pair table (tests/test_paper2_bars.py checks all three).
+# four are the plan's own examples; the last four are proposed here, each two clearly different species of one order
+# (two forms of one species, such as a farmed pig and a wild boar, are not used: a part borrowed between them cannot be
+# called). Every one passes scripts/shared/disallowed_subjects.py and is in no other pair table
+# (tests/test_paper2_bars.py checks the order, the guard and the tables).
 NEW_LOOKALIKE_PAIRS = [
     ("lion", "tiger"), ("wolf", "fox"), ("horse", "donkey"), ("goat", "sheep"),
-    ("leopard", "jaguar"), ("rabbit", "hare"), ("camel", "llama"), ("pig", "boar"),
+    ("leopard", "jaguar"), ("rabbit", "hare"), ("camel", "llama"), ("otter", "weasel"),
 ]
 NEW_LOOKALIKE_SEEDS = range(8001, 8009)
 
@@ -156,7 +158,7 @@ IMAGENET_CLASS_NAMES = {
     293: "cheetah", 301: "ladybug", 309: "bee", 310: "ant", 321: "admiral", 322: "ringlet", 323: "monarch",
     324: "cabbage butterfly", 325: "sulphur butterfly", 326: "lycaenid", 330: "wood rabbit", 331: "hare",
     332: "Angora", 333: "hamster", 339: "sorrel", 340: "zebra", 341: "hog", 342: "wild boar", 344: "hippopotamus",
-    348: "ram", 349: "bighorn", 350: "ibex", 354: "Arabian camel", 355: "llama", 360: "otter", 361: "skunk",
+    348: "ram", 349: "bighorn", 350: "ibex", 354: "Arabian camel", 355: "llama", 356: "weasel", 360: "otter", 361: "skunk",
     362: "badger", 364: "three-toed sloth", 388: "giant panda",
 }
 DOG_BREEDS = range(151, 269)   # ImageNet's 118 dog breeds, Chihuahua (151) to Mexican hairless (268); 269 is a wolf
@@ -164,7 +166,7 @@ DOG_BREEDS = range(151, 269)   # ImageNet's 118 dog breeds, Chihuahua (151) to M
 IMAGENET_CLASSES = {
     "cheetah": [293], "cougar": [286], "puma": [286], "leopard": [288], "jaguar": [290], "lion": [291], "tiger": [292],
     "cat": [281, 282, 283, 284, 285], "dog": list(DOG_BREEDS), "wolf": [269, 270, 271], "coyote": [272],
-    "fox": [277, 278, 279, 280], "badger": [362], "otter": [360], "skunk": [361], "panda": [388],
+    "fox": [277, 278, 279, 280], "badger": [362], "otter": [360], "weasel": [356], "skunk": [361], "panda": [388],
     "seal": [150],           # a sea lion is an eared seal
     "duck": [97, 98], "goose": [99], "swan": [100], "magpie": [18], "quail": [85], "peacock": [84],
     "eagle": [22], "owl": [24], "flamingo": [130], "spoonbill": [129], "pelican": [144], "parrot": [87, 88, 89, 90],
