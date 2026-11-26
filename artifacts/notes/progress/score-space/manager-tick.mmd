@@ -1,0 +1,23 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef page fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px,color:#111111
+  classDef you fill:#fff4e6,stroke:#e8590c,stroke-width:2px,color:#111111
+
+  subgraph READ["Reads, every hour"]
+    B[("board.json<br/>steps and open questions")]:::plain
+    S["session_status.py<br/>estimated finish, flags"]:::plain
+    R["requests.md<br/>lines between loops"]:::plain
+    A["ListAgents<br/>which loops are busy or idle"]:::plain
+  end
+
+  M{"Loop 13<br/>manager tick"}:::plain
+  B --> M
+  S --> M
+  R --> M
+  A --> M
+
+  M --> P["manager/status.md<br/>1. for you to answer<br/>2. each loop: step, ETA, blocker<br/>3. alignment, every 6 hours<br/>4. nudges sent"]:::page
+  M -->|"once, only when something<br/>changed for that loop"| L["Loops 4, 6, 7, 8, 11, 12<br/>a nudge message"]:::plain
+  M -.->|"only: a new question, a loop idle<br/>with nothing blocking it, or<br/>alignment turns to no"| Y["you<br/>one notification"]:::you
+  P --> Y
