@@ -1,0 +1,231 @@
+{
+ "n": 96,
+ "two_clear": {
+  "co3": 25,
+  "whole": 18,
+  "own": 20
+ },
+ "compared": "own against whole",
+ "lead": 2,
+ "won": 7,
+ "lost": 5,
+ "p_one_sided": 0.38720703125,
+ "per_pair": {
+  "a_puma__x__a_condor": {
+   "co3": 4,
+   "whole": 2,
+   "own": 3
+  },
+  "a_hippopotamus__x__a_swallow": {
+   "co3": 0,
+   "whole": 0,
+   "own": 0
+  },
+  "a_zebra__x__a_flamingo": {
+   "co3": 4,
+   "whole": 2,
+   "own": 2
+  },
+  "a_giraffe__x__a_tortoise": {
+   "co3": 5,
+   "whole": 5,
+   "own": 5
+  },
+  "a_seal__x__a_gull": {
+   "co3": 5,
+   "whole": 1,
+   "own": 3
+  },
+  "a_bobcat__x__a_quail": {
+   "co3": 0,
+   "whole": 0,
+   "own": 1
+  },
+  "a_duck__x__a_goose": {
+   "co3": 0,
+   "whole": 0,
+   "own": 2
+  },
+  "a_lighthouse__x__a_sailboat": {
+   "co3": 1,
+   "whole": 1,
+   "own": 1
+  },
+  "a_crow__x__a_raven": {
+   "co3": 1,
+   "whole": 2,
+   "own": 0
+  },
+  "a_boar__x__a_pheasant": {
+   "co3": 2,
+   "whole": 0,
+   "own": 0
+  },
+  "an_eagle__x__a_fox": {
+   "co3": 3,
+   "whole": 4,
+   "own": 3
+  },
+  "a_cheetah__x__a_cougar": {
+   "co3": 0,
+   "whole": 1,
+   "own": 0
+  }
+ },
+ "broken": {
+  "co3": 2,
+  "whole": 7,
+  "own": 3
+ },
+ "passes": false,
+ "reported_whole_vs_co3": {
+  "n": 96,
+  "two_clear": {
+   "co3": 25,
+   "whole": 18,
+   "own": 20
+  },
+  "compared": "whole against co3",
+  "lead": -7,
+  "won": 3,
+  "lost": 10,
+  "p_one_sided": 0.98876953125,
+  "per_pair": {
+   "a_puma__x__a_condor": {
+    "co3": 4,
+    "whole": 2,
+    "own": 3
+   },
+   "a_hippopotamus__x__a_swallow": {
+    "co3": 0,
+    "whole": 0,
+    "own": 0
+   },
+   "a_zebra__x__a_flamingo": {
+    "co3": 4,
+    "whole": 2,
+    "own": 2
+   },
+   "a_giraffe__x__a_tortoise": {
+    "co3": 5,
+    "whole": 5,
+    "own": 5
+   },
+   "a_seal__x__a_gull": {
+    "co3": 5,
+    "whole": 1,
+    "own": 3
+   },
+   "a_bobcat__x__a_quail": {
+    "co3": 0,
+    "whole": 0,
+    "own": 1
+   },
+   "a_duck__x__a_goose": {
+    "co3": 0,
+    "whole": 0,
+    "own": 2
+   },
+   "a_lighthouse__x__a_sailboat": {
+    "co3": 1,
+    "whole": 1,
+    "own": 1
+   },
+   "a_crow__x__a_raven": {
+    "co3": 1,
+    "whole": 2,
+    "own": 0
+   },
+   "a_boar__x__a_pheasant": {
+    "co3": 2,
+    "whole": 0,
+    "own": 0
+   },
+   "an_eagle__x__a_fox": {
+    "co3": 3,
+    "whole": 4,
+    "own": 3
+   },
+   "a_cheetah__x__a_cougar": {
+    "co3": 0,
+    "whole": 1,
+    "own": 0
+   }
+  }
+ },
+ "reported_own_vs_co3": {
+  "n": 96,
+  "two_clear": {
+   "co3": 25,
+   "whole": 18,
+   "own": 20
+  },
+  "compared": "own against co3",
+  "lead": -5,
+  "won": 4,
+  "lost": 9,
+  "p_one_sided": 0.953857421875,
+  "per_pair": {
+   "a_puma__x__a_condor": {
+    "co3": 4,
+    "whole": 2,
+    "own": 3
+   },
+   "a_hippopotamus__x__a_swallow": {
+    "co3": 0,
+    "whole": 0,
+    "own": 0
+   },
+   "a_zebra__x__a_flamingo": {
+    "co3": 4,
+    "whole": 2,
+    "own": 2
+   },
+   "a_giraffe__x__a_tortoise": {
+    "co3": 5,
+    "whole": 5,
+    "own": 5
+   },
+   "a_seal__x__a_gull": {
+    "co3": 5,
+    "whole": 1,
+    "own": 3
+   },
+   "a_bobcat__x__a_quail": {
+    "co3": 0,
+    "whole": 0,
+    "own": 1
+   },
+   "a_duck__x__a_goose": {
+    "co3": 0,
+    "whole": 0,
+    "own": 2
+   },
+   "a_lighthouse__x__a_sailboat": {
+    "co3": 1,
+    "whole": 1,
+    "own": 1
+   },
+   "a_crow__x__a_raven": {
+    "co3": 1,
+    "whole": 2,
+    "own": 0
+   },
+   "a_boar__x__a_pheasant": {
+    "co3": 2,
+    "whole": 0,
+    "own": 0
+   },
+   "an_eagle__x__a_fox": {
+    "co3": 3,
+    "whole": 4,
+    "own": 3
+   },
+   "a_cheetah__x__a_cougar": {
+    "co3": 0,
+    "whole": 1,
+    "own": 0
+   }
+  }
+ }
+}
