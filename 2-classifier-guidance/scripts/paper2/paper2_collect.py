@@ -185,7 +185,8 @@ DIAL_MADE = ("the plain product of experts (CFG 7.5 per expert, 50 DDIM steps) w
 
 def dial() -> list[dict]:
     out = []
-    for d in sorted((LEAKAGE / "10-co-occurrence-dial/blind").glob("*/")):
+    # Only folders: before Python 3.11, glob("*/") also returns files (the blind folder holds bar.json).
+    for d in sorted(p for p in (LEAKAGE / "10-co-occurrence-dial/blind").iterdir() if p.is_dir()):
         settled = json.loads((d / "settled.json").read_text())["settled"]
         notes = notes_by_id(*(d / f"calls-{n}.csv" for n in (1, 2, 3)))
         for i, s in sorted(settled.items()):

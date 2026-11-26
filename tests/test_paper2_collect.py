@@ -62,3 +62,19 @@ def test_rows_read_as_a_picture_list():
     for r in ROWS:
         assert r["a"] and r["b"] and r["pair_type"] in ("look-alike", "unlike") and r["picture"].startswith("/datasets/")
     assert sum(r["reported_apart"] for r in ROWS) == 64        # crow and raven
+
+
+def test_a_blind_folder_holding_a_stray_file_is_read(tmp_path, monkeypatch):
+    """The dial's blind folder holds bar.json beside its batch folders; on Python 3.10 glob("*/") returned it too."""
+    import json
+    blind = tmp_path / "10-co-occurrence-dial/blind"
+    (blind / "batch-1").mkdir(parents=True)
+    (blind / "bar.json").write_text("{}")
+    (blind / "stray.txt").write_text("not a batch")
+    (blind / "batch-1/settled.json").write_text(json.dumps({"settled": {
+        "abc": {"pair": "a_lobster__x__a_whale", "seed": 6001, "weight": 0.5, "rung": "one"}}}))
+    (blind / "batch-1/calls-1.csv").write_text("id,rung,broken,note\nabc,one,1,lobster alone\n")
+    monkeypatch.setattr(collect, "LEAKAGE", tmp_path)
+    rows = collect.dial()
+    assert len(rows) == 1 and rows[0]["picture"].endswith("a_lobster__x__a_whale/seed-6001-w0.50.png")
+    assert rows[0]["notes"] == "lobster alone"
