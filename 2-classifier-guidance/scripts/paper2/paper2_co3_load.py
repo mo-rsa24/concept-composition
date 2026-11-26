@@ -3,9 +3,10 @@
 Setup plan task 8 (plans/paper-2-dials/plans/01-setup.md). Run only through paper2_co3_load.sh. Loads
 CO3 exactly as its row does (paper2_rows.py: load_parser, load, set_prompt, start_noise, which come from
 method_search/co3_common.py), with HF_HUB_OFFLINE=1, so any file not in HF_HOME raises instead of
-downloading. CO3 turns on xformers attention as it loads, which needs a visible card, so the build runs
-on the held node's device 0. Writes the package versions, the device, the seconds to load and to set a
-prompt, the concepts CO3's parser found, and the peak memory, to --out (load.txt).
+downloading. The build runs on the held node's device 0, as every CO3 run does; CO3 asks for xformers as it
+loads, and where xformers is missing (co3_bw) paper2_co3_patch.py lets it fall back to PyTorch's attention. Writes the package versions, the device, the seconds to load and to set a
+prompt, the concepts CO3's parser found, the attention kernel (xformers, or PyTorch's scaled-dot-product attention
+when xformers is missing, as in co3_bw; see paper2_co3_patch.py), and the peak memory, to --out (load.txt).
 """
 from __future__ import annotations
 
@@ -35,11 +36,14 @@ def main(argv=None) -> int:
     a = ap.parse_args(argv)
     assert os.environ.get("HF_HUB_OFFLINE") == "1", "run through paper2_co3_load.sh: HF_HUB_OFFLINE must be 1"
     import torch
+    sys.path.insert(0, str(HERE))
+    from paper2_co3_patch import use_pytorch_attention_if_no_xformers
+    attention = use_pytorch_attention_if_no_xformers()   # before CO3 is built
     import paper2_rows as rows
     import co3_common
 
     lines = [f"python {sys.executable}", f"co3_common {Path(co3_common.__file__).resolve()}",
-             f"HF_HOME {os.environ.get('HF_HOME')}"]
+             f"HF_HOME {os.environ.get('HF_HOME')}", f"attention {attention}"]
     lines += [f"{p} {version(p)}" for p in ("torch", "diffusers", "transformers", "xformers", "stanza",
                                             "huggingface-hub", "accelerate")]
     t0 = time.time()

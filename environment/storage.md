@@ -95,6 +95,12 @@ Navigation: ⬅️ [The storage map](#the-storage-map) | 📋 [TOC](#table-of-co
   2026-11-19 with matching sha256 on all four. `canvases.py` reads it when `MNIST_RAW` points there;
   the laptop's path is its default. The MNIST share run writes to
   `/datasets/mmolefe/poe_repair_min/outputs/mnist-share/` (checkpoints, samples, logs).
+- **Laptop to `/datasets`** (`scripts/cluster.sh` only pulls): `rsync -az <laptop folder>/
+  mscluster84:/datasets/mmolefe/...` in the push direction, through `mscluster84`. `verified`
+  2026-11-26: Paper 2's 192 joint-prompt pictures (281 MB, 27 seconds) went from
+  `outputs/loop-6/m14/blind/pictures/` to `/datasets/mmolefe/poe_repair_min/paper2/paper2-upload-joint/`
+  with `2-classifier-guidance/scripts/paper2/paper2_upload_joint.sh --go`, which checks the remote disk
+  first and opens every picture at 1024 by 1024 after copying.
 
 - **How `/datasets/mmolefe` is laid out** (since 2026-11-13): raw datasets in `raw/`, other
   projects' outputs in `projects/<project>/`, archived work in `_archive/`, each moved folder with

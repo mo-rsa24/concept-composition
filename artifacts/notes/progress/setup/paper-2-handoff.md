@@ -223,6 +223,7 @@ onto another node. The owner allocates the node and pushes the branch. None of t
 | `paper2_launch.sh` | runs one GPU step (a judge, the trainer, a draw) behind every guard, pinned to device 0; `co3` or `vlm` names the python |
 | `paper2_fetch_weights.sh`, `paper2_fetch_weights.py` | task 6: five repositories into `HF_HOME`, each with whether it was cached, its size and an offline config check; fails if the home folder's caches grew past 1 GB |
 | `paper2_upload_joint.sh` | task 7, run on the laptop: the 192 pictures by `rsync` through mscluster84 in the push direction (question 119's proposed route), then a count and a size check on the cluster; does nothing without `--go` |
+| `paper2_co3_patch.py` | lets CO3 build without xformers: diffusers' own attention in its place, and the kernel on record |
 | `paper2_co3_load.sh`, `paper2_co3_load.py` | task 8: stops before loading if the SDXL snapshot, its fp16 U-Net, the fp16-fix VAE or the sentence parser's model is missing; then builds CO3 offline through `paper2_rows.py`, sets one pair, draws no picture |
 | `paper2_vlm_env_build.sh` | the vision-language environment at `/datasets/mmolefe/envs/paper2-vlm`, conda and pip caches on `/datasets`, every version pinned; stops if the folder exists |
 | `paper2_vlm_env_check.sh`, `paper2_vlm_load_check.py` | loads Qwen3-VL-8B-Instruct in that environment through the judge's own code and asks one crop one question |
@@ -260,9 +261,34 @@ $ <cpu torch>/bin/python -m pytest <the same four files> -q
 57 passed, 1 skipped        # the real CO3 import, which runs on the held node
 ```
 
-**Task 8 departs from the plan's "on a CPU node".** CO3 calls `pipe.enable_xformers_memory_efficient_attention()` as
-it loads (`composition/debottam_co3/composers/Co3.py`, line 67), and diffusers raises there when no card is visible, so
-the build runs on the held node's device 0 behind a 12,000 MiB card guard (inferred from the code, not seen run).
+**Task 8 departs from the plan's "on a CPU node".** CO3 builds on the held node's device 0, behind a 12,000 MiB card
+guard, as every CO3 run does.
+
+**CO3 without xformers.** CO3's `Co3.__init__` calls `pipe.enable_xformers_memory_efficient_attention()`
+(`composition/debottam_co3/composers/Co3.py`, line 67), and `co3_bw`, the only environment that drives a Blackwell card,
+has no xformers: the first run of task 8 on mscluster112 stopped there with `ModuleNotFoundError`
+(`/datasets/mmolefe/poe_repair_min/paper2/logs/paper2-co3-load.log`, from line 89). `co3` has xformers 0.0.28.post3 but
+cannot drive the card. The owner's decision: fall back to PyTorch's own attention. `paper2_co3_patch.py` does it,
+called before CO3 is built by `paper2_co3_load.py` and by the trainer's `co3_sampler` (used by `train`, `draw` and
+`closeness-cache`): when xformers cannot be imported, the pipelines' xformers switch prints "xformers missing: CO3 runs
+on PyTorch scaled-dot-product attention" and returns, so CO3 keeps diffusers' default attention processor; when xformers
+imports, nothing changes. `co3_common.py`, `paper2_rows.py` and CO3's own code are untouched. Every run records the
+kernel: `attention` in `load.txt`, in the trainer's `run.json` and `summary.json`, in the closeness cache and in
+`draw.json`, as `xformers` or `pytorch-sdpa`.
+
+```
+$ python3 -m pytest tests/test_paper2_co3_patch.py tests/test_paper2_kinds.py tests/test_paper2_sheets.py tests/test_paper2_co3_import.py tests/test_paper2_identity_dial.py -q
+40 passed, 2 skipped        # laptop python
+$ <cpu torch>/bin/python -m pytest <the same five files> -q
+70 passed, 1 skipped
+```
+
+`tests/test_paper2_co3_patch.py` holds 5 tests: with xformers absent a stand-in pipeline's switch prints the line and
+does nothing; with it present nothing changes; a subclass with its own switch is patched when named; the laptop's
+xformers check agrees with the import system; and both CO3 entry points call the patch before importing `paper2_rows`.
+On the real classes (diffusers 0.35.2 and transformers 4.57.6 in the temporary CPU torch), `StableDiffusionXLPipeline`
+takes the switch from `DiffusionPipeline` and does not define its own, and after the patch the call CO3 makes printed
+the line and returned.
 
 **Accepted** by Loop 18 on 2026-11-26 (rechecked there: `bash -n` on all seven scripts, `py_compile` on the three Python
 files, 57 passed and 1 skipped under the CPU torch). Its decisions: the `.sh` in place of `.sbatch`, the build on the
@@ -322,7 +348,8 @@ Loop 18 may overrule any of these.
 | 6 | SDXL is fetched as its configs, scheduler, tokenizers and `*fp16.safetensors` only; the other four drop only other frameworks' formats | CO3 loads SDXL with `variant="fp16"`; the full SDXL repository is far larger |
 | 6 | A stray download is caught by the growth of `~/.cache/huggingface`, `~/.cache/torch` and `~/.cache/pip` | the plan's "`/home-mscluster` grew by no more than 1 GB" cannot be read from the shared filesystem's total, which other users move |
 | 7 | The route is question 119's proposed default, and the script does nothing without `--go` | the owner has not answered question 119 |
-| 8 | CO3 builds on the held node's device 0, not the CPU | CO3 calls `enable_xformers_memory_efficient_attention()` as it loads, and diffusers raises there when no card is visible (inferred from the code, not seen run) |
+| 8 | CO3 builds on the held node's device 0, not the CPU | every CO3 run uses the card, and the load check should build it as the runs do |
+| 8 | Without xformers, CO3 runs on diffusers' default attention (PyTorch scaled-dot-product attention), and every run records which | the owner's decision after task 8 stopped on mscluster112: `co3_bw` has no xformers and `co3` cannot drive a Blackwell card |
 | 8 | The check also stops if stanza's English model is missing at `${STANZA_RESOURCES_DIR:-~/stanza_resources}/en` | CO3's parser loads it with `download_method=None` |
 | env | The vision-language environment pins python 3.11, torch 2.11.0 and torchvision 0.26.0 (cu128), transformers 4.57.6, huggingface_hub 0.36.2, tokenizers 0.22.2, accelerate 1.12.0, safetensors 0.7.0, pillow 12.1.1, numpy 2.3.5 | torch as in `co3_bw`; transformers 4.57.6 is the last 4.x and holds Qwen3-VL (its wheel has `qwen3_vl/modeling`); it needs huggingface_hub below 1.0 and tokenizers 0.22; each version exists on PyPI or the cu128 index (`pip index versions`, 2026-11-26) |
 | all | Card minimums: 12000 MiB for the CO3 load, 20000 MiB for Qwen3-VL; each command below states its own | the card is shared with Paper 1's process, so each run asks for what it needs rather than an empty card |
@@ -342,20 +369,23 @@ Loop 18 may overrule any of these.
    DINOv2 large, Qwen3-VL-8B), the body counter and the vision-language environment have each been written against
    but not run. The real-model paths are `co3_sampler`, `CropShareReward`, `JudgeKeep` and `closeness-cache` in the
    trainer, each judge's model class, and the scripts for tasks 6 and 8. The first launch tests them.
-3. **CO3 on a single-animal prompt** is untried: `closeness-cache` points CO3 at "a cat" as well as at pairs, and CO3's
+3. **CO3 on PyTorch's attention in place of xformers** has not drawn a picture yet: the two kernels compute the same
+   attention, but whether CO3's pictures under `pytorch-sdpa` match its earlier xformers renders is unmeasured, so a
+   comparison across rows keeps to one kernel, which each run records.
+4. **CO3 on a single-animal prompt** is untried: `closeness-cache` points CO3 at "a cat" as well as at pairs, and CO3's
    parser has only ever been given two-subject prompts here.
-4. **The CO3 code snapshot** at `/datasets/mmolefe/poe_repair_min/loop-5/code/67b0bafa-b91076f` is the path
+5. **The CO3 code snapshot** at `/datasets/mmolefe/poe_repair_min/loop-5/code/67b0bafa-b91076f` is the path
    `m1_paper2.sbatch` names; it was not checked live. The guards stop with a message if it is missing.
-5. **The sentence parser's model** (stanza, English) must already sit at `${STANZA_RESOURCES_DIR:-~/stanza_resources}/en`
+6. **The sentence parser's model** (stanza, English) must already sit at `${STANZA_RESOURCES_DIR:-~/stanza_resources}/en`
    on the cluster; whether it does is not recorded. Task 8 stops if it is missing.
-6. **The trainer's memory on the shared card** is unmeasured. The earlier reward fine-tune needed a 48 GB card, so the
+7. **The trainer's memory on the shared card** is unmeasured. The earlier reward fine-tune needed a 48 GB card, so the
    commands below ask for 48,000 MiB free; the smoke measures it.
-7. **Not written here, owed by the species judge plan's own steps:** `paper2_bars.py` (0.2, with `IMAGENET_CLASSES`),
+8. **Not written here, owed by the species judge plan's own steps:** `paper2_bars.py` (0.2, with `IMAGENET_CLASSES`),
    `paper2_collect.py` (0.4), `paper2_label_set.py` (0.8), `paper2_bodies.py` (0.13, which writes `bodies.json`),
    `paper2_score.py` (0.21), and the choice of each judge's settings on choosing pairs (0.18 to 0.20), which
    `paper2_common.redecide` turns into a re-scoring of stored raw scores with no model. The first result's CO3-alone row
    is drawn by an untouched CO3 in its own process, not by this trainer's `draw`, which refuses strength 0.
-8. **The vision-language environment's pins** all exist on PyPI or the cu128 index, but the build is untried.
+9. **The vision-language environment's pins** all exist on PyPI or the cu128 index, but the build is untried.
 
 ## The commands, ready for the owner's yes
 
@@ -372,7 +402,7 @@ Every script opens with its guards and logs to `/datasets/mmolefe/poe_repair_min
 | 2 | `/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python -c "from transformers import Qwen3VLForConditionalGeneration"` | it imports: the vision-language judge can run on `co3_bw` (launch it with `co3`), and steps 3 and 4 are skipped. An `ImportError` means steps 3 and 4 |
 | 3 | `bash 2-classifier-guidance/scripts/paper2/paper2_vlm_env_build.sh` | it prints every pinned version, "transformers has Qwen3-VL" and the folder's size at `/datasets/mmolefe/envs/paper2-vlm` |
 | 4 | `bash 2-classifier-guidance/scripts/paper2/paper2_vlm_env_check.sh` | `PASS: Qwen3-VL-8B answered on the card`; `outputs/paper2/paper2-vlm-env/load.txt` holds the load time, seconds per answer, peak memory and one yes probability |
-| 5, task 8 | `bash 2-classifier-guidance/scripts/paper2/paper2_co3_load.sh` | `PASS: CO3 built offline`; `outputs/paper2/paper2-co3-load/load.txt` names `method_search/co3_common.py` and the versions. This proves the restored `co3_common.py` loads CO3 |
+| 5, task 8 | `bash 2-classifier-guidance/scripts/paper2/paper2_co3_load.sh` | `PASS: CO3 built offline`; `outputs/paper2/paper2-co3-load/load.txt` names `method_search/co3_common.py`, the versions and `attention pytorch-sdpa` on `co3_bw`. This proves the restored `co3_common.py` loads CO3 |
 | 6 | `bash -c 'source 2-classifier-guidance/scripts/paper2/paper2_guards.sh && p2_python && p2_co3_path && "$PY" -m pytest tests/test_paper2_kinds.py tests/test_paper2_sheets.py tests/test_paper2_co3_import.py tests/test_paper2_identity_dial.py -q'` | every test passes, none skipped: the real import of `paper2_rows` and `co3_common` runs here |
 | 7, task 7, on the laptop | `bash 2-classifier-guidance/scripts/paper2/paper2_upload_joint.sh --go`, only once question 119 names this route | `PASS: 192 pictures at 1024 by 1024 on /datasets`; then record the route in `environment/storage.md` |
 

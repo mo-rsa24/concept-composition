@@ -4,8 +4,9 @@
 #   bash 2-classifier-guidance/scripts/paper2/paper2_co3_load.sh
 #
 # Only after the owner's yes and after task 6. Run from the cluster checkout on the held Blackwell node.
-# CO3 turns on xformers attention as it loads, which needs a visible card, so the build uses device 0
-# (about 10 GB; Paper 1's process may share the card). Stops before loading if the SDXL snapshot, the
+# The build uses device 0, as every CO3 run does (about 10 GB; Paper 1's process may share the card). CO3 asks
+# for xformers as it loads; co3_bw has none, so paper2_co3_patch.py falls back to PyTorch's attention and load.txt
+# records which kernel ran. Stops before loading if the SDXL snapshot, the
 # fp16-fix VAE CO3 loads beside it, or the sentence parser's English model is missing, so a skipped task 6
 # cannot cost a run. This is where co3_common.py (method_search/, restored 2026-11-26) is first proven
 # to load CO3. Writes outputs/paper2/paper2-co3-load/load.txt in the checkout and a copy beside the log.

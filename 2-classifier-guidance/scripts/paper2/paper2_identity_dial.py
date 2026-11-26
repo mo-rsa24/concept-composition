@@ -421,6 +421,7 @@ class Sampler:
         self.set_text = set_text                # (prompt) -> CO3 pointed at any prompt (the closeness cache)
         self.start = start
         self.kind = kind                        # "co3" or "stand-in": a cache is read only by its own kind
+        self.attention = "stand-in"             # CO3's attention kernel: "xformers" or "pytorch-sdpa"
         self.corrected_steps = corrected_steps  # CO3's own corrector runs at steps below this
         self.n_steps = len(model.scheduler.timesteps)
 
@@ -523,6 +524,8 @@ def co3_sampler(device, out: Path) -> Sampler:
     for p in (HERE.parent / "method_search", HERE.parent / "method_search" / "rung2",
               HERE.parent / "rung2", REPO):
         sys.path.insert(0, str(p))
+    from paper2_co3_patch import use_pytorch_attention_if_no_xformers
+    attention = use_pytorch_attention_if_no_xformers()   # before CO3 is built: co3_bw has no xformers
     import paper2_rows as rows
     from poe_repair._sdxl.sdipc_utils import decode_latents_with_grad
     parser = rows.load_parser()
@@ -569,10 +572,12 @@ def co3_sampler(device, out: Path) -> Sampler:
         with torch.autocast(device_type="cuda", dtype=torch.float16):
             return _step(x, t, i)
     model.denoise_step = rollout_step
-    return Sampler(model, decode=lambda x0: decode_latents_with_grad(vae, x0.float())[0],
+    sampler = Sampler(model, decode=lambda x0: decode_latents_with_grad(vae, x0.float())[0],
                    guided_eps=guided_eps, cond_eps=cond_eps, prompt_eps=prompt_eps, set_pair=set_pair,
                    set_text=set_text, start=lambda seed: rows.start_noise(model, seed),
                    corrected_steps=int(config.num_ts_to_correct), kind="co3")
+    sampler.attention = attention
+    return sampler
 
 
 # ---------------------------------------------------------------- inputs
@@ -649,7 +654,7 @@ def build_closeness_cache(sampler: Sampler, prompts: list[str], seeds: list[int]
                 eps = sampler.prompt_eps(x, k, prompt).float()
             entries.append({"prompt": prompt, "seed": s, "k": k, "x": x.detach().cpu(), "eps": eps.cpu()})
             print(f"closeness cache: {prompt!r} seed {s} step {k}", flush=True)
-    cache = {"kind": sampler.kind, "dial_attached": False, "prompts": prompts, "seeds": seeds,
+    cache = {"kind": sampler.kind, "attention": sampler.attention, "dial_attached": False, "prompts": prompts, "seeds": seeds,
              "window": list(window), "seed": seed, "made": time.strftime("%Y-%m-%dT%H:%M:%S"), "entries": entries}
     out.parent.mkdir(parents=True, exist_ok=True)
     torch.save(cache, out)
@@ -779,6 +784,7 @@ def train(a: argparse.Namespace) -> dict:
             "dial_from_step": dial_from, "closeness_weight": a.closeness_weight, "lr": a.lr,
             "steps": a.steps, "seed": a.seed, "dry_run": a.dry_run, "n_layers": len(dial.layers),
             "pairs": {f"{x}|{y}": w for x, y, w in pairs}, "n_seeds": len(seeds),
+            "attention": sampler.attention,
             "closeness_cache": str(cache_path), "closeness_batch": a.closeness_batch,
             "closeness_prompts": sorted({e["prompt"] for e in cache})}
     (out / "run.json").write_text(json.dumps({**meta, "ckpt_steps": ckpt_steps,
@@ -966,7 +972,7 @@ def draw(a: argparse.Namespace) -> None:
             to_pil(image).save(path)
             drawn.append({"pair": f"{pa}|{pb}", "seed": seed, "picture": str(path)})
             print(f"{pa} and {pb} seed {seed} -> {path}", flush=True)
-    (out / "draw.json").write_text(json.dumps({"ckpt": str(a.ckpt), "strength": a.strength,
+    (out / "draw.json").write_text(json.dumps({"ckpt": str(a.ckpt), "strength": a.strength, "attention": sampler.attention,
                                                "dial_from_step": dial_from, "pictures": drawn}, indent=1))
 
 
