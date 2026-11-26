@@ -1,0 +1,17 @@
+{
+ "whole_vs_co3": {
+  "n": 96,
+  "median": 22.29,
+  "max": 39.67
+ },
+ "own_vs_co3": {
+  "n": 96,
+  "median": 20.3,
+  "max": 32.34
+ },
+ "own_vs_whole": {
+  "n": 96,
+  "median": 21.44,
+  "max": 44.25
+ }
+}

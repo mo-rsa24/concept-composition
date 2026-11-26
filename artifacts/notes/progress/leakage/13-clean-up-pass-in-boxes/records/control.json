@@ -1,0 +1,25 @@
+{
+ "pair": "a_duck__x__a_goose",
+ "seed": 6025,
+ "device": "NVIDIA GeForce RTX 3090",
+ "first_step": 5,
+ "empty_boxes_own_vs_whole_max_pixel": 0,
+ "entering_first_step_whole_vs_co3_max_abs": 0.0,
+ "entering_first_step_own_vs_co3_max_abs": 0.0,
+ "own_vs_whole_max_pixel": 255,
+ "boxes": [
+  [
+   554.8,
+   132.3,
+   883.2,
+   872.3
+  ],
+  [
+   53.1,
+   190.8,
+   529.7,
+   866.4
+  ]
+ ],
+ "passes": true
+}
