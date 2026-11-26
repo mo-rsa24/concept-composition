@@ -5,7 +5,7 @@ between loops, the cluster and the live sessions, decides the questions it is al
 and leaves the rest here. Paper 1 is experts that never met; Paper 2 is doing better than CO3 inside one
 model.
 
-**Last tick:** 2026-11-26 00:58 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
+**Last tick:** 2026-11-26 02:20 (UTC+2). The board stands at 57 of 90 steps done and 6 in progress.
 
 ## Contents
 
@@ -152,6 +152,7 @@ Newest first.
 
 | Concerns | Finding | Source |
 |---|---|---|
+| Loop 12 | **Z13 ran 0.3 GPU-hours over** (4.5 against 4.2 approved). | Z13's review |
 | Paper 1's two-colour CLEVR test (Loop 6) | **The picture-reading checker also missed its bar** (0.641 against 0.75, flat from update 250), so neither checker can read block counts and the method row is reported as not run. M10 stands on the blind eye calls: plain 0.000, corrector 0.000, mask paste 0.205 | `/datasets/.../loop-6/m10/comparison/m10-part-c.tar` |
 | Paper 1's two-colour CLEVR test (Loop 6) | **The block counter cannot judge pastes, so the test is inconclusive on its scorer whatever question 114 decides.** Two blind reviewers agreed on all 864 pictures: exact share plain 0.000, corrector 0.000, mask paste 0.205, where the counter said about 0.5 for the paste. Most pastes lay blue over red and leave a red sliver, which the counter, trained on scenes where objects never overlap, reads as two objects. The eye calls are the faithful measure; question 114's retraining would buy nothing | M10's review, commit 2b8c40b3 |
 | Paper 1's two-colour CLEVR test (Loop 6) | **The count checker, Paper 1's method row, missed its training bar**: held-out balanced accuracy 0.645 against 0.75. The diagnosis at four noise windows ruled out noise as the main cause (best 0.741 nearly clean, one-count-off at chance throughout): the experts' maps carry little of the count. The picture-reading checker also missed (0.641), so the method row is reported as not run | M10's review |
@@ -243,6 +244,7 @@ Under the closing rule: idle, and the loop finished, closed, or a second copy of
 
 | Time | Session | Loop | Why |
 |---|---|---|---|
+| Loop 12: Where CO3 leaks | 2026-11-26 02:15 | closed after Z13 (null: boxed pass 20 of 96, whole-picture pass 18, CO3 alone 25, p 0.39; the box route on CO3 is shut), its review f2a2860e and ledger entry 98c2003d; no jobs left |
 | Loop 6: Find the best method | 2026-11-26 01:20 | closed by the owner's shutdown; its M10 ledger entry checked and given full archive paths (5cbc4c42); no jobs, pods or watchers left |
 | 2026-11-25 | 🎯 PhD Loop 4: Read Rivals And Set Targets (both copies) | **paused by the owner** until the go or no-go; its upkeep step K6 stays open; restart with its prompt's start command |
 | 2026-11-25 | 🗂️ PhD Loop 11: Drain The Loops Into The Pillars | **paused by the owner** until the go or no-go; its final drain (Y5) waits for the other loops |

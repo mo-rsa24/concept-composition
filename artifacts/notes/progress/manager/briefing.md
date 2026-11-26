@@ -3,7 +3,7 @@
 The one page to read. Loop 13 rewrites it every 6 hours, and at once when you say "updates", "brief me"
 or "where are we". The full detail is on [the status page](status.md).
 
-**Written:** 2026-11-25 23:00 (UTC+2).
+**Written:** 2026-11-26 02:20 (UTC+2). This is the final briefing: every loop is closed.
 
 ## Contents
 
@@ -13,44 +13,33 @@ or "where are we". The full detail is on [the status page](status.md).
 
 ## Where we are
 
-<a href="../leakage/11-gradient-trained-classifier/gate/held-back-pairs-sheet.png"><img src="../leakage/11-gradient-trained-classifier/gate/held-back-pairs-sheet.png" width="200" alt="Coloured digits on held-back pairs: the classifier trained so its push points the right way (middle row) against its no-penalty and shuffled twins."></a>
+<a href="../reviewer/failure-kinds.png"><img src="../reviewer/failure-kinds.png" width="200" alt="Why 164 failed attempts failed, across all 223: test design 162, could not measure it 87, the idea 60, done wrong 36, wrong data 27, not understood 23."></a>
 
-1. **Paper 1's two-colour block test shows the problem plainly.** One model trained only on red CLEVR
-   blocks and one only on blue, combined by adding their predictions, drew the right scene in 0 of 288
-   pictures checked by eye (two blind reviewers, 864 of 864 agreed), at every count from 1 red + 1 blue
-   to 3 + 3: they draw dark blends that are neither colour. A better sampler (Du et al.'s corrector) also
-   drew 0, so the blending is not a sampling error. Pasting one model's blocks onto the other's picture
-   drew 20.5% right (59% at 1 + 1, 0% at 3 + 3). The block counter disagreed with the eye on 14.7% of
-   pictures, because it reads a red sliver under a pasted blue block as two objects, so the result rests
-   on the eye calls ([M10's review](../method-search/05-two-experts-by-colour/review.md)).
-2. **Paper 1's method row has not run.** The count checker could not read block counts from the experts'
-   maps at any noise level (best 0.741 against its 0.75 bar). One checker that reads the noisy picture
-   itself is the one remaining attempt (question 116).
-3. **Paper 2's box check was too weak to tell.** The gentle box push drew 27 two-clear pictures of 96
-   against CO3's 26, but changed each picture by about 2 grey levels of 255. This morning's stronger
-   clean-up pass changed pictures about 10 times more, and the same pass without boxes changed them most
-   of all, so the open question is whether boxes add anything beyond the pass: 14 against 10 of 48, not
-   yet significant ([Z12's review](../leakage/12-aligned-classifier-on-co3/review.md)). Automatic boxes
-   (a detector plus CLIP) matched boxes drawn by eye on 46 of 48 pictures.
-4. **Also closed today:** the LoRA plus boxes (4 against 2 of 32, hybrids rose), Paper 2's first checker
-   route, the attention reader and the ratio classifier. Still standing: on coloured digits, the
-   classifier trained so its push points the right way beats every control (88.8% against 73.8%, 63.1%
-   and 47.0%).
-5. **Nothing is running.** Both RunPod pods are stopped after checked copies; today's RunPod spend is
-   about R180. Loops 6 and 12 wait on your answers; Loops 4 and 11 stay paused. Parked for later: the
-   DCFM and Bradley benchmark rebuilds, CO3 stage B and the X-ray work.
+1. **Everything is shut down.** All loops are closed, every board step is finished or closed as not run,
+   and nothing runs: no cluster jobs and no RunPod pods. You chose to stop both papers and start over.
+2. **The starting point for the restart** is [the consensus](../reviewer/consensus.md): what is settled,
+   the ideas worth retrying ranked by cost, the rules for every new design, and what each paper can claim.
+   Behind it is [the what-we-tried ledger](../reviewer/what-we-tried/README.md), 223 attempts, each with
+   its kind of failure and whether the idea is still alive. Every loop reads both before designing.
+3. **Why things failed:** of 164 failed attempts, only 9 failed on the idea alone; test design (162
+   mentions) and instruments that could not see the outcome (87) dominate. Most closed ideas were never
+   fairly tested.
+4. **The last two results.** Paper 1's two-colour block test: models trained apart and added together drew
+   the right scene in 0 of 288 pictures by eye, a better sampler also 0, pasting 20.5%; neither count
+   checker could read block counts (0.741 and 0.641 against 0.75). Paper 2's deciding box test: the boxed
+   clean-up pass drew 20 two-clear pictures of 96, the same pass without boxes 18 and CO3 alone 25, so
+   the box route on CO3 is shut.
+5. **What stands:** on coloured digits, a classifier trained so its push points the right way beat every
+   control (88.8% against 73.8%, 63.1% and 47.0%), because a model that had seen each combination
+   supplied the right direction. The open question for any restart is where that direction comes from
+   when no model has seen the combination.
 
 ## For you to decide
 
-Answer with `python3 scripts/progress_board.py answer <number> "<your answer>"`, or in this session.
-
 | # | The question | Recommended |
 |---|---|---|
-| 114 | The block counter came in short | **report on the eye calls**; retraining cannot fix overlap it never saw |
-| 116 | One checker that reads the picture itself, for Paper 1's method row | **yes**, about 1 RunPod GPU-hour, bar unchanged, judged by eye |
-| 115 | Paper 2's box idea | **one deciding rerun**: this morning's clean-up pass with boxes against without, fresh seeds, 96 each, about 3 cluster GPU-hours |
-| 96 | Judge checkers on ranking instead of their yes-or-no call? | moot for the closed checker route |
-| 104 | Which model Paper 2 runs on | **held by you** until Paper 2 works on SDXL |
+| none | When and how to restart | start from the consensus's retry list: the cheapest fair retests need about 1 GPU-hour together |
+| 96, 104 | held earlier; moot after the shutdown | close when you restart |
 
 ## What the manager does for you
 
