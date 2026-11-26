@@ -1,0 +1,23 @@
+# Prompts outside the identity dial's purpose, for its closeness term (paper2_identity_dial.py closeness-cache
+# --closeness-prompts). The dial's purpose is two animals of a look-alike pair in one picture; these are one animal
+# alone, and two animals of different taxonomic orders (unlike pairs). None is a pair named in the species judge
+# plan's pair table or the pooled LoRA dial's pair file, and every line passes scripts/shared/disallowed_subjects.py
+# (tests/test_paper2_identity_dial.py checks both).
+# Single animals
+a cat
+a dog
+a horse
+an owl
+a goldfish
+a rabbit
+a parrot
+a sheep
+# Unlike pairs
+a horse and a parrot
+a rabbit and a goldfish
+a camel and a toucan
+a panda and a pelican
+a koala and a swan
+a moose and an ostrich
+a hedgehog and a walrus
+a raccoon and a peacock

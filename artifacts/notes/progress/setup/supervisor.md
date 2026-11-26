@@ -1,0 +1,229 @@
+# 🧭 Setup supervisor: the two papers' setup code, reviewed task by task
+
+Loop 18 reviews the setup code that Loop 16 writes for Paper 1 (`2-classifier-guidance/scripts/paper1/`, from
+[Paper 1's setup plan](../../../../plans/paper-1-clevr-touching/plans/01-setup.md)) and Loop 17 writes for Paper 2
+(`2-classifier-guidance/scripts/paper2/`, from [Paper 2's setup plan](../../../../plans/paper-2-dials/plans/01-setup.md)).
+Each task is read, compiled with `python3 -m py_compile`, its laptop check is run again here, and its settings are
+compared with the first-result plan it serves ([Paper 1's first result](../../../../plans/paper-1-clevr-touching/plans/02-first-result.md),
+[Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
+on the cluster; nothing is committed until the owner says so.
+
+Last updated: 2026-11-26 16:06 SAST.
+
+**The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
+
+- Paper 1 ([its tracker](../../../../plans/paper-1-clevr-touching/tracker.md)): Setup: 9 of 14 done; first result: not started (35 to do); the yes/no read: not started (19 to do); confirm: not started (28 to do); for the paper: not started (21 to do)
+- Paper 2 ([its tracker](../../../../plans/paper-2-dials/tracker.md)): Setup: 4 of 9 done; first result: not started (40 to do); the yes/no read: not started (20 to do); confirm: not started (33 to do); for the paper: not started (54 to do)
+
+**Ready to allocate the node.** Board question 122 is answered: you allocate mscluster110 once Paper 1's push is accepted, and it was accepted at 13:46. Paper 1's sampler port, region sampler, head, push, sheets, joint renderer and packing are accepted, and the empty-scene model is found. Paper 1's first-result plan asks for its bars (setup task 7, in review next) to be committed before its step 2. Paper 2's judges need their weights fetched first (Paper 2 setup task 6, at your launch).
+
+## Where each loop stands
+
+| Loop | Writes | Tasks accepted | Now on |
+|---|---|---:|---|
+| 🧪 Loop 16, Paper 1 setup code | the sampler port, region sampler, head, push, blind sheets, renderer joint mode, first-result bars | 8 of 8 | **stopped** 14:09; [its hand-off](paper-1-handoff.md) holds each task, every choice, what is still open and the commands for your launch |
+| 🔬 Loop 17, Paper 2 setup code | the seven rules and four crop judges, the identity dial trainer, the blind-sheet builder | 4 of 4 | **stopped** 14:01; [its hand-off](paper-2-handoff.md) holds each task, every choice, what is still open and the commands for your launch |
+
+## Each task and its review
+
+### Paper 1 (Loop 16)
+
+| Task | What it writes | Review | Fixes asked |
+|---|---|---|---|
+| 0 | the plan checked (`/verify-plan`, `/xref-pillar`) | **accepted** 13:24. Report-only, as for Paper 2; 8 plan findings and 3 links listed under "Waiting on you" | none |
+| 1 | the 32-step Heun sampler moved out of `m10_compose.py` with paths from arguments, and the three job scripts with their guards | **accepted** 13:29, after two fixes. Read against `m10_compose.py`: noise levels, the Heun loop, the plain sum, per-seed noise, the 0.1 foreground rule, paste and the 1-pixel apart rule all match. Compiles; the three job scripts pass `bash -n` and each carries the disk guard on its run folder, `co3` or `co3_bw` by node, the `nvidia-smi` guard and the copy to `outputs/paper1/<run>/`. Exclude list matches the node table plus mscluster79 and 87. EDM2, Blender and CLEVR generator paths match the environment page | 1. `split` merged every seed set into one sorted list per count, so tuning seeds (10,000s) sorted ahead of evaluation seeds (20,000s) and "the first 32 touching evaluation seeds" would have picked tuning seeds: each set now keeps its own lists under a required `--set`. 2. the docstring held the string `/workspace`, so the plan's grep check was not empty: reworded. Both rechecked |
+| 2 | the region sampler (each expert only inside its own dilated mask) and its all-ones identity flag | **accepted** 13:30. Masks are the 0.1 rule dilated by 1 pixel, from the lone sample at the same seed and count; the formula runs at both evaluations of every step from the same per-seed noise; where the masks overlap it adds both experts; `--identity` sets both masks to ones and compares with the plain sum to 1e-5 on the 0-to-1 scale, exiting 1 on a fail; the 64 touching check seeds at 4 objects come from the check set's own split. Compiles | none. The formula is written as M_red D_red + M_blue D_blue + (1 − M_red − M_blue) D_empty, the same sum as the plan's; checked here in float32 on 100,000 values, with both masks at 1 it is bit-identical to the plain sum, while the plan's written order drifts by up to 3.8e-6 per evaluation |
+| 3 | the head on the frozen experts' features, its training loop and its held-out check | **accepted** 13:44, with your session's guardrails. The full plan's settings unchanged (two 3 by 3 blocks of 256 channels scaled and shifted from log σ and the count, σ log-uniform 0.28 to 10.5, 64 and 64 with replacement, AdamW 2e-4 and 0.01, 4,000 updates). Added: the overfitting gauge every 250 updates; whole-pixel shifts up to 4 on both classes, no mirror; the logit bounded at 4; negatives reweighted to the positives' touching share per count; an alignment loss, off by default; raw-pixel and feature probes per band at the block choice; held-out accuracy split into touching-only and apart-only pairs. The block choice reads no held-out scene: 4-fold cross-validation inside the 64. Tests run here with a CPU torch: 11 passed | first fix: the block choice and the check read the same held-out scenes (fixed by a 224 split, later replaced by the 4-fold rule above) |
+| 4 | the push and the random push of matched length | **accepted** 13:46, after the guardrail fixes. As delivered: D' = D + w·σ²·∇ logit through both frozen experts each told its own count, on top of the region sampler; w = 0 adds exactly zero; the random push draws from the seed's own generator; the old window constants gone; contact kept counts a purple blend as neither colour; tests cover the 25 pushed evaluations and the bit-for-bit identity. Compiles. The default window's steps 15 to 22 sit at σ 2.902 to 0.283, checked here on the sampler's formula. Tests run here with a CPU torch: 15 passed | 1. the window an argument, default steps 15 to 22 (σ 2.90 to 0.28), 10 to 22 also drawn at tuning at w = 1 and 2. 2. the random push shaped by the real push's per-pixel size before its length is matched. 3. per σ band: push length, sign check, share of zero or non-finite gradient entries, band ratio, in-band and off-band change; then the weight grid w1 × 1, 2, 4, 8 from the in-band change. All done, with the overlap band's distance from pure red and blue on the region check and 8 seeds drawn twice; rechecked |
+| 5 | the blind-sheet builder at 4 times size and the settling of two reviewers with a third | **accepted** 13:49. Seeds chosen as the first result says (32 touching evaluation seeds per count; 96 apart, shortfall from 2 objects; 32 touching held-out scenes per count by the renderer's masks); pictures re-saved from their pixels at 4 times size under letter-only names drawn from a seed; the key beside the sheet folder, never in it; the rubric version required on the index; a check that searches every file name and file text for row names, seeds and source paths; settling that stops on any field left unresolved. A sixth row: the paste with the object lower in the frame (nearer the camera) on top. Tests: 5 on the laptop, 21 with a CPU torch | none. Folded into task 6: the tuning sheet takes exactly 32 touching tuning seeds, 11, 11 and 10 |
+| 6 | the renderer's joint mode (red and blue touching, never passing through) and the packing to 64 pixels | **accepted** 13:55. 218 lines added to `clevr_render.py`, none deleted, so the old modes are unchanged; same-colour objects keep the generator's rules, red against blue may touch but never overlap; the generator's own 200-pixel visibility check; seed bases below 8,000,000 refused; per-object masks from one flat-colour render per scene, stopping if the colours do not match the objects. Packing imports the experts' own squash, writes the head's 64 and the 448 held out with masks and touching flags, the depth-order count, and stops on any picture shared between the two. Tests: 10 on the laptop, 26 with a CPU torch. Not yet run on Blender: the first result's smoke render is its first real run | none. The tuning sheet's exactly 32 touching seeds (11, 11, 10) added |
+| 7 | the first result's bars and the reader that turns settled calls into yes, no or inconclusive | **accepted** 14:00. All 13 constants at the table's values, the 4 and 7 GPU-hour stops as two constants, the weight anchor kept in this one file; the reader settles the calls, pairs ours with the region sampler seed by seed, and applies the verdict file's rule in its order (no, then yes, then inconclusive), reproducing the plan's worked example (gain 15, p 0.002, yes). Also here: the direction check on the 64 training scenes with a shuffled control, exiting 4 on a fail so the aligned head trains next; the lower-on-top preference; tests proving the alignment loss trains the head. Tests: 15 on the laptop, 40 with a CPU torch | none. Whether too few right calls on the real scenes should turn a yes into inconclusive is your board question 123 |
+| 10 | the model-check script: lists both experts' snapshots against their recorded hashes and the empty-scene model against its recorded size and hash | **accepted** 14:00, written and not run; its box stays unticked until it runs on your launch. Exits 0 only when all three match. Tests: 3 passed | none |
+| after 7 | seven gaps found while writing the commands, reviewed as a group | **accepted** 14:09. Run folders may hold parts (`<run>/<part>`); a run's blind sheet is copied for pulling, with its key beside the sheet folder, never inside it, so reviewers are handed the sheet folder only; the renderer writes the joint and expert render settings side by side for the smoke check (diff now 227 lines added, none deleted); the pack's sheet at 4 times size with counts under each scene; the negatives' object sizes recorded beside the pack's; the weight choice from your tuning calls (most right among weights whose contact kept is within 0.10 of the region sampler's, ties to the smaller weight, exit 3 when none qualifies); the reader's strip built from the blind sheet's own pictures. The smoke render's seed base 8,090,000 is clear of the pool (8,000,000 to 8,014,999), the held-out base (8,100,000) and every earlier base. All 51 hand-off python commands parse. Tests: 41 with a CPU torch | none |
+
+### Paper 2 (Loop 17)
+
+| Task | What it writes | Review | Fixes asked |
+|---|---|---|---|
+| 1 | the plan checked (`/verify-plan`, `/xref-pillar`) | **accepted** 13:22. Both checks run in report mode, nothing applied, since the loop may edit only checkboxes in the plan; the findings are listed under "Waiting on you" | none |
+| 2 | the seven rules as one function, and the four crop judges with a stand-in model for laptop runs | **accepted** 13:33, after one fix. The seven rules follow the plan's order; the five worked examples return borrowed part, two of one kind, extra subject, extra subject, wrong species. The crop matches `species_judge.py` lines 72 to 82 with the plan's 10% margin. Every judge's grid, default, phrasings and model name match the judges table. 7 files compile; tests rerun here: 26 passed | 1. CLIP, ImageNet and Detect-and-Compare could score a one-body picture up to 0.5 two-clear: they now score 0 below two bodies, as the old judge does, with one test per judge. Rechecked |
+| 3 | the identity dial trainer: rank-4 adapter with a strength knob, random dial of matched norm, the one-step trainer with the reward as an argument and the closeness term on | **accepted** 13:45, after two fixes. Rank 4 on every attention projection, exact at strength 0; random dial scaled on its effective weight change; the rollout is CO3's own sampler with its corrector, not the plain product; closeness read on outside prompts; the dial on only from the training window's first step, in training and in the test rows; pairs from a file with the reward per pair; a closeness weight of 0 stops the run. Tests run here with a CPU torch: 22 dial tests and 26 judge tests pass | 1. the closeness check is pinned to step 2, so a step 1 with no reward gradient would stop a healthy run: check it at the first step after the dial has first moved. 2. on the kept-draws route a skipped two-body draw gives a reward of exactly 0 and trips the reward guard: skip the guard on skipped draws, with a test. Both fixed with three tests; rechecked. Reopened 13:55 against the reworded plan text: 3. the closeness term's frozen side computed once in a separate process on single-animal and unlike-pair prompts; 4. weighted pairs, each pair's reward logged to W&B; 5. the step-1 closeness check read as the first step after the dial moves, since the text's own item 2 says a new dial's drift is 0 at step 1 **Accepted again 14:00**: the frozen side now comes from a cache made with no dial attached in another process, the prompts are 8 single animals and 8 unlike pairs, pairs carry weights with each pair's reward on its own W&B key. Tests: 65 passed with a CPU torch |
+| 4 | the blind-sheet builder: one full-size picture per page under a neutral name | **accepted** 13:46. Shuffled by a seed, names drawn from the seed and never from the path, each picture re-saved from its pixels so no prompt or seed in a file's text travels, the key outside the sheet folder, and a check that searches every file and file name for source folders, file names, seeds, pair names and row names. Rebuilt here on 5 pictures: 23 strings searched, 0 found; each page shows only the asked species and its neutral name above the picture at 1024 by 1024. Tests: 31 passed | none |
+| 6 to 8 | job scripts, written and not run: fetch the weights, move the 192 pictures, check CO3 loads; and the vision-language environment's build and load check | **accepted** 13:55. Shared guards (disk, python by node, card that refuses only a missing or faulted device, CUDA probe, offline Hugging Face cache); the fetch adds the fp16-fix VAE CO3 loads beside SDXL; the CO3 load check stops if the fetch has not run; the environment builds on `/datasets` with its caches there and a CUDA 12.8 torch. `co3_common.py` hashes the same as the copy in the published-methods repository at the commit earlier CO3 runs used. All scripts pass `bash -n`; tests 57 passed with a CPU torch | none |
+
+## Decisions made for the owner
+
+Each is recorded here; one asked on the board is also answered there, and the owner may overrule it by answering again.
+
+| Asked by | Decision | Why |
+|---|---|---|
+| Loop 17, by message | CLIP, ImageNet and Detect-and-Compare score 0 two-clear for a picture with fewer than two bodies; the vision-language judge keeps its exactly-two rule | rule 4 cannot call such a picture two clear, and the old judge already scores it 0; raw scores stay in `calls.json`, so this can be reversed without rerunning a model |
+| Loop 17, by message | Detect-and-Compare keeps the plan's rule as written: it never calls mixed, so it cannot name hybrid, and with references of the asked species only it cannot name wrong species; both count as misses on those kinds | adding a rule now would be a rule made after seeing the dry run; the plan's row gives it no such call |
+| Loop 17, by message | The vision-language judge calls a body mixed when both species answers reach the yes threshold | the plain reading of "both at once"; the plan's row does not say |
+| Loop 17, by message | A body called a species counts as "plain" (rule 1) and "clear" (rule 5) whether or not it is flagged | rule 3 already treats a flagged body as still that species |
+| Loop 16, by message | The head's block choice tries the middle and last decoder block at each of the 8 by 8 and 16 by 16 levels, four heads of 1,000 updates | about the cost of one full training; the plan leaves the candidates open |
+| Loop 16, by message | The block choice reads region-sampler pictures at the tuning seeds, drawn inside the head's training job; the weight-tuning step reuses them | the choice must happen on tuning seeds before training, and no earlier step draws them |
+| Loop 16, by message | Packing the 512 joint renders to 64 pixels goes in its own file, `paper1_pack.py`, using the renderer's own Lanczos squash from `clevr_data.py` and exiting on any picture shared between the head's 64 and the 448 held out | the setup plan lists no file for it; the first result's step 7 needs it |
+| Loop 16, by message | The job scripts run as plain `bash` on the held node, logging to `/datasets/.../paper1/logs/`, and refuse a card only when it is missing, faulted, or has less free memory than the job needs (12,000 MiB sampling, 16,000 MiB training) | so Paper 1 and Paper 2 can share the one card |
+| you, board question 120 | If `co3` cannot load Qwen3-VL-8B, the vision-language judge gets its own environment on `/datasets`. Loop 17 writes its build script and load check now, both unrun; the build runs with the weight fetch at your launch | your answer. Since the node is Blackwell, the environment carries a CUDA 12.8 build of torch, or the judge would run on the CPU with no error |
+| your session, relayed at 13:39 | Paper 1 adopts the guardrails of `artifacts/notes/guarding-the-first-results/paper-1.md`: 13 additions across the head, the push, the sheets and the checks, including the push window moving to steps 15 to 22 and shift augmentation, both of which change settings the first-result plan kept from the full plan | your decision; another agent updates the plan text, and the loops tick boxes only |
+| Loop 16, by message | The push acts on the evaluations that belong to the window's steps: the first evaluation of every window step and the correction of every step but the last, so every pushed σ lies inside the window | "on sampler steps 10 to 22" names steps; a rule by σ alone would also push the previous step's correction |
+| Loop 16, by message | `FIRST_PUSH_MIN_GREY` (1 grey level) is read against the median over pictures of each picture's mean change over all pixels, the stricter of two readings; the change inside the overlap band prints beside it | a stop only hands the call to you, and the in-band number shows whether a push that acts only near the contact is working |
+| your session, relayed at 13:40 | Three more prints from the guard note, print only: the overlap band's grey-level distance from pure red and pure blue on the region check; the head's held-out accuracy on touching-only and apart-only pairs; 8 seeds of ours drawn twice, with the largest difference between the two draws | your decision; none of them chooses anything |
+| Loop 16, by message | The block choice trains 250 updates per fold (4 candidates × 4 folds × 250 = 4,000, the cost of one full training) | 1,000 per fold would quadruple the choice's cost and press on the 4 GPU-hour stop; raising it is yours to decide |
+| Loop 17, by message | The dial's up-projection starts at zero, so the untrained dial is exactly the frozen model; the closeness term is checked at the first step after the dial has moved | a closeness term is exactly 0 until the dial moves; a small random start would make the untrained dial a tiny random dial |
+| Loop 17, by message | The random dial is scaled on its effective weight change, the square root of the summed squared norms of each layer's up × down | the two factors alone are not unique |
+| Loop 17, by message | The dial trains at learning rate 1e-4 (an argument), the VAE decodes in fp32, the dial is on in the rollout from its first step, and the closeness prediction uses CO3's empty-prompt row as its unconditional | the plans are silent; the earlier trainer's 1e-5 fine-tuned an adapter already trained |
+| Loop 16, by message | The push's weight grid is set in code before tuning: the smoke tries w from 0.25 to 16, w1 is the weight whose in-band change is nearest 5 grey levels, and the grid is w1 × 1, 2, 4, 8 | the guard note sets the grid from the in-band change; the rule is fixed before any tuning picture exists |
+| your session, 13:48 | `co3_common.py` is restored at `2-classifier-guidance/scripts/method_search/co3_common.py` from the teaching scene's `co3_common.py.copy` (byte-identical, checked here); it was never in git and neither checkout had it. It goes in the suggested commit. Whether it matches what earlier CO3 runs used is unproven until Paper 2's CO3 load check (setup task 8) | CO3's row, the dial trainer and the load check all import it; Loop 17 adds a laptop test that it defines every name they import, and a real import test that runs on the node |
+| Loop 16, by message | Blind-sheet names are 8 letters with no digits, one call template per reviewer, and settling stops when any field is unresolved | no digit can carry a seed or index, and the reader cannot run on a half-settled sheet |
+| you, relayed 13:55 | Paper 2's first-result stop line is 24 GPU-hours | your answer |
+| you, relayed 13:55 | Paper 2's setup task 3 now carries the five trainer requirements in its text; its tick stays, and the code is reviewed against that text | your answer |
+| you, relayed 13:55 | In Paper 1's first result, a failed direction check trains the head again with the alignment loss on and reads the check again, under a 7 GPU-hour stop; a second miss stops for you. The alignment loss is therefore working, tested code, at weight 1 when on (the full plan's aligned variant) | your answer; the weight is the full plan's |
+| you, board question 122 | The Blackwell node mscluster110 is allocated by you once Paper 1's push (setup task 4) is accepted, which it is since 13:46; nothing runs until you do | your answer |
+| Loop 17, by message | Paper 2's CO3 load check builds CO3 on the card, not the CPU, because CO3 turns on a memory-efficient attention that needs a card; it needs 12,000 MiB free, the vision-language check 20,000 | the plan said a CPU node; on the held node it costs nothing extra |
+| Loop 17, by message | The weight fetch adds a fifth model, the fp16-fix VAE CO3 loads beside SDXL | without it the offline CO3 load fails |
+| Loop 18 | Paper 2's step-1 closeness check is read as the first step after the dial first moves | the reworded text's item 4 says step 1, its item 2 says a new dial's drift is 0 at step 1; read literally, every run would stop. Worth fixing in the plan text |
+| your session, relayed 13:57 | Loop 18 runs `scripts/paper_tracker.py --all` after each accept or reopen and puts its two status lines at the top of this page | the script writes only the trackers and their diagrams, never a plan file (read here before running it) |
+| Loop 18, at your request, 16:05 (board 118) | Paper 2's three blind reviewers are fresh Claude sessions | no person is named, and your own blind call of 60 pictures already ties the labels to a person |
+| Loop 18, at your request, 16:05 (board 119) | The 192 pictures reach `/datasets` by `rsync` through mscluster84 in the push direction, with Loop 17's upload script, at your launch; the route is then recorded in the storage page | the one route proposed; the script checks the remote disk and opens every picture after copying |
+| Loop 18, at your request, 16:05 (board 123) | In Paper 1's first result, fewer than 82 of the 96 real touching scenes called right makes the answer inconclusive (could not measure it: the rubric at 64 pixels), whatever the gain; read before the rule | every right call on a touching seed needs occlusion read correctly, and the full plan reads this instrument row before any result row; Loop 16 adds it to the reader, your session adds the clause to the verdict file |
+| Loop 18, at your request, 16:05 | Plan-text edits: apply the cross-links, the missing Next and Needs lines, task 8's "Needs: task 6", the error-pattern close out, the reworded Paper 2 task 3 item 4, the verdict-file clause and both paper folders in the master plan's running order; waive the template-only parts (sub-task numbering, empty catalog parts, the Outcome column, fenced commands, review files for setup plans) | sent to your session, which edits plan text |
+| Loop 18, at your request, 16:05 | Allocate mscluster110 now | its condition (Paper 1's push accepted) is met; the runbook has no `salloc` recipe, so the command is yours or your session's |
+| Loop 18, at your request, 16:05 | The setup commit holds the setup code, tests, the two `01-setup.md` files and these notes only; the plan folders' other files go in their own commit | they were written by other sessions and are not reviewed here |
+| Loop 18, confirmed by your session | The head's block choice reads only the 64 training scenes against the region sampler's tuning-seed pictures, scored by 4-fold cross-validation inside the 64 (train on 48, read on 16); no held-out scene is read. This replaces the earlier split, where the choice read 224 of the 448 held-out scenes | the note's rule is that held-out scenes may inform, never choose, since choosing from them quietly turns k = 64 into more; cross-validation keeps the choice from being judged on scenes it trained on |
+| relayed by the owner's interactive session | Both first results run as two processes on one held Blackwell node (co3_bw), not through `sbatch`; job scripts run as plain `bash`, keep their guards, and refuse only a missing or faulted card, so the two papers can share it; logs go to `/datasets/.../logs/` | stated there as your decision; the loops were told at 13:32 |
+| Loop 17, by message | A plan check whose fixes the loop may not apply counts as done once its findings are reported; the fixes wait for the owner | the loops' rules forbid editing plan text, and none of the findings changes a setting the code must follow |
+| Loop 16, by message | The CPU render job keeps a GPU guard that refuses only a missing or faulted card, never a busy one | every first-result job runs on `bigbatch`, where every node has a card; the guard costs nothing there and keeps the rule that every job script has one |
+| Loop 16, by message | The head takes the full plan's training rows (noise σ log-uniform 0.28 to 10.5, positives with replacement, negatives, equal-weight logistic loss, batch 128 as 64 and 64, AdamW at 2e-4 with weight decay 0.01, 4,000 updates, with augmentation as your session's guardrails now set it: whole-pixel shifts only); the from-scratch network's layer rows belong to the ablation only | the full plan's table describes the ablation's layers and the shared training; the head's layers are in the paragraph above it |
+| Loop 16, by message | The push acts on a Heun evaluation only when its σ is one of steps 10 to 22's: both evaluations of steps 10 to 21 and the first of step 22. The random push uses the same evaluations | checked here: step 10 sits at σ 10.52, step 22 at 0.283, and step 22's second evaluation at 0.189, outside the plan's 10.5 to 0.28. The colour-expert run's code pushed both evaluations; the hand-off records the difference |
+| Loop 16, by message | Contact kept and the gradient-map sheet, which no setup task named but the first result's steps 10, 11 and 13 need, are written in the push task | the first result needs both and no other task writes them |
+| Loop 16, by message | The settling of two reviewers' calls with a third lives in the sheet builder; the bars file's reader imports it | one copy of the rule |
+| Loop 16, by message | The empty-scene model is a path constant and the default for `--empty-net`; the sampler still stops with a message if the file is missing, and the model check compares its sha256 with the recorded one | board question 121 found it at `loop-6/m7/full/models/empty/`, 248,538,254 bytes, sha256 `5e7905ef…fb272`, recorded in the CLEVR and EDM2 environment page |
+| Loop 16, by message | Pictures are saved as `<run>/count-<k>/<seed>.png`, one job may chain several commands, each command must name its run | file layout, reversible |
+| Loop 17, by message | The job script for Paper 2's CO3 load check (task 8) checks that the SDXL weights from the fetch (task 6) are present and stops with a clear message if not | the plan lacks the pointer saying task 8 needs task 6; the check in code makes the order safe without editing the plan |
+
+## Waiting on you
+
+**Allocating mscluster110.** Decided yes; its condition is met. Starting it is a cluster action, and the runbook has no `salloc` recipe, so you or your session run it. Nothing else here waits on you: the board questions this setup raised are answered, the plan edits are with your session, and the setup commit is made (below).
+
+**Plan edits found by Paper 2's plan checks, decided and sent to your session.** None changes what the code does.
+
+| Plan | Finding | Decision |
+|---|---|---|
+| Paper 2 setup | tasks 2, 3, 4, 6, 7 and 8 are single unnumbered checkboxes, where the plan template numbers sub-tasks 2.1, 3.1 | waived: a single checkbox needs no number |
+| Paper 2 setup | the Error Matrix lacks its "From global catalog" and "From project catalog" parts; the Figure Catalog lacks "Organization workflow" | waived: empty parts add nothing to a setup plan |
+| Paper 2 setup | the close out has `/sync-plan-tree` but no `/ingest-error-pattern` | apply, for a failed fetch or load check |
+| Paper 2 setup | the pasteable commands in 1.1, 1.2 and the close out are inline code, not fenced blocks | waived |
+| Paper 2 setup | task 8 (CO3 load check) reads the weights task 6 fetches but has no "Needs: task 6" pointer | apply; the job script checks it anyway |
+| Paper 2 setup | three exact cross-links: "disk guard" (line 100) to the disk-guard rule in `environment/storage.md`; "the node table's exclude list" (line 365) to `environment/hpc/nodes.md`; `scripts/cluster.sh run "sbatch ..."` (line 183) to the launch-and-harvest recipe in `runbook/running-things-on-the-cluster/` | apply |
+| Paper 2 setup | task 3's item 4 checks the closeness term at step 1, which its own item 2 says is always 0 for a new adapter | apply: reword to the first step after the dial first moves |
+| Paper 2 setup | no paired review file | waived: a setup plan has no verdict |
+
+**Plan edits found by Paper 1's plan checks, decided and sent to your session.** None changes what the code does.
+
+| Plan | Finding | Decision |
+|---|---|---|
+| Paper 1 setup | task groups use bare checkboxes, not 1.1, 2.1 | waived |
+| Paper 1 setup | groups 1 to 6 and the close out lack their "Next" and "Needs" lines; instruction 11 lacks "Next" | apply |
+| Paper 1 setup | the Error Matrix lacks its global and project catalog parts and an entry count; Outputs lacks its Pending, Generated and Organization parts; the Orchestration table has no Outcome column | waived |
+| Paper 1 setup | instruction 9.2 (how RunPod is reached) names no environment page and has no Outputs row | apply as answered: the empty-scene model was found on `/datasets`, so RunPod is not needed |
+| Paper 1 setup | no paired review file | waived: a setup plan has no verdict |
+| root `MASTER_PLAN.md` | never mentions either paper's plan folder | apply: name both in the running order |
+| Paper 1 setup | three cross-links: "the colour-expert run" (line 47) to the colour experts' model files in `environment/clevr-and-edm2.md`; "W&B project" (line 228) to the access paths in `environment/storage.md`; "Pull it" (line 331) to the harvest recipe in `runbook/running-things-on-the-cluster/` | apply |
+| Paper 1 verdict file | no clause for too few real scenes called right | apply: board question 123's answer |
+
+**Plan files changed by your session while the loops worked.** The watcher saw Paper 1's `README.md`, `plans/02-first-result.md`, `plans/03-full-plan.md`, `guide/phase-1-check-and-reuse.md` and `guide/figures/00-stages.*` change at 13:33 to 13:34. Loop 16 confirmed it wrote none of them. The first result's ten bars were unchanged, so no review needed redoing. Paper 2's `plans/02-species-judge.md` changed at 13:37; its seven rules, 10% margin and judges-table grids are unchanged, so the accepted judges stand. Paper 2's `plans/03-identity-dial-first-result.md` changed at 13:40: its GPU-hour stop rose from 16 to 24, and it gains `FIRST_REDRAW_KIND_CHANGES_MAX = 2`, the bar on how many pictures change kind when CO3 is simply redrawn. No setup code holds these (Paper 2's bars file is written in its first result's step 1), so no review changed. Later edits added the guardrails' text and both papers' trackers.
+
+**A picture to know about before the reviewers call it.** Of Paper 2's joint-prompt pictures, `95b7a187cfa1.png` (asked a boar and a pheasant) is two scenes stacked with a white line between them. Loop 17 found it on the dry run.
+
+## Final review
+
+Run 14:09, after both loops stopped, on the laptop. Nothing ran on the cluster.
+
+**Every file compiles.** 29 python files (both papers' scripts, `clevr_render.py`, `co3_common.py` and the ten test files) pass `python3 -m py_compile`; the three Paper 1 job scripts and the eight Paper 2 shell scripts pass `bash -n`.
+
+**Every laptop test passes.** Rerun at 16:06, after the reader's instrument check for board question 123 was added. The laptop's own python: 55 passed, 4 skipped (the skips need torch). A CPU torch outside the repo (`~/.claude/jobs/fd51e819/tmp/torchcpu`): 107 passed, 1 skipped (the real import of CO3, which needs `stanza` and CO3's `composers` package, present only on the cluster).
+
+**Each first-result setting, found in the code.** Line numbers are as of 14:09.
+
+| Setting | File | Line | Found |
+|---|---|---:|:---:|
+| Paper 1: EDM2's 32-step Heun sampler, σ 80 to 0.002, ρ 7 | `paper1/paper1_sample.py` | 73 | yes |
+| Paper 1: object mask, more than 0.1 from the mean empty scene | `paper1/paper1_sample.py` | 74 | yes |
+| Paper 1: mask dilated by 1 pixel | `paper1/paper1_sample.py` | 368 | yes |
+| Paper 1: mean empty scene over 1,024 empty-scene samples | `paper1/paper1_sample.py` | 75 | yes |
+| Paper 1: region sampler, each expert inside its own mask, both where they overlap | `paper1/paper1_sample.py` | 380 | yes |
+| Paper 1: push window, steps 15 to 22 (σ 2.90 to 0.28), 10 to 22 as the second setting | `paper1/paper1_sample.py` | 79 | yes |
+| Paper 1: push D' = D + w σ² ∇ logit | `paper1/paper1_sample.py` | 561 | yes |
+| Paper 1: random push shaped like the real push and matched in length | `paper1/paper1_sample.py` | 566 | yes |
+| Paper 1: the empty-scene model's path | `paper1/paper1_sample.py` | 67 | yes |
+| Paper 1: large outputs under `/datasets/mmolefe/poe_repair_min/paper1/` | `paper1/paper1_sample.py` | 62 | yes |
+| Paper 1: head training noise σ log-uniform 0.28 to 10.5 | `paper1/paper1_disc.py` | 69 | yes |
+| Paper 1: batch 64 real and 64 drawn | `paper1/paper1_disc.py` | 70 | yes |
+| Paper 1: AdamW, learning rate 2e-4, weight decay 0.01 | `paper1/paper1_disc.py` | 71 | yes |
+| Paper 1: 4,000 updates | `paper1/paper1_disc.py` | 72 | yes |
+| Paper 1: head width 256 | `paper1/paper1_disc.py` | 73 | yes |
+| Paper 1: whole-pixel shifts up to 4, no mirror | `paper1/paper1_disc.py` | 79 | yes |
+| Paper 1: bounded logit | `paper1/paper1_disc.py` | 80 | yes |
+| Paper 1: alignment loss at weight 1 when switched on | `paper1/paper1_disc.py` | 83 | yes |
+| Paper 1: the four σ bands | `paper1/paper1_disc.py` | 90 | yes |
+| Paper 1: block choice by 4-fold cross-validation inside the 64 training scenes | `paper1/paper1_disc.py` | 95 | yes |
+| Paper 1: W&B project `prime_lab/poe-repair-animals-compose` | `paper1/paper1_disc.py` | 76 | yes |
+| Paper 1: gain of at least 15 seeds for a yes | `paper1/paper1_first_bars.py` | 39 | yes |
+| Paper 1: one-sided p below 0.05 | `paper1/paper1_first_bars.py` | 40 | yes |
+| Paper 1: fewer than 82 of 96 real scenes right makes the answer inconclusive, read before the rule (board question 123) | `paper1/paper1_first_bars.py` | 75 | yes |
+| Paper 1: direction check, median cosine 0.10 | `paper1/paper1_first_bars.py` | 45 | yes |
+| Paper 1: stop at 4 GPU-hours, 7 once the aligned head runs | `paper1/paper1_first_bars.py` | 49 and 50 | yes |
+| Paper 1: 32 touching seeds per count on the blind sheet | `paper1/paper1_sheets.py` | 46 | yes |
+| Paper 1: the experts' own Lanczos squash to 64 pixels | `paper1/paper1_pack.py` | 35 | yes |
+| Paper 1: render seed bases below 8,000,000 refused | `method_search/clevr_render.py` | 376 | yes |
+| Paper 1: seeds: evaluation 20,000 to 20,255, tuning 10,000 to 10,255, check 30,000 to 30,127 | [Paper 1's hand-off](paper-1-handoff.md), the commands | 166 | yes, as arguments |
+| Paper 1: negatives 200,000 to 201,023, held-out negatives 202,048 to 202,303 | [Paper 1's hand-off](paper-1-handoff.md), the commands | 214 | yes, as arguments |
+| Paper 1: 512 joint renders at base 8,000,000, the head on the first 64 | [Paper 1's hand-off](paper-1-handoff.md), the commands | 205 and 206 | yes, as arguments |
+| Paper 2: rank-4 adapter on the attention layers | `paper2/paper2_identity_dial.py` | 98 | yes |
+| Paper 2: strength 0 gives the frozen output exactly | `paper2/paper2_identity_dial.py` | 125 | yes |
+| Paper 2: rollout through CO3's own sampler, not the plain product | `paper2/paper2_identity_dial.py` | 22 | yes |
+| Paper 2: the dial on only from the training window's first step | `paper2/paper2_identity_dial.py` | 26 | yes |
+| Paper 2: closeness term always on, frozen side cached in a separate process | `paper2/paper2_identity_dial.py` | 726 and 40 | yes |
+| Paper 2: each pair's reward logged to W&B | `paper2/paper2_identity_dial.py` | 52 | yes |
+| Paper 2: checkpoint steps as an argument (500 and 1,000 in the commands) | `paper2/paper2_identity_dial.py` | 1000 | yes |
+| Paper 2: the seven rules in the species judge plan's order | `paper2/paper2_kinds.py` | 59 | yes |
+| Paper 2: crop with a 10% margin, other bodies painted out | `paper2/paper2_common.py` | 51 | yes |
+| Paper 2: judge grids (CLIP margin 0.05 to 0.30; Detect-and-Compare gap 0.1 to 0.3; vision-language threshold 0.3 to 0.7) | `paper2_judge_clip.py`, `paper2_judge_dac.py`, `paper2_judge_vlm.py` | 29, 37, 31 | yes |
+| Paper 2: blind pages at 1,024 by 1,024 | `paper2/paper2_sheets.py` | 8 | yes |
+| Paper 2: large outputs under `/datasets/mmolefe/poe_repair_min/paper2/` | `paper2/paper2_common.py` | 48 | yes |
+| Paper 2: seeds: training 11,001 to 11,064, test 13,001 to 13,003 | [Paper 2's hand-off](paper-2-handoff.md), the commands | 399 and 402 | yes, as arguments |
+| Paper 2: tuning seeds 12,001 to 12,008 for picking the checkpoint (first result step 5) | [Paper 2's hand-off](paper-2-handoff.md) | none | **no** |
+| Paper 2: the first result's bars (two-clear lead 0.20, stop at 24 GPU-hours, and the rest) | none: the bars file is the first result's own step 1 | none | not a setup task |
+
+**What the review leaves open.**
+
+1. **Paper 2's checkpoint pick has no command.** The first result's step 5 draws 32 tuning pictures per checkpoint on seeds 12,001 to 12,008, has the kept judge call them, and writes `pick.json` with the runner-up judge's share and the gaming gap. No script or hand-off line does this yet; it is owed before step 5, beside the species judge plan's own scripts that [Paper 2's hand-off](paper-2-handoff.md) lists as not written here.
+2. **Paper 1's seed check has no script.** The first result's step 1 lists every seed range beside the full plan's and earlier jobs'; [Paper 1's hand-off](paper-1-handoff.md) lists it as open.
+3. **No real model has met this code.** Every GPU path is written against stand-ins. The first runs on the node are the first real test: the joint renderer's masks in Blender at Paper 1's smoke render, and CO3, the four judges and the vision-language environment at Paper 2's launch.
+4. **Paper 2's closeness cache uses seeds 21,001 to 21,005.** No plan assigns them. They overlap the full ladder's first-rung test seeds (20,000 to 21,023), but that rung runs on a different model, so nothing leaks into an SDXL set.
+
+## Suggested commit
+
+Nothing is committed. Everything below is untracked except `clevr_render.py`, which is modified. Compiled files are ignored by `.gitignore`.
+
+| What | Paths |
+|---|---|
+| Paper 1's code | `2-classifier-guidance/scripts/paper1/` (10 files: `paper1_sample.py`, `paper1_disc.py`, `paper1_sheets.py`, `paper1_first_bars.py`, `paper1_pack.py`, `paper1_model_check.py`, the three job scripts, `bigbatch-exclude.txt`) and `2-classifier-guidance/scripts/method_search/clevr_render.py` (the joint mode, 227 lines added) |
+| Paper 2's code | `2-classifier-guidance/scripts/paper2/` (19 files) |
+| CO3's loader | `2-classifier-guidance/scripts/method_search/co3_common.py`, restored, never committed before |
+| Tests | `tests/test_paper1_*.py` (6 files), `tests/test_paper2_*.py` (4 files) |
+| Plans, ticks only | `plans/paper-1-clevr-touching/plans/01-setup.md`, `plans/paper-2-dials/plans/01-setup.md` |
+| Notes | `artifacts/notes/progress/setup/` (the two hand-offs and this page) |
+
+One thing to decide first: no file in either paper's plan folder is tracked yet, so committing the two `01-setup.md` files tracks one file of each folder and leaves the rest untracked. The other sessions' edits to those folders (the first-result plans, review files, guides, trackers, and `scripts/paper_tracker.py`) belong in their own commit.
+
+```
+git add 2-classifier-guidance/scripts/paper1 2-classifier-guidance/scripts/paper2 \
+  2-classifier-guidance/scripts/method_search/clevr_render.py 2-classifier-guidance/scripts/method_search/co3_common.py \
+  tests/test_paper1_*.py tests/test_paper2_*.py \
+  plans/paper-1-clevr-touching/plans/01-setup.md plans/paper-2-dials/plans/01-setup.md \
+  artifacts/notes/progress/setup
+git commit -m "Paper 1 and Paper 2: setup code for both first results, reviewed task by task"
+```
