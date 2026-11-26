@@ -310,11 +310,11 @@ def test_closeness_prompts_are_single_animals_and_unlike_pairs_none_a_known_pair
     import re
     sys.path.insert(0, str(REPO / "scripts/shared"))
     from disallowed_subjects import is_allowed
+    import paper2_bars
     prompts = pid.read_prompts(PAPER2 / "paper2_closeness_prompts.txt")
-    plan = (REPO / "plans/paper-2-dials/plans/02-species-judge.md").read_text()
-    table = plan[plan.index("### The pairs"):plan.index("### The labelled check set")]
-    known = {frozenset(m) for row in table.splitlines() if row.startswith("| ")
-             for m in re.findall(r"(\w+) and (\w+)", row.split("|")[1])}
+    # The species judge plan's pairs as committed in paper2_bars.PAIRS (plans/ is not on the cluster; that PAIRS
+    # matches the plan's table is checked on the laptop by tests/test_paper2_bars.py), and the pooled dial's pairs.
+    known = {frozenset((a, b)) for a, b, _ in paper2_bars.PAIRS}
     pooled = json.loads((REPO / "artifacts/notes/progress/leakage/10-co-occurrence-dial/pairs.json").read_text())
     known |= {frozenset(re.findall(r"(?:an?) (\w+)", p)) for p in pooled["pairs"]}
     singles = [p for p in prompts if " and " not in p]

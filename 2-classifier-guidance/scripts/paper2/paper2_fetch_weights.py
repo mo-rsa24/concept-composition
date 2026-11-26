@@ -1,6 +1,7 @@
 """Fetch Paper 2's model weights into HF_HOME on /datasets, then check each loads its config offline.
 
-Setup plan task 6 (plans/paper-2-dials/plans/01-setup.md). Run only through paper2_fetch_weights.sh,
+Setup plan task 6 (plans/paper-2-dials/plans/01-setup.md), and with --set judges the species judge's step 0.14 (CLIP
+ViT-L/14 and the ImageNet classifier convnext_large.fb_in22k_ft_in1k, which timm loads from timm/<name> on the hub). Run only through paper2_fetch_weights.sh,
 which sets HF_HOME=/datasets/mmolefe/.cache/huggingface and the disk guard. Five repositories: the
 plan's four, plus madebyollin/sdxl-vae-fp16-fix, which CO3 loads beside SDXL
 (composition/debottam_co3/composers/Co3.py, line 69) and which an offline job could not fetch. CLIP
@@ -23,7 +24,7 @@ import time
 from pathlib import Path
 
 # (repository, what to fetch, the config file that must open offline)
-MODELS = [
+SETUP_MODELS = [
     ("stabilityai/stable-diffusion-xl-base-1.0",
      {"allow_patterns": ["model_index.json", "*/config.json", "scheduler/*", "tokenizer/*", "tokenizer_2/*",
                          "*fp16.safetensors"]},
@@ -36,6 +37,16 @@ MODELS = [
     ("IDEA-Research/grounding-dino-tiny", {"ignore_patterns": ["*.msgpack", "*.h5", "*.onnx", "*.ot", "*.gguf"]},
      "config.json"),
 ]
+# Species judge step 0.14: the two judges' models the setup fetch leaves out. timm loads its ImageNet classifier
+# from the hub repository timm/<name>, into the same HF_HOME. Each repository holds its weights twice, as
+# model.safetensors and pytorch_model.bin (1.71 GB each for CLIP, 0.79 GB each for the classifier, read from the hub on
+# 2026-11-26); transformers and timm both load the safetensors file when it is there, so the .bin copy is skipped.
+JUDGE_SKIP = ["*.bin", "*.msgpack", "*.h5", "*.onnx", "*.ot", "*.gguf"]
+JUDGE_MODELS = [
+    ("openai/clip-vit-large-patch14", {"ignore_patterns": JUDGE_SKIP}, "config.json"),
+    ("timm/convnext_large.fb_in22k_ft_in1k", {"ignore_patterns": JUDGE_SKIP}, "config.json"),
+]
+SETS = {"setup": SETUP_MODELS, "judges": JUDGE_MODELS}
 
 
 def repo_dir(hf_home: Path, repo: str) -> Path:
@@ -69,6 +80,13 @@ if {filename!r} == 'config.json' and {repo!r} != 'madebyollin/sdxl-vae-fp16-fix'
         msg += '; transformers loads it'
     except Exception as e:
         msg += '; transformers here cannot load it (' + type(e).__name__ + ')'
+if {repo!r}.startswith('timm/'):
+    try:
+        import timm
+        timm.create_model({repo!r}.split('/', 1)[1], pretrained=True)
+        msg += '; timm builds it offline'
+    except Exception as e:
+        msg += '; timm cannot build it offline (' + type(e).__name__ + ')'
 print(msg)
 """
     r = subprocess.run([sys.executable, "-c", code], capture_output=True, text=True,
@@ -81,6 +99,8 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--out", type=Path, required=True, help="sizes.txt")
     ap.add_argument("--check-only", action="store_true", help="fetch nothing; report the cache and the offline checks")
+    ap.add_argument("--set", choices=sorted(SETS), default="setup",
+                    help="setup: task 6's five repositories; judges: CLIP ViT-L/14 and the ImageNet classifier (step 0.14)")
     a = ap.parse_args(argv)
     hf_home = Path(os.environ["HF_HOME"])
     if not str(hf_home).startswith("/datasets/"):
@@ -93,7 +113,7 @@ def main(argv=None) -> int:
     header = f"{'repository':42s} {'cached before':>13s} {'size':>10s} {'seconds':>8s}  offline config"
     lines.append(header)
     ok_all = True
-    for repo, patterns, cfg in MODELS:
+    for repo, patterns, cfg in SETS[a.set]:
         d = repo_dir(hf_home, repo)
         before = (d / "snapshots").is_dir() and any((d / "snapshots").iterdir())
         t0 = time.time()
