@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated 2026-11-27 13:45 UTC
+Last updated 2026-11-27 14:20 UTC
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -233,6 +233,8 @@ Paper 2, 2026-11-27 13:05 UTC: the owner chose to train the identity dial on the
 Paper 2, 2026-11-27 13:35 UTC: the dial's first-result bars (paper2_first_result_bars.py, the plan's eight constants as written: two-clear lead at least 0.20, McNemar p at most 0.05, borrowed part must fall, random dial within 0.05, no-lead at most 0.05, gaming gap rise at most 0.10, at most 2 kind changes on redraw, stop at 24 GPU-hours) and --reward trained are committed. No bar names the judge's 216 of 240. Plan 03 assumes a passing judge in its tasks intro (line 335), in "What has to pass before this runs" (lines 507 to 514), in "What is not decided" item 1, and in its training-window rule (lines 83 to 84 and 251); the owner's decision of 13:05 UTC stands in for those lines, and the plan text is left for the owner. The supervisor's choices for the gaps: the window is the 10-step block where the trained head agrees most with its own finished-picture call (the plan's step 0.24 read, with whether any step reaches 0.75 recorded); the runner-up judge for the gaming gap is the vision-language judge (102 of 240, a different model family); the kept judge is the trained head; CO3 alone is drawn on the plan's pairs. Estimated cost 15.8 to 17.4 GPU-hours, under the plan's stop of 24.
 
 Paper 1, 2026-11-27 13:45 UTC: Method A on the squares toy at all 11,329 joint scenes, 20,000 updates: clean touching pairs 0.832 of 256 seeds, against 0.738 at 5,000 updates; WORKS. Both longer runs clear the bar (1,024 scenes 0.891, all 0.832). Picture grid: rung2c-method-a-longer.png in the toy's results folder.
+
+Paper 2, 2026-11-27 14:20 UTC: the dial's first run is fully built and committed (paper2_first_checks.py, paper2_first_read.py, draw-co3 and logging in paper2_identity_dial.py; 226 tests pass on a CPU copy of the environment, 31 torch-free tests pass on the laptop). Choices the builder made that stand: the training pairs are the 48 pool pairs plus the pooled adapter's eleven look-alike pairs plus new look-alike pairs, minus tuning and test (20 of the 48 pool pairs hold an object and stay because the plan names them); crocodile and alligator are left out by the subject guard; turtle and tortoise may train but are never shown; CO3's sampler now seeds each start noise as CO3's own row does, so the CO3, dial and random-dial pictures share corrector noise, and step 2's rollout check measures any change this makes. Commands: /home/molef/.claude/jobs/bb43a4bd/tmp/p2-dial-first-commands.sh, steps 2 to 6; about 17 to 18.5 GPU-hours with the added reads, under the stop of 24. It launches when mscluster84 answers.
 
 ## Final review
 
