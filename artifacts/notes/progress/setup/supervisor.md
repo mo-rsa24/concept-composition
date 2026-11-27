@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated 2026-11-27 21:15 UTC
+Last updated 2026-11-27 21:30 UTC
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -253,6 +253,8 @@ Paper 2, 2026-11-27 20:45 UTC: the dial run's step 2 on mscluster110 passed the 
 Paper 2, 2026-11-27 21:00 UTC: the rollout check's 1.73 grey levels came from the decode, not the 50 steps: the trainer decoded its finished pictures in fp32 with tiled blending while CO3 decodes the whole latent in fp16. Every finished picture now goes through CO3's own decode (commit 88ee3192; a CPU test shows the strength-0 rollout equals CO3's sample_loop bit for bit). The window read's reference pictures were made with the old decode, so for a consistent window the supervisor moved the window and the closeness cache aside (suffix old-decode-<time>, kept) and step 2 reruns from them on mscluster110; CO3's two draws and the failed rollout record are moved aside by the script itself.
 
 2026-11-27 21:15 UTC, toys. Paper 1 squares toy, matched budget (20,000 updates, run on the RTX 3090s inside our render jobs): Method D (A plus the three experts' inner decoder features, 8% more weights) gives 0.887 clean touching pairs from 1,024 joint scenes and 0.863 from all 11,329, against A's 0.891 and 0.832: WORKS, level with A, so the inner features add about nothing. Method B (the four-way ratio) gives 0.000 at every weight from 1 to 64 at both sizes, final and best heads: FAILS. With C's 0.000 at the same budget, the learned interaction term trained by denoising (A, or D) is the only method that works on the toy. Paper 2 miniature: the base trained 16,000 updates reads 0.919 exactly as asked on the fresh seeds 21,024 to 22,047 (1 object 1.000, 2 objects 0.957, 3 objects 0.872; total count right 0.978) against R1_BASE_COUNT_MIN 0.95: FAILS again. That was the one retry, so the miniature stops and its next step goes to the owner. The session host's handover test failed because the successor landed on mscluster171, which could not open its log on /datasets inside the job; host state and logs now live in /home-mscluster/mmolefe/claude-host, a failed successor is replaced, and the test reruns as job 97062.
+
+Paper 1, 2026-11-27 21:30 UTC: every toy method so far was sampled with the plain Heun sampler. The owner pointed at the inclusive-captions result: a Langevin corrector (20 steps per noise level, step 0.05 of the noise variance) took the product of experts to 300 of 300 whenever the experts had seen relabelled both-shapes pictures, and left it at 0 of 300 when they had not. A corrector rung is being added to the squares toy for every method (plain sum, A, D, C, B), on the saved models, run on bigbatch. Prediction, written before the run: the neural plain sum with the corrector stays below 0.2 (the experts never saw a joint scene, like the 0-relabelled row); A and D with the corrector rise above 0.891 and 0.887; B and C with the corrector stay below 0.2. B and C are recorded as failures with the plain sampler only. D works, level with A.
 
 ## Final review
 
