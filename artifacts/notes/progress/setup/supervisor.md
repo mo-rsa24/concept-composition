@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated: 2026-11-27 07:21 SAST.
+Last updated: 2026-11-27 07:26 SAST.
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -193,6 +193,8 @@ Nothing at the moment. Paper 1's tuning calls are with two fresh reviewers at yo
 **Paper 1, the push diagnosed further** (2026-11-27 07:21). Step 3, the head retrained with the direction-alignment loss: its push now points toward the real scene (cosine 0.44 at sigma 10.5 to 3.8 on training scenes, 0.34 held out, against -0.09 before) but at weight 1 it moves the picture about 1 grey level and the purple stays (0.984). Its weight ladder on all steps: weight 4 moves the overlap 8 grey levels, 16 moves it 16, 64 moves it 63, and purple stays 0.978 to 1.0 with red meeting blue on 18 to 42 of 626 touching seeds against 517 for the paste: a big enough push only darkens the overlap. Found while reading the training log: the head is trained only on noise from 0.28 to 10.5 (SIGMA_HI, chosen to cover the steps 10 to 22 window), so on the sampler's first ten or so steps (noise 80 down to 10.5), where the layout forms, it reads noise it never saw. Two runs now on mscluster110, one change each: the aligned head on 384 joint scenes instead of 64 (the 512 already rendered, 128 kept held out), and the aligned head on 64 scenes over the full noise range 0.28 to 80; each with the weight ladder and pixel checks.
 
 **Paper 2, the borrowed-part top-up called** (07:21). 320 CO3 renders on five pairs, called blind under version 4: 300 of 320 alike, 44 borrowed part called by both; a third reviewer settles 20 splits, then the set is rebuilt.
+
+**Paper 2, the labelled set split** (2026-11-27 07:26). After the borrowed-part top-up (batch 9, 320 renders on five pairs, 300 of 320 alike), the set split at draw 58 of seed 0: 11 choosing pairs, 19 test pairs, every kind at 40 read and 10 sealed confirmation pictures (wrong species 20 natural and 20 renamed; extra subject 8 on look-alike pairs, underpowered). 1,552 settled pictures over ten batches; agreement per kind 0.84 (wrong species) to 0.95; two clear against borrowed part 0.980. The owner's 60 (instruction 0.11) is built and copied to outputs/paper2/paper2-label-set/owner-sheet/ (check passed): the one step that is the owner's. The unselected sample is 61 of 100, with 28 more to call. paper2_score.py and the judge commands for steps 0.16 to 0.20 are with Loop 17.
 
 ## Final review
 

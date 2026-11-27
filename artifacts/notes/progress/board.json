@@ -5,7 +5,7 @@
   "Detour: zoom-ladder, about 430k tokens",
   "Detour: reading route and pictures, about 1.8M tokens",
   "Paper 1: push diagnosis; aligned head points right but only darkens the overlap; head never trained above noise 10.5; testing full noise range and 384 scenes",
-  "Paper 2: top-up called (44 borrowed part); rebuilding the labelled set"
+  "Paper 2: labelled set split (1,552 pictures); judges next; the owner's blind 60 is ready"
  ],
  "detours_join": "P2",
  "steps": [
