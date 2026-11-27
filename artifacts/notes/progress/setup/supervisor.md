@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated: 2026-11-27 06:11 SAST.
+Last updated: 2026-11-27 06:38 SAST.
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -187,6 +187,8 @@ Nothing at the moment. Paper 1's tuning calls are with two fresh reviewers at yo
 **Paper 1, the reframe withdrawn** (2026-11-27 05:50). The owner challenged reframing Paper 1 as a diagnosis paper, and the first result's own blind calls support the challenge: the purple share measures colour blending only, while the paper's measure is a right touching scene. The best rule-based row, paste with the lower object on top, was right on 44 of 96 touching seeds (blend 4, wrong object in front 33, red count 23, blue count 20), against 68 of 76 for real scenes. One owner per overlap removes the blend; it does not make the scene right. About 45 points stay open for a learned interaction, and only one learned method has been tested (a small head, steps 10 to 22, a capped push). Next: measure the new baseline blind (sheet paper1-baseline-sheet: region sampler with one owner per overlap, harmonised paste, lower-on-top paste, real scenes; 364 pictures, leak check 0 hits; eight reviewers calling), then pre-register learned interactions against it in order of expected payoff: a noise-aware head guiding from step 0, fine-tuning the experts on joint scenes with a small adapter, a learned overlap-owner and layout predictor. Paper 2's top-up renders run on mscluster112.
 
 **Paper 1, the no-training baseline judged blind** (2026-11-27 06:11). On the 96 touching seeds: paste with the lower object on top 43 right, harmonised paste 9, region sampler with one owner per overlap 1; real scenes 68 of 76. One owner per overlap removes the blend but the objects stop meeting (no contact on 83) and lose parts, so the purple share was the wrong yardstick. No training-free route beats the paste; the learned interaction is needed, against the paste's 43 of 96. Next: pre-register the product of experts plus a learned interaction term trained on the joint scenes. Filed under the contact-push result.
+
+**Paper 1, diagnosing the logit push one change at a time** (2026-11-27 06:38). The owner set the direction: keep the classifier route, find why it failed, fast, one change at a time, pixel checks before any blind calls; no adapter for Paper 1. Step 1, the same head at weight 1 pushing on all 32 steps: no change (purple share 0.982, 613 seeds mostly purple, against 0.986 and 623 unpushed; median change 1.7 grey levels, 5.0 in the overlap). Timing is not the cause. Removing the cap (step 2) could raise the push at most about 2.4 times and the tuning sheet already showed weights up to 16 pull the objects apart, so strength is not the cause either: the head points the wrong way where the layout forms (cosine with the denoising target -0.09 at high noise). Step 3 running on mscluster110: the head retrained with the direction-alignment loss at weight 1 (the first plan's aligned variant, never run), its direction check, then the push on all steps with pixel checks. The untracked draft plans/paper-1-clevr-touching/plans/05-a-learned-interaction-term.md came from a stopped agent and is not the direction; it awaits the owner.
 
 ## Final review
 
