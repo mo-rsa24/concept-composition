@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated 2026-11-27 13:05 UTC
+Last updated 2026-11-27 13:35 UTC
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -229,6 +229,8 @@ Paper 1, 2026-11-27 12:15 UTC: the squares toy's data curve and the two classifi
 Paper 1, 2026-11-27 13:00 UTC: Method A on the squares toy trained 20,000 updates in place of 5,000, one change, at 1,024 joint scenes: clean touching pairs 0.891 of 256 shared seeds, against 0.797 at 5,000 updates. That clears the bar set before rung 0 (at least 0.8 and at least 0.5 above the neural plain sum's 0.000): WORKS. Held-out denoising loss fell from 0.103 to about 0.092. The flat part of the data curve above about 1,000 scenes was the training budget, not the data. The run at all 11,329 scenes is training now (rung2c in results.json, files tagged -u20000).
 
 Paper 2, 2026-11-27 13:05 UTC: the owner chose to train the identity dial on the best judge we have, as a steering signal only, and to judge the dial's result only by blind calls against plan 03's bars, unchanged. The reward is the trained judge from the wider pool (paper2-judge-trained-seenpairs/head.pt, 121 of 240), chosen over the choosing-pool head (75 of 240) because it learned from 768 pictures against 369; its 121 is not a clean measure, which does not matter when the dial is read blind. A subagent is wiring --reward trained into paper2_identity_dial.py and writing the commands for plan 03's tasks 2 to 6; the launch waits on mscluster84, down since 11:35 UTC.
+
+Paper 2, 2026-11-27 13:35 UTC: the dial's first-result bars (paper2_first_result_bars.py, the plan's eight constants as written: two-clear lead at least 0.20, McNemar p at most 0.05, borrowed part must fall, random dial within 0.05, no-lead at most 0.05, gaming gap rise at most 0.10, at most 2 kind changes on redraw, stop at 24 GPU-hours) and --reward trained are committed. No bar names the judge's 216 of 240. Plan 03 assumes a passing judge in its tasks intro (line 335), in "What has to pass before this runs" (lines 507 to 514), in "What is not decided" item 1, and in its training-window rule (lines 83 to 84 and 251); the owner's decision of 13:05 UTC stands in for those lines, and the plan text is left for the owner. The supervisor's choices for the gaps: the window is the 10-step block where the trained head agrees most with its own finished-picture call (the plan's step 0.24 read, with whether any step reaches 0.75 recorded); the runner-up judge for the gaming gap is the vision-language judge (102 of 240, a different model family); the kept judge is the trained head; CO3 alone is drawn on the plan's pairs. Estimated cost 15.8 to 17.4 GPU-hours, under the plan's stop of 24.
 
 ## Final review
 
