@@ -5,7 +5,7 @@
     "Detour: zoom-ladder, about 430k tokens",
     "Detour: reading route and pictures, about 1.8M tokens",
     "Paper 1: toy WORKS: learned term (A) trained longer gives 0.89 (1,024 scenes) and 0.83 (all); next, CLEVR A trained longer when the cluster returns",
-    "Paper 2: dial bars and trained-judge reward committed; window, CO3-alone row and readers being built; launch waits on the cluster"
+    "Paper 2: dial run built and committed (trained judge steers, blind calls measure); launches when the cluster returns"
   ],
   "detours_join": "P2",
   "steps": [
