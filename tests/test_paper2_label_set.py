@@ -40,8 +40,9 @@ def write_batch(folder: Path, entries: list[dict], calls: list[list[str]], versi
         key["rules_version"] = version
     names = [f"n{i:05d}" for i in range(len(entries))]
     for name, e in zip(names, entries):
-        key["pictures"][name] = {"a": e["a"], "b": e["b"], "pair": slug(e["a"], e["b"]), "seed": e["seed"],
-                                 "source": "box", "unselected": str(e.get("unselected", False)), "picture_path": e["picture"]}
+        key["pictures"][name] = {"a": e["a"], "b": e["b"], "pair": e.get("pair") or slug(e["a"], e["b"]), "seed": e["seed"],
+                                 "source": "box", "unselected": str(e.get("unselected", False)), "picture_path": e["picture"],
+                                 "renamed": str(e.get("renamed", False)), "renaming": e.get("renaming", "")}
     (folder / "key.json").write_text(json.dumps(key))
     files = []
     for i, kinds in enumerate(calls, 1):
@@ -238,3 +239,71 @@ def test_without_a_v3_batch_v2_hybrids_stand():
     labels = {"/d/p.png": {"batch": "b2", "name": "n0", "kind": "hybrid", "rules_version": 2}}
     _, refused = ls.merge([{"name": "b2", "version": 2, "settled": labels}])
     assert refused == []
+
+
+# ---- rubric v4, renamed pictures, and the split diagnostic
+
+def test_a_v3_wrong_species_is_refused_once_a_v4_batch_exists():
+    lab = {"/d/p.png": {"batch": "b3", "name": "n0", "kind": "wrong_species", "rules_version": 3}}
+    _, refused = ls.merge([{"name": "b3", "version": 3, "settled": lab},
+                           {"name": "r4", "version": 4, "settled": {}}])
+    assert len(refused) == 1 and "wrong_species under rubric v3, where rubric v4" in refused[0]
+    _, refused = ls.merge([{"name": "b3", "version": 3, "settled": lab}])
+    assert refused == []
+
+
+def test_a_renamed_copy_stands_beside_its_original(tmp_path):
+    e = [{"picture": "/d/p0.png", "a": "cheetah", "b": "cougar", "seed": 1}]
+    b1 = write_batch(tmp_path / "b1", e, [["two_clear"]] * 2, version=4)
+    ren = [{"picture": "/d/p0.png", "a": "cheetah", "b": "leopard", "seed": 1, "pair": "a_cheetah__x__a_cougar",
+            "renamed": True, "renaming": "cougar as leopard"}]
+    b2 = write_batch(tmp_path / "b2", ren, [["wrong_species"]] * 2, version=4)
+    labels, refused = ls.merge([ls.settle_batch(b1), ls.settle_batch(b2)])
+    assert refused == [] and len(labels) == 2
+    assert labels["/d/p0.png"]["kind"] == "two_clear"
+    assert labels["/d/p0.png|renamed cougar as leopard"]["kind"] == "wrong_species"
+    assert labels["/d/p0.png|renamed cougar as leopard"]["pair"] == "a_cheetah__x__a_cougar"
+
+
+def test_the_read_holds_at_most_20_renamed_and_reports_why_it_falls_short():
+    def r(i, renamed, pair):
+        return {"item": f"i{i}", "pair": pair, "pair_type": "look-alike", "renamed": renamed}
+    pics = [r(i, True, f"p{i % 6}") for i in range(30)] + [r(100 + i, False, f"p{i % 6}") for i in range(30)]
+    read, fails = ls.read_selection(pics, ls.random.Random(0))
+    assert len(read) == 40 and sum(x["renamed"] for x in read) <= 20 and fails == []
+    read, fails = ls.read_selection(pics[:30] + pics[30:45], ls.random.Random(0))       # 15 natural only
+    assert len(read) == 35 and sum(x["renamed"] for x in read) == 20
+    assert "read under 40: the 20-renamed cap" in fails
+    few_pairs = [r(i, False, "p0" if i < 20 else "p1") for i in range(60)]
+    read, fails = ls.read_selection(few_pairs, ls.random.Random(0))
+    assert "read under 40: the 12-a-pair cap" in fails and "pairs under 4" in fails
+
+
+def test_a_mostly_renamed_wrong_species_read_is_marked(tmp_path):
+    entries = [e for e in rich_entries() if e["kind"] != "wrong_species"]
+    natural_ws = [e for e in rich_entries() if e["kind"] == "wrong_species"][::4]          # 36 natural
+    renamed_ws = [{**e, "picture": e["picture"] + "-r", "renamed": True, "renaming": "x as y"}
+                  for e in rich_entries() if e["kind"] == "wrong_species"]                # 144 renamed
+    allp = entries + natural_ws + renamed_ws
+    b = write_batch(tmp_path / "b1", allp, [[e["kind"] for e in allp]] * 2, version=4)
+    assert run(tmp_path, [b]) == 0
+    counts = (tmp_path / "out/counts.txt").read_text()
+    line = next(l for l in counts.splitlines() if l.strip().startswith("wrong_species"))
+    assert "renamed 20" in line and "natural 20" in line or "MOSTLY RENAMED" in line
+    rows = read_out(tmp_path)
+    ws_read = [r for r in rows if r["kind"] == "wrong_species" and r["part"] == "read"]
+    assert len(ws_read) == 40 and sum(r["renamed"] == "True" for r in ws_read) <= 20
+    assert "settled natural and renamed apart: wrong_species 36 natural, 144 renamed" in counts
+
+
+def test_the_split_diagnostic_names_what_blocks_it(tmp_path):
+    entries = rich_entries(per_pair_kind=2)
+    kinds = [e["kind"] for e in entries]
+    b = write_batch(tmp_path / "b1", entries, [kinds, kinds], version=4)
+    assert run(tmp_path, [b]) == 1
+    counts = (tmp_path / "out/counts.txt").read_text()
+    assert "split diagnostic over 20000 draws" in counts
+    diag = json.loads((tmp_path / "out/split-diagnostic.json").read_text())
+    assert diag["draws"] == 20000
+    assert diag["fails"]["hybrid"]["test under 50 (confirmation 10 and read 40)"] > 0
+    assert set(diag["fails"]["hybrid"]) <= set(ls.REASONS)

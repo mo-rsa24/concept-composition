@@ -10,7 +10,7 @@ the key only), it shuffles by a seed, gives each picture a neutral name, and wri
                  images/<name>.png  the picture alone, re-saved from its pixels
                  sheet.csv          name, asked species, in the shuffled order
                  calls-template.csv name, kind, note: the reviewer fills kind and note
-                 rules.txt          the six kinds and the seven rules (the rubric, version 3 by default:
+                 rules.txt          the six kinds and the seven rules (the rubric, version 4 by default:
                                     see RULES_V1 and rules_text)
   <out>/key/     key.json: each neutral name to its picture ("picture_path", the list's picture value as given, a
                  field no list column may take), its species and the list's other columns
@@ -117,13 +117,24 @@ V3_SHAPE = ("A body's species is decided by its shape: its head, face, ears, bui
             "spots, stripes or colour never make a body MIXED, however much of the body they cover: a cougar-shaped\n"
             "body in cheetah spots is the cougar, flagged. A body is MIXED only when its shape joins the two species,\n"
             "such as one species' head on the other's build, or the other's legs, wings or beak.")
-RULES_VERSION = 3   # what build writes unless told otherwise
-RULES_VERSIONS = (1, 2, 3)
+# Version 4 adds one paragraph after version 3's shape paragraph, after wrong species missed the agreement bar at 24 of
+# 31 (0.77) across seven batches: the splits were over what counts as a body (a tiny blurred bird, a moth, a shadow) and
+# whether a near relative is OTHER (an eagle drawn for a condor). Version 3 is frozen as built (checksum pinned).
+V4_BODIES = ("Count as a body only an animal you can name at a glance and that is at least the size of a hand relative\n"
+             "to the asked animals; skip tiny, blurred, distant or half-seen shapes, shadows, statues, toys and pictures\n"
+             "within the picture. A body that is a different species from both asked animals is OTHER even when it is a\n"
+             "close relative (an eagle drawn for a condor, a coyote drawn for a fox).")
+RULES_VERSION = 4   # what build writes unless told otherwise
+RULES_VERSIONS = (1, 2, 3, 4)
 
 
 def _body_v2() -> str:
     assert V1_FLAG in RULES_V1
     return RULES_V1.replace(V1_FLAG, V2_FLAG) + V2_BORROWED
+
+
+def _body_v3() -> str:
+    return _body_v2().replace(V2_FLAG, V2_FLAG + "\n\n" + V3_SHAPE)
 
 
 def rules_text(version: int = RULES_VERSION) -> str:
@@ -133,7 +144,9 @@ def rules_text(version: int = RULES_VERSION) -> str:
     if version == 2:
         return "Rules v2\n" + _body_v2()
     if version == 3:
-        return "Rules v3\n" + _body_v2().replace(V2_FLAG, V2_FLAG + "\n\n" + V3_SHAPE)
+        return "Rules v3\n" + _body_v3()
+    if version == 4:
+        return "Rules v4\n" + _body_v3().replace(V3_SHAPE, V3_SHAPE + "\n\n" + V4_BODIES)
     raise SystemExit(f"no rubric version {version}; versions {', '.join(map(str, RULES_VERSIONS))} exist")
 
 

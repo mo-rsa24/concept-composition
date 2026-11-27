@@ -204,8 +204,8 @@ def test_a_v1_sheet_still_checks_even_with_no_version_in_its_key(tmp_path):
 
 
 def test_an_unknown_version_is_refused():
-    with pytest.raises(SystemExit, match="no rubric version 4"):
-        sheets.rules_text(4)
+    with pytest.raises(SystemExit, match="no rubric version 5"):
+        sheets.rules_text(5)
 
 
 
@@ -288,17 +288,44 @@ def test_rubric_v3_adds_the_shape_paragraph_and_changes_nothing_else():
 def test_a_v3_sheet_carries_the_paragraph_and_passes_the_leak_check(tmp_path):
     lst = collector_list(tmp_path, [("own", "one"), ("co3", "two_clear"), ("both", "hybrid")])
     out = tmp_path / "out"
-    sheets.main(["build", "--pictures", str(lst), "--seed", "3", "--out", str(out)])
+    sheets.main(["build", "--pictures", str(lst), "--seed", "3", "--out", str(out), "--rules-version", "3"])
     assert json.loads((out / "key/key.json").read_text())["rules_version"] == 3
     assert sheets.V3_SHAPE in (out / "sheet/rules.txt").read_text()
     assert sheets.main(["check", "--out", str(out)]) == 0
 
 
-@pytest.mark.parametrize("version,sha", [(1, V1_SHA256), (2, V2_SHA256)])
+@pytest.mark.parametrize("version,sha", [(1, V1_SHA256), (2, V2_SHA256), (3, "ddb2c16d7dab94f914120c49d9ca500996f8dc6f4f2c32345a37deae81da25d4")])
 def test_v1_and_v2_sheets_still_rebuild_byte_identical_rules(tmp_path, version, sha):
     import hashlib
     out = tmp_path / "out"
     sheets.main(["build", "--pictures", str(make_list(tmp_path)), "--seed", "0", "--out", str(out),
                  "--rules-version", str(version)])
     assert hashlib.sha256((out / "sheet/rules.txt").read_bytes()).hexdigest() == sha
+    assert sheets.main(["check", "--out", str(out)]) == 0
+
+
+V3_SHA256 = "ddb2c16d7dab94f914120c49d9ca500996f8dc6f4f2c32345a37deae81da25d4"   # the hybrid recall's rules.txt
+
+
+def test_rubric_v3_is_unchanged():
+    import hashlib
+    assert hashlib.sha256(sheets.rules_text(3).encode()).hexdigest() == V3_SHA256
+
+
+def test_rubric_v4_adds_the_bodies_paragraph_after_the_shape_paragraph_and_nothing_else():
+    v4 = sheets.rules_text(4)
+    assert v4.startswith("Rules v4\n")
+    for part in ("name at a glance", "at least the size of a hand", "shadows, statues, toys and pictures",
+                 "is OTHER even when it is a\nclose relative", "an eagle drawn for a condor, a coyote drawn for a fox"):
+        assert part in v4, part
+    shape_end = v4.index(sheets.V3_SHAPE) + len(sheets.V3_SHAPE)
+    assert v4[shape_end:].startswith("\n\nCount as a body only")
+    assert "Rules v3\n" + v4[len("Rules v4\n"):].replace("\n\n" + sheets.V4_BODIES, "") == sheets.rules_text(3)
+
+
+def test_the_default_sheet_is_v4_and_checks(tmp_path):
+    out = tmp_path / "out"
+    sheets.main(["build", "--pictures", str(make_list(tmp_path)), "--seed", "0", "--out", str(out)])
+    assert json.loads((out / "key/key.json").read_text())["rules_version"] == 4
+    assert sheets.V4_BODIES in (out / "sheet/rules.txt").read_text()
     assert sheets.main(["check", "--out", str(out)]) == 0

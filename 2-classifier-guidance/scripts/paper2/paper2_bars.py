@@ -135,6 +135,7 @@ NEW_LOOKALIKE_SEEDS = range(8001, 8009)
 # Wrong-species pictures made by renaming, if natural ones are short: one subject shown under a look-alike name.
 RENAMING = {"cougar": "leopard", "goose": "swan", "fox": "coyote", "flamingo": "spoonbill"}
 RENAMED_PER_KIND_MAX = 20     # of the 40 read wrong-species pictures
+RENAMING_SEED = 5             # orders the renamed candidates (paper2_renamed.py)
 NATURAL_WRONG_SPECIES_NEEDED = 65   # 40 read, 10 confirmation, 15 choosing
 
 # The old judge's verdicts (3-understanding-compositionality/scripts/species_judge.py) as the six kinds.
