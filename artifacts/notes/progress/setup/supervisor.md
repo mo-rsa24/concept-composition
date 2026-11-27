@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated: 2026-11-27 03:24 SAST.
+Last updated: 2026-11-27 03:29 SAST.
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -165,6 +165,10 @@ Nothing at the moment. Paper 1's tuning calls are with two fresh reviewers at yo
 **Paper 2, the labelled set's first build** (03:13). The builder (`c4c199b0`) ran on batch 1 with its recall: 200 pictures settled, none unsettled, two clear against borrowed part 0.989. Not split, as expected: every kind is short of 65 pictures or of 20 on look-alike pairs (borrowed part 9, two of one kind 8, wrong species 2), and wrong species misses the agreement bar on its 2 pictures. `next-candidates.csv` lists 1,131 uncalled pictures for the short kinds, 263 on look-alike pairs.
 
 **Paper 1's first result: no** (2026-11-27 03:24). The reader (`9f994f72`, with the real-scene check read as 0.85 of the scenes on the sheet) gives gain -1: ours right on 1 of 96 touching seeds, the region sampler on 2, p 1.0, the random push 1 above the region sampler. The rubric was readable, 68 of 76 real touching scenes right against 65 needed. Mask paste was right on 27 of 96 touching seeds and paste with the lower object on top on 44; ours on apart seeds 46 of 96 against paste's 94. By the verdict file, a no closes the route at k = 64 and stops the full plan from running. The strip and the answer are filed under [the contact-push result](../../../results/does-the-contact-push-beat-the-region-sampler/README.md). The real-scene share was written into the reader by Loop 18 while Loop 16 was offline, on the owner's word.
+
+**The owner's standing rule** (2026-11-27 03:29). "My decisions are based on good results. Whatever will give me good results then unattended." From now on the supervisor decides and acts, then reports: spends past an estimate, batch sizes, rubric fixes before a judge runs, which design to try after a result, code whose owning loop is offline, and SSH launches on mscluster110 and mscluster112 with the pulse check. Two lines still hold because breaking them makes a result look good without being good: no bar or pre-registered rule moves after its result is seen, and no data is deleted or history rewritten. The owner's blind 60 for Paper 2 (instruction 0.11) stays theirs, because it is the ground truth the judges are checked against.
+
+**Paper 2 after batch 2** (03:29). 500 pictures settled. Borrowed part misses the agreement bar, 36 of 58 (0.62): all 20 of its splits with hybrid are a cougar-shaped body in cheetah spots, read as mixed by one reviewer and as a flagged cougar by the other. Decided: rules version 3 adds one sentence, a coat never makes a body mixed, only its shape does; every settled hybrid is recalled under it. The bar does not move. The look-alike pool is spent (544 uncalled, none on look-alike pairs), so steps 0.9 and 0.10 render the plain sum and CO3 on the eight new look-alike pairs (about 1.5 GPU-hours on mscluster112). Both are with Loop 17. Paper 1: the supervisor chose to diagnose the no before choosing a next design; a read-only diagnosis is running.
 
 ## Final review
 
