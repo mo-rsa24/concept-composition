@@ -61,3 +61,61 @@ def test_joint_set_rules():
     assert not purple.any()
     assert red.flatten(1).any(1).all() and blue.flatten(1).any(1).all()
     assert len(pics) == 2844 + 2 * 2760 + 2 * 2112
+
+
+def test_expert_features_leave_the_output_unchanged():
+    """Asking an expert for its inner decoder maps returns the same denoised picture, and maps at 4, 8 and 16 pixels."""
+    torch.manual_seed(1)
+    ex = st.Expert(w=8).eval()
+    x = torch.randn(3, 3, 16, 16) * 5
+    with torch.no_grad():
+        plain = ex(x, 2.5)
+        out, fs = ex(x, 2.5, feats=True)
+    assert torch.equal(plain, out)
+    assert [f.shape[-1] for f in fs] == [4, 8, 16]
+    assert [f.shape[1] for f in fs] == [16, 16, 8]
+
+
+def test_method_d_starts_at_the_plain_sum_and_its_zero_control_is_byte_identical():
+    """DeltaD's last convolution starts at zero, so before training the composed sampler is the plain sum; with random weights
+    and delta multiplied by 0 it is still the plain sum byte for byte, through the feature path."""
+    torch.manual_seed(0)
+    nets = [st.Expert(w=8).eval() for _ in range(3)]
+    fresh = st.DeltaD(w=8, proj=8, expert_w=8).eval()
+    x = st.starting_noise([5, 6], device="cpu")
+    with torch.no_grad():
+        plain = st.heun(st.plainsum_denoiser(*nets), x)
+        start = st.heun(st.interaction_denoiser(*nets, fresh), x)
+        for p in fresh.parameters():
+            torch.nn.init.normal_(p, std=0.05)
+        zero = st.heun(st.interaction_denoiser(*nets, fresh, zero_delta=True), x)
+        live = st.heun(st.interaction_denoiser(*nets, fresh), x)
+    assert torch.equal(plain, start)
+    assert torch.equal(plain, zero)
+    assert not torch.equal(plain, live)
+
+
+def test_recording_the_push_does_not_change_the_samples():
+    torch.manual_seed(0)
+    nets = [st.Expert(w=8).eval() for _ in range(3)]
+    head = st.Head(1, w=8).eval()
+    x = st.starting_noise([3], device="cpu")
+    rec = []
+    with torch.no_grad():
+        a = st.heun(st.push_denoiser(st.plainsum_denoiser(*nets), lambda xx, s: head(xx, s)[:, 0], 4.0), x)
+        b = st.heun(st.push_denoiser(st.plainsum_denoiser(*nets), lambda xx, s: head(xx, s)[:, 0], 4.0, record=rec), x)
+    assert torch.equal(a, b)
+    assert len(rec) == st.STEPS and rec[0][0] == 0
+
+
+def test_a_new_run_refuses_an_existing_key_or_file(tmp_path, monkeypatch):
+    monkeypatch.setattr(st, "RESULTS", tmp_path / "results")
+    monkeypatch.setattr(st, "OUT", tmp_path / "out")
+    st.save_results("rung9", {"x": 1})
+    with pytest.raises(SystemExit):
+        st.require_new("rung9", [])
+    taken = tmp_path / "out" / "taken.pt"
+    taken.write_text("")
+    with pytest.raises(SystemExit):
+        st.require_new("rung10", [taken])
+    st.require_new("rung10", [tmp_path / "out" / "free.pt"])

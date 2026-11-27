@@ -54,12 +54,17 @@ Subcommands, one per rung, run in order (each writes its section of results.json
   rung2b    Method A at N = 256, 1024 and 4096 (the data curve), and the plot of clean-pair share against N
   rung3     Method C at w = 1, 4, 16, 64
   rung4     Method B at w = 1, 4, 16, 64
+  rung2c    Method A trained 20,000 updates at N = 1,024 and all
+  rung3c    Method C at rung 2c's budget (20,000 updates, N = 1,024 and all), drawn states from 1,024 seeds (a) and 8,192 (b)
+  rung4b    Method B at rung 2c's budget, the score unchanged
+  rung5     Method D: rung 2c's Method A whose delta also reads the experts' inner decoder features
 
   /home/molef/micromamba/envs/voice-agent/bin/python 2-classifier-guidance/scripts/paper1/toy/squares_toy.py rung0
 """
 import argparse
 import json
 import math
+import os
 import time
 from pathlib import Path
 
@@ -69,8 +74,10 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 REPO = Path(__file__).resolve().parents[4]
-OUT = REPO / "outputs" / "paper1-toy"                       # checkpoints and sample tensors (git-ignored)
-RESULTS = REPO / "artifacts" / "results" / "does-the-interaction-term-work-on-a-small-toy"
+# checkpoints and sample tensors (git-ignored), and the results folder; SQUARES_TOY_OUT and SQUARES_TOY_RESULTS move them (on the
+# cluster both point at /datasets/mmolefe/poe_repair_min/toys/paper1/)
+OUT = Path(os.environ.get("SQUARES_TOY_OUT", REPO / "outputs" / "paper1-toy"))
+RESULTS = Path(os.environ.get("SQUARES_TOY_RESULTS", REPO / "artifacts" / "results" / "does-the-interaction-term-work-on-a-small-toy"))
 DEV = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 H = 16
@@ -380,14 +387,17 @@ class UNet(nn.Module):
         nn.init.zeros_(self.logvar_linear.weight)
         nn.init.zeros_(self.logvar_linear.bias)
 
-    def forward(self, h, sigma):
+    def forward(self, h, sigma, feats=False):
+        """With feats, also the decoder's inner feature maps [4 by 4 (after the middle blocks), 8 by 8 (after d2), 16 by 16
+        (after d1)]; the output is computed by the same operations either way."""
         e = self.cond(fourier(sigma))
         h1 = self.e1(self.conv_in(h), e)
         h2 = self.e2(F.avg_pool2d(h1, 2), e)
         h3 = self.m2(self.m1(F.avg_pool2d(h2, 2), e), e)
-        h = self.d2(torch.cat([F.interpolate(h3, scale_factor=2, mode="nearest"), h2], 1), e)
-        h = self.d1(torch.cat([F.interpolate(h, scale_factor=2, mode="nearest"), h1], 1), e)
-        return self.conv_out(h)
+        h8 = self.d2(torch.cat([F.interpolate(h3, scale_factor=2, mode="nearest"), h2], 1), e)
+        h16 = self.d1(torch.cat([F.interpolate(h8, scale_factor=2, mode="nearest"), h1], 1), e)
+        out = self.conv_out(h16)
+        return (out, [h3, h8, h16]) if feats else out
 
     def logvar(self, sigma):
         return self.logvar_linear(fourier(sigma)).view(-1, 1, 1, 1)
@@ -400,23 +410,75 @@ class Expert(nn.Module):
         super().__init__()
         self.net = UNet(3, 3, w)
 
-    def forward(self, x, sigma):
+    def forward(self, x, sigma, feats=False):
         sigma = torch.as_tensor(sigma, device=x.device, dtype=torch.float32).reshape(-1).expand(len(x))
         s4 = sigma.view(-1, 1, 1, 1)
+        if feats:
+            out, fs = self.net(c_in(s4) * x, sigma, feats=True)
+            return c_skip(s4) * x + c_out(s4) * out, fs
         return c_skip(s4) * x + c_out(s4) * self.net(c_in(s4) * x, sigma)
 
 
 class Delta(nn.Module):
     """Method A's interaction term: c_out(sigma) F(c_in x, D_red, D_blue, D_empty; sigma), F's last convolution zero at the start."""
+    wants_feats = False
 
     def __init__(self, w=64):
         super().__init__()
         self.net = UNet(12, 3, w, zero_out=True)
 
-    def forward(self, x, sigma, d_r, d_b, d_e):
+    def forward(self, x, sigma, d_r, d_b, d_e, feats=None):
         sigma = torch.as_tensor(sigma, device=x.device, dtype=torch.float32).reshape(-1).expand(len(x))
         s4 = sigma.view(-1, 1, 1, 1)
         return c_out(s4) * self.net(torch.cat([c_in(s4) * x, d_r, d_b, d_e], 1), sigma)
+
+
+class FusedUNet(UNet):
+    """Method D's network: UNet whose decoder also reads the three frozen experts' inner decoder features. At each resolution
+    (4, 8, 16) the red, blue and empty experts' maps are concatenated and a 1 by 1 convolution projects them to `proj` channels,
+    which are concatenated into the decoder at that resolution: beside the middle output at 4 by 4, beside the skip at 8 by 8 and
+    at 16 by 16. Everything else (encoder, conditioning, zero last convolution, logvar) is UNet's."""
+
+    def __init__(self, cin, cout, w=64, expert_w=64, proj=32, zero_out=True):
+        super().__init__(cin, cout, w, zero_out=zero_out)
+        self.p4 = nn.Conv2d(3 * 2 * expert_w, proj, 1)
+        self.p8 = nn.Conv2d(3 * 2 * expert_w, proj, 1)
+        self.p16 = nn.Conv2d(3 * expert_w, proj, 1)
+        self.d2 = Block(2 * w + proj + 2 * w + proj, 2 * w)
+        self.d1 = Block(2 * w + w + proj, w)
+
+    def forward(self, h, sigma, ef):
+        """ef: [[red 4, red 8, red 16], [blue ...], [empty ...]], the experts' feature lists in that order."""
+        f4, f8, f16 = (torch.cat([f[k] for f in ef], 1) for k in range(3))
+        e = self.cond(fourier(sigma))
+        h1 = self.e1(self.conv_in(h), e)
+        h2 = self.e2(F.avg_pool2d(h1, 2), e)
+        h3 = torch.cat([self.m2(self.m1(F.avg_pool2d(h2, 2), e), e), self.p4(f4)], 1)
+        h = self.d2(torch.cat([F.interpolate(h3, scale_factor=2, mode="nearest"), h2, self.p8(f8)], 1), e)
+        h = self.d1(torch.cat([F.interpolate(h, scale_factor=2, mode="nearest"), h1, self.p16(f16)], 1), e)
+        return self.conv_out(h)
+
+
+class DeltaD(nn.Module):
+    """Method D's interaction term: Method A's delta whose network also reads the experts' inner decoder features (FusedUNet)."""
+    wants_feats = True
+
+    def __init__(self, w=64, proj=32, expert_w=64):
+        super().__init__()
+        self.net = FusedUNet(12, 3, w, expert_w=expert_w, proj=proj)
+
+    def forward(self, x, sigma, d_r, d_b, d_e, feats=None):
+        sigma = torch.as_tensor(sigma, device=x.device, dtype=torch.float32).reshape(-1).expand(len(x))
+        s4 = sigma.view(-1, 1, 1, 1)
+        return c_out(s4) * self.net(torch.cat([c_in(s4) * x, d_r, d_b, d_e], 1), sigma, feats)
+
+
+def experts_out(nets, x, s, feats=False):
+    """(d_red, d_blue, d_empty, features or None). With feats, each expert runs once and returns its inner decoder maps too."""
+    if not feats:
+        return nets[0](x, s), nets[1](x, s), nets[2](x, s), None
+    (d_r, f_r), (d_b, f_b), (d_e, f_e) = (n(x, s, feats=True) for n in nets)
+    return d_r, d_b, d_e, [f_r, f_b, f_e]
 
 
 class Head(nn.Module):
@@ -451,21 +513,30 @@ def fourway_ratio(logits):
 
 def interaction_denoiser(red, blue, empty, delta, zero_delta=False):
     scale = 0.0 if zero_delta else 1.0
+    feats = getattr(delta, "wants_feats", False)
 
     def denoise(x, s, step, second):
-        d_r, d_b, d_e = red(x, s), blue(x, s), empty(x, s)
-        return plainsum_of(d_r, d_b, d_e) + scale * delta(x, s, d_r, d_b, d_e)
+        if not feats:
+            d_r, d_b, d_e = red(x, s), blue(x, s), empty(x, s)
+            return plainsum_of(d_r, d_b, d_e) + scale * delta(x, s, d_r, d_b, d_e)
+        d_r, d_b, d_e, ef = experts_out((red, blue, empty), x, s, feats=True)
+        return plainsum_of(d_r, d_b, d_e) + scale * delta(x, s, d_r, d_b, d_e, ef)
     return denoise
 
 
-def push_denoiser(base, score, w):
-    """D' = D + w sigma^2 grad_x score(x, sigma) at every evaluation; score returns one number per picture."""
+def push_denoiser(base, score, w, record=None):
+    """D' = D + w sigma^2 grad_x score(x, sigma) at every evaluation; score returns one number per picture. With a record list,
+    each first evaluation appends (step, sigma, root mean square of the push per value, mean score); the output is unchanged."""
     def denoise(x, s, step, second):
         d = base(x, s, step, second)
         with torch.enable_grad():
             xx = x.detach().requires_grad_(True)
-            g, = torch.autograd.grad(score(xx, s).sum(), xx)
-        return d + w * s ** 2 * g
+            sc = score(xx, s)
+            g, = torch.autograd.grad(sc.sum(), xx)
+        push = w * s ** 2 * g
+        if record is not None and not second:
+            record.append((int(step), float(s), float(push.pow(2).mean().sqrt()), float(sc.detach().mean())))
+        return d + push
     return denoise
 
 
@@ -479,12 +550,28 @@ def load_results():
 
 
 def save_results(key, value):
+    """Read, add one key, write, under an exclusive lock, so two rungs running at once cannot drop each other's key."""
+    import fcntl
     RESULTS.mkdir(parents=True, exist_ok=True)
-    res = load_results()
-    res[key] = value
-    res["bars"] = BARS
-    res["device"] = str(DEV) + (f" ({torch.cuda.get_device_name()})" if DEV.type == "cuda" else "")
-    (RESULTS / "results.json").write_text(json.dumps(res, indent=1))
+    OUT.mkdir(parents=True, exist_ok=True)
+    with open(OUT / "results.lock", "w") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        res = load_results()
+        res[key] = value
+        res["bars"] = BARS
+        res["device"] = str(DEV) + (f" ({torch.cuda.get_device_name()})" if DEV.type == "cuda" else "")
+        tmp = RESULTS / "results.json.tmp"
+        tmp.write_text(json.dumps(res, indent=1))
+        tmp.replace(RESULTS / "results.json")
+
+
+def require_new(key, paths):
+    """Stop before any compute if the results key or any output file already exists: a new run never overwrites an old one."""
+    if key in load_results():
+        raise SystemExit(f"results.json already has key {key!r}; pick a new key")
+    taken = [str(p) for p in paths if Path(p).exists()]
+    if taken:
+        raise SystemExit("these files already exist: " + ", ".join(taken))
 
 
 def grid(rows, labels, path, scale=8, gap=2):
@@ -655,10 +742,13 @@ def cmd_rung1(a):
                            "seconds": round(time.time() - t0, 1)})
 
 
-def train_delta(nets, jpics, train_idx, val_idx, updates, batch=256, lr=5e-4, seed=0, val_every=250):
+def train_delta(nets, jpics, train_idx, val_idx, updates, batch=256, lr=5e-4, seed=0, val_every=250, model_cls=None):
+    """model_cls None is Method A's Delta. A model whose class has wants_feats (DeltaD) also gets the experts' inner features;
+    for Delta the calls below run the same operations as before that option existed."""
     red, blue, empty = nets
     torch.manual_seed(seed)
-    model = Delta().to(DEV)
+    model = (model_cls or Delta)().to(DEV)
+    feats = getattr(model, "wants_feats", False)
     opt = torch.optim.Adam(model.parameters(), lr=lr, betas=(0.9, 0.99))
     X = jpics[train_idx].to(DEV)
     V = jpics[val_idx]
@@ -673,8 +763,8 @@ def train_delta(nets, jpics, train_idx, val_idx, updates, batch=256, lr=5e-4, se
         for i in range(0, len(v0), 512):
             x0, s, n = v0[i:i + 512].to(DEV), vs[i:i + 512].to(DEV), vn[i:i + 512].to(DEV)
             x = x0 + s.view(-1, 1, 1, 1) * n
-            d_r, d_b, d_e = red(x, s), blue(x, s), empty(x, s)
-            D = plainsum_of(d_r, d_b, d_e) + model(x, s, d_r, d_b, d_e)
+            d_r, d_b, d_e, ef = experts_out(nets, x, s, feats)
+            D = plainsum_of(d_r, d_b, d_e) + model(x, s, d_r, d_b, d_e, ef)
             tot += float((loss_weight(s.view(-1, 1, 1, 1)) * (D - x0) ** 2).mean((1, 2, 3)).sum())
         return tot / len(v0)
 
@@ -685,8 +775,8 @@ def train_delta(nets, jpics, train_idx, val_idx, updates, batch=256, lr=5e-4, se
         s = draw_sigma(batch)
         x = x0 + s.view(-1, 1, 1, 1) * torch.randn_like(x0)
         with torch.no_grad():
-            d_r, d_b, d_e = red(x, s), blue(x, s), empty(x, s)
-        D = plainsum_of(d_r, d_b, d_e) + model(x, s, d_r, d_b, d_e)
+            d_r, d_b, d_e, ef = experts_out(nets, x, s, feats)
+        D = plainsum_of(d_r, d_b, d_e) + model(x, s, d_r, d_b, d_e, ef)
         loss = edm_loss(D, x0, s, model.net.logvar(s))
         opt.zero_grad(set_to_none=True)
         loss.backward()
@@ -702,9 +792,15 @@ def train_delta(nets, jpics, train_idx, val_idx, updates, batch=256, lr=5e-4, se
     return model.eval().requires_grad_(False), {"best_update": best[1], "best_val_loss": best[0], "curve": curve}
 
 
-def run_method_a(ns, updates, key, picture, zero_control, tag=""):
-    """Method A at each N in ns (0 means the whole training pool); results under results.json[key], a grid at picture."""
+def run_method_a(ns, updates, key, picture, zero_control, tag="", method="A", model_cls=None, compare=None):
+    """Method A at each N in ns (0 means the whole training pool); results under results.json[key], a grid at picture. method "D"
+    with model_cls DeltaD runs Method D the same way, files named deltaD-... and methodD-...; compare maps a name to an earlier
+    samples file whose row and picture are shown beside each N (rung 5 shows rung 2c's Method A)."""
     t0 = time.time()
+    prefix = "delta" if method == "A" else f"delta{method}"
+    names = [("all" if n == 0 else str(n)) + tag for n in ns]
+    require_new(key, [OUT / f"{prefix}-N{nm}.pt" for nm in names] + [OUT / f"samples-method{method}-N{nm}.pt" for nm in names]
+                + [RESULTS / picture])
     (e, r, b, j, meta), (Ee, Er, Eb, Ej) = sets_and_exact()
     nets = load_experts()
     red, blue, empty = nets
@@ -712,25 +808,40 @@ def run_method_a(ns, updates, key, picture, zero_control, tag=""):
     xn = load_samples("neural-plainsum")
     base = metrics(xn, j)
     rows, xs, labels = [("neural plain sum", base)], [load_samples("exact-joint"), xn], ["exact joint", "neural plain sum"]
-    info = {"updates": updates}
+    info = {"updates": updates, "method": method}
     exact_resid = lambda x, s: Ej(x, s) - plainsum_of(red(x, s), blue(x, s), empty(x, s))  # noqa: E731
     for n in ns:
         t1 = time.time()
         idx = tr if n == 0 else tr[:n]
         name = ("all" if n == 0 else str(n)) + tag
-        model, tinfo = train_delta(nets, j, idx, va, updates)
-        torch.save(model.state_dict(), OUT / f"delta-N{name}.pt")
+        if compare and name in compare:
+            xc = load_samples(compare[name][1])
+            mc = metrics(xc, j, train_idx=idx)
+            mc["verdict"] = verdict(mc["clean_share"], base["clean_share"])
+            rows.append((compare[name][0], mc))
+            xs.append(xc)
+            labels.append(compare[name][2])
+            t1 = time.time()
+        model, tinfo = train_delta(nets, j, idx, va, updates, model_cls=model_cls)
+        train_seconds = round(time.time() - t1, 1)
+        torch.save(model.state_dict(), OUT / f"{prefix}-N{name}.pt")
         with torch.no_grad():
             x = sample(interaction_denoiser(red, blue, empty, model))
-        save_samples(f"methodA-N{name}", x)
+        save_samples(f"method{method}-N{name}", x)
         m = metrics(x, j, train_idx=idx)
         m["verdict"] = verdict(m["clean_share"], base["clean_share"])
-        err = band_error(lambda xx, s: model(xx, s, red(xx, s), blue(xx, s), empty(xx, s)), exact_resid, j[va])
+        feats = getattr(model, "wants_feats", False)
+
+        def delta_of(xx, s):
+            d_r, d_b, d_e, ef = experts_out(nets, xx, s, feats)
+            return model(xx, s, d_r, d_b, d_e, ef)
+        err = band_error(delta_of, exact_resid, j[va])
         info[f"N={name}"] = {"n_train_scenes": len(idx), "train": tinfo, "residual_error_vs_exact_by_band": err,
+                             "parameters": sum(p.numel() for p in model.parameters()), "train_seconds": train_seconds,
                              "seconds": round(time.time() - t1, 1)}
-        rows.append((f"Method A, N = {name} ({len(idx)} scenes)" + (f", {updates} updates" if tag else ""), m))
+        rows.append((f"Method {method}, N = {name} ({len(idx)} scenes)" + (f", {updates} updates" if tag else ""), m))
         xs.append(x)
-        labels.append(f"A, N={name}")
+        labels.append(f"{method}, N={name}")
         print(rows[-1][0], m["clean_share"], m["verdict"], json.dumps(err), flush=True)
         if zero_control and n == ns[-1]:
             with torch.no_grad():
@@ -950,6 +1061,334 @@ def cmd_rung4(a):
     save_results("rung4", {"rows": dict(rows), "head_updates": a.updates, "head_train_seconds": round(train_seconds, 1),
                            "head_heldout_accuracy_by_band": acc, "seconds": round(time.time() - t0, 1)})
 
+# -------------------------------------------------------------------------------------------------------------------------------------
+# Matched budgets: Methods C and B trained as long as rung 2c's Method A (20,000 updates), and Method D
+
+
+DRAWN_SEEDS_MORE = list(range(100000, 108192))                # rung 3c variant b; its first 1,024 are DRAWN_SEEDS
+LOGIT_STEPS = (2, 8, 14, 20, 26)                              # states after these Heun steps sit at sigma 46.2, 13.3, 2.90, 0.415, 0.028
+
+
+def picture_extras(x):
+    """Median over seeds of the brightest R and the brightest B, and the share of seeds with no red, blue or purple pixel at all."""
+    x = x.clamp(-1, 1)
+    red, blue, purple = masks(x)
+    empty = ~(red | blue | purple).flatten(1).any(1)
+    return {"median_brightest_R": round(float(x[:, 0].flatten(1).max(1).values.median()), 3),
+            "median_brightest_B": round(float(x[:, 2].flatten(1).max(1).values.median()), 3),
+            "share_empty": float(empty.float().mean())}
+
+
+def drawn_states(nets, seeds):
+    """The neural plain sum's state after every Heun step i = 0..30 (at sigma t[i+1]) from each seed, in rung 3's layout (batches of
+    256 seeds, then step, then seed in the batch), so the first 1,024 seeds' block is rung 3's drawn set exactly.
+    Returns (states, their sigmas, each state's position in seeds)."""
+    per, n = STEPS - 1, len(seeds)
+    S = torch.empty(n * per, 3, H, H, device=DEV)
+    Ssig = torch.empty(n * per, device=DEV)
+    seed_of = torch.empty(n * per, dtype=torch.long)
+    with torch.no_grad():
+        for b0 in range(0, n, 256):
+            chunk = seeds[b0:b0 + 256]
+            nb, off = len(chunk), b0 * per
+
+            def keep(i, x, s):
+                if i < per:
+                    S[off + i * nb: off + (i + 1) * nb] = x
+                    Ssig[off + i * nb: off + (i + 1) * nb] = float(s)
+                    seed_of[off + i * nb: off + (i + 1) * nb] = torch.arange(b0, b0 + nb)
+            heun(plainsum_denoiser(*nets), starting_noise(chunk), after_step=keep)
+    return S, Ssig, seed_of
+
+
+def train_head(nout, draw_batch, val_batches, loss_fn, updates, lr, val_every=250, log=""):
+    """Rung 3 and 4's head recipe (seed 0, AdamW, learning rate lr) run for `updates`, with the held-out loss on fixed batches
+    measured every val_every updates as rung 2's delta does. Returns (final head, the head at the lowest held-out loss, info)."""
+    torch.manual_seed(0)
+    head = Head(nout).to(DEV)
+    opt = torch.optim.AdamW(head.parameters(), lr=lr, betas=(0.9, 0.99))
+
+    @torch.no_grad()
+    def val_loss():
+        head.eval()
+        tot, cnt = 0.0, 0
+        for x, s, y in val_batches:
+            tot += float(loss_fn(head(x, s), y, reduction="sum"))
+            cnt += len(y)
+        head.train()
+        return tot / cnt
+    best = (val_loss(), 0, {k: v.clone() for k, v in head.state_dict().items()})
+    curve = [(0, None, best[0])]
+    t1 = time.time()
+    for u in range(1, updates + 1):
+        x, s, y = draw_batch()
+        loss = loss_fn(head(x, s), y)
+        opt.zero_grad(set_to_none=True)
+        loss.backward()
+        opt.step()
+        if u % val_every == 0 or u == updates:
+            vl = val_loss()
+            curve.append((u, float(loss.detach()), vl))
+            if u % 2000 == 0:
+                print(f"  head {log} update {u} loss {float(loss.detach()):.4f} val {vl:.4f}", flush=True)
+            if vl < best[0]:
+                best = (vl, u, {k: v.clone() for k, v in head.state_dict().items()})
+    train_seconds = round(time.time() - t1, 1)
+    final = head.eval().requires_grad_(False)
+    best_head = Head(nout).to(DEV)
+    best_head.load_state_dict(best[2])
+    info = {"updates": updates, "train_seconds": train_seconds, "best_update": best[1], "best_val_loss": best[0],
+            "final_val_loss": curve[-1][2], "val_every": val_every, "curve": curve}
+    return final, best_head.eval().requires_grad_(False), info
+
+
+def push_rows(nets, score, sample_tag, label, j, base_clean):
+    """Sample the plain sum pushed by score at every weight; rows with the toy's metrics plus brightness and empty share, and the
+    push's size per step (root mean square per value and mean score over the 256 seeds, first evaluation of each step)."""
+    rows, xs, traj = [], [], {}
+    for w in WEIGHTS:
+        rec = []
+        x = sample(push_denoiser(plainsum_denoiser(*nets), score, w, record=rec))
+        save_samples(f"{sample_tag}-w{w}", x)
+        m = metrics(x, j)
+        m["verdict"] = verdict(m["clean_share"], base_clean)
+        m.update(picture_extras(x))
+        rows.append((f"{label}, w = {w}", m))
+        xs.append(x)
+        traj[f"w={w}"] = [(st_, round(sg, 4), round(rms, 5), round(sc, 4)) for st_, sg, rms, sc in rec]
+        print(rows[-1][0], m["clean_share"], m["verdict"], m["median_brightest_R"], m["median_brightest_B"], m["share_empty"],
+              flush=True)
+    return rows, xs, traj
+
+
+def cmd_rung3c(a):
+    """Method C at rung 2c's budget: the same head, data recipe and push as rung 3, trained a.updates updates, at N = 1,024 and all
+    joint scenes as the real examples. Variant a draws from rung 3's 1,024 seeds; variant b from 8,192 seeds (more drawn data)."""
+    t0 = time.time()
+    U = a.updates
+    names = {n: ("all" if n == 0 else str(n)) for n in a.ns}
+    variants = {"a": len(DRAWN_SEEDS), "b": len(DRAWN_SEEDS_MORE)}
+    files = [RESULTS / f"rung3c-method-c-matched-N{nm}.png" for nm in names.values()]
+    for v in variants:
+        for nm in names.values():
+            files += [OUT / f"head-C{v}-N{nm}-u{U}.pt", OUT / f"head-C{v}-N{nm}-u{U}-best.pt"]
+            files += [OUT / f"samples-methodC{v}-N{nm}-u{U}{b}-w{w}.pt" for w in WEIGHTS for b in ("", "-best")]
+    require_new("rung3c", files)
+    (e, r, b, j, meta), _ = sets_and_exact()
+    nets = load_experts()
+    tr, va = joint_split()
+    xn = load_samples("neural-plainsum")
+    base = metrics(xn, j)
+    t = sigmas()
+    sig_set = t[1:STEPS]
+    t1 = time.time()
+    S_all, Sig_all, seed_all = drawn_states(nets, DRAWN_SEEDS_MORE)
+    states_seconds = round(time.time() - t1, 1)
+    print(f"drawn states {len(S_all)} in {states_seconds} s", flush=True)
+    R_va = j[va].to(DEV)
+    info = {"updates": U, "batch": a.batch, "lr": a.lr, "drawn_states_seconds_8192_seeds": states_seconds}
+    grids = {nm: ([load_samples("exact-joint"), xn], ["exact joint", "neural plain sum"]) for nm in names.values()}
+    all_rows = [("neural plain sum", base)]
+    for nm in names.values():
+        xa = load_samples(f"methodA-N{nm}-u20000")
+        ma = metrics(xa, j, train_idx=tr if nm == "all" else tr[:int(nm)])
+        ma["verdict"] = verdict(ma["clean_share"], base["clean_share"])
+        all_rows.append((f"Method A, N = {nm}, 20000 updates (rung 2c)", ma))
+        grids[nm][0].append(xa)
+        grids[nm][1].append(f"A, N={nm} (2c)")
+    for v, nseeds in variants.items():
+        k = len(DRAWN_SEEDS) * (STEPS - 1) if v == "a" else len(S_all)
+        S, Ssig, seed_of = S_all[:k], Sig_all[:k], seed_all[:k]
+        hold = (seed_of % VAL_NTH == 0).to(DEV)
+        S_tr, Sig_tr, S_va, Sig_va = S[~hold], Ssig[~hold], S[hold], Ssig[hold]
+        n_tr_seeds, n_va_seeds = int((torch.arange(nseeds) % VAL_NTH != 0).sum()), int((torch.arange(nseeds) % VAL_NTH == 0).sum())
+        g = torch.Generator(device=DEV).manual_seed(11)
+        kv = torch.randperm(len(S_va), device=DEV, generator=g)[:4096]
+        vf, vsf = S_va[kv], Sig_va[kv]
+        vsr = sig_set[torch.randint(len(sig_set), (len(kv),), device=DEV, generator=g)]
+        vx0 = R_va[torch.randint(len(R_va), (len(kv),), device=DEV, generator=g)]
+        vr = vx0 + vsr.view(-1, 1, 1, 1) * torch.randn(vx0.shape, device=DEV, generator=g)
+        vx, vs = torch.cat([vr, vf]), torch.cat([vsr, vsf])
+        vy = torch.cat([torch.ones(len(kv), device=DEV), torch.zeros(len(kv), device=DEV)])
+        val_batches = [(vx[i:i + 1024], vs[i:i + 1024], vy[i:i + 1024]) for i in range(0, len(vx), 1024)]
+        for n, nm in names.items():
+            t1 = time.time()
+            idx = tr if n == 0 else tr[:n]
+            R_tr = j[idx].to(DEV)
+            half = a.batch // 2
+
+            def draw_batch():
+                kk = torch.randint(len(S_tr), (half,), device=DEV)
+                xf, sf = S_tr[kk], Sig_tr[kk]
+                sr = sig_set[torch.randint(len(sig_set), (half,), device=DEV)]
+                x0 = R_tr[torch.randint(len(R_tr), (half,), device=DEV)]
+                xr = x0 + sr.view(-1, 1, 1, 1) * torch.randn_like(x0)
+                y = torch.cat([torch.ones(half, device=DEV), torch.zeros(half, device=DEV)])
+                return torch.cat([xr, xf]), torch.cat([sr, sf]), y
+
+            def bce(logits, y, reduction="mean"):
+                return F.binary_cross_entropy_with_logits(logits[:, 0], y, reduction=reduction)
+            head, best_head, hinfo = train_head(1, draw_batch, val_batches, bce, U, a.lr, log=f"C{v} N={nm}")
+            torch.save(head.state_dict(), OUT / f"head-C{v}-N{nm}-u{U}.pt")
+            torch.save(best_head.state_dict(), OUT / f"head-C{v}-N{nm}-u{U}-best.pt")
+            entry = {"drawn_seeds": nseeds, "drawn_train_seeds": n_tr_seeds, "drawn_heldout_seeds": n_va_seeds,
+                     "drawn_states": len(S), "n_real_scenes": len(idx), "head": hinfo}
+            for which, hd in (("final", head), ("best", best_head)):
+                if which == "best" and hinfo["best_update"] == U:
+                    entry["best"] = "the lowest held-out loss is at the last update, so the best head is the final head"
+                    continue
+                acc, logit_table = {}, {}
+                gg = torch.Generator(device=DEV).manual_seed(5)
+                with torch.no_grad():
+                    for hi, lo in SIGMA_BANDS:
+                        sel = (Sig_va <= hi) & (Sig_va > lo)
+                        if sel.sum() == 0:
+                            continue
+                        xf, sf = S_va[sel][:2048], Sig_va[sel][:2048]
+                        x0 = R_va[torch.randint(len(R_va), (len(xf),), device=DEV, generator=gg)]
+                        xr = x0 + sf.view(-1, 1, 1, 1) * torch.randn(x0.shape, device=DEV, generator=gg)
+                        acc[f"{hi}-{lo}"] = round(0.5 * float((hd(xr, sf)[:, 0] > 0).float().mean()
+                                                            + (hd(xf, sf)[:, 0] <= 0).float().mean()), 3)
+                    first = (seed_of < 256)
+                    for i in LOGIT_STEPS:
+                        s_i = float(t[i + 1])
+                        at = (Ssig == s_i)
+                        tr_sel = (at & first.to(DEV) & ~hold)
+                        va_sel = (at & first.to(DEV) & hold)
+                        x0 = R_va[:256]
+                        xr = x0 + s_i * torch.randn(x0.shape, device=DEV, generator=gg)
+                        logit_table[f"{s_i:.3f}"] = {
+                            "drawn_training_seeds": round(float(hd(S[tr_sel], Ssig[tr_sel])[:, 0].mean()), 2),
+                            "drawn_heldout_seeds": round(float(hd(S[va_sel], Ssig[va_sel])[:, 0].mean()), 2),
+                            "real_heldout_scenes_noised": round(float(hd(xr, torch.full((256,), s_i, device=DEV))[:, 0].mean()), 2),
+                            "n_training_seeds": int(tr_sel.sum()), "n_heldout_seeds": int(va_sel.sum())}
+                tag = "" if which == "final" else "-best"
+                lab = f"C({v}) N={nm}" + ("" if which == "final" else f" best@{hinfo['best_update']}")
+                rows, xs, traj = push_rows(nets, lambda xx, s, hd=hd: hd(xx, s)[:, 0], f"methodC{v}-N{nm}-u{U}{tag}", lab, j,
+                                           base["clean_share"])
+                print(f"C{v} N={nm} {which} accuracy {acc}", json.dumps(logit_table), flush=True)
+                entry[which] = {"heldout_balanced_accuracy_by_band": acc, "mean_logit_by_sigma": logit_table,
+                                "rows": dict(rows), "push_by_step": traj}
+                all_rows += rows
+                if which == "final":
+                    grids[nm][0].extend(xs)
+                    grids[nm][1].extend([f"C({v}), w={w}" for w in WEIGHTS])
+            entry["seconds"] = round(time.time() - t1, 1)
+            info[f"C{v}-N={nm}"] = entry
+    print(table(all_rows))
+    for nm, (xs, labels) in grids.items():
+        grid(xs, labels, RESULTS / f"rung3c-method-c-matched-N{nm}.png")
+    info["rows"] = dict(all_rows)
+    info["seconds"] = round(time.time() - t0, 1)
+    save_results("rung3c", info)
+
+
+def cmd_rung4b(a):
+    """Method B at rung 2c's budget: rung 4's four-way head, classes and score unchanged, trained a.updates updates, with the both
+    class drawn from N = 1,024 or all joint training scenes."""
+    t0 = time.time()
+    U = a.updates
+    names = {n: ("all" if n == 0 else str(n)) for n in a.ns}
+    files = [RESULTS / "rung4b-method-b-matched.png"]
+    for nm in names.values():
+        files += [OUT / f"head-B-N{nm}-u{U}.pt", OUT / f"head-B-N{nm}-u{U}-best.pt"]
+        files += [OUT / f"samples-methodB-N{nm}-u{U}{b}-w{w}.pt" for w in WEIGHTS for b in ("", "-best")]
+    require_new("rung4b", files)
+    (e, r, b, j, meta), _ = sets_and_exact()
+    nets = load_experts()
+    tr, va = joint_split()
+    xn = load_samples("neural-plainsum")
+    base = metrics(xn, j)
+    every = lambda n: ([i for i in range(n) if i % VAL_NTH != 0], [i for i in range(n) if i % VAL_NTH == 0])  # noqa: E731
+    rtr, rva = every(len(r))
+    classes_va = [e.to(DEV), r[rva].to(DEV), b[rva].to(DEV), j[va].to(DEV)]
+    q = a.batch // 4
+
+    def draw(classes, q, gen=None):
+        xs, ys, ss = [], [], []
+        for c, P in enumerate(classes):
+            s = torch.exp(torch.empty(q, device=DEV).uniform_(math.log(SIGMA_LO), math.log(SIGMA_HI), generator=gen))
+            x0 = P[torch.randint(len(P), (q,), device=DEV, generator=gen)]
+            xs.append(x0 + s.view(-1, 1, 1, 1) * torch.randn(x0.shape, device=DEV, generator=gen))
+            ys.append(torch.full((q,), c, device=DEV))
+            ss.append(s)
+        return torch.cat(xs), torch.cat(ss), torch.cat(ys)
+    vx, vs, vy = draw(classes_va, 1024, torch.Generator(device=DEV).manual_seed(11))
+    val_batches = [(vx[i:i + 1024], vs[i:i + 1024], vy[i:i + 1024]) for i in range(0, len(vx), 1024)]
+
+    def ce(logits, y, reduction="mean"):
+        return F.cross_entropy(logits, y, reduction=reduction)
+    info = {"updates": U, "batch": a.batch, "lr": a.lr}
+    xs_grid, labels = [load_samples("exact-joint"), xn], ["exact joint", "neural plain sum"]
+    all_rows = [("neural plain sum", base)]
+    fixed = {"confident touching pair (both +4, rest -4)": [-4, -4, -4, 4], "four even logits": [0, 0, 0, 0],
+             "confident empty (neither +4, rest -4)": [4, -4, -4, -4], "confident red only": [-4, 4, -4, -4]}
+    info["score_on_fixed_logits"] = {k: round(float(fourway_ratio(torch.tensor([v], dtype=torch.float32))[0]), 3)
+                                     for k, v in fixed.items()}
+    for n, nm in names.items():
+        t1 = time.time()
+        idx = tr if n == 0 else tr[:n]
+        xa = load_samples(f"methodA-N{nm}-u20000")
+        ma = metrics(xa, j, train_idx=idx)
+        ma["verdict"] = verdict(ma["clean_share"], base["clean_share"])
+        all_rows.append((f"Method A, N = {nm}, 20000 updates (rung 2c)", ma))
+        xs_grid.append(xa)
+        labels.append(f"A, N={nm} (2c)")
+        classes_tr = [e.to(DEV), r[rtr].to(DEV), b[rtr].to(DEV), j[idx].to(DEV)]
+        head, best_head, hinfo = train_head(4, lambda: draw(classes_tr, q), val_batches, ce, U, a.lr, log=f"B N={nm}")
+        torch.save(head.state_dict(), OUT / f"head-B-N{nm}-u{U}.pt")
+        torch.save(best_head.state_dict(), OUT / f"head-B-N{nm}-u{U}-best.pt")
+        entry = {"n_both_scenes": len(idx), "head": hinfo}
+        for which, hd in (("final", head), ("best", best_head)):
+            if which == "best" and hinfo["best_update"] == U:
+                entry["best"] = "the lowest held-out loss is at the last update, so the best head is the final head"
+                continue
+            acc, score_by_class = {}, {}
+            g = torch.Generator(device=DEV).manual_seed(5)
+            with torch.no_grad():
+                for hi, lo in SIGMA_BANDS:
+                    per, sc = [], []
+                    for c, P in enumerate(classes_va):
+                        s = torch.exp(torch.empty(512, device=DEV).uniform_(math.log(lo), math.log(hi), generator=g))
+                        x0 = P[torch.randint(len(P), (512,), device=DEV, generator=g)]
+                        x = x0 + s.view(-1, 1, 1, 1) * torch.randn(x0.shape, device=DEV, generator=g)
+                        lg = hd(x, s)
+                        per.append(float((lg.argmax(1) == c).float().mean()))
+                        sc.append(round(float(fourway_ratio(lg).mean()), 3))
+                    acc[f"{hi}-{lo}"] = {"per_class (empty, red, blue, both)": [round(p_, 3) for p_ in per],
+                                         "balanced": round(sum(per) / 4, 3)}
+                    score_by_class[f"{hi}-{lo}"] = dict(zip(("empty", "red only", "blue only", "both"), sc))
+            tag = "" if which == "final" else "-best"
+            lab = f"B N={nm}" + ("" if which == "final" else f" best@{hinfo['best_update']}")
+            rows, xs, traj = push_rows(nets, lambda xx, s, hd=hd: fourway_ratio(hd(xx, s)), f"methodB-N{nm}-u{U}{tag}", lab, j,
+                                       base["clean_share"])
+            print(f"B N={nm} {which} accuracy", json.dumps(acc), "score by class", json.dumps(score_by_class), flush=True)
+            entry[which] = {"heldout_accuracy_by_band": acc, "mean_score_by_class_and_band": score_by_class, "rows": dict(rows),
+                            "push_by_step": traj}
+            all_rows += rows
+            if which == "final":
+                xs_grid.extend(xs)
+                labels.extend([f"B N={nm}, w={w}" for w in WEIGHTS])
+        entry["seconds"] = round(time.time() - t1, 1)
+        info[f"B-N={nm}"] = entry
+    print(table(all_rows))
+    grid(xs_grid, labels, RESULTS / "rung4b-method-b-matched.png")
+    info["rows"] = dict(all_rows)
+    info["seconds"] = round(time.time() - t0, 1)
+    save_results("rung4b", info)
+
+
+def cmd_rung5(a):
+    """Method D: rung 2c's Method A with one change, the delta network also reads the experts' inner decoder features (DeltaD).
+    Same loss, data, seed, updates, held-out rule and sampling; files carry the -u<updates> tag."""
+    tag = f"-u{a.updates}"
+    compare = {}
+    for n in a.ns:
+        nm = "all" if n == 0 else str(n)
+        compare[nm + tag] = (f"Method A, N = {nm}, 20000 updates (rung 2c)", f"methodA-N{nm}-u20000", f"A, N={nm} (2c)")
+    run_method_a(a.ns, a.updates, "rung5", "rung5-method-d.png", zero_control=True, tag=tag, method="D", model_cls=DeltaD,
+                 compare=compare)
+
 
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -973,6 +1412,15 @@ def main():
         q.add_argument("--updates", type=int, default=6000)
         q.add_argument("--batch", type=int, default=256)
         q.add_argument("--lr", type=float, default=5e-4)
+    for name in ("rung3c", "rung4b"):
+        q = sub.add_parser(name)
+        q.add_argument("--ns", type=int, nargs="+", default=[1024, 0], help="0 means the whole training pool")
+        q.add_argument("--updates", type=int, default=20000)
+        q.add_argument("--batch", type=int, default=256)
+        q.add_argument("--lr", type=float, default=5e-4)
+    q = sub.add_parser("rung5")
+    q.add_argument("--ns", type=int, nargs="+", default=[1024, 0])
+    q.add_argument("--updates", type=int, default=20000)
     a = p.parse_args()
     globals()["cmd_" + a.cmd](a)
 
