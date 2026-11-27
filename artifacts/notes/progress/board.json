@@ -4,7 +4,7 @@
   "Detour: idea walk, 7 claims, paused",
   "Detour: zoom-ladder, about 430k tokens",
   "Detour: reading route and pictures, about 1.8M tokens",
-  "Paper 1: best rule still wrong on 52 of 96; new baseline being called blind (364 pictures), then learned interactions",
+  "Paper 1: no-training routes judged blind (one owner 1 of 96, paste 43, real 68 of 76); a learned interaction term is next",
   "Paper 2 labels pass every agreement bar; split blocked by borrowed part on one pair (58 of 86); rendering 320 on five more pairs"
  ],
  "detours_join": "P2",
