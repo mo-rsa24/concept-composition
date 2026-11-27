@@ -5,7 +5,7 @@
   "Detour: zoom-ladder, about 430k tokens",
   "Detour: reading route and pictures, about 1.8M tokens",
   "Paper 1: diagnosis converged; best push 131 of 527 touching (separate noise, 384 scenes) vs paste 461; direction waits on the owner",
-  "Paper 2: DreamSim and BioCLIP pass 64 of 64 cats; exploratory read running"
+  "Paper 2: six automated judges miss (best 102 of 240, need 216); measurement goes to the owner"
  ],
  "detours_join": "P2",
  "steps": [

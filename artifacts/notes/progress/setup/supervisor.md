@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated: 2026-11-27 09:09 SAST.
+Last updated: 2026-11-27 10:06 SAST.
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -205,6 +205,8 @@ Nothing at the moment. Paper 1's tuning calls are with two fresh reviewers at yo
 **Paper 1, the diagnosis converges** (2026-11-27 09:09). One change at a time, pixel checks on touching evaluation seeds: the 384-scene aligned head peaks at weight 64 (68 of 626 red meeting blue) and falls at 128 and 256 (61, 47) as the overlap goes dark. Separate starting noise per expert (afde29f8, offset 100,000; 527 seeds touch, overlap halved to 71 pixels) gives 83 of 527 with no push and the best result yet with the 384-scene head at weight 16, 131 of 527 (25%), purple still 0.94; weights 64 and 256 fall back to 107 and 55; the lower-on-top paste on the same pairs 461 of 527 (87%, purple 0.09). Across timing, direction, noise range, six times the data, push strength and starting noise, the classifier push tops out near a quarter of seeds touching with the overlap still blended. Paper 1's direction now goes to the owner; Paper 1 runs are paused.
 
 **Paper 2, the follow-on judges pass the 64-cat check** (09:09). DreamSim (against SDXL's own cat and dog renders, seeds 9001 to 9008) and BioCLIP each name all 64 census cats cat (bar 62). An exploratory read on the already-read split is running on mscluster110 (BioCLIP, then the other 432 references and DreamSim, then the scorer), marked as not the verdict: if either judge comes near the bars, new test pairs are built for the verdict; if both fail as the first four did, that batch is not needed.
+
+**Paper 2, the follow-on judges miss too** (2026-11-27 10:06). Exploratory read on the already-read split: DreamSim 96 of 240 (two-clear precision 0.42, within-pair AUC 0.79), BioCLIP 70 of 240 (0.56, 0.74); bars 216, 0.90, 0.85. Six automated judges have now missed by wide margins; no new test pairs are built. Paper 2's measurement goes back to the owner.
 
 ## Final review
 
