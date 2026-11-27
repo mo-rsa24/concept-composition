@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated 2026-11-27 11:10 UTC
+Last updated 2026-11-27 13:40 UTC
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -221,6 +221,8 @@ Paper 1, 2026-11-27 10:55 UTC: Method A's first read on CLEVR, the first 22 touc
 Paper 1, 2026-11-27 11:10 UTC: Method A's full read on the 626 touching evaluation seeds. Red within 1 pixel of blue: Method A 303 (34, 96 and 173 at counts 1, 2 and 3), the plain sum through the same code 0, the paste with the lower object on top 517 (84, 194, 239). Seeds mostly purple in the overlap: 23, 619 and 26. Method A does not beat the paste on pixels, so no blind test yet; it helps partly. Its touching share follows its training scenes' (14, 74 and 109 of 128 touch at counts 1, 2 and 3), so the next single change trains it on the 197 touching scenes only (paper1-diag-pack-k384-touching, a copy; run paper1-methodA-k384-touch, read on the same 66 seeds by p1-methodA-touch.sh). Method D waits on that read.
 
 Paper 2, 2026-11-27 11:10 UTC: the trained judge misses the bar of 216 of 240. On the choosing pool it agrees on 75 of 240 (two clear 9 of 40, borrowed part 0, hybrid 11, two of one kind 7, wrong species 12, extra subject 36, the one kind that passes 33). On the wider pool, exploratory because it saw other seeds of the test pairs, 121 of 240. Seven judges have now missed. What the dial trains on next changes the plan's design, so it goes to the owner with a recommendation.
+
+Paper 1, 2026-11-27 13:40 UTC: the squares toy (16x16, red and blue squares of side 4, black background; 169 red, 169 blue, 1 empty, 12,588 joint pictures that touch or overlap by one or two pixels; exact denoisers known; artifacts/results/does-the-interaction-term-work-on-a-small-toy/) reproduces the failure and answers whether the interaction term can be learned. Clean touching pairs on 256 shared seeds: exact joint 1.000, exact plain sum 0.141, neural plain sum 0.000, Method A with 16 joint scenes 0.145, with 64 0.141, with all 11,329 0.738, zero-delta control 0.000. Against the bars set before rung 0, that is fails, fails, partial (0.738 is 0.738 above the plain sum but under 0.8). With few scenes Method A draws bright squares that come out apart, as on CLEVR with 384 scenes; with many it draws touching pairs, one in front. The method learns the interaction; the number of joint scenes decides how much. The first builder stopped on a login timeout after rung 2; a second one is running the data curve (N 256, 1,024, 4,096), Method C and Method B on the toy. mscluster84 stopped answering at 13:35 UTC; the cluster runs were launched with nohup and are read once it returns.
 
 ## Final review
 
