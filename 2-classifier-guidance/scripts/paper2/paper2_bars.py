@@ -62,6 +62,8 @@ SINGLE_SPECIES_TELL_MIN = 0.90  # below this on one species' own pictures: "cann
 SPLIT_SEED = 0
 CONFIRM_SEED = 1
 UNSELECTED_SEED = 2
+OWNER_SEED = 4          # draws the owner's 60 from the read test pictures (seed 3 drew batch-01's candidates)
+SPLIT_ATTEMPTS_MAX = 20000   # draws of the pair split tried from SPLIT_SEED before the shortfall is reported
 
 # The middle of each judge's grid, where step 0.15 reads the 64 cats.
 CROP_CHECK_SETTINGS = {"margin": 0.15, "flag_share": 0.25, "yes_threshold": 0.5, "borrow_gap": 0.2, "n_refs": 8}
