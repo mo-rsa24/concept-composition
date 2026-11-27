@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated: 2026-11-27 03:44 SAST.
+Last updated: 2026-11-27 04:58 SAST.
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -173,6 +173,10 @@ Nothing at the moment. Paper 1's tuning calls are with two fresh reviewers at yo
 **Paper 1, why the answer was no** (2026-11-27 03:44). The diagnosis puts the cause upstream of the push: the red and blue lone samples share their starting noise, so their objects overlap, and in the overlap the region sampler is the plain sum, which draws purple from step 0. The push was small there (2.7 to 6.5 grey levels where about 40 were needed) and the head was near chance at high noise. Confirmed with one cheap run (`97bcd5e6`, `--overlap lower`, about 90 seconds on mscluster110): giving the overlap to the lower object drops the purple share inside the overlap from 0.986 to 0.154 (ours 0.982, paste with the lower object on top 0.101). Filed under [the contact-push result](../../../results/does-the-contact-push-beat-the-region-sampler/README.md). The next design needs a new pre-registered plan, so it is a direction choice and is set out for the owner.
 
 **Paper 2, rules version 3 settles agreement** (03:44). Every settled hybrid (140) and borrowed part (58) was recalled under version 3. Every kind now meets the 0.80 agreement bar: borrowed part 0.90 (55 of 61), hybrid 0.88, two of one kind 0.82, two clear 0.95; two clear against borrowed part 0.991. Still not split: borrowed part sits on 3 pairs (5 needed), two of one kind is 24 short, wrong species 49 short (15 of them look-alike) and extra subject 9 short. The look-alike renders on eight new pairs are running on mscluster112.
+
+**Paper 2, the whole pool called** (2026-11-27 04:58). Batch 5 (128 pictures on the eight new look-alike pairs) and batch 6 (the last 544 candidates, all on unlike pairs) were called under version 3. 1,172 pictures are settled. Every kind meets the agreement bar except wrong species, 24 of 31 (0.77): reviewers split on what counts as a body (a tiny blurred bird, a moth, a shadow) and on near-species (an eagle drawn for a condor). Still not split: wrong species has 31 pictures (65 needed), extra subject 11 on look-alike pairs (20 needed); the candidate pool is empty. Decided: rules version 4 (what counts as a body; a close relative is still a different species), a recall of every wrong-species call, and the plan's renamed pictures; asked of Loop 17 with a split diagnostic.
+
+**Paper 1, the next design pressure-tested** (04:58). The drafted overlap-ownership plan is shelved, uncommitted: in real scenes the lower object is in front on 341 of 346 touching pairs, the lower-object rule is a known baseline (Zhu et al. 2017), and a learned owner can at best tie it. The literature points instead at separate starting noise per expert (composition is exact only when the parts do not overlap), the rule for depth order, the learned part spent on the contact edge, all judged against a harmonised paste (the lower-on-top paste re-noised and finished by the sampler), the rival a reviewer would demand. The pressure test is filed beside the result. A coding agent is building the harmonised paste and the separate-noise sampler for a cheap measurement before any new pre-registration.
 
 ## Final review
 
