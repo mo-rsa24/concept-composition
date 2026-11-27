@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated: 2026-11-27 04:58 SAST.
+Last updated: 2026-11-27 05:14 SAST.
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -177,6 +177,10 @@ Nothing at the moment. Paper 1's tuning calls are with two fresh reviewers at yo
 **Paper 2, the whole pool called** (2026-11-27 04:58). Batch 5 (128 pictures on the eight new look-alike pairs) and batch 6 (the last 544 candidates, all on unlike pairs) were called under version 3. 1,172 pictures are settled. Every kind meets the agreement bar except wrong species, 24 of 31 (0.77): reviewers split on what counts as a body (a tiny blurred bird, a moth, a shadow) and on near-species (an eagle drawn for a condor). Still not split: wrong species has 31 pictures (65 needed), extra subject 11 on look-alike pairs (20 needed); the candidate pool is empty. Decided: rules version 4 (what counts as a body; a close relative is still a different species), a recall of every wrong-species call, and the plan's renamed pictures; asked of Loop 17 with a split diagnostic.
 
 **Paper 1, the next design pressure-tested** (04:58). The drafted overlap-ownership plan is shelved, uncommitted: in real scenes the lower object is in front on 341 of 346 touching pairs, the lower-object rule is a known baseline (Zhu et al. 2017), and a learned owner can at best tie it. The literature points instead at separate starting noise per expert (composition is exact only when the parts do not overlap), the rule for depth order, the learned part spent on the contact edge, all judged against a harmonised paste (the lower-on-top paste re-noised and finished by the sampler), the rival a reviewer would demand. The pressure test is filed beside the result. A coding agent is building the harmonised paste and the separate-noise sampler for a cheap measurement before any new pre-registration.
+
+**Paper 1, the two candidate fixes measured** (2026-11-27 05:14). Purple share inside the overlap on touching seeds, median: paste with the lower object on top 0.101 (the floor, since a paste has no blend), region sampler with the overlap to the lower object 0.154, harmonised paste 0.163 from step 10 or 15, separate starting noise 0.140 (and touching seeds fall from 626 to 527, the overlap halves from 138 to 71 pixels). Read: once the overlap has one owner, every sampler is within about 0.05 of the floor, so the colour problem behind the first no is solved by a rule, not by learning. What is left for a learned part is small (the contact edge, about 2 pixels at 64). That bears on what Paper 1 claims, so it is set out for the owner with a recommendation.
+
+**Paper 2, version 4** (05:14). Rules version 4 (bodies a reviewer can name at a glance count; a close relative is a different species) governs wrong species and extra subject. Recall of 336 pictures (every settled extra subject and wrong species, and every wrong-species call) and 60 renamed pictures (cougar shown as leopard 27, goose as swan 36, fox as coyote 25, flamingo as spoonbill 20 of the 108 possible) are being called by 18 reviewers. The split diagnostic shows borrowed part (concentrated on cheetah and cougar) failing the 12-a-pair and look-alike rules in 70% of draws, wrong species and extra subject's look-alike count in all.
 
 ## Final review
 
