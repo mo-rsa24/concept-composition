@@ -131,3 +131,18 @@ def test_lower_on_top_paste_puts_the_lower_object_in_front():
     assert torch.equal(out[0, 35, 25], red_col) and torch.equal(plain[0, 35, 25], blue_col)   # overlap: lower-on-top differs from paste
     assert torch.equal(out[1, 25, 25], blue_col)
     assert torch.equal(out[0, 22, 35], blue_col) and torch.equal(out[0, 45, 12], red_col)   # outside the overlap each keeps its own
+
+
+def test_lower_owns_overlap_gives_the_overlap_to_the_lower_object():
+    import torch
+    m_r = torch.zeros(1, 1, 4, 4); m_b = torch.zeros(1, 1, 4, 4)
+    m_r[..., 0:3, 0:3] = 1; m_b[..., 1:4, 1:4] = 1          # overlap is rows 1-2, columns 1-2
+    base_r = torch.where(m_r > 0, torch.tensor(2.0), torch.tensor(-1.0))
+    base_b = torch.where(m_b > 0, torch.tensor(3.0), torch.tensor(-1.0))   # blue's base is lower in the frame
+    r, b = ps.lower_owns_overlap(m_r, m_b, base_r, base_b)
+    assert r[..., 1:3, 1:3].sum() == 0 and b[..., 1:3, 1:3].sum() == 4       # blue owns the overlap
+    assert r[..., 0, 0] == 1 and b[..., 3, 3] == 1                           # outside the overlap nothing changes
+    r2, b2 = ps.lower_owns_overlap(m_r, m_b, base_b, base_r)                  # now red is lower
+    assert b2[..., 1:3, 1:3].sum() == 0 and r2[..., 1:3, 1:3].sum() == 4
+    r3, b3 = ps.lower_owns_overlap(m_r, m_b, base_r, base_r)                  # a tie keeps blue, as paste does
+    assert r3[..., 1:3, 1:3].sum() == 0

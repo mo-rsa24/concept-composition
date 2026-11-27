@@ -368,6 +368,24 @@ def object_masks(lone_dir, k, seeds, empty):
     return (F.max_pool2d(mask, 3, 1, 1) > 0).float().to(DEV)
 
 
+def lower_owns_overlap(mask_red, mask_blue, base_red, base_blue):
+    """Where the two masks overlap, keep only the mask of the object whose base sits lower in the frame (nearer the camera); a tie
+    keeps blue, as paste does. base_red and base_blue are each pixel's object base row (base_row, -1 off the objects), dilated like
+    the masks. Added 2026-11-27 for the diagnosis of the first result's no: in the shared overlap the region sampler is the plain sum,
+    which draws purple; this gives the overlap to one expert."""
+    both = (mask_red > 0) & (mask_blue > 0)
+    red_wins = base_red > base_blue
+    return (torch.where(both & ~red_wins, torch.zeros_like(mask_red), mask_red),
+            torch.where(both & red_wins, torch.zeros_like(mask_blue), mask_blue))
+
+
+def object_bases(lone_dir, k, seeds, empty):
+    """Each lone sample's object base rows (base_row of its foreground objects), dilated by 1 pixel like object_masks; on DEV."""
+    pictures = load_pictures(Path(lone_dir) / f"count-{k}", seeds)
+    base = base_row(components(foreground(pictures, empty))).float()[:, None]
+    return F.max_pool2d(base, 3, 1, 1).to(DEV)
+
+
 def region_denoiser(nets, labels_red, labels_blue, mask_red, mask_blue):
     """D = D_empty + M_red (D_red - D_empty) + M_blue (D_blue - D_empty), written as M_red D_red + M_blue D_blue + (1 - M_red - M_blue)
     D_empty. The two forms are the same sum; the second, with both masks all ones, performs exactly the plain sum's floating-point
@@ -406,6 +424,9 @@ def cmd_region(args):
             else:
                 m_r = object_masks(args.red_dir, k, batch, empty)
                 m_b = object_masks(args.blue_dir, k, batch, empty)
+                if getattr(args, "overlap", "both") == "lower":
+                    m_r, m_b = lower_owns_overlap(m_r, m_b, object_bases(args.red_dir, k, batch, empty),
+                                                  object_bases(args.blue_dir, k, batch, empty))
             x = heun(region_denoiser(nets, labels, labels, m_r, m_b), x0, t)
             images = to_uint8(encoder, x)
             save(images, folder / f"count-{k}", batch)
@@ -416,7 +437,8 @@ def cmd_region(args):
                 worst = max(worst, float(((x - plain).abs() / 2).max()))   # sampler output is on -1 to 1; halve for the 0-to-1 scale
             pictures += len(batch)
     seconds = time.time() - begin
-    log_json(folder, "timing", {"stage": "region", "identity": bool(args.identity), "counts": counts, "pictures": pictures,
+    log_json(folder, "timing", {"stage": "region", "identity": bool(args.identity), "overlap": getattr(args, "overlap", "both"),
+                                "counts": counts, "pictures": pictures,
                                 "seconds": round(seconds, 1), "seconds_per_picture": round(seconds / max(1, pictures), 4),
                                 "device": device_name()})
     if distances:
@@ -940,6 +962,9 @@ def build_parser():
     p.add_argument("--mean-empty", required=True)
     p.add_argument("--counts", default="1,2,3")
     p.add_argument("--identity", action="store_true", help="both masks all ones; also draws the plain sum and writes identity.txt")
+    p.add_argument("--overlap", choices=("both", "lower"), default="both",
+                   help="both: where the masks overlap both experts act (the plan's sampler); lower: the overlap goes to the object whose "
+                        "base sits lower in the frame")
     seed_choice(p)
 
     p = common(sub.add_parser("pair-sheet"))
