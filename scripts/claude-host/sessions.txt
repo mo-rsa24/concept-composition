@@ -1,0 +1,6 @@
+# One Claude session per line: name|prompt file in scripts/claude-host/prompts/ (copied to /datasets/mmolefe/claude-host/prompts/).
+# The prompt is used only the first time a session starts; after that it is resumed by name.
+# Uncomment a line to add that session at the next host start.
+supervisor|supervisor.txt
+#paper1|paper1.txt
+#paper2|paper2.txt

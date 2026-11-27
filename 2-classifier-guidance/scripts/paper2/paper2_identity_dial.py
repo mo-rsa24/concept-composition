@@ -463,6 +463,34 @@ class Sampler:
     def alpha(self, k):
         return self.model.alpha(self.model.scheduler.timesteps[k]).float()
 
+    def finish(self, x):
+        """The finished picture, (3, H, W) in [0, 1], decoded by the model's own code (finish_by_model)."""
+        return finish_by_model(self.model, x)
+
+
+FINISH = "the model's own sample_loop decode and postprocess (CO3: its fp16 VAE under fp16 autocast, untiled)"
+
+
+def finish_by_model(model, x):
+    """A finished latent decoded exactly as the model's own sample_loop decodes it, by running that sample_loop with no
+    step left to run: what remains of it is its decode and its postprocess to a picture.
+
+    CO3's row (paper2_rows: seed_everything, then Co3.sample_loop) decodes with CO3's fp16 VAE under fp16 autocast, whole,
+    and postprocesses with its image processor. The trainer's graph decode (an fp32 copy of the VAE, tiled, for the
+    reward's gradient) differs from that by pixel noise (1.73 grey levels on average, up to 72 on single edge pixels, in
+    step 2's rollout check on 2026-11-27), so every finished picture goes through here and the rows are matched pictures.
+    Returns the saved picture's own values: the uint8 picture divided by 255, on x's device."""
+    import numpy as np
+    sched = model.scheduler
+    steps = sched.timesteps
+    sched.timesteps = steps[:0]
+    try:
+        pil = type(model).sample_loop(model, x)[0]
+    finally:
+        sched.timesteps = steps
+    arr = torch.from_numpy(np.asarray(pil.convert("RGB")).copy())
+    return arr.permute(2, 0, 1).float().div(255).to(x.device)
+
 
 class StandInModel:
     """A CO3-shaped stand-in on CPU: one attention block as the U-Net, ten steps, prompts as offsets.
@@ -504,6 +532,16 @@ class StandInModel:
         an = self.alphas[min(i + 1, len(self.alphas) - 1)]
         return an.sqrt() * x0 + (1 - an).sqrt() * e
 
+    def decode(self, x0):
+        return torch.sigmoid(self.decoder(x0.reshape(1, -1))).reshape(3, 8, 8)
+
+    def sample_loop(self, x):
+        """CO3's sample_loop shape: every step through denoise_step, then the model's own decode, as a list of pictures."""
+        with torch.no_grad():
+            for i, t in enumerate(self.scheduler.timesteps):
+                x = self.denoise_step(x, t, i)
+            return [to_pil(self.decode(x.float()))]
+
 
 class StandInUNet(nn.Module):
     def __init__(self):
@@ -537,7 +575,7 @@ def stand_in_sampler(seed: int = 0) -> Sampler:
     def set_text(prompt):
         m.prompt = prompt
 
-    return Sampler(m, decode=lambda x0: torch.sigmoid(m.decoder(x0.reshape(1, -1))).reshape(3, 8, 8),
+    return Sampler(m, decode=m.decode,
                    guided_eps=lambda x, k: m.eps(x, m.prompt), cond_eps=lambda x, k: m.eps(x, m.prompt),
                    prompt_eps=lambda x, k, prompt: m.eps(x, prompt), set_pair=set_pair, set_text=set_text,
                    start=lambda seed: torch.randn(1, 16, 8, generator=torch.Generator().manual_seed(seed)),
@@ -557,7 +595,10 @@ def co3_sampler(device, out: Path) -> Sampler:
     model, config = rows.load("a cat and a dog", parser, out)
     for p in model.unet.parameters():
         p.requires_grad_(False)
-    vae = model.vae.to(torch.float32)   # the fp16 SDXL VAE overflows; decode in fp32
+    # The reward's decode keeps the graph in fp32 on a copy of the VAE; CO3's own fp16 VAE stays as it is, for the
+    # finished pictures, which go through CO3's own decode (Sampler.finish).
+    import copy
+    vae = copy.deepcopy(model.vae).to(torch.float32)
     enc_cache: dict[str, tuple] = {}
 
     def guided(x, t, seq_u, pool_u, seq_c, pool_c):
@@ -835,8 +876,8 @@ def log_tuning_pictures(sampler: "Sampler", dial: Dial, dial_from: int, reward, 
         for s in seeds:
             x = sampler.rollout(sampler.start(s), 0, sampler.n_steps, dial, dial_from, 1.0)
             dial.set_strength(0.0)
+            image = sampler.finish(x)
             with torch.no_grad():
-                image = sampler.decode(x.float())
                 score, info = reward(image, pa, pb)
             path = folder / slug_of(pa, pb) / f"seed-{s}.png"
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -1139,7 +1180,7 @@ def draw(a: argparse.Namespace) -> None:
         raise SystemExit("--dial-from-step is required: the checkpoint does not record it")
     drawn = draw_rows(sampler, dial, dial_from, a.strength, pairs, seeds, out)
     (out / "draw.json").write_text(json.dumps({"ckpt": str(a.ckpt), "strength": a.strength, "attention": sampler.attention,
-                                               "dial_from_step": dial_from, "pictures": drawn}, indent=1))
+                                               "dial_from_step": dial_from, "finish": FINISH, "pictures": drawn}, indent=1))
 
 
 def draw_rows(sampler: Sampler, dial: Dial | None, dial_from: int, strength: float, pairs, seeds, out: Path) -> list[dict]:
@@ -1150,8 +1191,9 @@ def draw_rows(sampler: Sampler, dial: Dial | None, dial_from: int, strength: flo
         sampler.set_pair(pa, pb)
         for seed in seeds:
             x = sampler.rollout(sampler.start(seed), 0, sampler.n_steps, dial, dial_from, strength)
-            with torch.no_grad():
-                image = sampler.decode(x.float())
+            if dial is not None:
+                dial.set_strength(0.0)
+            image = sampler.finish(x)
             path = out / slug_of(pa, pb) / f"seed-{seed}.png"
             path.parent.mkdir(parents=True, exist_ok=True)
             to_pil(image).save(path)
@@ -1182,7 +1224,7 @@ def draw_co3(a: argparse.Namespace) -> None:
         raise SystemExit("the CO3 row is drawn by a U-Net with no adapter attached")
     drawn = draw_rows(sampler, None, sampler.n_steps, 0.0, pairs, seeds, out)
     (out / "draw.json").write_text(json.dumps({"ckpt": None, "row": "CO3 alone, no adapter attached",
-                                               "attention": sampler.attention, "pictures": drawn}, indent=1))
+                                               "attention": sampler.attention, "finish": FINISH, "pictures": drawn}, indent=1))
 
 
 def build_reward(a: argparse.Namespace):

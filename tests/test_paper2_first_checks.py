@@ -395,4 +395,6 @@ def test_rollout_check_passes_on_the_stand_in(tmp_path):
                     "--dry-run"]) == 0
     r = json.loads((tmp_path / "r/rollout.json").read_text())
     assert r["passed"] and r["trainer_minus_co3_first_grey"] == 0
-    assert len(list((tmp_path / "r").glob("*.png"))) == 3
+    assert r["latents_equal"] and r["latent_largest_difference"] == 0
+    assert r["co3_steps_then_finish_minus_co3_first_grey"] == 0
+    assert len(list((tmp_path / "r").glob("*.png"))) == 4

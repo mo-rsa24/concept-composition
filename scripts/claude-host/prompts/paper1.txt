@@ -1,0 +1,1 @@
+Follow artifacts/notes/progress/prompts/session-16-paper-1-setup.md to its end. You run on the cluster in tmux on a batch node; read artifacts/notes/progress/setup/supervisor.md first for where Paper 1 stands.

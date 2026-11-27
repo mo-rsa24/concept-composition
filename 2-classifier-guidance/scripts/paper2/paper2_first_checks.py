@@ -450,8 +450,7 @@ def cmd_window(a) -> int:
                 c = call_picture(judge, est, pa, pb)
                 steps.append({"kind": c["kind"], "two_clear_score": c["two_clear_score"], "n_bodies": c["n_bodies"]})
                 x = sampler.rollout(x, k, k + 1, None, n, 0.0)
-            with torch.no_grad():
-                finished = sampler.decode(x.float()).float()
+            finished = sampler.finish(x)
             path = out / "finished" / pid.slug_of(pa, pb) / f"seed-{s}.png"
             path.parent.mkdir(parents=True, exist_ok=True)
             pid.to_pil(finished).save(path)
@@ -523,6 +522,14 @@ def grey_difference(x, y) -> float:
 
 
 def cmd_rollout(a) -> int:
+    """CO3's row twice, then the trainer's strength-0 rollout, with what separates them if they differ.
+
+    Beside the pass rule (unchanged): CO3's own steps run by hand under its sample_loop's autocast, giving its finished
+    latent, against the trainer's finished latent (the largest absolute difference, and whether they are equal); that
+    hand-run latent decoded by finish_by_model against CO3's first picture (0 when finish is CO3's own decode); and the
+    trainer's latent through the reward's fp32 graph decode against CO3's first picture (the decode the finished pictures
+    used to take)."""
+    import contextlib
     import torch
     import paper2_identity_dial as pid
     out = Path(a.out)
@@ -530,11 +537,11 @@ def cmd_rollout(a) -> int:
     pa, pb, _ = pid.read_pairs(a.pairs_file)[0]
     pictures = {}
     if a.dry_run:
-        sampler = pid.stand_in_sampler(0)
-        sampler.set_pair(pa, pb)
-        for name in ("co3-1", "co3-2"):
-            x = sampler.rollout(sampler.start(a.seed), 0, sampler.n_steps, None, sampler.n_steps, 0.0)
-            pictures[name] = pid.to_pil(sampler.decode(x.float()))
+        row = pid.stand_in_sampler(0)
+        row.set_pair(pa, pb)
+        row_model, row_start = row.model, row.start
+        seed_all = lambda s: None                                      # noqa: E731
+        autocast = contextlib.nullcontext
         path = "stand-in sampler, both rows"
     else:
         for p in (HERE.parent / "method_search", HERE.parent / "rung2", REPO):
@@ -542,25 +549,40 @@ def cmd_rollout(a) -> int:
         from paper2_co3_patch import use_pytorch_attention_if_no_xformers
         use_pytorch_attention_if_no_xformers()
         import paper2_rows as rows
-        from composers.utils_custom import seed_everything
+        from composers.utils_custom import seed_everything as seed_all
         parser = rows.load_parser()
         prompt = f"{with_article(pa)} and {with_article(pb)}"
-        model, config = rows.load(prompt, parser, out / "_config")
-        rows.set_prompt(model, config, prompt, parser)
-        for name in ("co3-1", "co3-2"):
-            seed_everything(a.seed)
-            pictures[name] = model.sample_loop(rows.start_noise(model, a.seed))[0]
-        del model
+        row_model, config = rows.load(prompt, parser, out / "_config")
+        rows.set_prompt(row_model, config, prompt, parser)
+        row_start = lambda s: rows.start_noise(row_model, s)           # noqa: E731
+        autocast = lambda: torch.autocast(device_type="cuda", dtype=torch.float16)   # noqa: E731
+        path = "CO3's row: paper2_rows (seed_everything, sample_loop); the trainer: co3_sampler's rollout and finish"
+    for name in ("co3-1", "co3-2"):
+        seed_all(a.seed)
+        pictures[name] = row_model.sample_loop(row_start(a.seed))[0]
+    seed_all(a.seed)
+    x = row_start(a.seed)
+    with torch.no_grad(), autocast():
+        for i, t in enumerate(row_model.scheduler.timesteps):
+            x = row_model.denoise_step(x, t, i)
+    row_latent = x.detach().clone()
+    pictures["co3-steps-then-finish"] = pid.to_pil(pid.finish_by_model(row_model, x))
+    if a.dry_run:
+        sampler = pid.stand_in_sampler(0)
+    else:
+        row_latent = row_latent.cpu()
+        del row_model
         torch.cuda.empty_cache()
         sampler = pid.co3_sampler(a.device, out)
-        sampler.set_pair(pa, pb)
-        path = "CO3's row: paper2_rows (seed_everything, sample_loop); the trainer: co3_sampler's rollout"
+    sampler.set_pair(pa, pb)
     dial = pid.attach_dial(sampler.unet, pid.RANK)
     x = sampler.rollout(sampler.start(a.seed), 0, sampler.n_steps, dial, sampler.n_steps, 0.0)
+    pictures["trainer-strength-0"] = pid.to_pil(sampler.finish(x))
     with torch.no_grad():
-        pictures["trainer-strength-0"] = pid.to_pil(sampler.decode(x.float()))
+        graph_decode = pid.to_pil(sampler.decode(x.float()))
     for name, im in pictures.items():
         im.save(out / f"{name}.png")
+    trainer_latent = x.detach().to(row_latent.device)
     redraw = grey_difference(pictures["co3-2"], pictures["co3-1"])
     trainer = grey_difference(pictures["trainer-strength-0"], pictures["co3-1"])
     passed = trainer <= redraw or trainer <= 1.0
@@ -568,7 +590,13 @@ def cmd_rollout(a) -> int:
               "co3_second_minus_first_grey": round(redraw, 4), "trainer_minus_co3_first_grey": round(trainer, 4),
               "rule": "the trainer's strength-0 picture differs from the first CO3 picture by no more than the second "
                       "CO3 picture does, or by at most 1 grey level of 255",
-              "passed": passed}
+              "passed": passed,
+              "latents_equal": bool(row_latent.dtype == trainer_latent.dtype and torch.equal(row_latent, trainer_latent)),
+              "latent_dtypes": [str(row_latent.dtype), str(trainer_latent.dtype)],
+              "latent_largest_difference": float((row_latent.float() - trainer_latent.float()).abs().max()),
+              "co3_steps_then_finish_minus_co3_first_grey": round(
+                  grey_difference(pictures["co3-steps-then-finish"], pictures["co3-1"]), 4),
+              "trainer_graph_decode_minus_co3_first_grey": round(grey_difference(graph_decode, pictures["co3-1"]), 4)}
     (out / "rollout.json").write_text(json.dumps(result, indent=1))
     print(json.dumps(result))
     if not passed:

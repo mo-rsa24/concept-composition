@@ -508,3 +508,86 @@ def test_training_logs_the_tuning_pictures_before_and_every_n_steps(tmp_path):
     assert summary["memory"] == {"on_card": False} and len(summary["logged"]) == 4
     with pytest.raises(SystemExit, match="go together"):
         pid.main(["train", "--dry-run", "--log-pairs-file", str(tmp_path / "tuning.txt"), "--out", str(tmp_path / "u")])
+
+
+# ---- the trainer's strength-0 rollout is CO3's own row, bit for bit (step 2's rollout check, run here on the stand-in)
+
+def _as_array(pil):
+    import numpy as np
+    return np.asarray(pil.convert("RGB"))
+
+
+@pytest.mark.parametrize("seed", [12001, 12002])
+def test_strength_0_rollout_and_finish_equal_the_models_own_sample_loop_bit_for_bit(seed):
+    """CO3's row is seed, then the model's sample_loop (every step through denoise_step, then its own decode). The
+    trainer's is its rollout with a dial attached at strength 0, then finish. The dial carries weights that would move
+    the picture if they acted, so equality also shows strength 0 skips the adapter."""
+    import numpy as np
+    row = pid.stand_in_sampler(0)
+    row.set_pair("donkey", "pony")
+    reference = row.model.sample_loop(row.start(seed))[0]
+    trainer = pid.stand_in_sampler(0)
+    trainer.set_pair("donkey", "pony")
+    dial = pid.attach_dial(trainer.unet)
+    randomise(dial)
+    x = trainer.rollout(trainer.start(seed), 0, trainer.n_steps, dial, trainer.n_steps, 0.0)
+    assert np.array_equal(_as_array(pid.to_pil(trainer.finish(x))), _as_array(reference))
+    # and at strength 1 from step 2 the same dial does move it, so the check above is not blind
+    y = trainer.rollout(trainer.start(seed), 0, trainer.n_steps, dial, 2, 1.0)
+    assert not np.array_equal(_as_array(pid.to_pil(trainer.finish(y))), _as_array(reference))
+
+
+def test_finish_is_the_models_decode_and_restores_its_steps():
+    s = pid.stand_in_sampler(0)
+    steps = s.model.scheduler.timesteps.clone()
+    x = s.rollout(s.start(1), 0, s.n_steps, None, s.n_steps, 0.0)
+    calls_before = len(s.model.calls)
+    img = s.finish(x)
+    assert len(s.model.calls) == calls_before                      # no step ran inside finish
+    assert torch.equal(s.model.scheduler.timesteps, steps)
+    assert _as_array(pid.to_pil(img)).tobytes() == _as_array(pid.to_pil(s.model.decode(x.float()))).tobytes()
+
+    class Broken(pid.StandInModel):
+        def sample_loop(self, x):
+            raise RuntimeError("decode failed")
+    b = Broken(0)
+    before = b.scheduler.timesteps.clone()
+    with pytest.raises(RuntimeError):
+        pid.finish_by_model(b, x)
+    assert torch.equal(b.scheduler.timesteps, before)              # restored even when the decode fails
+
+
+def test_drawn_rows_are_the_models_own_pictures(tmp_path):
+    """draw-co3 (no adapter) and draw with an untrained dial (up at zero) both give, for each pair and seed, exactly the
+    picture the model's own sample_loop gives."""
+    import numpy as np
+    from PIL import Image
+    (tmp_path / "pairs.txt").write_text("a_wolf__x__a_husky\na_crow__x__a_raven\n")
+    assert run("draw-co3", "--dry-run", "--pairs-file", str(tmp_path / "pairs.txt"), "--seeds", "13001:13003",
+               "--out", str(tmp_path / "co3")).returncode == 0
+    dial = pid.attach_dial(pid.stand_in_sampler(0).unet)
+    pid.save_dial(dial.state(), tmp_path / "zero.pt", {"dial_from_step": 2})
+    pid.main(["draw", "--dry-run", "--ckpt", str(tmp_path / "zero.pt"), "--pairs-file", str(tmp_path / "pairs.txt"),
+              "--seeds", "13001:13003", "--out", str(tmp_path / "dial")])
+    for folder in ("co3", "dial"):
+        assert json.loads((tmp_path / folder / "draw.json").read_text())["finish"] == pid.FINISH
+    for slug, (a, b) in (("a_wolf__x__a_husky", ("wolf", "husky")), ("a_crow__x__a_raven", ("crow", "raven"))):
+        for seed in (13001, 13002):
+            ref = pid.stand_in_sampler(0)
+            ref.set_pair(a, b)
+            want = _as_array(ref.model.sample_loop(ref.start(seed))[0])
+            for folder in ("co3", "dial"):
+                got = np.asarray(Image.open(tmp_path / folder / slug / f"seed-{seed}.png").convert("RGB"))
+                assert np.array_equal(got, want), (folder, slug, seed)
+
+
+def test_co3_sampler_keeps_co3s_own_vae_and_decodes_finished_pictures_with_it():
+    """co3_sampler cannot run here (it loads SDXL); its source must leave CO3's VAE in its own dtype, keep the graph
+    decode on a copy, and give every finished picture to finish rather than to the graph decode."""
+    src = DIAL.read_text()
+    body = src[src.index("def co3_sampler("):src.index("# ---------------------------------------------------------------- inputs")]
+    assert "model.vae.to(torch.float32)" not in body and "copy.deepcopy(model.vae).to(torch.float32)" in body
+    for fn in ("def draw_rows(", "def log_tuning_pictures("):
+        part = src[src.index(fn):]
+        part = part[:part.index("\ndef ", 1)]
+        assert "sampler.finish(x)" in part and "sampler.decode(x" not in part, fn
