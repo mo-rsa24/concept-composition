@@ -5,7 +5,7 @@
     "Detour: zoom-ladder, about 430k tokens",
     "Detour: reading route and pictures, about 1.8M tokens",
     "Paper 1: CLEVR A touching 376/626 (paste 517); 3,000 joint renders near done; toy B, D on held render-node GPUs; toy C fails at A's budget",
-    "Paper 2: dial checks stopped at the rollout check (1.73 grey, precision); trainer being matched to CO3; mini toy base on a held node",
+    "Paper 2: rollout mismatch traced to the decode and fixed; dial checks rerunning on mscluster110; mini toy base on a held node",
     "Moving the Claude sessions to a daily batch-node host on the cluster (scripts written, handover under test)"
   ],
   "detours_join": "P2",

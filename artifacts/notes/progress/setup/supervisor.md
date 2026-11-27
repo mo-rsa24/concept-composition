@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated 2026-11-27 20:45 UTC
+Last updated 2026-11-27 21:00 UTC
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -249,6 +249,8 @@ Paper 2, 2026-11-27 19:20 UTC: the dial miniature (16x16, squares and diamonds i
 2026-11-27 20:25 UTC, both papers: the cluster checkout was synced to d5171b7d through a git bundle on /datasets (the cluster could not fetch from GitHub), after its uncommitted board.json edit was set aside with git stash (kept, named for this sync). Three toy runs moved off the laptop onto the RTX 3090s inside our own render jobs (rendering uses the CPU only): Method B at A's budget on mscluster54, Method D on mscluster59, Paper 2's miniature base on mscluster61, all writing under /datasets/mmolefe/poe_repair_min/toys/. Method C at A's budget finished on the laptop first and fails in all 32 settings (both drawn-data sizes, 1,024 and all scenes, weights 1 to 64, final and best heads): clean touching pairs 0.000; its head still memorises its training seeds. Render job 97042 aborted at the GPU guard on mscluster48 (GPU not visible); mscluster48 is added to the bigbatch exclude list and the job resubmitted as 97051 on mscluster83. The other five render jobs were at about 340 of 500 scenes each at 20:23 UTC.
 
 Paper 2, 2026-11-27 20:45 UTC: the dial run's step 2 on mscluster110 passed the sets, the window read (trained head, CO3's choosing pairs at seeds 14,001 to 14,004: window steps 40 to 50), the closeness cache and the redraw count (0 kind changes of 32, bar 2), then stopped at the rollout check, exit 3: on donkey and pony at seed 12,001 the trainer's drawing with the dial at strength 0 differs from CO3's own drawing by 1.73 grey levels on average while CO3 drawn twice differs by 0.00 (rule: at most the redraw difference or 1 grey level). Side by side the pictures are the same, the difference is pixel noise on edges (1.3% of pixels above 10 grey levels), the precision mismatch the memory note sampler-identity-checks-match-precision describes. The check is kept as it is; the dial builder is making the trainer's rollout match CO3's precision, after which step 2 reruns from the rollout check. Paper 1: five of the six joint render jobs finished; job 97051 (resubmitted) is still rendering. The Claude session host (scripts/claude-host/, runbook recipe keeping-claude-sessions-on-the-cluster) is written and its handover is under test as job 97054.
+
+Paper 2, 2026-11-27 21:00 UTC: the rollout check's 1.73 grey levels came from the decode, not the 50 steps: the trainer decoded its finished pictures in fp32 with tiled blending while CO3 decodes the whole latent in fp16. Every finished picture now goes through CO3's own decode (commit 88ee3192; a CPU test shows the strength-0 rollout equals CO3's sample_loop bit for bit). The window read's reference pictures were made with the old decode, so for a consistent window the supervisor moved the window and the closeness cache aside (suffix old-decode-<time>, kept) and step 2 reruns from them on mscluster110; CO3's two draws and the failed rollout record are moved aside by the script itself.
 
 ## Final review
 
