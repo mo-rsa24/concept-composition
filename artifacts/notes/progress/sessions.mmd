@@ -4,7 +4,7 @@ flowchart TB
   classDef doing fill:#ffd8a8,color:#111111
   classDef todo fill:#e9ecef,color:#111111
   classDef note fill:#ffffff,stroke:#c92a2a,stroke-dasharray:5 5,color:#c92a2a
-  now["Sessions at 02:14 · 111 of 111 steps done"]
+  now["Sessions at 12:32 · 117 of 118 steps done"]
   style now fill:#ffffff,stroke:#ffffff,color:#111111
   subgraph L0["Loop 1 · not running · all done"]
     direction LR
@@ -26,15 +26,15 @@ flowchart TB
     direction LR
     d4["1 done"]:::done
   end
-  subgraph L5["Loop 6 · idle · all done"]
+  subgraph L5["Loop 6 · not running · all done"]
     direction LR
     d5["17 done"]:::done
   end
-  subgraph L6["Loop 12 · working · all done"]
+  subgraph L6["Loop 12 · not running · all done"]
     direction LR
     d6["13 done"]:::done
   end
-  subgraph L7["Loop 13 · working · all done"]
+  subgraph L7["Loop 13 · not running · all done"]
     direction LR
     d7["2 done"]:::done
   end
@@ -46,27 +46,43 @@ flowchart TB
     direction LR
     d9["4 done"]:::done
   end
-  subgraph L10["Loop 7 · not running · all done"]
+  subgraph L10["s0 · not running · all done"]
     direction LR
-    d10["3 done"]:::done
+    d10["2 done"]:::done
   end
-  subgraph L11["Loop 8 · not running · all done"]
+  subgraph L11["Loop 16 · not running · all done"]
     direction LR
-    d11["7 done"]:::done
+    d11["1 done"]:::done
   end
-  subgraph L12["Loop 9 · not running · all done"]
+  subgraph L12["Loop 17 · not running · all done"]
     direction LR
-    d12["9 done"]:::done
+    d12["1 done"]:::done
   end
-  subgraph L13["Loop 10 · not running · all done"]
+  subgraph L13["Loop 18 · working · 1 left · ETA 44 min to 77.9 h"]
     direction LR
-    d13["9 done"]:::done
+    d13["2 done"]:::done --> n_RS7["RS7: Paper 2 species judge:<br/>scripts written and<br/>every judge passes the<br/>64-cat check"]:::doing
   end
-  subgraph L14["Loop 11 · not running · all done"]
+  subgraph L14["Loop 7 · not running · all done"]
     direction LR
-    d14["5 done"]:::done
+    d14["3 done"]:::done
   end
-  now ~~~ L0 ~~~ L1 ~~~ L2 ~~~ L3 ~~~ L4 ~~~ L5 ~~~ L6 ~~~ L7 ~~~ L8 ~~~ L9 ~~~ L10 ~~~ L11 ~~~ L12 ~~~ L13 ~~~ L14
+  subgraph L15["Loop 8 · not running · all done"]
+    direction LR
+    d15["7 done"]:::done
+  end
+  subgraph L16["Loop 9 · not running · all done"]
+    direction LR
+    d16["9 done"]:::done
+  end
+  subgraph L17["Loop 10 · not running · all done"]
+    direction LR
+    d17["9 done"]:::done
+  end
+  subgraph L18["Loop 11 · not running · all done"]
+    direction LR
+    d18["5 done"]:::done
+  end
+  now ~~~ L0 ~~~ L1 ~~~ L2 ~~~ L3 ~~~ L4 ~~~ L5 ~~~ L6 ~~~ L7 ~~~ L8 ~~~ L9 ~~~ L10 ~~~ L11 ~~~ L12 ~~~ L13 ~~~ L14 ~~~ L15 ~~~ L16 ~~~ L17 ~~~ L18
   style L0 fill:#e8f0fd,stroke:#2f6fde,stroke-width:3px
   style d0 stroke:#2f6fde,stroke-width:3px
   style L1 fill:#fff0f6,stroke:#d6336c,stroke-width:3px
@@ -95,5 +111,14 @@ flowchart TB
   style d12 stroke:#6b7280,stroke-width:3px
   style L13 fill:#f1f3f5,stroke:#6b7280,stroke-width:3px
   style d13 stroke:#6b7280,stroke-width:3px
+  style n_RS7 stroke:#6b7280,stroke-width:3px
   style L14 fill:#f1f3f5,stroke:#6b7280,stroke-width:3px
   style d14 stroke:#6b7280,stroke-width:3px
+  style L15 fill:#f1f3f5,stroke:#6b7280,stroke-width:3px
+  style d15 stroke:#6b7280,stroke-width:3px
+  style L16 fill:#f1f3f5,stroke:#6b7280,stroke-width:3px
+  style d16 stroke:#6b7280,stroke-width:3px
+  style L17 fill:#f1f3f5,stroke:#6b7280,stroke-width:3px
+  style d17 stroke:#6b7280,stroke-width:3px
+  style L18 fill:#f1f3f5,stroke:#6b7280,stroke-width:3px
+  style d18 stroke:#6b7280,stroke-width:3px

@@ -1,0 +1,822 @@
+OpenAI Codex v0.171.0-alpha.13
+--------
+workdir: /home/molef/PhD/concept-composition/artifacts/notes/progress/field-scouts/astra
+model: gpt-6-astra
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR]
+reasoning effort: high
+reasoning summaries: none
+session id: 01a2025a-89db-7752-bfd0-696fd5f93939
+--------
+user
+You are working in an empty folder. Do not read any file outside this folder. Follow the brief below. Your output path is table.json in this folder. Use web search and open the papers. When table.json is written and parses as JSON, reply with one line giving the row count.
+
+# Field scout brief
+
+You are surveying published research as of 2026-11-22. Search the web, open the papers themselves, and report only what you read in them.
+
+## The two research problems
+
+**Problem 1: composing experts that never met.** Two diffusion models are trained separately, on disjoint data. Neither has seen an image containing both concepts, and no joint prompt or joint data exists. The goal is to sample images that contain both concepts as separate objects by combining the two trained models at sampling time, or with a small amount of extra machinery.
+
+**Problem 2: restoring plurality in one model.** One text-to-image diffusion model has seen both concepts. Combining its predictions for two prompts as a product of experts tends to fuse them into one hybrid object. The goal is to make the composed sample contain two distinct objects, for example with a corrector, a guidance term, a classifier, a regional method or a better sampler.
+
+## What to find
+
+Find the papers a careful reviewer would expect either project to cite or compare against. Cover direct rivals, the theory of when a product of diffusion models is valid, region-based and layout-based composition, samplers and correctors for composition, attention-based multi-object methods, the benchmarks used to score them, and work from 2025 and 2026 that a slower search would miss.
+
+These are already known, so include each one that matters and verify it:
+
+Composable Diffusion (2206.01714), Reduce Reuse Recycle (2302.11552), SuperDiff (2412.17762), Feynman-Kac Correctors (2503.02819), MultiDiffusion (2302.08113), Projective Composition (2502.04549), Local Mechanisms of Compositional Generalization (2509.16447), CoInD (2503.01145), CO3 (2509.25940), ToMe (2411.07132), Attend-and-Excite (2301.13826), Compositional Sculpting (2309.16115), Catastrophic Compositional Generation (2606.23920), Test-Time Compositional Generalization (2605.07078), Diffusion Domain Expansion (2605.23275), PiCo (2505.03203), FreeFuse (2510.23515).
+
+At least 10 of your rows must be papers **not** on that list.
+
+## Rules
+
+- Return at most 30 rows, ordered by how much each matters to the two problems.
+- Open each paper's arXiv page, HTML version or PDF. If you cannot open it, keep the row, set `read` to `could not read`, and leave `evidence_quote` empty.
+- `evidence_quote` must be one sentence copied word for word from the paper, supporting `idea`.
+- Copy a number only if you saw it in the paper, and say where it is. Never estimate or fill a field from memory. Write `not stated` when the paper does not say.
+- Check that each arXiv id matches the title.
+
+## Output
+
+Write a JSON list to the output path you were given, and nothing else to that file. Each row:
+
+```json
+{
+  "title": "exact paper title",
+  "arxiv_id": "2412.17762 or null",
+  "year": 2024,
+  "venue": "where it was published, or preprint",
+  "serves": "problem 1, problem 2, or both",
+  "relation": "direct rival, partial rival, theory, tool, or benchmark",
+  "idea": "one plain sentence on what the method does",
+  "needs_joint_data": "yes, no, or not stated: does it need images or a prompt showing both concepts?",
+  "models": "the models it composes or uses",
+  "datasets": "the datasets or prompt sets it reports on",
+  "headline_result": "its main number with metric and dataset, or not stated",
+  "where": "section, table or page of that number",
+  "evidence_quote": "one sentence copied word for word",
+  "url": "the page you read",
+  "code_url": "repository URL, or not stated",
+  "read": "full text, abstract only, or could not read"
+}
+```
+
+codex
+I’ll check the supplied IDs against the papers, search for additional work, and build `table.json` from the sources I can open. I’ll stay within this folder for all file access.
+
+web search: 
+web search: https://arxiv.org/abs/2206.01714
+web search: 
+web search: diffusion composition product experts multi object 2026 2025 sampling compositional generation ...
+web search: 
+web search: https://arxiv.org/abs/2509.16447
+codex
+The supplied IDs match the titles I’ve checked so far. The papers distinguish errors in the composition sampler from errors in scores outside the training distribution; that distinction matters for whether a corrector can solve Problem 1. I’m also checking which methods require a joint prompt, layout, or shared pretrained model.
+
+web search: 
+web search: diffusion composition theory classifier free guidance not product distribution Bradley Nakkiran 2024 2025 ...
+exec
+/bin/bash -lc "python - <<'PY'
+import urllib.request
+u='https://arxiv.org/html/2509.25940v2'
+try:
+ s=urllib.request.urlopen(u,timeout=30).read().decode()
+ print(len(s)); print(s[:120])
+except Exception as e: print(type(e).__name__, str(e))
+PY" in /home/molef/PhD/concept-composition/artifacts/notes/progress/field-scouts/astra
+ succeeded in 0ms:
+URLError <urlopen error [Errno -3] Temporary failure in name resolution>
+
+web search: 
+web search: https://arxiv.org/html/2509.25940v2
+web search: 
+web search: https://arxiv.org/html/2502.04549v3
+web search: 
+web search: "Classifier-Free Guidance is a Predictor-Corrector" arxiv ...
+web search: 
+web search: "Classifier-Free Guidance is a Predictor-Corrector" arxiv.org ...
+web search: 
+web search: https://arxiv.org/abs/2302.08113
+web search: 
+web search: "SynGen" "arxiv.org/abs"
+codex
+I found additional 2025–2026 work on factor-wise expert routing, staged object composition, multi-object training failures, and benchmark drift. There is also a version detail worth preserving: the current T2I-CompBench arXiv entry is titled T2I-CompBench++, while the original benchmark remains available as an earlier version.
+
+web search: 
+web search: 
+web search: 
+web search: 
+web search: https://arxiv.org/html/2509.16447v3
+web search: https://arxiv.org/html/2606.23920v1
+web search: https://arxiv.org/html/2412.17762v2
+web search: https://arxiv.org/html/2503.02819v2
+web search: 
+web search: 
+web search: 
+web search: https://arxiv.org/html/2302.11552
+web search: https://arxiv.org/html/2206.01714
+web search: https://arxiv.org/html/2309.16115
+web search: 
+web search: 
+web search: 
+web search: https://arxiv.org/html/2605.07078
+web search: https://arxiv.org/html/2503.01145
+web search: https://arxiv.org/html/2605.23275
+web search: 
+web search: 
+web search: 
+web search: 
+web search: https://arxiv.org/html/2505.03203
+web search: https://arxiv.org/html/2411.07132
+web search: https://arxiv.org/html/2410.05591v2
+web search: https://arxiv.org/html/2510.23515v3
+web search: 
+web search: 
+web search: 
+web search: 
+web search: https://arxiv.org/html/2301.13826
+web search: https://arxiv.org/html/2302.08113
+web search: https://arxiv.org/html/2301.07093
+web search: https://arxiv.org/html/2306.08877
+web search: 
+web search: 
+web search: 
+web search: https://arxiv.org/html/2212.05032
+web search: https://arxiv.org/html/2408.09000v2
+web search: https://arxiv.org/html/2307.10816
+web search: 
+web search: 
+web search: 
+web search: https://arxiv.org/html/2310.11513
+web search: https://arxiv.org/html/2307.06350v3
+web search: https://arxiv.org/html/2512.16853
+web search: 
+web search: 
+web search: 
+web search: 
+web search: https://arxiv.org/html/2605.00273v2
+web search: https://arxiv.org/html/2607.11758
+web search: https://arxiv.org/html/2506.08894v2
+web search: https://arxiv.org/html/2611.00804
+codex
+The full texts clarify several limits: Composable Diffusion reports limited success with separately trained models; CO3 uses a joint prompt; and Test-Time Compositional Generalization takes an example of the desired composition. I’ll make these dependencies explicit in the rows so they are distinguishable from methods that meet Problem 1’s stricter setup.
+
+web search: 
+web search: diffusion "composition" "disjoint datasets" "models" ...
+web search: 
+web search: 
+web search: 
+web search: 
+web search: 
+web search: 
+web search: 
+web search: 
+web search: https://arxiv.org/html/2412.17762v2
+web search: https://arxiv.org/html/2302.11552
+web search: https://arxiv.org/html/2503.01145
+web search: https://arxiv.org/html/2509.25940v2
+web search: https://arxiv.org/html/2502.04549v3
+web search: https://arxiv.org/html/2503.02819v2
+web search: https://arxiv.org/html/2206.01714
+web search: https://arxiv.org/html/2509.16447v3
+web search: 
+web search: 
+web search: 
+web search: 
+web search: 
+web search: 
+web search: 
+web search: 
+web search: https://arxiv.org/html/2605.23275
+web search: https://arxiv.org/html/2410.05591v2
+web search: https://arxiv.org/html/2606.23920v1
+web search: https://arxiv.org/html/2411.07132
+web search: https://arxiv.org/html/2510.23515v3
+web search: https://arxiv.org/html/2505.03203
+web search: https://arxiv.org/html/2309.16115
+web search: https://arxiv.org/html/2605.07078
+web search: 
+web search: 
+web search: 
+web search: 
+web search: 
+web search: 
+web search: 
+web search: 
+web search: 
+web search: 
+web search: 
+web search: 
+web search: 
+web search: https://arxiv.org/html/2306.08877
+web search: https://arxiv.org/html/2302.08113
+web search: https://arxiv.org/html/2212.05032
+web search: https://arxiv.org/html/2607.11758
+web search: https://arxiv.org/html/2307.06350v3
+web search: https://arxiv.org/html/2310.11513
+web search: https://arxiv.org/html/2307.10816
+web search: https://arxiv.org/html/2512.16853
+web search: https://arxiv.org/html/2506.08894v2
+web search: https://arxiv.org/html/2605.00273v2
+web search: https://arxiv.org/html/2301.13826
+web search: https://arxiv.org/html/2611.00804
+web search: https://arxiv.org/html/2301.07093
+web search: 
+web search: site:proceedings.mlr.press MultiDiffusion Fusing Diffusion Paths 2023 ...
+web search: 
+web search: 'MNIST' in https://arxiv.org/html/2309.16115
+web search: 
+web search: 'Table 1' in https://arxiv.org/html/2309.16115
+web search: 
+web search: https://arxiv.org/pdf/2510.23515v3
+codex
+The table now includes both close competitors and methods with different assumptions. I’m checking the quoted sentences, numerical results, and table references, then I’ll write and parse the JSON.
+
+web search: 
+web search: site:openreview.net "FreeFuse: Multi-Subject LoRA Fusion" TMLR ...
+apply patch
+patch: completed
+/home/molef/PhD/concept-composition/artifacts/notes/progress/field-scouts/astra/table.json
+diff --git a/artifacts/notes/progress/field-scouts/astra/table.json b/artifacts/notes/progress/field-scouts/astra/table.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..97de11a71d9a4d34a1000ec7ed69363baf4be7fc
+--- /dev/null
++++ b/artifacts/notes/progress/field-scouts/astra/table.json
+@@ -0,0 +1,542 @@
++[
++  {
++    "title": "Mechanisms of Projective Composition of Diffusion Models",
++    "arxiv_id": "2502.04549",
++    "year": 2025,
++    "venue": "ICML 2025",
++    "serves": "both",
++    "relation": "theory",
++    "idea": "Defines composition by preserved projected marginals and proves score composition and reverse diffusion valid under factorized conditionals, while general feature-space composition need not be sampleable by reverse diffusion.",
++    "needs_joint_data": "no",
++    "models": "Conditional diffusion scores with a background score; CLEVR diffusion models. Setup: the theory permits sources that are not conditionals of a shared joint distribution; the successful construction requires compatible factors and a background distribution.",
++    "datasets": "CLEVR object-location and object-color composition experiments.",
++    "headline_result": "not stated",
++    "where": "not stated",
++    "evidence_quote": "We begin by precisely defining one possible desired result of composition, which we call projective composition.",
++    "url": "https://arxiv.org/html/2502.04549v3",
++    "code_url": "not stated",
++    "read": "full text"
++  },
++  {
++    "title": "Catastrophic Compositional Generation: Why Vanilla Diffusion Models Fail to Extrapolate",
++    "arxiv_id": "2606.23920",
++    "year": 2026,
++    "venue": "preprint",
++    "serves": "both",
++    "relation": "theory",
++    "idea": "Separates sampler approximation error from out-of-distribution score error and shows that Feynman-Kac correction can amplify the latter, including for separately trained experts.",
++    "needs_joint_data": "no",
++    "models": "Conditional denoising diffusion models and separately trained single-condition experts; analytic-score controls; FKC. Setup: explicitly tests target combinations absent from source training support, alongside in-distribution controls.",
++    "datasets": "Synthetic Gaussians and Gaussian mixtures; semi-synthetic rooms containing couches, paintings, or coffee tables.",
++    "headline_result": "In the non-factorized OOD Gaussian setting with N=10000, SW2 worsens from 0.8518 at K=1 to 2.8322 at K=256; analytic-score SW2 improves from 0.6375 to 0.0820.",
++    "where": "Table 1(d), Section 5.1.",
++    "evidence_quote": "Moreover, in these cases, we find that FKC reinforces these errors, further degenerating sample quality.",
++    "url": "https://arxiv.org/html/2606.23920v1",
++    "code_url": "https://github.com/DSoiffer/compositional-diffusion",
++    "read": "full text"
++  },
++  {
++    "title": "Compositional Visual Generation with Composable Diffusion Models",
++    "arxiv_id": "2206.01714",
++    "year": 2022,
++    "venue": "ECCV 2022",
++    "serves": "both",
++    "relation": "partial rival",
++    "idea": "Adds or subtracts conditional diffusion scores to express concept conjunction and negation, but reports limited success when the models were trained on different datasets.",
++    "needs_joint_data": "no",
++    "models": "Self-composed conditional diffusion models; pretrained text-guided diffusion models including GLIDE; Section 7 notes that successful components are instances of the same model. Setup: composition uses separate conditions; however, the training images can contain multiple objects, so the experiments do not establish the strict disjoint-data setup.",
++    "datasets": "CLEVR; Relational CLEVR; FFHQ; text-description composition examples.",
++    "headline_result": "Three-component CLEVR accuracy 31.36% and FID 10.51.",
++    "where": "Table 1.",
++    "evidence_quote": "An image is generated by composing a set of diffusion models, with each of them modeling a certain component of the image.",
++    "url": "https://arxiv.org/html/2206.01714",
++    "code_url": "not stated",
++    "read": "full text"
++  },
++  {
++    "title": "Reduce, Reuse, Recycle: Compositional Generation with Energy-Based Diffusion Models and MCMC",
++    "arxiv_id": "2302.11552",
++    "year": 2023,
++    "venue": "ICML 2023",
++    "serves": "both",
++    "relation": "direct rival",
++    "idea": "Replaces naive reverse sampling of composed scores with annealed MCMC, with energy parameterization enabling Metropolis-corrected samplers.",
++    "needs_joint_data": "no",
++    "models": "Score-parameterized and energy-parameterized diffusion models; ULA, U-HMC, MALA and HMC; self-composed text-to-image models. Setup: combines individual condition scores; CLEVR training still contains multi-object images and is not the strict disjoint single-concept setup.",
++    "datasets": "Synthetic densities; CLEVR; ImageNet; composed text prompts and image tapestries.",
++    "headline_result": "Five-position CLEVR accuracy 72.7 for energy-parameterized HMC versus 57.4 for score-parameterized reverse sampling.",
++    "where": "Table 2.",
++    "evidence_quote": "We conclude that the sampler (not the model) is responsible for this failure and propose new samplers, inspired by MCMC, which enable successful compositional generation.",
++    "url": "https://arxiv.org/html/2302.11552",
++    "code_url": "not stated",
++    "read": "full text"
++  },
++  {
++    "title": "Feynman-Kac Correctors in Diffusion: Annealing, Guidance, and Product of Experts",
++    "arxiv_id": "2503.02819",
++    "year": 2025,
++    "venue": "ICML 2025",
++    "serves": "both",
++    "relation": "direct rival",
++    "idea": "Uses Feynman-Kac particle weights and sequential Monte Carlo resampling to track annealed or composed distributions more faithfully.",
++    "needs_joint_data": "no",
++    "models": "Pretrained score models; EDM2-XS for image guidance; DEM for temperature annealing; pretrained molecular models. Setup: operates on pretrained scores without target joint training data or a joint prompt; accuracy still depends on those scores.",
++    "datasets": "ImageNet-512; synthetic multimodal distributions; Lennard-Jones systems; multi-objective molecule generation.",
++    "headline_result": "EDM2+FKC achieves CLIP 29.14 and ImageReward 0.05 at churn 40 and 32 steps, compared with 28.75 and -0.24 without FKC.",
++    "where": "Table 2, right-hand block; Section 5.1.",
++    "evidence_quote": "To simulate these PDEs, we propose Sequential Monte Carlo (SMC) resampling algorithms that leverage inference-time scaling to improve sampling quality.",
++    "url": "https://arxiv.org/html/2503.02819v2",
++    "code_url": "https://github.com/martaskrt/fkc-diffusion",
++    "read": "full text"
++  },
++  {
++    "title": "Steer Away From Mode Collisions: Improving Composition In Diffusion Models",
++    "arxiv_id": "2509.25940",
++    "year": 2025,
++    "venue": "ICLR 2026",
++    "serves": "problem 2",
++    "relation": "direct rival",
++    "idea": "CO3 contrasts the joint-prompt prediction against individual-concept predictions using adaptive Tweedie-mean resampling and correction to reduce missing or colliding concepts.",
++    "needs_joint_data": "yes",
++    "models": "SDXL with DDIM; the same denoiser evaluates joint, individual and unconditional prompts. Setup: explicitly needs a joint prompt and its constituent concept prompts, although no additional training images are needed.",
++    "datasets": "Attend-and-Excite prompt categories; T2I-CompBench Complex; RareBench Concat, Relations and Complex.",
++    "headline_result": "Animal-Animal BLIP-VQA 0.7441 versus SDXL 0.6950; T2I-CompBench Complex ImageReward 0.4406 versus 0.3083.",
++    "where": "Tables 1 and 2, Section 4.2.",
++    "evidence_quote": "This encourages the sampler to move away from the nearest mode, preventing collapse toward one dominant concept.",
++    "url": "https://arxiv.org/html/2509.25940v2",
++    "code_url": "https://github.com/debottam-dutta7/co3",
++    "read": "full text"
++  },
++  {
++    "title": "MultiDiffusion: Fusing Diffusion Paths for Controlled Image Generation",
++    "arxiv_id": "2302.08113",
++    "year": 2023,
++    "venue": "ICML 2023",
++    "serves": "both",
++    "relation": "partial rival",
++    "idea": "Solves a shared least-squares denoising problem over regions or crops so regional prompts and masks produce a coherent image.",
++    "needs_joint_data": "yes",
++    "models": "One pretrained Stable Diffusion v2 model reused across crops or regions. Setup: reported region benchmark uses a full-image caption for the background and regional prompts plus masks; the general regional formulation can use separate prompts.",
++    "datasets": "COCO validation subset for regional generation; text-to-panorama prompts.",
++    "headline_result": "COCO regional-generation IoU 0.26 ± 0.12 versus 0.18 ± 0.10 without bootstrapping.",
++    "where": "Table 2, Section 5.2.",
++    "evidence_quote": "In turn, the MultiDiffusion takes a global denoising sampling step reconciling all these different steps via least squares optimal solution.",
++    "url": "https://arxiv.org/html/2302.08113",
++    "code_url": "not stated",
++    "read": "full text"
++  },
++  {
++    "title": "TweedieMix: Improving Multi-Concept Fusion for Diffusion-based Image/Video Generation",
++    "arxiv_id": "2410.05591",
++    "year": 2024,
++    "venue": "ICLR 2025",
++    "serves": "both",
++    "relation": "partial rival",
++    "idea": "First encourages multiple objects with joint-prompt resampling, then mixes separately customized concepts in Tweedie-denoised space.",
++    "needs_joint_data": "yes",
++    "models": "Customized text-to-image diffusion models, primarily SDXL; image-to-video extensions including Stable Video Diffusion. Setup: requires a prompt containing multiple objects; concept customization is separate and shares a pretrained backbone.",
++    "datasets": "Custom Concept 101 combinations; personalized image and video examples.",
++    "headline_result": "Multi-concept CLIP image similarity 0.8311 and DINO image similarity 0.5950; the evaluation excludes images missing foreground objects.",
++    "where": "Table 1; Appendix A evaluation details.",
++    "evidence_quote": "During the initial steps, we apply a multiple object-aware sampling technique to ensure the inclusion of the desired target objects.",
++    "url": "https://arxiv.org/html/2410.05591v2",
++    "code_url": "https://github.com/KwonGihyun/TweedieMix",
++    "read": "full text"
++  },
++  {
++    "title": "FreeFuse: Multi-Subject LoRA Fusion via Adaptive Token-Level Routing at Test Time",
++    "arxiv_id": "2510.23515",
++    "year": 2025,
++    "venue": "TMLR 2026",
++    "serves": "both",
++    "relation": "partial rival",
++    "idea": "Routes separate subject LoRA residuals to automatically extracted subject regions while retaining the shared base model's global attention.",
++    "needs_joint_data": "yes",
++    "models": "FLUX flow-matching transformer with independently trained subject LoRAs; SDXL extension discussed. Setup: uses composite multi-subject prompts and a shared pretrained model, but needs no joint subject training images or user-drawn layout.",
++    "datasets": "Custom character-character and character-object prompt evaluations.",
++    "headline_result": "ArcFace identity similarity 0.4275 versus LoRAShop 0.3886 on the paper's multi-subject evaluation.",
++    "where": "Table 1, Section 4.1.",
++    "evidence_quote": "We propose a robust, training-free framework that mitigates feature conflicts among multiple LoRAs by spatially constraining their influence.",
++    "url": "https://arxiv.org/html/2510.23515v3",
++    "code_url": "https://github.com/yaoliliu/FreeFuse",
++    "read": "full text"
++  },
++  {
++    "title": "Local Mechanisms of Compositional Generalization in Conditional Diffusion",
++    "arxiv_id": "2509.16447",
++    "year": 2025,
++    "venue": "preprint",
++    "serves": "both",
++    "relation": "theory",
++    "idea": "Connects conditional projective composition to local conditional scores and tests whether enforcing locality restores object-count generalization.",
++    "needs_joint_data": "no",
++    "models": "Location- and color-conditioned CLEVR diffusion models; SDXL; Matryoshka Diffusion Model. Setup: explicitly tests object counts beyond training; the local intervention changes the architecture and requires training.",
++    "datasets": "CLEVR; semantic-category prompts for SDXL; Flickr-trained Matryoshka model analysis.",
++    "headline_result": "The local model trained on one object generalizes to five locations.",
++    "where": "Section 4, causal intervention; Figure 8 and Table 1.",
++    "evidence_quote": "Furthermore, we show that a causal intervention explicitly enforcing local conditional scores enables length generalization in a previously failing model.",
++    "url": "https://arxiv.org/html/2509.16447v3",
++    "code_url": "not stated",
++    "read": "full text"
++  },
++  {
++    "title": "CoInD: Enabling Logical Compositions in Diffusion Models",
++    "arxiv_id": "2503.01145",
++    "year": 2025,
++    "venue": "ICLR 2025",
++    "serves": "both",
++    "relation": "partial rival",
++    "idea": "Adds a training objective enforcing independence of conditional marginals so logical conjunction and negation work better on held-out attribute combinations.",
++    "needs_joint_data": "no",
++    "models": "Conditional diffusion models with Fisher-divergence regularization; GLIDE comparison; Stable Diffusion fine-tuning extension. Setup: evaluates held-out target combinations, but requires training with attribute labels and an independence objective rather than merely combining frozen experts.",
++    "datasets": "Colored MNIST; Shapes3D; CelebA held-out smiling-male combination.",
++    "headline_result": "CelebA conjunction FID 43.76 for CoInD versus 95.41 for Composed GLIDE.",
++    "where": "Table 2.",
++    "evidence_quote": "It explicitly enforces statistical independence between the conditional marginal distributions by minimizing Fisher’s divergence between the joint and marginal distributions.",
++    "url": "https://arxiv.org/html/2503.01145",
++    "code_url": "https://github.com/sachit3022/compositional-generation/",
++    "read": "full text"
++  },
++  {
++    "title": "The Superposition of Diffusion Models Using the Itô Density Estimator",
++    "arxiv_id": "2412.17762",
++    "year": 2024,
++    "venue": "ICLR 2025",
++    "serves": "both",
++    "relation": "partial rival",
++    "idea": "SuperDiff dynamically reweights pretrained vector fields using estimated densities to implement OR and equal-likelihood AND composition, with image AND experiments targeting concept blending.",
++    "needs_joint_data": "no",
++    "models": "Separate diffusion models; Stable Diffusion v1-4; FrameDiff and Proteus; LDMol. Setup: composes pretrained models or separate prompts without retraining; joint prompts are comparison baselines.",
++    "datasets": "CIFAR-10; concept-pair image interpolation prompts; protein and multi-property molecule generation.",
++    "headline_result": "Image concept interpolation minimum TIFA 39.92 versus 32.48 for score averaging and 27.58 for joint prompting; this measures blending, not separate-object success.",
++    "where": "Table 2, Section 4.2.",
++    "evidence_quote": "In this paper, we cast the problem of combining multiple pre-trained diffusion models at the generation stage under a novel proposed framework termed superposition.",
++    "url": "https://arxiv.org/html/2412.17762v2",
++    "code_url": "https://github.com/necludov/super-diffusion",
++    "read": "full text"
++  },
++  {
++    "title": "Compositional Sculpting of Iterative Generative Processes",
++    "arxiv_id": "2309.16115",
++    "year": 2023,
++    "venue": "NeurIPS 2023",
++    "serves": "both",
++    "relation": "tool",
++    "idea": "Learns classifiers from component-model trajectories to guide harmonic-mean and contrast compositions, which reshape overlapping densities rather than establish separate-object extrapolation.",
++    "needs_joint_data": "no",
++    "models": "Separately trained diffusion models with classifier guidance; GFlowNets. Setup: auxiliary classifiers are trained from component-generated samples; the demonstrated image components have overlapping support.",
++    "datasets": "Colored MNIST; MNIST subsets; molecular-generation and synthetic experiments.",
++    "headline_result": "not stated",
++    "where": "not stated",
++    "evidence_quote": "We then introduce a method for sampling from these compositions built on classifier guidance.",
++    "url": "https://arxiv.org/html/2309.16115",
++    "code_url": "https://github.com/timgaripov/compositional-sculpting",
++    "read": "full text"
++  },
++  {
++    "title": "Classifier-Free Guidance is a Predictor-Corrector",
++    "arxiv_id": "2408.09000",
++    "year": 2024,
++    "venue": "NeurIPS 2024 M3L Workshop",
++    "serves": "both",
++    "relation": "theory",
++    "idea": "Shows that guided DDPM and DDIM need not sample the intended powered density and interprets stochastic CFG as a denoising predictor plus a Langevin sharpening corrector.",
++    "needs_joint_data": "no",
++    "models": "DDPM and DDIM guidance; analytic Gaussian examples; SDXL predictor-corrector demonstration. Setup: theoretical analysis of conditional and unconditional scores; no joint-concept dataset is required.",
++    "datasets": "Synthetic Gaussian and Gaussian-mixture counterexamples; qualitative SDXL prompts.",
++    "headline_result": "not stated",
++    "where": "not stated",
++    "evidence_quote": "PCG alternates between denoising steps and Langevin dynamics steps.",
++    "url": "https://arxiv.org/html/2408.09000v2",
++    "code_url": "not stated",
++    "read": "full text"
++  },
++  {
++    "title": "Product of Experts for Visual Generation",
++    "arxiv_id": "2506.08894",
++    "year": 2025,
++    "venue": "ICLR 2026",
++    "serves": "both",
++    "relation": "partial rival",
++    "idea": "Combines heterogeneous generative and discriminative experts with annealed MCMC and importance resampling, using conditional regional experts for more coherent visual composition.",
++    "needs_joint_data": "yes",
++    "models": "FLUX.1 Depth and Fill; Wan2.1 video models; autoregressive experts; VLM and physical-simulator constraints. Setup: reported tasks use a target scene specification, prompts, and reference or simulator inputs; no additional joint-model training is required.",
++    "datasets": "Graphics-rendered object insertion scenes; Magic Insert character insertion; physical-simulation video tasks.",
++    "headline_result": "Magic Insert scene evaluation ImageReward 1.711 ± 0.308 versus 1.169 ± 0.701 for Magic Insert.",
++    "where": "Table 1, character-rendering block.",
++    "evidence_quote": "We propose a probabilistic framework that combines information from these heterogeneous models, where expert models jointly shape a product distribution over outputs.",
++    "url": "https://arxiv.org/html/2506.08894v2",
++    "code_url": "not stated",
++    "read": "full text"
++  },
++  {
++    "title": "Training-free Conditional Object Composition for Multi-object Image Generation with Diffusion Models",
++    "arxiv_id": "2611.00804",
++    "year": 2026,
++    "venue": "preprint",
++    "serves": "problem 2",
++    "relation": "direct rival",
++    "idea": "Generates a subset of requested objects first, then inserts the remaining object with inpainting and layout guidance, selecting the decomposition using attention or a detector.",
++    "needs_joint_data": "yes",
++    "models": "SDXL; attention-based selection or Faster R-CNN selection; YOLOv11-L evaluation. Setup: uses a multi-object prompt, and evaluation object sets are taken from real COCO images in which the objects co-occur.",
++    "datasets": "MS COCO object co-occurrence prompt sets.",
++    "headline_result": "For six objects, success rate is 35.8 ± 5.3% with detector selection and 25.2 ± 4.7% with attention selection, versus SDXL 19.2 ± 3.3%.",
++    "where": "Table 1, Section 4.",
++    "evidence_quote": "To enable effective composition, we adopt an inpainting-based formulation with layout guidance to preserve existing regions and encourage spatially coherent placement.",
++    "url": "https://arxiv.org/html/2611.00804",
++    "code_url": "https://github.com/ShampooWang/condComp_imageGen/tree/main",
++    "read": "full text"
++  },
++  {
++    "title": "Attend-and-Excite: Attention-Based Semantic Guidance for Text-to-Image Diffusion Models",
++    "arxiv_id": "2301.13826",
++    "year": 2023,
++    "venue": "SIGGRAPH 2023",
++    "serves": "problem 2",
++    "relation": "direct rival",
++    "idea": "Updates the noisy latent to strengthen the most neglected subject's cross-attention, encouraging all prompted objects to appear.",
++    "needs_joint_data": "yes",
++    "models": "Stable Diffusion with inference-time cross-attention optimization. Setup: requires a joint text prompt and its subject tokens; no extra training images are needed.",
++    "datasets": "Animal-Animal, Animal-Object and Object-Object prompt benchmark; complex multi-subject prompts.",
++    "headline_result": "Animal-Animal CLIP text-text similarity between prompt and BLIP caption is 0.806 versus 0.767 for Stable Diffusion.",
++    "where": "Table 1, Section 5.2.",
++    "evidence_quote": "As such, we define a loss objective that attempts to maximize the attention values for each subject token.",
++    "url": "https://arxiv.org/html/2301.13826",
++    "code_url": "not stated",
++    "read": "full text"
++  },
++  {
++    "title": "Token Merging for Training-Free Semantic Binding in Text-to-Image Synthesis",
++    "arxiv_id": "2411.07132",
++    "year": 2024,
++    "venue": "NeurIPS 2024",
++    "serves": "problem 2",
++    "relation": "direct rival",
++    "idea": "Merges each object's related tokens into a composite token and refines token embeddings to improve attribute and sub-object binding.",
++    "needs_joint_data": "yes",
++    "models": "SDXL; SpaCy parsing; composite-token optimization and end-token substitution. Setup: syntactically parses a joint prompt; no additional model training is required.",
++    "datasets": "T2I-CompBench attribute-binding subsets; proposed GPT-4o object-binding benchmark.",
++    "headline_result": "GPT-4o object-binding score 0.9549 versus SDXL 0.4907.",
++    "where": "Table 1.",
++    "evidence_quote": "We introduce a novel method called Token Merging (ToMe), which enhances semantic binding by aggregating relevant tokens into a single composite token.",
++    "url": "https://arxiv.org/html/2411.07132",
++    "code_url": "https://github.com/hutaihang/ToMe",
++    "read": "full text"
++  },
++  {
++    "title": "PiCo: Enhancing Text-Image Alignment with Improved Noise Selection and Precise Mask Control in Diffusion Models",
++    "arxiv_id": "2505.03203",
++    "year": 2025,
++    "venue": "ICME Workshops 2025",
++    "serves": "problem 2",
++    "relation": "direct rival",
++    "idea": "Selects promising initial noise and uses referring masks to control cross-attention so objects and attributes are less often omitted or mixed.",
++    "needs_joint_data": "yes",
++    "models": "Stable Diffusion with noise selection and referring-mask control. Setup: evaluates and controls generation against a joint prompt; no model fine-tuning is required.",
++    "datasets": "CC-500; T2I-CompBench attribute and complex-composition prompts; MS COCO for image-quality metrics.",
++    "headline_result": "VQAScore 0.50 on T2I-CompBench prompts with selected noise, versus 0.45 for Stable Diffusion under the same noise-selection setting.",
++    "where": "Table I (objective metrics, selected noise); evaluation protocol in the experiments section.",
++    "evidence_quote": "Second, we introduce a referring mask module to generate pixel-level masks and to precisely modulate the cross-attention maps.",
++    "url": "https://arxiv.org/html/2505.03203",
++    "code_url": "not stated",
++    "read": "full text"
++  },
++  {
++    "title": "GenEval: An Object-Focused Framework for Evaluating Text-to-Image Alignment",
++    "arxiv_id": "2310.11513",
++    "year": 2023,
++    "venue": "NeurIPS 2023",
++    "serves": "both",
++    "relation": "benchmark",
++    "idea": "Uses object detection, segmentation and color classification to check object presence, count, position and attribute binding separately.",
++    "needs_joint_data": "yes",
++    "models": "Mask2Former and CLIP evaluator; Stable Diffusion variants, SDXL, DeepFloyd IF and minDALL-E. Setup: evaluation uses compositional target prompts, but does not supply joint training data to the generator.",
++    "datasets": "GenEval templated prompts based on COCO object categories; human-agreement study.",
++    "headline_result": "GenEval agrees with human annotators on 83% of images, compared with 88% interannotator agreement.",
++    "where": "Section 4, Analysis; Figure 3.",
++    "evidence_quote": "In this paper, we introduce GenEval, an object-focused framework to evaluate compositional image properties such as object co-occurrence, position, count, and color.",
++    "url": "https://arxiv.org/html/2310.11513",
++    "code_url": "https://github.com/djghosh13/geneval",
++    "read": "full text"
++  },
++  {
++    "title": "T2I-CompBench++: An Enhanced and Comprehensive Benchmark for Compositional Text-to-image Generation",
++    "arxiv_id": "2307.06350",
++    "year": 2025,
++    "venue": "IEEE Transactions on Pattern Analysis and Machine Intelligence, 2025",
++    "serves": "both",
++    "relation": "benchmark",
++    "idea": "Extends T2I-CompBench to test attribute binding, relationships, numeracy and complex scenes with category-specific VQA and detection metrics.",
++    "needs_joint_data": "yes",
++    "models": "BLIP-VQA, UniDet, CLIP and multimodal evaluators; Stable Diffusion variants, FLUX.1, DALL-E 3, PixArt and compositional baselines. Setup: evaluation requires compositional prompts; its GORS baseline fine-tunes on reward-selected generated image-prompt pairs.",
++    "datasets": "T2I-CompBench and expanded T2I-CompBench++; the selected title is the arXiv journal revision rather than the original conference title.",
++    "headline_result": "On color binding, BLIP-VQA has human-ranking Spearman rho 0.7958 versus CLIP 0.2773.",
++    "where": "Table XII.",
++    "evidence_quote": "In addition to the benchmark, we propose enhanced evaluation metrics designed to assess these diverse compositional challenges.",
++    "url": "https://arxiv.org/html/2307.06350v3",
++    "code_url": "not stated",
++    "read": "full text"
++  },
++  {
++    "title": "GenEval 2: Addressing Benchmark Drift in Text-to-Image Evaluation",
++    "arxiv_id": "2512.16853",
++    "year": 2025,
++    "venue": "preprint",
++    "serves": "both",
++    "relation": "benchmark",
++    "idea": "Audits drift in GenEval and introduces more compositional prompts with Soft-TIFA scoring of individual visual requirements.",
++    "needs_joint_data": "yes",
++    "models": "Soft-TIFA with an open-source VQA model; Stable Diffusion variants, FLUX.1-dev, Bagel, Qwen-Image and Gemini image generation. Setup: evaluation specifies multi-object targets through prompts; no generator training on these targets is required.",
++    "datasets": "GenEval audit; GenEval 2; human annotations of prompt and atom correctness.",
++    "headline_result": "GenEval underestimates Gemini 2.5 Flash Image's human score by 17.7 percentage points.",
++    "where": "Table 1; human-alignment analysis in Section 3.",
++    "evidence_quote": "We also introduce Soft-TIFA, an evaluation method tailored to GenEval 2’s templated and compositional structure.",
++    "url": "https://arxiv.org/html/2512.16853",
++    "code_url": "https://github.com/facebookresearch/GenEval2",
++    "read": "full text"
++  },
++  {
++    "title": "BoxDiff: Text-to-Image Synthesis with Training-Free Box-Constrained Diffusion",
++    "arxiv_id": "2307.10816",
++    "year": 2023,
++    "venue": "ICCV 2023",
++    "serves": "problem 2",
++    "relation": "direct rival",
++    "idea": "Constrains token attention inside, outside and along the boundaries of boxes to place distinct objects without retraining.",
++    "needs_joint_data": "yes",
++    "models": "Stable Diffusion; plug-in evaluation with GLIGEN. Setup: uses a joint text prompt and user-specified boxes or scribbles, but no new paired training data.",
++    "datasets": "New collected image/layout set excluding overlap with COCO and Visual Genome.",
++    "headline_result": "Stable Diffusion plus BoxDiff achieves YOLO AP 22.3 versus 2.8 without BoxDiff.",
++    "where": "Table 3.",
++    "evidence_quote": "Beyond that, BoxDiff can interact with other types of conditions such as scribble.",
++    "url": "https://arxiv.org/html/2307.10816",
++    "code_url": "https://github.com/showlab/BoxDiff",
++    "read": "full text"
++  },
++  {
++    "title": "GLIGEN: Open-Set Grounded Text-to-Image Generation",
++    "arxiv_id": "2301.07093",
++    "year": 2023,
++    "venue": "CVPR 2023",
++    "serves": "problem 2",
++    "relation": "partial rival",
++    "idea": "Adds trainable gated attention layers to a frozen text-to-image model so entity descriptions and spatial inputs control object placement.",
++    "needs_joint_data": "yes",
++    "models": "Frozen latent diffusion and Stable Diffusion backbones with new grounding layers. Setup: trains added layers on grounded image annotations and uses a scene-level set of entities and locations; target combinations can be novel.",
++    "datasets": "COCO; LVIS; grounded text-to-image and inpainting experiments.",
++    "headline_result": "COCO2014 detection-conditioned GLIGEN obtains FID 5.61 and YOLO AP 24.0.",
++    "where": "Table 1.",
++    "evidence_quote": "With the above aims, we propose a method for providing new grounding conditional inputs to pretrained text-to-image diffusion models.",
++    "url": "https://arxiv.org/html/2301.07093",
++    "code_url": "not stated",
++    "read": "full text"
++  },
++  {
++    "title": "Training-Free Structured Diffusion Guidance for Compositional Text-to-Image Synthesis",
++    "arxiv_id": "2212.05032",
++    "year": 2022,
++    "venue": "ICLR 2023",
++    "serves": "problem 2",
++    "relation": "direct rival",
++    "idea": "Uses linguistic structure to construct cross-attention features for separate noun phrases, improving attribute binding and concept conjunction.",
++    "needs_joint_data": "yes",
++    "models": "Stable Diffusion with structured cross-attention. Setup: parses a joint prompt into constituent phrases; no extra training samples are needed.",
++    "datasets": "ABC-6K; CC-500; MS COCO captions.",
++    "headline_result": "On ABC-6K, human text-image alignment preference is 42.2% wins versus 35.6% losses against Stable Diffusion, after filtering the most similar pairs.",
++    "where": "Table 1; Section 4.2.",
++    "evidence_quote": "Therefore, by manipulating the cross-attention representations based on linguistic insights, we can better preserve the compositional semantics in the generated image.",
++    "url": "https://arxiv.org/html/2212.05032",
++    "code_url": "not stated",
++    "read": "full text"
++  },
++  {
++    "title": "Linguistic Binding in Diffusion Models: Enhancing Attribute Correspondence through Attention Map Alignment",
++    "arxiv_id": "2306.08877",
++    "year": 2023,
++    "venue": "NeurIPS 2023",
++    "serves": "problem 2",
++    "relation": "direct rival",
++    "idea": "SynGen parses entity-modifier relationships and optimizes cross-attention to bind related tokens while separating unrelated concepts.",
++    "needs_joint_data": "yes",
++    "models": "Stable Diffusion with inference-time attention loss; comparisons with Attend-and-Excite and Structured Diffusion. Setup: requires a joint prompt whose syntax supplies bindings; no model retraining is needed.",
++    "datasets": "ABC-6K; Attend-and-Excite attribute prompts; DVMP challenge set.",
++    "headline_result": "On ABC-6K, SynGen receives 28.00% of majority votes for concept separation versus 11.17% for Attend-and-Excite.",
++    "where": "Table 1.",
++    "evidence_quote": "Specifically, we encourage large overlap between attention maps of entities and their modifiers, and small overlap with other entities and modifier words.",
++    "url": "https://arxiv.org/html/2306.08877",
++    "code_url": "https://github.com/RoyiRa/Syntax-Guided-Generation",
++    "read": "full text"
++  },
++  {
++    "title": "Diffusion Domain Expansion: Learning to Coordinate Pre-trained Diffusion Models",
++    "arxiv_id": "2605.23275",
++    "year": 2026,
++    "venue": "ICML 2024 SPIGM Workshop (as stated in arXiv comments; arXiv submission is 2026)",
++    "serves": "both",
++    "relation": "partial rival",
++    "idea": "Trains a coordinator over pretrained denoiser outputs to generalize to larger domains or more conditioning inputs than the coordinator saw during training.",
++    "needs_joint_data": "yes",
++    "models": "Pretrained UNet diffusion models with a ViT coordinator. Setup: coordinator training uses larger objects or multiple conditioning inputs, so it does not meet the no-joint-data requirement.",
++    "datasets": "Slakh2100; CLEVR; Google Maps satellite-image dataset.",
++    "headline_result": "CLEVR accuracy with five conditioning locations is 44.5 for DDE with Heun versus 33.6 for RRR with Heun.",
++    "where": "Figure 3 (tabular results), Section 4.2.",
++    "evidence_quote": "Our method employs a compact trainable network designed to coordinate the denoised outputs of pre-trained diffusion models.",
++    "url": "https://arxiv.org/html/2605.23275",
++    "code_url": "not stated",
++    "read": "full text"
++  },
++  {
++    "title": "Test-Time Compositional Generalization in Diffusion Models via Concept Discovery",
++    "arxiv_id": "2605.07078",
++    "year": 2026,
++    "venue": "preprint",
++    "serves": "both",
++    "relation": "partial rival",
++    "idea": "Discovers density-mode prototypes from a pretrained score field and combines them into a Gaussian product teacher, optionally distilled into a LoRA, to reproduce an unseen composition specified by an example.",
++    "needs_joint_data": "yes",
++    "models": "Pretrained conditional UNet; analytic Gaussian product-of-experts teacher; learned class embedding and LoRA. Setup: requires a single out-of-distribution query image showing the desired composition.",
++    "datasets": "ColorMNIST and CelebA with held-out attribute combinations.",
++    "headline_result": "CelebA generalization FID 140.3 for the analytic PoE; LoRA generalization F1 24.7% versus query-only 20.2%.",
++    "where": "Table 2; Section 4 results.",
++    "evidence_quote": "On held-out composition benchmarks built from ColorMNIST and CelebA, both the analytic PoE sampler and the low-rank adapted model outperform query-only and nearest trained-class baselines.",
++    "url": "https://arxiv.org/html/2605.07078",
++    "code_url": "not stated",
++    "read": "full text"
++  },
++  {
++    "title": "From Global to Factor-Wise Expert Composition in Discrete Diffusion Models",
++    "arxiv_id": "2607.11758",
++    "year": 2026,
++    "venue": "UAI 2026",
++    "serves": "both",
++    "relation": "partial rival",
++    "idea": "FactorDiff routes each discrete grid position to the most confident expert instead of assigning one mixture weight per sample, offering a regional composition comparison outside natural-image diffusion.",
++    "needs_joint_data": "not stated",
++    "models": "Masked discrete diffusion experts for occupancy, foreground color and full-grid prediction; convolutional and transformer iterative-refinement backbones. Setup: demonstrates experts trained on different objectives from a common grid-task corpus, not disjoint concept-image datasets.",
++    "datasets": "ARC-AGI-1 task subset with RE-ARC-generated held-out IID examples.",
++    "headline_result": "Color-plus-occupancy routing reaches 90.5% exact-grid accuracy versus 78.4% for FKC; this is the selected-task IID evaluation, not the full ARC test benchmark.",
++    "where": "Table 2; Section 5.",
++    "evidence_quote": "We exploit this factorization to compose experts at the variable level.",
++    "url": "https://arxiv.org/html/2607.11758",
++    "code_url": "https://github.com/markohuang/factordiff",
++    "read": "full text"
++  },
++  {
++    "title": "When Do Diffusion Models learn to Generate Multiple Objects?",
++    "arxiv_id": "2605.00273",
++    "year": 2026,
++    "venue": "ICML 2026",
++    "serves": "both",
++    "relation": "benchmark",
++    "idea": "Uses the controlled mosaic generator to isolate scene complexity, concept imbalance and held-out combinations as causes of multi-object generation failure.",
++    "needs_joint_data": "no",
++    "models": "Latent U-Net diffusion and DiT flow-matching models with a frozen Stable Diffusion VAE. Setup: the compositional-generalization experiments explicitly withhold target factor pairs, alongside experiments on observed concepts.",
++    "datasets": "mosaic synthetic attribution, spatial-relation and counting tasks.",
++    "headline_result": "Attribution and spatial relations exceed 90% accuracy in the base concept-generalization setting, including highly skewed data, while counting has a low-data failure regime.",
++    "where": "Section 5.1; Figure 9.",
++    "evidence_quote": "Moreover, compositional generalization collapses as more concept combinations are held out during training.",
++    "url": "https://arxiv.org/html/2605.00273v2",
++    "code_url": "https://github.com/eugene6923/MOSAIC.git",
++    "read": "full text"
++  }
++]
+
+exec
+/bin/bash -lc "python - <<'PY'
+import json
+from pathlib import Path
+p=Path('table.json')
+rows=json.loads(p.read_text())
+fields={'title','arxiv_id','year','venue','serves','relation','idea','needs_joint_data','models','datasets','headline_result','where','evidence_quote','url','code_url','read'}
+known=set('2206.01714 2302.11552 2412.17762 2503.02819 2302.08113 2502.04549 2509.16447 2503.01145 2509.25940 2411.07132 2301.13826 2309.16115 2606.23920 2605.07078 2605.23275 2505.03203 2510.23515'.split())
+assert len(rows)<=30
+assert len({r['arxiv_id'] for r in rows})==len(rows)
+assert known <= {r['arxiv_id'] for r in rows}
+assert sum(r['arxiv_id'] not in known for r in rows)>=10
+for r in rows:
+ assert set(r)==fields
+ assert r['needs_joint_data'] in {'yes','no','not stated'}
+ assert r['serves'] in {'problem 1','problem 2','both'}
+ assert r['relation'] in {'direct rival','partial rival','theory','tool','benchmark'}
+ assert r['read'] in {'full text','abstract only','could not read'}
+ assert r['arxiv_id'] in r['url']
+ assert len(r['evidence_quote'].split()) <= 25
+print(f\"{len(rows)} rows; {sum(r['arxiv_id'] not in known for r in rows)} additional papers; valid JSON and schema\")
+PY" in /home/molef/PhD/concept-composition/artifacts/notes/progress/field-scouts/astra
+ succeeded in 0ms:
+30 rows; 13 additional papers; valid JSON and schema
+
+codex
+30 rows.
+tokens used
+236,060
+30 rows.
