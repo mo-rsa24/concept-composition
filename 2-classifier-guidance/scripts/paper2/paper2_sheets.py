@@ -14,13 +14,21 @@ the key only), it shuffles by a seed, gives each picture a neutral name, and wri
   <out>/key/     key.json: each neutral name to its source path, species and the list's other columns
 
 Pictures are re-saved from their pixels, never copied byte for byte, so no text chunk a renderer
-wrote into a PNG (a prompt, a seed) reaches the sheet. A neutral name is ten hex characters drawn
-from the shuffle seed, not derived from the path. A picture that is not 1024 by 1024 stops the build.
+wrote into a PNG (a prompt, a seed) reaches the sheet. A neutral name is ten consonants (no vowels, no
+digits) drawn from the shuffle seed, not derived from the path: with no digit it cannot hold a seed,
+and with no vowel it cannot spell a row or source word such as own, box or old. A picture that is not
+1024 by 1024 stops the build.
 
 `check` searches every file under sheet/ (a text file's every byte, a PNG's every chunk but its
-compressed pixels), and every file name, for what would unblind
-it: each source folder's name, each original file name, and every value of the list's other columns
-(row, pair, seed and the like). It prints each hit and exits 1 if there is any.
+compressed pixels), and every file name, for what would unblind it: each picture's source folders
+(the last three) and file name, and the values of the identifying columns (IDENTIFYING_COLUMNS: pair,
+seed, source, round, row, made, also_called_in). It never searches the call columns (earlier_call,
+earlier_scale, notes) or the yes-no columns, whose words ("one", "hybrid", "split") are ordinary. A value
+shorter than 3 characters is not searched; a seed of 4 digits or more always is. A value of 4 letters or
+fewer counts only as a whole word, so the row "both" does not fire on "both at once"; every longer
+value, and every value with a digit or an underscore, counts anywhere. rules.txt is the same for every
+sheet and holds those ordinary words, so it is not searched: it must equal the seven rules exactly. The
+check prints each hit and exits 1 if there is any.
 
     python3 paper2_sheets.py build --pictures list.csv --seed 0 --out <dir>
     python3 paper2_sheets.py check --out <dir>
@@ -31,6 +39,7 @@ import argparse
 import csv
 import json
 import random
+import re
 import sys
 from pathlib import Path
 
@@ -44,7 +53,10 @@ import paper2_kinds  # noqa: E402
 
 SIZE = 1024
 BAND = 80
-NAME_HEX = 10
+NAME_LETTERS = 10
+NAME_ALPHABET = "bcdfghjkmnpqrstvwxz"   # consonants only: no digit, no vowel
+IDENTIFYING_COLUMNS = ("pair", "seed", "source", "round", "row", "made", "also_called_in")
+SHORT_WORD = 4          # a pure-letter value this short or shorter counts only as a whole word
 CALL_CHOICES = paper2_kinds.ALL_KINDS
 
 
@@ -63,7 +75,7 @@ def neutral_names(n: int, seed: int) -> list[str]:
     rng = random.Random(f"names-{seed}")
     names: list[str] = []
     while len(names) < n:
-        name = f"{rng.getrandbits(4 * NAME_HEX):0{NAME_HEX}x}"
+        name = "".join(rng.choice(NAME_ALPHABET) for _ in range(NAME_LETTERS))
         if name not in names:
             names.append(name)
     return names
@@ -133,17 +145,26 @@ def build(a: argparse.Namespace) -> dict:
 
 
 def unblinding_strings(key: dict) -> set[str]:
-    """Everything that would tell a reviewer where a picture came from."""
+    """What would tell a reviewer where a picture came from: its source folders and file name, and the
+    values of the identifying columns, never the call columns."""
     found: set[str] = set()
     for entry in key["pictures"].values():
         src = Path(entry["source"])
         found.add(src.name)
         found.add(src.stem)
         found.update(p for p in src.parent.parts[-3:] if p not in ("/", ""))
-        for k, v in entry.items():
-            if k not in ("source", "a", "b") and str(v).strip():
-                found.add(str(v).strip())
-    return {s for s in found if len(s) >= 3}
+        for k in IDENTIFYING_COLUMNS:
+            v = str(entry.get(k, "")).strip()
+            if v:
+                found.add(v)
+    return {s for s in found if len(s) >= 3 or (s.isdigit() and len(s) >= 4)}
+
+
+def contains(data: bytes, needle: str) -> bool:
+    """A short pure-letter value counts only as a whole word; any other value counts anywhere."""
+    if needle.isalpha() and len(needle) <= SHORT_WORD:
+        return re.search(rb"(?<![A-Za-z0-9_])" + re.escape(needle.encode()) + rb"(?![A-Za-z0-9_])", data) is not None
+    return needle.encode() in data
 
 
 def searchable_bytes(path: Path) -> bytes:
@@ -171,11 +192,15 @@ def check(a: argparse.Namespace) -> int:
     needles = sorted(unblinding_strings(key))
     hits = []
     files = sorted(p for p in sheet.rglob("*") if p.is_file())
-    for p in files:
+    rules = sheet / "rules.txt"
+    if not rules.exists() or rules.read_text() != rules_text():
+        hits.append("rules.txt: is not exactly the seven rules")
+    searched = [p for p in files if p != rules]
+    for p in searched:
         data = searchable_bytes(p)
         rel = str(p.relative_to(sheet))
         for s in needles:
-            if s in rel or s.encode() in data:
+            if contains(rel.encode(), s) or contains(data, s):
                 hits.append(f"{rel}: contains {s!r}")
     pages = sorted((sheet / "pages").glob("*.png"))
     sizes = set()
@@ -187,8 +212,8 @@ def check(a: argparse.Namespace) -> int:
     for p in pics:
         with Image.open(p) as im:
             pic_sizes.add(im.size)
-    print(f"searched {len(files)} files under {sheet} for {len(needles)} strings "
-          f"(source folders, file names, and the list's other columns): {len(hits)} found")
+    print(f"searched {len(searched)} files under {sheet} (rules.txt compared whole) for {len(needles)} strings: "
+          f"source folders, file names, and the columns {', '.join(IDENTIFYING_COLUMNS)}: {len(hits)} found")
     for h in hits:
         print("  " + h)
     print(f"pages: {len(pages)} at {sorted(sizes)} (the picture at {SIZE} by {SIZE} under a {BAND}-pixel band); "

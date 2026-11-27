@@ -48,7 +48,7 @@ def test_build_then_check_passes(tmp_path):
         assert im.size == (1024, 1024 + sheets.BAND)
     key = json.loads((out / "key/key.json").read_text())["pictures"]
     assert set(key) == {p.stem for p in pages}
-    assert all(len(name) == sheets.NAME_HEX for name in key)
+    assert all(len(name) == sheets.NAME_LETTERS and set(name) <= set(sheets.NAME_ALPHABET) for name in key)
     assert not (out / "sheet" / "key.json").exists()
 
 
@@ -82,3 +82,75 @@ def test_a_picture_not_1024_stops_the_build(tmp_path):
     with pytest.raises(SystemExit, match="not 1024 by 1024"):
         sheets.main(["build", "--pictures", str(make_list(tmp_path, size=512)), "--seed", "0",
                      "--out", str(tmp_path / "out")])
+
+
+COLLECTOR_COLUMNS = ["picture", "a", "b", "pair", "pair_type", "seed", "source", "round", "row", "made", "earlier_call",
+                     "earlier_scale", "notes", "push_checker", "clip_named_boxes", "reported_apart", "unselected",
+                     "also_called_in"]
+
+
+def collector_list(tmp_path, rows_and_calls):
+    """A list in paper2_collect.py's columns, over stand-in pictures in a folder like the cluster's."""
+    src = tmp_path / "loop-12" / "z13" / "own"
+    src.mkdir(parents=True)
+    rows = []
+    for i, (row_, call) in enumerate(rows_and_calls):
+        p = src / f"seed-{6025 + i}.png"
+        Image.new("RGB", (1024, 1024), (30 * i, 90, 160)).save(p)
+        rows.append({"picture": str(p), "a": "cheetah", "b": "cougar", "pair": "a_cheetah__x__a_cougar",
+                     "pair_type": "look-alike", "seed": 6025 + i, "source": "box", "round": "13-rest", "row": row_,
+                     "made": "CO3 with each animal's own prediction inside its detected box, steps 5 to 30",
+                     "earlier_call": call, "earlier_scale": "four-step (one, hybrid, two_bodies, two_clear)",
+                     "notes": "one cheetah | hybrid with cougar ears", "push_checker": "none",
+                     "clip_named_boxes": True, "reported_apart": False, "unselected": False, "also_called_in": ""})
+    lst = tmp_path / "list.csv"
+    with open(lst, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=COLLECTOR_COLUMNS)
+        w.writeheader()
+        w.writerows(rows)
+    return lst
+
+
+def test_names_are_consonants_only_and_never_hold_a_seed():
+    for seed in range(50):
+        names = sheets.neutral_names(200, seed)
+        assert len(set(names)) == 200
+        assert all(len(n) == 10 and set(n) <= set(sheets.NAME_ALPHABET) for n in names)
+    assert not set(sheets.NAME_ALPHABET) & set("aeiouy0123456789")
+
+
+def test_ordinary_call_words_and_short_row_words_do_not_fire(tmp_path):
+    # earlier_call "one" and "split", rows "both" and "plain": the very words the rules use
+    lst = collector_list(tmp_path, [("both", "one"), ("plain", "split"), ("own", "hybrid"), ("co3", "two_clear")])
+    out = tmp_path / "out"
+    sheets.main(["build", "--pictures", str(lst), "--seed", "2", "--out", str(out)])
+    rules = (out / "sheet/rules.txt").read_text()
+    assert "both at once" in rules and "one plain A" in rules
+    assert sheets.main(["check", "--out", str(out)]) == 0
+
+
+def test_a_planted_seed_in_a_page_and_a_planted_slug_in_sheet_csv_still_fail(tmp_path):
+    lst = collector_list(tmp_path, [("own", "one"), ("co3", "two_clear")])
+    for name, plant in (("seed", "page"), ("slug", "csv"), ("rules", "rules")):
+        out = tmp_path / f"out-{name}"
+        sheets.main(["build", "--pictures", str(lst), "--seed", "0", "--out", str(out)])
+        if plant == "page":
+            p = next((out / "sheet/pages").glob("*.png"))
+            info = PngImagePlugin.PngInfo()
+            info.add_text("Comment", "drawn at 6026")
+            Image.open(p).save(p, pnginfo=info)
+        elif plant == "csv":
+            with open(out / "sheet/sheet.csv", "a") as f:
+                f.write("zzzz,a_cheetah__x__a_cougar\n")
+        else:
+            (out / "sheet/rules.txt").write_text(sheets.rules_text() + "drawn by the own row\n")
+        assert sheets.main(["check", "--out", str(out)]) == 1, name
+
+
+def test_the_searched_columns_are_named_and_the_call_columns_are_not():
+    assert sheets.IDENTIFYING_COLUMNS == ("pair", "seed", "source", "round", "row", "made", "also_called_in")
+    key = {"pictures": {"x": {"source": "/d/loop-12/z13/own/seed-6025.png", "a": "cat", "b": "dog", "seed": "6025",
+                              "row": "own", "earlier_call": "one", "notes": "a hybrid", "pair": "a_cat__x__a_dog"}}}
+    found = sheets.unblinding_strings(key)
+    assert {"6025", "own", "a_cat__x__a_dog", "seed-6025.png", "z13"} <= found
+    assert not {"one", "a hybrid"} & found
