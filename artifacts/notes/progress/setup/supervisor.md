@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated: 2026-11-27 06:38 SAST.
+Last updated: 2026-11-27 07:21 SAST.
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -189,6 +189,10 @@ Nothing at the moment. Paper 1's tuning calls are with two fresh reviewers at yo
 **Paper 1, the no-training baseline judged blind** (2026-11-27 06:11). On the 96 touching seeds: paste with the lower object on top 43 right, harmonised paste 9, region sampler with one owner per overlap 1; real scenes 68 of 76. One owner per overlap removes the blend but the objects stop meeting (no contact on 83) and lose parts, so the purple share was the wrong yardstick. No training-free route beats the paste; the learned interaction is needed, against the paste's 43 of 96. Next: pre-register the product of experts plus a learned interaction term trained on the joint scenes. Filed under the contact-push result.
 
 **Paper 1, diagnosing the logit push one change at a time** (2026-11-27 06:38). The owner set the direction: keep the classifier route, find why it failed, fast, one change at a time, pixel checks before any blind calls; no adapter for Paper 1. Step 1, the same head at weight 1 pushing on all 32 steps: no change (purple share 0.982, 613 seeds mostly purple, against 0.986 and 623 unpushed; median change 1.7 grey levels, 5.0 in the overlap). Timing is not the cause. Removing the cap (step 2) could raise the push at most about 2.4 times and the tuning sheet already showed weights up to 16 pull the objects apart, so strength is not the cause either: the head points the wrong way where the layout forms (cosine with the denoising target -0.09 at high noise). Step 3 running on mscluster110: the head retrained with the direction-alignment loss at weight 1 (the first plan's aligned variant, never run), its direction check, then the push on all steps with pixel checks. The untracked draft plans/paper-1-clevr-touching/plans/05-a-learned-interaction-term.md came from a stopped agent and is not the direction; it awaits the owner.
+
+**Paper 1, the push diagnosed further** (2026-11-27 07:21). Step 3, the head retrained with the direction-alignment loss: its push now points toward the real scene (cosine 0.44 at sigma 10.5 to 3.8 on training scenes, 0.34 held out, against -0.09 before) but at weight 1 it moves the picture about 1 grey level and the purple stays (0.984). Its weight ladder on all steps: weight 4 moves the overlap 8 grey levels, 16 moves it 16, 64 moves it 63, and purple stays 0.978 to 1.0 with red meeting blue on 18 to 42 of 626 touching seeds against 517 for the paste: a big enough push only darkens the overlap. Found while reading the training log: the head is trained only on noise from 0.28 to 10.5 (SIGMA_HI, chosen to cover the steps 10 to 22 window), so on the sampler's first ten or so steps (noise 80 down to 10.5), where the layout forms, it reads noise it never saw. Two runs now on mscluster110, one change each: the aligned head on 384 joint scenes instead of 64 (the 512 already rendered, 128 kept held out), and the aligned head on 64 scenes over the full noise range 0.28 to 80; each with the weight ladder and pixel checks.
+
+**Paper 2, the borrowed-part top-up called** (07:21). 320 CO3 renders on five pairs, called blind under version 4: 300 of 320 alike, 44 borrowed part called by both; a third reviewer settles 20 splits, then the set is rebuilt.
 
 ## Final review
 

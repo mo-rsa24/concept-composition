@@ -4,8 +4,8 @@
   "Detour: idea walk, 7 claims, paused",
   "Detour: zoom-ladder, about 430k tokens",
   "Detour: reading route and pictures, about 1.8M tokens",
-  "Paper 1: diagnosing the logit push one change at a time; all steps changed nothing; aligned head training",
-  "Paper 2 labels pass every agreement bar; split blocked by borrowed part on one pair (58 of 86); rendering 320 on five more pairs"
+  "Paper 1: push diagnosis; aligned head points right but only darkens the overlap; head never trained above noise 10.5; testing full noise range and 384 scenes",
+  "Paper 2: top-up called (44 borrowed part); rebuilding the labelled set"
  ],
  "detours_join": "P2",
  "steps": [
