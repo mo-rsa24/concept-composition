@@ -14,6 +14,8 @@ picture is tied to its pair and seed by a record, never by how it looks or where
   old       the old species judge's 29 renders; records/old-judge-labels.json
   new-plain, new-co3  steps 0.9 and 0.10's renders on the eight new look-alike pairs at seeds 8001 to 8008 (64 each),
             at the paths paper2_render_lookalike.py writes; uncalled; collected only when named with --sources
+  new-borrowed  the borrowed-part top-up: CO3 alone on paper2_bars.BORROWED_TOPUP_PAIRS at BORROWED_TOPUP_SEEDS (8101 to
+            8164, 320), at the paths `paper2_render_lookalike.py co3 --set borrowed` writes; uncalled; only with --sources
 
 Paths, rows and methods are from each round's own scripts (named beside each reader), mapped on 2026-11-26. No picture
 in these sources was drawn by a push whose checker read CLIP or ImageNet features: the only checker push (round 08's
@@ -56,7 +58,8 @@ RECORDS = HERE / "records"
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(REPO / "scripts/shared"))
 
-from paper2_bars import (NEW_LOOKALIKE_PAIRS, NEW_LOOKALIKE_SEEDS, REPORTED_APART, UNSELECTED_SEED,  # noqa: E402
+from paper2_bars import (BORROWED_TOPUP_PAIRS, BORROWED_TOPUP_SEEDS, NEW_LOOKALIKE_PAIRS, NEW_LOOKALIKE_SEEDS,  # noqa: E402
+                         REPORTED_APART, UNSELECTED_SEED,
                          UNSELECTED_TEST, pair_type)
 from paper2_common import PAPER2_DATASETS, species_from_slug  # noqa: E402
 
@@ -70,7 +73,7 @@ ABLATION = ROOT / "outputs/ablation_grid"                  # 3-understanding-com
 LEAKAGE = REPO / "artifacts/notes/progress/leakage"
 
 PLAN_COUNTS = {"m1": 96, "joint": 192, "box": 867, "dial": 200, "binding": 128, "old": 29,
-               "new-plain": 64, "new-co3": 64}
+               "new-plain": 64, "new-co3": 64, "new-borrowed": 320}
 PLAN_SOURCES = ("m1", "joint", "box", "dial", "binding", "old")     # the plan's table; the default
 NOT_ANIMALS = {"a_lighthouse__x__a_sailboat"}
 SUBJECT_CHECK_FAILED = {("old", "a_cat__x__a_dog", 9, "v58-05-self-contrast", 10000)}
@@ -236,6 +239,14 @@ def old() -> list[dict]:
     return out
 
 
+def new_borrowed() -> list[dict]:
+    """The borrowed-part top-up, at the paths `paper2_render_lookalike.py co3 --set borrowed` writes: uncalled."""
+    from paper2_render_lookalike import SETS, slug, tile_path
+    folder = PAPER2_DATASETS / SETS["borrowed"]["runs"]["co3"]
+    return [row_(tile_path(folder, a, b, s), slug(a, b), s, "new-borrowed", "borrowed top-up", "co3", CO3_ALONE,
+                 "", "uncalled") for a, b in BORROWED_TOPUP_PAIRS for s in BORROWED_TOPUP_SEEDS]
+
+
 def new_lookalike(row: str) -> list[dict]:
     """Steps 0.9 and 0.10's renders, at the paths paper2_render_lookalike.py writes: uncalled."""
     from paper2_render_lookalike import RUN_NAMES, slug, tile_path
@@ -248,7 +259,8 @@ def new_lookalike(row: str) -> list[dict]:
 
 row_ = row
 READERS = {"m1": m1, "joint": joint, "box": box, "dial": dial, "binding": binding, "old": old,
-           "new-plain": lambda: new_lookalike("plain"), "new-co3": lambda: new_lookalike("co3")}
+           "new-plain": lambda: new_lookalike("plain"), "new-co3": lambda: new_lookalike("co3"),
+           "new-borrowed": new_borrowed}
 
 
 # ---------------------------------------------------------------- the collection
@@ -319,7 +331,8 @@ def main(argv=None) -> int:
     ap.add_argument("--out", type=Path, default=PAPER2_DATASETS / "paper2-collect")
     ap.add_argument("--check", action="store_true", help="on the node: does each file exist and open at 1024 by 1024")
     ap.add_argument("--sources", nargs="+", choices=list(READERS), default=list(PLAN_SOURCES),
-                    help="default: the plan's six; new-plain new-co3 are steps 0.9 and 0.10's look-alike renders")
+                    help="default: the plan's six; new-plain new-co3 are steps 0.9 and 0.10's look-alike renders; "
+                         "new-borrowed is the borrowed-part top-up")
     a = ap.parse_args(argv)
     rows, report = collect(tuple(a.sources))
     lines = ["per source: resolved from its records against the plan's count, then on animal pairs"]

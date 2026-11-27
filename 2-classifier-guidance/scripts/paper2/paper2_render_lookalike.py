@@ -1,4 +1,5 @@
-"""Render the eight new look-alike pairs, for when look-alike pictures run short (species judge steps 0.9 and 0.10).
+"""Render pairs at fixed seeds for the species judge's labelled set: the eight new look-alike pairs (steps 0.9 and 0.10)
+or the borrowed-part top-up (step 0.8).
 
 Two rows, each run in its own process, on paper2_bars.NEW_LOOKALIKE_PAIRS at NEW_LOOKALIKE_SEEDS (8001 to 8008):
 
@@ -11,14 +12,22 @@ Two rows, each run in its own process, on paper2_bars.NEW_LOOKALIKE_PAIRS at NEW
           method_search/paper2_rows.py draws its co3 row (set_prompt, seed_everything, model.sample_loop on CO3's own
           start_noise); a pair whose prompt CO3's parser does not split into 2 concepts is skipped and named.
 
+--set picks the pairs, seeds and run name (default `lookalike`, as above). `--set borrowed` is the borrowed-part top-up:
+paper2_bars.BORROWED_TOPUP_PAIRS (zebra and flamingo, lion and tiger, bobcat and quail, puma and condor, tiger and dog)
+at BORROWED_TOPUP_SEEDS (8101 to 8164), 320 pictures, run names `paper2-render-co3-borrowed` (the one asked for) and
+`paper2-render-plain-borrowed`. --pairs (slugs from paper2_bars.PAIRS, NEW_LOOKALIKE_PAIRS or BORROWED_TOPUP_PAIRS) and
+--seeds ("8101-8164" or "8101,8102") narrow or replace the set's own; the run name stays the set's.
+
 Each writes, under --out: renders/<pair slug>/seed-<seed>.png (a picture already there is skipped, so a run resumes),
-record.json (every picture with its pair, seed, seconds and the card), and contact-sheet.png (the eight pairs as rows,
-the eight seeds as columns). paper2_collect.py --sources new-plain new-co3 turns them into candidates. Every pair passes
+record.json (every picture with its pair, seed, seconds and the card), and contact-sheet.png (the pairs as rows, the
+seeds as columns, wrapped at 16 a line). paper2_collect.py --sources new-plain new-co3 (or new-borrowed) turns them into
+candidates. Every pair passes
 scripts/shared/disallowed_subjects.py before anything is drawn. CO3 is built through paper2_co3_patch.py, so it runs on
 PyTorch's attention where xformers is missing.
 
     bash paper2_launch.sh paper2-render-plain-lookalike co3 16000 paper2_render_lookalike.py plain
     bash paper2_launch.sh paper2-render-co3-lookalike co3 16000 paper2_render_lookalike.py co3
+    bash paper2_launch.sh paper2-render-co3-borrowed co3 16000 paper2_render_lookalike.py co3 --set borrowed
 """
 from __future__ import annotations
 
@@ -34,11 +43,19 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[2]
 sys.path.insert(0, str(HERE))
 
-from paper2_bars import NEW_LOOKALIKE_PAIRS, NEW_LOOKALIKE_SEEDS  # noqa: E402
+from paper2_bars import (BORROWED_TOPUP_PAIRS, BORROWED_TOPUP_SEEDS, NEW_LOOKALIKE_PAIRS,  # noqa: E402
+                         NEW_LOOKALIKE_SEEDS, PAIRS)
 from paper2_common import PAPER2_DATASETS, with_article  # noqa: E402
 
 RUN_NAMES = {"plain": "paper2-render-plain-lookalike", "co3": "paper2-render-co3-lookalike"}
+SETS = {
+    "lookalike": {"pairs": NEW_LOOKALIKE_PAIRS, "seeds": list(NEW_LOOKALIKE_SEEDS), "runs": RUN_NAMES},
+    "borrowed": {"pairs": BORROWED_TOPUP_PAIRS, "seeds": list(BORROWED_TOPUP_SEEDS),
+                 "runs": {"plain": "paper2-render-plain-borrowed", "co3": "paper2-render-co3-borrowed"}},
+}
+KNOWN_PAIRS = [(a, b) for a, b, _ in PAIRS] + NEW_LOOKALIKE_PAIRS + BORROWED_TOPUP_PAIRS
 TILE = 160
+SHEET_COLUMNS = 16
 
 
 def joint_prompt(a: str, b: str) -> str:
@@ -51,6 +68,23 @@ def slug(a: str, b: str) -> str:
 
 def jobs(pairs=NEW_LOOKALIKE_PAIRS, seeds=NEW_LOOKALIKE_SEEDS) -> list[tuple[str, str, int]]:
     return [(a, b, s) for a, b in pairs for s in seeds]
+
+
+def pairs_from_slugs(slugs: list[str]) -> list[tuple[str, str]]:
+    by_slug = {slug(a, b): (a, b) for a, b in KNOWN_PAIRS}
+    unknown = [s for s in slugs if s not in by_slug]
+    if unknown:
+        raise SystemExit(f"not a known pair slug (paper2_bars.PAIRS, NEW_LOOKALIKE_PAIRS, BORROWED_TOPUP_PAIRS): {unknown}")
+    return [by_slug[s] for s in slugs]
+
+
+def parse_seeds(text: str) -> list[int]:
+    """'8101-8164' -> 8101 to 8164 inclusive; '8101,8105' -> those two."""
+    out = []
+    for part in text.split(","):
+        lo, _, hi = part.strip().partition("-")
+        out += list(range(int(lo), int(hi) + 1)) if hi else [int(lo)]
+    return out
 
 
 def tile_path(out: Path, a: str, b: str, seed: int) -> Path:
@@ -66,29 +100,35 @@ def guard_subjects(pairs) -> None:
 
 
 def contact_sheet(out: Path, pairs, seeds) -> Path:
-    page = Image.new("RGB", (TILE * len(seeds) + 170, TILE * len(pairs)), "white")
+    """One block of lines per pair: the seeds in order, SHEET_COLUMNS to a line; a missing picture is a red box."""
+    cols = min(len(seeds), SHEET_COLUMNS)
+    lines = -(-len(seeds) // cols)
+    page = Image.new("RGB", (TILE * cols + 170, TILE * lines * len(pairs)), "white")
     d = ImageDraw.Draw(page)
     for r, (a, b) in enumerate(pairs):
-        d.text((6, r * TILE + TILE // 2 - 6), f"{a} / {b}", fill="black")
-        for c, s in enumerate(seeds):
+        top = r * lines * TILE
+        d.text((6, top + TILE // 2 - 6), f"{a} / {b}", fill="black")
+        for i, s in enumerate(seeds):
+            x, y = 170 + (i % cols) * TILE, top + (i // cols) * TILE
             p = tile_path(out, a, b, s)
             if p.exists():
                 with Image.open(p) as im:
-                    page.paste(im.convert("RGB").resize((TILE, TILE)), (170 + c * TILE, r * TILE))
+                    page.paste(im.convert("RGB").resize((TILE, TILE)), (x, y))
             else:
-                d.rectangle((170 + c * TILE, r * TILE, 170 + (c + 1) * TILE - 1, (r + 1) * TILE - 1), outline="red")
+                d.rectangle((x, y, x + TILE - 1, y + TILE - 1), outline="red")
     path = out / "contact-sheet.png"
     page.save(path)
     return path
 
 
-def write_record(out: Path, row: str, done: list[dict], skipped: list[str], extra: dict) -> None:
+def write_record(out: Path, row: str, done: list[dict], skipped: list[str], extra: dict,
+                 pairs=NEW_LOOKALIKE_PAIRS, seeds=NEW_LOOKALIKE_SEEDS) -> None:
     rec = out / "record.json"
     old = json.loads(rec.read_text())["pictures"] if rec.exists() else []
     have = {(p["pair"], p["seed"]) for p in done}
     pictures = [p for p in old if (p["pair"], p["seed"]) not in have] + done
-    rec.write_text(json.dumps({"row": row, "pairs": [list(p) for p in NEW_LOOKALIKE_PAIRS],
-                               "seeds": list(NEW_LOOKALIKE_SEEDS), "skipped_pairs": skipped, **extra,
+    rec.write_text(json.dumps({"row": row, "pairs": [list(p) for p in pairs],
+                               "seeds": list(seeds), "skipped_pairs": skipped, **extra,
                                "pictures": sorted(pictures, key=lambda p: (p["pair"], p["seed"]))}, indent=1))
 
 
@@ -168,14 +208,19 @@ def render_co3(out: Path, todo) -> tuple[list[dict], list[str], dict]:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("row", choices=sorted(RUN_NAMES))
+    ap.add_argument("--set", dest="set_", choices=sorted(SETS), default="lookalike",
+                    help="the pairs, seeds and run name: lookalike (steps 0.9 and 0.10, the default) or borrowed")
+    ap.add_argument("--pairs", nargs="+", default=None, help="pair slugs, in place of the set's own")
+    ap.add_argument("--seeds", default=None, help="'8101-8164' or '8101,8102', in place of the set's own")
     ap.add_argument("--out", type=Path, default=None, help="default /datasets/mmolefe/poe_repair_min/paper2/<run name>")
     ap.add_argument("--pairs-limit", type=int, default=None, help="a smoke: the first N pairs")
     ap.add_argument("--seeds-limit", type=int, default=None, help="a smoke: the first N seeds")
     ap.add_argument("--sheet-only", action="store_true", help="redraw contact-sheet.png from the pictures on disk")
     a = ap.parse_args(argv)
-    out = a.out or PAPER2_DATASETS / RUN_NAMES[a.row]
-    pairs = NEW_LOOKALIKE_PAIRS[: a.pairs_limit]
-    seeds = list(NEW_LOOKALIKE_SEEDS)[: a.seeds_limit]
+    chosen = SETS[a.set_]
+    out = a.out or PAPER2_DATASETS / chosen["runs"][a.row]
+    pairs = (pairs_from_slugs(a.pairs) if a.pairs else chosen["pairs"])[: a.pairs_limit]
+    seeds = (parse_seeds(a.seeds) if a.seeds else chosen["seeds"])[: a.seeds_limit]
     guard_subjects(pairs)
     out.mkdir(parents=True, exist_ok=True)
     if not a.sheet_only:
@@ -183,7 +228,7 @@ def main(argv=None) -> int:
         print(f"{a.row}: {len(jobs(pairs, seeds))} pictures asked, {len(todo)} to draw, the rest already on disk", flush=True)
         if todo:
             done, skipped, extra = (render_plain if a.row == "plain" else render_co3)(out, todo)
-            write_record(out, a.row, done, skipped, extra)
+            write_record(out, a.row, done, skipped, {**extra, "set": a.set_}, pairs, seeds)
     sheet = contact_sheet(out, pairs, seeds)
     have = sum(tile_path(out, x, y, s).exists() for x, y, s in jobs(pairs, seeds))
     print(f"{have} of {len(jobs(pairs, seeds))} on disk; contact sheet {sheet}", flush=True)

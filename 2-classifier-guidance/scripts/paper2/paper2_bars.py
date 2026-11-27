@@ -138,6 +138,15 @@ NEW_LOOKALIKE_PAIRS = [
 ]
 NEW_LOOKALIKE_SEEDS = range(8001, 8009)
 
+# More borrowed-part pictures, CO3 alone, on the pairs other than cheetah and cougar that already make them. After nine
+# batches (1,232 settled), borrowed part had 86 pictures, 58 of them on cheetah and cougar, so under the 12-a-pair cap
+# its read could hold at most 39 even with every pair on the test side. Decided 2026-11-27 by Loop 18 under the owner's
+# delegation: more pictures on these pairs, not a looser cap. Seeds 8101 to 8164 (64 a pair, 320 in all) are a range
+# no earlier render used on these pairs (tests/test_paper2_render_lookalike.py checks every collector source).
+BORROWED_TOPUP_PAIRS = [("zebra", "flamingo"), ("lion", "tiger"), ("bobcat", "quail"), ("puma", "condor"),
+                        ("tiger", "dog")]
+BORROWED_TOPUP_SEEDS = range(8101, 8165)
+
 # Wrong-species pictures made by renaming, if natural ones are short: one subject shown under a look-alike name.
 RENAMING = {"cougar": "leopard", "goose": "swan", "fox": "coyote", "flamingo": "spoonbill"}
 RENAMED_PER_KIND_MAX = 20     # of the 40 read wrong-species pictures

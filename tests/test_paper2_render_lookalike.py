@@ -74,3 +74,62 @@ def test_the_default_collection_is_unchanged():
     rows, report = collect.collect()
     assert len(rows) == 1335 and sum(r["unselected"] for r in rows) == 100
     assert "new-plain" not in report["sources"]
+
+
+# ---- the borrowed-part top-up (step 0.8)
+
+from paper2_bars import BORROWED_TOPUP_PAIRS, BORROWED_TOPUP_SEEDS  # noqa: E402
+
+
+def test_the_topup_is_five_pairs_by_64_seeds_and_every_pair_is_allowed():
+    s = render.SETS["borrowed"]
+    jobs = render.jobs(s["pairs"], s["seeds"])
+    assert len(jobs) == 320 and len(set(jobs)) == 320
+    assert {render.slug(a, b) for a, b in s["pairs"]} == {"a_zebra__x__a_flamingo", "a_lion__x__a_tiger",
+                                                          "a_bobcat__x__a_quail", "a_puma__x__a_condor", "a_tiger__x__a_dog"}
+    assert s["seeds"] == list(range(8101, 8165))
+    assert s["runs"]["co3"] == "paper2-render-co3-borrowed"
+    render.guard_subjects(s["pairs"])
+
+
+def test_no_earlier_source_used_a_topup_seed_on_a_topup_pair():
+    rows, _ = collect.collect(tuple(n for n in collect.READERS if n != "new-borrowed"))
+    pairs = {render.slug(a, b) for a, b in BORROWED_TOPUP_PAIRS}
+    used = {(r["pair"], r["seed"]) for r in rows if r["pair"] in pairs}
+    assert used, "the top-up pairs have earlier pictures"
+    assert not any(seed in BORROWED_TOPUP_SEEDS for _, seed in used)
+
+
+def test_pairs_and_seeds_flags():
+    assert render.parse_seeds("8101-8104") == [8101, 8102, 8103, 8104]
+    assert render.parse_seeds("8101,8110") == [8101, 8110]
+    assert render.pairs_from_slugs(["a_tiger__x__a_dog", "an_otter__x__a_weasel"]) == [("tiger", "dog"), ("otter", "weasel")]
+    import pytest
+    with pytest.raises(SystemExit, match="not a known pair slug"):
+        render.pairs_from_slugs(["a_cat__x__a_unicorn"])
+
+
+def test_the_borrowed_set_writes_its_own_folder_and_wraps_the_sheet(tmp_path):
+    s = render.SETS["borrowed"]
+    for a, b in s["pairs"][:2]:
+        for seed in s["seeds"]:
+            p = render.tile_path(tmp_path, a, b, seed)
+            p.parent.mkdir(parents=True, exist_ok=True)
+            Image.new("RGB", (64, 64), (seed % 255, 10, 10)).save(p)
+    assert render.main(["co3", "--set", "borrowed", "--out", str(tmp_path), "--sheet-only",
+                        "--pairs", "a_zebra__x__a_flamingo", "a_lion__x__a_tiger"]) == 0
+    assert Image.open(tmp_path / "contact-sheet.png").size == (render.TILE * 16 + 170, render.TILE * 4 * 2)
+    assert render.main(["co3", "--set", "borrowed", "--out", str(tmp_path), "--sheet-only"]) == 1   # 3 pairs missing
+    render.write_record(tmp_path, "co3", [{"pair": "a_tiger__x__a_dog", "seed": 8101, "picture": "p", "seconds": 9}],
+                        [], {"set": "borrowed"}, s["pairs"], s["seeds"])
+    rec = json.loads((tmp_path / "record.json").read_text())
+    assert rec["seeds"][0] == 8101 and len(rec["pairs"]) == 5 and rec["set"] == "borrowed"
+
+
+def test_the_collector_reads_the_320_topup_pictures_as_uncalled_co3_candidates():
+    rows, report = collect.collect(("new-borrowed",))
+    assert len(rows) == 320 and report["sources"]["new-borrowed"]["resolved"] == 320
+    assert all(r["made"] == collect.CO3_ALONE and r["earlier_call"] == "" and not r["unselected"] for r in rows)
+    assert all("/paper2/paper2-render-co3-borrowed/renders/" in r["picture"] for r in rows)
+    types = {r["pair"]: r["pair_type"] for r in rows}
+    assert types["a_lion__x__a_tiger"] == "look-alike" and types["a_zebra__x__a_flamingo"] == "unlike"
