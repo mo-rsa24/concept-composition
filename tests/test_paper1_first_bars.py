@@ -70,6 +70,21 @@ def test_too_few_real_scenes_right_makes_the_answer_inconclusive():
     assert fb.answer(5, 0.031, 0, real_right=82) == "no"
 
 
+def test_real_scene_bar_is_a_share_of_the_scenes_on_the_sheet():
+    # the owner's decision of 2026-11-27: the bar is 0.85 of the real touching scenes called, ceil(0.85 x n)
+    assert fb.real_right_needed(96) == 82 and fb.real_right_needed(76) == 65
+    assert fb.answer_and_reason(5, 0.031, 0, real_right=64, real_called=76) == ("inconclusive", fb.RUBRIC_REASON)
+    assert fb.answer(5, 0.031, 0, real_right=65, real_called=76) == "no"
+    assert fb.answer(5, 0.031, 0, real_right=82, real_called=96) == "no"
+    assert fb.answer_and_reason(5, 0.031, 0, real_right=81, real_called=96) == ("inconclusive", fb.RUBRIC_REASON)
+    assert fb.FIRST_REAL_RIGHT_MIN == 82   # kept in the file for the record, unused
+
+
+def test_reader_reports_the_needed_count_from_the_sheet():
+    low = _worked_example(real_right=81)
+    assert low["real_scenes_called"] == 96 and low["real_scenes_needed"] == 82 and low["rubric_readable"] is False
+
+
 def test_reader_counts_pairs_and_answers():
     # 96 touching seeds: ours right on 50, region right on 35; ours wins 20, loses 5 (both right on 30); random right on 37
     key, settled, n = [], {}, 0

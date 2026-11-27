@@ -40,7 +40,11 @@ FIRST_GAIN_MIN = 15                 # seeds: ours right minus the region sampler
 FIRST_P_MAX = 0.05                  # the one-sided paired McNemar p must be below this for a yes
 FIRST_RANDOM_BAND = 5               # seeds: the random push right minus the region sampler right within -5 to +5 for a yes
 FIRST_NULL_GAIN_MAX = 5             # seeds: a gain at or below this is a no
-FIRST_REAL_RIGHT_MIN = 82           # of the 96 real touching scenes, at least this many right (0.85 of 96), or the rubric cannot be read
+FIRST_REAL_RIGHT_MIN = 82           # unused, kept for the record: the bar as first written, 82 of 96 real touching scenes (0.85 of 96).
+                                    # FIRST_REAL_RIGHT_SHARE_MIN replaced it on 2026-11-27 by the owner's decision, because the blind
+                                    # sheet held 76 real touching scenes, not 96, so 82 could never be met
+FIRST_REAL_RIGHT_SHARE_MIN = 0.85   # of the real touching scenes on the sheet, at least this share right (ceil(0.85 x n): 82 of 96,
+                                    # 65 of 76), or the rubric cannot be read; the full plan's OCCLUSION_REAL_MIN
 FIRST_PUSH_MIN_GREY = 1             # step 10: the push's median change at w = 1, grey levels on 0 to 255; below it the plan stops
 FIRST_DIRECTION_COS_MIN = 0.10      # step 10: the push's median cosine with the denoising target on the 64 training scenes; under it in
                                     # both of the two lowest sigma bands, the head trains again with the alignment loss on
@@ -68,11 +72,17 @@ def one_sided_binomial_p(wins, losses):
 RUBRIC_REASON = "could not measure it: the rubric at 64 pixels"
 
 
-def answer_and_reason(gain, p, random_minus_region, real_right=None):
+def real_right_needed(real_called):
+    """How many of real_called real touching scenes must be called right: ceil(FIRST_REAL_RIGHT_SHARE_MIN x real_called)."""
+    return math.ceil(round(FIRST_REAL_RIGHT_SHARE_MIN * real_called, 9))
+
+
+def answer_and_reason(gain, p, random_minus_region, real_right=None, real_called=FIRST_TOUCH_SEEDS):
     """(answer, reason). The instrument first, as the full plan reads its instrument rows before any result row: fewer than
-    FIRST_REAL_RIGHT_MIN real touching scenes called right makes the answer inconclusive whatever the gain, p or random push
-    (decided on board question 123). Then the verdict file's rule, in this order: no, yes, inconclusive."""
-    if real_right is not None and real_right < FIRST_REAL_RIGHT_MIN:
+    real_right_needed(real_called) of the real_called real touching scenes called right makes the answer inconclusive whatever the
+    gain, p or random push (decided on board question 123; read as a share by the owner on 2026-11-27). Then the verdict file's rule,
+    in this order: no, yes, inconclusive."""
+    if real_right is not None and real_right < real_right_needed(real_called):
         return "inconclusive", RUBRIC_REASON
     if gain <= FIRST_NULL_GAIN_MAX:
         return "no", f"gain {gain} at or below {FIRST_NULL_GAIN_MAX}"
@@ -81,9 +91,9 @@ def answer_and_reason(gain, p, random_minus_region, real_right=None):
     return "inconclusive", "between the bars: a gain of 6 to 14, or p at 0.05 or above, or the random push more than 5 seeds off"
 
 
-def answer(gain, p, random_minus_region, real_right=None):
+def answer(gain, p, random_minus_region, real_right=None, real_called=FIRST_TOUCH_SEEDS):
     """yes, no or inconclusive (see answer_and_reason)."""
-    return answer_and_reason(gain, p, random_minus_region, real_right)[0]
+    return answer_and_reason(gain, p, random_minus_region, real_right, real_called)[0]
 
 
 def is_right(call, count, side):
@@ -152,7 +162,7 @@ def read(settled, key, rows=ROWS):
     p = one_sided_binomial_p(ours_only, region_only)
     random_minus_region = sum(rand.values()) - sum(region.values())
     real = table.get("real", {}).get("touching", {"right": 0, "called": 0})
-    verdict, reason = answer_and_reason(gain, p, random_minus_region, real["right"] if real["called"] else None)
+    verdict, reason = answer_and_reason(gain, p, random_minus_region, real["right"] if real["called"] else None, real["called"])
     out = {
         "answer": verdict, "reason": reason,
         "gain": gain, "p_one_sided": round(p, 6), "disagreeing_seeds": ours_only + region_only,
@@ -161,11 +171,13 @@ def read(settled, key, rows=ROWS):
         "random_push_minus_region": random_minus_region,
         "touching_seeds": len(shared), "expected_touching_seeds": FIRST_TOUCH_SEEDS,
         "real_scenes_right": real["right"], "real_scenes_called": real["called"],
-        "rubric_readable": real["right"] >= FIRST_REAL_RIGHT_MIN,
+        "real_scenes_needed": real_right_needed(real["called"]),
+        "rubric_readable": real["right"] >= real_right_needed(real["called"]),
         "rows": table,
         "failing_fields": {f"{r} {s}": v for (r, s), v in sorted(fails.items())},
         "bars": {"FIRST_GAIN_MIN": FIRST_GAIN_MIN, "FIRST_P_MAX": FIRST_P_MAX, "FIRST_RANDOM_BAND": FIRST_RANDOM_BAND,
-                 "FIRST_NULL_GAIN_MAX": FIRST_NULL_GAIN_MAX, "FIRST_REAL_RIGHT_MIN": FIRST_REAL_RIGHT_MIN},
+                 "FIRST_NULL_GAIN_MAX": FIRST_NULL_GAIN_MAX,
+                 "FIRST_REAL_RIGHT_SHARE_MIN": FIRST_REAL_RIGHT_SHARE_MIN},
     }
     if "ours" in table and "paste" in table and "apart" in table["ours"] and "apart" in table["paste"]:
         out["apart_ours_minus_paste"] = table["ours"]["apart"]["right"] - table["paste"]["apart"]["right"]
@@ -218,7 +230,7 @@ def cmd_read(args):
              "", "                     region right   region wrong",
              f"ours right           {t['ours right, region right']:>12}   {t['ours right, region wrong']:>12}",
              f"ours wrong           {t['ours wrong, region right']:>12}   {t['ours wrong, region wrong']:>12}", "",
-             f"real touching scenes right: {out['real_scenes_right']} of {out['real_scenes_called']} (bar {FIRST_REAL_RIGHT_MIN}; "
+             f"real touching scenes right: {out['real_scenes_right']} of {out['real_scenes_called']} (needed {out['real_scenes_needed']}, {FIRST_REAL_RIGHT_SHARE_MIN} of those called; "
              f"rubric readable: {out['rubric_readable']})"]
     for name, sides in out["rows"].items():
         for side, v in sides.items():
