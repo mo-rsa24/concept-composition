@@ -702,7 +702,7 @@ def train_delta(nets, jpics, train_idx, val_idx, updates, batch=256, lr=5e-4, se
     return model.eval().requires_grad_(False), {"best_update": best[1], "best_val_loss": best[0], "curve": curve}
 
 
-def run_method_a(ns, updates, key, picture, zero_control):
+def run_method_a(ns, updates, key, picture, zero_control, tag=""):
     """Method A at each N in ns (0 means the whole training pool); results under results.json[key], a grid at picture."""
     t0 = time.time()
     (e, r, b, j, meta), (Ee, Er, Eb, Ej) = sets_and_exact()
@@ -717,7 +717,7 @@ def run_method_a(ns, updates, key, picture, zero_control):
     for n in ns:
         t1 = time.time()
         idx = tr if n == 0 else tr[:n]
-        name = "all" if n == 0 else str(n)
+        name = ("all" if n == 0 else str(n)) + tag
         model, tinfo = train_delta(nets, j, idx, va, updates)
         torch.save(model.state_dict(), OUT / f"delta-N{name}.pt")
         with torch.no_grad():
@@ -728,7 +728,7 @@ def run_method_a(ns, updates, key, picture, zero_control):
         err = band_error(lambda xx, s: model(xx, s, red(xx, s), blue(xx, s), empty(xx, s)), exact_resid, j[va])
         info[f"N={name}"] = {"n_train_scenes": len(idx), "train": tinfo, "residual_error_vs_exact_by_band": err,
                              "seconds": round(time.time() - t1, 1)}
-        rows.append((f"Method A, N = {name} ({len(idx)} scenes)", m))
+        rows.append((f"Method A, N = {name} ({len(idx)} scenes)" + (f", {updates} updates" if tag else ""), m))
         xs.append(x)
         labels.append(f"A, N={name}")
         print(rows[-1][0], m["clean_share"], m["verdict"], json.dumps(err), flush=True)
@@ -793,6 +793,12 @@ def data_curve():
 def cmd_rung2b(a):
     run_method_a(a.ns, a.updates, "rung2b", "rung2b-method-a.png", zero_control=False)
     data_curve()
+
+
+def cmd_rung2c(a):
+    """Method A trained longer, one change from rung 2b: the number of updates. Files carry a -u<updates> tag, so the 5,000-update
+    models, samples, rows and data curve are left as they are."""
+    run_method_a(a.ns, a.updates, "rung2c", "rung2c-method-a-longer.png", zero_control=False, tag=f"-u{a.updates}")
 
 
 def cmd_rung3(a):
@@ -956,6 +962,9 @@ def main():
     q = sub.add_parser("rung2")
     q.add_argument("--ns", type=int, nargs="+", default=[16, 64, 0], help="0 means the whole training pool")
     q.add_argument("--updates", type=int, default=5000)
+    q = sub.add_parser("rung2c")
+    q.add_argument("--ns", type=int, nargs="+", default=[1024, 0])
+    q.add_argument("--updates", type=int, default=20000)
     q = sub.add_parser("rung2b")
     q.add_argument("--ns", type=int, nargs="+", default=[256, 1024, 4096])
     q.add_argument("--updates", type=int, default=5000)
