@@ -12,6 +12,8 @@ picture is tied to its pair and seed by a record, never by how it looks or where
   dial      the pooled LoRA's weight dial (200); artifacts/notes/progress/leakage/10-co-occurrence-dial/blind/
   binding   the LoRA binding check, option A (128); 1-lora-correction/binding/blind/
   old       the old species judge's 29 renders; records/old-judge-labels.json
+  new-plain, new-co3  steps 0.9 and 0.10's renders on the eight new look-alike pairs at seeds 8001 to 8008 (64 each),
+            at the paths paper2_render_lookalike.py writes; uncalled; collected only when named with --sources
 
 Paths, rows and methods are from each round's own scripts (named beside each reader), mapped on 2026-11-26. No picture
 in these sources was drawn by a push whose checker read CLIP or ImageNet features: the only checker push (round 08's
@@ -35,6 +37,7 @@ call). --check, on the node, adds whether each file opens at 1024 by 1024, and t
 candidates open, and the earlier calls give at least 80 hybrid and 150 two-clear candidates.
 
     python3 paper2_collect.py --out outputs/paper2/paper2-collect                    # laptop: records only
+    "$PY" paper2_collect.py --sources new-plain new-co3 --check --out <dir>       # the 128 new look-alike pictures
     "$PY" paper2_collect.py --check --out /datasets/mmolefe/poe_repair_min/paper2/paper2-collect   # on the node
 """
 from __future__ import annotations
@@ -53,7 +56,8 @@ RECORDS = HERE / "records"
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(REPO / "scripts/shared"))
 
-from paper2_bars import REPORTED_APART, UNSELECTED_SEED, UNSELECTED_TEST, pair_type  # noqa: E402
+from paper2_bars import (NEW_LOOKALIKE_PAIRS, NEW_LOOKALIKE_SEEDS, REPORTED_APART, UNSELECTED_SEED,  # noqa: E402
+                         UNSELECTED_TEST, pair_type)
 from paper2_common import PAPER2_DATASETS, species_from_slug  # noqa: E402
 
 ROOT = Path("/datasets/mmolefe/poe_repair_min")
@@ -65,7 +69,9 @@ BINDING = ROOT / "lora-binding/option-a"                   # binding/option_a.py
 ABLATION = ROOT / "outputs/ablation_grid"                  # 3-understanding-compositionality/scripts/sweep_probe.sbatch line 21
 LEAKAGE = REPO / "artifacts/notes/progress/leakage"
 
-PLAN_COUNTS = {"m1": 96, "joint": 192, "box": 867, "dial": 200, "binding": 128, "old": 29}
+PLAN_COUNTS = {"m1": 96, "joint": 192, "box": 867, "dial": 200, "binding": 128, "old": 29,
+               "new-plain": 64, "new-co3": 64}
+PLAN_SOURCES = ("m1", "joint", "box", "dial", "binding", "old")     # the plan's table; the default
 NOT_ANIMALS = {"a_lighthouse__x__a_sailboat"}
 SUBJECT_CHECK_FAILED = {("old", "a_cat__x__a_dog", 9, "v58-05-self-contrast", 10000)}
 TWO_CLEAR_LIKE = {"two_clear", "own_parts", "composed"}
@@ -230,16 +236,29 @@ def old() -> list[dict]:
     return out
 
 
-READERS = {"m1": m1, "joint": joint, "box": box, "dial": dial, "binding": binding, "old": old}
+def new_lookalike(row: str) -> list[dict]:
+    """Steps 0.9 and 0.10's renders, at the paths paper2_render_lookalike.py writes: uncalled."""
+    from paper2_render_lookalike import RUN_NAMES, slug, tile_path
+    made = (CO3_ALONE if row == "co3" else
+            "the plain product of experts on an untouched U-Net (CFG 7.5 per expert, 50 DDIM steps)")
+    folder = PAPER2_DATASETS / RUN_NAMES[row]
+    return [row_(tile_path(folder, a, b, s), slug(a, b), s, f"new-{row}", "0.9" if row == "plain" else "0.10", row, made,
+                 "", "uncalled") for a, b in NEW_LOOKALIKE_PAIRS for s in NEW_LOOKALIKE_SEEDS]
+
+
+row_ = row
+READERS = {"m1": m1, "joint": joint, "box": box, "dial": dial, "binding": binding, "old": old,
+           "new-plain": lambda: new_lookalike("plain"), "new-co3": lambda: new_lookalike("co3")}
 
 
 # ---------------------------------------------------------------- the collection
 
-def collect() -> tuple[list[dict], dict]:
+def collect(sources=PLAN_SOURCES) -> tuple[list[dict], dict]:
     from disallowed_subjects import is_allowed
     report = {"sources": {}, "left_out": Counter(), "merged": 0}
     kept: dict[str, dict] = {}
-    for name, reader in READERS.items():
+    for name in sources:
+        reader = READERS[name]
         rows = reader()
         report["sources"][name] = {"resolved": len(rows), "plan": PLAN_COUNTS[name]}
         animal = 0
@@ -268,9 +287,12 @@ def collect() -> tuple[list[dict], dict]:
     rows = list(kept.values())
     for r in rows:
         r["also_called_in"] = " ; ".join(r.pop("_also", []))
-    pool = sorted(r["picture"] for r in rows if r["made"] == CO3_ALONE or r["made"] == "CO3, no push")
-    for pic in random.Random(UNSELECTED_SEED).sample(pool, UNSELECTED_TEST):
-        kept[pic]["unselected"] = True
+    # The unselected draw is the plan's, over its own CO3-alone pictures: made only when those sources are collected.
+    pool = sorted(r["picture"] for r in rows if r["source"] in ("m1", "box")
+                  and (r["made"] == CO3_ALONE or r["made"] == "CO3, no push"))
+    if {"m1", "box"} <= set(sources):
+        for pic in random.Random(UNSELECTED_SEED).sample(pool, UNSELECTED_TEST):
+            kept[pic]["unselected"] = True
     report["co3_alone_pool"] = len(pool)
     return rows, report
 
@@ -296,8 +318,10 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--out", type=Path, default=PAPER2_DATASETS / "paper2-collect")
     ap.add_argument("--check", action="store_true", help="on the node: does each file exist and open at 1024 by 1024")
+    ap.add_argument("--sources", nargs="+", choices=list(READERS), default=list(PLAN_SOURCES),
+                    help="default: the plan's six; new-plain new-co3 are steps 0.9 and 0.10's look-alike renders")
     a = ap.parse_args(argv)
-    rows, report = collect()
+    rows, report = collect(tuple(a.sources))
     lines = ["per source: resolved from its records against the plan's count, then on animal pairs"]
     for name, s in report["sources"].items():
         flag = "matches" if s["resolved"] == s["plan"] else f"SHORT BY {s['plan'] - s['resolved']}"
@@ -305,7 +329,8 @@ def main(argv=None) -> int:
     lines.append(f"left out: {dict(report['left_out'])}")
     lines.append(f"called in more than one round, kept once: {report['merged']}")
     lines.append(f"distinct candidate pictures: {len(rows)}; unselected CO3-alone drawn: "
-                 f"{sum(r['unselected'] for r in rows)} of {report['co3_alone_pool']} by seed {UNSELECTED_SEED}")
+                 f"{sum(r['unselected'] for r in rows)} of {report['co3_alone_pool']} by seed {UNSELECTED_SEED}"
+                 + ("" if {"m1", "box"} <= set(a.sources) else " (the draw needs the m1 and box sources)"))
     calls = Counter(r["earlier_call"] for r in rows)
     hybrid, two_clear = calls["hybrid"], sum(calls[c] for c in TWO_CLEAR_LIKE)
     lines.append(f"earlier calls: {dict(sorted(calls.items()))}")
@@ -315,15 +340,21 @@ def main(argv=None) -> int:
                  f"{sum(r['reported_apart'] for r in rows)}")
     lines.append(f"push checkers: {dict(Counter(r['push_checker'] for r in rows))}; boxes named by CLIP: "
                  f"{sum(r['clip_named_boxes'] for r in rows)}; read CLIP or ImageNet features: 0")
-    ok = hybrid >= 80 and two_clear >= 150
+    plan_run = set(PLAN_SOURCES) <= set(a.sources)      # step 0.4's own pass line applies to the plan's sources
+    ok = (hybrid >= 80 and two_clear >= 150) if plan_run else True
     columns = list(COLUMNS)
     if a.check:
         seen = check_files(rows)
         columns.append("opens_at_1024")
         lines.append(f"on disk: {dict(seen)}")
-        ok = ok and seen["yes"] >= 1000
-        lines.append(f"step 0.4 {'passes' if ok else 'does NOT pass'}: {seen['yes']} open at 1024 (need 1000), "
-                     f"{hybrid} hybrid (need 80), {two_clear} two-clear (need 150)")
+        if plan_run:
+            ok = ok and seen["yes"] >= 1000
+            lines.append(f"step 0.4 {'passes' if ok else 'does NOT pass'}: {seen['yes']} open at 1024 (need 1000), "
+                         f"{hybrid} hybrid (need 80), {two_clear} two-clear (need 150)")
+        else:
+            ok = seen["yes"] == len(rows)
+            lines.append(f"{'all' if ok else 'NOT all'} {len(rows)} pictures of {', '.join(a.sources)} open at 1024 "
+                         f"({seen['yes']} do)")
     else:
         lines.append("files not checked: run with --check on the node")
     lines.append("per pair: " + ", ".join(f"{p} {n}" for p, n in sorted(Counter(r['pair'] for r in rows).items())))
