@@ -4,7 +4,7 @@
   "Detour: idea walk, 7 claims, paused",
   "Detour: zoom-ladder, about 430k tokens",
   "Detour: reading route and pictures, about 1.8M tokens",
-  "Paper 1: push diagnosis; full noise range no help; 384 scenes the only lever (68 of 626 vs paste 517); higher weights and separate noise next",
+  "Paper 1: push diagnosis; 384 scenes the only lever (68 of 626 vs paste 517); separate starting noise and higher weights running",
   "Paper 2: species judge no; follow-on DreamSim and BioCLIP in their 64-cat check"
  ],
  "detours_join": "P2",
