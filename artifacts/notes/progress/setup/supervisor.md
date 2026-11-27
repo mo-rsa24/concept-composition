@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated: 2026-11-27 12:15 SAST.
+Last updated 2026-11-27 10:31 UTC
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -209,6 +209,8 @@ Nothing at the moment. Paper 1's tuning calls are with two fresh reviewers at yo
 **Paper 2, the follow-on judges miss too** (2026-11-27 10:06). Exploratory read on the already-read split: DreamSim 96 of 240 (two-clear precision 0.42, within-pair AUC 0.79), BioCLIP 70 of 240 (0.56, 0.74); bars 216, 0.90, 0.85. Six automated judges have now missed by wide margins; no new test pairs are built. Paper 2's measurement goes back to the owner.
 
 **Paper 2, what blind calls can and cannot replace** (2026-11-27 12:15). Read of plans/paper-2-dials/plans/03-identity-dial-first-result.md and paper2_identity_dial.py: the dial's training needs an automated judge (the gradient route's reward and the kept route's filter call it every step; train exits without --judge-settings), so blind calls can replace the measurement only. Measured blind, the first result is 400 pictures (redraw 64, checkpoint pick 96, test 240): about 0.9 million reviewer tokens at 256 pixels or 2.9 million at the plan's 1024. Bars written in judge terms that the owner would restate: FIRST_REDRAW_KIND_CHANGES_MAX, FIRST_GAMING_GAP_MAX_RISE, R3_JUDGE_HALFDRAWN_MIN, the owner-choice gate and the kept-judge disagreement lines. A blind-called kept route would need about 2,304 pre-drawn pictures (26 to 36 GPU-hours, about 16.9 million tokens at 1024). The training signal goes to the owner.
+
+Paper 1, 2026-11-27 10:30 UTC: two of the outside reading's four methods are running on mscluster110, sharing its one card (mscluster112 held another user's job). Method A (paper1_interaction.py, commit 33975fa0) is training on the 384 joint scenes; its 200-update smoke ran at 0.16 seconds an update, and the held-out denoising loss fell from 0.0277 at update 750 to 0.0265 at update 1000. Method C is being retried with the caveat the reading names: the head's drawn examples are now the region sampler's own half-drawn states at the sigma each was saved at (commit dee56a40, 61 tests passing), drawn first over seeds 200000 to 201023, then the head, then its push at weights 1, 4, 16 and 64. The earlier push was already Method C's formula (the gradient of the logit, log D/(1-D)) with the wrong drawn examples. Method B (the four-way classifier, neither, red only, blue only, both) runs after C reads out, because both need a classifier calibrated across the whole noise range and C's result says whether that is reachable here. Method D (Method A given the experts' inner features) runs if A helps partly; A's network already sees the three experts' outputs, but not their features.
 
 ## Final review
 

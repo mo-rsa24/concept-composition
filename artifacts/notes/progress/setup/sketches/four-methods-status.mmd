@@ -1,0 +1,15 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TB
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef run fill:#fff3e0,stroke:#e08a00,stroke-width:3px,color:#111111
+  classDef wait fill:#f2f2f2,stroke:#888888,stroke-width:2px,stroke-dasharray:5 5,color:#111111
+  S["plain sum<br/>D_red + D_blue - D_empty"]:::plain
+  A["Method A: learned interaction term<br/>small U-Net, denoising loss, 384 joint scenes<br/>RUNNING on mscluster110"]:::run
+  C["Method C: real vs drawn head<br/>drawn = sampler's own half-drawn states<br/>RUNNING (states being drawn)"]:::run
+  C0["Method C, first try<br/>drawn = finished pictures noised again<br/>DONE: tops out near 1 in 4 touching"]:::plain
+  B["Method B: four-way classifier<br/>neither / red only / blue only / both<br/>NOT RUN"]:::wait
+  D["Method D: A plus the experts' inner features<br/>cross-expert attention<br/>NOT RUN"]:::wait
+  S --> A
+  S --> C0 --> C
+  S -.->|"run after C reads out"| B
+  A -.->|"run if A helps partly"| D
