@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated: 2026-11-27 03:13 SAST.
+Last updated: 2026-11-27 03:24 SAST.
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -163,6 +163,8 @@ Nothing at the moment. Paper 1's tuning calls are with two fresh reviewers at yo
 **Paper 1, the blind calls** (2026-11-27 03:13). Sixteen fresh reviewer agents called the 844 pictures, eight parts per reviewer; three parts were sent back once to apply the brief's purple rule (a wholly purple shape is one red and one blue, band yes). The two reviewers agree on 3,223 of 3,376 fields (95.5%); 96 pictures hold a disagreement, and a third reviewer is calling them. Where no red object meets a blue one, the third reviewer writes "none" rather than leaving the field empty, because the settling code reads an empty third call as unresolved; the reader treats "none" exactly as empty.
 
 **Paper 2, the labelled set's first build** (03:13). The builder (`c4c199b0`) ran on batch 1 with its recall: 200 pictures settled, none unsettled, two clear against borrowed part 0.989. Not split, as expected: every kind is short of 65 pictures or of 20 on look-alike pairs (borrowed part 9, two of one kind 8, wrong species 2), and wrong species misses the agreement bar on its 2 pictures. `next-candidates.csv` lists 1,131 uncalled pictures for the short kinds, 263 on look-alike pairs.
+
+**Paper 1's first result: no** (2026-11-27 03:24). The reader (`9f994f72`, with the real-scene check read as 0.85 of the scenes on the sheet) gives gain -1: ours right on 1 of 96 touching seeds, the region sampler on 2, p 1.0, the random push 1 above the region sampler. The rubric was readable, 68 of 76 real touching scenes right against 65 needed. Mask paste was right on 27 of 96 touching seeds and paste with the lower object on top on 44; ours on apart seeds 46 of 96 against paste's 94. By the verdict file, a no closes the route at k = 64 and stops the full plan from running. The strip and the answer are filed under [the contact-push result](../../../results/does-the-contact-push-beat-the-region-sampler/README.md). The real-scene share was written into the reader by Loop 18 while Loop 16 was offline, on the owner's word.
 
 ## Final review
 

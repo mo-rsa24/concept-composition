@@ -1237,6 +1237,111 @@
    "finished": "2026-11-26T02:12:21+02:00"
   },
   {
+   "id": "RS1",
+   "label": "RS1 Both papers staged: setup, first result, full plan",
+   "owner": "s0",
+   "proof": "each paper folder opens with README.md and plans/01-setup.md, 02/03 first-result plan with its review file",
+   "needs": [],
+   "state": "done",
+   "serves": "Both papers",
+   "objective": "Get the first results before anything else",
+   "started": "2026-11-26T13:15:06+02:00",
+   "finished": "2026-11-26T13:15:06+02:00",
+   "updated": "2026-11-26T13:15:06+02:00",
+   "note": "29 pages, links checked"
+  },
+  {
+   "id": "RS2",
+   "label": "RS2 Setup loop prompts written",
+   "owner": "s0",
+   "proof": "artifacts/notes/progress/prompts/session-16, 17 and 18 exist",
+   "needs": [
+    "RS1"
+   ],
+   "state": "done",
+   "serves": "Both papers",
+   "objective": "Write the setup code",
+   "started": "2026-11-26T13:15:13+02:00",
+   "finished": "2026-11-26T13:15:13+02:00",
+   "updated": "2026-11-26T13:15:13+02:00",
+   "note": "three prompts"
+  },
+  {
+   "id": "RS3",
+   "label": "RS3 Paper 1 setup code accepted",
+   "owner": "s16",
+   "proof": "plans/paper-1-clevr-touching/plans/01-setup.md tasks 0 to 7 ticked; artifacts/notes/progress/setup/paper-1-handoff.md",
+   "needs": [
+    "RS2"
+   ],
+   "state": "done",
+   "serves": "Paper 1",
+   "objective": "Write the setup code",
+   "started": "2026-11-26T13:15:22+02:00",
+   "updated": "2026-11-26T14:09:59+02:00",
+   "note": "set by Loop 18: tasks 0 to 7 ticked in 01-setup.md and paper-1-handoff.md written; Loop 16 stopped without setting it",
+   "finished": "2026-11-26T14:09:59+02:00"
+  },
+  {
+   "id": "RS4",
+   "label": "RS4 Paper 2 setup code accepted",
+   "owner": "s17",
+   "proof": "plans/paper-2-dials/plans/01-setup.md tasks 1 to 4 ticked; artifacts/notes/progress/setup/paper-2-handoff.md",
+   "needs": [
+    "RS2"
+   ],
+   "state": "done",
+   "serves": "Paper 2",
+   "objective": "Write the setup code",
+   "started": "2026-11-26T13:17:38+02:00",
+   "updated": "2026-11-26T14:01:18+02:00",
+   "finished": "2026-11-26T14:01:18+02:00",
+   "note": "Paper 2 setup tasks 1 to 4 accepted by Loop 18; task 6 to 8 scripts and the vision-language environment written, not run; hand-off at artifacts/notes/progress/setup/paper-2-handoff.md"
+  },
+  {
+   "id": "RS5",
+   "label": "RS5 Supervisor's final review",
+   "owner": "s18",
+   "proof": "artifacts/notes/progress/setup/supervisor.md holds the final review table and the suggested commit",
+   "needs": [
+    "RS3",
+    "RS4"
+   ],
+   "state": "done",
+   "serves": "Both papers",
+   "objective": "Write the setup code",
+   "started": "2026-11-26T14:10:12+02:00",
+   "finished": "2026-11-26T14:10:12+02:00",
+   "updated": "2026-11-26T14:10:12+02:00",
+   "note": "final review on artifacts/notes/progress/setup/supervisor.md: 29 files compile, tests 54 passed (laptop) and 106 passed (CPU torch), suggested commit listed"
+  },
+  {
+   "id": "RS6",
+   "label": "RS6 Paper 1 first result: yes, no or inconclusive",
+   "owner": "s18",
+   "proof": "plans/paper-1-clevr-touching/review/02-first-result.md answered by the reader (paper1_first_bars.py read)",
+   "needs": [
+    "RS3"
+   ],
+   "state": "done",
+   "started": "2026-11-26T18:49:47+02:00",
+   "updated": "2026-11-27T03:24:31+02:00",
+   "finished": "2026-11-27T03:24:31+02:00",
+   "note": "No: gain -1 of 96 (ours 1, region 2), p 1.0; rubric readable, 68 of 76 real scenes right. Closes the route at k = 64 and stops the full plan, per the verdict file."
+  },
+  {
+   "id": "RS7",
+   "label": "RS7 Paper 2 species judge: scripts written and every judge passes the 64-cat check",
+   "owner": "s18",
+   "proof": "each judge names at least 62 of the 64 single cats cat (02-species-judge.md step 0.15)",
+   "needs": [
+    "RS4"
+   ],
+   "state": "doing",
+   "started": "2026-11-27T03:24:31+02:00",
+   "updated": "2026-11-27T03:24:31+02:00"
+  },
+  {
    "id": "U1",
    "label": "U1 Closest papers read",
    "owner": "s7",
@@ -2296,7 +2401,14 @@
     "Z10",
     "Z11",
     "Z12",
-    "Z13"
+    "Z13",
+    "RS1",
+    "RS2",
+    "RS3",
+    "RS4",
+    "RS5",
+    "RS6",
+    "RS7"
    ],
    "joiner": "~~~"
   }
@@ -2361,6 +2473,18 @@
   "s15": {
    "id": "b99f397a",
    "name": "Loop 15"
+  },
+  "s16": {
+   "id": "9e022b9a",
+   "name": "Loop 16"
+  },
+  "s17": {
+   "id": "fd51e819",
+   "name": "Loop 17"
+  },
+  "s18": {
+   "id": "bb43a4bd",
+   "name": "Loop 18"
   }
  },
  "objectives": [
@@ -2392,7 +2516,9 @@
   "pooled adapter at weight 0 to 1.25 on 8 held-out pairs sharing no animal with training, blind calls of one, hybrid or two clear, share against weight",
   "the checker trained with a penalty pulling its push toward the expert's own score for the pair, on coloured digits, against the plain checker and the names-only push",
   "stage A: the per-animal box correction with boxes given against CO3 alone on seeds 6017 to 6024; stage B only if A passes and the owner agrees: a classifier trained to copy it, without boxes",
-  "the clean-up pass with each animal's own prediction in its automatic box against the same pass over the whole picture, CO3 alone beside them, seeds 6025 to 6032, 96 pictures per row"
+  "the clean-up pass with each animal's own prediction in its automatic box against the same pass over the whole picture, CO3 alone beside them, seeds 6025 to 6032, 96 pictures per row",
+  "Get the first results before anything else",
+  "Write the setup code"
  ],
  "brief": {
   "outcome": "two papers, each beating its best rival",
@@ -3682,6 +3808,83 @@
    "by": "s13",
    "state": "open",
    "asked": "2026-11-26T00:32:54+02:00"
+  },
+  {
+   "id": 118,
+   "question": "Paper 2's species judge plan uses three fresh Claude sessions as blind reviewers 1 to 3 of the pictures. Is there a person who can replace reviewer 1, or should it stay Claude sessions?",
+   "holds": null,
+   "default": "Claude sessions",
+   "by": "s17",
+   "state": "answered",
+   "asked": "2026-11-26T13:17:50+02:00",
+   "answer": "Decided by Loop 18 at the owner's request (2026-11-26): Claude sessions as reviewers 1 to 3, because no person is named and the owner's own blind call of 60 pictures already ties the labels to a person. The owner may overrule by answering again.",
+   "answered": "2026-11-26T16:04:48+02:00"
+  },
+  {
+   "id": 119,
+   "question": "How should the 192 joint-prompt pictures (outputs/loop-6/m14/blind/pictures/ on the laptop) reach /datasets/mmolefe/poe_repair_min/paper2/paper2-upload-joint/? scripts/cluster.sh only pulls. Name a route (for example rsync through mscluster84 in the push direction), or decline and the species judge uses its box rows instead.",
+   "holds": null,
+   "default": "rsync through mscluster84 in the push direction",
+   "by": "s17",
+   "state": "answered",
+   "asked": "2026-11-26T13:17:50+02:00",
+   "answer": "Decided by Loop 18 at the owner's request (2026-11-26): rsync through mscluster84 in the push direction, as Loop 17's paper2_upload_joint.sh --go does (it checks the remote disk, copies, then counts and opens every picture at 1024 by 1024). It runs at the owner's launch, and the route is then recorded in environment/storage.md. The owner may overrule by answering again.",
+   "answered": "2026-11-26T16:04:48+02:00"
+  },
+  {
+   "id": 120,
+   "question": "If the co3 environment cannot load Qwen3-VL-8B for Paper 2's vision-language judge, may a separate mamba environment be built on /datasets for that one judge? And yes or no to the setup's cluster half (fetch four models, about 26 GB on /datasets; copy the 192 pictures; one CPU job that checks CO3 loads)?",
+   "holds": null,
+   "default": "yes to a separate mamba environment; yes to the cluster half",
+   "by": "s17",
+   "state": "answered",
+   "asked": "2026-11-26T13:17:50+02:00",
+   "answer": "Owner: yes. If co3 cannot load Qwen3-VL-8B, build a separate environment on /datasets for the vision-language judge only. Loop 17 writes the build script and its check; building it on the cluster happens with the weight fetch, at the owner's launch, not from a loop.",
+   "answered": "2026-11-26T13:35:28+02:00"
+  },
+  {
+   "id": 121,
+   "question": "Where is the empty-scene model on the cluster? Paper 1's sampler takes it as --empty-net; on the RunPod pod it was models/empty/network-snapshot-0002000-0.100.pkl, from the M7 run.",
+   "holds": null,
+   "default": null,
+   "by": "s16",
+   "state": "answered",
+   "asked": "2026-11-26T13:18:50+02:00",
+   "answer": "Decided for the owner (owner delegated it): /datasets/mmolefe/poe_repair_min/loop-6/m7/full/models/empty/network-snapshot-0002000-0.100.pkl, the M7 run's final 0.100 snapshot from its full rung (248,538,254 bytes, sha256 5e7905efd3b723d79507dde0af9d5d63d959738a2e08ab234646101ece8fb272), found by a read-only listing on 2026-11-26. Recorded in environment/clevr-and-edm2.md.",
+   "answered": "2026-11-26T13:33:13+02:00"
+  },
+  {
+   "id": 122,
+   "question": "Code ready: allocate the Blackwell node now?",
+   "holds": null,
+   "default": "allocate once board question 121 (the empty-scene model's path) is answered; until then only the red and blue lone samples can run",
+   "by": "s18",
+   "state": "answered",
+   "asked": "2026-11-26T13:31:49+02:00",
+   "answer": "Owner: allocate once Paper 1's push task (setup task 4) is accepted, on mscluster110 (then 112; avoid 111). Until then the node stays free.",
+   "answered": "2026-11-26T13:52:41+02:00"
+  },
+  {
+   "id": 123,
+   "question": "Paper 1 first result: if the eye calls fewer than 82 of the 96 real touching scenes right (FIRST_REAL_RIGHT_MIN, the rubric unreadable at 64 pixels), should a yes become inconclusive? The verdict file's rule has no clause for it; the reader reports it beside the answer.",
+   "holds": null,
+   "default": "report it beside the answer and leave the answer as the rule gives it",
+   "by": "s18",
+   "state": "answered",
+   "asked": "2026-11-26T14:00:19+02:00",
+   "answer": "Decided by Loop 18 at the owner's request (2026-11-26): yes. If the eye calls fewer than 82 of the 96 real touching scenes right, the answer is inconclusive (could not measure it: the rubric at 64 pixels), whatever the gain, because every right call on a touching seed needs occlusion read correctly and the full plan reads this instrument row before any result row (OCCLUSION_REAL_MIN). Loop 16 adds it to the reader; the verdict file gains the clause. The owner may overrule by answering again.",
+   "answered": "2026-11-26T16:04:48+02:00"
+  },
+  {
+   "id": 124,
+   "question": "May Loop 18 run both papers' first-result work over SSH on mscluster112 (shared-device path, outside Slurm), with a pulse check that no other user holds the node?",
+   "holds": null,
+   "default": "yes",
+   "by": "s18",
+   "state": "answered",
+   "asked": "2026-11-26T16:11:05+02:00",
+   "answer": "Owner, in Loop 18's chat, 2026-11-26 16:10: yes. 'You may run experiments on mscluster112 by ssh'ing and running there, and we can run pulse checks to see if it hasn't allocated to someone other than mmolefe.' Then: 'No I allow you. You ssh and run.'",
+   "answered": "2026-11-26T16:11:05+02:00"
   }
  ]
 }
