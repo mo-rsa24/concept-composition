@@ -5,7 +5,7 @@
     "Detour: zoom-ladder, about 430k tokens",
     "Detour: reading route and pictures, about 1.8M tokens",
     "Paper 1: toy WORKS: learned term (A) trained longer gives 0.89 clean pairs from 1,024 joint scenes; B, C draw none",
-    "Paper 2: dial to train on our best judge (121 of 240), read only by blind calls; being wired, waits on the cluster"
+    "Paper 2: dial bars and trained-judge reward committed; window, CO3-alone row and readers being built; launch waits on the cluster"
   ],
   "detours_join": "P2",
   "steps": [
