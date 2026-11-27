@@ -1,0 +1,19 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TB
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  subgraph NOW["Now: CLEVR"]
+    N1["64px Blender scenes<br/>EDM2 experts trained for days<br/>one answer = hours"]:::plain
+  end
+  subgraph NEXT["Proposed: the squares toy, same idea"]
+    T1["16x16 pictures drawn by code<br/>red square / blue square / empty<br/>joint = the two touching, one in front"]:::plain
+    T2["exact denoisers known<br/>(finite picture sets)<br/>so the true interaction is known"]:::plain
+    T3["three small experts<br/>trained separately, minutes"]:::plain
+    T4["plain sum: red + blue - empty<br/>expect overlap and purple"]:::plain
+    T5["+ learned interaction<br/>Method A, B, C"]:::plain
+    T6{"clean touching pair?<br/>checked exactly in pixels"}:::plain
+    T1 --> T2
+    T1 --> T3 --> T4 --> T5 --> T6
+    T2 -.->|"how far the learned term<br/>is from the true one"| T5
+  end
+  N1 -.->|"scale back up only<br/>once the toy works"| T1
+  style NEXT fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px

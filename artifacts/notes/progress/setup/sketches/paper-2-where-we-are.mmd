@@ -1,0 +1,13 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef done fill:#e6f4ea,stroke:#2e7d32,stroke-width:2px,color:#111111
+  classDef run fill:#fff3e0,stroke:#e08a00,stroke-width:3px,color:#111111
+  classDef wait fill:#f2f2f2,stroke:#888888,stroke-width:2px,stroke-dasharray:5 5,color:#111111
+  P1["1 Setup<br/>scripts, weights, dial trainer<br/>checked on CPU"]:::done
+  P2a["2a Hand calls<br/>1,552 pictures, six kinds<br/>callers agree 84-95%"]:::done
+  P2b["2b Six ready-made judges<br/>best 102 of 240<br/>bar 216: all miss"]:::done
+  P2c["2c Train our own judge<br/>on the 1,552 calls<br/>BEING BUILT"]:::run
+  P3["3 Identity dial first result<br/>rank-4 LoRA on SDXL<br/>NOT STARTED"]:::wait
+  P4["4 Full ladder<br/>stacked dials"]:::wait
+  P1 --> P2a --> P2b --> P2c
+  P2c -.->|"needs 216 of 240<br/>to train the dial"| P3 --> P4
