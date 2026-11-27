@@ -5,6 +5,7 @@ Needs torch, so it runs on the cluster (co3 or co3_bw python) or with a CPU buil
   python -m pytest tests/test_paper1_interaction.py
 """
 import json
+import math
 import sys
 from pathlib import Path
 
@@ -235,3 +236,82 @@ def test_weight_count_at_the_default_width():
     print(json.dumps({"width": pi.WIDTH, "delta_weights": pi.weight_count(model),
                       "uncertainty_weights": pi.weight_count(model, True) - pi.weight_count(model)}))
     assert pi.WIDTH == 96 and pi.weight_count(model) == 2_968_739 and pi.weight_count(model, True) - pi.weight_count(model) == 33
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------
+# The Langevin corrector (--corrector-steps, --corrector-size), copied from the squares toy's rung 6
+
+
+def test_corrector_steps_0_writes_the_uncorrected_pictures_byte_for_byte(tmp_path, stub_models):
+    seeds, counts = [5, 6, 7], (1, 3)
+    trained = tmp_path / "trained.pt"
+    pi.save_checkpoint(trained, _random_delta(), {"note": "random"}, 7, 0.5)
+    common = ["--root", str(tmp_path), "--counts", "1,3", "--seeds", "5-7", "--batch", "2", "--checkpoint", str(trained)]
+    pi.main(["sample", "--run", "default"] + common)
+    pi.main(["sample", "--run", "k0", "--corrector-steps", "0", "--corrector-size", "0.3"] + common)
+    pi.main(["sample", "--run", "k1", "--corrector-steps", "1"] + common)
+    pi.main(["sample", "--run", "zero-k0", "--zero-delta", "--corrector-steps", "0"] + common)
+    pi.main(["sample", "--run", "zero-k1", "--zero-delta", "--corrector-steps", "1"] + common)
+    ps.main(["plainsum", "--run", "plain", "--root", str(tmp_path), "--counts", "1,3", "--seeds", "5-7", "--batch", "2"])
+    for k in counts:
+        assert _bytes(tmp_path / "k0", k, seeds) == _bytes(tmp_path / "default", k, seeds)
+        assert _bytes(tmp_path / "zero-k0", k, seeds) == _bytes(tmp_path / "plain", k, seeds)
+        assert _bytes(tmp_path / "k1", k, seeds) != _bytes(tmp_path / "default", k, seeds)
+        assert _bytes(tmp_path / "zero-k1", k, seeds) != _bytes(tmp_path / "plain", k, seeds)
+        assert _bytes(tmp_path / "zero-k1", k, seeds) != _bytes(tmp_path / "k1", k, seeds)   # the corrector uses the row's denoiser
+    t0 = json.loads((tmp_path / "k0" / "timing.jsonl").read_text())
+    t1 = json.loads((tmp_path / "k1" / "timing.jsonl").read_text())
+    assert (t0["corrector_steps"], t0["corrector_size"], t0["denoiser_calls_per_picture"]) == (0, None, 63)
+    assert (t1["corrector_steps"], t1["corrector_size"], t1["denoiser_calls_per_picture"]) == (1, 0.05, 94)
+    assert "200000 + seed" in t1["corrector_noise"]
+
+
+def test_one_corrector_step_matches_a_hand_computation():
+    nets, seeds = _stub_nets(), [20003, 20011]
+    denoise = pi.interaction_denoiser(nets, _random_delta(), 2, len(seeds))
+    x = torch.randn(len(seeds), 3, 64, 64, generator=torch.Generator().manual_seed(8)) * 3
+    hook = pi.corrector(denoise, seeds, 1, 0.05)
+    t = ps.sigmas("cpu")
+    s1, s2 = t[10], t[11]
+    out1 = hook(x, s1)
+    out2 = hook(out1, s2)
+    # by hand in float64: eta = 0.05 sigma^2, so x + eta (D - x) / sigma^2 + sqrt(2 eta) z = x + 0.05 (D - x) + sqrt(0.1) sigma z,
+    # z the next (1, 3, 64, 64) draw of seed s's own generator seeded 200,000 + s (the second level takes the second draw)
+    gens = [torch.Generator().manual_seed(200000 + s) for s in seeds]
+    z1 = torch.stack([torch.randn(1, 3, 64, 64, generator=g)[0] for g in gens]).double()
+    z2 = torch.stack([torch.randn(1, 3, 64, 64, generator=g)[0] for g in gens]).double()
+
+    def by_hand(xin, s, z):
+        d = denoise(xin, s, 0, True).double()
+        return xin.double() + 0.05 * (d - xin.double()) + math.sqrt(0.1) * float(s) * z
+    assert torch.allclose(out1.double(), by_hand(x, s1, z1), atol=1e-5)
+    assert torch.allclose(out2.double(), by_hand(out1, s2, z2), atol=1e-5)
+    assert not torch.allclose(out1, x)
+
+
+def test_corrector_runs_after_every_step_above_sigma_0_with_one_extra_call_per_step():
+    nets, seeds, calls = _stub_nets(), [1, 2], []
+    base = pi.interaction_denoiser(nets, _random_delta(), 1, len(seeds))
+
+    def denoise(x, s, step, second=False):
+        calls.append(float(s))
+        return base(x, s, step, second)
+    x = torch.randn(len(seeds), 3, 64, 64, generator=torch.Generator().manual_seed(9)) * 80
+    ps.heun(denoise, x, ps.sigmas("cpu"), after_step=pi.corrector(denoise, seeds, 3))
+    assert len(calls) == 63 + 31 * 3 and 0.0 not in calls
+
+
+def test_corrector_noise_does_not_depend_on_batching(tmp_path, stub_models):
+    seeds = [5, 6, 7]
+    trained = tmp_path / "trained.pt"
+    pi.save_checkpoint(trained, _random_delta(), {"note": "random"}, 7, 0.5)
+    common = ["--root", str(tmp_path), "--counts", "2", "--checkpoint", str(trained), "--corrector-steps", "2"]
+    pi.main(["sample", "--run", "together", "--seeds", "5-7", "--batch", "3"] + common)
+    pi.main(["sample", "--run", "one-by-one", "--seeds", "5-7", "--batch", "1"] + common)
+    pi.main(["sample", "--run", "six-alone", "--seeds", "6", "--batch", "1"] + common)
+    assert _bytes(tmp_path / "together", 2, seeds) == _bytes(tmp_path / "one-by-one", 2, seeds)
+    assert _bytes(tmp_path / "six-alone", 2, [6]) == _bytes(tmp_path / "together", 2, [6])
+    hook_all = pi.corrector(lambda x, s, step, second: x * 0, [5, 6, 7], 2)
+    hook_six = pi.corrector(lambda x, s, step, second: x * 0, [6], 2)
+    x, s = torch.zeros(3, 3, 64, 64), ps.sigmas("cpu")[5]
+    assert torch.equal(hook_all(x, s)[1], hook_six(x[1:2], s)[0])

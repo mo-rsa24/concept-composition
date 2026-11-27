@@ -48,12 +48,24 @@ each seed, the plain sum's own starting noise, writing <run>/count-<k>/<seed:06d
 paper1_overlap_stats.py and paper1_sample.py contact read. --zero-delta multiplies delta by 0 inside the same denoiser: the plain sum
 through this code (the control); with an untrained delta it must write byte-identical pictures to paper1_sample.py plainsum.
 
+The Langevin corrector (--corrector-steps K, --corrector-size 0.05). Copied from the squares toy's rung 6
+(toy/squares_toy.py: langevin_step, corrector), itself the inclusive-captions project's toy_caption_corrector: after every Heun step
+that lands above sigma 0 (heun's after_step hook, so 31 of the 32 steps), K steps at that sigma of
+    x <- x + eta * score + sqrt(2 eta) * z,   score = (D(x, sigma) - x) / sigma^2,   eta = size * sigma^2,
+with D the same composed denoiser the row samples with (the plain sum plus delta, or the plain sum under --zero-delta). Each seed's
+z comes from its own CPU generator seeded CORRECTOR_SEED_OFFSET + seed (200,000 + seed), drawing (K, 3, 64, 64) per noise level, so a
+seed's pictures do not depend on how seeds are batched. K = 0 (the default) passes no hook to heun: the sampler's operations, and
+its pictures, are the uncorrected ones byte for byte. Each corrector step is one more denoiser call, so K steps cost 63 + 31 K calls
+per picture against the plain sampler's 63.
+
 Usage (cluster, through paper1_gpu.sbatch; folders absolute or relative to /datasets/mmolefe/poe_repair_min/paper1/):
   python paper1_interaction.py train --run paper1-methodA-k384 --positives paper1-diag-pack-k384/k384-s1
   python paper1_interaction.py sample --run paper1-methodA-k384-rows --checkpoint paper1-methodA-k384/interaction.pt \
       --split paper1-first-lone-red/split.json --set evaluation --side touching --counts 1,2,3
   python paper1_interaction.py sample --run paper1-methodA-zero-rows --checkpoint paper1-methodA-k384/interaction.pt --zero-delta \
       --split paper1-first-lone-red/split.json --set evaluation --side touching --counts 1,2,3
+  python paper1_interaction.py sample --run paper1-methodA-k384-k20-rows --checkpoint paper1-methodA-k384/interaction.pt \
+      --corrector-steps 20 --split paper1-first-lone-red/split.json --set evaluation --side touching --counts 1,2,3
 """
 import argparse
 import copy
@@ -225,6 +237,38 @@ def interaction_denoiser(nets, model, k, n, zero_delta=False):
 
 
 # ---------------------------------------------------------------------------------------------------------------------------------------
+# The Langevin corrector (toy/squares_toy.py rung 6; see the docstring)
+
+CORRECTOR_SIZE = 0.05
+CORRECTOR_SEED_OFFSET = 200000
+
+
+def langevin_step(denoise, x, s, size, noise, step=0):
+    """One corrector step at sigma s: x + eta score + sqrt(2 eta) noise, score = (D(x, s) - x) / s^2, eta = size s^2."""
+    score = (denoise(x, s, step, True) - x) / s ** 2
+    eta = size * s ** 2
+    return x + eta * score + (2 * eta).sqrt() * noise
+
+
+def corrector(denoise, seeds, steps, size=CORRECTOR_SIZE):
+    """paper1_sample.heun's after_step hook: after Heun step i lands at sigma, `steps` Langevin steps at that sigma. At each level
+    every seed's own generator draws (steps, 3, 64, 64) noise. With steps 0 nothing is drawn and x is returned untouched."""
+    gens = [torch.Generator().manual_seed(CORRECTOR_SEED_OFFSET + int(s)) for s in seeds]
+    level = [0]                                              # heun calls the hook once per step, in order, from step 0
+
+    def correct(x, sigma):
+        i = level[0]
+        level[0] += 1
+        if steps == 0:
+            return x
+        noise = torch.stack([torch.randn(steps, 3, 64, 64, generator=g) for g in gens]).to(x.device)
+        for k in range(steps):
+            x = langevin_step(denoise, x, sigma, size, noise[:, k], step=i + 1)
+        return x
+    return correct
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------
 # Data and the held-out split
 
 
@@ -392,6 +436,8 @@ def cmd_train(args):
 def cmd_sample(args):
     if not args.checkpoint and not args.zero_delta:
         raise SystemExit("give --checkpoint interaction.pt (or --zero-delta for the plain sum through this code)")
+    if args.corrector_steps < 0 or args.corrector_size <= 0:
+        raise SystemExit("--corrector-steps must be 0 or more and --corrector-size above 0")
     folder = ps.run_dir(args)
     nets, encoder = ps.load_three(args)
     if args.checkpoint:
@@ -404,12 +450,19 @@ def cmd_sample(args):
     for k in counts:
         for batch in ps.batches(ps.seeds_for(args, k), args.batch):
             x, _ = ps.starting_noise(batch)
-            x = ps.heun(interaction_denoiser(nets, model, k, len(batch), zero_delta=args.zero_delta), x, t)
+            denoise = interaction_denoiser(nets, model, k, len(batch), zero_delta=args.zero_delta)
+            hook = corrector(denoise, batch, args.corrector_steps, args.corrector_size) if args.corrector_steps > 0 else None
+            x = ps.heun(denoise, x, t, after_step=hook)
             ps.save(ps.to_uint8(encoder, x), folder / f"count-{k}", batch)
             pictures += len(batch)
     seconds = time.time() - begin
     ps.log_json(folder, "timing", {"stage": "methodA-sample", "zero_delta": bool(args.zero_delta), "checkpoint": args.checkpoint,
                                    "checkpoint_update": record.get("update"), "width": record.get("width"), "counts": counts,
+                                   "corrector_steps": args.corrector_steps,
+                                   "corrector_size": args.corrector_size if args.corrector_steps > 0 else None,
+                                   "corrector_noise": (f"one CPU generator per seed, seeded {CORRECTOR_SEED_OFFSET} + seed"
+                                                       if args.corrector_steps > 0 else None),
+                                   "denoiser_calls_per_picture": 2 * ps.STEPS - 1 + (ps.STEPS - 1) * args.corrector_steps,
                                    "seed_choice": {"seeds": args.seeds, "split": args.split, "set": args.set, "side": args.side,
                                                    "limit": args.limit},
                                    "pictures": pictures, "seconds": round(seconds, 1),
@@ -453,6 +506,10 @@ def build_parser():
     p.add_argument("--set", choices=ps.SEED_SETS)
     p.add_argument("--side", choices=["touching", "apart"], default="touching")
     p.add_argument("--limit", type=int, help="the first N seeds in seed order, per count")
+    p.add_argument("--corrector-steps", type=int, default=0,
+                   help="Langevin corrector steps after each Heun step above sigma 0 (default 0: no corrector)")
+    p.add_argument("--corrector-size", type=float, default=CORRECTOR_SIZE,
+                   help="corrector step as a fraction of sigma squared (default %(default)s)")
     return ap
 
 
