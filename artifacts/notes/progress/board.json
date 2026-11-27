@@ -4,8 +4,8 @@
   "Detour: idea walk, 7 claims, paused",
   "Detour: zoom-ladder, about 430k tokens",
   "Detour: reading route and pictures, about 1.8M tokens",
-  "Paper 1: diagnosis converged; best push 131 of 527 touching (separate noise, 384 scenes) vs paste 461; direction waits on the owner",
-  "Paper 2: six automated judges miss (best 102 of 240, need 216); measurement goes to the owner"
+  "Paper 1: Method A and the trajectory-negative head being built",
+  "Paper 2: six judges out; the dial's training needs a judge, so its training signal goes to the owner"
  ],
  "detours_join": "P2",
  "steps": [

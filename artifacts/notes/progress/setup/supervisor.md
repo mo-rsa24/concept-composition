@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated: 2026-11-27 10:06 SAST.
+Last updated: 2026-11-27 12:15 SAST.
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -207,6 +207,8 @@ Nothing at the moment. Paper 1's tuning calls are with two fresh reviewers at yo
 **Paper 2, the follow-on judges pass the 64-cat check** (09:09). DreamSim (against SDXL's own cat and dog renders, seeds 9001 to 9008) and BioCLIP each name all 64 census cats cat (bar 62). An exploratory read on the already-read split is running on mscluster110 (BioCLIP, then the other 432 references and DreamSim, then the scorer), marked as not the verdict: if either judge comes near the bars, new test pairs are built for the verdict; if both fail as the first four did, that batch is not needed.
 
 **Paper 2, the follow-on judges miss too** (2026-11-27 10:06). Exploratory read on the already-read split: DreamSim 96 of 240 (two-clear precision 0.42, within-pair AUC 0.79), BioCLIP 70 of 240 (0.56, 0.74); bars 216, 0.90, 0.85. Six automated judges have now missed by wide margins; no new test pairs are built. Paper 2's measurement goes back to the owner.
+
+**Paper 2, what blind calls can and cannot replace** (2026-11-27 12:15). Read of plans/paper-2-dials/plans/03-identity-dial-first-result.md and paper2_identity_dial.py: the dial's training needs an automated judge (the gradient route's reward and the kept route's filter call it every step; train exits without --judge-settings), so blind calls can replace the measurement only. Measured blind, the first result is 400 pictures (redraw 64, checkpoint pick 96, test 240): about 0.9 million reviewer tokens at 256 pixels or 2.9 million at the plan's 1024. Bars written in judge terms that the owner would restate: FIRST_REDRAW_KIND_CHANGES_MAX, FIRST_GAMING_GAP_MAX_RISE, R3_JUDGE_HALFDRAWN_MIN, the owner-choice gate and the kept-judge disagreement lines. A blind-called kept route would need about 2,304 pre-drawn pictures (26 to 36 GPU-hours, about 16.9 million tokens at 1024). The training signal goes to the owner.
 
 ## Final review
 
