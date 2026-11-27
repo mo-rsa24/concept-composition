@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated 2026-11-27 18:10 UTC
+Last updated 2026-11-27 19:20 UTC
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -241,6 +241,8 @@ Paper 1, 2026-11-27 14:45 UTC: Method A trained on the 197 touching joint scenes
 Paper 1, 2026-11-27 18:00 UTC: Methods C and B on CLEVR, read after the cluster returned at 17:58 UTC. Red within 1 pixel of blue on the 626 touching evaluation seeds. Method C (the head trained on the region sampler's own half-drawn states): 39, 85, 176 and 261 at weights 1, 4, 16 and 64 (shares 0.062, 0.136, 0.281, 0.417), but 622 to 624 of 626 seeds are mostly purple in the overlap at every weight, so its contact is mostly fused purple shapes with red and blue edges, not two objects. Method B (four-way ratio): 17, 15, 18 and 18. Method A on all 384 scenes: 303 with 23 mostly purple; the paste 517 with 26. Neither push beats the paste or Method A; A stays the method. Method A on the 197 touching scenes trained 16,000 updates (p1-methodA-touch-long.sh) was launched on mscluster110 at 17:59 UTC; its wrapper had not printed its first line a minute later, likely waiting on the slow home filesystem.
 
 2026-11-27 18:10 UTC, both papers: the owner asked whether B, C and D had A's training budget on the squares toy (they had not: each classifier head trained about a minute, A about 28; D was never built) and whether Paper 2 has a small toy for training dials alone and stacking them. Two builders run on the laptop: Paper 1's fair comparison (C and B trained 20,000 updates at 1,024 and all joint scenes, C also with drawn states from 8,192 seeds, and D, Method A plus the experts' inner features, all against the toy's existing bars); and a miniature of Paper 2's toy rung (plan 04's rung 1, which costs about 26 GPU-hours at 64 pixels) at 16 or 32 pixels with the four dial kinds trained alone by the plan's recipes, then interference, the stacking correction and the deciding test, with gate 1's bars where the plan has them and new bars written before any result where it does not.
+
+Paper 2, 2026-11-27 19:20 UTC: the dial miniature (16x16, squares and diamonds in four colours, a conditioned base, code committed) stopped at gate 1: the base draws exactly the asked objects on 0.870 of 1,024 canvases against R1_BASE_COUNT_MIN 0.95 (1 object 0.981, 2 objects 0.910, 3 objects 0.812; total count right 0.947, so it mixes up the count per colour). Every other stage 1 bar passed. Supervisor's choice: train the base 16,000 updates in place of 6,000, nothing else changed, the 6,000-update base kept; the bar stays 0.95 and is read on fresh seeds 21,024 to 22,047, with the original seeds reported as a second reading; one retry only. The run's GPU budget (a cap the builder set, not a result bar) rises from 60 to 120 minutes.
 
 ## Final review
 
