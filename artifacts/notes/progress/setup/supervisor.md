@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated: 2026-11-27 05:23 SAST.
+Last updated: 2026-11-27 05:50 SAST.
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -183,6 +183,8 @@ Nothing at the moment. Paper 1's tuning calls are with two fresh reviewers at yo
 **Paper 2, version 4** (05:14). Rules version 4 (bodies a reviewer can name at a glance count; a close relative is a different species) governs wrong species and extra subject. Recall of 336 pictures (every settled extra subject and wrong species, and every wrong-species call) and 60 renamed pictures (cougar shown as leopard 27, goose as swan 36, fox as coyote 25, flamingo as spoonbill 20 of the 108 possible) are being called by 18 reviewers. The split diagnostic shows borrowed part (concentrated on cheetah and cougar) failing the 12-a-pair and look-alike rules in 70% of draws, wrong species and extra subject's look-alike count in all.
 
 **Paper 2, every kind meets the agreement bar** (2026-11-27 05:23). Nine batches, 1,232 settled pictures. The version 4 recall (336 pictures, 308 alike) and 60 renamed pictures (57 alike) bring wrong species to 72 pictures (27 natural, 45 renamed) at 0.90 agreement; every kind is now at or above 0.87, two clear against borrowed part 0.979. One count is still short: extra subject has 8 pictures on look-alike pairs against 20, failing in every draw, and the pool is spent. Decided, before any judge has run: the look-alike minimum becomes per kind, 8 for extra subject (all that exist), its look-alike reading reported as underpowered; asked of Loop 17.
+
+**Paper 1, the reframe withdrawn** (2026-11-27 05:50). The owner challenged reframing Paper 1 as a diagnosis paper, and the first result's own blind calls support the challenge: the purple share measures colour blending only, while the paper's measure is a right touching scene. The best rule-based row, paste with the lower object on top, was right on 44 of 96 touching seeds (blend 4, wrong object in front 33, red count 23, blue count 20), against 68 of 76 for real scenes. One owner per overlap removes the blend; it does not make the scene right. About 45 points stay open for a learned interaction, and only one learned method has been tested (a small head, steps 10 to 22, a capped push). Next: measure the new baseline blind (sheet paper1-baseline-sheet: region sampler with one owner per overlap, harmonised paste, lower-on-top paste, real scenes; 364 pictures, leak check 0 hits; eight reviewers calling), then pre-register learned interactions against it in order of expected payoff: a noise-aware head guiding from step 0, fine-tuning the experts on joint scenes with a small adapter, a learned overlap-owner and layout predictor. Paper 2's top-up renders run on mscluster112.
 
 ## Final review
 
