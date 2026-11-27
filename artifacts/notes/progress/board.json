@@ -4,7 +4,7 @@
     "Detour: idea walk, 7 claims, paused",
     "Detour: zoom-ladder, about 430k tokens",
     "Detour: reading route and pictures, about 1.8M tokens",
-    "Paper 1: squares toy tests whether the interaction term works at all; Methods A and C on CLEVR running, B being built",
+    "Paper 1: Method A removes the purple on CLEVR (27 of 66 touching, paste 52); squares toy, B and C running",
     "Paper 2: training our own judge on the 1,552 hand calls, so the dial can train"
   ],
   "detours_join": "P2",

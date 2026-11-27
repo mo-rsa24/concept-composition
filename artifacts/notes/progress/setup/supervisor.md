@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated 2026-11-27 10:52 UTC
+Last updated 2026-11-27 10:56 UTC
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -215,6 +215,8 @@ Paper 1, 2026-11-27 10:30 UTC: two of the outside reading's four methods are run
 Paper 1, 2026-11-27 11:00 UTC: the owner wants to know whether the method works at all before paying for CLEVR precision, and to scale only if a small version cannot be improved further. A squares toy is being built and run on the laptop: 16x16 pictures drawn by code (a red square, a blue square, an empty scene, and joint scenes where the two touch, one in front), so every expert's exact denoiser and the exact interaction are known. Three small experts are trained separately as on CLEVR, then the plain sum, Method A, Method C on the sampler's own states and Method B are run on 256 shared seeds. The bars were set before any toy result: a method works if its share of clean touching pairs is at least 0.8 and at least 0.5 above the plain sum's; partial if at least 0.2 above; fails otherwise. Rung 0 checks that the exact plain sum fails on the toy; if it does not, the toy does not reproduce the problem and is redesigned before any method is read. Method B and Paper 2's trained judge are being built in parallel; the CLEVR Method A quick read on 66 seeds still runs, since it costs about 15 minutes of card time.
 
 Paper 2, 2026-11-27 10:50 UTC: the trained judge (paper2_trained_judge.py, commit 42147a6f: frozen CLIP ViT-L/14 features, a 136,102-weight head, the two names in both orders) runs on mscluster110 twice. The reading against the bar of 216 of 240 trains on the choosing pairs only (369 pictures, 318 train and 51 development), which keeps the plan's claim that the judge is read on pairs it was never tuned on; its outputs are paper2-judge-trained and paper2-judge-score-trained. A second run trains on the wider pool (768 pictures, including other seeds of 16 of the 19 test pairs) into paper2-judge-trained-seenpairs and paper2-judge-score-trained-seenpairs; it reads new pictures of pairs the judge has seen, so it is exploratory and never counts against the bar. The thin kinds (wrong species 19 training pictures, two of one kind 21, borrowed part 25 in the choosing pool) are the likeliest misses. Paper 1's Method B (commit 2bc66217, real pictures per class: 384 joint, 15,000 red only, 15,000 blue only, 5,000 empty) is training on the same card.
+
+Paper 1, 2026-11-27 10:55 UTC: Method A's first read on CLEVR, the first 22 touching evaluation seeds per count (66 seeds), all rows on the same seeds. Red within 1 pixel of blue: plain sum through the same code 0 of 66, Method A 27 of 66, paste with the lower object on top 52 of 66. Seeds mostly purple in the overlap: 65, 5 and 6. Method A removes the purple and draws separate red and blue objects, which no push managed (its best was 68 of 626 with shared noise); the gap to the paste is now touching, since many of A's pairs come out apart. This is a pixel read, not the blind test; the full 626-seed read is running. Strip and card: artifacts/results/does-the-interaction-term-fix-clevr/.
 
 ## Final review
 
