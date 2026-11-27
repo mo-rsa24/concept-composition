@@ -39,6 +39,12 @@ REVIEWER_GAP_KIND_MAX = 0.10
 AGREE_ALL_MIN = 216           # of 240
 AGREE_KIND_MIN = 33           # of 40
 LOOKALIKE_PER_KIND_MIN = 20   # of 40
+# The look-alike minimum the split applies, per kind. Set on 2026-11-27, before any judge ran, by Loop 18 under the owner's
+# delegation: after the whole candidate pool and steps 0.9 and 0.10's renders on eight new look-alike pairs, only 8
+# natural extra-subject pictures sit on look-alike pairs, so extra subject's minimum is 8 and its look-alike agreement is
+# read on those 8 and reported as underpowered. Every other kind keeps LOOKALIKE_PER_KIND_MIN.
+LOOKALIKE_MIN_BY_KIND = {"two_clear": 20, "borrowed_part": 20, "hybrid": 20, "two_of_one_kind": 20,
+                         "wrong_species": 20, "extra_subject": 8}
 TWO_CLEAR_PRECISION_MIN = 0.90
 WITHIN_PAIR_AUC_MIN = 0.85
 AUC_PAIRS_MIN = 4

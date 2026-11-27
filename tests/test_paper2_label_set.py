@@ -18,7 +18,7 @@ REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "2-classifier-guidance/scripts/paper2"))
 
 import paper2_label_set as ls  # noqa: E402
-from paper2_bars import (LOOKALIKE_PER_KIND_MIN, PER_KIND_CHOOSING_MIN, PER_KIND_CONFIRM,  # noqa: E402
+from paper2_bars import (LOOKALIKE_MIN_BY_KIND, PER_KIND_CHOOSING_MIN, PER_KIND_CONFIRM,  # noqa: E402
                          PER_KIND_ONE_PAIR_MAX, PER_KIND_TEST_PAIRS_MIN, PER_KIND_TEST_READ)
 from paper2_kinds import KINDS  # noqa: E402
 
@@ -124,7 +124,7 @@ def test_the_split_meets_the_size_table_and_seals_the_confirmation_slice(tmp_pat
         assert sum(r["kind"] == kind and r["part"] == "choosing" for r in rows) >= PER_KIND_CHOOSING_MIN
         read = [r for r in rows if r["kind"] == kind and r["part"] == "read"]
         assert len(read) == PER_KIND_TEST_READ
-        assert sum(r["pair_type"] == "look-alike" for r in read) >= LOOKALIKE_PER_KIND_MIN
+        assert sum(r["pair_type"] == "look-alike" for r in read) >= LOOKALIKE_MIN_BY_KIND[kind]
         assert len({r["pair"] for r in read}) >= PER_KIND_TEST_PAIRS_MIN
         assert max(Counter(r["pair"] for r in read).values()) <= PER_KIND_ONE_PAIR_MAX
         assert sum(truth[p] == kind for p in confirm) == PER_KIND_CONFIRM
@@ -318,3 +318,41 @@ def test_a_v3_extra_subject_is_refused_once_v4_exists_and_a_v4_recall_replaces_i
     assert "b3 (extra_subject, v3)" in labels["/d/p0.png"]["replaces"]
     assert len(refused) == 1 and refused[0].startswith("b3/n00001: extra_subject under rubric v3, where rubric v4")
     assert ls.VERSION_KINDS[4] == {"wrong_species", "extra_subject"}
+
+
+def short_lookalike_extra_subject():
+    """Rich for every kind, except extra subject: 8 pictures on look-alike pairs (4 on each of two), many unlike."""
+    entries = [e for e in rich_entries() if e["kind"] != "extra_subject"]
+    for a, b in LOOK[:2]:
+        for j in range(4):
+            entries.append({"picture": f"/d/{slug(a, b)}/extra/{j}.png", "a": a, "b": b, "seed": 6100 + j,
+                            "kind": "extra_subject"})
+    for a, b in UNLIKE:
+        for j in range(16):
+            entries.append({"picture": f"/d/{slug(a, b)}/extra/{j}.png", "a": a, "b": b, "seed": 6100 + j,
+                            "kind": "extra_subject"})
+    return entries
+
+
+def test_a_set_short_only_on_one_kinds_lookalike_count_splits_under_its_lowered_minimum(tmp_path, monkeypatch):
+    entries = short_lookalike_extra_subject()
+    kinds = [e["kind"] for e in entries]
+    b = write_batch(tmp_path / "b1", entries, [kinds, kinds], version=4)
+    assert run(tmp_path, [b]) == 0                                          # extra subject's minimum is 8
+    split = json.loads((tmp_path / "out/split.json").read_text())
+    assert split["lookalike_min_by_kind"]["extra_subject"] == 8
+    counts = (tmp_path / "out/counts.txt").read_text()
+    assert "look-alike minimum per kind" in counts and "extra_subject 8" in counts
+    assert "look-alike minimum 8, underpowered on look-alike pairs" in counts
+    rows = read_out(tmp_path)
+    es_read = [r for r in rows if r["kind"] == "extra_subject" and r["part"] == "read"]
+    assert len(es_read) == 40 and sum(r["pair_type"] == "look-alike" for r in es_read) >= 8
+
+    monkeypatch.setattr(ls, "LOOKALIKE_MIN_BY_KIND", {k: 20 for k in KINDS})
+    (tmp_path / "batches.json").write_text(json.dumps([b]))
+    assert ls.main(["--batches", str(tmp_path / "batches.json"), "--out", str(tmp_path / "out20")]) == 1
+    diag = json.loads((tmp_path / "out20/split-diagnostic.json").read_text())
+    es = diag["fails"]["extra_subject"]
+    # every draw fails on extra subject: on its look-alike minimum, or before the read is drawn, on its test count
+    assert es["look-alike under its minimum"] + es["test under 50 (confirmation 10 and read 40)"] >= diag["draws"]
+    assert "'look-alike pictures': 12" in (tmp_path / "out20/counts.txt").read_text()

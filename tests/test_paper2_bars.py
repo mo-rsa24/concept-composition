@@ -119,3 +119,9 @@ def test_pair_types_hold_without_the_plan():
     assert len(bars.PAIRS) == 23
     for a, b, _ in bars.PAIRS:
         assert bars.pair_type(a, b) == ("look-alike" if (a, b) in lookalike else "unlike"), (a, b)
+
+
+def test_the_lookalike_minimum_is_per_kind_and_lowered_only_for_extra_subject():
+    assert set(bars.LOOKALIKE_MIN_BY_KIND) == set(bars.KINDS)
+    assert bars.LOOKALIKE_MIN_BY_KIND["extra_subject"] == 8
+    assert all(v == bars.LOOKALIKE_PER_KIND_MIN == 20 for k, v in bars.LOOKALIKE_MIN_BY_KIND.items() if k != "extra_subject")

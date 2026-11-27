@@ -25,7 +25,7 @@ What it does, in order:
   5. splits the pairs into choosing and test pairs by the first draw from SPLIT_SEED (0) that meets the size table:
      on choosing pairs at least PER_KIND_CHOOSING_MIN (15) of each kind; on test pairs, for each kind, a confirmation
      slice of PER_KIND_CONFIRM (10) drawn by CONFIRM_SEED (1), and from the rest PER_KIND_TEST_READ (40) read pictures,
-     at least LOOKALIKE_PER_KIND_MIN (20) on look-alike pairs, from at least PER_KIND_TEST_PAIRS_MIN (4) pairs, at most
+     at least LOOKALIKE_MIN_BY_KIND (20, extra subject 8) on look-alike pairs, from at least PER_KIND_TEST_PAIRS_MIN (4) pairs, at most
      PER_KIND_ONE_PAIR_MAX (12) from one pair, at most RENAMED_PER_KIND_MAX (20) renamed. Crow and raven are in neither
      (REPORTED_APART). Each draw puts every pair on the choosing side with probability 0.3; over every draw tried,
      counts.txt and split-diagnostic.json report how often each kind missed each rule, so what blocks a split shows;
@@ -64,7 +64,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
-from paper2_bars import (CLEAR_VS_BORROWED_AGREE_MIN, CONFIRM_SEED, LOOKALIKE_PER_KIND_MIN, OWNER_SEED,  # noqa: E402
+from paper2_bars import (CLEAR_VS_BORROWED_AGREE_MIN, CONFIRM_SEED, LOOKALIKE_MIN_BY_KIND, OWNER_SEED,  # noqa: E402
                          PER_KIND_CHOOSING_MIN, PER_KIND_CONFIRM, PER_KIND_ONE_PAIR_MAX, PER_KIND_TEST_PAIRS_MIN,
                          PER_KIND_TEST_READ, REPORTED_APART, REVIEWER_AGREE_KIND_MIN, SPLIT_ATTEMPTS_MAX, SPLIT_SEED,
                          RENAMED_PER_KIND_MAX, UNSELECTED_SEED, UNSELECTED_TEST, pair_type)
@@ -192,12 +192,12 @@ def agreement(labels: dict) -> dict:
 # ---------------------------------------------------------------- the split
 
 REASONS = ("choosing under 15", "confirmation under 10", "test under 50 (confirmation 10 and read 40)",
-           "read under 40: the 12-a-pair cap", "read under 40: the 20-renamed cap", "look-alike under 20",
+           "read under 40: the 12-a-pair cap", "read under 40: the 20-renamed cap", "look-alike under its minimum",
            "pairs under 4")
 
 
-def read_selection(pictures: list[dict], rng: random.Random) -> tuple[list[dict], list[str]]:
-    """40 read pictures of one kind: look-alike first up to 20, then any; at most 12 a pair and at most
+def read_selection(pictures: list[dict], rng: random.Random, look_min: int = 20) -> tuple[list[dict], list[str]]:
+    """40 read pictures of one kind: look-alike first up to look_min, then any; at most 12 a pair and at most
     RENAMED_PER_KIND_MAX renamed. Returns the pictures and every rule of the size table they miss (none if met)."""
     order = pictures[:]
     rng.shuffle(order)
@@ -210,7 +210,7 @@ def read_selection(pictures: list[dict], rng: random.Random) -> tuple[list[dict]
                 break
             if r["item"] in taken or per_pair[r["pair"]] >= PER_KIND_ONE_PAIR_MAX:
                 continue
-            if phase == "look-alike" and (r["pair_type"] != "look-alike" or look >= LOOKALIKE_PER_KIND_MIN):
+            if phase == "look-alike" and (r["pair_type"] != "look-alike" or look >= look_min):
                 continue
             if r["renamed"] and renamed >= RENAMED_PER_KIND_MAX:
                 skipped_renamed = True
@@ -223,8 +223,8 @@ def read_selection(pictures: list[dict], rng: random.Random) -> tuple[list[dict]
     fails = []
     if len(chosen) < PER_KIND_TEST_READ:
         fails.append("read under 40: the 20-renamed cap" if skipped_renamed else "read under 40: the 12-a-pair cap")
-    if look < LOOKALIKE_PER_KIND_MIN:
-        fails.append("look-alike under 20")
+    if look < look_min:
+        fails.append("look-alike under its minimum")
     if len(per_pair) < PER_KIND_TEST_PAIRS_MIN:
         fails.append("pairs under 4")
     return chosen, fails
@@ -247,7 +247,7 @@ def judge_draw(by_kind: dict[str, list[dict]], choosing: set[str]) -> tuple[dict
             confirm = random.Random(f"{CONFIRM_SEED}-{kind}").sample(test, PER_KIND_CONFIRM)
             held = {r["item"] for r in confirm}
             read, read_fails = read_selection([r for r in test if r["item"] not in held],
-                                              random.Random(f"{SPLIT_SEED}-read-{kind}"))
+                                              random.Random(f"{SPLIT_SEED}-read-{kind}"), LOOKALIKE_MIN_BY_KIND[kind])
             why += read_fails
             parts[kind] = {"confirm": confirm, "read": read}
         fails[kind] = why
@@ -276,6 +276,10 @@ def split(rows: list[dict]) -> tuple[set[str] | None, dict | None, int, dict]:
     return None, None, SPLIT_ATTEMPTS_MAX, diag
 
 
+def lookalike_minimums() -> str:
+    return ", ".join(f"{k} {LOOKALIKE_MIN_BY_KIND[k]}" for k in KINDS)
+
+
 def diagnostic_lines(diag: dict) -> list[str]:
     n = diag["draws"]
     out = [f"split diagnostic over {n} draws (a draw fails when any kind misses any rule; shares are of all draws):"]
@@ -297,8 +301,8 @@ def shortfalls(rows: list[dict]) -> dict:
         short = {}
         if len(mine) < need_all:
             short["pictures"] = need_all - len(mine)
-        if look < LOOKALIKE_PER_KIND_MIN:
-            short["look-alike pictures"] = LOOKALIKE_PER_KIND_MIN - look
+        if look < LOOKALIKE_MIN_BY_KIND[kind]:
+            short["look-alike pictures"] = LOOKALIKE_MIN_BY_KIND[kind] - look
         if pairs < PER_KIND_TEST_PAIRS_MIN + 1:
             short["pairs"] = PER_KIND_TEST_PAIRS_MIN + 1 - pairs
         out[kind] = {"have": len(mine), "look_alike": look, "pairs": pairs, "need": need_all, "short": short}
@@ -383,7 +387,8 @@ def main(argv=None) -> int:
         sf = shortfalls(in_split)
         lines.append(f"NOT SPLIT: no draw of the {len({r['pair'] for r in in_split})} pairs in {attempts} met the size "
                      f"table. Each kind needs at least {PER_KIND_CHOOSING_MIN + PER_KIND_CONFIRM + PER_KIND_TEST_READ} "
-                     f"pictures, {LOOKALIKE_PER_KIND_MIN} on look-alike pairs, over at least {PER_KIND_TEST_PAIRS_MIN + 1} pairs:")
+                     f"pictures, its look-alike minimum on look-alike pairs ({lookalike_minimums()}), over at least "
+                     f"{PER_KIND_TEST_PAIRS_MIN + 1} pairs:")
         for kind, v in sf.items():
             lines.append(f"  {kind:16s} {v['have']:4d} pictures, {v['look_alike']:3d} look-alike, {v['pairs']:2d} pairs"
                          f"   short: {v['short'] or 'none overall (the split itself fails)'}")
@@ -416,7 +421,8 @@ def main(argv=None) -> int:
                       and r["part"] != "confirmation"]
         for r in rows:
             r["unselected_sample"] = r in unselected
-        (out / "split.json").write_text(json.dumps({"seed": SPLIT_SEED, "attempt": attempts, "choosing_pairs": sorted(choosing),
+        (out / "split.json").write_text(json.dumps({"seed": SPLIT_SEED, "attempt": attempts,
+                                                    "lookalike_min_by_kind": LOOKALIKE_MIN_BY_KIND, "choosing_pairs": sorted(choosing),
                                                     "test_pairs": test_pairs}, indent=1))
         (out / "confirm.json").write_text(json.dumps(
             {"sealed": "paper2_score.py does not open this until owner-choice.json exists", "seed": CONFIRM_SEED,
@@ -425,7 +431,8 @@ def main(argv=None) -> int:
             w = csv.writer(f)
             w.writerow(["picture", "a", "b"])
             w.writerows((r["picture"], r["a"], r["b"]) for r in owner)
-        lines.append(f"split at draw {attempts} of seed {SPLIT_SEED}: {len(choosing)} choosing pairs, {len(test_pairs)} test pairs")
+        lines.append(f"split at draw {attempts} of seed {SPLIT_SEED}: {len(choosing)} choosing pairs, {len(test_pairs)} test pairs; "
+                     f"look-alike minimum per kind {lookalike_minimums()}")
         for kind in KINDS:
             read = parts[kind]["read"]
             lines.append(f"  {kind:16s} choosing {sum(r['kind'] == kind and r['part'] == 'choosing' for r in rows):3d}; "
@@ -434,6 +441,8 @@ def main(argv=None) -> int:
                          f"{max(Counter(r['pair'] for r in read).values())}; natural {sum(not r['renamed'] for r in read)}, "
                          f"renamed {sum(r['renamed'] for r in read)}"
                          + ("; MOSTLY RENAMED" if sum(not r["renamed"] for r in read) < PER_KIND_TEST_READ // 2 else "")
+                         + (f"; look-alike minimum {LOOKALIKE_MIN_BY_KIND[kind]}, underpowered on look-alike pairs"
+                            if LOOKALIKE_MIN_BY_KIND[kind] < 20 else "")
                          + f"); confirmation {PER_KIND_CONFIRM} (sealed)")
         renamed_read = [r for p in parts.values() for r in p["read"] if r["renamed"]]
         if renamed_read:
