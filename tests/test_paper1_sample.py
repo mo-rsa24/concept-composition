@@ -401,3 +401,65 @@ def test_overlap_stats_counts_the_overlap_and_its_purple_share(tmp_path):
     pooled = out["pooled"]
     assert pooled["touching"] == 1 and pooled["median_purple_share"] == 0.5 and pooled["seeds_mostly_purple"] == 0
     assert pooled["median_overlap_pixels_touching"] == 48 and out["blue_seed_offset"] == 0
+
+
+# --------------------------------------------------------------------------------------------------------------------------------------
+# The push with separate starting noise per expert (--blue-seed-offset, --overlap), as region
+
+
+class _StubDisc:
+    """logit = sum(W * x), so the push is w sigma^2 W wherever it acts."""
+
+    def __init__(self):
+        g = torch.Generator().manual_seed(3)
+        self.weight = torch.randn(1, 3, 64, 64, generator=g)
+
+    def logit(self, x, s, count):
+        return (x * self.weight).flatten(1).sum(1)
+
+
+def _run_push(tmp_path, monkeypatch, red, blue, empty, run, extra=()):
+    import paper1_disc as pdisc
+    seen = _patch_models(monkeypatch)
+    monkeypatch.setattr(pdisc, "load_discriminator", lambda path, r, b: _StubDisc())
+    ps.main(["push", "--run", run, "--root", str(tmp_path), "--head", "none.pt", "--weights", "1", "--red-dir", str(red),
+             "--blue-dir", str(blue), "--mean-empty", str(empty), "--counts", "1", "--seeds", "5-6", *extra])
+    return seen
+
+
+def test_push_at_offset_zero_starts_from_todays_shared_noise(tmp_path, monkeypatch):
+    red, blue, empty = _lone_folders(tmp_path)
+    seen = _run_push(tmp_path, monkeypatch, red, blue, empty, "p0")
+    assert torch.equal(seen[0][0], _seed_noise([5, 6])[0] * ps.sigmas("cpu")[0])
+    summary = json.loads((tmp_path / "p0" / "push.json").read_text())
+    assert "blue_seed_offset" not in summary and "overlap" not in summary          # default push.json unchanged
+    first = [np.asarray(Image.open(tmp_path / "p0" / "count-1" / f"{s:06d}.png")) for s in (5, 6)]
+    _run_push(tmp_path, monkeypatch, red, blue, empty, "p0-explicit", ["--blue-seed-offset", "0", "--overlap", "both"])
+    again = [np.asarray(Image.open(tmp_path / "p0-explicit" / "count-1" / f"{s:06d}.png")) for s in (5, 6)]
+    assert all(np.array_equal(a, b) for a, b in zip(first, again))
+
+
+@pytest.mark.parametrize("overlap", ["both", "lower"])
+def test_push_at_an_offset_starts_from_regions_joint_noise(tmp_path, monkeypatch, overlap):
+    red, blue, empty = _lone_folders(tmp_path, offset=100)
+    region_seen = _patch_models(monkeypatch)
+    ps.main(["region", "--run", "r", "--root", str(tmp_path), "--red-dir", str(red), "--blue-dir", str(blue), "--mean-empty", str(empty),
+             "--counts", "1", "--seeds", "5-6", "--overlap", overlap, "--blue-seed-offset", "100"])
+    push_seen = _run_push(tmp_path, monkeypatch, red, blue, empty, "p", ["--overlap", overlap, "--blue-seed-offset", "100"])
+    assert torch.equal(push_seen[0][0], region_seen[0][0])
+    s80 = float(ps.sigmas("cpu")[0])
+    assert torch.allclose(push_seen[0][0][0, :, 15, 25], torch.tensor(105 * s80))   # inside blue's mask: seed s + 100
+    assert torch.allclose(push_seen[0][0][0, :, 15, 12], torch.tensor(5 * s80))     # inside red's: seed s
+    summary = json.loads((tmp_path / "p" / "push.json").read_text())
+    assert summary["blue_seed_offset"] == 100 and summary.get("overlap", "both") == overlap
+
+
+def test_push_refuses_a_blue_folder_drawn_at_another_offset(tmp_path, monkeypatch):
+    red, blue, empty = _lone_folders(tmp_path, offset=100)
+    with pytest.raises(SystemExit, match="blue seed offset 100"):
+        _run_push(tmp_path, monkeypatch, red, blue, empty, "p")                       # given 0, folder holds 100
+    red2, blue2, empty2 = _lone_folders(tmp_path / "zero")
+    with pytest.raises(SystemExit, match="blue seed offset 0"):
+        _run_push(tmp_path, monkeypatch, red2, blue2, empty2, "p2", ["--blue-seed-offset", "100"])
+    assert ps.build_parser().parse_args(["push", "--run", "r", "--head", "h", "--red-dir", "a", "--blue-dir", "b", "--mean-empty", "m",
+                                         "--seeds", "1"]).blue_seed_offset == 0

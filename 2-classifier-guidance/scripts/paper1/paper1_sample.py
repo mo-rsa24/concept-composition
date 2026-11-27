@@ -31,7 +31,7 @@ Subcommands:
   harmonise   finished pictures (such as the lower-on-top paste row) noised to sampler step --from-step and finished by the region
               sampler with the lower object owning the overlap (SDEdit), the rival with no joint scene
 
---blue-seed-offset N (lone with --expert blue, split, paste, region, harmonise; default 0) gives the blue expert its own starting noise:
+--blue-seed-offset N (lone with --expert blue, split, paste, region, harmonise, push; default 0) gives the blue expert its own starting noise:
 the blue lone sample of pair seed s is drawn from seed s + N and saved as <s>.png in a folder that records N in blue-seed-offset.json;
 red keeps seed s. region and harmonise then start each pair from noise assembled by mask (compose_noise).
 
@@ -796,9 +796,17 @@ class PushStats:
 
 @torch.no_grad()
 def draw_pushed(nets, disc, encoder, args, k, batch, w, window, empty, stats=None, grads=None):
+    """One batch of ours or the random push. The masks and the starting noise are region's: --overlap lower gives the overlap to the
+    object whose base sits lower, and --blue-seed-offset N starts blue's mask from seed s + N (compose_noise) while red and the
+    empty-scene model keep seed s. The random push's directions come from seed s's own generator at every offset."""
     x0, rnd = starting_noise(batch)
     m_r = object_masks(args.red_dir, k, batch, empty)
     m_b = object_masks(args.blue_dir, k, batch, empty)
+    if getattr(args, "overlap", "both") == "lower":
+        m_r, m_b = lower_owns_overlap(m_r, m_b, object_bases(args.red_dir, k, batch, empty), object_bases(args.blue_dir, k, batch, empty))
+    offset = getattr(args, "blue_seed_offset", 0)
+    if offset:
+        x0 = compose_noise(x0, starting_noise([s + offset for s in batch])[0], x0, m_r, m_b)
 
     def record(**kw):
         if stats is not None:
@@ -819,7 +827,8 @@ def cmd_push(args):
     seeds of the first count at the first weight in the same job and records the largest difference (guardrail 9).
     """
     import paper1_disc as pdisc
-    check_blue_offset(args.blue_dir, 0)   # the push starts every pair from the shared noise; it has no joint noise for an offset pair
+    offset = getattr(args, "blue_seed_offset", 0)
+    check_blue_offset(args.blue_dir, offset)   # the blue lone folder must have been drawn at the offset this push is given
     folder = run_dir(args)
     nets, encoder = load_three(args)
     disc = pdisc.load_discriminator(args.head, nets[0], nets[1])
@@ -830,6 +839,10 @@ def cmd_push(args):
     summary = {"random_push": bool(args.random_push), "head": args.head, "window": [window[0], window[-1]],
                "window_sigmas": [round(float(sigmas("cpu")[window[0]]), 3), round(float(sigmas("cpu")[window[-1]]), 3)],
                "pushed_evaluations": len(pushed_evaluations(window)), "weights": {}}
+    if offset:
+        summary["blue_seed_offset"] = offset
+    if getattr(args, "overlap", "both") != "both":
+        summary["overlap"] = args.overlap
     begin, pictures, maps = time.time(), 0, []
     for w in weights:
         out = folder if len(weights) == 1 else folder / f"w-{w:g}"
@@ -1184,6 +1197,9 @@ def build_parser():
     p.add_argument("--window", default=PUSH_WINDOW_DEFAULT, help="sampler steps the push acts on (default %(default)s; the other is 10-22)")
     p.add_argument("--weights-file", help="weight-grid.json from the weight-grid subcommand; its grid replaces --weights")
     p.add_argument("--repeat-check", type=int, default=0, help="redraw this many seeds in the same job and record the largest difference")
+    p.add_argument("--overlap", choices=("both", "lower"), default="both",
+                   help="as region: both (the plan's sampler) or lower (the overlap goes to the object whose base sits lower)")
+    blue_offset(p)
     seed_choice(p)
 
     p = common(sub.add_parser("weight-grid"))
