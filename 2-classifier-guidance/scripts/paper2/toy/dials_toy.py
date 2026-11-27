@@ -31,6 +31,7 @@ import argparse
 import copy
 import json
 import math
+import os
 import random
 import sys
 import time
@@ -47,8 +48,9 @@ import toy_model as tm  # noqa: E402
 st = tm.st
 DEV = tm.DEV
 REPO = Path(__file__).resolve().parents[4]
-OUT = REPO / "outputs" / "paper2-toy"
-RESULTS = REPO / "artifacts" / "results" / "can-dials-be-trained-alone-and-stacked-on-a-small-toy"
+# PAPER2_TOY_OUT and PAPER2_TOY_RESULTS move checkpoints and results (on the cluster, under /datasets/mmolefe/poe_repair_min/toys/paper2/)
+OUT = Path(os.environ.get("PAPER2_TOY_OUT", REPO / "outputs" / "paper2-toy"))
+RESULTS = Path(os.environ.get("PAPER2_TOY_RESULTS", REPO / "artifacts" / "results" / "can-dials-be-trained-alone-and-stacked-on-a-small-toy"))
 
 # ---- the bars (README "The bars"), fixed before stage 1 ran --------------------------------------------------------------------------
 R1_TEMPLATE_MARGIN_MIN = 0.15
@@ -65,7 +67,7 @@ R1_INTERFERENCE_SHOWN = 0.10
 SOLO_VS_PLAIN_MIN = 0.15
 DECIDE_INTERFERENCE_MIN = 0.10
 DECIDE_SOLO_LEAD_MIN = 0.10
-GPU_MINUTES_STOP = 60
+GPU_MINUTES_STOP = 240
 
 N_EVAL = 1024
 STRENGTHS = (0.0, 0.5, 1.0, 1.5)
@@ -299,7 +301,7 @@ def cmd_stage1(a):
     model = tm.load_base(base_path())
     res = {}
     # non-look-alike conditions: every training condition, test seeds
-    conds, seeds = eval_set(tc.training_conditions())
+    conds, seeds = eval_set(tc.training_conditions(), seed0=a.test_seed0)
     x = tm.sample(model, conds, seeds)
     R = tc.read(x)
     exact = np.array([tc.asked_exactly(r, c) for r, c in zip(R, conds)])
@@ -313,7 +315,7 @@ def cmd_stage1(a):
         rows.append(x[sel]); labels.append(f"base, {n} object(s)\n" + ", ".join(tc.name(conds[i]) for i in sel[:2]) + " ...")
         calls.append([call_text(R[i]) for i in sel])
     # look-alike: identity test conditions
-    lc, ls = eval_set(tc.DIAL_CONDS["identity"][1])
+    lc, ls = eval_set(tc.DIAL_CONDS["identity"][1], seed0=a.test_seed0)
     xl = tm.sample(model, lc, ls)
     Rl = tc.read(xl)
     both = np.array([tc.asked_exactly(r, c) for r, c in zip(Rl, lc)])
@@ -328,7 +330,7 @@ def cmd_stage1(a):
     calls.append([call_text(r) for r in Rl[:GRID_COLS]])
     # binding: held-out combinations, and every dial's training conditions on tuning seeds (what each dial starts from)
     for d in tc.DIALS:
-        for side, cs, s0 in (("train_tuning_seeds", tc.DIAL_CONDS[d][0], tc.SEEDS["tuning"]), ("test", tc.DIAL_CONDS[d][1], None)):
+        for side, cs, s0 in (("train_tuning_seeds", tc.DIAL_CONDS[d][0], a.tune_seed0), ("test", tc.DIAL_CONDS[d][1], a.test_seed0)):
             c2, s2 = eval_set(cs, n=512, seed0=s0)
             x2 = tm.sample(model, c2, s2)
             R2 = tc.read(x2)
@@ -340,7 +342,7 @@ def cmd_stage1(a):
                 res["base_binding_test"]["most_common_drawings"] = Counter(
                     " ".join(sorted(tc.NAMES[k] if k < 100 else "?" for k in tc.pairs_of(r).elements())) for r in R2).most_common(6)
     # decoded estimates against the finished picture, on tuning seeds of the two gradient dials' training conditions
-    ac, as_ = eval_set(tc.DIAL_CONDS["identity"][0] + tc.DIAL_CONDS["binding"][0], n=512, seed0=tc.SEEDS["tuning"])
+    ac, as_ = eval_set(tc.DIAL_CONDS["identity"][0] + tc.DIAL_CONDS["binding"][0], n=512, seed0=a.tune_seed0)
     agree = decoded_agreement(model, ac, as_)
     t = st.sigmas("cpu")
     first = next((i for i, v in enumerate(agree) if v >= DECODED_AGREEMENT_MIN), None)
@@ -348,10 +350,12 @@ def cmd_stage1(a):
     res["decoded_agreement"] = {"per_step": [{"step": i, "sigma": round(float(t[i]), 4), "agreement": round(v, 3)} for i, v in enumerate(agree)],
                                 "bar": DECODED_AGREEMENT_MIN, "gradient_window_steps": window,
                                 "gradient_window_sigmas": [round(float(t[i]), 4) for i in window]}
-    grid(rows, labels, RESULTS / "stage1-base-samples.png", calls=calls)
+    res["test_seeds"] = [a.test_seed0, a.test_seed0 + N_EVAL - 1]
+    res["tuning_seeds"] = [a.tune_seed0, a.tune_seed0 + 511]
+    grid(rows, labels, RESULTS / f"stage1-base-samples{a.suffix}.png", calls=calls)
     sync()
     res["seconds"] = round(time.time() - t0, 1)
-    save_results("stage1", res)
+    save_results(a.key, res)
     print(json.dumps({k: v for k, v in res.items() if k != "decoded_agreement"}, indent=1))
     print("agreement", [(r["step"], r["sigma"], r["agreement"]) for r in res["decoded_agreement"]["per_step"]])
     print("window", window)
@@ -362,7 +366,7 @@ def cmd_misses(a):
     sync()
     t0 = time.time()
     model = tm.load_base(base_path())
-    conds, seeds = eval_set(tc.training_conditions())
+    conds, seeds = eval_set(tc.training_conditions(), seed0=a.test_seed0)
     x = tm.sample(model, conds, seeds)
     R = tc.read(x)
     kinds, miss = Counter(), []
@@ -389,12 +393,13 @@ def cmd_misses(a):
         o = r["objects"]
         return any(abs(p[2] - q[2]) < tc.OBJ + tc.GAP_MIN and abs(p[3] - q[3]) < tc.OBJ + tc.GAP_MIN for j, p in enumerate(o) for q in o[j + 1:])
     sel = miss[:GRID_COLS]
-    grid([x[sel]], ["base misses,\nnon-look-alike"], RESULTS / "stage1-base-misses.png", col_labels=[tc.name(conds[i]) for i in sel],
+    grid([x[sel]], ["base misses,\nnon-look-alike"], RESULTS / f"stage1-base-misses{a.suffix}.png", col_labels=[tc.name(conds[i]) for i in sel],
          calls=[[call_text(R[i]) for i in sel]])
     sync()
     info = {"misses": len(miss), "kinds": dict(kinds), "misses_by_asked_object_count": dict(Counter(len(conds[i]) for i in miss)),
             "misses_with_two_objects_closer_than_training_gap": sum(close(R[i]) for i in miss), "seconds": round(time.time() - t0, 1)}
-    save_results("stage1_misses", info)
+    info["test_seeds"] = [a.test_seed0, a.test_seed0 + N_EVAL - 1]
+    save_results(a.key, info)
     print(json.dumps(info, indent=1))
 
 
@@ -961,8 +966,12 @@ def main():
     q.add_argument("--batch", type=int, default=256)
     q.add_argument("--lr", type=float, default=1e-3)
     q.add_argument("--ema", type=float, default=0.999)
-    sub.add_parser("stage1")
-    sub.add_parser("misses")
+    for nm, key in (("stage1", "stage1"), ("misses", "stage1_misses")):
+        q = sub.add_parser(nm)
+        q.add_argument("--test-seed0", type=int, default=tc.SEEDS["test"])
+        q.add_argument("--tune-seed0", type=int, default=tc.SEEDS["tuning"])
+        q.add_argument("--key", default=key, help="results.json section to write")
+        q.add_argument("--suffix", default="", help="appended to the picture file name")
     q = sub.add_parser("dials")
     q.add_argument("--which", nargs="+", default=list(tc.DIALS))
     q.add_argument("--kept-per", type=int, default=2048)
