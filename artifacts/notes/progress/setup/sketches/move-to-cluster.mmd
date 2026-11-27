@@ -1,0 +1,19 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  subgraph WIN["Windows laptop"]
+    APP["Claude app<br/>views and drives the sessions<br/>(Remote Control)"]:::plain
+    LAP["laptop checkout<br/>kept in step by git"]:::plain
+  end
+  subgraph NEXT["mscluster: where the work lives"]
+    LOGIN["login node, tmux<br/>supervisor session<br/>Paper 1 and Paper 2 loops"]:::plain
+    REPO[("cluster checkout<br/>code, plans, notes (git)<br/>+ results cards (copied once)")]:::plain
+    DS[("/datasets<br/>renders, checkpoints, runs<br/>already here")]:::plain
+    JOBS["compute jobs<br/>bigbatch x6, mscluster110"]:::plain
+  end
+  APP -.->|"Remote Control"| LOGIN
+  LAP <-->|"git push / pull"| REPO
+  LOGIN --> REPO
+  LOGIN -->|"sbatch / ssh"| JOBS
+  JOBS --> DS
+  style NEXT fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
