@@ -114,6 +114,7 @@ ATTN_TARGETS = ("to_q", "to_k", "to_v", "to_out.0")
 FIRST_RESULT_CKPT_STEPS = (500, 1000)
 CLOSENESS_REPORT_STEP = 50      # the smoke's step at which the closeness weight is chosen
 REWARD_GUARD_WITHIN = 10        # the reward term must show a gradient within this many steps
+CLOSENESS_GRAD_SCALE = 2.0 ** 16   # the closeness term's backward is scaled by this, then its gradient divided by it
 WANDB_PROJECT = "prime_lab/poe-repair-animals-compose"
 
 
@@ -767,6 +768,41 @@ def closeness(eps: torch.Tensor, eps_frozen: torch.Tensor) -> torch.Tensor:
     return ((eps.float() - eps_frozen.float()) ** 2).mean() / (eps_frozen.float() ** 2).mean().clamp_min(1e-12)
 
 
+def closeness_backward(sampler: "Sampler", params, batch: list[dict], weight: float,
+                       scale: float = CLOSENESS_GRAD_SCALE, check_graph: bool = False) -> tuple[float, float]:
+    """The closeness term's backward pass, scaled so its gradient survives fp16. Returns (mean drift, scale used).
+
+    The term is a mean over every latent number (4 x 128 x 128 on SDXL) divided by the frozen prediction's size, so its
+    gradient at the U-Net's output is about 1e-8 a number while the drift is small, under fp16's smallest value (6e-8):
+    through the U-Net's fp16 autocast it rounds to exactly 0, and the dial got no gradient from the term (the smoke of
+    2026-11-28 stopped at step 2 with the term at 6.05e-7 and its gradient norm 0.0). As PyTorch's AMP gradient scaler
+    does, the backward runs on the term times `scale` and the dial's gradient is divided by `scale` after; if that
+    gradient is not finite, the scale halves and the term is computed again. The gradient already on the parameters
+    (the task term's) is kept and the closeness gradient is added to it. The dial must be on (strength 1)."""
+    device = next(sampler.unet.parameters()).device
+    before = grad_snapshot(params)
+    while True:
+        for p in params:
+            p.grad = None
+        drifts = []
+        for e in batch:
+            xe = e["x"].to(device)
+            d = closeness(sampler.prompt_eps(xe, e["k"], e["prompt"]), e["eps"].to(xe.device))
+            if check_graph and not d.requires_grad:
+                raise SystemExit("the closeness term carries no gradient: the dial is not in its prediction")
+            (scale * weight * d / len(batch)).backward()
+            drifts.append(float(d.detach()))
+        finite = all(p.grad is None or bool(torch.isfinite(p.grad).all()) for p in params)
+        if finite or scale <= 1.0:
+            break
+        scale /= 2.0
+    if not finite:
+        raise SystemExit("the closeness term's gradient is not finite even unscaled")
+    for p, b in zip(params, before):
+        p.grad = b + (torch.zeros_like(p) if p.grad is None else p.grad) / scale
+    return sum(drifts) / len(drifts), scale
+
+
 def grad_snapshot(params) -> list[torch.Tensor]:
     return [torch.zeros_like(p) if p.grad is None else p.grad.detach().clone() for p in params]
 
@@ -960,6 +996,10 @@ def train(a: argparse.Namespace) -> dict:
     if bool(log_pairs) != bool(log_seeds) or (log_pairs and not a.log_every_steps):
         raise SystemExit("--log-pairs-file, --log-seeds and --log-every-steps go together")
     cache = load_closeness_cache(cache_path, sampler.kind, sampler.n_steps)
+    outside = sorted({e["k"] for e in cache if not window[0] <= e["k"] < window[1]})
+    if outside:
+        raise SystemExit(f"{cache_path} holds states at steps {outside}, outside the window {window}: build the closeness "
+                         "cache again with this run's window")
     if not sampler.corrected_steps <= window[0] < window[1] <= sampler.n_steps:
         raise SystemExit(f"window {window} must sit in {sampler.corrected_steps}..{sampler.n_steps}: the step "
                          "with the graph is CO3's plain guided prediction, after its corrected steps")
@@ -982,6 +1022,7 @@ def train(a: argparse.Namespace) -> dict:
             "pairs": {f"{x}|{y}": w for x, y, w in pairs}, "n_seeds": len(seeds),
             "attention": sampler.attention,
             "closeness_cache": str(cache_path), "closeness_batch": a.closeness_batch,
+            "closeness_grad_scale": a.closeness_grad_scale,
             "closeness_prompts": sorted({e["prompt"] for e in cache})}
     if not a.dry_run and a.reward == "trained":
         import hashlib
@@ -1055,16 +1096,8 @@ def train(a: argparse.Namespace) -> dict:
         # frozen prediction an untouched U-Net made on the same states in another process.
         dial.set_strength(1.0)
         before = grad_snapshot(params)
-        drifts = []
-        for e in batch:
-            xe = e["x"].to(next(sampler.unet.parameters()).device)
-            d = closeness(sampler.prompt_eps(xe, e["k"], e["prompt"]),
-                          e["eps"].to(xe.device))
-            if step == 1 and not d.requires_grad:
-                raise SystemExit("the closeness term carries no gradient: the dial is not in its prediction")
-            (a.closeness_weight * d / len(batch)).backward()
-            drifts.append(float(d.detach()))
-        drift = sum(drifts) / len(drifts)
+        drift, grad_scale = closeness_backward(sampler, params, batch, a.closeness_weight, a.closeness_grad_scale,
+                                               check_graph=step == 1)
         close_grad = grad_norm_since(params, before)
         term = a.closeness_weight * drift
         dial.set_strength(0.0)
@@ -1109,6 +1142,7 @@ def train(a: argparse.Namespace) -> dict:
                "reward": value, "kind": info.get("kind"), "n_bodies": info.get("n_bodies"),
                "task_loss": task_value, "task_grad_norm": task_grad, "drift": drift,
                "closeness_term": term, "closeness_grad_norm": close_grad, "closeness_share": share,
+               "closeness_grad_scale": grad_scale,
                "grad_norm": gnorm, "seconds": round(time.time() - t0, 2)}
         log.write(json.dumps(row) + "\n")
         log.flush()
@@ -1335,6 +1369,8 @@ def main(argv=None):
     t.add_argument("--closeness-weight", type=float, default=None,
                    help="must be above 0; chosen from the drift at the smoke's step 50 (closeness.json)")
     t.add_argument("--closeness-report-step", type=int, default=CLOSENESS_REPORT_STEP)
+    t.add_argument("--closeness-grad-scale", type=float, default=CLOSENESS_GRAD_SCALE,
+                   help="the closeness backward runs on the term times this, its gradient divided by it after (fp16)")
     t.add_argument("--steps", type=int, default=None, help="training steps (first result: 1000)")
     t.add_argument("--ckpt-steps", type=int, nargs="*", default=None,
                    help=f"steps that save a checkpoint (first result: {' '.join(map(str, FIRST_RESULT_CKPT_STEPS))})")

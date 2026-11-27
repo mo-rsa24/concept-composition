@@ -591,3 +591,111 @@ def test_co3_sampler_keeps_co3s_own_vae_and_decodes_finished_pictures_with_it():
         part = src[src.index(fn):]
         part = part[:part.index("\ndef ", 1)]
         assert "sampler.finish(x)" in part and "sampler.decode(x" not in part, fn
+
+
+# ---- the closeness term's gradient survives fp16 (the smoke of 2026-11-28 stopped with the term at 6.05e-7, gradient 0.0)
+
+def _fp16_world(up=1e-3, n=4096, size=100.0):
+    """The stand-in U-Net under CPU fp16 autocast with a large output over many latent numbers, as SDXL's is, a dial whose
+    change weights are `up` in size, and one cached state with its frozen prediction."""
+    from types import SimpleNamespace
+    torch.manual_seed(0)
+    unet = pid.StandInUNet()
+    for p in unet.parameters():
+        p.requires_grad_(False)
+
+    def eps(x, k, prompt):
+        with torch.autocast("cpu", dtype=torch.float16):
+            return size * unet(x)
+    x = torch.randn(1, n, 8)
+    with torch.no_grad():
+        frozen = eps(x, 0, "a cat").float()
+    dial = pid.attach_dial(unet)
+    g = torch.Generator().manual_seed(1)
+    for m in dial.layers.values():
+        m.lora_up.weight.data = up * torch.randn(m.lora_up.weight.shape, generator=g)
+    params = dial.parameters()
+    for p in params:
+        p.requires_grad_(True)
+    dial.set_strength(1.0)
+    return SimpleNamespace(unet=unet, prompt_eps=eps), params, [{"x": x, "k": 0, "prompt": "a cat", "eps": frozen}]
+
+
+def _norm(params):
+    return float(sum(p.grad.double().pow(2).sum() for p in params).sqrt())
+
+
+def test_closeness_gradient_underflows_unscaled_and_survives_scaled():
+    s, params, batch = _fp16_world()
+    drift, _ = pid.closeness_backward(s, params, batch, 1.0, scale=1.0)
+    assert 0 < drift < 1e-5 and _norm(params) == 0.0           # the smoke's failure: a term, and no gradient
+    s, params, batch = _fp16_world()
+    drift, used = pid.closeness_backward(s, params, batch, 1.0)
+    assert used == pid.CLOSENESS_GRAD_SCALE
+    # against the same term computed in fp32 throughout
+    from types import SimpleNamespace
+    ref_s, ref_p, ref_b = _fp16_world()
+    plain = SimpleNamespace(unet=ref_s.unet, prompt_eps=lambda x, k, p: 100.0 * ref_s.unet(x))
+    pid.closeness_backward(plain, ref_p, ref_b, 1.0, scale=1.0)
+    assert _norm(params) == pytest.approx(_norm(ref_p), rel=0.1)
+
+
+def test_closeness_backward_halves_an_overflowing_scale_and_keeps_the_task_gradient():
+    s, params, batch = _fp16_world()
+    for p in params:
+        p.grad = torch.full_like(p, 1e-6)                         # the task term's gradient, already there
+    _, used = pid.closeness_backward(s, params, batch, 1.0, scale=2.0 ** 100)
+    assert used < 2.0 ** 100 and all(bool(torch.isfinite(p.grad).all()) for p in params)
+    s2, params2, batch2 = _fp16_world()
+    pid.closeness_backward(s2, params2, batch2, 1.0)
+    for p, q in zip(params, params2):
+        assert torch.allclose(p.grad - 1e-6, q.grad, rtol=0.05, atol=1e-10)
+
+
+def _fp16_training(tmp_path, monkeypatch):
+    """A dry-run training whose closeness term runs as on the card: fp16 autocast, a large output, 4,096 latent numbers."""
+    real = pid.stand_in_sampler
+
+    def fp16_sampler(seed=0):
+        s = real(seed)
+        m = s.model
+
+        def prompt_eps(x, k, prompt):
+            with torch.autocast("cpu", dtype=torch.float16):
+                return 100.0 * m.eps(x, prompt)
+        s.prompt_eps = prompt_eps
+        return s
+    monkeypatch.setattr(pid, "stand_in_sampler", fp16_sampler)
+    frozen = fp16_sampler(0)
+    entries = []
+    for i, k in enumerate((2, 3, 4, 2)):
+        x = torch.randn(1, 4096, 8, generator=torch.Generator().manual_seed(i))
+        with torch.no_grad():
+            entries.append({"prompt": "a cat", "seed": 21001 + i, "k": k, "x": x,
+                            "eps": frozen.prompt_eps(x, k, "a cat").float()})
+    torch.save({"kind": "stand-in", "dial_attached": False, "window": [2, 5], "entries": entries}, tmp_path / "cache.pt")
+    return tmp_path / "cache.pt"
+
+
+def test_closeness_gradient_reaches_the_dial_after_one_step_in_fp16(tmp_path, monkeypatch):
+    cache = _fp16_training(tmp_path, monkeypatch)
+    pid.main(["train", "--dry-run", "--steps", "3", "--closeness-cache", str(cache), "--out", str(tmp_path / "run")])
+    log = [json.loads(x) for x in (tmp_path / "run/train-log.jsonl").read_text().splitlines()]
+    assert log[0]["closeness_term"] == 0                          # a new dial: no drift at step 1
+    assert log[1]["closeness_term"] > 0 and log[1]["closeness_grad_norm"] > 0
+    assert log[1]["closeness_grad_scale"] == pid.CLOSENESS_GRAD_SCALE
+
+
+def test_unscaled_fp16_closeness_stops_the_run_as_the_smoke_did(tmp_path, monkeypatch):
+    cache = _fp16_training(tmp_path, monkeypatch)
+    with pytest.raises(SystemExit, match=r"closeness term is exactly 0 at step 2, after the dial moved at step 1 \(term "
+                                         r"[0-9.e-]+, gradient norm 0.0\)"):
+        pid.main(["train", "--dry-run", "--steps", "3", "--closeness-cache", str(cache), "--closeness-grad-scale", "1",
+                  "--out", str(tmp_path / "run")])
+
+
+def test_a_cache_off_the_window_is_refused(tmp_path):
+    cache = tmp_path / "cache.pt"
+    assert run("closeness-cache", "--dry-run", "--window", "2", "4", "--out", str(cache)).returncode == 0
+    r = run("train", "--dry-run", "--window", "4", "6", "--closeness-cache", str(cache), "--out", str(tmp_path / "run"))
+    assert r.returncode != 0 and "outside the window" in r.stdout + r.stderr
