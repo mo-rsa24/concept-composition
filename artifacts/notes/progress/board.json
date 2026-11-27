@@ -4,8 +4,8 @@
     "Detour: idea walk, 7 claims, paused",
     "Detour: zoom-ladder, about 430k tokens",
     "Detour: reading route and pictures, about 1.8M tokens",
-    "Paper 1: Method A removes the purple on CLEVR (27 of 66 touching, paste 52); squares toy, B and C running",
-    "Paper 2: training our own judge on the 1,552 hand calls, so the dial can train"
+    "Paper 1: Method A 303 of 626 touching, no purple (paste 517); retrained on touching scenes only; toy, B, C running",
+    "Paper 2: our trained judge missed too (75 of 240, bar 216); the dial's training signal goes to the owner"
   ],
   "detours_join": "P2",
   "steps": [
