@@ -58,6 +58,8 @@ Subcommands, one per rung, run in order (each writes its section of results.json
   rung3c    Method C at rung 2c's budget (20,000 updates, N = 1,024 and all), drawn states from 1,024 seeds (a) and 8,192 (b)
   rung4b    Method B at rung 2c's budget, the score unchanged
   rung5     Method D: rung 2c's Method A whose delta also reads the experts' inner decoder features
+  rung6     every composed sampler from saved models, drawn plain and with a Langevin corrector at 5 and 20 steps per noise level
+            (step 0.05 sigma^2, score (D - x) / sigma^2 from the row's own composed denoiser, push included)
 
   /home/molef/micromamba/envs/voice-agent/bin/python 2-classifier-guidance/scripts/paper1/toy/squares_toy.py rung0
 """
@@ -208,7 +210,9 @@ def sigmas(device=DEV):
     return torch.cat([t, torch.zeros(1, dtype=torch.float64)]).float().to(device)
 
 
-def heun(denoise, x, after_step=None):
+def heun(denoise, x, after_step=None, correct=None):
+    """correct(i, x, sigma) -> x, if given, runs after every step that lands above sigma 0 (all but the last); rung 6's
+    corrector. Without it the operations are the plain sampler's."""
     t = sigmas(x.device)
     for i in range(STEPS):
         t_cur, t_next = t[i], t[i + 1]
@@ -218,6 +222,8 @@ def heun(denoise, x, after_step=None):
             d_eval = denoise(x_next, t_next, i, True)
             x_next = x + (t_next - t_cur) * 0.5 * (d_cur + (x_next - d_eval) / t_next)
         x = x_next
+        if correct is not None and i < STEPS - 1:
+            x = correct(i, x, t_next)
         if after_step is not None:
             after_step(i, x, t_next)
     return x
@@ -250,6 +256,53 @@ def sample(denoise, seeds=EVAL_SEEDS, batch=256):
     outs = []
     for i in range(0, len(seeds), batch):
         outs.append(heun(denoise, starting_noise(seeds[i:i + batch])).detach())
+    return torch.cat(outs)
+
+
+# -------------------------------------------------------------------------------------------------------------------------------------
+# Rung 6's corrector: toy_caption_corrector.draw's Langevin step, moved to this toy's EDM denoisers.
+# There, after each reverse step lands at noise level j >= 1, CORR_STEPS times: z <- z + eta s + sqrt(2 eta) noise, with s the score
+# of the same composed noise estimate at level j and eta = CORR_SIZE times the noise variance at j. Here the level is the sigma a
+# Heun step lands on (every step but the last, which lands on 0), the score is (D(x, sigma) - x) / sigma^2 with D the row's own
+# composed denoiser (push included), and eta = CORRECTOR_SIZE sigma^2. That script draws its noise from one generator seeded
+# training seed + 7; here each evaluation seed gets its own generator, seeded CORRECTOR_SEED_OFFSET + seed, so a seed's pictures do
+# not depend on how seeds are batched, and the offset keeps clear of the evaluation seeds (0 to 255) and Method C's drawn seeds
+# (100,000 to 108,191), whose generators make starting noise (seed + 7 would reuse seed 7's starting noise as seed 0's
+# corrector noise).
+
+CORRECTOR_SIZE = 0.05
+CORRECTOR_SEED_OFFSET = 200000
+
+
+def langevin_step(denoise, x, s, size, noise, step=0):
+    """One corrector step at sigma s: x + eta score + sqrt(2 eta) noise, score = (D(x, s) - x) / s^2, eta = size s^2. The
+    denoiser is called as a second evaluation, so a push's record (first evaluations only) is left as the plain sampler's."""
+    score = (denoise(x, s, step, True) - x) / s ** 2
+    eta = size * s ** 2
+    return x + eta * score + (2 * eta).sqrt() * noise
+
+
+def corrector(denoise, seeds, steps, size=CORRECTOR_SIZE):
+    """heun's correct hook: after Heun step i lands at sigma, `steps` Langevin steps at that sigma. At each level every seed's own
+    generator draws (steps, 3, H, H) noise. With steps 0 nothing is drawn and x is returned untouched."""
+    gens = [torch.Generator().manual_seed(CORRECTOR_SEED_OFFSET + int(s)) for s in seeds]
+
+    def correct(i, x, sigma):
+        if steps == 0:
+            return x
+        noise = torch.stack([torch.randn(steps, 3, H, H, generator=g) for g in gens]).to(x.device)
+        for k in range(steps):
+            x = langevin_step(denoise, x, sigma, size, noise[:, k], step=i + 1)
+        return x
+    return correct
+
+
+def sample_corrected(denoise, steps, size=CORRECTOR_SIZE, seeds=EVAL_SEEDS, batch=256, device=DEV):
+    """sample() with the corrector at `steps` per noise level; the same starting noise per seed as every other row."""
+    outs = []
+    for i in range(0, len(seeds), batch):
+        chunk = seeds[i:i + batch]
+        outs.append(heun(denoise, starting_noise(chunk, device), correct=corrector(denoise, chunk, steps, size)).detach())
     return torch.cat(outs)
 
 
@@ -1390,6 +1443,166 @@ def cmd_rung5(a):
                  compare=compare)
 
 
+# -------------------------------------------------------------------------------------------------------------------------------------
+# Rung 6: every composed sampler again, with a Langevin corrector at each noise level
+
+
+RUNG6_STEPS = (0, 5, 20)                                     # corrector steps per noise level; 0 is the plain sampler, 20 is judged
+RUNG6_JUDGED = 20
+RUNG6_N = 1024
+RUNG6_WEIGHTS = (16, 64)
+RUNG6_WRITTEN_BEFORE = """# Rung 6: the corrector on every composed sampler (written before the run)
+
+Every row is drawn on the 256 shared seeds from the same starting noise three ways: the plain Heun sampler (0 corrector steps),
+5 and 20 Langevin corrector steps per noise level, step 0.05 of the noise variance (toy_caption_corrector.py's corrector, score
+(D - x) / sigma^2 from each row's own composed denoiser, push included). Rows: exact joint (sanity), exact plain sum, neural plain
+sum, Method A (N = 1,024, 20,000 updates, rung 2c's saved delta), Method D (N = 1,024, 20,000 updates, rung 5's saved model),
+Method C (rung 3c's C(b) final head at N = 1,024, w = 16 and 64), Method B (rung 4b's final head at N = 1,024, w = 16 and 64).
+
+The bars are the toy's, unchanged: a row WORKS if its clean-pair share is at least 0.8 and at least 0.5 above the neural plain
+sum's plain-sampler share (0.000); PARTIAL if at least 0.2 above it but short of WORKS; FAILS otherwise.
+
+The supervisor's prediction, judged at 20 corrector steps (5 steps reported beside it, not judged):
+  - neural plain sum with the corrector: clean-pair share below 0.2
+  - Method A with the corrector: above its plain-sampler 0.891
+  - Method D with the corrector: above its plain-sampler 0.887
+  - Method B and Method C with the corrector, at both weights: below 0.2
+"""
+RUNG6_PREDICTED = {                                           # row prefix -> (comparison, threshold), checked on the judged setting
+    "neural plain sum": ("below", 0.2),
+    "Method A": ("above", 0.891),
+    "Method D": ("above", 0.887),
+    "Method C": ("below", 0.2),
+    "Method B": ("below", 0.2),
+}
+
+
+def rung6_rows():
+    """(row name, files it needs under OUT, builder taking the exact denoisers and returning the row's composed denoiser, the
+    plain sampler's saved samples name). Builders load their models only when called."""
+    nm = f"N{RUNG6_N}-u20000"
+    experts = [OUT / f"expert-{c}.pt" for c in ("red", "blue", "empty")]
+    rows = []
+
+    def exact_joint(ex):
+        return joint_denoiser(ex[3])
+
+    def exact_plain(ex):
+        return plainsum_denoiser(ex[1], ex[2], ex[0])
+    rows.append(("exact joint", [], exact_joint, "exact-joint"))
+    rows.append(("exact plain sum", [], exact_plain, "exact-plainsum"))
+
+    def neural_plain(ex):
+        return plainsum_denoiser(*load_experts())
+    rows.append(("neural plain sum", experts, neural_plain, "neural-plainsum"))
+
+    def method(cls, path):
+        def build(ex):
+            model = cls().to(DEV)
+            model.load_state_dict(torch.load(path, map_location=DEV))
+            return interaction_denoiser(*load_experts(), model.eval().requires_grad_(False))
+        return build
+    rows.append((f"Method A, N = {RUNG6_N}, 20000 updates", experts + [OUT / f"delta-{nm}.pt"],
+                 method(Delta, OUT / f"delta-{nm}.pt"), f"methodA-{nm}"))
+    rows.append((f"Method D, N = {RUNG6_N}, 20000 updates", experts + [OUT / f"deltaD-{nm}.pt"],
+                 method(DeltaD, OUT / f"deltaD-{nm}.pt"), f"methodD-{nm}"))
+
+    def pushed(nout, path, score_of, w):
+        def build(ex):
+            head = Head(nout).to(DEV)
+            head.load_state_dict(torch.load(path, map_location=DEV))
+            head = head.eval().requires_grad_(False)
+            return push_denoiser(plainsum_denoiser(*load_experts()), lambda xx, s: score_of(head(xx, s)), w)
+        return build
+    for w in RUNG6_WEIGHTS:
+        rows.append((f"Method C, C(b) N = {RUNG6_N} final head, w = {w}", experts + [OUT / f"head-Cb-{nm}.pt"],
+                     pushed(1, OUT / f"head-Cb-{nm}.pt", lambda lg: lg[:, 0], w), f"methodCb-{nm}-w{w}"))
+    for w in RUNG6_WEIGHTS:
+        rows.append((f"Method B, N = {RUNG6_N} final head, w = {w}", experts + [OUT / f"head-B-{nm}.pt"],
+                     pushed(4, OUT / f"head-B-{nm}.pt", fourway_ratio, w), f"methodB-{nm}-w{w}"))
+    return rows
+
+
+def rung6_slug(name):
+    import re
+    return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+
+
+def rung6_prediction_checks(rows, steps):
+    """For each row drawn at `steps` corrector steps whose name starts with a predicted prefix: the prediction, the clean-pair
+    share, and whether it held."""
+    out = {}
+    for name, m in rows.items():
+        if not name.endswith(f", {steps} corrector steps"):
+            continue
+        for prefix, (how, thr) in RUNG6_PREDICTED.items():
+            if name.startswith(prefix):
+                c = m["clean_share"]
+                out[name] = {"predicted": f"{how} {thr}", "clean_share": c, "held": bool(c < thr if how == "below" else c > thr)}
+    return out
+
+
+def cmd_rung6(a):
+    """Rung 6: each composed sampler drawn plain and with the corrector at 5 and 20 steps per noise level, from saved models only.
+    The predictions and bars are written to RESULTS/rung6-written-before-the-run.md and results.json before any sampling."""
+    t0 = time.time()
+    steps_list = sorted(set(a.steps))
+    rows_spec = rung6_rows()
+    missing = {name: [str(p) for p in need if not Path(p).exists()] for name, need, _, _ in rows_spec}
+    missing = {k: v for k, v in missing.items() if v}
+    todo = [r for r in rows_spec if r[0] not in missing]
+    sample_files = [OUT / f"samples-rung6-{rung6_slug(name)}-k{k}.pt" for name, _, _, _ in todo for k in steps_list]
+    before = RESULTS / "rung6-written-before-the-run.md"
+    require_new("rung6", sample_files + [RESULTS / "rung6-corrector.png", before])
+    for name, files in missing.items():
+        print(f"SKIP {name}: missing {', '.join(files)}", flush=True)
+    RESULTS.mkdir(parents=True, exist_ok=True)
+    before.write_text(RUNG6_WRITTEN_BEFORE)
+    save_results("rung6", {"status": "written before the run; no result yet", "written_before_the_run": RUNG6_WRITTEN_BEFORE,
+                           "corrector_steps": steps_list, "corrector_size": a.size, "skipped_missing_files": missing})
+    print(RUNG6_WRITTEN_BEFORE, flush=True)
+
+    (e, r, b, j, meta), ex = sets_and_exact()
+    tr, va = joint_split()
+    base_file = OUT / "samples-neural-plainsum.pt"
+    base = metrics(load_samples("neural-plainsum"), j)["clean_share"] if base_file.exists() else 0.0
+    rows, xs, labels, plain_check, timing = {}, [], [], {}, {}
+    for name, _, build, plain_name in todo:
+        denoise = build(ex)
+        idx = tr[:RUNG6_N] if name.startswith(("Method A", "Method D")) else None
+        for k in steps_list:
+            t1 = time.time()
+            with torch.no_grad():
+                x = sample_corrected(denoise, k, a.size)
+            row = f"{name}, {k} corrector steps"
+            timing[row] = round(time.time() - t1, 1)
+            save_samples(f"rung6-{rung6_slug(name)}-k{k}", x)
+            m = metrics(x, j, train_idx=idx)
+            m["verdict"] = verdict(m["clean_share"], base)
+            m.update(picture_extras(x))
+            rows[row] = m
+            xs.append(x)
+            labels.append(f"{name.split(',')[0]}{', w=' + name.split('w = ')[1] if 'w = ' in name else ''}, k={k}")
+            if k == 0 and plain_name and (OUT / f"samples-{plain_name}.pt").exists():
+                xp = load_samples(plain_name)[:len(x)].to(x.device)
+                plain_check[name] = {"saved_samples": f"samples-{plain_name}.pt", "byte_identical": bool(torch.equal(x, xp)),
+                                     "max_abs_difference": float((x - xp).abs().max())}
+            print(f"{row}: clean {m['clean_share']:.3f} {m['verdict']} purple seeds {m['share_with_purple']:.3f} "
+                  f"empty {m['share_empty']:.3f} ({timing[row]} s)", flush=True)
+    print(table(list(rows.items())))
+    grid(xs, labels, RESULTS / "rung6-corrector.png")
+    checks = rung6_prediction_checks(rows, RUNG6_JUDGED)
+    reported = rung6_prediction_checks(rows, 5) if 5 in steps_list else {}
+    print("predictions at 20 steps:", json.dumps(checks, indent=1), flush=True)
+    info = {"written_before_the_run": RUNG6_WRITTEN_BEFORE, "corrector_steps": steps_list, "corrector_size": a.size,
+            "corrector_noise": f"one generator per evaluation seed, seeded {CORRECTOR_SEED_OFFSET} + seed",
+            "judged_steps": RUNG6_JUDGED, "neural_plain_sum_plain_sampler_clean_share": base,
+            "skipped_missing_files": missing, "plain_sampler_against_saved_samples": plain_check,
+            "prediction_checks_at_20_steps": checks, "prediction_checks_at_5_steps_reported_not_judged": reported,
+            "row_seconds": timing, "rows": rows, "seconds": round(time.time() - t0, 1)}
+    save_results("rung6", info)
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -1421,6 +1634,9 @@ def main():
     q = sub.add_parser("rung5")
     q.add_argument("--ns", type=int, nargs="+", default=[1024, 0])
     q.add_argument("--updates", type=int, default=20000)
+    q = sub.add_parser("rung6")
+    q.add_argument("--steps", type=int, nargs="+", default=list(RUNG6_STEPS), help="corrector steps per noise level; 0 is plain")
+    q.add_argument("--size", type=float, default=CORRECTOR_SIZE, help="corrector step as a fraction of sigma squared")
     a = p.parse_args()
     globals()["cmd_" + a.cmd](a)
 

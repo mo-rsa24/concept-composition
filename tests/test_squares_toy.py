@@ -119,3 +119,72 @@ def test_a_new_run_refuses_an_existing_key_or_file(tmp_path, monkeypatch):
     with pytest.raises(SystemExit):
         st.require_new("rung10", [taken])
     st.require_new("rung10", [tmp_path / "out" / "free.pt"])
+
+
+def test_corrector_with_zero_steps_reproduces_the_plain_sampler_byte_for_byte():
+    """Rung 6 at 0 corrector steps runs the corrector path and gives the plain sampler's pictures exactly, for the plain sum,
+    Method A's composed denoiser and a pushed one; 5 steps changes them."""
+    torch.manual_seed(0)
+    nets = [st.Expert(w=8).eval() for _ in range(3)]
+    delta = st.Delta(w=8).eval()
+    for p in delta.parameters():
+        torch.nn.init.normal_(p, std=0.05)
+    head = st.Head(1, w=8).eval()
+    seeds = [5, 6]
+    x = st.starting_noise(seeds, device="cpu")
+    for denoise in (st.plainsum_denoiser(*nets), st.interaction_denoiser(*nets, delta),
+                    st.push_denoiser(st.plainsum_denoiser(*nets), lambda xx, s: head(xx, s)[:, 0], 4.0)):
+        with torch.no_grad():
+            plain = st.heun(denoise, x)
+            zero = st.sample_corrected(denoise, 0, seeds=seeds, device="cpu")
+            five = st.sample_corrected(denoise, 5, seeds=seeds, device="cpu")
+        assert torch.equal(plain, zero)
+        assert not torch.equal(plain, five)
+
+
+def test_langevin_step_matches_hand_computation():
+    """Stand-in denoiser D(x, s) = 0.5 x + 0.3. At x = 0.7, sigma 2, size 0.05, noise 0.4:
+    score = (0.65 - 0.7) / 4, eta = 0.05 * 4, x' = x + eta score + sqrt(2 eta) noise."""
+    x = torch.full((1, 3, 2, 2), 0.7)
+    noise = torch.full_like(x, 0.4)
+    s = torch.tensor(2.0)
+    got = st.langevin_step(lambda xx, ss, i, sec: 0.5 * xx + 0.3, x, s, 0.05, noise)
+    score = (0.5 * 0.7 + 0.3 - 0.7) / 4.0
+    eta = 0.05 * 4.0
+    want = 0.7 + eta * score + math.sqrt(2 * eta) * 0.4
+    assert torch.allclose(got, torch.full_like(x, want), atol=1e-6)
+
+
+def test_corrector_draws_each_seeds_own_noise():
+    """Two corrector steps at one level for seeds 3 and 9: each seed's noise comes from its own generator, seeded 200,000 + seed,
+    drawn as (steps, 3, 16, 16), so the result equals a hand loop over those draws, and a seed's result does not depend on its batch."""
+    def denoise(xx, ss, i, sec):
+        return 0.5 * xx + 0.3
+    x = torch.randn(2, 3, st.H, st.H, generator=torch.Generator().manual_seed(1))
+    s = torch.tensor(1.5)
+    got = st.corrector(denoise, [3, 9], 2)(0, x, s)
+    want = x.clone()
+    draws = [torch.Generator().manual_seed(st.CORRECTOR_SEED_OFFSET + sd) for sd in (3, 9)]
+    noise = torch.stack([torch.randn(2, 3, st.H, st.H, generator=g) for g in draws])
+    for k in range(2):
+        d = 0.5 * want + 0.3
+        want = want + 0.05 * 1.5 ** 2 * (d - want) / 1.5 ** 2 + math.sqrt(2 * 0.05 * 1.5 ** 2) * noise[:, k]
+    assert torch.allclose(got, want, atol=1e-6)
+    alone = st.corrector(denoise, [9], 2)(0, x[1:], s)
+    assert torch.equal(alone, got[1:])
+
+
+def test_rung6_looks_for_the_saved_models_by_their_training_names(tmp_path, monkeypatch):
+    """The files rung 6 loads are the ones rungs 2c, 5, 3c and 4b wrote at N = 1,024 and 20,000 updates; with none present, every
+    neural row is listed as missing and the two exact rows need nothing."""
+    monkeypatch.setattr(st, "OUT", tmp_path)
+    rows = st.rung6_rows()
+    need = {name: {p.name for p in files} for name, files, _, _ in rows}
+    assert need["exact joint"] == set() and need["exact plain sum"] == set()
+    names = set().union(*need.values())
+    for f in ("expert-red.pt", "expert-blue.pt", "expert-empty.pt", "delta-N1024-u20000.pt", "deltaD-N1024-u20000.pt",
+              "head-Cb-N1024-u20000.pt", "head-B-N1024-u20000.pt"):
+        assert f in names
+    assert len(rows) == 9
+    assert {r[3] for r in rows} >= {"methodA-N1024-u20000", "methodD-N1024-u20000", "methodCb-N1024-u20000-w16",
+                                    "methodB-N1024-u20000-w64"}

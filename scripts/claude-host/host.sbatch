@@ -4,6 +4,7 @@
 #SBATCH --job-name=claude-host
 #SBATCH --output=/home-mscluster/mmolefe/claude-host/logs/host-%j.log
 #SBATCH --signal=B:USR1@7200
+#SBATCH --exclude=mscluster171
 #
 # Keeps this project's Claude Code sessions alive on the cluster, one batch node at a time.
 #
