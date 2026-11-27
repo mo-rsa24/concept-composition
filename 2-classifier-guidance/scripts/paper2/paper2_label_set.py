@@ -15,9 +15,10 @@ What it does, in order:
   1. settles each batch: reviewer 1's kind where reviewers 1 and 2 agree, else the third reviewer's, else the picture is
      unsettled and left out (counted);
   2. merges the batches by picture path, a later batch in the manifest replacing an earlier one's label (a recall);
-  3. refuses to mix rubric versions where they differ: once any batch is version 2, a picture whose final kind is two
-     clear or borrowed part must take it from a version-2 batch (the versions differ only in what counts as a borrowed
-     part, which decides between exactly those two kinds); the other kinds stand from either version;
+  3. refuses to mix rubric versions where they differ (VERSION_KINDS): once any batch of a version is in the set, a
+     picture whose final kind that version governs must take its label from a batch of that version or later. Version 2
+     governs two clear and borrowed part (it changed what counts as a borrowed part); version 3 governs hybrid (a coat
+     never makes a body mixed, which can move a hybrid to borrowed part). Every other label stands from any version;
   4. reports reviewer agreement per settled kind (REVIEWER_AGREE_KIND_MIN) and on two clear against borrowed part
      (CLEAR_VS_BORROWED_AGREE_MIN), each read on the batch that gave the picture its final label;
   5. splits the pairs into choosing and test pairs by the first draw from SPLIT_SEED (0) that meets the size table:
@@ -61,9 +62,14 @@ from paper2_bars import (CLEAR_VS_BORROWED_AGREE_MIN, CONFIRM_SEED, LOOKALIKE_PE
                          UNSELECTED_SEED, UNSELECTED_TEST, pair_type)
 from paper2_collect import CO3_ALONE  # noqa: E402
 from paper2_common import species_from_slug  # noqa: E402
-from paper2_kinds import ALL_KINDS, BORROWED_PART, KINDS, OTHER_KIND, TWO_CLEAR  # noqa: E402
+from paper2_kinds import ALL_KINDS, BORROWED_PART, HYBRID, KINDS, OTHER_KIND, TWO_CLEAR  # noqa: E402
 
 FLAG_KINDS = {TWO_CLEAR, BORROWED_PART}     # the kinds the rubric's flag decides between
+# Each rubric version names the kinds its change can move a picture into or out of. Once any batch of that version is
+# in the set, a picture labelled with one of those kinds must take its label from a batch of that version or later.
+# v2 changed what counts as a borrowed-part flag (two clear against borrowed part); v3 says a coat never makes a body
+# mixed, which can move a hybrid to borrowed part but moves no picture out of two clear or borrowed part.
+VERSION_KINDS = {2: FLAG_KINDS, 3: {HYBRID}}
 CHOOSING_SHARE = 0.3
 OWNER_PER_KIND = 10
 EARLIER_CALL_POINTS_AT = {             # which earlier calls suggest a candidate may be a short kind
@@ -139,11 +145,15 @@ def merge(batches: list[dict]) -> tuple[dict, list[str]]:
             if pic in labels:
                 row = {**row, "replaces": f"{labels[pic]['batch']} ({labels[pic]['kind']}, v{labels[pic]['rules_version']})"}
             labels[pic] = row
+    newest = max((b["version"] for b in batches), default=1)
     refused = []
-    if any(b["version"] >= 2 for b in batches):
-        refused = sorted(f"{r['batch']}/{r['name']}: {r['kind']} under rubric v{r['rules_version']}"
-                         for r in labels.values() if r["kind"] in FLAG_KINDS and r["rules_version"] < 2)
-    return labels, refused
+    for r in labels.values():
+        for version, kinds in sorted(VERSION_KINDS.items()):
+            if version <= newest and r["kind"] in kinds and r["rules_version"] < version:
+                refused.append(f"{r['batch']}/{r['name']}: {r['kind']} under rubric v{r['rules_version']}, "
+                               f"where rubric v{version} is in the set and governs {r['kind']}")
+                break
+    return labels, sorted(refused)
 
 
 def agreement(labels: dict) -> dict:
@@ -273,8 +283,8 @@ def main(argv=None) -> int:
     lines = [f"batches: " + "; ".join(f"{b['name']} rubric v{b['version']}: {len(b['settled'])} settled, "
                                       f"{len(b['unsettled'])} unsettled" for b in batches)]
     if refused:
-        msg = (f"refused: {len(refused)} pictures hold a two-clear or borrowed-part label from a version-1 batch while a "
-               "version-2 batch exists; call them again under version 2:\n  " + "\n  ".join(refused))
+        msg = (f"refused: {len(refused)} pictures hold a label from an older rubric than the newest one that governs "
+               "that kind; call them again under that version:\n  " + "\n  ".join(refused))
         (out / "counts.txt").write_text("\n".join(lines) + "\n" + msg + "\n")
         print("\n".join(lines))
         raise SystemExit(msg)

@@ -10,7 +10,7 @@ the key only), it shuffles by a seed, gives each picture a neutral name, and wri
                  images/<name>.png  the picture alone, re-saved from its pixels
                  sheet.csv          name, asked species, in the shuffled order
                  calls-template.csv name, kind, note: the reviewer fills kind and note
-                 rules.txt          the six kinds and the seven rules (the rubric, version 2 by default:
+                 rules.txt          the six kinds and the seven rules (the rubric, version 3 by default:
                                     see RULES_V1 and rules_text)
   <out>/key/     key.json: each neutral name to its picture ("picture_path", the list's picture value as given, a
                  field no list column may take), its species and the list's other columns
@@ -110,17 +110,31 @@ V2_FLAG = ("and separately flagged only when it clearly shows a named part of th
            "resembles the other species is not a flag. When unsure, do not flag.")
 V2_BORROWED = ("\nBorrowed part (rule 3): a named part of the other asked species is clearly visible on one of the two\n"
                "bodies. When unsure, call it two clear.\n")
-RULES_VERSION = 2   # what build writes unless told otherwise
+# Version 3 adds one paragraph after version 2's flag paragraph, after batches 1 and 2 split 20 times between hybrid and
+# borrowed part on one picture type (cheetah and cougar: a cougar-shaped head on a body in cheetah spots) and borrowed
+# part missed the agreement bar at 36 of 58 (0.62). Version 2 is frozen as built (checksum pinned in the tests).
+V3_SHAPE = ("A body's species is decided by its shape: its head, face, ears, build, legs, wings or tail shape. A coat,\n"
+            "spots, stripes or colour never make a body MIXED, however much of the body they cover: a cougar-shaped\n"
+            "body in cheetah spots is the cougar, flagged. A body is MIXED only when its shape joins the two species,\n"
+            "such as one species' head on the other's build, or the other's legs, wings or beak.")
+RULES_VERSION = 3   # what build writes unless told otherwise
+RULES_VERSIONS = (1, 2, 3)
+
+
+def _body_v2() -> str:
+    assert V1_FLAG in RULES_V1
+    return RULES_V1.replace(V1_FLAG, V2_FLAG) + V2_BORROWED
 
 
 def rules_text(version: int = RULES_VERSION) -> str:
-    """The rubric a reviewer reads, as rules.txt. Version 2 opens with its version line."""
+    """The rubric a reviewer reads, as rules.txt. Versions 2 and later open with their version line."""
     if version == 1:
         return RULES_V1
     if version == 2:
-        assert V1_FLAG in RULES_V1
-        return "Rules v2\n" + RULES_V1.replace(V1_FLAG, V2_FLAG) + V2_BORROWED
-    raise SystemExit(f"no rubric version {version}; versions 1 and 2 exist")
+        return "Rules v2\n" + _body_v2()
+    if version == 3:
+        return "Rules v3\n" + _body_v2().replace(V2_FLAG, V2_FLAG + "\n\n" + V3_SHAPE)
+    raise SystemExit(f"no rubric version {version}; versions {', '.join(map(str, RULES_VERSIONS))} exist")
 
 
 def build(a: argparse.Namespace) -> dict:
@@ -280,7 +294,7 @@ def main(argv=None):
     b = sub.add_parser("build")
     b.add_argument("--pictures", type=Path, required=True, help="CSV with columns picture, a, b, and any others")
     b.add_argument("--seed", type=int, required=True, help="the shuffle and the neutral names")
-    b.add_argument("--rules-version", type=int, choices=(1, 2), default=RULES_VERSION,
+    b.add_argument("--rules-version", type=int, choices=RULES_VERSIONS, default=RULES_VERSION,
                    help="the reviewers' rubric written as rules.txt and recorded in key.json")
     b.add_argument("--out", type=Path, required=True)
     c = sub.add_parser("check")

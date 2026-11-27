@@ -182,7 +182,8 @@ def test_rubric_v2_names_the_parts_and_changes_nothing_else():
 
 def test_a_v2_sheet_records_its_version_and_checks(tmp_path):
     out = tmp_path / "out"
-    sheets.main(["build", "--pictures", str(make_list(tmp_path)), "--seed", "0", "--out", str(out)])
+    sheets.main(["build", "--pictures", str(make_list(tmp_path)), "--seed", "0", "--out", str(out),
+                 "--rules-version", "2"])
     assert json.loads((out / "key/key.json").read_text())["rules_version"] == 2
     assert (out / "sheet/rules.txt").read_text().splitlines()[0] == "Rules v2"
     assert sheets.main(["check", "--out", str(out)]) == 0
@@ -203,8 +204,8 @@ def test_a_v1_sheet_still_checks_even_with_no_version_in_its_key(tmp_path):
 
 
 def test_an_unknown_version_is_refused():
-    with pytest.raises(SystemExit, match="no rubric version 3"):
-        sheets.rules_text(3)
+    with pytest.raises(SystemExit, match="no rubric version 4"):
+        sheets.rules_text(4)
 
 
 
@@ -262,3 +263,42 @@ def test_a_sheet_built_before_the_fix_checks_against_its_relinked_key(tmp_path):
     (out / "key/key-relinked.json").write_text(json.dumps(relinked))
     assert sheets.main(["check", "--out", str(out)]) == 1                 # the old key has lost every path
     assert sheets.main(["check", "--out", str(out), "--key", str(out / "key/key-relinked.json")]) == 0
+
+
+V2_SHA256 = "a928036044ab8b3085e1b31dcb8f4e80c056076f8380e485b5dde9eb9d0695eb"   # batch-01-recall and batch 2's rules.txt
+
+
+def test_rubric_v2_is_unchanged():
+    import hashlib
+    assert hashlib.sha256(sheets.rules_text(2).encode()).hexdigest() == V2_SHA256
+
+
+def test_rubric_v3_adds_the_shape_paragraph_and_changes_nothing_else():
+    v3 = sheets.rules_text(3)
+    assert v3.startswith("Rules v3\n")
+    for part in ("decided by its shape", "never make a body MIXED", "a cougar-shaped\nbody in cheetah spots is the cougar, flagged",
+                 "MIXED only when its shape joins the two species"):
+        assert part in v3, part
+    flag_end = v3.index("When unsure, do not flag.") + len("When unsure, do not flag.")
+    assert v3[flag_end:].startswith("\n\nA body's species is decided by its shape")       # right after the flag paragraph
+    back = v3[len("Rules v3\n"):].replace("\n\n" + sheets.V3_SHAPE, "")
+    assert "Rules v2\n" + back == sheets.rules_text(2)                                     # every other word is v2's
+
+
+def test_a_v3_sheet_carries_the_paragraph_and_passes_the_leak_check(tmp_path):
+    lst = collector_list(tmp_path, [("own", "one"), ("co3", "two_clear"), ("both", "hybrid")])
+    out = tmp_path / "out"
+    sheets.main(["build", "--pictures", str(lst), "--seed", "3", "--out", str(out)])
+    assert json.loads((out / "key/key.json").read_text())["rules_version"] == 3
+    assert sheets.V3_SHAPE in (out / "sheet/rules.txt").read_text()
+    assert sheets.main(["check", "--out", str(out)]) == 0
+
+
+@pytest.mark.parametrize("version,sha", [(1, V1_SHA256), (2, V2_SHA256)])
+def test_v1_and_v2_sheets_still_rebuild_byte_identical_rules(tmp_path, version, sha):
+    import hashlib
+    out = tmp_path / "out"
+    sheets.main(["build", "--pictures", str(make_list(tmp_path)), "--seed", "0", "--out", str(out),
+                 "--rules-version", str(version)])
+    assert hashlib.sha256((out / "sheet/rules.txt").read_bytes()).hexdigest() == sha
+    assert sheets.main(["check", "--out", str(out)]) == 0

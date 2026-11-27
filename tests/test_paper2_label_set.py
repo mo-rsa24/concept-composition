@@ -94,7 +94,7 @@ def test_a_v1_flag_kind_cannot_mix_with_v2_but_other_kinds_stand(tmp_path):
     recall = write_batch(tmp_path / "rc", e[:1], [["two_clear"]] * 2, version=2)
     labels, refused = ls.merge([ls.settle_batch(b1), ls.settle_batch(recall)])
     assert labels["/d/p0.png"]["kind"] == "two_clear" and "replaces" in labels["/d/p0.png"]   # the recall wins
-    assert refused == ["b1/n00001: two_clear under rubric v1"]                             # p1 was not recalled
+    assert len(refused) == 1 and refused[0].startswith("b1/n00001: two_clear under rubric v1, where rubric v2")
     assert labels["/d/p2.png"]["kind"] == "hybrid"                                        # hybrid stands from v1
     (tmp_path / "batches.json").write_text(json.dumps([b1, recall]))
     with pytest.raises(SystemExit, match="refused: 1 pictures"):
@@ -215,3 +215,26 @@ def test_with_no_split_the_top_up_waits(tmp_path):
     ls.main(["--batches", str(tmp_path / "batches.json"), "--out", str(tmp_path / "out")])
     assert "top-up to 100 waits for the split" in (tmp_path / "out/counts.txt").read_text()
     assert not (tmp_path / "out/unselected-next.csv").exists()
+
+
+def test_a_v2_hybrid_is_refused_once_a_v3_batch_exists_and_a_v3_recall_replaces_it(tmp_path):
+    e = [{"picture": f"/d/p{i}.png", "a": "cheetah", "b": "cougar", "seed": i} for i in range(4)]
+    b2 = write_batch(tmp_path / "b2", e, [["hybrid", "hybrid", "two_clear", "borrowed_part"]] * 2, version=2)
+    r3 = write_batch(tmp_path / "r3", e[:1], [["borrowed_part"]] * 2, version=3)       # recalls p0 only
+    labels, refused = ls.merge([ls.settle_batch(b2), ls.settle_batch(r3)])
+    assert labels["/d/p0.png"]["kind"] == "borrowed_part" and labels["/d/p0.png"]["rules_version"] == 3
+    assert "b2 (hybrid, v2)" in labels["/d/p0.png"]["replaces"]
+    assert len(refused) == 1 and refused[0].startswith("b2/n00001: hybrid under rubric v2, where rubric v3")
+    assert labels["/d/p2.png"]["kind"] == "two_clear" and labels["/d/p3.png"]["kind"] == "borrowed_part"   # v2 stands
+    (tmp_path / "batches.json").write_text(json.dumps([b2, r3]))
+    with pytest.raises(SystemExit, match="b2/n00001: hybrid under rubric v2"):
+        ls.main(["--batches", str(tmp_path / "batches.json"), "--out", str(tmp_path / "out")])
+    r3all = write_batch(tmp_path / "r3all", e[:2], [["borrowed_part", "hybrid"]] * 2, version=3)
+    labels, refused = ls.merge([ls.settle_batch(b2), ls.settle_batch(r3all)])
+    assert refused == [] and labels["/d/p1.png"]["rules_version"] == 3
+
+
+def test_without_a_v3_batch_v2_hybrids_stand():
+    labels = {"/d/p.png": {"batch": "b2", "name": "n0", "kind": "hybrid", "rules_version": 2}}
+    _, refused = ls.merge([{"name": "b2", "version": 2, "settled": labels}])
+    assert refused == []
