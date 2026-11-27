@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated 2026-11-27 19:50 UTC
+Last updated 2026-11-27 20:25 UTC
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -245,6 +245,8 @@ Paper 1, 2026-11-27 18:00 UTC: Methods C and B on CLEVR, read after the cluster 
 Paper 2, 2026-11-27 19:20 UTC: the dial miniature (16x16, squares and diamonds in four colours, a conditioned base, code committed) stopped at gate 1: the base draws exactly the asked objects on 0.870 of 1,024 canvases against R1_BASE_COUNT_MIN 0.95 (1 object 0.981, 2 objects 0.910, 3 objects 0.812; total count right 0.947, so it mixes up the count per colour). Every other stage 1 bar passed. Supervisor's choice: train the base 16,000 updates in place of 6,000, nothing else changed, the 6,000-update base kept; the bar stays 0.95 and is read on fresh seeds 21,024 to 22,047, with the original seeds reported as a second reading; one retry only. The run's GPU budget (a cap the builder set, not a result bar) rises from 60 to 120 minutes.
 
 2026-11-27 19:50 UTC, both papers: mscluster84 stays down but the login node (mscluster) answers, so cluster work goes through it (CLUSTER_NODE=mscluster for scripts/cluster.sh). Paper 1: Method A on the 197 touching scenes trained 16,000 updates finished at 18:47 UTC; its held-out loss was best at update 2,750, so it overfit its 177 training scenes and the kept checkpoint matches the 4,000-update run (40 of 66 again). On all 626 touching seeds it keeps red against blue on 376 (52, 131, 193 at counts 1 to 3), against 303 for A on all 384 scenes and 517 for the paste, with 26 seeds mostly purple (the paste 26). As on the toy, a few hundred joint scenes overfit; the lever is more joint scenes. The owner asked to fill the Slurm caps: six bigbatch render jobs (97042 to 97047, nodes 48, 54, 59, 61, 63, 72) render 3,000 new joint scenes at seed base 8,100,000 (recorded in environment/clevr-and-edm2.md beside the earlier 8,000,000 set), for about 1,500 more touching scenes. Paper 2: the dial run's step 2 (checks) started on mscluster110 inside job 96208 at 19:49 UTC.
+
+2026-11-27 20:25 UTC, both papers: the cluster checkout was synced to d5171b7d through a git bundle on /datasets (the cluster could not fetch from GitHub), after its uncommitted board.json edit was set aside with git stash (kept, named for this sync). Three toy runs moved off the laptop onto the RTX 3090s inside our own render jobs (rendering uses the CPU only): Method B at A's budget on mscluster54, Method D on mscluster59, Paper 2's miniature base on mscluster61, all writing under /datasets/mmolefe/poe_repair_min/toys/. Method C at A's budget finished on the laptop first and fails in all 32 settings (both drawn-data sizes, 1,024 and all scenes, weights 1 to 64, final and best heads): clean touching pairs 0.000; its head still memorises its training seeds. Render job 97042 aborted at the GPU guard on mscluster48 (GPU not visible); mscluster48 is added to the bigbatch exclude list and the job resubmitted as 97051 on mscluster83. The other five render jobs were at about 340 of 500 scenes each at 20:23 UTC.
 
 ## Final review
 
