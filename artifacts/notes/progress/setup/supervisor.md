@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated 2026-11-27 22:50 UTC
+Last updated 2026-11-27 23:10 UTC
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -261,6 +261,8 @@ Paper 1, 2026-11-27 21:30 UTC: every toy method so far was sampled with the plai
 Paper 1, 2026-11-27 21:35 UTC: the corrector stage on the squares toy (rung6, job 97069, mscluster54; the inclusive-captions Langevin corrector, eta 0.05 sigma^2, run after every Heun step above sigma 0). Clean touching pairs of 256 seeds at 0, 5 and 20 corrector steps per noise level: exact joint 1.000, 1.000, 1.000; exact plain sum 0.141, 0.121, 0.113; neural plain sum 0.000, 0.000, 0.000 (empty pictures rise from 0.090 to 0.254); Method A (1,024 scenes, 20,000 updates) 0.895, 0.926, 0.996; Method D 0.887, 0.941, 0.977; Method C at w 16 and 64 0.000 at every step count (empty pictures rise to 0.730 and 0.793); Method B at w 16 and 64 0.000 (empty rises to 0.859 and 0.992). Every prediction written before the run held: the corrector completes the composition only where the learned term supplies the missing information, as in the inclusive-captions figure's relabelled rows; on the plain sum and the two classifier pushes it empties the picture. Grid: rung6-corrector.png in the toy's results folder. Next on CLEVR: Method A with the corrector, on the 1,599-touching-scene checkpoint and the 197-scene one, at 5 and 20 steps.
 
 Paper 1, 2026-11-27 22:50 UTC: Method A trained on 1,599 touching joint scenes (the 3,000 new renders' touching scenes plus the old 197; held-out loss best at update 7,000, 0.0282) keeps red against blue on 501 of the 626 touching evaluation seeds (87, 176, 238 at counts 1 to 3), against 376 for A on 197 scenes and 517 for the paste (84, 194, 239), with 27 seeds mostly purple (the paste 26); at one object per colour it beats the paste. With the Langevin corrector, on the first 66 touching seeds: A (1,599 scenes) with 5 steps 55 of 66, mostly purple 2; with 20 steps 48, purple 3; with none 49, purple 7; A on 197 scenes with 5 and 20 steps 35 and 38 (40 with none); the plain sum with 20 steps 0, purple 62; the paste 52, purple 6. The corrector launcher's full read uses 20 steps (its rule chose the checkpoint at 20 steps); a full read at 5 steps is queued after it (p1-methodA-k5-full.sh). These are pixel reads; a method that beats the paste on all 626 goes to a blind test. Paper 2: the dial run's step 2 passed with the new decode (rollout 0.0 grey levels from CO3's own picture; redraw within its bar); step 3, the smoke run, started on mscluster110.
+
+Paper 2, 2026-11-27 23:10 UTC: the dial's smoke (step 3) stopped at its own guard: the closeness term was 6.05e-7 with a gradient norm of exactly 0 at step 2. Cause: its gradient at the U-Net's output, about 1.6e-8 per number, is below fp16's smallest value, so the fp16 autocast backward rounded it to 0. Fix (commit 39a69111): the closeness backward is loss-scaled by 2^16 and unscaled on the dial, halving on overflow, as PyTorch's AMP gradient scaler does; the guard is unchanged; a closeness cache holding states outside the window is refused. The part-run smoke is moved aside (paper2-first-identity-smoke.closeness-underflow-20261128) and step 3 reruns.
 
 ## Final review
 
