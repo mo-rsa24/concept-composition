@@ -4,7 +4,7 @@
   "Detour: idea walk, 7 claims, paused",
   "Detour: zoom-ladder, about 430k tokens",
   "Detour: reading route and pictures, about 1.8M tokens",
-  "Paper 1: one owner per overlap removes the blend, but 52 of 96 touching scenes are still wrong (counts, order); measuring the new baseline blind, then a learned interaction on top",
+  "Paper 1: best rule still wrong on 52 of 96; new baseline being called blind (364 pictures), then learned interactions",
   "Paper 2 labels pass every agreement bar; split blocked by borrowed part on one pair (58 of 86); rendering 320 on five more pairs"
  ],
  "detours_join": "P2",
