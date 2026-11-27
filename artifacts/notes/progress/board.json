@@ -4,7 +4,7 @@
     "Detour: idea walk, 7 claims, paused",
     "Detour: zoom-ladder, about 430k tokens",
     "Detour: reading route and pictures, about 1.8M tokens",
-    "Paper 1: toy says the learned term (A) works from ~1,000 joint scenes (0.80 clean pairs); classifier pushes (B, C) draw none",
+    "Paper 1: toy says the learned term (A) works from ~1,000 joint scenes (0.80); training it 4x longer now; B, C draw none",
     "Paper 2: our trained judge missed too (75 of 240, bar 216); the dial's training signal goes to the owner"
   ],
   "detours_join": "P2",
