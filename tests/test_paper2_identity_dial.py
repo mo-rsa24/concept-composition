@@ -324,3 +324,129 @@ def test_closeness_prompts_are_single_animals_and_unlike_pairs_none_a_known_pair
         assert is_allowed(p), p
     for p in pairs:
         assert frozenset(re.findall(r"(?:an?) (\w+)", p)) not in known, p
+
+
+# ---- --reward trained: the trained species judge as the gradient route's reward (owner's choice of 2026-11-27)
+
+def _stub_head(path, zero=False):
+    """A trained-judge head on the stub backbone (16 numbers a view), saved as paper2_trained_judge.cmd_train saves one.
+    zero=True zeroes every weight, so the head's logits are constant and its two-clear probability has no gradient."""
+    import paper2_trained_judge as tj
+    torch.manual_seed(0)
+    head = tj.JudgeHead(tj.StubBackbone.dim)
+    if zero:
+        with torch.no_grad():
+            for p in head.parameters():
+                p.zero_()
+    torch.save({"state": head.state_dict(), "config": head.config, "kinds": list(tj.KINDS),
+                "bank": ["horse", "parrot", "owl"], "backbone": "stub", "logit_scale": tj.StubBackbone.logit_scale,
+                "epoch": 1}, path)
+    return path
+
+
+class _TwoBoxes:
+    """Stands in for the body counter: two fixed bodies, left and right halves of the stand-in's 8 by 8 picture."""
+
+    def __init__(self, device):
+        pass
+
+    def __call__(self, image):
+        return [[0, 0, 4, 8], [4, 0, 8, 8]]
+
+
+@pytest.fixture
+def trained_world(tmp_path, monkeypatch):
+    """The non-dry-run path of `train` on CPU: the stand-in sampler in place of CO3, the stub body counter, a real
+    closeness cache from another process, a weighted pairs file, and the route each reward took recorded."""
+    cache = tmp_path / "cache.pt"
+    assert run("closeness-cache", "--dry-run", "--out", str(cache)).returncode == 0
+    pairs = tmp_path / "pairs.txt"
+    pairs.write_text("a_cheetah__x__a_cougar 3\na_duck__x__a_goose 1\n")
+    monkeypatch.setattr(pid, "co3_sampler", lambda device, out: pid.stand_in_sampler(0))
+    monkeypatch.setattr(pid, "BodyBoxes", _TwoBoxes)
+    built = []
+    real = pid.trained_judge_reward
+    monkeypatch.setattr(pid, "trained_judge_reward",
+                        lambda head, device: built.append(("trained", head)) or real(head, device))
+
+    def args(*extra, reward="trained", route="gradient", out="run"):
+        return ["train", "--route", route, "--reward", reward, "--pairs-file", str(pairs), "--seeds", "11001", "11002",
+                "--window", "2", "5", "--closeness-cache", str(cache), "--closeness-weight", "1", "--steps", "2",
+                "--ckpt-steps", "2", "--device", "cpu", "--wandb-mode", "disabled", "--out", str(tmp_path / out),
+                *extra]
+    return {"tmp": tmp_path, "args": args, "built": built}
+
+
+def test_reward_trained_routes_to_the_trained_judge_and_trains(trained_world):
+    import paper2_trained_judge as tj
+    w = trained_world
+    head = _stub_head(w["tmp"] / "head.pt")
+    seen = []
+    real_call = tj.TrainedJudgeReward.__call__
+    with pytest.MonkeyPatch.context() as mp:
+        mp.setattr(tj.TrainedJudgeReward, "__call__", lambda self, *a: seen.append(type(self)) or real_call(self, *a))
+        pid.main(w["args"]("--judge-head", str(head)))
+    assert w["built"] == [("trained", head)]
+    assert seen and all(t is tj.TrainedJudgeReward for t in seen)       # every step's reward was the trained judge
+    run_json = json.loads((w["tmp"] / "run/run.json").read_text())
+    assert run_json["reward"] == "trained" and run_json["judge_head"] == str(head)
+    assert len(run_json["judge_head_sha256"]) == 64
+    log = [json.loads(x) for x in (w["tmp"] / "run/train-log.jsonl").read_text().splitlines()]
+    assert log[0]["task_grad_norm"] > 0                                  # the head's gradient reached the dial
+    assert all(0 < row["reward"] < 1 for row in log)                     # a two-clear probability
+    assert (w["tmp"] / "run/ckpt-2/dial.pt").exists()
+
+
+def test_reward_trained_with_a_zero_gradient_head_stops_at_step_1(trained_world):
+    w = trained_world
+    head = _stub_head(w["tmp"] / "zero.pt", zero=True)
+    # the value is the head's flat two-clear probability, 1/6, so the stop comes from the gradient norm being 0
+    with pytest.raises(SystemExit, match=r"reward term is exactly 0 at step 1 \(value -0\.1666\d*, gradient norm 0\.0\)"):
+        pid.main(w["args"]("--judge-head", str(head)))
+    assert w["built"] == [("trained", head)]
+
+
+def test_reward_trained_needs_its_head_and_the_gradient_route(trained_world):
+    w = trained_world
+    with pytest.raises(SystemExit, match="--judge-head is required"):
+        pid.main(w["args"]())
+    head = _stub_head(w["tmp"] / "head.pt")
+    with pytest.raises(SystemExit, match="gradient-route reward"):
+        pid.main(w["args"]("--judge-head", str(head), route="kept"))
+    with pytest.raises(SystemExit, match="is not a file"):
+        pid.main(w["args"]("--judge-head", str(w["tmp"] / "missing.pt")))
+
+
+def test_crop_judge_routes_are_unchanged(trained_world, monkeypatch):
+    """clip and imagenet still build CropShareReward from --judge-settings on the gradient route, any crop judge still
+    builds JudgeKeep on the kept route, and neither touches the trained judge."""
+    w = trained_world
+    settings = w["tmp"] / "settings.json"
+    settings.write_text(json.dumps({"settings": {"margin": 0.3, "flag_share": 0.25}}))
+    made = []
+
+    class Crop:
+        def __init__(self, kind, device, s, class_table=None):
+            made.append(("crop", kind, s))
+
+        def __call__(self, image, a, b):
+            return image[0].mean() - image[2].mean(), {"kind": "stand-in", "n_bodies": 2}
+
+    class Keep:
+        def __init__(self, judge, device, settings_file):
+            made.append(("keep", judge, Path(settings_file)))
+
+        def __call__(self, image, a, b):
+            return torch.tensor(1.0), {"kind": "two_clear", "n_bodies": 2}
+    monkeypatch.setattr(pid, "CropShareReward", Crop)
+    monkeypatch.setattr(pid, "JudgeKeep", Keep)
+    for kind in ("clip", "imagenet"):
+        pid.main(w["args"]("--judge-settings", str(settings), reward=kind, out=f"run-{kind}"))
+    pid.main(w["args"]("--judge-settings", str(settings), reward="vlm", route="kept", out="run-kept"))
+    assert made == [("crop", "clip", {"margin": 0.3, "flag_share": 0.25}),
+                    ("crop", "imagenet", {"margin": 0.3, "flag_share": 0.25}), ("keep", "vlm", settings)]
+    assert w["built"] == []
+    for out in ("run-clip", "run-imagenet", "run-kept"):
+        assert "judge_head" not in json.loads((w["tmp"] / out / "run.json").read_text())
+    with pytest.raises(SystemExit, match="--judge-settings is required"):
+        pid.main(w["args"](reward="clip", out="run-none"))

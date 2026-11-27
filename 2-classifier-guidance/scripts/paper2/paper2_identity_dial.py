@@ -67,6 +67,10 @@ after the dial first moved, not at step 1, because, in item 2's own words, "a ne
         --closeness-cache <closeness-cache.pt> --closeness-weight <from the smoke> \\
         --steps 1000 --ckpt-steps 500 1000 \\
         --out /datasets/mmolefe/poe_repair_min/paper2/paper2-first-identity-train
+    # the trained species judge as the reward (owner's choice of 2026-11-27): --reward trained takes the head, not
+    # a settings.json, and runs on the gradient route only
+    python paper2_identity_dial.py train ... --route gradient --reward trained \\
+        --judge-head /datasets/mmolefe/poe_repair_min/paper2/paper2-judge-trained-seenpairs/head.pt ...
     python paper2_identity_dial.py random --like <ckpt-1000/dial.pt> --out <random/dial.pt> --seed 0
     python paper2_identity_dial.py draw --ckpt <dial.pt> --strength 1 --dial-from-step 15 \\
         --pairs-file test-pairs.txt --seeds 13001:13004 --out <folder>
@@ -386,6 +390,17 @@ class JudgeKeep:
             calls.append(self.judge.decide(self.judge.raw(crop, a, b), self.settings))
         kind, _ = kind_of(calls)
         return torch.tensor(1.0 if kind == TWO_CLEAR else 0.0), {"kind": kind, "n_bodies": len(boxes)}
+
+
+def trained_judge_reward(head_path: Path, device):
+    """`--reward trained`: Paper 2's trained species judge (paper2_trained_judge.TrainedJudgeReward), the same call as
+    CropShareReward. Its score is the head's two-clear probability, with the graph through frozen CLIP ViT-L/14 to the
+    pixels; the boxes come from BodyBoxes on the detached picture and are held fixed. Imported here, not at the top,
+    because paper2_trained_judge imports this file."""
+    from paper2_trained_judge import TrainedJudgeReward
+    if not Path(head_path).is_file():
+        raise SystemExit(f"--judge-head {head_path} is not a file")
+    return TrainedJudgeReward(Path(head_path), device)
 
 
 class StandInReward:
@@ -751,14 +766,20 @@ def train(a: argparse.Namespace) -> dict:
         seeds = [11001, 11002]
         reward = StandInReward() if a.route == "gradient" else StandInKeep()
     else:
-        for need in ("pairs_file", "seeds", "window", "closeness_cache", "judge_settings"):
+        judge_input = "judge_head" if a.reward == "trained" else "judge_settings"
+        for need in ("pairs_file", "seeds", "window", "closeness_cache", judge_input):
             if not getattr(a, need):
                 raise SystemExit(f"--{need.replace('_', '-')} is required unless --dry-run")
+        if a.reward == "trained" and a.route != "gradient":
+            raise SystemExit("--reward trained is a gradient-route reward: the trained judge's head gives the two-clear "
+                             "probability with its graph; the kept route takes a crop judge's settings.json")
         cache_path = a.closeness_cache
         sampler = co3_sampler(a.device, out)
         pairs, seeds = read_pairs(a.pairs_file), parse_seeds(a.seeds)
         window = tuple(a.window)
-        if a.route == "gradient":
+        if a.reward == "trained":
+            reward = trained_judge_reward(a.judge_head, a.device)
+        elif a.route == "gradient":
             settings = json.loads(Path(a.judge_settings).read_text())["settings"]
             reward = CropShareReward(a.reward, a.device, settings, a.class_table)
         else:
@@ -787,6 +808,10 @@ def train(a: argparse.Namespace) -> dict:
             "attention": sampler.attention,
             "closeness_cache": str(cache_path), "closeness_batch": a.closeness_batch,
             "closeness_prompts": sorted({e["prompt"] for e in cache})}
+    if not a.dry_run and a.reward == "trained":
+        import hashlib
+        meta["judge_head"] = str(a.judge_head)
+        meta["judge_head_sha256"] = hashlib.sha256(Path(a.judge_head).read_bytes()).hexdigest()
     (out / "run.json").write_text(json.dumps({**meta, "ckpt_steps": ckpt_steps,
                                               "started": time.strftime("%Y-%m-%dT%H:%M:%S")}, indent=1))
     tracker = Tracker("disabled" if a.dry_run and a.wandb_mode == "online" else a.wandb_mode,
@@ -984,10 +1009,13 @@ def main(argv=None):
                    help=f"run folder; cluster runs use {PAPER2_DATASETS}/<run-name>")
     t.add_argument("--dry-run", action="store_true", help="stand-in CO3, reward and pairs, CPU, 2 steps")
     t.add_argument("--route", choices=("gradient", "kept"), default="gradient")
-    t.add_argument("--reward", choices=("clip", "imagenet", "dac", "vlm"), default="clip",
-                   help="the judge: the gradient route needs clip or imagenet; the kept route takes any")
+    t.add_argument("--reward", choices=("clip", "imagenet", "dac", "vlm", "trained"), default="clip",
+                   help="the judge: the gradient route needs clip, imagenet or trained; the kept route takes any "
+                        "crop judge")
     t.add_argument("--judge-settings", type=Path, default=None,
                    help="the judge's frozen settings.json from species judge steps 0.18 to 0.20")
+    t.add_argument("--judge-head", type=Path, default=None,
+                   help="--reward trained only: the trained judge's head.pt (paper2_trained_judge.py train)")
     t.add_argument("--class-table", type=Path, default=None, help="ImageNet judge only")
     t.add_argument("--pairs-file", type=Path, default=None,
                    help="training pairs with a weight each: 'slug weight' per line, or JSON [{pair, weight}]")
