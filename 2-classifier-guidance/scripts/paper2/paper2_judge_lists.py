@@ -1,7 +1,7 @@
 """The judges' picture lists on the split labelled set, their GPU cost, and each judge's setting chosen on choosing pairs.
 
 Species judge steps 0.17 to 0.20 (`paper2-judge-old`, `-clip`, `-imagenet`, `-vlm`; Detect-and-Compare is out of these
-steps since step 0.15, see the hand-off). The plan ("The judges"): every free setting is chosen on choosing pairs, from
+steps since step 0.15, see the hand-off), and the follow-on judges `paper2-judge-dreamsim` and `paper2-judge-bioclip`. The plan ("The judges"): every free setting is chosen on choosing pairs, from
 the judge's grid, by the highest six-kind agreement, and frozen before any test pair is called; the test pairs are
 called without the confirmation slice. Three subcommands, run in this order:
 
@@ -49,7 +49,7 @@ from paper2_bars import GPU_HOURS_STOP  # noqa: E402
 LIST_COLUMNS = ["picture", "a", "b", "item", "pair", "pair_type", "kind", "part", "unselected_sample", "renamed",
                 "renaming", "call_1", "call_2"]
 TEST_PARTS = ("read", "spare", "apart")
-JUDGES = ("old", "clip", "imagenet", "vlm")
+JUDGES = ("old", "clip", "imagenet", "vlm", "dreamsim", "bioclip")
 OUT_OF_STEPS = {"dac": "Detect-and-Compare failed the crop check at every grid value in step 0.15 and is out of steps "
                        "0.17 to 0.21 (paper-2-handoff.md, 'Step 0.15 on mscluster112')"}
 
@@ -162,24 +162,37 @@ def grid_of(judge: str) -> tuple[list[str], list[tuple]]:
     if judge == "vlm":
         import paper2_judge_vlm as m
         return ["yes_threshold"], [(t,) for t in m.YES_THRESHOLD_GRID]
+    if judge == "bioclip":
+        import paper2_judge_clip as m                 # BioCLIP runs on the CLIP judge's grids
+        return ["margin", "flag_share"], list(itertools.product(m.MARGIN_GRID, m.FLAG_SHARE_GRID))
+    if judge == "dreamsim":
+        import paper2_judge_dreamsim as m
+        return ["margin", "flag_gap", "floor"], list(itertools.product(m.MARGIN_GRID, m.FLAG_GAP_GRID, m.FLOOR_GRID))
     raise SystemExit(OUT_OF_STEPS.get(judge, f"{judge} has no free setting to choose (the old judge runs as committed)"))
 
 
 def deciding_judge(judge: str):
     """A judge object whose decide and two_clear_score work with no model (its stand-in is never called)."""
     ns = argparse.Namespace(dry_run=True, device="cpu", margin=0.15, flag_share=0.25, yes_threshold=0.5,
-                            class_table=None)
+                            class_table=None, flag_gap=0.10, floor=0.4, references=None, n_refs=8)
     if judge == "clip":
         from paper2_judge_clip import ClipJudge
         return ClipJudge(ns)
     if judge == "imagenet":
         from paper2_judge_imagenet import ImageNetJudge
         return ImageNetJudge(ns)
+    if judge == "bioclip":
+        from paper2_judge_bioclip import BioClipJudge
+        return BioClipJudge(ns)
+    if judge == "dreamsim":
+        from paper2_judge_dreamsim import DreamSimJudge
+        return DreamSimJudge(ns)
     from paper2_judge_vlm import VlmJudge
     return VlmJudge(ns)
 
 
-FLAGS = {"margin": "--margin", "flag_share": "--flag-share", "yes_threshold": "--yes-threshold"}
+FLAGS = {"margin": "--margin", "flag_share": "--flag-share", "yes_threshold": "--yes-threshold",
+         "flag_gap": "--flag-gap", "floor": "--floor"}
 
 
 def choose(judge: str, calls: dict, choosing: list[dict]) -> dict:

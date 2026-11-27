@@ -46,7 +46,13 @@ JUDGE_MODELS = [
     ("openai/clip-vit-large-patch14", {"ignore_patterns": JUDGE_SKIP}, "config.json"),
     ("timm/convnext_large.fb_in22k_ft_in1k", {"ignore_patterns": JUDGE_SKIP}, "config.json"),
 ]
-SETS = {"setup": SETUP_MODELS, "judges": JUDGE_MODELS}
+# The follow-on judges after step 0 failed: BioCLIP, which open_clip loads from the hub repository (its config is
+# open_clip_config.json, not config.json). DreamSim's weights do not come from the hub; paper2_fetch_followon.sh
+# fetches them through the dreamsim package.
+FOLLOWON_MODELS = [
+    ("imageomics/bioclip", {"ignore_patterns": ["*.msgpack", "*.h5", "*.onnx", "*.ot", "*.gguf"]}, "open_clip_config.json"),
+]
+SETS = {"setup": SETUP_MODELS, "judges": JUDGE_MODELS, "followon": FOLLOWON_MODELS}
 
 
 def repo_dir(hf_home: Path, repo: str) -> Path:
@@ -80,6 +86,13 @@ if {filename!r} == 'config.json' and {repo!r} != 'madebyollin/sdxl-vae-fp16-fix'
         msg += '; transformers loads it'
     except Exception as e:
         msg += '; transformers here cannot load it (' + type(e).__name__ + ')'
+if {repo!r} == 'imageomics/bioclip':
+    try:
+        import open_clip
+        open_clip.create_model_and_transforms('hf-hub:imageomics/bioclip')
+        msg += '; open_clip builds it offline'
+    except Exception as e:
+        msg += '; open_clip cannot build it offline (' + type(e).__name__ + ': ' + str(e)[:120] + ')'
 if {repo!r}.startswith('timm/'):
     try:
         import timm

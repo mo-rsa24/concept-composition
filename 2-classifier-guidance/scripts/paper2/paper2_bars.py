@@ -147,6 +147,21 @@ BORROWED_TOPUP_PAIRS = [("zebra", "flamingo"), ("lion", "tiger"), ("bobcat", "qu
                         ("tiger", "dog")]
 BORROWED_TOPUP_SEEDS = range(8101, 8165)
 
+# The follow-on judges (step 0 failed on 2026-11-27: no judge met the bars; the owner chose to test the next candidates).
+# The DreamSim judge compares each crop with SDXL's own single-species renders: plain SDXL, "a photo of a <species>",
+# the cat census's settings (50 DDIM steps, guidance 7.5, 1024 px), REFERENCE_PER_SPECIES of them at REFERENCE_SEEDS.
+# The seeds sit apart from every render the labelled set and the 64-cat check use (the census cats are seeds 0 to 63).
+REFERENCE_PER_SPECIES = 8
+REFERENCE_SEEDS = range(9001, 9001 + REFERENCE_PER_SPECIES)
+
+
+def asked_species() -> list[str]:
+    """Every species a picture of the labelled set or the 64-cat check can be asked about."""
+    names = {s for a, b, _ in PAIRS for s in (a, b)}
+    names |= {s for a, b in NEW_LOOKALIKE_PAIRS + BORROWED_TOPUP_PAIRS for s in (a, b)}
+    names |= set(RENAMING.values()) | {"cat", "dog"}
+    return sorted(names)
+
 # Wrong-species pictures made by renaming, if natural ones are short: one subject shown under a look-alike name.
 RENAMING = {"cougar": "leopard", "goose": "swan", "fox": "coyote", "flamingo": "spoonbill"}
 RENAMED_PER_KIND_MAX = 20     # of the 40 read wrong-species pictures
