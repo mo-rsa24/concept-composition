@@ -4,8 +4,8 @@
     "Detour: idea walk, 7 claims, paused",
     "Detour: zoom-ladder, about 430k tokens",
     "Detour: reading route and pictures, about 1.8M tokens",
-    "Paper 1: CLEVR C reaches 261 of 626 but stays purple, B 18; A on touching scenes trained longer launched",
-    "Paper 2: dial run built and committed (trained judge steers, blind calls measure); launches when the cluster returns"
+    "Paper 1: A the method (CLEVR 303/626 no purple, toy 0.89); fair toy test of B, C, D at A's budget running",
+    "Paper 2: dial run built, waits on the cluster; a mini toy of the dial ladder being built on the laptop"
   ],
   "detours_join": "P2",
   "steps": [
