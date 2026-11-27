@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated 2026-11-27 13:00 UTC
+Last updated 2026-11-27 13:05 UTC
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -227,6 +227,8 @@ Paper 1, 2026-11-27 11:40 UTC: the squares toy (16x16, red and blue squares of s
 Paper 1, 2026-11-27 12:15 UTC: the squares toy's data curve and the two classifier methods. Clean touching pairs on 256 shared seeds for Method A by number of joint training scenes: 16 0.145, 64 0.141, 256 0.609, 1,024 0.797, 4,096 0.750, 11,329 0.738. Method C (real against the sampler's own states) and Method B (the four-way ratio), both on all joint scenes, give 0.000 at every weight from 1 to 64. Against the bars set before rung 0: A partial from 256 scenes up (0.797 at 1,024 misses 0.8 by one seed's worth), C and B fail. Reading: both pushes failed for reasons specific to how they were built. Method C's head memorised its 922 training seeds' states (held-out balanced accuracy 0.50 above sigma 2, logit pinned at the +4 bound for any new seed, so the push is about zero where placement is decided). Method B's ratio, log q11 - log(q10+q11) - log(q01+q11), scores a confidently empty picture 6.62 and a confident touching pair 0.00, so pushing up it removes squares. Neither result shows a classifier push cannot work, but each needs a new design, and Method A already works without one; the learned term trained by denoising does draw it, it needs a few hundred to a thousand joint scenes, and past about 1,000 more scenes stop helping, so the remaining gap to 0.8 sits in the network or its training budget, not the data.
 
 Paper 1, 2026-11-27 13:00 UTC: Method A on the squares toy trained 20,000 updates in place of 5,000, one change, at 1,024 joint scenes: clean touching pairs 0.891 of 256 shared seeds, against 0.797 at 5,000 updates. That clears the bar set before rung 0 (at least 0.8 and at least 0.5 above the neural plain sum's 0.000): WORKS. Held-out denoising loss fell from 0.103 to about 0.092. The flat part of the data curve above about 1,000 scenes was the training budget, not the data. The run at all 11,329 scenes is training now (rung2c in results.json, files tagged -u20000).
+
+Paper 2, 2026-11-27 13:05 UTC: the owner chose to train the identity dial on the best judge we have, as a steering signal only, and to judge the dial's result only by blind calls against plan 03's bars, unchanged. The reward is the trained judge from the wider pool (paper2-judge-trained-seenpairs/head.pt, 121 of 240), chosen over the choosing-pool head (75 of 240) because it learned from 768 pictures against 369; its 121 is not a clean measure, which does not matter when the dial is read blind. A subagent is wiring --reward trained into paper2_identity_dial.py and writing the commands for plan 03's tasks 2 to 6; the launch waits on mscluster84, down since 11:35 UTC.
 
 ## Final review
 
