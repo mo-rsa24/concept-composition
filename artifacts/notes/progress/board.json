@@ -4,7 +4,7 @@
     "Detour: idea walk, 7 claims, paused",
     "Detour: zoom-ladder, about 430k tokens",
     "Detour: reading route and pictures, about 1.8M tokens",
-    "Paper 1: CLEVR A touching 376/626 (paste 517) but overfits 197 scenes; rendering 3,000 more joint scenes on 6 bigbatch nodes",
+    "Paper 1: CLEVR A touching 376/626 (paste 517); toy C at A's budget fails too; 3,000 joint renders on bigbatch; toy B and D wait on a slow cluster sync",
     "Paper 2: dial run checks started on mscluster110; mini toy's base retraining on the laptop"
   ],
   "detours_join": "P2",
