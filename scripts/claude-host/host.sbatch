@@ -2,13 +2,13 @@
 #SBATCH --partition=batch
 #SBATCH --time=1-00:00:00
 #SBATCH --job-name=claude-host
-#SBATCH --output=/datasets/mmolefe/claude-host/logs/host-%j.log
+#SBATCH --output=/home-mscluster/mmolefe/claude-host/logs/host-%j.log
 #SBATCH --signal=B:USR1@7200
 #
 # Keeps this project's Claude Code sessions alive on the cluster, one batch node at a time.
 #
 # What it does, in order:
-#   1. Waits until no other host job holds the lock (/datasets/mmolefe/claude-host/lock). If one does, it writes its own job
+#   1. Waits until no other host job holds the lock (/home-mscluster/mmolefe/claude-host/lock). If one does, it writes its own job
 #      id to the takeover file, which tells that host to stop its sessions and release the lock.
 #   2. Takes the lock and starts one tmux window per line of sessions.txt: a Claude session with that name, Remote Control on.
 #      A session that has run before is resumed by name; a new one starts from its prompt file.
@@ -21,7 +21,7 @@
 # Permission rules for the sessions are the owner's to set (in the cluster's ~/.claude settings, or CLAUDE_ARGS in host.env);
 # this script passes nothing about permissions itself.
 set -u
-H=${CLAUDE_HOST_DIR:-/datasets/mmolefe/claude-host}
+H=${CLAUDE_HOST_DIR:-/home-mscluster/mmolefe/claude-host}   # home, not /datasets: some nodes cannot see /datasets inside a job
 REPO=${REPO:-/home-mscluster/mmolefe/Playground/PhD/concept-composition}
 CLAUDE=${CLAUDE:-/home-mscluster/mmolefe/.local/bin/claude}
 CLAUDE_ARGS=""
@@ -32,11 +32,14 @@ SOCK=claude-host
 ME=${SLURM_JOB_ID:?run under Slurm}
 log() { echo "[$(date -u '+%F %T')] $*"; }
 
+NEXT=""
 submit_next() {
-  log "USR1: submitting the next host job"
-  sbatch "$H/host.sbatch" || log "sbatch of the next host failed; up.sh will resubmit"
+  NEXT=$(sbatch --parsable "$H/host.sbatch" 2>/dev/null)
+  log "submitted the next host job: ${NEXT:-none (sbatch failed)}"
 }
-trap submit_next USR1
+on_usr1() { log "USR1: time to hand over"; HANDOVER=1; submit_next; }
+HANDOVER=0
+trap on_usr1 USR1
 
 log "host $ME on $(hostname -s), repo $REPO"
 mkdir -p "$H/started" "$H/logs"
@@ -79,6 +82,11 @@ done < "$H/sessions.txt"
 # 3. Run until a successor asks for the takeover.
 while true; do
   sleep 30 & wait $!
+  # A successor that failed or vanished before taking over is replaced, so one bad node cannot break the chain.
+  if [ $HANDOVER = 1 ] && [ "$(cat "$LOCK")" = "$ME" ] && { [ -z "$NEXT" ] || [ -z "$(squeue -h -j "$NEXT" -o %T 2>/dev/null)" ]; }; then
+    log "next host ${NEXT:-none} is not queued or running: submitting again"
+    sleep 60; submit_next
+  fi
   if [ -s "$TAKEOVER" ] && [ "$(cat "$TAKEOVER")" != "$ME" ]; then
     log "takeover asked by $(cat "$TAKEOVER"): stopping sessions"
     for w in $(tmux -L $SOCK list-windows -t host -F '#W' 2>/dev/null); do

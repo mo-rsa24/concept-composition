@@ -1,11 +1,11 @@
 #!/bin/bash
 # From the laptop: make sure one Claude host job is running on the cluster's batch partition, and copy the host files to
-# /datasets/mmolefe/claude-host/ first. Safe to run any time: it submits only when no host job is queued or running.
+# /home-mscluster/mmolefe/claude-host/ first. Safe to run any time: it submits only when no host job is queued or running.
 #   scripts/claude-host/up.sh          copy the files, then submit if none is running
 #   scripts/claude-host/up.sh status   show the host jobs and the lock
 set -u
 HERE=$(cd "$(dirname "$0")" && pwd)
-H=/datasets/mmolefe/claude-host
+H=/home-mscluster/mmolefe/claude-host
 LOGIN=${CLUSTER_LOGIN:-mscluster}
 ssh_() { timeout 90 ssh -o ConnectTimeout=20 "$LOGIN" "$@"; }
 

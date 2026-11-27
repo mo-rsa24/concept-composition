@@ -4,7 +4,7 @@ Navigation: 📋 [Index](../00-INDEX.md)
 
 The supervisor and the paper loops run as Claude Code sessions in tmux on a `batch` node, so they keep working while the
 laptop sleeps or WSL disconnects. A host job holds the node for a day, submits its own successor two hours before its
-limit, and hands the sessions over through a lock file on `/datasets`. Each session is resumed by name on the new node,
+limit, and hands the sessions over through a lock file in the home folder (every node sees it; some nodes cannot see `/datasets` inside a job). Each session is resumed by name on the new node,
 because its history lives in `~/.claude` on the shared home filesystem. The Claude app on Windows reaches each session
 through Remote Control.
 
@@ -27,7 +27,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#2-the-one-time-setup) ➡�
 |---|---|
 | Host job `claude-host` | `batch` partition, 1-day limit; verified 2026-11-27 (job 97053 on mscluster164) that a `batch` job starts while all six `bigbatch` slots and the `biggpu` job are held, so it does not count against those caps |
 | Scripts | `scripts/claude-host/`: `host.sbatch`, `up.sh`, `sessions.txt`, `prompts/` |
-| Host state | `/datasets/mmolefe/claude-host/`: `lock` (job id whose sessions are live), `takeover`, `started/<name>` (sessions that have run once), `logs/host-<job>.log` |
+| Host state | `/home-mscluster/mmolefe/claude-host/`: `lock` (job id whose sessions are live), `takeover`, `started/<name>` (sessions that have run once), `logs/host-<job>.log` |
 | Session history | `~/.claude/projects/` on the cluster's home filesystem, shared by every node |
 | GPU work | still `sbatch` on `bigbatch` and the owner's `biggpu` job, per [the launch recipe](launching-and-harvesting-a-run.md) |
 
@@ -43,7 +43,7 @@ These are the owner's steps; the sessions never handle credentials or their own 
    `/home-mscluster/mmolefe/.local/bin/claude` and sign in. You should see the prompt box; `/exit` leaves. The sign-in is
    stored under the cluster's home folder, so every later node finds it.
 2. **Set the sessions' permission rules** in the cluster's `~/.claude/settings.json` (or put extra flags in
-   `/datasets/mmolefe/claude-host/host.env` as `CLAUDE_ARGS="..."`). A session in tmux stops and waits at any permission
+   `/home-mscluster/mmolefe/claude-host/host.env` as `CLAUDE_ARGS="..."`). A session in tmux stops and waits at any permission
    prompt nobody answers, so the rules decide how unattended it can be.
 3. **Bring `~/.claude` and the learning tree to the cluster** as git clones (`git clone <your .claude repo> ~/.claude`,
    and the same for `~/goal-setting/learning`), then point any hook or setting that names `/home/molef/` at
@@ -59,7 +59,7 @@ From the laptop repo root:
 scripts/claude-host/up.sh
 ```
 
-It copies the scripts and prompts to `/datasets/mmolefe/claude-host/` and submits `host.sbatch`, unless a host job is
+It copies the scripts and prompts to `/home-mscluster/mmolefe/claude-host/` and submits `host.sbatch`, unless a host job is
 already queued or running. **Worked:** it prints `Submitted batch job <id>`, and `scripts/claude-host/up.sh status` shows
 the job `RUNNING` with the lock holding its id. **Failed:** `cluster not answering` (the login node is down: wait and run
 again), or the status shows no job (it ended during an outage: run `up.sh` again; the sessions resume by name).

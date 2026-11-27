@@ -80,8 +80,8 @@ flowchart TB
   X0["Detour: idea walk, 7 claims, paused"]:::detour -.-> P2
   X1["Detour: zoom-ladder, about 430k tokens"]:::detour -.-> P2
   X2["Detour: reading route and pictures, about 1.8M tokens"]:::detour -.-> P2
-  X3["Paper 1: CLEVR A touching 376/626 (paste 517); 3,000 joint renders near done; toy B, D on held render-node GPUs; toy C fails at A's budget"]:::detour -.-> P2
-  X4["Paper 2: rollout mismatch traced to the decode and fixed; dial checks rerunning on mscluster110; mini toy base on a held node"]:::detour -.-> P2
+  X3["Paper 1: toy: only the learned term works (A 0.89, D 0.89; B, C 0.00 at A's budget); CLEVR renders near done"]:::detour -.-> P2
+  X4["Paper 2: dial checks rerunning after the decode fix; mini toy base failed its retry (0.919, bar 0.95), owner to decide"]:::detour -.-> P2
   X5["Moving the Claude sessions to a daily batch-node host on the cluster (scripts written, handover under test)"]:::detour -.-> P2
   L1 ~~~ L2 ~~~ L3 ~~~ L4 ~~~ L5 ~~~ L6 ~~~ L7 ~~~ L8 ~~~ L9 ~~~ L10 ~~~ L11
   S0 --> SA --> LOOP --> JOIN --> CAL --> SE --> SF --> GOAL
