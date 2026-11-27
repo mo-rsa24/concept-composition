@@ -28,6 +28,12 @@ Subcommands:
               push.json with the push length per sigma band and the grey-level change from the region sampler; grad-maps.png
   contact     contact kept on the touching seeds of picture runs, per count and pooled; contact.json
   weight-grid the tuning weights w1 x (1, 2, 4, 8) from the push smoke's in-band change, written before tuning; weight-grid.json
+  harmonise   finished pictures (such as the lower-on-top paste row) noised to sampler step --from-step and finished by the region
+              sampler with the lower object owning the overlap (SDEdit), the rival with no joint scene
+
+--blue-seed-offset N (lone with --expert blue, split, paste, region, harmonise; default 0) gives the blue expert its own starting noise:
+the blue lone sample of pair seed s is drawn from seed s + N and saved as <s>.png in a folder that records N in blue-seed-offset.json;
+red keeps seed s. region and harmonise then start each pair from noise assembled by mask (compose_noise).
 
 Usage (from the repository root, on the cluster, with the co3 python):
   python paper1_sample.py lone --run paper1-first-lone-red --expert red --red-net <pkl> --counts 1,2,3 --seeds 20000-20255,10000-10255
@@ -41,6 +47,8 @@ Usage (from the repository root, on the cluster, with the co3 python):
   python paper1_sample.py push --run paper1-first-push-smoke --head paper1-first-disc-k64/head.pt --weights ladder --red-dir <lone red run> --blue-dir <lone blue run> --mean-empty <pt> --split <split.json> --set check --side touching --limit 16 --compare-to paper1-first-region-check --grad-maps 8
   python paper1_sample.py contact --run paper1-first-tune-weight --folders paper1-first-tune-weight/w-0.5,paper1-first-tune-weight/w-1 --mean-empty <pt> --split <split.json> --set tuning --side touching
   python paper1_sample.py port-sheet --run paper1-first-sampler-port --archive <folder holding c11/, c22/, c33/> --counts 1,2,3 --seeds 0-7
+  python paper1_sample.py lone --run paper1-next-lone-blue-o100000 --expert blue --blue-seed-offset 100000 --counts 1,2,3 --seeds 20000-20255
+  python paper1_sample.py harmonise --run paper1-next-harmonise-s10 --pictures paper1-first-row-paste-lower --from-step 10 --red-dir <lone red run> --blue-dir <lone blue run> --mean-empty <pt> --counts 1,2,3 --split <split.json> --set evaluation --side touching
 """
 import argparse
 import json
@@ -95,11 +103,14 @@ def sigmas(device=None):
     return torch.cat([t, torch.zeros(1, dtype=torch.float64)]).float().to(device or DEV)
 
 
-def heun(denoise, x, t, after_step=None):
+def heun(denoise, x, t, after_step=None, start=0):
     """EDM2's deterministic Heun sampler. denoise(x, sigma, step, second) returns the denoised picture D(x; sigma) at sampler step
     `step`; second is False for the step's first evaluation (at sigma_step) and True for its correction (at sigma_step+1). The
-    arithmetic is m10_compose.py's; the flag only lets the push choose which evaluations it acts on."""
-    for i in range(STEPS):
+    arithmetic is m10_compose.py's; the flag only lets the push choose which evaluations it acts on.
+
+    start: the first sampler step taken, with x at sigma t[start]. 0 (the default) is the whole sampler from sigma 80; harmonise
+    starts at --from-step with a finished picture noised to that step's sigma."""
+    for i in range(start, STEPS):
         t_cur, t_next = t[i], t[i + 1]
         d_cur = (x - denoise(x, t_cur, i, False)) / t_cur
         x_next = x + (t_next - t_cur) * d_cur
@@ -135,11 +146,48 @@ def one_hot(k, n):
     return F.one_hot(torch.full((n,), k - 1, device=DEV), 3).float()
 
 
-def starting_noise(seeds):
-    """x at sigma 80 for each seed, from EDM2's per-seed generator, so every method starts from the same noise at a seed."""
+def unit_noise(seeds):
+    """Unit-variance Gaussian noise (n, 3, 64, 64) for each seed, from EDM2's per-seed generator, and the generator itself."""
     from generate_images import StackedRandomGenerator
     rnd = StackedRandomGenerator(DEV, seeds)
-    return rnd.randn([len(seeds), 3, 64, 64], device=DEV) * sigmas()[0], rnd
+    return rnd.randn([len(seeds), 3, 64, 64], device=DEV), rnd
+
+
+def starting_noise(seeds):
+    """x at sigma 80 for each seed, from EDM2's per-seed generator, so every method starts from the same noise at a seed."""
+    eps, rnd = unit_noise(seeds)
+    return eps * sigmas()[0], rnd
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------
+# Separate starting noise per expert (--blue-seed-offset N). Every picture stays keyed by the pair's seed s, which is red's seed: a
+# blue lone folder drawn at offset N holds at count-<k>/<s>.png the blue expert's sample from seed s + N, and says so in
+# blue-seed-offset.json at its top level. A folder without that file was drawn at offset 0 (the first result's folders).
+
+BLUE_OFFSET_FILE = "blue-seed-offset.json"
+
+
+def recorded_blue_offset(blue_dir):
+    """The blue seed offset a lone blue folder was drawn at: its blue-seed-offset.json, or 0 for a folder without one."""
+    path = Path(blue_dir) / BLUE_OFFSET_FILE
+    return int(json.loads(path.read_text())["blue_seed_offset"]) if path.exists() else 0
+
+
+def check_blue_offset(blue_dir, offset):
+    """Refuse a blue lone folder drawn at a different offset from the one this command was given, so a pair is never read with a
+    blue sample from the wrong seed."""
+    recorded = recorded_blue_offset(blue_dir)
+    if recorded != offset:
+        raise SystemExit(f"{blue_dir} holds blue lone samples drawn at blue seed offset {recorded}; this command was given "
+                         f"--blue-seed-offset {offset}")
+
+
+def compose_noise(n_red, n_blue, n_empty, mask_red, mask_blue):
+    """The joint starting noise of a pair whose experts start from different seeds: blue's noise where blue's mask holds, red's
+    where only red's holds, the empty-scene model's elsewhere. The masks are the ones the sampler uses (dilated lone masks, after
+    --overlap): with --overlap lower they are disjoint, so the overlap takes its owner's noise; with --overlap both the overlap takes
+    blue's noise, as mask paste puts blue's foreground on top. Noise tensors (n, 3, 64, 64), masks (n, 1, 64, 64)."""
+    return torch.where(mask_blue > 0, n_blue, torch.where(mask_red > 0, n_red, n_empty))
 
 
 def to_uint8(encoder, x):
@@ -285,6 +333,8 @@ def cmd_lone(args):
     path = {"red": args.red_net, "blue": args.blue_net, "empty": args.empty_net}[args.expert]
     if not Path(path).is_file():
         raise SystemExit(f"no {args.expert} model at {path}")
+    offset = getattr(args, "blue_seed_offset", 0)
+    claim_blue_offset(folder, args.expert, offset)
     net, encoder = load_net(path)
     t = sigmas()
     seeds = parse_seeds(args.seeds)
@@ -293,14 +343,36 @@ def cmd_lone(args):
     for k in counts:
         out = folder / ("empty" if k is None else f"count-{k}")
         for batch in batches(seeds, args.batch):
-            x, _ = starting_noise(batch)
+            x, _ = starting_noise([s + offset for s in batch] if offset else batch)   # saved under the pair's seed s either way
             labels = None if k is None else one_hot(k, len(batch))
             x = heun(lambda z, s, step, second: net(z, s.expand(len(z)), labels), x, t)
             save(to_uint8(encoder, x), out, batch)
     seconds = time.time() - begin
-    log_json(folder, "timing", {"stage": "lone", "expert": args.expert, "counts": counts, "seeds": len(seeds),
-                                "pictures": len(seeds) * len(counts), "seconds": round(seconds, 1),
-                                "seconds_per_picture": round(seconds / (len(seeds) * len(counts)), 4), "device": device_name()})
+    record = {"stage": "lone", "expert": args.expert, "counts": counts, "seeds": len(seeds),
+              "pictures": len(seeds) * len(counts), "seconds": round(seconds, 1),
+              "seconds_per_picture": round(seconds / (len(seeds) * len(counts)), 4), "device": device_name()}
+    if offset:
+        record["blue_seed_offset"] = offset
+    log_json(folder, "timing", record)
+
+
+def claim_blue_offset(folder, expert, offset):
+    """Before a lone run draws: an offset is for the blue expert only, and a folder holds blue samples from one offset. A nonzero
+    offset writes blue-seed-offset.json; it refuses a folder that already holds pictures drawn at another offset (a folder with
+    pictures and no file was drawn at 0)."""
+    if offset and expert != "blue":
+        raise SystemExit("--blue-seed-offset applies to the blue expert only; red and the empty-scene model keep seed s")
+    if expert != "blue":
+        return
+    path = folder / BLUE_OFFSET_FILE
+    recorded = recorded_blue_offset(folder)
+    has_pictures = any(folder.glob("count-*/*.png"))
+    if recorded != offset and (path.exists() or has_pictures):
+        raise SystemExit(f"{folder} already holds blue samples drawn at blue seed offset {recorded}; use another --run for offset {offset}")
+    if offset:
+        path.write_text(json.dumps({"blue_seed_offset": offset,
+                                    "rule": f"count-<k>/<s>.png is the blue expert's sample from seed s + {offset}; red, the empty-scene "
+                                            f"model and the region sampler keep seed s"}, indent=1) + "\n")
 
 
 def cmd_mean_empty(args):
@@ -405,9 +477,20 @@ def cmd_region(args):
 
     With --identity both masks are all ones, the plain sum is drawn at the same seeds in the same process, and identity.txt records
     the largest per-pixel difference between the two sampler outputs on the 0-to-1 scale, against IDENTITY_TOL.
+
+    With --blue-seed-offset N (default 0, the shared starting noise) the blue lone folder must have been drawn at offset N, and the
+    joint starting noise at pair seed s is assembled by mask (compose_noise): starting_noise(s + N), blue's, inside blue's dilated
+    lone mask; starting_noise(s), red's, inside red's; starting_noise(s), the empty-scene model's, everywhere else. The masks are the
+    sampler's own after --overlap, so with --overlap lower the overlap takes its owner's noise and with --overlap both it takes blue's.
+    Since red and the empty-scene model share seed s, this is starting_noise(s) with blue's mask region replaced by starting_noise(s + N).
     """
     if not args.identity and not (args.red_dir and args.blue_dir):
         raise SystemExit("--red-dir and --blue-dir are required unless --identity")
+    offset = getattr(args, "blue_seed_offset", 0)
+    if offset and args.identity:
+        raise SystemExit("--identity uses all-ones masks and one seed; it takes no --blue-seed-offset")
+    if not args.identity:
+        check_blue_offset(args.blue_dir, offset)
     folder = run_dir(args)
     nets, encoder = load_three(args)
     empty = load_mean_empty(args.mean_empty)
@@ -427,6 +510,8 @@ def cmd_region(args):
                 if getattr(args, "overlap", "both") == "lower":
                     m_r, m_b = lower_owns_overlap(m_r, m_b, object_bases(args.red_dir, k, batch, empty),
                                                   object_bases(args.blue_dir, k, batch, empty))
+                if offset:   # red and the empty-scene model keep seed s, blue's mask gets seed s + offset (compose_noise)
+                    x0 = compose_noise(x0, starting_noise([s + offset for s in batch])[0], x0, m_r, m_b)
             x = heun(region_denoiser(nets, labels, labels, m_r, m_b), x0, t)
             images = to_uint8(encoder, x)
             save(images, folder / f"count-{k}", batch)
@@ -437,10 +522,13 @@ def cmd_region(args):
                 worst = max(worst, float(((x - plain).abs() / 2).max()))   # sampler output is on -1 to 1; halve for the 0-to-1 scale
             pictures += len(batch)
     seconds = time.time() - begin
-    log_json(folder, "timing", {"stage": "region", "identity": bool(args.identity), "overlap": getattr(args, "overlap", "both"),
-                                "counts": counts, "pictures": pictures,
-                                "seconds": round(seconds, 1), "seconds_per_picture": round(seconds / max(1, pictures), 4),
-                                "device": device_name()})
+    record = {"stage": "region", "identity": bool(args.identity), "overlap": getattr(args, "overlap", "both"),
+              "counts": counts, "pictures": pictures,
+              "seconds": round(seconds, 1), "seconds_per_picture": round(seconds / max(1, pictures), 4),
+              "device": device_name()}
+    if offset:
+        record["blue_seed_offset"] = offset
+    log_json(folder, "timing", record)
     if distances:
         measured = [d["median_distance_grey"] for d in distances if d["median_distance_grey"] is not None]
         result = {"rule": "for each overlap-band pixel (where the dilated red and blue masks meet), the mean absolute difference over "
@@ -448,6 +536,8 @@ def cmd_region(args):
                           "colour of that seed's own lone sample's object pixels; per seed the median over its band pixels",
                   "median_over_seeds_grey": round(float(np.median(measured)), 3) if measured else None,
                   "seeds_with_band": len(measured), "seeds": distances}
+        if offset:
+            result["blue_seed_offset"] = offset
         (folder / "band-distance.json").write_text(json.dumps(result, indent=1) + "\n")
         print(json.dumps({"band_distance_median_over_seeds_grey": result["median_over_seeds_grey"], "seeds_with_band": len(measured)}),
               flush=True)
@@ -482,6 +572,66 @@ def band_distance(images, args, k, seeds, empty, m_r, m_b):
         out.append({"seed": seed, "count": k, "band_pixels": int(band[i].sum()), "median_distance_grey": round(float(dist.median()), 3),
                     "red_colour": [round(float(v), 1) for v in cols[0]], "blue_colour": [round(float(v), 1) for v in cols[1]]})
     return out
+
+
+HARMONISE_FROM_STEP = 10   # the default re-noising step: sigma 10.52; step 15 is sigma 2.90
+
+
+def load_uint8(folder, seeds):
+    """Saved pictures as EDM2's raw pixels: uint8, (n, 3, 64, 64), on DEV."""
+    pictures = np.stack([np.asarray(Image.open(Path(folder) / f"{s:06d}.png").convert("RGB")) for s in seeds])
+    return torch.from_numpy(pictures).permute(0, 3, 1, 2).contiguous().to(DEV)
+
+
+def harmonise_start(clean, eps, t, from_step):
+    """x at sampler step from_step: the finished picture on the sampler's -1 to 1 scale plus sigma_{from_step} times unit noise."""
+    return clean + t[from_step] * eps
+
+
+@torch.no_grad()
+def cmd_harmonise(args):
+    """The harmonised paste (SDEdit, Meng et al. 2022): finished pictures noised back to sampler step S and finished by the region
+    sampler, so the experts redraw the cut edges. The rival a known order plus redrawing gives, with no joint scene.
+
+    Per pair seed s and count k: the picture <pictures>/count-<k>/<s>.png (for example the lower-on-top paste row) is encoded to the
+    sampler's -1 to 1 scale by the networks' own encoder; x_S = picture + sigma_S * eps, where eps is the unit-variance noise
+    starting_noise(s) is made from (unit_noise(s)), so each picture is noised along its own seed's starting direction; then the Heun
+    sampler runs steps S to 31 (heun with start=S) with the region denoiser, its masks the dilated lone masks from --red-dir and
+    --blue-dir with --overlap as in region (default lower here). With --blue-seed-offset N, eps is assembled by mask as region's
+    starting noise is (compose_noise). Writes <run>/count-<k>/<s>.png and a timing record holding S, sigma_S and the source folder.
+    """
+    offset = args.blue_seed_offset
+    check_blue_offset(args.blue_dir, offset)
+    t = sigmas()
+    S = args.from_step
+    if not 0 <= S < STEPS:
+        raise SystemExit(f"--from-step {S} is outside sampler steps 0 to {STEPS - 1}")
+    source = Path(args.pictures) if Path(args.pictures).is_absolute() else Path(args.root) / args.pictures
+    folder = run_dir(args)
+    nets, encoder = load_three(args)
+    empty = load_mean_empty(args.mean_empty)
+    counts = parse_counts(args.counts)
+    pictures, begin = 0, time.time()
+    for k in counts:
+        for batch in batches(seeds_for(args, k), args.batch):
+            labels = one_hot(k, len(batch))
+            m_r = object_masks(args.red_dir, k, batch, empty)
+            m_b = object_masks(args.blue_dir, k, batch, empty)
+            if args.overlap == "lower":
+                m_r, m_b = lower_owns_overlap(m_r, m_b, object_bases(args.red_dir, k, batch, empty),
+                                              object_bases(args.blue_dir, k, batch, empty))
+            eps, _ = unit_noise(batch)
+            if offset:
+                eps = compose_noise(eps, unit_noise([s + offset for s in batch])[0], eps, m_r, m_b)
+            clean = encoder.encode(load_uint8(source / f"count-{k}", batch))
+            x = heun(region_denoiser(nets, labels, labels, m_r, m_b), harmonise_start(clean, eps, t, S), t, start=S)
+            save(to_uint8(encoder, x), folder / f"count-{k}", batch)
+            pictures += len(batch)
+    seconds = time.time() - begin
+    log_json(folder, "timing", {"stage": "harmonise", "from_step": S, "sigma_from_step": round(float(t[S]), 4),
+                                "pictures_from": str(source), "overlap": args.overlap, "blue_seed_offset": offset, "counts": counts,
+                                "pictures": pictures, "seconds": round(seconds, 1),
+                                "seconds_per_picture": round(seconds / max(1, pictures), 4), "device": device_name()})
 
 
 def cmd_pair_sheet(args):
@@ -669,6 +819,7 @@ def cmd_push(args):
     seeds of the first count at the first weight in the same job and records the largest difference (guardrail 9).
     """
     import paper1_disc as pdisc
+    check_blue_offset(args.blue_dir, 0)   # the push starts every pair from the shared noise; it has no joint noise for an offset pair
     folder = run_dir(args)
     nets, encoder = load_three(args)
     disc = pdisc.load_discriminator(args.head, nets[0], nets[1])
@@ -838,6 +989,8 @@ def cmd_contact(args):
 
 
 def cmd_paste(args):
+    offset = getattr(args, "blue_seed_offset", 0)
+    check_blue_offset(args.blue_dir, offset)
     folder = run_dir(args)
     empty = load_mean_empty(args.mean_empty)
     seeds, counts = parse_seeds(args.seeds), parse_counts(args.counts)
@@ -847,7 +1000,10 @@ def cmd_paste(args):
             blue = load_pictures(Path(args.blue_dir) / f"count-{k}", batch)
             pasted, _ = (paste_lower_on_top if args.order == "lower-on-top" else paste)(red, blue, empty)
             save((pasted * 255).round().clamp(0, 255).byte().numpy(), folder / f"count-{k}", batch)
-    log_json(folder, "timing", {"stage": "paste", "order": args.order, "counts": counts, "pictures": len(seeds) * len(counts)})
+    record = {"stage": "paste", "order": args.order, "counts": counts, "pictures": len(seeds) * len(counts)}
+    if offset:
+        record["blue_seed_offset"] = offset
+    log_json(folder, "timing", record)
 
 
 def cmd_split(args):
@@ -855,7 +1011,13 @@ def cmd_split(args):
 
     Each seed set (evaluation, tuning, check, negatives, heldout-negatives) keeps its own lists, so "the first 32 touching evaluation
     seeds in seed order" can never pick a tuning or check seed (consensus rule 12).
+
+    With --blue-seed-offset N the pairs are red at seed s beside blue drawn from seed s + N (a blue lone folder drawn at that offset),
+    so touching and apart are recomputed from the shifted pairs; each count's entry records "blue_seed_offset", and a set's lists are
+    never merged across offsets.
     """
+    offset = getattr(args, "blue_seed_offset", 0)
+    check_blue_offset(args.blue_dir, offset)
     folder = run_dir(args)
     empty = load_mean_empty(args.mean_empty)
     seeds, counts = parse_seeds(args.seeds), parse_counts(args.counts)
@@ -875,14 +1037,22 @@ def cmd_split(args):
             for seed, a in zip(batch, is_apart.tolist()):
                 (separate if a else touching).append(seed)
         entry = result.setdefault(f"count-{k}", {"touching": [], "apart": []})
+        if entry.get("blue_seed_offset", 0) != offset and (entry["touching"] or entry["apart"]):
+            raise SystemExit(f"{path} set {args.set} count-{k} was split at blue seed offset {entry.get('blue_seed_offset', 0)}; "
+                             f"split offset {offset} into another --run")
+        if offset:
+            entry["blue_seed_offset"] = offset
         entry["touching"] = sorted(set(entry["touching"]) | set(touching))
         entry["apart"] = sorted(set(entry["apart"]) | set(separate))
         entry["touching_share"] = round(len(entry["touching"]) / max(1, len(entry["touching"]) + len(entry["apart"])), 4)
         if sizes:
             entry["object_pixels"] = {"median": int(np.median(sizes)), "p10": int(np.percentile(sizes, 10)),
                                       "p90": int(np.percentile(sizes, 90)), "objects": len(sizes)}
-        print(json.dumps({"set": args.set, "count": k, "objects": 2 * k, "seeds": len(seeds), "touching": len(touching),
-                          "apart": len(separate), "touching_share_these_seeds": round(len(touching) / max(1, len(seeds)), 4)}), flush=True)
+        line = {"set": args.set, "count": k, "objects": 2 * k, "seeds": len(seeds), "touching": len(touching),
+                "apart": len(separate), "touching_share_these_seeds": round(len(touching) / max(1, len(seeds)), 4)}
+        if offset:
+            line["blue_seed_offset"] = offset
+        print(json.dumps(line), flush=True)
     path.write_text(json.dumps(whole, indent=1) + "\n")
 
 
@@ -924,8 +1094,13 @@ def build_parser():
             p.add_argument("--batch", type=int, default=BATCH)
         return p
 
+    def blue_offset(p):
+        p.add_argument("--blue-seed-offset", type=int, default=0,
+                       help="blue lone samples drawn from seed s + N while red keeps s (default 0: the shared starting noise)")
+
     p = common(sub.add_parser("lone"), nets=True)
     p.add_argument("--expert", choices=["red", "blue", "empty"], required=True)
+    blue_offset(p)
     p.add_argument("--counts", default="1,2,3")
     p.add_argument("--seeds", required=True)
 
@@ -948,6 +1123,7 @@ def build_parser():
         else:
             p.add_argument("--order", choices=["blue-on-top", "lower-on-top"], default="blue-on-top",
                            help="blue-on-top: mask paste; lower-on-top: the object whose base is lower in the frame on top (guardrail 5b)")
+        blue_offset(p)
 
     def seed_choice(p):
         p.add_argument("--seeds", help="seed ranges such as 30000-30127; or choose them from a split file below")
@@ -965,6 +1141,20 @@ def build_parser():
     p.add_argument("--overlap", choices=("both", "lower"), default="both",
                    help="both: where the masks overlap both experts act (the plan's sampler); lower: the overlap goes to the object whose "
                         "base sits lower in the frame")
+    blue_offset(p)
+    seed_choice(p)
+
+    p = common(sub.add_parser("harmonise"), nets=True)
+    p.add_argument("--pictures", required=True, help="finished pictures holding count-<k>/<seed>.png, such as the lower-on-top paste row")
+    p.add_argument("--from-step", type=int, default=HARMONISE_FROM_STEP,
+                   help="the sampler step the pictures are noised to and finished from (default %(default)s, sigma 10.52; 15 is sigma 2.90)")
+    p.add_argument("--red-dir", required=True, help="the red lone run's folder, for the region sampler's masks")
+    p.add_argument("--blue-dir", required=True)
+    p.add_argument("--mean-empty", required=True)
+    p.add_argument("--counts", default="1,2,3")
+    p.add_argument("--overlap", choices=("both", "lower"), default="lower",
+                   help="as region; default lower here: the overlap goes to the object whose base sits lower in the frame")
+    blue_offset(p)
     seed_choice(p)
 
     p = common(sub.add_parser("pair-sheet"))
@@ -1014,7 +1204,7 @@ def build_parser():
 
 COMMANDS = {"lone": cmd_lone, "mean-empty": cmd_mean_empty, "plainsum": cmd_plainsum, "paste": cmd_paste, "split": cmd_split,
             "port-sheet": cmd_port_sheet, "region": cmd_region, "pair-sheet": cmd_pair_sheet, "mask-sheet": cmd_mask_sheet,
-            "push": cmd_push, "contact": cmd_contact, "weight-grid": cmd_weight_grid}
+            "push": cmd_push, "contact": cmd_contact, "weight-grid": cmd_weight_grid, "harmonise": cmd_harmonise}
 
 
 def main(argv=None):
