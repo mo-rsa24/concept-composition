@@ -10,7 +10,8 @@ the key only), it shuffles by a seed, gives each picture a neutral name, and wri
                  images/<name>.png  the picture alone, re-saved from its pixels
                  sheet.csv          name, asked species, in the shuffled order
                  calls-template.csv name, kind, note: the reviewer fills kind and note
-                 rules.txt          the six kinds and the seven rules, from paper2_kinds.py
+                 rules.txt          the six kinds and the seven rules (the rubric, version 2 by default:
+                                    see RULES_V1 and rules_text)
   <out>/key/     key.json: each neutral name to its source path, species and the list's other columns
 
 Pictures are re-saved from their pixels, never copied byte for byte, so no text chunk a renderer
@@ -81,14 +82,41 @@ def neutral_names(n: int, seed: int) -> list[str]:
     return names
 
 
-def rules_text() -> str:
-    doc = paper2_kinds.__doc__
-    start = doc.index("Each body is called")
-    end = doc.index("Two words the plan leaves open")
-    kinds = ", ".join(k.replace("_", " ") for k in paper2_kinds.ALL_KINDS)
-    return ("Call each page into one kind: " + kinds + ".\n"
-            "Write the kind and a note of a few words per page into calls-template.csv.\n\n"
-            + doc[start:end].strip() + "\n")
+# The reviewers' rubric, by version. Version 1 is frozen as the text batch-01's sheet was built with (checksum pinned in
+# tests/test_paper2_sheets.py). Version 2 tightens only what counts as a borrowed-part flag, after reviewers 1 and 2
+# called batch-01's borrowed-part pictures alike 26 times in 34 (0.76, under REVIEWER_AGREE_KIND_MIN 0.80); it is made
+# from version 1 by two exact replacements and one added line, so every other word is version 1's.
+RULES_V1 = (
+    "Call each page into one kind: two clear, borrowed part, hybrid, two of one kind, wrong species, extra subject, other.\n"
+    "Write the kind and a note of a few words per page into calls-template.csv.\n\n"
+    "Each body is called A (the first asked species), B (the second), MIXED (both at once) or OTHER\n"
+    "(neither), and separately flagged when it carries a visible part of the other asked species.\n\n"
+    "    1. 3 or more bodies, with at least one plain A and one plain B    -> extra subject\n"
+    "    2. any body called other                                          -> wrong species\n"
+    "    3. exactly 2 bodies, one A and one B, either flagged              -> borrowed part\n"
+    "    4. exactly 2 bodies, one A and one B, neither flagged             -> two clear\n"
+    "    5. some body mixed, and no clear body of one asked species        -> hybrid\n"
+    "    6. 2 or more bodies, all A, or all B                              -> two of one kind\n"
+    "    7. anything else (one plain body, no body)                        -> other\n"
+)
+V1_FLAG = ("and separately flagged when it carries a visible part of the other asked species.")
+V2_FLAG = ("and separately flagged only when it clearly shows a named part of the other asked\n"
+           "species: its spots or stripes, a mane, wings, feathers, a beak, horns, hooves or a tail, covering more\n"
+           "than a small patch of the body. A similar colour, a faint or partial pattern, or a shape that merely\n"
+           "resembles the other species is not a flag. When unsure, do not flag.")
+V2_BORROWED = ("\nBorrowed part (rule 3): a named part of the other asked species is clearly visible on one of the two\n"
+               "bodies. When unsure, call it two clear.\n")
+RULES_VERSION = 2   # what build writes unless told otherwise
+
+
+def rules_text(version: int = RULES_VERSION) -> str:
+    """The rubric a reviewer reads, as rules.txt. Version 2 opens with its version line."""
+    if version == 1:
+        return RULES_V1
+    if version == 2:
+        assert V1_FLAG in RULES_V1
+        return "Rules v2\n" + RULES_V1.replace(V1_FLAG, V2_FLAG) + V2_BORROWED
+    raise SystemExit(f"no rubric version {version}; versions 1 and 2 exist")
 
 
 def build(a: argparse.Namespace) -> dict:
@@ -136,8 +164,9 @@ def build(a: argparse.Namespace) -> dict:
         w = csv.writer(f)
         w.writerow(["name", "kind", "note"])
         w.writerows([(n, "", "") for n, _ in listed])
-    (sheet / "rules.txt").write_text(rules_text())
-    (keydir / "key.json").write_text(json.dumps({"seed": a.seed, "list": str(Path(a.pictures).resolve()),
+    (sheet / "rules.txt").write_text(rules_text(a.rules_version))
+    (keydir / "key.json").write_text(json.dumps({"seed": a.seed, "rules_version": a.rules_version,
+                                                 "list": str(Path(a.pictures).resolve()),
                                                  "pictures": key}, indent=1))
     summary = {"pages": len(names), "sheet": str(sheet), "key": str(keydir / "key.json"), "seed": a.seed}
     print(json.dumps(summary))
@@ -193,8 +222,9 @@ def check(a: argparse.Namespace) -> int:
     hits = []
     files = sorted(p for p in sheet.rglob("*") if p.is_file())
     rules = sheet / "rules.txt"
-    if not rules.exists() or rules.read_text() != rules_text():
-        hits.append("rules.txt: is not exactly the seven rules")
+    version = int(key.get("rules_version", 1))      # a key with no version (batch-01) was built with version 1
+    if not rules.exists() or rules.read_text() != rules_text(version):
+        hits.append(f"rules.txt: is not exactly the rubric, version {version}")
     searched = [p for p in files if p != rules]
     for p in searched:
         data = searchable_bytes(p)
@@ -229,6 +259,8 @@ def main(argv=None):
     b = sub.add_parser("build")
     b.add_argument("--pictures", type=Path, required=True, help="CSV with columns picture, a, b, and any others")
     b.add_argument("--seed", type=int, required=True, help="the shuffle and the neutral names")
+    b.add_argument("--rules-version", type=int, choices=(1, 2), default=RULES_VERSION,
+                   help="the reviewers' rubric written as rules.txt and recorded in key.json")
     b.add_argument("--out", type=Path, required=True)
     c = sub.add_parser("check")
     c.add_argument("--out", type=Path, required=True)

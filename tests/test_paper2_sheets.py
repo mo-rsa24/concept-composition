@@ -154,3 +154,53 @@ def test_the_searched_columns_are_named_and_the_call_columns_are_not():
     found = sheets.unblinding_strings(key)
     assert {"6025", "own", "a_cat__x__a_dog", "seed-6025.png", "z13"} <= found
     assert not {"one", "a hybrid"} & found
+
+
+# ---- the rubric's versions
+
+V1_SHA256 = "3848cc6189d9ba206ae409355d89e970b604f023a672213c28435bc2853c077c"   # batch-01's rules.txt
+
+
+def test_rubric_v1_is_unchanged():
+    import hashlib
+    assert hashlib.sha256(sheets.rules_text(1).encode()).hexdigest() == V1_SHA256
+    assert not sheets.rules_text(1).startswith("Rules v")
+
+
+def test_rubric_v2_names_the_parts_and_changes_nothing_else():
+    v2 = sheets.rules_text(2)
+    assert v2.startswith("Rules v2\n")
+    for part in ("spots or stripes", "a mane", "wings", "feathers", "a beak", "horns", "hooves", "a tail",
+                 "more\nthan a small patch", "When unsure, do not flag.", "When unsure, call it two clear."):
+        assert part in v2, part
+    back = v2[len("Rules v2\n"):].replace(sheets.V2_FLAG, sheets.V1_FLAG).replace(sheets.V2_BORROWED, "")
+    assert back == sheets.rules_text(1)           # every other word is version 1's
+    import paper2_kinds
+    assert paper2_kinds.kind_of([("A", True), ("B", False)]) == ("borrowed_part", 3)   # the rule itself is unchanged
+
+
+def test_a_v2_sheet_records_its_version_and_checks(tmp_path):
+    out = tmp_path / "out"
+    sheets.main(["build", "--pictures", str(make_list(tmp_path)), "--seed", "0", "--out", str(out)])
+    assert json.loads((out / "key/key.json").read_text())["rules_version"] == 2
+    assert (out / "sheet/rules.txt").read_text().splitlines()[0] == "Rules v2"
+    assert sheets.main(["check", "--out", str(out)]) == 0
+    (out / "sheet/rules.txt").write_text(sheets.rules_text(2).replace("When unsure, do not flag.", "Flag freely."))
+    assert sheets.main(["check", "--out", str(out)]) == 1
+
+
+def test_a_v1_sheet_still_checks_even_with_no_version_in_its_key(tmp_path):
+    out = tmp_path / "out"
+    sheets.main(["build", "--pictures", str(make_list(tmp_path)), "--seed", "0", "--out", str(out),
+                 "--rules-version", "1"])
+    key = json.loads((out / "key/key.json").read_text())
+    key.pop("rules_version")                       # as batch-01's key was written
+    (out / "key/key.json").write_text(json.dumps(key))
+    assert sheets.main(["check", "--out", str(out)]) == 0
+    (out / "sheet/rules.txt").write_text(sheets.rules_text(2))   # a v2 rubric on a v1 sheet is caught
+    assert sheets.main(["check", "--out", str(out)]) == 1
+
+
+def test_an_unknown_version_is_refused():
+    with pytest.raises(SystemExit, match="no rubric version 3"):
+        sheets.rules_text(3)
