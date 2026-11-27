@@ -21,7 +21,9 @@ Subcommands:
               sits lower in the frame on top where they overlap (the lower-on-top paste row)
   split       touching or apart per seed per count from two lone folders, written to split.json under one seed set's name
   port-sheet  the plain sum beside archived pictures at the same seeds, for the port check
-  region      the region sampler from two lone folders' masks; --identity sets both masks to all ones and checks it against the plain sum
+  region      the region sampler from two lone folders' masks; --identity sets both masks to all ones and checks it against the plain sum;
+              --save-states also keeps x after every Heun step with its sigma under <run>/states/ (save_states has the layout), the
+              negatives paper1_disc.py train --negative-states reads
   pair-sheet  two folders side by side at the same seeds (the region sampler beside mask paste)
   mask-sheet  lone samples with each object's dilated mask outlined, to check shadows fall inside
   push        ours (the region sampler plus the head's push on sampler steps 10 to 22) or --random-push, at one or more weights;
@@ -44,6 +46,7 @@ Usage (from the repository root, on the cluster, with the co3 python):
   python paper1_sample.py split --run paper1-first-lone-red --set evaluation --red-dir <lone red run> --blue-dir <lone blue run> --mean-empty <pt> --counts 1,2,3 --seeds 20000-20255
   python paper1_sample.py region --run paper1-first-region-check --identity --empty-net <pkl> --mean-empty <pt> --counts 1,2,3 --seeds 30000-30007
   python paper1_sample.py region --run paper1-first-region-check --empty-net <pkl> --red-dir <lone red run> --blue-dir <lone blue run> --mean-empty <pt> --counts 2 --split <split.json> --set check --side touching --limit 64
+  python paper1_sample.py region --run paper1-trajneg-states --red-dir <lone red run> --blue-dir <lone blue run> --mean-empty <pt> --seeds 200000-201023 --save-states
   python paper1_sample.py push --run paper1-first-push-smoke --head paper1-first-disc-k64/head.pt --weights ladder --red-dir <lone red run> --blue-dir <lone blue run> --mean-empty <pt> --split <split.json> --set check --side touching --limit 16 --compare-to paper1-first-region-check --grad-maps 8
   python paper1_sample.py contact --run paper1-first-tune-weight --folders paper1-first-tune-weight/w-0.5,paper1-first-tune-weight/w-1 --mean-empty <pt> --split <split.json> --set tuning --side touching
   python paper1_sample.py port-sheet --run paper1-first-sampler-port --archive <folder holding c11/, c22/, c33/> --counts 1,2,3 --seeds 0-7
@@ -458,6 +461,36 @@ def object_bases(lone_dir, k, seeds, empty):
     return F.max_pool2d(base, 3, 1, 1).to(DEV)
 
 
+STATES_DIR = "states"   # region --save-states writes under <run>/states/
+
+
+def state_recorder():
+    """heun's after_step hook for --save-states: keeps a CPU float32 copy of x after every step but the last, with the sigma x is at
+    (t[step + 1]), and hands x back untouched, so the sampler's arithmetic is the same with or without it. Returns (hook, trail), trail
+    a list of (x, sigma) in step order."""
+    trail = []
+
+    def hook(x, sigma):
+        trail.append((x.detach().to("cpu", torch.float32, copy=True), float(sigma)))
+        return x
+    return hook, trail
+
+
+def save_states(folder, k, seeds, trail):
+    """One batch's states, written to <folder>/count-<k>/<first seed:06d>-<last seed:06d>.pt as a dict:
+      count   k, each colour's count
+      seeds   the pair seeds s, in the batch's order (the pictures' file names)
+      steps   the sampler steps 0 to 30; states[:, j] is x after step steps[j] (step 31's output is the saved picture)
+      sigmas  (31,) float32, the sigma each state is at, t[1] = 66.93 down to t[31] = 0.002, as heun handed it to the hook
+      states  (n, 31, 3, 64, 64) float32 on the sampler's scale (the sampler's own x, before the encoder's decode)
+    Each seed takes 31 x 3 x 64 x 64 x 4 bytes = 1.52 MB."""
+    out = Path(folder) / f"count-{k}"
+    out.mkdir(parents=True, exist_ok=True)
+    torch.save({"count": k, "seeds": list(seeds), "steps": list(range(len(trail))),
+                "sigmas": torch.tensor([s for _, s in trail], dtype=torch.float32),
+                "states": torch.stack([x for x, _ in trail], 1)}, out / f"{seeds[0]:06d}-{seeds[-1]:06d}.pt")
+
+
 def region_denoiser(nets, labels_red, labels_blue, mask_red, mask_blue):
     """D = D_empty + M_red (D_red - D_empty) + M_blue (D_blue - D_empty), written as M_red D_red + M_blue D_blue + (1 - M_red - M_blue)
     D_empty. The two forms are the same sum; the second, with both masks all ones, performs exactly the plain sum's floating-point
@@ -483,6 +516,9 @@ def cmd_region(args):
     lone mask; starting_noise(s), red's, inside red's; starting_noise(s), the empty-scene model's, everywhere else. The masks are the
     sampler's own after --overlap, so with --overlap lower the overlap takes its owner's noise and with --overlap both it takes blue's.
     Since red and the empty-scene model share seed s, this is starting_noise(s) with blue's mask region replaced by starting_noise(s + N).
+
+    With --save-states (off by default) heun's after_step hook also keeps x after every step, written per count and batch under
+    <run>/states/ (save_states); the hook returns x unchanged, so the pictures are the same as without it.
     """
     if not args.identity and not (args.red_dir and args.blue_dir):
         raise SystemExit("--red-dir and --blue-dir are required unless --identity")
@@ -512,7 +548,12 @@ def cmd_region(args):
                                                   object_bases(args.blue_dir, k, batch, empty))
                 if offset:   # red and the empty-scene model keep seed s, blue's mask gets seed s + offset (compose_noise)
                     x0 = compose_noise(x0, starting_noise([s + offset for s in batch])[0], x0, m_r, m_b)
-            x = heun(region_denoiser(nets, labels, labels, m_r, m_b), x0, t)
+            if getattr(args, "save_states", False):
+                hook, trail = state_recorder()
+                x = heun(region_denoiser(nets, labels, labels, m_r, m_b), x0, t, after_step=hook)
+                save_states(folder / STATES_DIR, k, batch, trail)
+            else:
+                x = heun(region_denoiser(nets, labels, labels, m_r, m_b), x0, t)
             images = to_uint8(encoder, x)
             save(images, folder / f"count-{k}", batch)
             if not args.identity:
@@ -528,6 +569,8 @@ def cmd_region(args):
               "device": device_name()}
     if offset:
         record["blue_seed_offset"] = offset
+    if getattr(args, "save_states", False):
+        record["states"] = str(folder / STATES_DIR)
     log_json(folder, "timing", record)
     if distances:
         measured = [d["median_distance_grey"] for d in distances if d["median_distance_grey"] is not None]
@@ -1154,6 +1197,9 @@ def build_parser():
     p.add_argument("--overlap", choices=("both", "lower"), default="both",
                    help="both: where the masks overlap both experts act (the plan's sampler); lower: the overlap goes to the object whose "
                         "base sits lower in the frame")
+    p.add_argument("--save-states", action="store_true",
+                   help="also keep x after every Heun step with its sigma, per count and batch under <run>/states/ (about 1.52 MB per "
+                        "seed and count); the pictures are the same as without it")
     blue_offset(p)
     seed_choice(p)
 

@@ -22,6 +22,14 @@ repeated, real and drawn alike, never mirrored (a mirror would put the shadows o
 that give them the positives' touching share in each count; every GAUGE_EVERY updates the overfitting gauge is written (read only);
 an optional alignment loss (off by default) pulls sigma^2 * grad logit toward the denoising target x0 - D_region(x_t).
 
+Negatives from the sampler's own states (train --negative-states, off by default). In place of finished region-sampler pictures
+noised back up, each negative is the region sampler's own x after one Heun step, saved by paper1_sample.py region --save-states, fed
+at the sigma it was saved at, with no noise added and no shift; only states whose sigma lies in [sigma_lo, sigma_hi] are used. The
+reason: guidance corrects the sampler only if the "drawn" class the head learns is where the sampler actually is at each step, and a
+finished picture of a product of separately trained experts, noised again, is not that. Positives stay as they are. The states sit at
+the sampler's own sigmas, so they are drawn with weights that give them the positives' log-uniform sigma bin by bin
+(state_sigma_weights), times the touching weights read from each state's seed.
+
 Input layout. Every picture folder holds count-<k>/ sub-folders of 64 by 64 PNGs (k = each colour's count, 1 to 3), the layout of
 paper1_sample.py's runs. Joint scenes from paper1_pack.py are named by render index (<index:06d>.png), carry touching.json beside
 them, and their per-colour masks under masks/count-<k>/<index:06d>-red.png and -blue.png. Negatives are named by seed, and their
@@ -43,7 +51,10 @@ Usage (cluster, through paper1_train.sbatch run as bash on the held node; folder
   python paper1_disc.py train  --run paper1-first-disc-k64 --positives paper1-first-pack/k64-s1 --negatives paper1-first-negatives/train \
       --negatives-split paper1-first-negatives/split.json --gauge-negatives paper1-first-negatives/heldout \
       --blocks-file paper1-first-disc-k64/blocks.json --seed 0
-  python paper1_disc.py check  --run paper1-first-disc-check --head paper1-first-disc-k64/head.pt --positives paper1-first-pack/k64-s1 \
+  python paper1_disc.py train  --run paper1-diag-disc-k384-trajneg --positives paper1-diag-pack-k384/k384-s1 \
+      --negative-states paper1-trajneg-states/states --negatives-split paper1-first-negatives/split.json --sigma-hi 80 --align-weight 1.0 \
+      --gauge-negatives paper1-first-negatives/heldout --blocks-file paper1-first-disc-k64/blocks.json --seed 0
+  python paper1_disc.py check --run paper1-first-disc-check --head paper1-first-disc-k64/head.pt --positives paper1-first-pack/k64-s1 \
       --negatives paper1-first-negatives/train --heldout-positives paper1-first-pack/heldout --heldout-negatives paper1-first-negatives/heldout
 """
 import argparse
@@ -262,6 +273,51 @@ def load_masks(folder, names):
     return out
 
 
+def load_states(folder, sigma_lo, sigma_hi):
+    """The region sampler's own states from paper1_sample.py region --save-states (folder/count-<k>/<first>-<last>.pt, layout in
+    paper1_sample.save_states), kept where the state's saved sigma lies in [sigma_lo, sigma_hi]. One row per (seed, step), seed-major.
+    Returns (states (n, 3, 64, 64) float32, counts (n,), names ("count-<k>/<seed:06d>.png", the state's pair seed, so file_number and
+    the touching weights read it as they read a picture's), sigmas (n,) float32, steps (n,))."""
+    xs, counts, names, sig, steps = [], [], [], [], []
+    for k in ps.COUNTS:
+        sub = Path(folder) / f"count-{k}"
+        if not sub.is_dir():
+            continue
+        for p in sorted(sub.glob("*.pt")):
+            d = torch.load(p, map_location="cpu")
+            keep = [j for j, s in enumerate(d["sigmas"].tolist()) if sigma_lo <= s <= sigma_hi]
+            if not keep:
+                continue
+            st = d["states"][:, keep].float()                                        # (seeds, kept steps, 3, 64, 64)
+            n, m = st.shape[:2]
+            xs.append(st.reshape(n * m, *st.shape[2:]))
+            sig.append(d["sigmas"][keep].float().repeat(n))
+            steps += [d["steps"][j] for j in keep] * n
+            counts += [k] * (n * m)
+            names += [f"count-{k}/{s:06d}.png" for s in d["seeds"] for _ in keep]
+    if not xs:
+        raise SystemExit(f"no saved states with sigma in [{sigma_lo}, {sigma_hi}] under {folder}/count-<k>/*.pt; "
+                         "paper1_sample.py region --save-states writes them")
+    return torch.cat(xs), torch.tensor(counts), names, torch.cat(sig), torch.tensor(steps)
+
+
+def state_sigma_weights(sigmas, lo, hi):
+    """Sampling weights that give the state negatives the positives' log-uniform sigma on [lo, hi], bin by bin.
+
+    The states sit at the sampler's own sigmas, spaced 0.18 to 0.38 apart in log sigma between 66.9 and 0.283, so drawn uniformly
+    they would put about twice as many negatives per unit of log sigma at the high-noise end as at the low. Each distinct sigma owns
+    the bin between the log-sigma midpoints to its neighbours, clipped to [log lo, log hi]; its weight is that bin's width over the
+    mean width, so a seed's weights average 1 (every seed holds the same steps) and each count keeps its share. Returns (weights (n,),
+    {sigma: weight})."""
+    vals = sorted(set(sigmas.tolist()))
+    logs = [math.log(v) for v in vals]
+    edges = [math.log(lo)] + [(a + b) / 2 for a, b in zip(logs, logs[1:])] + [math.log(hi)]
+    width = {v: edges[i + 1] - edges[i] for i, v in enumerate(vals)}
+    mean = sum(width.values()) / len(width)
+    return (torch.tensor([width[s] / mean for s in sigmas.tolist()]),
+            {f"{v:.4g}": round(width[v] / mean, 4) for v in reversed(vals)})
+
+
 def resolve(root, folder):
     """A folder given relative to the paper1 root, or absolute."""
     p = Path(folder)
@@ -359,11 +415,14 @@ def push_direction(disc, xt, sigma, count, create_graph=False):
 # Training
 
 
-def train_head(disc, pos, neg, args, updates, seed, neg_weights=None, log=None, on_timing=None, gauge=None, align=None):
+def train_head(disc, pos, neg, args, updates, seed, neg_weights=None, log=None, on_timing=None, gauge=None, align=None, neg_sigma=None):
     """Train disc.head from a fresh start. pos and neg are (pictures, counts). Returns the training record.
 
     neg_weights: sampling weights for the negatives (None: uniform). gauge(update): called every GAUGE_EVERY updates.
     align: (nets3, masks_red, masks_blue) when the alignment loss is on; the masks index like pos.
+    neg_sigma: None (the default) when neg holds finished pictures, which are shifted and noised like the positives. When neg holds the
+    region sampler's saved states (--negative-states), their sigmas (n,): each negative is fed as saved, at its own sigma, with no
+    noise added and no shift (a shift would repeat noisy edge pixels, a mark only negatives would carry); positives as always.
     """
     torch.manual_seed(seed)
     gen = torch.Generator().manual_seed(seed)
@@ -377,11 +436,19 @@ def train_head(disc, pos, neg, args, updates, seed, neg_weights=None, log=None, 
             ineg = torch.randint(len(neg[0]), (args.batch_neg,), generator=gen)                 # negatives with replacement
         else:
             ineg = torch.multinomial(neg_weights, args.batch_neg, replacement=True, generator=gen)
-        x0 = shifted(torch.cat([pos[0][ip], neg[0][ineg]]), args.shift, gen).to(DEV)
-        count = torch.cat([pos[1][ip], neg[1][ineg]]).to(DEV)
-        label = torch.cat([torch.ones(args.batch_pos), torch.zeros(args.batch_neg)]).to(DEV)
-        sigma = log_uniform(len(x0), args.sigma_lo, args.sigma_hi, gen).to(DEV)
-        x = noised(x0, sigma, gen)
+        if neg_sigma is None:
+            x0 = shifted(torch.cat([pos[0][ip], neg[0][ineg]]), args.shift, gen).to(DEV)
+            count = torch.cat([pos[1][ip], neg[1][ineg]]).to(DEV)
+            label = torch.cat([torch.ones(args.batch_pos), torch.zeros(args.batch_neg)]).to(DEV)
+            sigma = log_uniform(len(x0), args.sigma_lo, args.sigma_hi, gen).to(DEV)
+            x = noised(x0, sigma, gen)
+        else:                                                      # negatives are saved sampler states, each at its own sigma
+            xp0 = shifted(pos[0][ip], args.shift, gen).to(DEV)
+            count = torch.cat([pos[1][ip], neg[1][ineg]]).to(DEV)
+            label = torch.cat([torch.ones(args.batch_pos), torch.zeros(args.batch_neg)]).to(DEV)
+            sp = log_uniform(len(xp0), args.sigma_lo, args.sigma_hi, gen).to(DEV)
+            x = torch.cat([noised(xp0, sp, gen), neg[0][ineg].to(DEV)])
+            sigma = torch.cat([sp, neg_sigma[ineg].to(DEV)])
         with torch.no_grad():
             feats = disc.features(x, sigma, count)
         loss = F.binary_cross_entropy_with_logits(disc.head(feats, sigma, count), label)
@@ -593,6 +660,8 @@ def cmd_choose(args):
 
 
 def cmd_train(args):
+    if bool(args.negatives) == bool(getattr(args, "negative_states", None)):
+        raise SystemExit("give --negatives (finished region-sampler pictures) or --negative-states (its saved states), one of the two")
     folder = ps.run_dir(args)
     if args.blocks_file:
         blocks = json.loads(resolve(args.root, args.blocks_file).read_text())
@@ -603,7 +672,12 @@ def cmd_train(args):
     aligning = args.align_weight > 0
     nets = load_nets_for(args)
     pos_dir = resolve(args.root, args.positives)
-    pos_data, neg_data = load_folder(pos_dir), load_folder(resolve(args.root, args.negatives))
+    neg_sigma = None
+    if args.negatives:
+        pos_data, neg_data = load_folder(pos_dir), load_folder(resolve(args.root, args.negatives))
+    else:
+        pos_data, states = load_folder(pos_dir), load_states(resolve(args.root, args.negative_states), args.sigma_lo, args.sigma_hi)
+        neg_data, neg_sigma = states[:3], states[3]
     pos, neg = pos_data[:2], neg_data[:2]
     disc = Discriminator(nets[0], nets[1], block8, block16)
 
@@ -614,6 +688,17 @@ def cmd_train(args):
         neg_weights, report = touching_weights(pos_dir, neg_data[2], neg_data[1], resolve(args.root, args.negatives_split))
         reweight_report = {"reweighted": True, "per_count": report}
         print(json.dumps({"touching_reweight": report}), flush=True)
+    states_report = None
+    if neg_sigma is not None:
+        sigma_weights, by_sigma = state_sigma_weights(neg_sigma, args.sigma_lo, args.sigma_hi)
+        neg_weights = sigma_weights if neg_weights is None else neg_weights * sigma_weights
+        states_report = {"folder": args.negative_states, "states": len(neg_sigma),
+                         "seeds": len(set(zip(neg_data[1].tolist(), map(file_number, neg_data[2])))),
+                         "steps": sorted(set(states[4].tolist())), "sigma_weight": by_sigma,
+                         "rule": "each negative is the region sampler's saved x after one Heun step, fed at its saved sigma with no noise "
+                                 "added and no shift; only sigma in [sigma_lo, sigma_hi]; drawn with weights giving the positives' "
+                                 "log-uniform sigma bin by bin (state_sigma_weights), times the touching weights by the state's seed"}
+        print(json.dumps({"negative_states": {k: v for k, v in states_report.items() if k != "rule"}}), flush=True)
 
     gauge_neg = None
     if args.gauge_negatives:
@@ -627,6 +712,8 @@ def cmd_train(args):
     settings.update({"mirror": False, "block8": block8, "block16": block16, "seed": args.seed, "positives": args.positives,
                      "negatives": args.negatives, "positives_count": len(pos[0]), "negatives_count": len(neg[0]),
                      "touching_reweight": reweight_report})
+    if states_report is not None:
+        settings["negative_states"] = states_report
     print(json.dumps({"settings": settings}), flush=True)
     wb = None
     try:
@@ -650,9 +737,14 @@ def cmd_train(args):
             xp, cp = pos[0].to(DEV), pos[1].to(DEV)
             sp = sig(len(xp))
             lp = disc.logit(noised(xp, sp, gauge_gen), sp, cp).cpu()
-            xn, cn = neg[0][:len(xp)].to(DEV), neg[1][:len(xp)].to(DEV)
-            sn = sig(len(xn))
-            ln = disc.logit(noised(xn, sn, gauge_gen), sn, cn).cpu()
+            if neg_sigma is None:
+                xn, cn = neg[0][:len(xp)].to(DEV), neg[1][:len(xp)].to(DEV)
+                sn = sig(len(xn))
+                ln = disc.logit(noised(xn, sn, gauge_gen), sn, cn).cpu()
+            else:   # saved states as they are, at their own sigmas: a fixed pick spread evenly over counts, seeds and steps
+                pick = torch.linspace(0, len(neg[0]) - 1, len(xp)).long()
+                xn, cn, sn = neg[0][pick].to(DEV), neg[1][pick].to(DEV), neg_sigma[pick].to(DEV)
+                ln = disc.logit(xn, sn, cn).cpu()
             rec = {"update": update, "r_t": round(float(lp.sign().mean()), 4), "mean_logit_positives": round(float(lp.mean()), 4),
                    "mean_logit_negatives": round(float(ln.mean()), 4)}
             if gauge_neg is not None:
@@ -677,7 +769,7 @@ def cmd_train(args):
         mr, mb = load_masks(pos_dir, pos_data[2])
         align = (nets, mr, mb)
     record = train_head(disc, pos, neg, args, args.updates, args.seed, neg_weights=neg_weights, log=log, on_timing=timing,
-                        gauge=gauge, align=align)
+                        gauge=gauge, align=align, neg_sigma=neg_sigma)
     print(json.dumps({"head_weights": record["head_weights"]}), flush=True)
     torch.save({"head": disc.head.state_dict(), "block8": block8, "block16": block16, "in_channels": record["in_channels"],
                 "width": args.width, "logit_bound": args.logit_bound, "settings": settings}, folder / "head.pt")
@@ -888,9 +980,9 @@ def build_parser():
         p.add_argument("--edm2", default=str(ps.EDM2_DIR))
         return p
 
-    def training(p):
+    def training(p, negatives_required=True):
         p.add_argument("--positives", required=True, help="folder of count-<k>/ joint scenes at 64 pixels (the k-scene subset)")
-        p.add_argument("--negatives", required=True, help="folder of count-<k>/ region-sampler pictures")
+        p.add_argument("--negatives", required=negatives_required, help="folder of count-<k>/ region-sampler pictures")
         p.add_argument("--sigma-lo", type=float, default=SIGMA_LO)
         p.add_argument("--sigma-hi", type=float, default=SIGMA_HI)
         p.add_argument("--batch-pos", type=int, default=BATCH_POS)
@@ -911,7 +1003,10 @@ def build_parser():
     p.set_defaults(reweight_touching=False)
 
     p = common(sub.add_parser("train"))
-    training(p)
+    training(p, negatives_required=False)
+    p.add_argument("--negative-states", help="in place of --negatives: the <run>/states/ folder paper1_sample.py region --save-states "
+                                             "wrote; each negative is a saved sampler state at its saved sigma, within --sigma-lo to "
+                                             "--sigma-hi")
     p.add_argument("--blocks-file", help="blocks.json from choose")
     p.add_argument("--block8", default=CANDIDATES_8[-1])
     p.add_argument("--block16", default=CANDIDATES_16[-1])

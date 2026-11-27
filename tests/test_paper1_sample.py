@@ -463,3 +463,79 @@ def test_push_refuses_a_blue_folder_drawn_at_another_offset(tmp_path, monkeypatc
         _run_push(tmp_path, monkeypatch, red2, blue2, empty2, "p2", ["--blue-seed-offset", "100"])
     assert ps.build_parser().parse_args(["push", "--run", "r", "--head", "h", "--red-dir", "a", "--blue-dir", "b", "--mean-empty", "m",
                                          "--seeds", "1"]).blue_seed_offset == 0
+
+
+# --------------------------------------------------------------------------------------------------------------------------------------
+# region --save-states: the sampler's own states after every Heun step, for the head's negatives (paper1_disc.py --negative-states)
+
+
+def _random_seed_noise(seeds):
+    """Stand-in for EDM2's per-seed generator with a different random picture per seed, so the trajectory is not flat."""
+    return torch.stack([torch.randn(3, 64, 64, generator=torch.Generator().manual_seed(s)) for s in seeds]), None
+
+
+def _patch_moving_models(monkeypatch):
+    """Experts whose denoised picture depends on x, so every step moves x; heun's after_step argument is recorded per call."""
+    nets = [lambda x, s, l, f=f: torch.tanh(x / 20) * f for f in (0.9, -0.6, 0.3)]
+    monkeypatch.setattr(ps, "load_three", lambda args: (nets, StubEncoder()))
+    monkeypatch.setattr(ps, "unit_noise", _random_seed_noise)
+    hooks = []
+    real = ps.heun
+
+    def heun(denoise, x, t, after_step=None, start=0):
+        hooks.append(after_step)
+        return real(denoise, x, t, after_step=after_step, start=start)
+    monkeypatch.setattr(ps, "heun", heun)
+    return nets, hooks
+
+
+def _region_argv(tmp_path, run, red, blue, empty, extra=()):
+    return ["region", "--run", run, "--root", str(tmp_path), "--red-dir", str(red), "--blue-dir", str(blue), "--mean-empty", str(empty),
+            "--counts", "1", "--seeds", "5-6", "--batch", "1", *extra]
+
+
+def test_saved_states_are_the_samplers_trajectory_step_by_step_at_the_right_sigmas(tmp_path, monkeypatch):
+    red, blue, empty = _lone_folders(tmp_path)
+    nets, _ = _patch_moving_models(monkeypatch)
+    ps.main(_region_argv(tmp_path, "r", red, blue, empty, ["--save-states"]))
+    files = sorted((tmp_path / "r" / "states" / "count-1").iterdir())
+    assert [f.name for f in files] == ["000005-000005.pt", "000006-000006.pt"]      # one file per count and seed batch
+    t = ps.sigmas("cpu")
+    mean_empty = torch.load(empty)
+    for seed, f in zip((5, 6), files):
+        saved = torch.load(f)
+        assert saved["count"] == 1 and saved["seeds"] == [seed] and saved["steps"] == list(range(31))
+        assert saved["states"].shape == (1, 31, 3, 64, 64) and saved["states"].dtype == torch.float32
+        assert torch.equal(saved["sigmas"], t[1:32])                                 # x after step j is at sigma t[j + 1]
+        m_r = ps.object_masks(red, 1, [seed], mean_empty)
+        m_b = ps.object_masks(blue, 1, [seed], mean_empty)
+        trail = []
+        x0 = _random_seed_noise([seed])[0] * t[0]
+        _heun_before_start(ps.region_denoiser(nets, ps.one_hot(1, 1), ps.one_hot(1, 1), m_r, m_b), x0, t,
+                           after_step=lambda z, s: trail.append((z.clone(), float(s))) or z)
+        assert len(trail) == 31
+        for j, (z, s) in enumerate(trail):
+            assert torch.equal(saved["states"][0, j], z[0]) and float(saved["sigmas"][j]) == s
+        assert not torch.equal(saved["states"][0, 0], saved["states"][0, 30])        # the stub sampler does move
+    timing = json.loads((tmp_path / "r" / "timing.jsonl").read_text())
+    assert timing["states"] == str(tmp_path / "r" / "states")
+
+
+def test_region_without_save_states_writes_the_same_files_as_before(tmp_path, monkeypatch):
+    red, blue, empty = _lone_folders(tmp_path)
+    _, hooks = _patch_moving_models(monkeypatch)
+    ps.main(_region_argv(tmp_path, "off", red, blue, empty))
+    assert hooks and all(h is None for h in hooks)                                   # off: heun gets no after_step at all
+    hooks.clear()
+    ps.main(_region_argv(tmp_path, "on", red, blue, empty, ["--save-states"]))
+    assert all(h is not None for h in hooks)
+    listing = lambda run: sorted(str(p.relative_to(tmp_path / run)) for p in (tmp_path / run).rglob("*") if p.is_file())
+    assert listing("off") == ["band-distance.json", "count-1/000005.png", "count-1/000006.png", "timing.jsonl"]
+    assert [p for p in listing("on") if not p.startswith("states/")] == listing("off")
+    for name in ("band-distance.json", "count-1/000005.png", "count-1/000006.png"):
+        assert (tmp_path / "off" / name).read_bytes() == (tmp_path / "on" / name).read_bytes()
+    off = json.loads((tmp_path / "off" / "timing.jsonl").read_text())
+    on = json.loads((tmp_path / "on" / "timing.jsonl").read_text())
+    assert "states" not in off and set(on) - set(off) == {"states"}
+    assert set(off) == {"stage", "identity", "overlap", "counts", "pictures", "seconds", "seconds_per_picture", "device"}
+    assert ps.build_parser().parse_args(["region", "--run", "r", "--mean-empty", "m", "--identity", "--seeds", "1"]).save_states is False
