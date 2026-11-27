@@ -4,8 +4,8 @@
   "Detour: idea walk, 7 claims, paused",
   "Detour: zoom-ladder, about 430k tokens",
   "Detour: reading route and pictures, about 1.8M tokens",
-  "Paper 1: push diagnosis; 384 scenes the only lever (68 of 626 vs paste 517); separate starting noise and higher weights running",
-  "Paper 2: species judge no; follow-on DreamSim and BioCLIP in their 64-cat check"
+  "Paper 1: diagnosis converged; best push 131 of 527 touching (separate noise, 384 scenes) vs paste 461; direction waits on the owner",
+  "Paper 2: DreamSim and BioCLIP pass 64 of 64 cats; exploratory read running"
  ],
  "detours_join": "P2",
  "steps": [
