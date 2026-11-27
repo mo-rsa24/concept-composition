@@ -4,8 +4,8 @@
     "Detour: idea walk, 7 claims, paused",
     "Detour: zoom-ladder, about 430k tokens",
     "Detour: reading route and pictures, about 1.8M tokens",
-    "Paper 1: Method A and Method C on the sampler's own states running on mscluster110; B and D queued",
-    "Paper 2: six judges out; the dial's training needs a judge, so its training signal goes to the owner"
+    "Paper 1: squares toy tests whether the interaction term works at all; Methods A and C on CLEVR running, B being built",
+    "Paper 2: training our own judge on the 1,552 hand calls, so the dial can train"
   ],
   "detours_join": "P2",
   "steps": [
