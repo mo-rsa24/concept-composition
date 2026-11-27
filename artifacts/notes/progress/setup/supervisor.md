@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated 2026-11-27 23:35 UTC
+Last updated 2026-11-27 23:45 UTC
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -265,6 +265,8 @@ Paper 1, 2026-11-27 22:50 UTC: Method A trained on 1,599 touching joint scenes (
 Paper 2, 2026-11-27 23:10 UTC: the dial's smoke (step 3) stopped at its own guard: the closeness term was 6.05e-7 with a gradient norm of exactly 0 at step 2. Cause: its gradient at the U-Net's output, about 1.6e-8 per number, is below fp16's smallest value, so the fp16 autocast backward rounded it to 0. Fix (commit 39a69111): the closeness backward is loss-scaled by 2^16 and unscaled on the dial, halving on overflow, as PyTorch's AMP gradient scaler does; the guard is unchanged; a closeness cache holding states outside the window is refused. The part-run smoke is moved aside (paper2-first-identity-smoke.closeness-underflow-20261128) and step 3 reruns.
 
 Paper 2, 2026-11-27 23:35 UTC: the dial's smoke (step 3) passed after the loss-scaling fix: 50 steps on bear and boar, chicken and rabbit, turtle and tortoise, wombat and wallaby; the closeness gradient is non-zero (9.6e-5 at step 50); the dial at strength 0 equals untouched CO3 and at strength 1 changes the picture by a median 0.074 and at most 37.5 grey levels; the closeness weight for training is 1,387 (the plan's rule: the smallest weight that makes the term a tenth of the loss); no pair flagged as not moving; 30.4 seconds a step, projecting 17.2 GPU-hours for the run against the stop line of 24. Step 4, training (1,000 steps, about 8.4 GPU-hours), started on mscluster110 inside job 96208, which has 38 hours left.
+
+Paper 1, 2026-11-27 23:45 UTC: the full corrector reads on all 626 touching seeds, Method A on 1,599 touching scenes: no corrector 501 (87, 176, 238), 27 mostly purple; 5 corrector steps 492 (81, 178, 233), 20 purple; 20 steps 483 (89, 175, 219), 22 purple; the plain sum with 20 steps 0, 589 purple; the paste 517 (84, 194, 239), 26 purple. On CLEVR the corrector lowers purple but does not raise touching; the 55 of 66 on the first quick read was within the noise of 66 seeds. Nothing beats the paste on pixels, so nothing goes to the blind test yet. The lever that moved CLEVR is joint data (197 touching scenes 376, 1,599 scenes 501), so 6,000 more joint scenes are rendering on bigbatch (jobs 97073 to 97078, seed base 8,200,000, recorded in environment/clevr-and-edm2.md); Method A is retrained on all touching scenes when they finish.
 
 ## Final review
 
