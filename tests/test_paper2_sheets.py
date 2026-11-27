@@ -149,8 +149,9 @@ def test_a_planted_seed_in_a_page_and_a_planted_slug_in_sheet_csv_still_fail(tmp
 
 def test_the_searched_columns_are_named_and_the_call_columns_are_not():
     assert sheets.IDENTIFYING_COLUMNS == ("pair", "seed", "source", "round", "row", "made", "also_called_in")
-    key = {"pictures": {"x": {"source": "/d/loop-12/z13/own/seed-6025.png", "a": "cat", "b": "dog", "seed": "6025",
-                              "row": "own", "earlier_call": "one", "notes": "a hybrid", "pair": "a_cat__x__a_dog"}}}
+    key = {"pictures": {"x": {"picture_path": "/d/loop-12/z13/own/seed-6025.png", "source": "box", "a": "cat",
+                              "b": "dog", "seed": "6025", "row": "own", "earlier_call": "one", "notes": "a hybrid",
+                              "pair": "a_cat__x__a_dog"}}}
     found = sheets.unblinding_strings(key)
     assert {"6025", "own", "a_cat__x__a_dog", "seed-6025.png", "z13"} <= found
     assert not {"one", "a hybrid"} & found
@@ -204,3 +205,60 @@ def test_a_v1_sheet_still_checks_even_with_no_version_in_its_key(tmp_path):
 def test_an_unknown_version_is_refused():
     with pytest.raises(SystemExit, match="no rubric version 3"):
         sheets.rules_text(3)
+
+
+
+# ---- the picture's path in the key
+
+def test_a_list_with_a_source_column_keeps_both_the_path_and_the_source_kind(tmp_path):
+    lst = collector_list(tmp_path, [("own", "one"), ("co3", "two_clear")])
+    out = tmp_path / "out"
+    sheets.main(["build", "--pictures", str(lst), "--seed", "0", "--out", str(out)])
+    key = json.loads((out / "key/key.json").read_text())["pictures"]
+    listed = {r["picture"] for r in csv.DictReader(open(lst))}
+    assert {e["picture_path"] for e in key.values()} == listed
+    assert {e["source"] for e in key.values()} == {"box"}
+    found = sheets.unblinding_strings({"pictures": key})
+    assert {"seed-6025.png", "seed-6025", "z13", "own"} <= found       # the real file name and folders are searched
+    assert sheets.main(["check", "--out", str(out)]) == 0
+
+
+def test_a_list_column_named_like_a_reserved_field_stops_the_build(tmp_path):
+    lst = tmp_path / "list.csv"
+    p = tmp_path / "p.png"
+    Image.new("RGB", (1024, 1024)).save(p)
+    lst.write_text(f"picture,a,b,picture_path\n{p},cat,dog,/elsewhere.png\n")
+    with pytest.raises(SystemExit, match="reserves for the picture's path"):
+        sheets.main(["build", "--pictures", str(lst), "--seed", "0", "--out", str(tmp_path / "out")])
+
+
+def test_check_fails_on_a_missing_path_or_a_missing_file(tmp_path):
+    out = tmp_path / "out"
+    sheets.main(["build", "--pictures", str(make_list(tmp_path)), "--seed", "0", "--out", str(out)])
+    keyfile = out / "key/key.json"
+    key = json.loads(keyfile.read_text())
+    first = next(iter(key["pictures"]))
+    gone = Path(key["pictures"][first]["picture_path"])
+    gone.unlink()
+    assert sheets.main(["check", "--out", str(out)]) == 1                 # the file is missing
+    del key["pictures"][first]["picture_path"]
+    keyfile.write_text(json.dumps(key))
+    assert sheets.main(["check", "--out", str(out)]) == 1                 # the entry has no path
+
+
+def test_a_sheet_built_before_the_fix_checks_against_its_relinked_key(tmp_path):
+    lst = collector_list(tmp_path, [("own", "one"), ("co3", "two_clear")])
+    out = tmp_path / "out"
+    sheets.main(["build", "--pictures", str(lst), "--seed", "0", "--out", str(out), "--rules-version", "1"])
+    key = json.loads((out / "key/key.json").read_text())
+    rows = {r["seed"]: r["picture"] for r in csv.DictReader(open(lst))}
+    old = {"seed": key["seed"], "list": key["list"], "pictures": {}}
+    relinked = {"seed": key["seed"], "list": key["list"], "pictures": {}}
+    for name, e in key["pictures"].items():
+        lost = {k: v for k, v in e.items() if k != "picture_path"}      # the old builder kept only source = "box"
+        old["pictures"][name] = lost
+        relinked["pictures"][name] = {**lost, "picture": rows[str(e["seed"])]}
+    (out / "key/key.json").write_text(json.dumps(old))
+    (out / "key/key-relinked.json").write_text(json.dumps(relinked))
+    assert sheets.main(["check", "--out", str(out)]) == 1                 # the old key has lost every path
+    assert sheets.main(["check", "--out", str(out), "--key", str(out / "key/key-relinked.json")]) == 0

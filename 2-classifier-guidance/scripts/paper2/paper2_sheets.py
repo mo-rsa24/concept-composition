@@ -12,7 +12,8 @@ the key only), it shuffles by a seed, gives each picture a neutral name, and wri
                  calls-template.csv name, kind, note: the reviewer fills kind and note
                  rules.txt          the six kinds and the seven rules (the rubric, version 2 by default:
                                     see RULES_V1 and rules_text)
-  <out>/key/     key.json: each neutral name to its source path, species and the list's other columns
+  <out>/key/     key.json: each neutral name to its picture ("picture_path", the list's picture value as given, a
+                 field no list column may take), its species and the list's other columns
 
 Pictures are re-saved from their pixels, never copied byte for byte, so no text chunk a renderer
 wrote into a PNG (a prompt, a seed) reaches the sheet. A neutral name is ten consonants (no vowels, no
@@ -58,6 +59,9 @@ NAME_LETTERS = 10
 NAME_ALPHABET = "bcdfghjkmnpqrstvwxz"   # consonants only: no digit, no vowel
 IDENTIFYING_COLUMNS = ("pair", "seed", "source", "round", "row", "made", "also_called_in")
 SHORT_WORD = 4          # a pure-letter value this short or shorter counts only as a whole word
+# key.json fields the builder writes itself; a list column with one of these names stops the build rather than
+# overwrite it (the collector's list carries its own "source" column, which once overwrote the picture's path).
+RESERVED_FIELDS = ("picture_path",)
 CALL_CHOICES = paper2_kinds.ALL_KINDS
 
 
@@ -121,6 +125,10 @@ def rules_text(version: int = RULES_VERSION) -> str:
 
 def build(a: argparse.Namespace) -> dict:
     rows = read_list(a.pictures)
+    clash = [c for c in RESERVED_FIELDS if rows and c in rows[0]]
+    if clash:
+        raise SystemExit(f"the list has a column named {', '.join(clash)}, a field the key reserves for the picture's "
+                         "path; rename that column")
     sheet, keydir = Path(a.out) / "sheet", Path(a.out) / "key"
     if sheet.exists() and any(sheet.iterdir()):
         raise SystemExit(f"{sheet} is not empty; build each batch into a new folder")
@@ -153,7 +161,7 @@ def build(a: argparse.Namespace) -> dict:
         d.text((20, 14), asked_line(r["a"], r["b"]), fill="black", font=big)
         d.text((SIZE - 20, BAND - 30), name, fill=(120, 120, 120), font=small, anchor="ra")
         page.save(sheet / "pages" / f"{name}.png")
-        key[name] = {"source": str(Path(r["picture"]).resolve()), **{k: v for k, v in r.items() if k != "picture"}}
+        key[name] = {**{k: v for k, v in r.items() if k != "picture"}, "picture_path": r["picture"]}
         listed.append((name, asked_line(r["a"], r["b"])[len("Asked: "):]))
 
     with open(sheet / "sheet.csv", "w", newline="") as f:
@@ -173,15 +181,22 @@ def build(a: argparse.Namespace) -> dict:
     return summary
 
 
+def picture_path_of(entry: dict) -> str | None:
+    """The picture behind a key entry: "picture_path" as build writes it, or "picture" in a key relinked from its list."""
+    return entry.get("picture_path") or entry.get("picture")
+
+
 def unblinding_strings(key: dict) -> set[str]:
     """What would tell a reviewer where a picture came from: its source folders and file name, and the
     values of the identifying columns, never the call columns."""
     found: set[str] = set()
     for entry in key["pictures"].values():
-        src = Path(entry["source"])
-        found.add(src.name)
-        found.add(src.stem)
-        found.update(p for p in src.parent.parts[-3:] if p not in ("/", ""))
+        path = picture_path_of(entry)
+        if path:
+            src = Path(path)
+            found.add(src.name)
+            found.add(src.stem)
+            found.update(p for p in src.parent.parts[-3:] if p not in ("/", ""))
         for k in IDENTIFYING_COLUMNS:
             v = str(entry.get(k, "")).strip()
             if v:
@@ -216,10 +231,15 @@ def searchable_bytes(path: Path) -> bytes:
 
 
 def check(a: argparse.Namespace) -> int:
-    sheet, keyfile = Path(a.out) / "sheet", Path(a.out) / "key" / "key.json"
+    sheet = Path(a.out) / "sheet"
+    keyfile = Path(a.key) if a.key else Path(a.out) / "key" / "key.json"
     key = json.loads(keyfile.read_text())
     needles = sorted(unblinding_strings(key))
     hits = []
+    no_path = [n for n, e in key["pictures"].items() if not picture_path_of(e)]
+    missing = [n for n, e in key["pictures"].items() if picture_path_of(e) and not Path(picture_path_of(e)).exists()]
+    hits += [f"key {keyfile.name}: entry {n} has no picture path" for n in no_path]
+    hits += [f"key {keyfile.name}: entry {n}'s picture is missing at {picture_path_of(key['pictures'][n])}" for n in missing]
     files = sorted(p for p in sheet.rglob("*") if p.is_file())
     rules = sheet / "rules.txt"
     version = int(key.get("rules_version", 1))      # a key with no version (batch-01) was built with version 1
@@ -246,6 +266,7 @@ def check(a: argparse.Namespace) -> int:
           f"source folders, file names, and the columns {', '.join(IDENTIFYING_COLUMNS)}: {len(hits)} found")
     for h in hits:
         print("  " + h)
+    print(f"key {keyfile}: {len(key['pictures'])} entries, {len(no_path)} with no picture path, {len(missing)} missing on disk")
     print(f"pages: {len(pages)} at {sorted(sizes)} (the picture at {SIZE} by {SIZE} under a {BAND}-pixel band); "
           f"pictures: {len(pics)} at {sorted(pic_sizes)}")
     ok = not hits and pic_sizes == {(SIZE, SIZE)} and sizes == {(SIZE, SIZE + BAND)}
@@ -264,6 +285,9 @@ def main(argv=None):
     b.add_argument("--out", type=Path, required=True)
     c = sub.add_parser("check")
     c.add_argument("--out", type=Path, required=True)
+    c.add_argument("--key", type=Path, default=None,
+                   help="the key to check against; default <out>/key/key.json (sheets built before the path fix: "
+                        "key/key-relinked.json)")
     a = ap.parse_args(argv)
     if a.cmd == "build":
         build(a)
