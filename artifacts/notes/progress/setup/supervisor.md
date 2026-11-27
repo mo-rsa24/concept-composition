@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated: 2026-11-27 07:26 SAST.
+Last updated: 2026-11-27 08:27 SAST.
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -195,6 +195,8 @@ Nothing at the moment. Paper 1's tuning calls are with two fresh reviewers at yo
 **Paper 2, the borrowed-part top-up called** (07:21). 320 CO3 renders on five pairs, called blind under version 4: 300 of 320 alike, 44 borrowed part called by both; a third reviewer settles 20 splits, then the set is rebuilt.
 
 **Paper 2, the labelled set split** (2026-11-27 07:26). After the borrowed-part top-up (batch 9, 320 renders on five pairs, 300 of 320 alike), the set split at draw 58 of seed 0: 11 choosing pairs, 19 test pairs, every kind at 40 read and 10 sealed confirmation pictures (wrong species 20 natural and 20 renamed; extra subject 8 on look-alike pairs, underpowered). 1,552 settled pictures over ten batches; agreement per kind 0.84 (wrong species) to 0.95; two clear against borrowed part 0.980. The owner's 60 (instruction 0.11) is built and copied to outputs/paper2/paper2-label-set/owner-sheet/ (check passed): the one step that is the owner's. The unselected sample is 61 of 100, with 28 more to call. paper2_score.py and the judge commands for steps 0.16 to 0.20 are with Loop 17.
+
+**Paper 2's species judge: no** (2026-11-27 08:27). On the 240 read pictures of the 19 test pairs, agreement with the settled kind (216 needed): vision-language judge 102, CLIP 90, old judge 63, ImageNet 57; two-clear precision 0.40 to 0.49 against 0.90; borrowed part and hybrid near zero for every judge. By the plan's results table, step 0 fails and a follow-on plan tests the next candidates (a crop against SDXL's own single-species renders by DreamSim, or BioCLIP) on new test pairs. The owner's 60 decides which absolute bars are read and cannot change the verdict. Filed under the species-judge result. Paper 2 waits on the owner for the follow-on; the 28 unselected top-up calls are not needed for this verdict and are not run.
 
 ## Final review
 
