@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated: 2026-11-27 03:29 SAST.
+Last updated: 2026-11-27 03:44 SAST.
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -169,6 +169,10 @@ Nothing at the moment. Paper 1's tuning calls are with two fresh reviewers at yo
 **The owner's standing rule** (2026-11-27 03:29). "My decisions are based on good results. Whatever will give me good results then unattended." From now on the supervisor decides and acts, then reports: spends past an estimate, batch sizes, rubric fixes before a judge runs, which design to try after a result, code whose owning loop is offline, and SSH launches on mscluster110 and mscluster112 with the pulse check. Two lines still hold because breaking them makes a result look good without being good: no bar or pre-registered rule moves after its result is seen, and no data is deleted or history rewritten. The owner's blind 60 for Paper 2 (instruction 0.11) stays theirs, because it is the ground truth the judges are checked against.
 
 **Paper 2 after batch 2** (03:29). 500 pictures settled. Borrowed part misses the agreement bar, 36 of 58 (0.62): all 20 of its splits with hybrid are a cougar-shaped body in cheetah spots, read as mixed by one reviewer and as a flagged cougar by the other. Decided: rules version 3 adds one sentence, a coat never makes a body mixed, only its shape does; every settled hybrid is recalled under it. The bar does not move. The look-alike pool is spent (544 uncalled, none on look-alike pairs), so steps 0.9 and 0.10 render the plain sum and CO3 on the eight new look-alike pairs (about 1.5 GPU-hours on mscluster112). Both are with Loop 17. Paper 1: the supervisor chose to diagnose the no before choosing a next design; a read-only diagnosis is running.
+
+**Paper 1, why the answer was no** (2026-11-27 03:44). The diagnosis puts the cause upstream of the push: the red and blue lone samples share their starting noise, so their objects overlap, and in the overlap the region sampler is the plain sum, which draws purple from step 0. The push was small there (2.7 to 6.5 grey levels where about 40 were needed) and the head was near chance at high noise. Confirmed with one cheap run (`97bcd5e6`, `--overlap lower`, about 90 seconds on mscluster110): giving the overlap to the lower object drops the purple share inside the overlap from 0.986 to 0.154 (ours 0.982, paste with the lower object on top 0.101). Filed under [the contact-push result](../../../results/does-the-contact-push-beat-the-region-sampler/README.md). The next design needs a new pre-registered plan, so it is a direction choice and is set out for the owner.
+
+**Paper 2, rules version 3 settles agreement** (03:44). Every settled hybrid (140) and borrowed part (58) was recalled under version 3. Every kind now meets the 0.80 agreement bar: borrowed part 0.90 (55 of 61), hybrid 0.88, two of one kind 0.82, two clear 0.95; two clear against borrowed part 0.991. Still not split: borrowed part sits on 3 pairs (5 needed), two of one kind is 24 short, wrong species 49 short (15 of them look-alike) and extra subject 9 short. The look-alike renders on eight new pairs are running on mscluster112.
 
 ## Final review
 
