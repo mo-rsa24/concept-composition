@@ -307,3 +307,14 @@ def test_the_split_diagnostic_names_what_blocks_it(tmp_path):
     assert diag["draws"] == 20000
     assert diag["fails"]["hybrid"]["test under 50 (confirmation 10 and read 40)"] > 0
     assert set(diag["fails"]["hybrid"]) <= set(ls.REASONS)
+
+
+def test_a_v3_extra_subject_is_refused_once_v4_exists_and_a_v4_recall_replaces_it(tmp_path):
+    e = [{"picture": f"/d/p{i}.png", "a": "boar", "b": "pheasant", "seed": i} for i in range(2)]
+    b3 = write_batch(tmp_path / "b3", e, [["extra_subject", "extra_subject"]] * 2, version=3)
+    r4 = write_batch(tmp_path / "r4", e[:1], [["two_clear"]] * 2, version=4)          # a blurred third bird no longer counts
+    labels, refused = ls.merge([ls.settle_batch(b3), ls.settle_batch(r4)])
+    assert labels["/d/p0.png"]["kind"] == "two_clear" and labels["/d/p0.png"]["rules_version"] == 4
+    assert "b3 (extra_subject, v3)" in labels["/d/p0.png"]["replaces"]
+    assert len(refused) == 1 and refused[0].startswith("b3/n00001: extra_subject under rubric v3, where rubric v4")
+    assert ls.VERSION_KINDS[4] == {"wrong_species", "extra_subject"}

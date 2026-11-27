@@ -18,8 +18,8 @@ What it does, in order:
   3. refuses to mix rubric versions where they differ (VERSION_KINDS): once any batch of a version is in the set, a
      picture whose final kind that version governs must take its label from a batch of that version or later. Version 2
      governs two clear and borrowed part (it changed what counts as a borrowed part); version 3 governs hybrid (a coat
-     never makes a body mixed, which can move a hybrid to borrowed part); version 4 governs wrong species (what counts
-     as a body, and a close relative is OTHER). Every other label stands from any version;
+     never makes a body mixed, which can move a hybrid to borrowed part); version 4 governs wrong species and extra
+     subject (what counts as a body, and a close relative is OTHER). Every other label stands from any version;
   4. reports reviewer agreement per settled kind (REVIEWER_AGREE_KIND_MIN) and on two clear against borrowed part
      (CLEAR_VS_BORROWED_AGREE_MIN), each read on the batch that gave the picture its final label;
   5. splits the pairs into choosing and test pairs by the first draw from SPLIT_SEED (0) that meets the size table:
@@ -70,15 +70,17 @@ from paper2_bars import (CLEAR_VS_BORROWED_AGREE_MIN, CONFIRM_SEED, LOOKALIKE_PE
                          RENAMED_PER_KIND_MAX, UNSELECTED_SEED, UNSELECTED_TEST, pair_type)
 from paper2_collect import CO3_ALONE  # noqa: E402
 from paper2_common import species_from_slug  # noqa: E402
-from paper2_kinds import ALL_KINDS, BORROWED_PART, HYBRID, KINDS, OTHER_KIND, TWO_CLEAR, WRONG_SPECIES  # noqa: E402
+from paper2_kinds import (ALL_KINDS, BORROWED_PART, EXTRA_SUBJECT, HYBRID, KINDS, OTHER_KIND, TWO_CLEAR,  # noqa: E402
+                          WRONG_SPECIES)
 
 FLAG_KINDS = {TWO_CLEAR, BORROWED_PART}     # the kinds the rubric's flag decides between
 # Each rubric version names the kinds its change can move a picture into or out of. Once any batch of that version is
 # in the set, a picture labelled with one of those kinds must take its label from a batch of that version or later.
 # v2 changed what counts as a borrowed-part flag (two clear against borrowed part); v3 says a coat never makes a body
 # mixed, which can move a hybrid to borrowed part but moves no picture out of two clear or borrowed part.
-# v4 says what counts as a body and that a close relative is OTHER, which decides wrong species.
-VERSION_KINDS = {2: FLAG_KINDS, 3: {HYBRID}, 4: {WRONG_SPECIES}}
+# v4 says what counts as a body and that a close relative is OTHER: that decides wrong species, and the body count it
+# changes can move a picture out of extra subject (a blurred third bird no longer counts).
+VERSION_KINDS = {2: FLAG_KINDS, 3: {HYBRID}, 4: {WRONG_SPECIES, EXTRA_SUBJECT}}
 CHOOSING_SHARE = 0.3
 OWNER_PER_KIND = 10
 EARLIER_CALL_POINTS_AT = {             # which earlier calls suggest a candidate may be a short kind
