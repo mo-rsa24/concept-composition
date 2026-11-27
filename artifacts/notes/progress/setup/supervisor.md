@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated 2026-11-27 14:45 UTC
+Last updated 2026-11-27 18:00 UTC
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -237,6 +237,8 @@ Paper 1, 2026-11-27 13:45 UTC: Method A on the squares toy at all 11,329 joint s
 Paper 2, 2026-11-27 14:20 UTC: the dial's first run is fully built and committed (paper2_first_checks.py, paper2_first_read.py, draw-co3 and logging in paper2_identity_dial.py; 226 tests pass on a CPU copy of the environment, 31 torch-free tests pass on the laptop). Choices the builder made that stand: the training pairs are the 48 pool pairs plus the pooled adapter's eleven look-alike pairs plus new look-alike pairs, minus tuning and test (20 of the 48 pool pairs hold an object and stay because the plan names them); crocodile and alligator are left out by the subject guard; turtle and tortoise may train but are never shown; CO3's sampler now seeds each start noise as CO3's own row does, so the CO3, dial and random-dial pictures share corrector noise, and step 2's rollout check measures any change this makes. Commands: /home/molef/.claude/jobs/bb43a4bd/tmp/p2-dial-first-commands.sh, steps 2 to 6; about 17 to 18.5 GPU-hours with the added reads, under the stop of 24. It launches when mscluster84 answers.
 
 Paper 1, 2026-11-27 14:45 UTC: Method A trained on the 197 touching joint scenes only (one change from the 384-scene run), read on the same first 22 touching evaluation seeds per count: red within 1 pixel of blue on 40 of 66 (9, 13 and 18 at counts 1, 2 and 3), against 27 of 66 for A on all 384 scenes, 0 for the plain sum and 52 for the paste. The training scenes' touching share was the brake. The Method B and Method C pushes on CLEVR finished (12:27 and 12:53 UTC); their reads wait on the cluster, which answers only on and off since 14:24 UTC. Next on CLEVR: the touching-only run trained 16,000 updates in place of 4,000, one change, as the toy showed longer training lifts Method A from 0.797 to 0.891.
+
+Paper 1, 2026-11-27 18:00 UTC: Methods C and B on CLEVR, read after the cluster returned at 17:58 UTC. Red within 1 pixel of blue on the 626 touching evaluation seeds. Method C (the head trained on the region sampler's own half-drawn states): 39, 85, 176 and 261 at weights 1, 4, 16 and 64 (shares 0.062, 0.136, 0.281, 0.417), but 622 to 624 of 626 seeds are mostly purple in the overlap at every weight, so its contact is mostly fused purple shapes with red and blue edges, not two objects. Method B (four-way ratio): 17, 15, 18 and 18. Method A on all 384 scenes: 303 with 23 mostly purple; the paste 517 with 26. Neither push beats the paste or Method A; A stays the method. Method A on the 197 touching scenes trained 16,000 updates (p1-methodA-touch-long.sh) was launched on mscluster110 at 17:59 UTC; its wrapper had not printed its first line a minute later, likely waiting on the slow home filesystem.
 
 ## Final review
 
