@@ -450,3 +450,61 @@ def test_crop_judge_routes_are_unchanged(trained_world, monkeypatch):
         assert "judge_head" not in json.loads((w["tmp"] / out / "run.json").read_text())
     with pytest.raises(SystemExit, match="--judge-settings is required"):
         pid.main(w["args"](reward="clip", out="run-none"))
+
+
+# ---- the first result's additions: the CO3 row with no adapter, the probe, the logged tuning pictures, memory
+
+def test_draw_co3_attaches_no_adapter_and_lists_its_pictures(tmp_path):
+    (tmp_path / "pairs.txt").write_text("a_wolf__x__a_husky\na_crow__x__a_raven\n")
+    r = run("draw-co3", "--dry-run", "--pairs-file", str(tmp_path / "pairs.txt"), "--seeds", "13001:13004",
+            "--out", str(tmp_path / "co3"))
+    assert r.returncode == 0, r.stdout + r.stderr
+    import csv
+    rows = list(csv.DictReader(open(tmp_path / "co3/pictures.csv")))
+    assert len(rows) == 6 and set(rows[0]) == {"picture", "a", "b", "pair", "seed"}
+    assert json.loads((tmp_path / "co3/draw.json").read_text())["ckpt"] is None
+
+
+def test_co3_row_and_dial_row_at_one_seed_are_matched_pictures(tmp_path):
+    """The same pair and seed through the same rollout: CO3 alone and an untrained dial (up at zero) give the same
+    picture, so the rows differ only by what the dial learned."""
+    (tmp_path / "pairs.txt").write_text("a_wolf__x__a_husky\n")
+    assert run("draw-co3", "--dry-run", "--pairs-file", str(tmp_path / "pairs.txt"), "--seeds", "13001",
+               "--out", str(tmp_path / "co3")).returncode == 0
+    sampler = pid.stand_in_sampler(0)
+    dial = pid.attach_dial(sampler.unet)
+    pid.save_dial(dial.state(), tmp_path / "zero.pt", {"dial_from_step": 2})
+    pid.main(["draw", "--dry-run", "--ckpt", str(tmp_path / "zero.pt"), "--out", str(tmp_path / "dial")])
+    from PIL import Image
+    import numpy as np
+    a = np.asarray(Image.open(tmp_path / "co3/a_wolf__x__a_husky/seed-13001.png"))
+    b = np.asarray(Image.open(tmp_path / "dial/a_cheetah__x__a_cougar/seed-13001.png"))
+    assert a.shape == b.shape
+    sampler2 = pid.stand_in_sampler(0)
+    sampler2.set_pair("cheetah", "cougar")
+    x = sampler2.rollout(sampler2.start(13001), 0, sampler2.n_steps, None, sampler2.n_steps, 0.0)
+    c = np.asarray(pid.to_pil(sampler2.decode(x.float())))
+    assert np.array_equal(b, c)
+
+
+def test_probe_strength_0_equals_off_and_the_change_grows(tmp_path):
+    assert run("train", "--dry-run", "--steps", "3", "--out", str(tmp_path / "t")).returncode == 0
+    r = run("probe", "--dry-run", "--ckpt", str(tmp_path / "t/ckpt-3/dial.pt"), "--out", str(tmp_path / "p"))
+    assert r.returncode == 0, r.stdout + r.stderr
+    p = json.loads((tmp_path / "p/probe.json").read_text())
+    assert p["strength_0_equals_off"] and p["change_grows_with_strength"]
+    assert p["strengths"]["0.0"]["largest_grey"] == 0 and p["strengths"]["1.0"]["cosine_with_judge_gradient"] is not None
+    assert len(list((tmp_path / "p").glob("estimate-*.png"))) == 4
+
+
+def test_training_logs_the_tuning_pictures_before_and_every_n_steps(tmp_path):
+    (tmp_path / "tuning.txt").write_text("a_wolf__x__a_husky\na_crow__x__a_raven\n")
+    pid.main(["train", "--dry-run", "--steps", "5", "--log-pairs-file", str(tmp_path / "tuning.txt"), "--log-seeds",
+              "12001", "12002", "--log-every-steps", "2", "--out", str(tmp_path / "t")])
+    logged = [json.loads(x) for x in (tmp_path / "t/logged.jsonl").read_text().splitlines()]
+    assert [r["step"] for r in logged] == [0, 2, 4, 5]
+    assert all(r["n"] == 4 and (tmp_path / f"t/logged/step-{r['step']:05d}/sheet.png").exists() for r in logged)
+    summary = json.loads((tmp_path / "t/summary.json").read_text())
+    assert summary["memory"] == {"on_card": False} and len(summary["logged"]) == 4
+    with pytest.raises(SystemExit, match="go together"):
+        pid.main(["train", "--dry-run", "--log-pairs-file", str(tmp_path / "tuning.txt"), "--out", str(tmp_path / "u")])

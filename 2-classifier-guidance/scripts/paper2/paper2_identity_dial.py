@@ -71,6 +71,16 @@ after the dial first moved, not at step 1, because, in item 2's own words, "a ne
     # a settings.json, and runs on the gradient route only
     python paper2_identity_dial.py train ... --route gradient --reward trained \\
         --judge-head /datasets/mmolefe/poe_repair_min/paper2/paper2-judge-trained-seenpairs/head.pt ...
+    # while training, the 8 logged tuning pictures (4 pairs at 2 seeds) drawn with the dial and judged before step 1,
+    # every 250 steps and after the last, with a sheet each time (logged/step-<n>/, logged.jsonl, W&B judge/*)
+    python paper2_identity_dial.py train ... --log-pairs-file tuning-pairs.txt --log-seeds 12001 12002 \\
+        --log-every-steps 250
+    # the CO3 row: no adapter attached, the same rollout and decode as the dial rows; pictures.csv beside them
+    python paper2_identity_dial.py draw-co3 --pairs-file test-pairs.txt --seeds 13001:13004 --out <folder>
+    # the smoke's second half: one saved CO3 state, the dial at strengths 0, 0.5 and 1 against off, and the cosine of
+    # the change with the judge's gradient (probe.json)
+    python paper2_identity_dial.py probe --ckpt <smoke>/ckpt-50/dial.pt --pairs-file tuning-pairs.txt --seed 12001 \\
+        --reward trained --judge-head <head.pt> --out <smoke>/probe
     python paper2_identity_dial.py random --like <ckpt-1000/dial.pt> --out <random/dial.pt> --seed 0
     python paper2_identity_dial.py draw --ckpt <dial.pt> --strength 1 --dial-from-step 15 \\
         --pairs-file test-pairs.txt --seeds 13001:13004 --out <folder>
@@ -587,9 +597,17 @@ def co3_sampler(device, out: Path) -> Sampler:
         with torch.autocast(device_type="cuda", dtype=torch.float16):
             return _step(x, t, i)
     model.denoise_step = rollout_step
+    from composers.utils_custom import seed_everything
+
+    def start(seed):
+        # CO3's corrector draws its own noise, so its row seeds every random source before each picture
+        # (paper2_render_lookalike.render_co3: seed_everything(seed), then start_noise). Every rollout here does the same,
+        # so the CO3 row, the dial row and the random-dial row of one pair and seed are matched pictures.
+        seed_everything(seed)
+        return rows.start_noise(model, seed)
     sampler = Sampler(model, decode=lambda x0: decode_latents_with_grad(vae, x0.float())[0],
                    guided_eps=guided_eps, cond_eps=cond_eps, prompt_eps=prompt_eps, set_pair=set_pair,
-                   set_text=set_text, start=lambda seed: rows.start_noise(model, seed),
+                   set_text=set_text, start=start,
                    corrected_steps=int(config.num_ts_to_correct), kind="co3")
     sampler.attention = attention
     return sampler
@@ -721,24 +739,133 @@ def grad_norm_since(params, before) -> float:
 
 
 class Tracker:
-    """W&B when it is on (each pair's reward on its own key), and nothing when it is off."""
+    """W&B when it is on (each pair's reward on its own key), and nothing when it is off.
 
-    def __init__(self, mode: str, project: str, name: str, config: dict):
+    The judges' shares on the logged tuning pictures sit on their own axis, judge/train_step, so the runner-up judge's
+    shares, scored after training in its own environment, can be added to the same run at the same training steps
+    (paper2_first_read.py runner-up)."""
+
+    def __init__(self, mode: str, project: str, name: str, config: dict, out: Path | None = None):
         self.run = None
         if mode != "disabled":
             import wandb
             entity, _, proj = project.rpartition("/")
             self.run = wandb.init(project=proj, entity=entity or None, name=name, mode=mode, config=config,
                                   tags=["paper2", "identity-dial"])
+            self.run.define_metric("judge/train_step")
+            self.run.define_metric("judge/*", step_metric="judge/train_step")
+            if out is not None:
+                (Path(out) / "wandb-run.json").write_text(json.dumps(
+                    {"id": self.run.id, "project": proj, "entity": self.run.entity, "url": self.run.url}, indent=1))
 
     def log(self, row: dict, step: int) -> None:
         if self.run is not None:
             self.run.log(row, step=step)
 
+    def log_judges(self, row: dict, images: dict | None = None) -> None:
+        if self.run is not None:
+            import wandb
+            self.run.log({**row, **{k: wandb.Image(str(v)) for k, v in (images or {}).items()}})
+
     def finish(self, summary: dict) -> None:
         if self.run is not None:
             self.run.summary.update(summary)
             self.run.finish()
+
+
+class MemoryLog:
+    """Peak and current card memory in MiB at named points (setup plan's step 2 memory check). Off on the CPU."""
+
+    def __init__(self, device):
+        self.on = torch.cuda.is_available() and str(device).startswith("cuda")
+        self.marks: dict[str, float | None] = {}
+
+    def mark(self, name: str) -> None:
+        self.marks[name] = round(torch.cuda.memory_allocated() / 2 ** 20, 1) if self.on else None
+
+    def reset_peak(self) -> None:
+        if self.on:
+            torch.cuda.reset_peak_memory_stats()
+
+    def peak(self, name: str) -> None:
+        self.marks[name] = round(torch.cuda.max_memory_allocated() / 2 ** 20, 1) if self.on else None
+
+    def summary(self) -> dict:
+        m = self.marks
+        if not self.on:
+            return {"on_card": False}
+
+        def diff(x, y):
+            return round(m[x] - m[y], 1) if m.get(x) is not None and m.get(y) is not None else None
+        peaks = [v for k, v in m.items() if k.endswith("_peak") and v is not None]
+        return {"on_card": True, **m, "judge_mib": diff("after_judge", "after_model"),
+                "closeness_batch_mib": diff("closeness_peak", "before_closeness"),
+                "task_step_mib": diff("task_peak", "before_task"),
+                "peak_mib": max(peaks + [round(torch.cuda.max_memory_allocated() / 2 ** 20, 1)]),
+                "card_mib": round(torch.cuda.get_device_properties(0).total_memory / 2 ** 20, 1)}
+
+
+def contact_sheet(rows: list[dict], path: Path, tile: int = 256, columns: int = 4) -> Path:
+    """The logged pictures as one sheet, each with its pair, seed, the judge's kind and two-clear score under it."""
+    from PIL import Image, ImageDraw
+    n = len(rows)
+    lines = 2
+    page = Image.new("RGB", (columns * tile, ((n + columns - 1) // columns) * (tile + 14 * lines)), "white")
+    d = ImageDraw.Draw(page)
+    for i, r in enumerate(rows):
+        x, y = (i % columns) * tile, (i // columns) * (tile + 14 * lines)
+        with Image.open(r["picture"]) as im:
+            page.paste(im.convert("RGB").resize((tile, tile)), (x, y))
+        d.text((x + 2, y + tile), f"{r['a']} / {r['b']} seed {r['seed']}", fill="black")
+        d.text((x + 2, y + tile + 14), f"{r['kind']}  two clear {r['two_clear_score']:.3f}", fill="black")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    page.save(path)
+    return path
+
+
+def log_tuning_pictures(sampler: "Sampler", dial: Dial, dial_from: int, reward, pairs, seeds, step: int, out: Path,
+                        tracker: Tracker) -> dict:
+    """Draw the logged tuning pictures with the dial at strength 1 from `dial_from`, score each finished picture with
+    the reward's own judge (its kind and two-clear score), and save them, their list and a sheet under
+    logged/step-<step>/. The runner-up judge reads the same pictures after training, in its own environment."""
+    folder = out / "logged" / f"step-{step:05d}"
+    drawn = []
+    for pa, pb, _ in pairs:
+        sampler.set_pair(pa, pb)
+        for s in seeds:
+            x = sampler.rollout(sampler.start(s), 0, sampler.n_steps, dial, dial_from, 1.0)
+            dial.set_strength(0.0)
+            with torch.no_grad():
+                image = sampler.decode(x.float())
+                score, info = reward(image, pa, pb)
+            path = folder / slug_of(pa, pb) / f"seed-{s}.png"
+            path.parent.mkdir(parents=True, exist_ok=True)
+            to_pil(image).save(path)
+            drawn.append({"picture": str(path), "a": pa, "b": pb, "pair": f"{pa}|{pb}", "seed": s,
+                         "kind": info.get("kind"), "n_bodies": info.get("n_bodies"),
+                         "two_clear_score": float(score)})
+    write_pictures(folder / "pictures.csv", drawn)
+    share = sum(r["kind"] == TWO_CLEAR for r in drawn) / len(drawn)
+    sheet = contact_sheet(drawn, folder / "sheet.png")
+    record = {"step": step, "n": len(drawn), "trained_two_clear_share": share, "pictures": drawn}
+    with open(out / "logged.jsonl", "a") as f:
+        f.write(json.dumps(record) + "\n")
+    tracker.log_judges({"judge/train_step": step, "judge/trained_two_clear_share": share}, {"judge/sheet": sheet})
+    print(f"logged {len(drawn)} tuning pictures at step {step}: the training judge calls {share:.3f} two clear; "
+          f"sheet {sheet}", flush=True)
+    return record
+
+
+def write_pictures(path: Path, rows: list[dict]) -> None:
+    """picture, a, b, pair, seed (and any other columns): the list every judge and the sheet builder read."""
+    import csv
+    cols = ["picture", "a", "b", "pair", "seed"]
+    cols += [k for k in rows[0] if k not in cols] if rows else []
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
+        w.writeheader()
+        w.writerows(rows)
 
 
 def train(a: argparse.Namespace) -> dict:
@@ -749,6 +876,7 @@ def train(a: argparse.Namespace) -> dict:
     out.mkdir(parents=True, exist_ok=True)
     rng = random.Random(a.seed)
     torch.manual_seed(a.seed)
+    mem = MemoryLog(a.device)
 
     if a.dry_run:
         window = tuple(a.window) if a.window else (2, 5)
@@ -775,6 +903,7 @@ def train(a: argparse.Namespace) -> dict:
                              "probability with its graph; the kept route takes a crop judge's settings.json")
         cache_path = a.closeness_cache
         sampler = co3_sampler(a.device, out)
+        mem.mark("after_model")
         pairs, seeds = read_pairs(a.pairs_file), parse_seeds(a.seeds)
         window = tuple(a.window)
         if a.reward == "trained":
@@ -784,6 +913,11 @@ def train(a: argparse.Namespace) -> dict:
             reward = CropShareReward(a.reward, a.device, settings, a.class_table)
         else:
             reward = JudgeKeep(a.reward, a.device, a.judge_settings)
+        mem.mark("after_judge")
+    log_pairs = read_pairs(a.log_pairs_file) if a.log_pairs_file else []
+    log_seeds = parse_seeds(a.log_seeds) if a.log_seeds else []
+    if bool(log_pairs) != bool(log_seeds) or (log_pairs and not a.log_every_steps):
+        raise SystemExit("--log-pairs-file, --log-seeds and --log-every-steps go together")
     cache = load_closeness_cache(cache_path, sampler.kind, sampler.n_steps)
     if not sampler.corrected_steps <= window[0] < window[1] <= sampler.n_steps:
         raise SystemExit(f"window {window} must sit in {sampler.corrected_steps}..{sampler.n_steps}: the step "
@@ -815,13 +949,16 @@ def train(a: argparse.Namespace) -> dict:
     (out / "run.json").write_text(json.dumps({**meta, "ckpt_steps": ckpt_steps,
                                               "started": time.strftime("%Y-%m-%dT%H:%M:%S")}, indent=1))
     tracker = Tracker("disabled" if a.dry_run and a.wandb_mode == "online" else a.wandb_mode,
-                      a.wandb_project, out.name, meta)
+                      a.wandb_project, out.name, meta, out)
     print(f"dial: {len(dial.layers)} attention projections at rank {RANK}, "
           f"{sum(p.numel() for p in params):,} trainable weights; route {a.route}; window {window}; "
           f"dial on from step {dial_from}; pairs and weights {meta['pairs']}; {len(seeds)} seeds; "
           f"closeness on {a.closeness_batch} of {len(cache)} cached states a step, weight {a.closeness_weight}",
           flush=True)
 
+    logged = []
+    if log_pairs:   # the logged tuning pictures before any step: the untrained dial, up at zero, so CO3 itself
+        logged.append(log_tuning_pictures(sampler, dial, dial_from, reward, log_pairs, log_seeds, 0, out, tracker))
     log = open(out / "train-log.jsonl", "a")
     rewards_by_pair: dict[str, list[float]] = {}
     reward_checked = False
@@ -838,6 +975,9 @@ def train(a: argparse.Namespace) -> dict:
         x = sampler.start(seed)
         at = sampler.alpha(k)
         opt.zero_grad(set_to_none=True)
+        if step == 1:
+            mem.mark("before_task")
+            mem.reset_peak()
 
         # The task term: the reward's gradient (gradient route) or the denoising loss on a kept draw.
         if a.route == "gradient":
@@ -865,6 +1005,10 @@ def train(a: argparse.Namespace) -> dict:
         if task_has_graph:
             task_loss.backward()
         task_grad = grad_norm_since(params, before)
+        if step == 1:
+            mem.peak("task_peak")
+            mem.mark("before_closeness")
+            mem.reset_peak()
 
         # The closeness term: the dial's prediction on cached states of prompts outside its purpose, against the
         # frozen prediction an untouched U-Net made on the same states in another process.
@@ -883,6 +1027,8 @@ def train(a: argparse.Namespace) -> dict:
         close_grad = grad_norm_since(params, before)
         term = a.closeness_weight * drift
         dial.set_strength(0.0)
+        if step == 1:
+            mem.peak("closeness_peak")
 
         gnorm = float(torch.nn.utils.clip_grad_norm_(params, a.grad_clip))
         opt.step()
@@ -942,6 +1088,9 @@ def train(a: argparse.Namespace) -> dict:
             path = out / f"ckpt-{step}" / "dial.pt"
             save_dial(dial.state(), path, {**meta, "step": step})
             print(f"checkpoint {path} (norm {state_norm(dial.state()):.6g})", flush=True)
+        if log_pairs and (step % a.log_every_steps == 0 or step == a.steps):
+            logged.append(log_tuning_pictures(sampler, dial, dial_from, reward, log_pairs, log_seeds, step, out,
+                                              tracker))
     log.close()
 
     per_pair = {k: {"n": len(v), "mean": statistics.fmean(v),
@@ -955,7 +1104,9 @@ def train(a: argparse.Namespace) -> dict:
     summary = {**meta, "skipped_draws": skipped, "reward_per_pair": per_pair,
                "reward_mean": statistics.fmean(every),
                "reward_spread": statistics.pstdev(every) if len(every) > 1 else 0.0,
-               "seconds": round(time.time() - t0, 2), "seconds_per_step": round((time.time() - t0) / a.steps, 3)}
+               "seconds": round(time.time() - t0, 2), "seconds_per_step": round((time.time() - t0) / a.steps, 3),
+               "memory": mem.summary(),
+               "logged": [{"step": r["step"], "trained_two_clear_share": r["trained_two_clear_share"]} for r in logged]}
     (out / "summary.json").write_text(json.dumps(summary, indent=1))
     tracker.finish({f"reward/pair/{k}/mean": v["mean"] for k, v in per_pair.items()})
     return summary
@@ -976,7 +1127,8 @@ def draw(a: argparse.Namespace) -> None:
     out.mkdir(parents=True, exist_ok=True)
     if a.dry_run:
         sampler = stand_in_sampler(0)
-        pairs, seeds = [("cheetah", "cougar", 1.0)], [13001]
+        pairs = read_pairs(a.pairs_file) if a.pairs_file else [("cheetah", "cougar", 1.0)]
+        seeds = parse_seeds(a.seeds) if a.seeds else [13001]
     else:
         sampler = co3_sampler(a.device, out)
         pairs, seeds = read_pairs(a.pairs_file), parse_seeds(a.seeds)
@@ -985,11 +1137,19 @@ def draw(a: argparse.Namespace) -> None:
     dial_from = a.dial_from_step if a.dial_from_step is not None else saved.get("dial_from_step")
     if dial_from is None:
         raise SystemExit("--dial-from-step is required: the checkpoint does not record it")
+    drawn = draw_rows(sampler, dial, dial_from, a.strength, pairs, seeds, out)
+    (out / "draw.json").write_text(json.dumps({"ckpt": str(a.ckpt), "strength": a.strength, "attention": sampler.attention,
+                                               "dial_from_step": dial_from, "pictures": drawn}, indent=1))
+
+
+def draw_rows(sampler: Sampler, dial: Dial | None, dial_from: int, strength: float, pairs, seeds, out: Path) -> list[dict]:
+    """Every pair at every seed through the sampler's own rollout, the dial (if any) at `strength` from `dial_from`;
+    saved as <out>/<slug>/seed-<seed>.png and listed in <out>/pictures.csv (picture, a, b, pair, seed)."""
     drawn = []
     for pa, pb, _ in pairs:
         sampler.set_pair(pa, pb)
         for seed in seeds:
-            x = sampler.rollout(sampler.start(seed), 0, sampler.n_steps, dial, dial_from, a.strength)
+            x = sampler.rollout(sampler.start(seed), 0, sampler.n_steps, dial, dial_from, strength)
             with torch.no_grad():
                 image = sampler.decode(x.float())
             path = out / slug_of(pa, pb) / f"seed-{seed}.png"
@@ -997,8 +1157,111 @@ def draw(a: argparse.Namespace) -> None:
             to_pil(image).save(path)
             drawn.append({"pair": f"{pa}|{pb}", "seed": seed, "picture": str(path)})
             print(f"{pa} and {pb} seed {seed} -> {path}", flush=True)
-    (out / "draw.json").write_text(json.dumps({"ckpt": str(a.ckpt), "strength": a.strength, "attention": sampler.attention,
-                                               "dial_from_step": dial_from, "pictures": drawn}, indent=1))
+    write_pictures(out / "pictures.csv", [{"picture": d["picture"], "a": d["pair"].split("|")[0],
+                                           "b": d["pair"].split("|")[1], "pair": d["pair"], "seed": d["seed"]}
+                                          for d in drawn])
+    return drawn
+
+
+def draw_co3(a: argparse.Namespace) -> None:
+    """The CO3 row: CO3 alone, in its own process, with no adapter attached to the U-Net at all (never a dial at
+    strength 0; 04-full-ladder.md, rule 14), drawn through the same rollout and decode as the dial rows, so the rows
+    differ only in the adapter. Writes the pictures, pictures.csv and draw.json."""
+    out = Path(a.out)
+    out.mkdir(parents=True, exist_ok=True)
+    if a.dry_run:
+        sampler = stand_in_sampler(0)
+        pairs = read_pairs(a.pairs_file) if a.pairs_file else [("cheetah", "cougar", 1.0)]
+        seeds = parse_seeds(a.seeds) if a.seeds else [13001]
+    else:
+        if not a.pairs_file or not a.seeds:
+            raise SystemExit("--pairs-file and --seeds are required unless --dry-run")
+        sampler = co3_sampler(a.device, out)
+        pairs, seeds = read_pairs(a.pairs_file), parse_seeds(a.seeds)
+    if any(isinstance(m, DialLinear) for m in sampler.unet.modules()):
+        raise SystemExit("the CO3 row is drawn by a U-Net with no adapter attached")
+    drawn = draw_rows(sampler, None, sampler.n_steps, 0.0, pairs, seeds, out)
+    (out / "draw.json").write_text(json.dumps({"ckpt": None, "row": "CO3 alone, no adapter attached",
+                                               "attention": sampler.attention, "pictures": drawn}, indent=1))
+
+
+def build_reward(a: argparse.Namespace):
+    """The gradient route's reward from --reward and its input, or the stand-in on a dry run."""
+    if a.dry_run:
+        return StandInReward()
+    if a.reward == "trained":
+        if not a.judge_head:
+            raise SystemExit("--judge-head is required with --reward trained")
+        return trained_judge_reward(a.judge_head, a.device)
+    if not a.judge_settings:
+        raise SystemExit("--judge-settings is required")
+    settings = json.loads(Path(a.judge_settings).read_text())["settings"]
+    return CropShareReward(a.reward, a.device, settings, a.class_table)
+
+
+def probe(a: argparse.Namespace) -> dict:
+    """The smoke's second half: one saved CO3 state, the dial on against off.
+
+    CO3 (no adapter attached) is rolled out to step k for the first pair of --pairs-file at --seed, and that state is
+    saved. Off is the decoded estimate there from the untouched U-Net. Then the dial from --ckpt is attached and the
+    estimate is decoded again at strengths 0, 0.5 and 1. For each: the median and largest change from off in grey levels
+    (0 to 255, over every pixel and channel), and the cosine between the change and the gradient of the judge's
+    two-clear score at the off picture. Strength 0 must equal off exactly; the change should grow with strength.
+    Writes probe.json, state.pt and the four estimates (off, 0, 0.5, 1) as pictures."""
+    out = Path(a.out)
+    out.mkdir(parents=True, exist_ok=True)
+    if a.dry_run:
+        sampler = stand_in_sampler(0)
+        pairs = read_pairs(a.pairs_file) if a.pairs_file else [("cheetah", "cougar", 1.0)]
+    else:
+        if not a.pairs_file:
+            raise SystemExit("--pairs-file is required unless --dry-run")
+        sampler = co3_sampler(a.device, out)
+        pairs = read_pairs(a.pairs_file)
+    saved = torch.load(str(a.ckpt), map_location="cpu", weights_only=False)
+    k = a.step if a.step is not None else saved.get("dial_from_step")
+    if k is None:
+        raise SystemExit("--step is required: the checkpoint does not record its first step")
+    pa, pb, _ = pairs[0]
+    sampler.set_pair(pa, pb)
+    x = sampler.rollout(sampler.start(a.seed), 0, k, None, sampler.n_steps, 0.0)
+    torch.save({"x": x.detach().cpu(), "pair": f"{pa}|{pb}", "seed": a.seed, "k": k}, out / "state.pt")
+    at = sampler.alpha(k)
+
+    def estimate():
+        with torch.no_grad():
+            eps = sampler.guided_eps(x, k)
+            return sampler.decode((x.float() - (1 - at).sqrt() * eps) / at.sqrt()).float()
+    off = estimate()
+    reward = build_reward(a)
+    off_g = off.detach().clone().requires_grad_(True)
+    score, info = reward(off_g, pa, pb)
+    grad = torch.autograd.grad(score, off_g, allow_unused=True)[0]
+    grad = torch.zeros_like(off) if grad is None else grad
+    dial = load_dial(sampler.unet, a.ckpt, 1.0)
+    rows = {}
+    to_pil(off).save(out / "estimate-off.png")
+    for s in (0.0, 0.5, 1.0):
+        dial.set_strength(s)
+        img = estimate()
+        dial.set_strength(0.0)
+        change = (img - off) * 255
+        flat, g = change.flatten().double(), grad.flatten().double()
+        denom = float(flat.norm() * g.norm())
+        rows[str(s)] = {"median_grey": float(change.abs().median()), "largest_grey": float(change.abs().max()),
+                        "mean_grey": float(change.abs().mean()), "equals_off": bool(torch.equal(img, off)),
+                        "cosine_with_judge_gradient": float(flat @ g) / denom if denom > 0 else None}
+        to_pil(img).save(out / f"estimate-strength-{s:g}.png")
+    medians = [rows[s]["median_grey"] for s in ("0.0", "0.5", "1.0")]
+    means = [rows[s]["mean_grey"] for s in ("0.0", "0.5", "1.0")]
+    result = {"pair": f"{pa}|{pb}", "seed": a.seed, "step": k, "ckpt": str(a.ckpt), "judge_score_off": float(score.detach()) if torch.is_tensor(score) else float(score),
+              "judge_kind_off": info.get("kind"), "judge_gradient_norm": float(grad.norm()), "strengths": rows,
+              "strength_0_equals_off": rows["0.0"]["equals_off"],
+              "change_grows_with_strength": means[0] <= means[1] <= means[2] and means[2] > 0,
+              "median_grey_by_strength": medians}
+    (out / "probe.json").write_text(json.dumps(result, indent=1))
+    print(json.dumps(result), flush=True)
+    return result
 
 
 def main(argv=None):
@@ -1041,6 +1304,11 @@ def main(argv=None):
     t.add_argument("--wandb-mode", choices=("online", "offline", "disabled"), default="online",
                    help="each pair's reward is logged on its own key; the dry run is always disabled")
     t.add_argument("--wandb-project", default=WANDB_PROJECT)
+    t.add_argument("--log-pairs-file", type=Path, default=None,
+                   help="the tuning pairs whose pictures are drawn and judged while training (with --log-seeds)")
+    t.add_argument("--log-seeds", nargs="+", default=None, help="their seeds; 12001 12002 gives 8 pictures on 4 pairs")
+    t.add_argument("--log-every-steps", type=int, default=None,
+                   help="draw and judge them before step 1, every this many steps, and after the last")
     c = sub.add_parser("closeness-cache", help="the frozen side of the closeness term, from a U-Net with no dial")
     c.add_argument("--out", type=Path, required=True, help="the cache file (.pt)")
     c.add_argument("--closeness-prompts", type=Path, default=None,
@@ -1065,11 +1333,35 @@ def main(argv=None):
     d.add_argument("--out", type=Path, required=True)
     d.add_argument("--dry-run", action="store_true")
     d.add_argument("--device", default="cuda")
+    o = sub.add_parser("draw-co3", help="the CO3 row: CO3 alone, no adapter attached, through the same rollout")
+    o.add_argument("--pairs-file", type=Path, default=None)
+    o.add_argument("--seeds", nargs="+", default=None)
+    o.add_argument("--out", type=Path, required=True)
+    o.add_argument("--dry-run", action="store_true")
+    o.add_argument("--device", default="cuda")
+    q = sub.add_parser("probe", help="one saved CO3 state, the dial on against off, and the judge's gradient")
+    q.add_argument("--ckpt", type=Path, required=True)
+    q.add_argument("--pairs-file", type=Path, default=None, help="its first pair is used")
+    q.add_argument("--seed", type=int, default=12001)
+    q.add_argument("--step", type=int, default=None, help="default: the checkpoint's first step")
+    q.add_argument("--reward", choices=("clip", "imagenet", "trained"), default="trained")
+    q.add_argument("--judge-head", type=Path, default=None)
+    q.add_argument("--judge-settings", type=Path, default=None)
+    q.add_argument("--class-table", type=Path, default=None)
+    q.add_argument("--out", type=Path, required=True)
+    q.add_argument("--dry-run", action="store_true")
+    q.add_argument("--device", default="cuda")
     a = ap.parse_args(argv)
     if a.cmd == "random":
         return random_dial(a)
     if a.cmd == "draw":
         return draw(a)
+    if a.cmd == "draw-co3":
+        return draw_co3(a)
+    if a.cmd == "probe":
+        if a.dry_run:
+            a.device = "cpu"
+        return probe(a)
     if a.cmd == "closeness-cache":
         return closeness_cache(a)
     if a.dry_run:
