@@ -81,7 +81,7 @@ flowchart TB
   X1["Detour: zoom-ladder, about 430k tokens"]:::detour -.-> P2
   X2["Detour: reading route and pictures, about 1.8M tokens"]:::detour -.-> P2
   X3["Paper 1: CLEVR A touching 376/626 (paste 517); 3,000 joint renders near done; toy B, D on held render-node GPUs; toy C fails at A's budget"]:::detour -.-> P2
-  X4["Paper 2: dial run checks on mscluster110; mini toy base retraining on a held render-node GPU"]:::detour -.-> P2
+  X4["Paper 2: dial checks stopped at the rollout check (1.73 grey, precision); trainer being matched to CO3; mini toy base on a held node"]:::detour -.-> P2
   X5["Moving the Claude sessions to a daily batch-node host on the cluster (scripts written, handover under test)"]:::detour -.-> P2
   L1 ~~~ L2 ~~~ L3 ~~~ L4 ~~~ L5 ~~~ L6 ~~~ L7 ~~~ L8 ~~~ L9 ~~~ L10 ~~~ L11
   S0 --> SA --> LOOP --> JOIN --> CAL --> SE --> SF --> GOAL
