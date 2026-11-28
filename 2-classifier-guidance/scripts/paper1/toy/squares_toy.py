@@ -1603,6 +1603,608 @@ def cmd_rung6(a):
     save_results("rung6", info)
 
 
+# -------------------------------------------------------------------------------------------------------------------------------------
+# The guidance ladder (G1 to G5): does classifier guidance help composition when it is done properly?
+#
+# The interaction term is the gradient of a scalar. With r(x, sigma) = log p_joint(x; sigma) - [log p_red + log p_blue - log p_empty]
+# (each density the noised one at sigma), Tweedie's formula gives D_joint - D_plain_sum = sigma^2 grad_x r. So a head phi(x, sigma)
+# whose push is sigma^2 grad_x phi can represent exactly what Method A's delta learns. Each rung below keeps that head and changes one
+# thing about how it is trained or run:
+#   G1  the head reads all three frozen experts' inner decoder features (rung 5's FusedUNet path), trained by Method A's EDM2
+#       denoising loss on D_plain_sum + push, 1,024 joint scenes, 20,000 updates, Method A's optimiser and held-out rule
+#   G2  the same head trained as the CLEVR head was: real joint scenes (noised at the sampler's levels) against the plain-sum
+#       sampler's own states (rung 3c's variant b drawn set, 8,192 seeds), bounded logit, plus the alignment loss
+#       1 - cos(sigma^2 grad logit, x0 - D_plain_sum(x_t)) on a quarter of each batch's real scenes at weight 1; the push is
+#       w sigma^2 grad logit with w chosen on tuning seeds 10,000 to 10,255 (never an evaluation seed)
+#   G3  the same head with its push regressed onto the exact interaction D_exact_joint(x_t) - D_plain_sum(x_t): the ceiling
+#   G4  on the best of G1 to G3, one change each: EMA of the weights, whole-pixel shift augmentation, 3 times the updates, a small
+#       vision transformer in place of the conv network
+#   G5  the Langevin corrector (rung 6's, 20 steps per level, step 0.05 sigma^2) on the winner
+
+
+TUNING_SEEDS = list(range(10000, 10256))                      # G2's weight choice; disjoint from evaluation, drawn and corrector seeds
+G_N = 1024
+G_UPDATES = 20000
+ALIGN_SHARE_TOY = 0.25                                        # paper1_disc.py ALIGN_SHARE
+ALIGN_WEIGHT_TOY = 1.0                                        # paper1_disc.py ALIGN_WEIGHT_ON
+EMA_DECAY = 0.999
+SHIFT_MAX = 4                                                 # paper1_disc.py's whole-pixel shift, up to 4 each way
+G_PREDICTIONS = {                                             # artifacts/notes/progress/setup/supervisor.md, 2026-11-28 05:00 UTC
+    "G1": "works, 0.75 to 0.90, near A's 0.891",
+    "G2": "fails, under 0.2",
+    "G3": "works, at least 0.9: the ceiling for any guidance head",
+    "G4": "each within 0.05 of its parent, except 3 times the updates on G2, which may rise",
+}
+
+
+class ViTNet(nn.Module):
+    """A small vision transformer with FusedUNet's inputs and output shape: the 12-channel picture input cut into patch by patch
+    tokens, the three experts' inner decoder features brought to the token grid (4 by 4 maps upsampled, 16 by 16 maps averaged),
+    projected and added to each token, then `depth` transformer blocks whose norms are scaled and shifted by sigma (adaLN, as in
+    DiT), and a linear map from each token back to its patch's pixels, zero at the start."""
+
+    def __init__(self, cin, cout, patch=2, dim=128, depth=4, heads=4, expert_w=64, proj=32):
+        super().__init__()
+        self.patch, self.cout, self.n, self.heads = patch, cout, H // patch, heads
+        self.cond = nn.Sequential(nn.Linear(FOURIER, EMB), nn.SiLU(), nn.Linear(EMB, EMB), nn.SiLU())
+        self.embed = nn.Conv2d(cin, dim, patch, stride=patch)
+        self.p4 = nn.Conv2d(3 * 2 * expert_w, proj, 1)
+        self.p8 = nn.Conv2d(3 * 2 * expert_w, proj, 1)
+        self.p16 = nn.Conv2d(3 * expert_w, proj, 1)
+        self.feat = nn.Linear(3 * proj, dim)
+        self.pos = nn.Parameter(torch.randn(1, self.n * self.n, dim) * 0.02)
+        self.blocks = nn.ModuleList()
+        for _ in range(depth):
+            blk = nn.ModuleDict({"n1": nn.LayerNorm(dim, elementwise_affine=False), "qkv": nn.Linear(dim, 3 * dim), "proj": nn.Linear(dim, dim),
+                                 "n2": nn.LayerNorm(dim, elementwise_affine=False),
+                                 "mlp": nn.Sequential(nn.Linear(dim, 4 * dim), nn.GELU(), nn.Linear(4 * dim, dim)),
+                                 "ada": nn.Linear(EMB, 6 * dim)})
+            nn.init.zeros_(blk["ada"].weight)
+            nn.init.zeros_(blk["ada"].bias)
+            self.blocks.append(blk)
+        self.n_out = nn.LayerNorm(dim, elementwise_affine=False)
+        self.ada_out = nn.Linear(EMB, 2 * dim)
+        self.out = nn.Linear(dim, cout * patch * patch)
+        nn.init.zeros_(self.out.weight)
+        nn.init.zeros_(self.out.bias)
+        self.logvar_linear = nn.Linear(FOURIER, 1)
+        nn.init.zeros_(self.logvar_linear.weight)
+        nn.init.zeros_(self.logvar_linear.bias)
+
+    def attend(self, qkv):
+        """Softmax attention written out, because the fused attention kernels need not support the second derivative that
+        training through grad_x phi takes."""
+        b, n, _ = qkv.shape
+        q, k, v = qkv.view(b, n, 3, self.heads, -1).permute(2, 0, 3, 1, 4)
+        a = torch.softmax(q @ k.transpose(-1, -2) / math.sqrt(q.shape[-1]), -1)
+        return (a @ v).transpose(1, 2).reshape(b, n, -1)
+
+    def forward(self, h, sigma, ef):
+        f4, f8, f16 = (torch.cat([f[k] for f in ef], 1) for k in range(3))
+        g = self.n
+        fs = [F.interpolate(self.p4(f4), size=(g, g), mode="nearest") if f4.shape[-1] < g else F.adaptive_avg_pool2d(self.p4(f4), g),
+              F.interpolate(self.p8(f8), size=(g, g), mode="nearest") if f8.shape[-1] < g else F.adaptive_avg_pool2d(self.p8(f8), g),
+              F.adaptive_avg_pool2d(self.p16(f16), g)]
+        e = self.cond(fourier(sigma))
+        t = self.embed(h).flatten(2).transpose(1, 2) + self.feat(torch.cat(fs, 1).flatten(2).transpose(1, 2)) + self.pos
+        for blk in self.blocks:
+            s1, b1, g1, s2, b2, g2 = blk["ada"](e)[:, None].chunk(6, -1)
+            y = blk["n1"](t) * (1 + s1) + b1
+            t = t + g1 * blk["proj"](self.attend(blk["qkv"](y)))
+            y = blk["n2"](t) * (1 + s2) + b2
+            t = t + g2 * blk["mlp"](y)
+        s, b = self.ada_out(e)[:, None].chunk(2, -1)
+        t = self.out(self.n_out(t) * (1 + s) + b)                                      # (B, g*g, cout*p*p)
+        p = self.patch
+        return t.view(-1, g, g, self.cout, p, p).permute(0, 3, 1, 4, 2, 5).reshape(-1, self.cout, H, H)
+
+    def logvar(self, sigma):
+        return self.logvar_linear(fourier(sigma)).view(-1, 1, 1, 1)
+
+
+class GuidanceHead(nn.Module):
+    """One scalar phi(x, sigma) per picture, reading the noisy picture, the three experts' outputs and their inner decoder features.
+
+    The push is sigma^2 grad_x phi, in the units of a denoiser correction (the same units as Method A's delta), because
+    D_joint - D_plain_sum = sigma^2 grad_x r with r the log ratio of the joint density to the product of experts; so c(sigma) = sigma^2
+    and phi stands for r. Inside, phi = (sigma_data / sigma) <c_in x, F(c_in x, D_red, D_blue, D_empty, features; sigma)>, summed
+    over every value: with that scale the part of the push that does not differentiate F is c_out(sigma) F, Method A's delta form
+    exactly, so the head starts with A's inductive bias and the rest of the gradient keeps the push a true gradient. F's last layer
+    is zero at the start, so phi and the push start at 0. With bound, the logit is bound tanh(phi / bound) (the CLEVR head's bounded
+    logit, used by G2 only)."""
+    wants_feats = True
+
+    def __init__(self, arch="conv", bound=None, w=64, proj=32, expert_w=64):
+        super().__init__()
+        self.arch, self.bound = arch, bound
+        self.net = FusedUNet(12, 3, w, expert_w=expert_w, proj=proj) if arch == "conv" else ViTNet(12, 3, expert_w=expert_w, proj=proj)
+
+    def forward(self, x, sigma, d_r, d_b, d_e, ef):
+        sigma = torch.as_tensor(sigma, device=x.device, dtype=torch.float32).reshape(-1).expand(len(x))
+        s4 = sigma.view(-1, 1, 1, 1)
+        xin = c_in(s4) * x
+        Fx = self.net(torch.cat([xin, d_r, d_b, d_e], 1), sigma, ef)
+        phi = SIGMA_DATA / sigma * (xin * Fx).flatten(1).sum(1)
+        return self.bound * torch.tanh(phi / self.bound) if self.bound else phi
+
+
+def guided_parts(nets, head, x, s, create_graph=False):
+    """(D_plain_sum detached, push = sigma^2 grad_x phi, phi). The experts run with x requiring grad, so the gradient flows through
+    their outputs and features as well as the head; the experts' own weights are frozen. create_graph keeps the push differentiable
+    in the head's weights (training through grad_x phi)."""
+    with torch.enable_grad():
+        xx = x.detach().requires_grad_(True)
+        d_r, d_b, d_e, ef = experts_out(nets, xx, s, feats=True)
+        phi = head(xx, s, d_r, d_b, d_e, ef)
+        g, = torch.autograd.grad(phi.sum(), xx, create_graph=create_graph)
+    sig = torch.as_tensor(s, device=x.device, dtype=torch.float32).reshape(-1).expand(len(x)).view(-1, 1, 1, 1)
+    d_ps = plainsum_of(d_r, d_b, d_e).detach()
+    return d_ps, sig ** 2 * g, phi
+
+
+def guidance_denoiser(nets, head, w=1.0, record=None):
+    """D_plain_sum + w sigma^2 grad_x phi at every evaluation. With a record list, each first evaluation appends (step, sigma, root
+    mean square of the push per value, mean phi); the output is unchanged."""
+    def denoise(x, s, step, second):
+        d_ps, push, phi = guided_parts(nets, head, x, s)
+        push = w * push.detach()
+        if record is not None and not second:
+            record.append((int(step), float(s), float(push.pow(2).mean().sqrt()), float(phi.detach().mean())))
+        return d_ps + push
+    return denoise
+
+
+def scene_shift(x0, max_shift, gen=None):
+    """Each scene moved by its own whole-pixel shift, up to max_shift each way, drawn uniformly among the shifts that keep every
+    coloured pixel inside the picture, so a shifted touching pair is again a touching pair (a member of the joint set). The
+    background is one colour, so rolling the picture is the move."""
+    if max_shift <= 0:
+        return x0
+    n = len(x0)
+    fg = (x0 > -0.5).any(1)                                                             # (n, H, H) coloured pixels
+    rows, cols = fg.any(2), fg.any(1)
+    ar = torch.arange(H, device=x0.device)
+    top = torch.where(rows, ar, H).min(1).values
+    bot = torch.where(rows, ar, -1).max(1).values
+    lef = torch.where(cols, ar, H).min(1).values
+    rig = torch.where(cols, ar, -1).max(1).values
+    lo_r, hi_r = (-top).clamp(min=-max_shift), (H - 1 - bot).clamp(max=max_shift)
+    lo_c, hi_c = (-lef).clamp(min=-max_shift), (H - 1 - rig).clamp(max=max_shift)
+    u = torch.rand(n, 2, device=x0.device, generator=gen)
+    dr = lo_r + (u[:, 0] * (hi_r - lo_r + 1).float()).floor().long().clamp(max=(hi_r - lo_r))
+    dc = lo_c + (u[:, 1] * (hi_c - lo_c + 1).float()).floor().long().clamp(max=(hi_c - lo_c))
+    ri = (ar[None, :] - dr[:, None]) % H                                                # source row for each target row
+    ci = (ar[None, :] - dc[:, None]) % H
+    out = x0.gather(2, ri[:, None, :, None].expand(n, 3, H, H))
+    return out.gather(3, ci[:, None, None, :].expand(n, 3, H, H))
+
+
+def train_guidance(nets, jpics, exact_joint, train_idx, val_idx, signal, bound=None, arch="conv", ema=None, shift=0,
+                   updates=G_UPDATES, batch=256, lr=5e-4, seed=0, val_every=250, drawn=None, log=""):
+    """Train a GuidanceHead. signal "denoise" (G1): Method A's EDM2 loss on D_plain_sum + push against x0. "exact" (G3): the same
+    loss against D_exact_joint(x_t), so the push is regressed onto the exact interaction. "classifier" (G2): real (label 1) against
+    drawn (label 0) by binary cross-entropy on the bounded logit, plus the alignment loss; drawn = (states, sigmas, seed index).
+    Every signal uses Method A's optimiser (Adam, lr 5e-4, betas 0.9 and 0.99, seed 0, batch 256) and keeps the weights at the
+    lowest held-out loss of the signal's own kind, measured every val_every updates. With ema, the held-out loss and the kept
+    weights are the exponential moving average's (decay ema per update)."""
+    import copy
+    red, blue, empty = nets
+    torch.manual_seed(seed)
+    head = GuidanceHead(arch, bound).to(DEV)
+    avg = copy.deepcopy(head).requires_grad_(False) if ema else None
+    opt = torch.optim.Adam(head.parameters(), lr=lr, betas=(0.9, 0.99))
+    X = jpics[train_idx].to(DEV)
+    V = jpics[val_idx]
+    g = torch.Generator().manual_seed(12345)
+    v0 = V.repeat(2, 1, 1, 1)
+    vs = (torch.randn(len(v0), generator=g) * P_STD + P_MEAN).exp()
+    vn = torch.randn(v0.shape, generator=g)
+    sig_set = sigmas()[1:STEPS]
+    logvar = head.net.logvar
+
+    if signal == "classifier":
+        S, Ssig, seed_of = drawn
+        hold = (seed_of % VAL_NTH == 0).to(DEV)
+        S_tr, Sig_tr, S_va, Sig_va = S[~hold], Ssig[~hold], S[hold], Ssig[hold]
+        gv = torch.Generator(device=DEV).manual_seed(11)
+        kv = torch.randperm(len(S_va), device=DEV, generator=gv)[:2048]
+        cvf, cvsf = S_va[kv], Sig_va[kv]
+        cvsr = sig_set[torch.randint(len(sig_set), (len(kv),), device=DEV, generator=gv)]
+        cvx0 = V.to(DEV)[torch.randint(len(V), (len(kv),), device=DEV, generator=gv)]
+        cvr = cvx0 + cvsr.view(-1, 1, 1, 1) * torch.randn(cvx0.shape, device=DEV, generator=gv)
+        half = batch // 2
+        na = max(1, int(half * ALIGN_SHARE_TOY))
+
+    def denoise_loss_val(model, exact_target=False):
+        tot = 0.0
+        for i in range(0, len(v0), 512):
+            x0, s, n = v0[i:i + 512].to(DEV), vs[i:i + 512].to(DEV), vn[i:i + 512].to(DEV)
+            x = x0 + s.view(-1, 1, 1, 1) * n
+            d_ps, push, _ = guided_parts(nets, model, x, s)
+            tgt = exact_joint(x, s) if exact_target else x0
+            tot += float((loss_weight(s.view(-1, 1, 1, 1)) * (d_ps + push - tgt) ** 2).mean((1, 2, 3)).sum())
+        return tot / len(v0)
+
+    def align_loss(model, x0, s, gen=None, create_graph=False):
+        xt = x0 + s.view(-1, 1, 1, 1) * torch.randn(x0.shape, device=DEV, generator=gen)
+        d_ps, push, _ = guided_parts(nets, model, xt, s, create_graph=create_graph)
+        return (1 - F.cosine_similarity(push.flatten(1), (x0 - d_ps).flatten(1), dim=1))
+
+    def classifier_val(model):
+        with torch.no_grad():
+            bce, acc = 0.0, 0.0
+            for xs_, ss_, y in ((cvr, cvsr, 1.0), (cvf, cvsf, 0.0)):
+                lg = []
+                for i in range(0, len(xs_), 512):
+                    d_r, d_b, d_e, ef = experts_out(nets, xs_[i:i + 512], ss_[i:i + 512], feats=True)
+                    lg.append(model(xs_[i:i + 512], ss_[i:i + 512], d_r, d_b, d_e, ef))
+                lg = torch.cat(lg)
+                bce += float(F.binary_cross_entropy_with_logits(lg, torch.full_like(lg, y), reduction="sum"))
+                acc += float(((lg > 0) == bool(y)).float().mean()) / 2
+        al = float(sum(align_loss(model, cvx0[i:i + 512], cvsr[i:i + 512], torch.Generator(device=DEV).manual_seed(13 + i)).sum()
+                       for i in range(0, len(cvx0), 512)))
+        return bce / (2 * len(kv)) + ALIGN_WEIGHT_TOY * al / len(kv), acc, al / len(kv)
+
+    def val(model):
+        model.eval()
+        out = {"denoise_val": denoise_loss_val(model)}
+        if signal == "exact":
+            out["exact_val"] = denoise_loss_val(model, exact_target=True)
+            out["select"] = out["exact_val"]
+        elif signal == "classifier":
+            out["select"], out["balanced_accuracy"], out["align_val"] = classifier_val(model)
+        else:
+            out["select"] = out["denoise_val"]
+        model.train()
+        return out
+
+    watched = avg if ema else head
+    v = val(watched)
+    best = (v["select"], 0, {k: t.clone() for k, t in watched.state_dict().items()})
+    curve = [(0, None, v)]
+    t1 = time.time()
+    for u in range(1, updates + 1):
+        if signal in ("denoise", "exact"):
+            x0 = X[torch.randint(len(X), (batch,), device=DEV)]
+            x0 = scene_shift(x0, shift)
+            s = draw_sigma(batch)
+            x = x0 + s.view(-1, 1, 1, 1) * torch.randn_like(x0)
+            d_ps, push, _ = guided_parts(nets, head, x, s, create_graph=True)
+            tgt = x0
+            if signal == "exact":
+                with torch.no_grad():
+                    tgt = exact_joint(x, s)
+            loss = edm_loss(d_ps + push, tgt, s, logvar(s))
+        else:
+            kk = torch.randint(len(S_tr), (half,), device=DEV)
+            xf, sf = S_tr[kk], Sig_tr[kk]
+            ip = torch.randint(len(X), (half,), device=DEV)
+            sr = sig_set[torch.randint(len(sig_set), (half,), device=DEV)]
+            x0 = scene_shift(X[ip], shift)
+            xr = x0 + sr.view(-1, 1, 1, 1) * torch.randn_like(x0)
+            xb, sb = torch.cat([xr, xf]), torch.cat([sr, sf])
+            with torch.no_grad():
+                d_r, d_b, d_e, ef = experts_out(nets, xb, sb, feats=True)
+            lg = head(xb, sb, d_r, d_b, d_e, ef)
+            y = torch.cat([torch.ones(half, device=DEV), torch.zeros(half, device=DEV)])
+            loss = F.binary_cross_entropy_with_logits(lg, y)
+            ia = ip[:na]                                                                # unshifted, as paper1_disc.py aligns
+            loss = loss + ALIGN_WEIGHT_TOY * align_loss(head, X[ia], sr[:na], create_graph=True).mean()
+        opt.zero_grad(set_to_none=True)
+        loss.backward()
+        opt.step()
+        if ema:
+            with torch.no_grad():
+                for pa, pm in zip(avg.parameters(), head.parameters()):
+                    pa.lerp_(pm, 1 - ema)
+                for ba, bm in zip(avg.buffers(), head.buffers()):
+                    ba.copy_(bm)
+        if u % val_every == 0 or u == updates:
+            v = val(watched)
+            curve.append((u, float(loss.detach()), v))
+            if u % 1000 == 0:
+                print(f"  head {log} update {u} loss {float(loss.detach()):.4f} val {json.dumps({k: round(x, 4) for k, x in v.items()})} "
+                      f"({time.time() - t1:.0f} s)", flush=True)
+            if v["select"] < best[0]:
+                best = (v["select"], u, {k: t.clone() for k, t in watched.state_dict().items()})
+    train_seconds = round(time.time() - t1, 1)
+    final_state = {k: t.clone() for k, t in watched.state_dict().items()}
+    watched.load_state_dict(best[2])
+    info = {"signal": signal, "bound": bound, "arch": arch, "ema": ema, "shift": shift, "updates": updates, "batch": batch, "lr": lr,
+            "optimiser": "Adam, betas (0.9, 0.99), Method A's", "best_update": best[1], "best_val_select": best[0],
+            "train_seconds": train_seconds, "curve": curve, "parameters": sum(p.numel() for p in head.parameters())}
+    return watched.eval().requires_grad_(False), final_state, info
+
+
+def g_files(name):
+    return OUT / f"head-{name}.pt", OUT / f"samples-{name}.pt"
+
+
+def g_base_rows(j, tr):
+    """Rows and pictures every G rung shows beside its own: exact joint, neural plain sum, rung 2c's Method A, rung 5's Method D."""
+    xn = load_samples("neural-plainsum")
+    base = metrics(xn, j)
+    rows, xs, labels = [("neural plain sum", base)], [load_samples("exact-joint"), xn], ["exact joint", "neural plain sum"]
+    for nm, lab, short in ((f"methodA-N{G_N}-u20000", f"Method A, N = {G_N}, 20000 updates (rung 2c)", "A (2c)"),
+                           (f"methodD-N{G_N}-u20000", f"Method D, N = {G_N}, 20000 updates (rung 5)", "D (rung 5)")):
+        if (OUT / f"samples-{nm}.pt").exists():
+            x = load_samples(nm)
+            m = metrics(x, j, train_idx=tr[:G_N])
+            m["verdict"] = verdict(m["clean_share"], base["clean_share"])
+            rows.append((lab, m))
+            xs.append(x)
+            labels.append(short)
+    return base, rows, xs, labels
+
+
+def choose_weight(nets, head, j, base_clean):
+    """G2's weight: the weight of rung 3's grid (1, 4, 16, 64) whose pictures on the tuning seeds have the highest clean-pair share,
+    ties to the smaller weight. Only tuning seeds choose; the evaluation seeds are read after the choice."""
+    tuning = {}
+    for w in WEIGHTS:
+        with torch.no_grad():
+            x = sample(guidance_denoiser(nets, head, w), seeds=TUNING_SEEDS)
+        tuning[w] = metrics(x, j)
+        print(f"  tuning seeds, w = {w}: clean {tuning[w]['clean_share']:.3f} purple seeds {tuning[w]['share_with_purple']:.3f}", flush=True)
+    chosen = max(WEIGHTS, key=lambda w: (tuning[w]["clean_share"], -w))
+    return chosen, {f"w={w}": {"clean_share": m["clean_share"], "share_with_purple": m["share_with_purple"],
+                               "contact_share": m["contact_share"]} for w, m in tuning.items()}
+
+
+def g_prediction_check(rung, clean, parent_clean=None, parent=None, variant=None):
+    if rung == "G1":
+        held = 0.75 <= clean <= 0.90
+    elif rung == "G2":
+        held = clean < 0.2
+    elif rung == "G3":
+        held = clean >= 0.9
+    elif rung == "G4":
+        held = (clean >= parent_clean - 0.05) if (variant == "u60000" and parent == "G2") else abs(clean - parent_clean) <= 0.05
+    else:
+        return {"predicted": "no prediction recorded for this rung", "clean_share": clean}
+    out = {"predicted": G_PREDICTIONS[rung], "clean_share": clean, "held": bool(held)}
+    if parent_clean is not None:
+        out.update({"parent": parent, "parent_clean_share": parent_clean, "difference": round(clean - parent_clean, 4)})
+    return out
+
+
+def run_guidance_rung(key, rung, name, picture, signal, bound, arch="conv", ema=None, shift=0, updates=G_UPDATES, parent=None,
+                      parent_clean=None, variant=None, smoke=False):
+    """Train one GuidanceHead, sample the 256 shared seeds with its push (G2: at the weight chosen on tuning seeds, and every grid
+    weight on the evaluation seeds for reading only), and write results.json[key] with the prediction check and picture."""
+    t0 = time.time()
+    ckpt, samp = g_files(name)
+    require_new(key, [ckpt, samp, RESULTS / picture])
+    (e, r, b, j, meta), (Ee, Er, Eb, Ej) = sets_and_exact()
+    nets = load_experts()
+    tr, va = joint_split()
+    idx = tr[:G_N]
+    base, rows, xs, labels = g_base_rows(j, tr)
+    drawn = None
+    info = {"rung": rung, "the_one_change": None, "prediction_written_before_the_run": G_PREDICTIONS.get(rung)}
+    if signal == "classifier":
+        t1 = time.time()
+        drawn = drawn_states(nets, DRAWN_SEEDS_MORE if not smoke else DRAWN_SEEDS[:8])
+        info["drawn_states"] = {"seeds": len(DRAWN_SEEDS_MORE) if not smoke else 8, "states": len(drawn[0]),
+                                "seconds": round(time.time() - t1, 1)}
+    head, final_state, tinfo = train_guidance(nets, j, Ej, idx, va, signal, bound, arch, ema, shift, updates, drawn=drawn, log=name,
+                                              val_every=250 if not smoke else 2)
+    torch.save(head.state_dict(), ckpt)
+    torch.save(final_state, OUT / f"head-{name}-final.pt")
+    info["train"] = tinfo
+    w, tuning = 1.0, None
+    if signal == "classifier":
+        w, tuning = choose_weight(nets, head, j, base["clean_share"])
+        info["weight_rule"] = ("the weight of (1, 4, 16, 64) with the highest clean-pair share on tuning seeds 10,000 to 10,255, ties "
+                               "to the smaller weight")
+        info["tuning"] = tuning
+    info["weight"] = w
+    rec = []
+    with torch.no_grad():
+        x = sample(guidance_denoiser(nets, head, w, record=rec))
+    save_samples(name, x)
+    m = metrics(x, j, train_idx=idx)
+    m["verdict"] = verdict(m["clean_share"], base["clean_share"])
+    m.update(picture_extras(x))
+    lab = f"{rung} {name}" + (f", w = {w} (chosen on tuning seeds)" if signal == "classifier" else "")
+    rows.append((lab, m))
+    xs.append(x)
+    labels.append(f"{rung}" + (f" {variant}" if variant else "") + (f", w={w}" if signal == "classifier" else ""))
+    info["push_by_step"] = [(st_, round(sg, 4), round(rms, 5), round(ph, 4)) for st_, sg, rms, ph in rec]
+    if signal == "classifier":
+        info["evaluation_seeds_at_every_weight_reading_only"] = {}
+        for ww in WEIGHTS:
+            if ww == w:
+                continue
+            with torch.no_grad():
+                xw = sample(guidance_denoiser(nets, head, ww))
+            mw = metrics(xw, j, train_idx=idx)
+            mw["verdict"] = verdict(mw["clean_share"], base["clean_share"])
+            mw.update(picture_extras(xw))
+            info["evaluation_seeds_at_every_weight_reading_only"][f"w={ww}"] = mw
+            print(f"  reading only, evaluation seeds, w = {ww}: clean {mw['clean_share']:.3f}", flush=True)
+
+    def push_of(xx, s):
+        return w * guided_parts(nets, head, xx, s)[1]
+    exact_resid = lambda xx, s: Ej(xx, s) - plainsum_of(nets[0](xx, s), nets[1](xx, s), nets[2](xx, s))  # noqa: E731
+    info["push_error_vs_exact_interaction_by_band"] = band_error(push_of, exact_resid, j[va])
+    info["prediction_check"] = g_prediction_check(rung, m["clean_share"], parent_clean, parent, variant)
+    info["checkpoint"] = str(ckpt)
+    info["samples"] = str(samp)
+    info["picture"] = str(RESULTS / picture)
+    info["config"] = {"name": name, "signal": signal, "bound": bound, "arch": arch, "ema": ema, "shift": shift, "updates": updates,
+                      "weight": w, "parent": parent, "variant": variant}
+    print(table(rows), flush=True)
+    print(f"{key}: clean {m['clean_share']:.3f} {m['verdict']} purple seeds {m['share_with_purple']:.3f} empty {m['share_empty']:.3f}; "
+          f"prediction {json.dumps(info['prediction_check'])}", flush=True)
+    grid(xs, labels, RESULTS / picture)
+    info["rows"] = dict(rows)
+    info["seconds"] = round(time.time() - t0, 1)
+    save_results(key, info)
+    return m["clean_share"]
+
+
+G_RUNGS = {   # rung -> (signal, bound, the one change from the rung before it)
+    "G1": ("denoise", None, "a scalar guidance head on the experts' features, push sigma^2 grad phi, trained by Method A's loss"),
+    "G2": ("classifier", LOGIT_BOUND, "G1's head trained as the CLEVR head was: real against drawn, bounded logit, alignment loss"),
+    "G3": ("exact", None, "G1's head with its push regressed onto the exact interaction (the ceiling)"),
+}
+G4_VARIANTS = {   # variant -> (keyword changes, the one change)
+    "ema": ({"ema": EMA_DECAY}, f"EMA of the weights, decay {EMA_DECAY} per update, held-out choice on the EMA"),
+    "shift": ({"shift": SHIFT_MAX}, f"whole-pixel shift augmentation of the joint scenes, up to {SHIFT_MAX} each way, kept inside the picture"),
+    "u60000": ({"updates": 3 * G_UPDATES}, "3 times the updates (60,000)"),
+    "vit": ({"arch": "vit"}, "a small vision transformer (patch 2, width 128, 4 blocks, 4 heads) in place of the conv network"),
+}
+
+
+def g_key(rung, variant=None, parent=None):
+    return f"rung{rung}" if rung != "G4" else f"rungG4-{parent}-{variant}"
+
+
+def g_name(rung, variant=None, parent=None, smoke=False):
+    base = f"G1-N{G_N}-u{G_UPDATES}" if rung == "G1" else f"{rung}-N{G_N}-u{G_UPDATES}"
+    if rung == "G4":
+        base = f"G4-{parent}-{variant}-N{G_N}"
+    return base + ("-smoke" if smoke else "")
+
+
+def cmd_rungG(a):
+    """G1, G2 or G3 (a.cmd names it)."""
+    rung = a.cmd[4:]
+    signal, bound, change = G_RUNGS[rung]
+    key = g_key(rung) + ("-smoke" if a.smoke else "")
+    name = g_name(rung, smoke=a.smoke)
+    updates = a.updates
+    run_guidance_rung(key, rung, name, f"rung{rung}-guidance-head{'-smoke' if a.smoke else ''}.png", signal, bound, updates=updates,
+                      smoke=a.smoke)
+    res = load_results()
+    res_entry = res[key]
+    res_entry["the_one_change"] = change
+    save_results(key, res_entry)
+
+
+def g_best_parent(suffix=""):
+    res = load_results()
+    have = [r for r in ("G1", "G2", "G3") if f"rung{r}{suffix}" in res]
+    if not have:
+        raise SystemExit("no G1, G2 or G3 result yet")
+    clean = {r: res[f"rung{r}{suffix}"]["prediction_check"]["clean_share"] for r in have}
+    best = max(clean, key=lambda r: (clean[r], -int(r[1])))
+    return best, clean[best], clean
+
+
+def cmd_rungG4(a):
+    """G4: on the best of G1 to G3 (highest clean-pair share; ties to the lower rung), one change at a time, each its own key."""
+    if a.parent == "auto":
+        parent, parent_clean, clean = g_best_parent("-smoke" if a.smoke else "")
+    else:
+        parent = a.parent
+        parent_clean = load_results()[f"rung{parent}" + ("-smoke" if a.smoke else "")]["prediction_check"]["clean_share"]
+        clean = None
+    print(f"G4 parent {parent} (clean {parent_clean:.3f}; G1 to G3: {clean})", flush=True)
+    signal, bound, _ = G_RUNGS[parent]
+    for variant in a.variants:
+        kw, change = G4_VARIANTS[variant]
+        kw = dict(kw)
+        updates = kw.pop("updates", G_UPDATES if not a.smoke else a.updates)
+        if a.smoke:
+            updates = a.updates
+        key = g_key("G4", variant, parent) + ("-smoke" if a.smoke else "")
+        if key in load_results():
+            print(f"skip {key}: already in results.json", flush=True)
+            continue
+        name = g_name("G4", variant, parent, smoke=a.smoke) + f"-u{updates}"
+        run_guidance_rung(key, "G4", name, f"rungG4-{parent}-{variant}{'-smoke' if a.smoke else ''}.png", signal, bound,
+                          updates=updates, parent=parent, parent_clean=parent_clean, variant=variant, smoke=a.smoke, **kw)
+        entry = load_results()[key]
+        entry["the_one_change"] = change
+        entry["parent_chosen_from"] = clean
+        save_results(key, entry)
+
+
+def cmd_rungG5(a):
+    """G5: the winner of G1 to G4 (highest clean-pair share on the plain sampler) drawn plain and with rung 6's Langevin corrector
+    (a.steps per level, step a.size sigma^2), the same starting noise and corrector noise per seed as rung 6."""
+    t0 = time.time()
+    res = load_results()
+    cands = {k: v for k, v in res.items() if k.startswith(("rungG1", "rungG2", "rungG3", "rungG4")) and not k.endswith("-smoke")
+             and isinstance(v, dict) and "config" in v}
+    if a.smoke:
+        cands = {k: v for k, v in res.items() if k.startswith("rungG") and k.endswith("-smoke") and "config" in v}
+    if a.source != "auto":
+        cands = {a.source: res[a.source]}
+    src = max(cands, key=lambda k: cands[k]["prediction_check"]["clean_share"])
+    cfg = cands[src]["config"]
+    steps_list = sorted(set(a.steps))
+    key = "rungG5" + ("-smoke" if a.smoke else "")
+    sample_files = [OUT / f"samples-G5-{cfg['name']}-k{k}.pt" for k in steps_list]
+    require_new(key, sample_files + [RESULTS / f"rungG5-corrector{'-smoke' if a.smoke else ''}.png"])
+    print(f"G5 on {src} ({cfg['name']}, plain clean {cands[src]['prediction_check']['clean_share']:.3f})", flush=True)
+    (e, r, b, j, meta), _ = sets_and_exact()
+    nets = load_experts()
+    tr, va = joint_split()
+    base, rows, xs, labels = g_base_rows(j, tr)
+    rows = dict(rows)
+    head = GuidanceHead(cfg["arch"], cfg["bound"]).to(DEV)
+    head.load_state_dict(torch.load(cands[src]["checkpoint"], map_location=DEV))
+    head = head.eval().requires_grad_(False)
+    denoise = guidance_denoiser(nets, head, cfg["weight"])
+    plain_check, timing = {}, {}
+    for k in steps_list:
+        t1 = time.time()
+        with torch.no_grad():
+            x = sample_corrected(denoise, k, a.size)
+        timing[k] = round(time.time() - t1, 1)
+        save_samples(f"G5-{cfg['name']}-k{k}", x)
+        m = metrics(x, j, train_idx=tr[:G_N])
+        m["verdict"] = verdict(m["clean_share"], base["clean_share"])
+        m.update(picture_extras(x))
+        rows[f"{src} ({cfg['name']}), {k} corrector steps"] = m
+        xs.append(x)
+        labels.append(f"{src[4:]}, k={k}")
+        if k == 0:
+            xp = torch.load(cands[src]["samples"]).to(x.device)
+            plain_check = {"saved_samples": cands[src]["samples"], "byte_identical": bool(torch.equal(x, xp)),
+                           "max_abs_difference": float((x - xp).abs().max())}
+        print(f"G5 k={k}: clean {m['clean_share']:.3f} {m['verdict']} purple seeds {m['share_with_purple']:.3f} "
+              f"empty {m['share_empty']:.3f} ({timing[k]} s)", flush=True)
+    a6 = res.get("rung6", {}).get("rows", {})
+    for nm in (f"Method A, N = {G_N}, 20000 updates, 20 corrector steps", f"Method D, N = {G_N}, 20000 updates, 20 corrector steps"):
+        if nm in a6:
+            rows[nm + " (rung 6)"] = a6[nm]
+    print(table(list(rows.items())), flush=True)
+    grid(xs, labels, RESULTS / f"rungG5-corrector{'-smoke' if a.smoke else ''}.png")
+    judged = rows[f"{src} ({cfg['name']}), {max(steps_list)} corrector steps"]["clean_share"]
+    info = {"source": src, "source_config": cfg, "corrector_steps": steps_list, "corrector_size": a.size,
+            "corrector_noise": f"one generator per evaluation seed, seeded {CORRECTOR_SEED_OFFSET} + seed (rung 6's)",
+            "candidates_clean_share": {k: v["prediction_check"]["clean_share"] for k, v in cands.items()},
+            "plain_sampler_against_saved_samples": plain_check,
+            "prediction_check": {"predicted": "no prediction recorded on the supervisor page for the corrector on the winner",
+                                 "clean_share": judged, "plain_sampler_clean_share": cands[src]["prediction_check"]["clean_share"]},
+            "row_seconds": timing, "rows": rows, "picture": str(RESULTS / f"rungG5-corrector{'-smoke' if a.smoke else ''}.png"),
+            "seconds": round(time.time() - t0, 1)}
+    save_results(key, info)
+
+
+def cmd_ladderG(a):
+    """G1, G2, G3, then G4's variants on the best of them, then G5, in one job (the user holds one free bigbatch slot). A rung whose
+    key is already in results.json is skipped, so a resubmitted job carries on where the last stopped."""
+    from argparse import Namespace
+    sm = "-smoke" if a.smoke else ""
+    for rung in a.rungs:
+        if rung in ("G1", "G2", "G3"):
+            if f"rung{rung}{sm}" in load_results():
+                print(f"skip rung{rung}{sm}: already in results.json", flush=True)
+                continue
+            cmd_rungG(Namespace(cmd=f"rung{rung}", updates=a.updates, smoke=a.smoke))
+        elif rung == "G4":
+            cmd_rungG4(Namespace(parent="auto", variants=a.variants, updates=a.updates, smoke=a.smoke))
+        elif rung == "G5":
+            if f"rungG5{sm}" in load_results():
+                continue
+            cmd_rungG5(Namespace(source="auto", steps=[0, RUNG6_JUDGED], size=CORRECTOR_SIZE, smoke=a.smoke))
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -1637,8 +2239,28 @@ def main():
     q = sub.add_parser("rung6")
     q.add_argument("--steps", type=int, nargs="+", default=list(RUNG6_STEPS), help="corrector steps per noise level; 0 is plain")
     q.add_argument("--size", type=float, default=CORRECTOR_SIZE, help="corrector step as a fraction of sigma squared")
+    for name in ("rungG1", "rungG2", "rungG3"):
+        q = sub.add_parser(name)
+        q.add_argument("--updates", type=int, default=G_UPDATES)
+        q.add_argument("--smoke", action="store_true", help="a quick check: keys and files end in -smoke")
+    q = sub.add_parser("rungG4")
+    q.add_argument("--parent", default="auto", help="G1, G2, G3 or auto (the best of them by clean-pair share)")
+    q.add_argument("--variants", nargs="+", default=list(G4_VARIANTS), choices=list(G4_VARIANTS))
+    q.add_argument("--updates", type=int, default=G_UPDATES, help="used only with --smoke")
+    q.add_argument("--smoke", action="store_true")
+    q = sub.add_parser("rungG5")
+    q.add_argument("--source", default="auto", help="a results.json key, or auto (the best G rung by clean-pair share)")
+    q.add_argument("--steps", type=int, nargs="+", default=[0, RUNG6_JUDGED])
+    q.add_argument("--size", type=float, default=CORRECTOR_SIZE)
+    q.add_argument("--smoke", action="store_true")
+    q = sub.add_parser("ladderG")
+    q.add_argument("--rungs", nargs="+", default=["G1", "G2", "G3", "G4", "G5"])
+    q.add_argument("--variants", nargs="+", default=list(G4_VARIANTS), choices=list(G4_VARIANTS))
+    q.add_argument("--updates", type=int, default=G_UPDATES, help="G1 to G3's updates; G4's only with --smoke")
+    q.add_argument("--smoke", action="store_true")
     a = p.parse_args()
-    globals()["cmd_" + a.cmd](a)
+    fn = "cmd_rungG" if a.cmd in ("rungG1", "rungG2", "rungG3") else "cmd_" + a.cmd
+    globals()[fn](a)
 
 
 if __name__ == "__main__":
