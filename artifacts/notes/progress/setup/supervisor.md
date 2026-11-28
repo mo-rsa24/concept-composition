@@ -323,6 +323,8 @@ L5 (the discriminator as a push at sampling time) sits outside the table, applie
 
 2026-11-28 04:40 UTC, the laptop's project memory (111 notes) is merged into the cluster's, so the notes the earlier entries said were missing are here now. Two bear on the running work. mscluster61's RTX 3090 is under thermal slowdown again (270 MHz of 2,100 at 79 C, throttle reason 0x20, read with `srun --jobid=97097 --overlap -n1 nvidia-smi`): the corrector sweep there draws about 2.5 seconds a picture at 5 corrector steps and still fits its 10-hour wall time, so it keeps running, and mscluster61 is added to the bigbatch exclude list for new jobs. And on SDXL the corrector's settled samples drifted toward flat illustration while every number passed, so the sweep's winning setting gets its pictures looked at before its count is trusted.
 
+2026-11-28 04:45 UTC, Paper 1, the owner asked whether every new cell (G1 to G4, L1 to L5) uses the corrector. As first briefed they did not: each cell was read with the plain Heun sampler and the corrector was kept for the winners. Changed by best expected result: every cell is read twice on the same seeds, with no corrector and with 20 Langevin steps at 0.05 sigma squared (the toy's working setting, where it lifted A from 0.895 to 0.996), each with its own verdict against the unchanged bar. It costs sampling only. The owner's reasoning is that the corrector takes away the sampler's failure, so the learned term only has to supply the interaction; reading every cell both ways shows which training signals supply it. On the harder 32 by 32 toy the 0.05 setting is untuned and is reported as such.
+
 ## Final review
 
 Run 14:09, after both loops stopped, on the laptop. Nothing ran on the cluster.
