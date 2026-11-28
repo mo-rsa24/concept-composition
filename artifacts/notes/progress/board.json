@@ -4,7 +4,7 @@
     "Detour: idea walk, 7 claims, paused",
     "Detour: zoom-ladder, about 430k tokens",
     "Detour: reading route and pictures, about 1.8M tokens",
-    "Paper 1: CLEVR A width 192 521 vs paste 517 (within ~12-seed spread); combined candidate training; cheaper adversarial variant passed the toy (0.855) and goes to CLEVR",
+    "Paper 1: CLEVR A width 192 521 vs paste 517 (within ~12-seed spread); combined candidate training; adversarial run on CLEVR training (job 97140, about 20 GPU-hours)",
     "Paper 2: identity dial first result INCONCLUSIVE (two-clear lead +0.06, 3 up 0 down, p 0.125); next direction to the owner (question 127); toy CO3 question 126 open",
     "Claude sessions moved to the cluster host job; the supervisor runs there unattended and sends the owner updates"
   ],
