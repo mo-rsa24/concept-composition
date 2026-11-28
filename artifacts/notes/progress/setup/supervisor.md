@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated 2026-11-28 03:00 UTC
+Last updated 2026-11-28 03:30 UTC
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -273,6 +273,8 @@ Paper 1, 2026-11-28 01:15 UTC: the 6,000 joint scenes at seed base 8,200,000 fin
 Paper 1, 2026-11-28 02:50 UTC: Method A on 4,448 touching scenes (457, 1,595 and 2,396 at counts 1 to 3: the 6,000 renders at seed base 8,200,000 packed as before plus the 1,599 already used), 16,000 updates: red against blue on 468 of 626 touching seeds (84, 163, 221), 26 mostly purple, against 501 for 1,599 scenes and 517 for the paste; first 66 seeds 47 against 49 and 52. Its held-out loss was still falling at its last reading (0.0268 at update 15,500), so with 2.8 times the scenes each was seen 2.8 times less often, the pattern the toy showed (all scenes at 5,000 updates below 1,024 scenes, 0.738 against 0.797, until 20,000 updates lifted it to 0.832). One change next: the same 4,448 scenes trained 48,000 updates (p1-methodA-joint3-u48k.sh, mscluster110), read on the 66 and 626 seeds. The fourth joint set (seed base 8,300,000) keeps rendering.
 
 Paper 1, 2026-11-28 03:00 UTC: three single-change CLEVR runs of Method A now run side by side to find the lever that moves the touching count: 4,448 touching scenes at 48,000 updates (mscluster110, projected 4.0 GPU-hours; compares with 468 at 16,000), 4,448 scenes at width 192 in place of 96 at 16,000 updates (bigbatch job 97092; compares with 468), and 1,599 scenes at 48,000 updates (bigbatch job 97093; compares with 501). Each reads all 626 touching seeds against the paste's 517. The fourth joint set (6,000 scenes, seed base 8,300,000) finished and is not yet packed. Paper 2's dial training was at step 770 of 1,000.
+
+2026-11-28 03:30 UTC, the handover: the owner signed Claude in on the cluster and installed the settings. The supervisor moves to the cluster host job (scripts/claude-host/, session name supervisor, Remote Control on); from its first tick it is the only supervisor and the laptop session's loop stops. Everything running continues where it is: the three CLEVR runs of Method A and the dial training.
 
 ## Final review
 
