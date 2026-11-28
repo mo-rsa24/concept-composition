@@ -1,6 +1,7 @@
-# One Claude session per line: name|prompt file in scripts/claude-host/prompts/ (copied to /datasets/mmolefe/claude-host/prompts/).
+# One Claude session per line: name|prompt file|title. The name is how the session is resumed; the title is what the Claude app
+# shows (its Remote Control name). The prompt file is in scripts/claude-host/prompts/ (copied to /home-mscluster/mmolefe/claude-host/prompts/).
 # The prompt is used only the first time a session starts; after that it is resumed by name.
 # Uncomment a line to add that session at the next host start.
-supervisor|supervisor.txt
-#paper1|paper1.txt
-#paper2|paper2.txt
+supervisor|supervisor.txt|🧭 PhD Loop 18: Setup supervisor
+#paper1|paper1.txt|🔬 PhD Loop 16: Paper 1
+#paper2|paper2.txt|🔬 PhD Loop 17: Paper 2

@@ -61,14 +61,15 @@ log "lock taken"
 
 # 2. Start the sessions.
 first=1
-while IFS='|' read -r name prompt; do
+while IFS='|' read -r name prompt title; do
+  title=${title:-$name}   # the name shown in the Claude app (Remote Control); the session itself is resumed by name
   case "$name" in ''|\#*) continue ;; esac
   if [ -n "${TEST_COMMAND:-}" ]; then
     cmd="$TEST_COMMAND $name"
   elif [ -f "$H/started/$name" ]; then
-    cmd="$CLAUDE $CLAUDE_ARGS --resume $name --remote-control $name"
+    cmd="$CLAUDE $CLAUDE_ARGS --resume $name --remote-control '$title'"
   else
-    cmd="$CLAUDE $CLAUDE_ARGS --name $name --remote-control $name \"\$(cat $H/prompts/$prompt)\""
+    cmd="$CLAUDE $CLAUDE_ARGS --name $name --remote-control '$title' \"\$(cat $H/prompts/$prompt)\""
     touch "$H/started/$name"
   fi
   if [ $first = 1 ]; then
