@@ -339,6 +339,21 @@ L5 (the discriminator as a push at sampling time) sits outside the table, applie
 
 2026-11-28 05:40 UTC, Paper 2's dial: the pick is made. Two blind reviewers (four fresh agents each, 24 pages apiece) agreed on 93 of the 96 pick pages; the 3 splits were all two clear against two of one kind, and a third fresh reviewer called all three two clear, noting that on two of them the left body is a stylised dog that could also read as a husky. Calls in `2-classifier-guidance/data/paper2/first-result/pick-calls-1.csv`, `-2.csv`, `-3.csv`. Step 5r (pick.json): blind two clear on the 32 tuning pictures, CO3 alone 0.500, checkpoint 500 0.531, checkpoint 1,000 0.531; the tie goes to **checkpoint 500**; the gaming alarm is quiet (trained head 0.406, runner-up judge 0.062, gap 0.344, a fall of 0.062 against an alarm at a rise above 0.1); one picture of 32 is not two bodies for each row. A lead of 1 picture in 32 forecasts a small test lead against the plan's 0.20 bar, but step 6 is the pre-registered test and runs as written: started on mscluster110 at 05:38 UTC (CO3, the dial at checkpoint 500 and the random dial of equal norm on the test pairs, CO3 and the dial on the ceiling pairs, the kept judge on all 240, the blind test sheet). The supervisor's host node (mscluster141) saw the new step 5r log only after a delay, so its /datasets view can lag; results are read through mscluster110 when a file looks missing.
 
+2026-11-28 06:10 UTC, Paper 1, the loss ladder on the squares toy at 256 joint scenes is finished (job 97100, commit d0f8470a; results `/datasets/mmolefe/poe_repair_min/toys/paper1/results-loss-ladder.json`, pictures `.../toys/paper1/loss-ladder/toy-N256-u5000-*.png`). Clean touching pairs of 256 seeds, plain sampler and with the corrector; every cell's empty share is at most 0.012 except the L5 plain-sum rows, and no cell shows purple:
+
+| Cell | Plain | Corrector | Verdict | Prediction |
+|---|---|---|---|---|
+| A rerun, the baseline | 0.652 | 0.895 | partial / works | |
+| L1, contact-band weights | 0.664 | 0.926 | partial / works | held, but inside run-to-run spread |
+| L2, noise moved to placement | 0.379 | 0.457 | partial / partial | failed (predicted a rise) |
+| L3, reward fine-tune | 0.801 | 0.969 | works / works | held; its no-reward control reads 0.805 and 0.965, so the gain is the extra fine-tuning |
+| **L4, adversarial, weight 0.03** | **0.879** | **0.988** | **works / works** | failed upward (predicted 0.60 to 0.80) |
+| L4, weight 0.003 | 0.840 | 0.980 | | |
+| L5 on the plain sum (exact per-level fake set, MCMC, the paper's fake set) | 0.000 | 0.000 | fails | failed; empties 12 to 16% of pictures |
+| L5 on A, rounds 1 and 2 | 0.672, 0.707 | 0.902, 0.918 | partial / works | held (adds 0.02 to 0.055) |
+
+L4 trains from scratch with the same 5,000 updates as the baseline, so it differs by one change, and its gain (+0.23) is far above the baseline's run-to-run spread (about 0.04). Why L5 fails on the plain sum: its discriminator, trained on 256 scenes, is far from the best discriminator even with an exact fake set (error 8.8 times the true correction at sigma 80 to 10, cosine 0.29 to 0.60 with the exact interaction), the caveat the Kim et al. reading names. Decided: L4 goes to CLEVR now, as one change from Method A on the 1,599 touching scenes (A reads 501 of 626, the paste 517), ported by a builder into `paper1_interaction.py`; the harder 32 by 32 toy (job 97106, its bars committed in d0f8470a) reads A's data curve and then L3 and L4 there.
+
 ## Final review
 
 Run 14:09, after both loops stopped, on the laptop. Nothing ran on the cluster.
