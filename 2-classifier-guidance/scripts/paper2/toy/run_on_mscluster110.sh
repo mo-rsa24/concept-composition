@@ -54,7 +54,7 @@ case "${1:-}" in
         echo "$(date -Is) start co3-base"
         PAPER2_TOY_WORK=$D/out/co3 "$PY" -u 2-classifier-guidance/scripts/paper2/toy/toy_co3.py train --updates 40000 > "$D/co3-base.log" 2>&1
         echo "$(date -Is) done co3-base"
-        "$0" co3-read ;;
+        bash "$0" co3-read ;;
     co3-read)
         # stage 1 on the composed sampler, bars R1_BASE_COUNT_MIN and R1_BASE_LOOKALIKE_MAX unchanged, on the fresh seeds fixed in
         # toy_co3.py before this read: test 23,072 to 24,095, tuning 11,536 to 12,047
