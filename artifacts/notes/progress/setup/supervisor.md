@@ -325,6 +325,8 @@ L5 (the discriminator as a push at sampling time) sits outside the table, applie
 
 2026-11-28 04:45 UTC, Paper 1, the owner asked whether every new cell (G1 to G4, L1 to L5) uses the corrector. As first briefed they did not: each cell was read with the plain Heun sampler and the corrector was kept for the winners. Changed by best expected result: every cell is read twice on the same seeds, with no corrector and with 20 Langevin steps at 0.05 sigma squared (the toy's working setting, where it lifted A from 0.895 to 0.996), each with its own verdict against the unchanged bar. It costs sampling only. The owner's reasoning is that the corrector takes away the sampler's failure, so the learned term only has to supply the interaction; reading every cell both ways shows which training signals supply it. On the harder 32 by 32 toy the 0.05 setting is untuned and is reported as such.
 
+2026-11-28 04:50 UTC, the owner, directly in the Claude app: "go ahead and keep working. You can keep making decisions. If you like you can run unattended and just let this supervisor give me updates." The supervisor runs unattended in the cluster host job as before and decides under the standing rule; the owner gets updates, with a phone notification for a result that beats the paste, a verdict, or anything only the owner can do (the two lines that never cross still hold).
+
 ## Final review
 
 Run 14:09, after both loops stopped, on the laptop. Nothing ran on the cluster.
