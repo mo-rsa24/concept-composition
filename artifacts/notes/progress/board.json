@@ -6,7 +6,7 @@
     "Detour: reading route and pictures, about 1.8M tokens",
     "Paper 1: CLEVR A best 501/626 (paste 517); longer and wider runs on 4,448 running; 1,599-longer resubmitted past its cost stop",
     "Paper 2: dial training at step 890 of 1,000 on mscluster110; steps 5, 5r, 6 and the blind calls next; mini toy waits on the owner",
-    "Claude sessions moved to the cluster: supervisor runs in the daily batch-node host job (done 2026-11-28)"
+    "Claude sessions moved to the cluster: supervisor runs in the daily batch-node host job, titled '🧭 PhD Loop 18: Setup supervisor' from the next restart"
   ],
   "detours_join": "P2",
   "steps": [
