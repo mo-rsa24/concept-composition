@@ -5,7 +5,7 @@
     "Detour: zoom-ladder, about 430k tokens",
     "Detour: reading route and pictures, about 1.8M tokens",
     "Paper 1: CLEVR A width 192 521 vs paste 517 (within ~12-seed spread); combined candidate and adversarial run training; toy: guidance trained by denoising works (0.965 with corrector), CLEVR-head recipe fails (0.000)",
-    "Paper 2: identity dial first result INCONCLUSIVE (two-clear lead +0.06, 3 up 0 down, p 0.125); next direction to the owner (question 127); toy CO3 question 126 open",
+    "Paper 2: dial inconclusive; owner delegated: a steering judge that agrees with blind calls is being built (bar: at most 1 in 10 disagreement); toy dial ladders running on both bases",
     "Claude sessions moved to the cluster host job; the supervisor runs there unattended and sends the owner updates"
   ],
   "detours_join": "P2",
@@ -3906,8 +3906,10 @@
       "holds": null,
       "default": "yes: run both dial ladders (about 2 GPU-hours on bigbatch); the failed stage 1 stays failed and is reported",
       "by": "supervisor",
-      "state": "open",
-      "asked": "2026-11-28T06:13:26+00:00"
+      "state": "answered",
+      "asked": "2026-11-28T06:13:26+00:00",
+      "answer": "owner delegated (you decide): yes, both dial ladders run (toy CO3 base at weight 5, and the width-128 base as the reference); stage 1 stays failed and is reported",
+      "answered": "2026-11-28T10:04:15+00:00"
     },
     {
       "id": 127,
@@ -3915,8 +3917,10 @@
       "holds": null,
       "default": "(a) first: the 53% disagreement means the dial was steered by a near-random signal",
       "by": "supervisor",
-      "state": "open",
-      "asked": "2026-11-28T07:09:05+00:00"
+      "state": "answered",
+      "asked": "2026-11-28T07:09:05+00:00",
+      "answer": "owner delegated (you decide): (a), a steering judge that agrees with the blind calls first, then the dial retrained on it and blind-tested again",
+      "answered": "2026-11-28T10:04:15+00:00"
     }
   ]
 }
