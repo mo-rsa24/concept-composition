@@ -98,7 +98,7 @@ def sets():
     """The four sets, cached at ROOT/sets.pt after the first build."""
     p = ROOT / "sets.pt"
     if p.exists():
-        d = torch.load(p)
+        d = torch.load(p, weights_only=False)   # this script's own file; meta is a numpy array
         return d["e"], d["r"], d["b"], d["j"], d["meta"]
     e, r, b = st.empty_set(), st.single_set(st.RED), st.single_set(st.BLUE)
     j, meta = joint_set()
