@@ -4,7 +4,7 @@
     "Detour: idea walk, 7 claims, paused",
     "Detour: zoom-ladder, about 430k tokens",
     "Detour: reading route and pictures, about 1.8M tokens",
-    "Paper 1: CLEVR A best 501/626 (paste 517); longer, wider and 1,599-longer runs plus a corrector step-size sweep running",
+    "Paper 1: CLEVR A best 501/626 (paste 517); three A runs and a corrector sweep running; guidance-done-properly ladder G1 to G4 building on the toy",
     "Paper 2: dial training finishing step 4 of 7 on mscluster110; miniature's third base (width 128, attention) training; question 125 to the owner",
     "Claude sessions moved to the cluster: supervisor runs in the daily batch-node host job, titled '🧭 PhD Loop 18: Setup supervisor' from the next restart"
   ],
