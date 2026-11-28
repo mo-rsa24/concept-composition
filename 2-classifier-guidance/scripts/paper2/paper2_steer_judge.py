@@ -297,11 +297,19 @@ def cmd_features(a) -> int:
         torch.save({"pictures": pictures, "embeddings": embs, "text": text, "logit_scale": scale},
                    out / f"{bb}.pt")
         print(f"{bb}: {len(pictures)} pictures embedded, {per:.4f} s a picture (whole + crops)", flush=True)
+        write_timing(out, timing, dev)
         del image_fn, text_fn
         torch.cuda.empty_cache() if dev.type == 'cuda' else None
-    old = json.loads((out / "timing.json").read_text()) if (out / "timing.json").exists() else {}
-    (out / "timing.json").write_text(json.dumps({**old, **timing, "device": torch.cuda.get_device_name(0) if dev.type == "cuda" else "cpu"}, indent=1))
+    write_timing(out, timing, dev)
     return 0
+
+
+def write_timing(out: Path, timing: dict, dev) -> None:
+    """Merge this run's seconds per picture into timing.json, after each backbone, so a later failure keeps them."""
+    import torch
+    old = json.loads((out / "timing.json").read_text()) if (out / "timing.json").exists() else {}
+    dev_name = torch.cuda.get_device_name(0) if dev.type == "cuda" else "cpu"
+    (out / "timing.json").write_text(json.dumps({**old, **timing, "device": dev_name}, indent=1))
 
 
 # ---------------------------------------------------------------- fit (CPU)
