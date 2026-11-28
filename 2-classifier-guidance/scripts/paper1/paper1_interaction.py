@@ -71,8 +71,10 @@ number is drawn, and the training loop runs the same operations in the same orde
   ADV_D_LR, betas ADV_D_BETAS) on the hinge loss relu(1 - real) + relu(1 + fake), plus R1 = ADV_R1_EVERY * 0.5 * ADV_R1 *
   |grad_y real score|^2 on real pictures every ADV_R1_EVERY updates. Then delta is trained on the denoising loss plus
   lam * (-score of D_new + sigma_d n_f), the gradient flowing through the frozen experts' features into D_new.
-  The expert features of D_new + sigma_d n_f are computed once with their graph: the discriminator's step reads them detached, the
-  delta's term reads them live. The experts are frozen, so this is the same arithmetic as the toy's two separate passes.
+  The expert features of D_new + sigma_d n_f are computed once: the discriminator's step reads them detached, the delta's term reads
+  them live. The experts are frozen, so this is the same arithmetic as the toy's two separate passes. To fit a 24 GB card the experts
+  run ADV_CHUNK pictures at a time, the live features through gradient checkpointing, and R1 is taken chunk by chunk with the
+  gradients added; values and gradients are those of the whole batch at once.
   The discriminator's sigma_d and n_f come from their own CPU generator (seed + ADV_SEED_OFFSET), so the positives, sigmas and noise
   of the denoising loss are the same draws as Method A's at the same seed.
   delta's weights are averaged with EMA ADV_EMA after every update. The validation loss is read on the averaged weights and the
@@ -104,6 +106,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import torch.utils.checkpoint
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
@@ -148,6 +151,7 @@ ADV_D_WIDTH, ADV_D_PROJ = 48, 32   # the toy FeatDisc's widths
 ADV_BLOCK8, ADV_BLOCK16 = "8x8_block1", "16x16_block3"   # paper1-first-disc-k64/blocks.json's chosen pair
 ADV_SEED_OFFSET = 1000        # the discriminator's own generator is seeded seed + this
 ADV_CURVE_EVERY = 250
+ADV_CHUNK = 8                 # pictures per pass through the experts' features, so the graphs fit a 24 GB card (same arithmetic)
 
 
 def c_in(sigma):
@@ -383,12 +387,22 @@ class FeatDisc(nn.Module):
         self.lin = nn.Linear(2 * w, 1)
         self.feature_channels = (c16, c8)
 
-    def features(self, y, sigma, count):
-        """(the joined 16 by 16 maps, the joined 8 by 8 maps) of red, blue and empty at (y, sigma)."""
+    def features(self, y, sigma, count, checkpointed=False):
+        """(the joined 16 by 16 maps, the joined 8 by 8 maps) of red, blue and empty at (y, sigma), ADV_CHUNK pictures at a time.
+        checkpointed: keep only each chunk's inputs and run the expert again during the backward pass (gradient checkpointing),
+        so the graph through the experts is held for one expert and one chunk at a time; the values and gradients are the same."""
         labels = F.one_hot(count.long() - 1, 3).float()
-        fr, fb, fe = (fx(y, sigma, lab) for fx, lab in zip(self._feats, (labels, labels, None)))
-        return (torch.cat([fr[ADV_BLOCK16], fb[ADV_BLOCK16], fe[ADV_BLOCK16]], 1),
-                torch.cat([fr[ADV_BLOCK8], fb[ADV_BLOCK8], fe[ADV_BLOCK8]], 1))
+        use_ckpt = checkpointed and torch.is_grad_enabled() and y.requires_grad
+        out16, out8 = [], []
+        for i in range(0, len(y), ADV_CHUNK):
+            per = []
+            for fx, lab in zip(self._feats, (labels, labels, None)):
+                fn = lambda yy, ss, ll, fx=fx: tuple(fx(yy, ss, ll)[b] for b in (ADV_BLOCK16, ADV_BLOCK8))
+                a = (y[i:i + ADV_CHUNK], sigma[i:i + ADV_CHUNK], None if lab is None else lab[i:i + ADV_CHUNK])
+                per.append(torch.utils.checkpoint.checkpoint(fn, *a, use_reentrant=False) if use_ckpt else fn(*a))
+            out16.append(torch.cat([f[0] for f in per], 1))
+            out8.append(torch.cat([f[1] for f in per], 1))
+        return torch.cat(out16), torch.cat(out8)
 
     def head(self, y, feats, sigma, count):
         e = self.cond(torch.cat([fourier(sigma.float()), F.one_hot(count.long() - 1, 3).float()], 1))
@@ -421,22 +435,28 @@ class Adversary:
         y_r = x0 + s4 * n_r
         y_f = d_new + s4 * n_f                                   # with its graph to delta
         r1 = update % ADV_R1_EVERY == 0
-        if r1:
-            y_r.requires_grad_(True)
-        f_f = self.disc.features(y_f, sd, count)
+        f_f = self.disc.features(y_f, sd, count, checkpointed=True)
+        with torch.no_grad():
+            f_r = self.disc.features(y_r, sd, count)
         self.disc.requires_grad_(True)
-        l_r = self.disc(y_r, sd, count)
+        l_r = self.disc.head(y_r, f_r, sd, count)
         l_f = self.disc.head(y_f.detach(), tuple(f.detach() for f in f_f), sd, count)
         loss_d = F.relu(1 - l_r).mean() + F.relu(1 + l_f).mean()
-        if r1:
-            g, = torch.autograd.grad(l_r.sum(), y_r, create_graph=True)
-            loss_d = loss_d + ADV_R1_EVERY * 0.5 * ADV_R1 * g.pow(2).flatten(1).sum(1).mean()
         self.opt.zero_grad(set_to_none=True)
         loss_d.backward()
+        loss_d = float(loss_d.detach())
+        if r1:                       # R1 on real pictures, chunk by chunk; each chunk's share of the batch mean, gradients added
+            for i in range(0, n, ADV_CHUNK):
+                yc = y_r[i:i + ADV_CHUNK].detach().requires_grad_(True)
+                lc = self.disc(yc, sd[i:i + ADV_CHUNK], count[i:i + ADV_CHUNK])
+                g, = torch.autograd.grad(lc.sum(), yc, create_graph=True)
+                term = ADV_R1_EVERY * 0.5 * ADV_R1 * g.pow(2).flatten(1).sum(1).sum() / n
+                term.backward()
+                loss_d += float(term.detach())
         self.opt.step()
         self.disc.requires_grad_(False)
         g_adv = -self.disc.head(y_f, f_f, sd, count).mean()
-        return g_adv, (float(loss_d.detach()), float(l_r.detach().mean()), float(l_f.detach().mean()), float(g_adv.detach()))
+        return g_adv, (loss_d, float(l_r.detach().mean()), float(l_f.detach().mean()), float(g_adv.detach()))
 
 
 # ---------------------------------------------------------------------------------------------------------------------------------------
