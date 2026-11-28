@@ -378,6 +378,8 @@ Paper 1: the adversarial-training port to CLEVR is running at both toy weights, 
 
 2026-11-28 08:25 UTC, Paper 1, how much a CLEVR read moves between runs. The 1,599-scene run stopped at update 20,250 (kept checkpoint at update 7,000) reads **489** of 626 touching seeds; the 16,000-update run on the same scenes, kept at the same update 7,000, read 501. The two differ only through the learning-rate schedule (it depends on the total number of updates), so a CLEVR pixel read moves about 12 seeds between otherwise identical runs. Against that spread, width 192 over width 96 (+53) and 48,000 over 16,000 updates on 4,448 scenes (+42) are levers, and width 192 over the paste (+4, 521 against 517) is not yet a win. This is why the blind test waits for the combined candidate.
 
+2026-11-28 08:30 UTC, Paper 1: the cheaper adversarial variant (R1 through the discriminator's own layers, red and blue experts only, weight 0.03) passes its toy check. Squares toy, 256 joint scenes, 5,000 updates (job 97139; bar saved at 08:11:02 UTC before training, key `toy-N256-u5000-L4c-r1e4-headR1-x2-written-before-the-run` in `results-loss-ladder.json`): clean touching pairs 0.855 of 256 seeds plain and 0.980 with the corrector, against the bar of 0.80 and the full L4's 0.879 and 0.988 (parent 0.652). It goes to CLEVR at weight 0.03 on the 1,599-scene recipe (about 21.5 GPU-hours on one bigbatch slot).
+
 ## Final review
 
 Run 14:09, after both loops stopped, on the laptop. Nothing ran on the cluster.
