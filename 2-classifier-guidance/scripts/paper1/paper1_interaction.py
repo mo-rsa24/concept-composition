@@ -82,6 +82,9 @@ number is drawn, and the training loop runs the same operations in the same orde
   row, since with an adversarial loss the held-out denoising loss is no longer what is trained), the raw last weights
   interaction-final-raw.pt. Every 250 updates train.json records (update, discriminator loss, mean real score, mean fake score,
   delta's adversarial term).
+  Two cheaper options (the toy's L4c, toy/loss_ladder.py run_L4c): --adv-r1-head-only takes R1 with the expert features
+  computed without gradients and detached, so R1's gradient reaches y only through the discriminator's pixel path; --adv-experts 2
+  has the discriminator read red's and blue's features only. Left out, both are L4 as above.
   The weight is chosen between ADV_WEIGHTS on tuning seeds with the final averaged delta (paper1_tuning_clean.py), as on the toy.
 
 Usage (cluster, through paper1_gpu.sbatch; folders absolute or relative to /datasets/mmolefe/poe_repair_min/paper1/):
@@ -373,9 +376,9 @@ class FeatDisc(nn.Module):
     blocks at 32 (w), 16 (2w, with the 16 by 16 features) and 8 (2w, with the 8 by 8 features), the mean over the grid and one
     linear layer. Gradients flow through the frozen experts to y."""
 
-    def __init__(self, nets, w=ADV_D_WIDTH, proj=ADV_D_PROJ):
+    def __init__(self, nets, w=ADV_D_WIDTH, proj=ADV_D_PROJ, experts=3):
         super().__init__()
-        self._feats = [pdisc.ExpertFeatures(n, (ADV_BLOCK8, ADV_BLOCK16)) for n in nets]
+        self._feats = [pdisc.ExpertFeatures(n, (ADV_BLOCK8, ADV_BLOCK16)) for n in list(nets)[:experts]]   # 2: red and blue only
         with torch.no_grad():                                   # the feature widths, read from one picture
             f = self.features(torch.zeros(1, 3, 64, 64, device=DEV), torch.ones(1, device=DEV), torch.ones(1, device=DEV))
         c16, c8 = f[0].shape[1], f[1].shape[1]
@@ -420,8 +423,9 @@ class Adversary:
     """The discriminator, its optimiser and its own generator; step() runs one update's discriminator step and returns delta's
     adversarial term (with its graph to D_new) and the numbers recorded."""
 
-    def __init__(self, nets, seed):
-        self.disc = FeatDisc(nets).to(DEV)
+    def __init__(self, nets, seed, r1_head_only=False, experts=3):
+        self.disc = FeatDisc(nets, experts=experts).to(DEV)
+        self.r1_head_only = r1_head_only
         self.opt = torch.optim.Adam(self.disc.parameters(), lr=ADV_D_LR, betas=ADV_D_BETAS)
         self.gen = torch.Generator().manual_seed(seed + ADV_SEED_OFFSET)
         self.lo, self.hi = math.log(ADV_SIGMA_D[0]), math.log(ADV_SIGMA_D[1])
@@ -445,7 +449,13 @@ class Adversary:
         self.opt.zero_grad(set_to_none=True)
         loss_d.backward()
         loss_d = float(loss_d.detach())
-        if r1:                       # R1 on real pictures, chunk by chunk; each chunk's share of the batch mean, gradients added
+        if r1 and self.r1_head_only:  # R1 through the head only: the real features above are detached, so y reaches it by pixels
+            yg = y_r.detach().requires_grad_(True)
+            g, = torch.autograd.grad(self.disc.head(yg, f_r, sd, count).sum(), yg, create_graph=True)
+            term = ADV_R1_EVERY * 0.5 * ADV_R1 * g.pow(2).flatten(1).sum(1).mean()
+            term.backward()
+            loss_d += float(term.detach())
+        elif r1:                     # R1 on real pictures, chunk by chunk; each chunk's share of the batch mean, gradients added
             for i in range(0, n, ADV_CHUNK):
                 yc = y_r[i:i + ADV_CHUNK].detach().requires_grad_(True)
                 lc = self.disc(yc, sd[i:i + ADV_CHUNK], count[i:i + ADV_CHUNK])
@@ -510,13 +520,14 @@ def cmd_train(args):
     if adv:                                                  # adversarial training (see the docstring); nothing here at 0
         ema = copy.deepcopy(model).requires_grad_(False)
         judged = ema
-        adversary = Adversary(nets, args.seed)
+        adversary = Adversary(nets, args.seed, r1_head_only=args.adv_r1_head_only, experts=args.adv_experts)
         settings.update({"adv_weight": args.adv_weight, "adv_r1": ADV_R1, "adv_r1_every": ADV_R1_EVERY, "adv_ema": ADV_EMA,
                          "adv_sigma_d": list(ADV_SIGMA_D), "adv_d_lr": ADV_D_LR, "adv_d_betas": list(ADV_D_BETAS),
                          "adv_d_width": ADV_D_WIDTH, "adv_d_proj": ADV_D_PROJ, "adv_blocks": [ADV_BLOCK16, ADV_BLOCK8],
                          "adv_feature_channels": list(adversary.disc.feature_channels),
                          "adv_d_weights": sum(p.numel() for p in adversary.disc.parameters()),
                          "adv_seed": args.seed + ADV_SEED_OFFSET, "adv_loss": "hinge",
+                         "adv_r1_head_only": bool(args.adv_r1_head_only), "adv_experts": args.adv_experts,
                          "judged": "interaction-final.pt, the EMA weights at the last update; interaction.pt keeps the EMA "
                                    "weights with the lowest validation loss"})
     print(json.dumps({k: v for k, v in settings.items() if k != "validation_names"}), flush=True)
@@ -684,6 +695,10 @@ def build_parser():
     p.add_argument("--no-wandb", dest="wandb", action="store_false", help="do not log to W&B")
     p.add_argument("--adv-weight", type=float, default=0.0,
                    help="the adversarial term's weight (default 0: Method A exactly, no discriminator built); see the docstring")
+    p.add_argument("--adv-r1-head-only", action="store_true",
+                   help="R1 with the expert features detached, through the discriminator's pixel path only (default: through the experts)")
+    p.add_argument("--adv-experts", type=int, default=3, choices=(2, 3),
+                   help="experts the discriminator reads: 3 red, blue and empty (default), 2 red and blue")
 
     p = common(sub.add_parser("sample"), ps.BATCH)
     p.add_argument("--checkpoint", help="interaction.pt from train")
