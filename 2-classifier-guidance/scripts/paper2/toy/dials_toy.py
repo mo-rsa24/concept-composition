@@ -51,6 +51,24 @@ REPO = Path(__file__).resolve().parents[4]
 # PAPER2_TOY_OUT and PAPER2_TOY_RESULTS move checkpoints and results (on the cluster, under /datasets/mmolefe/poe_repair_min/toys/paper2/)
 OUT = Path(os.environ.get("PAPER2_TOY_OUT", REPO / "outputs" / "paper2-toy"))
 RESULTS = Path(os.environ.get("PAPER2_TOY_RESULTS", REPO / "artifacts" / "results" / "can-dials-be-trained-alone-and-stacked-on-a-small-toy"))
+# Which base the stages run on. Every variable below defaults to the original behaviour (the conditional base at OUT/base.pt, files in
+# OUT, results.json keys as named, pictures in RESULTS), so a run that sets none of them is the run it always was.
+#   PAPER2_TOY_BASE_KIND   "conditional" or "co3" (toy_co3.py: per-object experts in a product, Heun plus a Langevin corrector)
+#   PAPER2_TOY_BASE        the base checkpoint (its sidecar .json beside it)
+#   PAPER2_TOY_WORK        where dials, stage 3 and 4 pictures as tensors, and the correction are saved and read
+#   PAPER2_TOY_KEY_PREFIX  put in front of every results.json key this run writes or reads back (dials, stage3)
+#   PAPER2_TOY_STAGE1_KEY  the stage-1 key whose decoded-agreement window the gradient dials train in (default prefix + "stage1")
+#   PAPER2_TOY_PICS        a subfolder of RESULTS for this run's pictures
+BASE_KIND = os.environ.get("PAPER2_TOY_BASE_KIND", "conditional")
+if BASE_KIND == "co3":
+    import toy_co3  # noqa: E402
+    toy_co3.install(tm)
+elif BASE_KIND != "conditional":
+    sys.exit(f"PAPER2_TOY_BASE_KIND {BASE_KIND} is neither conditional nor co3")
+WORK = Path(os.environ.get("PAPER2_TOY_WORK", OUT))
+KEY_PREFIX = os.environ.get("PAPER2_TOY_KEY_PREFIX", "")
+STAGE1_KEY = os.environ.get("PAPER2_TOY_STAGE1_KEY", KEY_PREFIX + "stage1")
+PICS = RESULTS / os.environ.get("PAPER2_TOY_PICS", "")
 
 # ---- the bars (README "The bars"), fixed before stage 1 ran --------------------------------------------------------------------------
 R1_TEMPLATE_MARGIN_MIN = 0.15
@@ -94,7 +112,7 @@ def load_results():
 def save_results(key, value):
     RESULTS.mkdir(parents=True, exist_ok=True)
     res = load_results()
-    res[key] = value
+    res[KEY_PREFIX + key] = value
     res["device"] = str(DEV) + (f" ({torch.cuda.get_device_name()})" if DEV.type == "cuda" else "")
     (RESULTS / "results.json").write_text(json.dumps(res, indent=1))
 
@@ -118,6 +136,7 @@ def grid(rows, labels, path, col_labels=None, calls=None, scale=8, gap=2):
             img.paste(Image.fromarray(arr[c]).resize((tile, tile), Image.NEAREST), (lw + c * (tile + gap), y))
             if calls:
                 dr.text((lw + c * (tile + gap) + 2, y + tile), calls[r][c], fill="black")
+    path = PICS / Path(path).relative_to(RESULTS)
     path.parent.mkdir(parents=True, exist_ok=True)
     img.save(path)
 
@@ -167,11 +186,12 @@ def outside_purpose_mask(dial, cond):
 
 
 def base_path():
-    return OUT / "base.pt"
+    return Path(os.environ.get("PAPER2_TOY_BASE", OUT / "base.pt"))
 
 
 def dial_path(d):
-    return OUT / f"dial-{d}.pt"
+    WORK.mkdir(parents=True, exist_ok=True)
+    return WORK / f"dial-{d}.pt"
 
 
 def load_dial_states(names):
@@ -535,8 +555,8 @@ def read_dial(model, dial, conds, seeds, strengths, base_R=None):
 
 
 def cmd_dials(a):
-    res = load_results().get("dials", {})
-    window = load_results()["stage1"]["decoded_agreement"]["gradient_window_steps"]
+    res = load_results().get(KEY_PREFIX + "dials", {})
+    window = load_results()[STAGE1_KEY]["decoded_agreement"]["gradient_window_steps"]
     idx, cond = canvases()
     X = torch.from_numpy(idx).to(DEV)
     C = torch.from_numpy(cond).float().to(DEV)
@@ -746,7 +766,7 @@ def cmd_stage3(a):
         grid([rows[k] for k in ("frozen", pair[0], pair[1], "plain stack")], ["frozen model", f"{pair[0]} alone", f"{pair[1]} alone", "plain stack"],
              RESULTS / f"stage3-{pair[0]}-{pair[1]}.png", col_labels=[tc.name(c) for c in conds[:GRID_COLS]],
              calls=[[call_text(r) for r in R[k][:GRID_COLS]] for k in ("frozen", pair[0], pair[1], "plain stack")])
-        torch.save({k: v for k, v in rows.items()}, OUT / f"stage3-{pair[0]}-{pair[1]}.pt")
+        torch.save({k: v for k, v in rows.items()}, WORK / f"stage3-{pair[0]}-{pair[1]}.pt")
         print(pair_name(pair), json.dumps({k: v for k, v in res["pairs"][pair_name(pair)].items() if k != "stack_measures"}), flush=True)
     mean_i = float(np.mean([v["interference"] for v in res["pairs"].values()]))
     ci_ = boot_mean_interference(per_pair)
@@ -857,7 +877,7 @@ def cmd_corr(a):
             if tl < best[0]:
                 best = (tl, u, copy.deepcopy(corr.state_dict()))
     corr.load_state_dict(best[2])
-    torch.save(corr.state_dict(), OUT / "correction-solo.pt")
+    torch.save(corr.state_dict(), WORK / "correction-solo.pt")
     smoke["after_training_chosen"] = best[0]
     sync()
     info = {"updates": a.updates, "batch": a.batch, "lr": a.lr, "lambda_overlap": a.lam, "trajectories_per_pair": a.traj,
@@ -870,7 +890,7 @@ def cmd_corr(a):
 def load_corr(states):
     model, layer_index, static = corr_setup(states)
     corr = tm.Correction(len(layer_index)).to(DEV)
-    corr.load_state_dict(torch.load(OUT / "correction-solo.pt", map_location=DEV))
+    corr.load_state_dict(torch.load(WORK / "correction-solo.pt", map_location=DEV))
     corr.eval()
     return corr, layer_index, static
 
@@ -884,7 +904,7 @@ def cmd_stage4(a):
     P, Cc, picks = [], [], []
     for pair, (_, test) in tc.PAIRS.items():
         conds, seeds = eval_set(test)
-        old = torch.load(OUT / f"stage3-{pair[0]}-{pair[1]}.pt")
+        old = torch.load(WORK / f"stage3-{pair[0]}-{pair[1]}.pt")
         m = tm.load_base(base_path(), dials=list(pair), dial_states=states)
         tm.set_active(m, {d: 1.0 for d in pair})
         with torch.no_grad():
@@ -901,7 +921,7 @@ def cmd_stage4(a):
                                          "lead": float(corr_.mean() - plain.mean()), **mcnemar(corr_, plain),
                                          "column_weights": {"mean": float(mvals.mean()), "min": float(mvals.min()), "max": float(mvals.max())},
                                          "correction_measures": measures(Rc, conds)}
-        torch.save(xc, OUT / f"stage4-{pair[0]}-{pair[1]}-solo.pt")
+        torch.save(xc, WORK / f"stage4-{pair[0]}-{pair[1]}-solo.pt")
         grid([old["frozen"], old[pair[0]], old[pair[1]], old["plain stack"], xc],
              ["frozen model", f"{pair[0]} alone", f"{pair[1]} alone", "plain stack", "solo-behaviour\ncorrection"],
              RESULTS / f"stage4-{pair[0]}-{pair[1]}.png", col_labels=[tc.name(c) for c in conds[:GRID_COLS]],
@@ -924,8 +944,8 @@ def cmd_stage5(a):
     pair = ("identity", "count")
     conds, seeds = eval_set(tc.DECIDING)
     assert tc.DECIDING == tc.PAIRS[pair][1]
-    old = torch.load(OUT / "stage3-identity-count.pt")
-    xc = torch.load(OUT / "stage4-identity-count-solo.pt")
+    old = torch.load(WORK / "stage3-identity-count.pt")
+    xc = torch.load(WORK / "stage4-identity-count-solo.pt")
     rows = {"frozen model": old["frozen"], "count dial alone": old["count"], "identity dial alone": old["identity"],
             "plain stack": old["plain stack"], "solo-behaviour correction": xc}
     R = {k: tc.read(v) for k, v in rows.items()}
@@ -944,7 +964,7 @@ def cmd_stage5(a):
                           "of_three_object_canvases: both blue objects diamonds": blues_diamond,
                           "of_three_object_canvases: the asked square is a square": square_right,
                           "asked_exactly_without_added (two objects, both right)": float(np.mean([tc.asked_exactly(r, c) for r, c in zip(Rk, conds)]))}
-    s3 = load_results()["stage3"]["pairs"]["identity + count"]
+    s3 = load_results()[KEY_PREFIX + "stage3"]["pairs"]["identity + count"]
     mc = mcnemar(ok["solo-behaviour correction"], ok["plain stack"])
     res["bars"] = {"interference_on_the_deciding_pair": {"value": s3["interference"], "interval": s3["interference_interval"],
                                                         "bar": DECIDE_INTERFERENCE_MIN,
