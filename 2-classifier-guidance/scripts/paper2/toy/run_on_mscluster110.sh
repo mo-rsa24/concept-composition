@@ -39,9 +39,12 @@ case "${1:-}" in
         # updates; the bar stays R1_BASE_COUNT_MIN 0.95, read on new fresh seeds 22,048 to 23,071 (tuning 11,024 to 11,535).
         # The 6,000- and 16,000-update bases stay in out/ under their own names.
         step base3 base --updates 40000 --width 128 --attn
-        step stage1-base3 stage1 --test-seed0 22048 --tune-seed0 11024 --key stage1_base3_fresh_seeds_22048 --suffix -base3-seeds-22048
-        step misses-base3 misses --test-seed0 22048 --key stage1_misses_base3 --suffix -base3 ;;
+        "$0" base3-read ;;
+    base3-read)
+        # the read alone, on the base3 already in out/base.pt (a suffix starting with a dash needs the --suffix= form)
+        step stage1-base3 stage1 --test-seed0 22048 --tune-seed0 11024 --key stage1_base3_fresh_seeds_22048 --suffix=-base3-seeds-22048
+        step misses-base3 misses --test-seed0 22048 --key stage1_misses_base3 --suffix=-base3 ;;
     dials) step dials dials --kept-per 1024 ;;
     stage2|stage3|corr|stage4|stage5) step "$1" "$1" ;;
-    *) echo "usage: $0 stage1|base3|dials|stage2|stage3|corr|stage4|stage5"; exit 2 ;;
+    *) echo "usage: $0 stage1|base3|base3-read|dials|stage2|stage3|corr|stage4|stage5"; exit 2 ;;
 esac
