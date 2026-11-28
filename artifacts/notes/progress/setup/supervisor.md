@@ -8,7 +8,7 @@ compared with the first-result plan it serves ([Paper 1's first result](../../..
 [Paper 2's identity dial first result](../../../../plans/paper-2-dials/plans/03-identity-dial-first-result.md)). Nothing runs
 on the cluster; nothing is committed until the owner says so.
 
-Last updated 2026-11-28 01:15 UTC
+Last updated 2026-11-28 02:50 UTC
 
 **The trackers** (`python3 scripts/paper_tracker.py --all`, from the plans' own checkboxes, which count plan checks and close-outs too):
 
@@ -269,6 +269,8 @@ Paper 2, 2026-11-27 23:35 UTC: the dial's smoke (step 3) passed after the loss-s
 Paper 1, 2026-11-27 23:45 UTC: the full corrector reads on all 626 touching seeds, Method A on 1,599 touching scenes: no corrector 501 (87, 176, 238), 27 mostly purple; 5 corrector steps 492 (81, 178, 233), 20 purple; 20 steps 483 (89, 175, 219), 22 purple; the plain sum with 20 steps 0, 589 purple; the paste 517 (84, 194, 239), 26 purple. On CLEVR the corrector lowers purple but does not raise touching; the 55 of 66 on the first quick read was within the noise of 66 seeds. Nothing beats the paste on pixels, so nothing goes to the blind test yet. The lever that moved CLEVR is joint data (197 touching scenes 376, 1,599 scenes 501), so 6,000 more joint scenes are rendering on bigbatch (jobs 97073 to 97078, seed base 8,200,000, recorded in environment/clevr-and-edm2.md); Method A is retrained on all touching scenes when they finish.
 
 Paper 1, 2026-11-28 01:15 UTC: the 6,000 joint scenes at seed base 8,200,000 finished (jobs 97073 to 97078, 01:08 to 01:10 UTC); p1-methodA-joint3.sh on mscluster110 linked and is packing them, then trains Method A on their touching scenes plus the 1,599 already used and reads the 66 and 626 touching seeds against the paste. With the six bigbatch slots idle, another 6,000 joint scenes are rendering at seed base 8,300,000 (jobs 97080 to 97085), so a next data point is ready if this one gains. Paper 2: the dial training was at step 340 of 1,000 at 00:45 UTC, reward about 0.9.
+
+Paper 1, 2026-11-28 02:50 UTC: Method A on 4,448 touching scenes (457, 1,595 and 2,396 at counts 1 to 3: the 6,000 renders at seed base 8,200,000 packed as before plus the 1,599 already used), 16,000 updates: red against blue on 468 of 626 touching seeds (84, 163, 221), 26 mostly purple, against 501 for 1,599 scenes and 517 for the paste; first 66 seeds 47 against 49 and 52. Its held-out loss was still falling at its last reading (0.0268 at update 15,500), so with 2.8 times the scenes each was seen 2.8 times less often, the pattern the toy showed (all scenes at 5,000 updates below 1,024 scenes, 0.738 against 0.797, until 20,000 updates lifted it to 0.832). One change next: the same 4,448 scenes trained 48,000 updates (p1-methodA-joint3-u48k.sh, mscluster110), read on the 66 and 626 seeds. The fourth joint set (seed base 8,300,000) keeps rendering.
 
 ## Final review
 
