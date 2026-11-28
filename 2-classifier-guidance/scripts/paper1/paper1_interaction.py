@@ -58,6 +58,30 @@ seed's pictures do not depend on how seeds are batched. K = 0 (the default) pass
 its pictures, are the uncorrected ones byte for byte. Each corrector step is one more denoiser call, so K steps cost 63 + 31 K calls
 per picture against the plain sampler's 63.
 
+Adversarial training (train --adv-weight lam; 0, the default, is Method A exactly: no discriminator is built, no extra random
+number is drawn, and the training loop runs the same operations in the same order). Ported from the squares toy's L4
+(toy/loss_ladder.py: FeatDisc, train_delta_x with adv_weight, run_L4, the L4_* constants), one change from Method A:
+  The discriminator (FeatDisc below) reads a picture y re-noised at sigma_d, log-uniform on ADV_SIGMA_D, and the three frozen
+  experts' inner decoder features at (y, sigma_d): the 16 by 16 and 8 by 8 decoder blocks paper1_disc.py's head reads (the block
+  choice in paper1-first-disc-k64/blocks.json, ADV_BLOCK16 and ADV_BLOCK8), from red, blue and the empty-scene model, each projected
+  by a 1 by 1 convolution and joined into a small encoder over c_in(sigma_d) y conditioned on sigma_d and the count. One raw score
+  per picture, no bound (as the toy's L4).
+  Each update, after Method A's denoising loss is formed on the batch: real joint scenes x0 and the delta's own current one-step
+  estimates D_new (the same noise draw n_f re-noises every estimate) go through the discriminator; it takes one Adam step (lr
+  ADV_D_LR, betas ADV_D_BETAS) on the hinge loss relu(1 - real) + relu(1 + fake), plus R1 = ADV_R1_EVERY * 0.5 * ADV_R1 *
+  |grad_y real score|^2 on real pictures every ADV_R1_EVERY updates. Then delta is trained on the denoising loss plus
+  lam * (-score of D_new + sigma_d n_f), the gradient flowing through the frozen experts' features into D_new.
+  The expert features of D_new + sigma_d n_f are computed once with their graph: the discriminator's step reads them detached, the
+  delta's term reads them live. The experts are frozen, so this is the same arithmetic as the toy's two separate passes.
+  The discriminator's sigma_d and n_f come from their own CPU generator (seed + ADV_SEED_OFFSET), so the positives, sigmas and noise
+  of the denoising loss are the same draws as Method A's at the same seed.
+  delta's weights are averaged with EMA ADV_EMA after every update. The validation loss is read on the averaged weights and the
+  lowest one is kept as interaction.pt (the kept row); the averaged weights at the last update are interaction-final.pt (the judged
+  row, since with an adversarial loss the held-out denoising loss is no longer what is trained), the raw last weights
+  interaction-final-raw.pt. Every 250 updates train.json records (update, discriminator loss, mean real score, mean fake score,
+  delta's adversarial term).
+  The weight is chosen between ADV_WEIGHTS on tuning seeds with the final averaged delta (paper1_tuning_clean.py), as on the toy.
+
 Usage (cluster, through paper1_gpu.sbatch; folders absolute or relative to /datasets/mmolefe/poe_repair_min/paper1/):
   python paper1_interaction.py train --run paper1-methodA-k384 --positives paper1-diag-pack-k384/k384-s1
   python paper1_interaction.py sample --run paper1-methodA-k384-rows --checkpoint paper1-methodA-k384/interaction.pt \
@@ -113,6 +137,17 @@ VAL_DRAWS = 4                 # fixed noise draws per held-out scene
 VAL_SEED = 12345
 LOSS_CURVE_EVERY = 50         # train.json's loss curve: the mean training loss over each block of this many updates
 WANDB_ENTITY, WANDB_PROJECT = pdisc.WANDB_ENTITY, pdisc.WANDB_PROJECT
+
+# Adversarial training (--adv-weight; the toy's L4 constants, toy/loss_ladder.py line 95)
+ADV_WEIGHTS = (0.003, 0.03)   # the weights tried; the choice is made on tuning seeds with the final averaged delta
+ADV_R1, ADV_R1_EVERY = 1.0, 4
+ADV_EMA = 0.999
+ADV_SIGMA_D = (0.05, 1.0)     # the discriminator's re-noising sigma, log-uniform on this range
+ADV_D_LR, ADV_D_BETAS = 2e-4, (0.0, 0.99)
+ADV_D_WIDTH, ADV_D_PROJ = 48, 32   # the toy FeatDisc's widths
+ADV_BLOCK8, ADV_BLOCK16 = "8x8_block1", "16x16_block3"   # paper1-first-disc-k64/blocks.json's chosen pair
+ADV_SEED_OFFSET = 1000        # the discriminator's own generator is seeded seed + this
+ADV_CURVE_EVERY = 250
 
 
 def c_in(sigma):
@@ -309,15 +344,99 @@ def validation_loss(nets, model, val, batch=128):
     return total / max(1, n)
 
 
-def training_loss(nets, model, x0, count, sigma, noise):
-    """EDM2Loss on D_new: lambda / exp(u) * (D_new - x0)^2 + u, averaged over every element; the experts run without gradients."""
+def training_loss(nets, model, x0, count, sigma, noise, return_d=False):
+    """EDM2Loss on D_new: lambda / exp(u) * (D_new - x0)^2 + u, averaged over every element; the experts run without gradients.
+    With return_d, also D_new itself (with its graph), for the adversarial term."""
     s4 = sigma.view(-1, 1, 1, 1)
     xt = x0 + s4 * noise
     with torch.no_grad():
         d_r, d_b, d_e = expert_guesses(nets, xt, sigma, F.one_hot(count.long() - 1, 3).float())
     d_new = combined(d_r, d_b, d_e, model(xt, sigma, count, d_r, d_b, d_e))
     logvar = model.logvar(sigma)
-    return ((loss_weight(s4) / logvar.exp()) * (d_new - x0) ** 2 + logvar).mean()
+    loss = ((loss_weight(s4) / logvar.exp()) * (d_new - x0) ** 2 + logvar).mean()
+    return (loss, d_new) if return_d else loss
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------
+# The discriminator for adversarial training (the toy's FeatDisc on CLEVR; see the docstring)
+
+
+class FeatDisc(nn.Module):
+    """Scores a picture y at re-noising level sigma_d and count k. The three frozen experts (red and blue told k, the empty-scene
+    model told nothing) run on (y, sigma_d) up to their 16 by 16 decoder block; their ADV_BLOCK16 outputs, joined, are projected by
+    a 1 by 1 convolution and joined to the pixel encoder at 16 by 16, and their ADV_BLOCK8 outputs likewise at 8 by 8. The pixel
+    encoder: c_in(sigma_d) y, a 3 by 3 convolution to w channels at 64 by 64, a residual block, then average pools and residual
+    blocks at 32 (w), 16 (2w, with the 16 by 16 features) and 8 (2w, with the 8 by 8 features), the mean over the grid and one
+    linear layer. Gradients flow through the frozen experts to y."""
+
+    def __init__(self, nets, w=ADV_D_WIDTH, proj=ADV_D_PROJ):
+        super().__init__()
+        self._feats = [pdisc.ExpertFeatures(n, (ADV_BLOCK8, ADV_BLOCK16)) for n in nets]
+        with torch.no_grad():                                   # the feature widths, read from one picture
+            f = self.features(torch.zeros(1, 3, 64, 64, device=DEV), torch.ones(1, device=DEV), torch.ones(1, device=DEV))
+        c16, c8 = f[0].shape[1], f[1].shape[1]
+        self.cond = nn.Sequential(nn.Linear(FOURIER + 3, EMB), nn.SiLU(), nn.Linear(EMB, EMB), nn.SiLU())
+        self.p16, self.p8 = nn.Conv2d(c16, proj, 1), nn.Conv2d(c8, proj, 1)
+        self.conv_in = nn.Conv2d(3, w, 3, padding=1)
+        self.b64, self.b32 = Block(w, w), Block(w, w)
+        self.b16, self.b8 = Block(w + proj, 2 * w), Block(2 * w + proj, 2 * w)
+        self.lin = nn.Linear(2 * w, 1)
+        self.feature_channels = (c16, c8)
+
+    def features(self, y, sigma, count):
+        """(the joined 16 by 16 maps, the joined 8 by 8 maps) of red, blue and empty at (y, sigma)."""
+        labels = F.one_hot(count.long() - 1, 3).float()
+        fr, fb, fe = (fx(y, sigma, lab) for fx, lab in zip(self._feats, (labels, labels, None)))
+        return (torch.cat([fr[ADV_BLOCK16], fb[ADV_BLOCK16], fe[ADV_BLOCK16]], 1),
+                torch.cat([fr[ADV_BLOCK8], fb[ADV_BLOCK8], fe[ADV_BLOCK8]], 1))
+
+    def head(self, y, feats, sigma, count):
+        e = self.cond(torch.cat([fourier(sigma.float()), F.one_hot(count.long() - 1, 3).float()], 1))
+        h = self.b64(self.conv_in(c_in(sigma.float().view(-1, 1, 1, 1)) * y.float()), e)
+        h = self.b32(F.avg_pool2d(h, 2), e)
+        h = self.b16(torch.cat([F.avg_pool2d(h, 2), self.p16(feats[0])], 1), e)
+        h = self.b8(torch.cat([F.avg_pool2d(h, 2), self.p8(feats[1])], 1), e)
+        return self.lin(h.mean((2, 3)))[:, 0]
+
+    def forward(self, y, sigma, count):
+        return self.head(y, self.features(y, sigma, count), sigma, count)
+
+
+class Adversary:
+    """The discriminator, its optimiser and its own generator; step() runs one update's discriminator step and returns delta's
+    adversarial term (with its graph to D_new) and the numbers recorded."""
+
+    def __init__(self, nets, seed):
+        self.disc = FeatDisc(nets).to(DEV)
+        self.opt = torch.optim.Adam(self.disc.parameters(), lr=ADV_D_LR, betas=ADV_D_BETAS)
+        self.gen = torch.Generator().manual_seed(seed + ADV_SEED_OFFSET)
+        self.lo, self.hi = math.log(ADV_SIGMA_D[0]), math.log(ADV_SIGMA_D[1])
+
+    def step(self, update, x0, count, d_new):
+        n = len(x0)
+        sd = torch.empty(n).uniform_(self.lo, self.hi, generator=self.gen).exp().to(DEV)
+        n_r = torch.randn(x0.shape, generator=self.gen).to(DEV)
+        n_f = torch.randn(x0.shape, generator=self.gen).to(DEV)
+        s4 = sd.view(-1, 1, 1, 1)
+        y_r = x0 + s4 * n_r
+        y_f = d_new + s4 * n_f                                   # with its graph to delta
+        r1 = update % ADV_R1_EVERY == 0
+        if r1:
+            y_r.requires_grad_(True)
+        f_f = self.disc.features(y_f, sd, count)
+        self.disc.requires_grad_(True)
+        l_r = self.disc(y_r, sd, count)
+        l_f = self.disc.head(y_f.detach(), tuple(f.detach() for f in f_f), sd, count)
+        loss_d = F.relu(1 - l_r).mean() + F.relu(1 + l_f).mean()
+        if r1:
+            g, = torch.autograd.grad(l_r.sum(), y_r, create_graph=True)
+            loss_d = loss_d + ADV_R1_EVERY * 0.5 * ADV_R1 * g.pow(2).flatten(1).sum(1).mean()
+        self.opt.zero_grad(set_to_none=True)
+        loss_d.backward()
+        self.opt.step()
+        self.disc.requires_grad_(False)
+        g_adv = -self.disc.head(y_f, f_f, sd, count).mean()
+        return g_adv, (float(loss_d.detach()), float(l_r.detach().mean()), float(l_f.detach().mean()), float(g_adv.detach()))
 
 
 # ---------------------------------------------------------------------------------------------------------------------------------------
@@ -364,6 +483,22 @@ def cmd_train(args):
                 "val_every": args.val_every, "val_draws": VAL_DRAWS, "val_seed": VAL_SEED,
                 "delta_weights": weight_count(model), "uncertainty_weights": weight_count(model, True) - weight_count(model),
                 "red_net": args.red_net, "blue_net": args.blue_net, "empty_net": args.empty_net}
+    adv = args.adv_weight > 0
+    if args.adv_weight < 0:
+        raise SystemExit("--adv-weight must be 0 or more")
+    ema, adversary, judged = None, None, model
+    if adv:                                                  # adversarial training (see the docstring); nothing here at 0
+        ema = copy.deepcopy(model).requires_grad_(False)
+        judged = ema
+        adversary = Adversary(nets, args.seed)
+        settings.update({"adv_weight": args.adv_weight, "adv_r1": ADV_R1, "adv_r1_every": ADV_R1_EVERY, "adv_ema": ADV_EMA,
+                         "adv_sigma_d": list(ADV_SIGMA_D), "adv_d_lr": ADV_D_LR, "adv_d_betas": list(ADV_D_BETAS),
+                         "adv_d_width": ADV_D_WIDTH, "adv_d_proj": ADV_D_PROJ, "adv_blocks": [ADV_BLOCK16, ADV_BLOCK8],
+                         "adv_feature_channels": list(adversary.disc.feature_channels),
+                         "adv_d_weights": sum(p.numel() for p in adversary.disc.parameters()),
+                         "adv_seed": args.seed + ADV_SEED_OFFSET, "adv_loss": "hinge",
+                         "judged": "interaction-final.pt, the EMA weights at the last update; interaction.pt keeps the EMA "
+                                   "weights with the lowest validation loss"})
     print(json.dumps({k: v for k, v in settings.items() if k != "validation_names"}), flush=True)
     wb = None
     if args.wandb:
@@ -377,28 +512,47 @@ def cmd_train(args):
     val_curve, best = [], {"update": None, "validation_loss": math.inf}
 
     def validate(update):
-        model.eval()
-        v = validation_loss(nets, model, val)
-        model.train()
+        judged.eval()
+        v = validation_loss(nets, judged, val)
+        judged.train()
         val_curve.append({"update": update, "validation_loss": round(v, 6)})
         if v < best["validation_loss"]:
             best.update(update=update, validation_loss=v)
-            save_checkpoint(folder / "interaction.pt", model, settings, update, v)
+            save_checkpoint(folder / "interaction.pt", judged, settings, update, v)
         print(json.dumps({"update": update, "validation_loss": round(v, 6), "best_update": best["update"]}), flush=True)
         if wb is not None:
             wb.log({"validation_loss": v}, step=update)
 
     validate(0)                                              # delta is 0 here: the plain sum's own validation loss
     gen = torch.Generator().manual_seed(args.seed)
-    losses, begin, rate = [], time.time(), None
+    losses, begin, rate, adv_curve = [], time.time(), None, []
     for update in range(1, args.updates + 1):
         idx = torch.randint(len(tr_x), (args.batch,), generator=gen)                 # positives with replacement
         sigma = draw_sigma(args.batch, gen)
         noise = torch.randn((args.batch, 3, 64, 64), generator=gen)
-        loss = training_loss(nets, model, tr_x[idx].to(DEV), tr_c[idx].to(DEV), sigma.to(DEV), noise.to(DEV))
+        if not adv:
+            loss = training_loss(nets, model, tr_x[idx].to(DEV), tr_c[idx].to(DEV), sigma.to(DEV), noise.to(DEV))
+        else:
+            x0b, cb = tr_x[idx].to(DEV), tr_c[idx].to(DEV)
+            loss, d_new = training_loss(nets, model, x0b, cb, sigma.to(DEV), noise.to(DEV), return_d=True)
+            g_adv, numbers = adversary.step(update, x0b, cb, d_new)
+            denoising = float(loss.detach())
+            loss = loss + args.adv_weight * g_adv
+            if update % ADV_CURVE_EVERY == 0:
+                adv_curve.append([update, round(denoising, 6), *(round(v, 6) for v in numbers)])
+                print(json.dumps({"update": update, "denoising_loss": round(denoising, 6), "disc_loss": round(numbers[0], 4),
+                                  "disc_real": round(numbers[1], 4), "disc_fake": round(numbers[2], 4),
+                                  "adv_term": round(numbers[3], 4)}), flush=True)
+                if wb is not None:
+                    wb.log({"denoising_loss": denoising, "disc_loss": numbers[0], "disc_real": numbers[1], "disc_fake": numbers[2],
+                            "adv_term": numbers[3]}, step=update)
         opt.zero_grad()
         loss.backward()
         opt.step()
+        if adv:
+            with torch.no_grad():
+                for pe, pm in zip(ema.parameters(), model.parameters()):
+                    pe.lerp_(pm, 1 - ADV_EMA)
         losses.append(float(loss.detach()))
         if wb is not None and update % 10 == 0:
             wb.log({"loss": float(np.mean(losses[-10:]))}, step=update)
@@ -422,6 +576,15 @@ def cmd_train(args):
               "best_update": best["update"], "best_validation_loss": round(best["validation_loss"], 6),
               "checkpoint": str(folder / "interaction.pt"), "settings": settings, "device": ps.device_name(),
               "wandb_run": wb.url if wb is not None else None}
+    if adv:
+        save_checkpoint(folder / "interaction-final.pt", ema, settings, args.updates, val_curve[-1]["validation_loss"])
+        save_checkpoint(folder / "interaction-final-raw.pt", model, settings, args.updates, None)
+        result.update({"final_checkpoint": str(folder / "interaction-final.pt"),
+                       "final_raw_checkpoint": str(folder / "interaction-final-raw.pt"),
+                       "final_validation_loss": val_curve[-1]["validation_loss"],
+                       "adversarial_curve_columns": ["update", "denoising loss", "disc loss", "disc mean real score",
+                                                     "disc mean fake score", "delta's adversarial term"],
+                       "adversarial_curve": adv_curve})
     (folder / "train.json").write_text(json.dumps(result, indent=1) + "\n")
     print(json.dumps({k: result[k] for k in ("updates", "seconds", "best_update", "best_validation_loss", "validation_loss_plain_sum")}),
           flush=True)
@@ -499,6 +662,8 @@ def build_parser():
     p.add_argument("--gpu-hours-stop", type=float, default=None,
                    help="replace the first result's 4 GPU-hour cost stop for this run (a spend decision, recorded in projection)")
     p.add_argument("--no-wandb", dest="wandb", action="store_false", help="do not log to W&B")
+    p.add_argument("--adv-weight", type=float, default=0.0,
+                   help="the adversarial term's weight (default 0: Method A exactly, no discriminator built); see the docstring")
 
     p = common(sub.add_parser("sample"), ps.BATCH)
     p.add_argument("--checkpoint", help="interaction.pt from train")
