@@ -11,7 +11,7 @@
 #   stage1   train the 16,000-update base, read stage 1 on fresh seeds (the gate), again on the original seeds, and sort the misses
 #   dials    train the four dials
 #   stage2 | stage3 | corr | stage4 | stage5
-#   co3-base | co3-read | co3-ladder   the toy CO3 base (toy_co3.py), its stage 1, its dial stages
+#   co3-base | co3-read | co3-retry | co3-ladder  the toy CO3 base (toy_co3.py), its stage 1, its dial stages
 #   ref-ladder                         the same dial stages on the width-128 conditional base, the reference row
 # Logs: /datasets/mmolefe/poe_repair_min/toys/paper2/<part>.log. Results: .../toys/paper2/results/. Checkpoints: .../toys/paper2/out/.
 set -euo pipefail
@@ -61,10 +61,22 @@ case "${1:-}" in
         export PAPER2_TOY_BASE_KIND=co3 PAPER2_TOY_BASE=$D/out/co3/co3-base.pt PAPER2_TOY_WORK=$D/out/co3 PAPER2_TOY_KEY_PREFIX=co3_ PAPER2_TOY_PICS=co3
         step co3-stage1 stage1 --test-seed0 23072 --tune-seed0 11536 --key stage1_fresh_seeds_23072 --suffix=-co3-seeds-23072
         step co3-misses misses --test-seed0 23072 --key stage1_misses_seeds_23072 --suffix=-co3-seeds-23072 ;;
+    co3-retry)
+        # the one retry after stage 1 failed at weight 1: choose the expert weight on seeds 12,048 to 12,559 by the rule in
+        # toy_co3.py, then stage 1 again at that weight on fresh seeds, test 24,096 to 25,119, tuning 12,560 to 13,071
+        echo "$(date -Is) start co3-tune-weight"
+        PAPER2_TOY_WORK=$D/out/co3 "$PY" -u 2-classifier-guidance/scripts/paper2/toy/toy_co3.py tune_weight > "$D/co3-tune-weight.log" 2>&1
+        echo "$(date -Is) done co3-tune-weight"
+        export PAPER2_TOY_CO3_WEIGHT=$("$PY" -c "import json; print(json.load(open('$D/out/co3/chosen-weight.json'))['weight'])")
+        export PAPER2_TOY_BASE_KIND=co3 PAPER2_TOY_BASE=$D/out/co3/co3-base.pt PAPER2_TOY_WORK=$D/out/co3 PAPER2_TOY_KEY_PREFIX=co3_ PAPER2_TOY_PICS=co3
+        step co3-retry-stage1 stage1 --test-seed0 24096 --tune-seed0 12560 --key stage1_retry_fresh_seeds_24096 --suffix=-co3-retry-seeds-24096
+        step co3-retry-misses misses --test-seed0 24096 --key stage1_retry_misses_seeds_24096 --suffix=-co3-retry-seeds-24096 ;;
     co3-ladder)
-        # the dial stages on the composed base: keys co3_dials, co3_stage2 ... co3_stage5, files in out/co3/, pictures in results/co3/
+        # the dial stages on the composed base at the retry's chosen weight: keys co3_dials, co3_stage2 ... co3_stage5, files in
+        # out/co3/, pictures in results/co3/
+        export PAPER2_TOY_CO3_WEIGHT=$("$PY" -c "import json; print(json.load(open('$D/out/co3/chosen-weight.json'))['weight'])")
         export PAPER2_TOY_BASE_KIND=co3 PAPER2_TOY_BASE=$D/out/co3/co3-base.pt PAPER2_TOY_WORK=$D/out/co3 PAPER2_TOY_KEY_PREFIX=co3_ \
-               PAPER2_TOY_STAGE1_KEY=co3_stage1_fresh_seeds_23072 PAPER2_TOY_PICS=co3
+               PAPER2_TOY_STAGE1_KEY=co3_stage1_retry_fresh_seeds_24096 PAPER2_TOY_PICS=co3
         step co3-dials dials --kept-per 1024
         for s in stage2 stage3 corr stage4 stage5; do step "co3-$s" "$s"; done ;;
     ref-ladder)
@@ -74,5 +86,5 @@ case "${1:-}" in
                PAPER2_TOY_STAGE1_KEY=stage1_base3_fresh_seeds_22048 PAPER2_TOY_PICS=ref-base3
         step ref-base3-dials dials --kept-per 1024
         for s in stage2 stage3 corr stage4 stage5; do step "ref-base3-$s" "$s"; done ;;
-    *) echo "usage: $0 stage1|base3|base3-read|dials|stage2|stage3|corr|stage4|stage5|co3-base|co3-read|co3-ladder|ref-ladder"; exit 2 ;;
+    *) echo "usage: $0 stage1|base3|base3-read|dials|stage2|stage3|corr|stage4|stage5|co3-base|co3-read|co3-retry|co3-ladder|ref-ladder"; exit 2 ;;
 esac

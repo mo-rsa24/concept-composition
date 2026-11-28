@@ -24,8 +24,15 @@ every expert because a product of "contains" experts cannot say how many objects
 expert with m = 2, never the same expert used twice); the joint condition itself is never shown to an expert.
 
 The composition. For a condition with E distinct combinations (the stages pass the same 14-number full condition they pass the
-conditional base), D = sum over the E experts of D_k - (E - 1) D_empty, the empty expert at the same n. With E = 1 this is the one
-expert and the empty expert is not evaluated.
+conditional base), D = D_empty + w sum over the E experts of (D_k - D_empty), the empty expert at the same n. At w = 1 this is the
+plain product, sum D_k - (E - 1) D_empty, and with E = 1 it is the one expert and the empty expert is not evaluated. w above 1 is the
+guidance scale CO3 on SDXL runs each prompt expert at; the weight comes from the environment variable PAPER2_TOY_CO3_WEIGHT
+(default 1).
+
+Stage 1 at w = 1 on test seeds 23,072 to 24,095 drew the right count (0.994) but the wrong colours: one expert's colour took over
+both objects, exactly asked 0.714 against the 0.95 bar. The one retry chooses w on its own tuning seeds (CO3_WEIGHT_TUNE_SEED0,
+512 canvases of the training conditions) by a rule fixed here, the highest exactly-asked share over CO3_WEIGHTS with ties to the
+smaller w, then reads stage 1 again on fresh seeds (CO3_RETRY_TEST_SEED0, CO3_RETRY_TUNE_SEED0) with the bars unchanged.
 
 The sampler. EDM2's deterministic Heun (32 steps, sigma 80 to 0.002, the same arithmetic as toy_model.heun_range), then after every
 step that lands above sigma 0, CORR_STEPS Langevin steps at that sigma: x <- x + eta score + sqrt(2 eta) z, score = (D(x, sigma) - x)
@@ -72,6 +79,11 @@ CORR_SEED_OFFSET = 50_000_000      # clear of every seed range in toy_canvas.SEE
 # ---- stage 1 on the composed sampler: the bars are dials_toy's, unchanged; the seeds are new and fixed here before the first read
 CO3_TEST_SEED0 = 23_072            # test seeds 23,072 to 24,095
 CO3_TUNE_SEED0 = 11_536            # tuning seeds 11,536 to 12,047
+# ---- the one retry: the expert weight, chosen on its own tuning seeds, then stage 1 again on fresh seeds
+CO3_WEIGHTS = (1.0, 1.5, 2.0, 3.0, 5.0)
+CO3_WEIGHT_TUNE_SEED0 = 12_048     # 512 canvases, seeds 12,048 to 12,559
+CO3_RETRY_TEST_SEED0 = 24_096      # test seeds 24,096 to 25,119
+CO3_RETRY_TUNE_SEED0 = 12_560      # tuning seeds 12,560 to 13,071
 
 
 # -------------------------------------------------------------------------------------------------------------------------------------
@@ -84,25 +96,29 @@ class CO3Denoiser(tm.Denoiser):
     def __init__(self, w=128, attn=True):
         nn.Module.__init__(self)
         self.net = tm.CondUNet(w, cond_dim=PART_DIM, attn=attn)
+        self.weight = 1.0                                   # the expert weight w (load_base sets it from the environment)
 
     def expert(self, x, sigma, part):
         """One expert evaluation per row: part is (N, 17)."""
         return tm.Denoiser.forward(self, x, sigma, part)
 
     def forward(self, x, sigma, cond):
-        """cond: (N, 14) full conditions, as the stages pass the conditional base. Returns sum_k D_k - (E - 1) D_empty per row."""
+        """cond: (N, 14) full conditions, as the stages pass the conditional base. Returns w sum_k D_k - (w E - 1) D_empty per row,
+        which is D_empty + w sum_k (D_k - D_empty)."""
         sigma = torch.as_tensor(sigma, device=x.device, dtype=torch.float32).reshape(-1).expand(len(x))
-        bi, part, ei, empty, E = expert_conditions(cond)
+        w = float(self.weight)
+        bi, part, ei, empty, E = expert_conditions(cond, w)
         Dall = self.expert(torch.cat([x[bi], x[ei]]), torch.cat([sigma[bi], sigma[ei]]), torch.cat([part, empty]))
         De, D0 = Dall[:len(bi)], Dall[len(bi):]
-        out = torch.zeros_like(x).index_add(0, bi, De)
+        out = torch.zeros_like(x).index_add(0, bi, w * De)
         if len(ei):
-            out = out.index_add(0, ei, -(E[ei] - 1).to(x.dtype).view(-1, 1, 1, 1) * D0)
+            out = out.index_add(0, ei, -(w * E[ei] - 1).to(x.dtype).view(-1, 1, 1, 1) * D0)
         return out
 
 
-def expert_conditions(cond):
-    """(row of each expert, its 17-number condition, rows needing the empty expert, their empty conditions, experts per row)."""
+def expert_conditions(cond, w=1.0):
+    """(row of each expert, its 17-number condition, rows needing the empty expert, their empty conditions, experts per row). A row
+    needs the empty expert when its coefficient w E - 1 is not zero."""
     counts = cond[:, :8].round().long()
     n = counts.sum(1)
     if (n < 1).any() or (n > MAX_N).any():
@@ -117,7 +133,7 @@ def expert_conditions(cond):
     part[r, 8 + ki // 4] = m
     part[r, 10 + ki % 4] = m
     part[r, 14 + n[bi] - 1] = 1
-    ei = (E > 1).nonzero()[:, 0]
+    ei = ((w * E - 1).abs() > 1e-9).nonzero()[:, 0]
     empty = torch.zeros(len(ei), PART_DIM, device=cond.device, dtype=cond.dtype)
     empty[torch.arange(len(ei), device=cond.device), 14 + n[ei] - 1] = 1
     return bi, part, ei, empty, E
@@ -149,6 +165,7 @@ def load_base(path, dials=(), dial_states=None):
         raise ValueError(f"{path} is not a composed (co3) base; its sidecar says {cfg}")
     m = CO3Denoiser(cfg["width"], cfg["attn"]).to(DEV)
     m.load_state_dict(torch.load(path, map_location=DEV))
+    m.weight = float(os.environ.get("PAPER2_TOY_CO3_WEIGHT", "1"))
     tm.freeze_base(m)
     m.eval()
     tm.wrap(m)
@@ -273,6 +290,41 @@ def cmd_train(a):
     print(json.dumps({k: v for k, v in info.items() if k != "loss_curve"}))
 
 
+def cmd_tune_weight(a):
+    """The retry's weight: exactly-asked share of the composed sampler at each w in CO3_WEIGHTS, on the training conditions at
+    seeds CO3_WEIGHT_TUNE_SEED0 onward (512 canvases); the highest share wins, ties to the smaller w. Writes the choice to
+    <out>/chosen-weight.json and the table to results.json."""
+    out = Path(a.out)
+    choice = out / "chosen-weight.json"
+    if choice.exists():
+        sys.exit(f"stopped: {choice} exists")
+    pool = tc.training_conditions()
+    conds = [pool[i % len(pool)] for i in range(a.n)]
+    seeds = list(range(CO3_WEIGHT_TUNE_SEED0, CO3_WEIGHT_TUNE_SEED0 + a.n))
+    if DEV.type == "cuda":
+        torch.cuda.synchronize()
+    t0 = time.time()
+    model = load_base(out / "co3-base.pt")
+    rows = {}
+    for w in CO3_WEIGHTS:
+        model.weight = w
+        R = tc.read(sample(model, conds, seeds))
+        ex = np.array([tc.asked_exactly(r, c) for r, c in zip(R, conds)])
+        rows[str(w)] = {"exactly_asked_share": float(ex.mean()),
+                        "by_object_count": {n: float(ex[[len(c) == n for c in conds]].mean()) for n in (1, 2, 3)},
+                        "count_right_share": float(np.mean([len(r["objects"]) == len(c) and not r["specks"] for r, c in zip(R, conds)]))}
+        print(w, rows[str(w)], flush=True)
+    best = max(CO3_WEIGHTS, key=lambda w: (rows[str(w)]["exactly_asked_share"], -w))
+    choice.write_text(json.dumps({"weight": best}) + "\n")
+    if DEV.type == "cuda":
+        torch.cuda.synchronize()
+    info = {"weights": rows, "chosen": best, "rule": "highest exactly-asked share, ties to the smaller weight",
+            "seeds": [seeds[0], seeds[-1]], "seconds": round(time.time() - t0, 1)}
+    if a.results:
+        save_results(a.results, a.key, info)
+    print(json.dumps(info))
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -287,6 +339,11 @@ def main():
     q.add_argument("--canvases", default=str(Path(os.environ.get("PAPER2_TOY_OUT", "outputs/paper2-toy")) / "train_canvases.npz"))
     q.add_argument("--results", default=os.environ.get("PAPER2_TOY_RESULTS", ""))
     q.add_argument("--key", default="co3_base_training")
+    q = sub.add_parser("tune_weight")
+    q.add_argument("--n", type=int, default=512)
+    q.add_argument("--out", default=os.environ.get("PAPER2_TOY_WORK", "outputs/paper2-toy/co3"))
+    q.add_argument("--results", default=os.environ.get("PAPER2_TOY_RESULTS", ""))
+    q.add_argument("--key", default="co3_retry_weight_tuning_seeds_12048")
     a = p.parse_args()
     globals()["cmd_" + a.cmd](a)
 
