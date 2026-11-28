@@ -293,6 +293,18 @@ Paper 1, 2026-11-28 03:00 UTC: three single-change CLEVR runs of Method A now ru
 
 Then the Langevin corrector on the winner, and the winner on CLEVR with the 1,599 and 4,448 touching scenes. A builder subagent writes and runs it beside the current CLEVR runs and the dial.
 
+2026-11-28 05:15 UTC, Paper 1, the owner (about 05:00 UTC, relayed by the laptop session) adds to the guidance ladder: try loss functions that put the signal on the interaction (an objective on the overlap and the contact, an interaction loss), a discriminator trained adversarially to improve or guide the interaction, and a toy revamped for longer runs and more data. The squares toy at 1,024 scenes is nearly saturated (A 0.891, 0.996 with the corrector), so a better loss could not show there. The loss ladder runs where A is not saturated: (a) the same toy at 256 joint scenes, where A reads 0.609 clean touching pairs of 256 seeds, and (b) a harder toy from the same code: 32 by 32 canvases, more positions, occlusion with depth order, its bars committed in code before its first run. Each is one change from Method A, under the toy's bars, on bigbatch:
+
+| Run | The one change from Method A | Prediction at 256 scenes (A 0.609), written before the run |
+|---|---|---|
+| L1 | per-pixel loss weights raised on the contact band and the occlusion edge, from the scene masks | rises, 0.65 to 0.80 |
+| L2 | the training noise levels shifted toward those where placement is decided (above sigma 2 on the toy) | rises a little, 0.62 to 0.75 |
+| L3 | A fine-tuned with a measured reward on its decoded estimate (a soft contact score minus a soft purple penalty), the denoising loss kept as an anchor | 0.65 to 0.85, with its held-out denoising loss rising (the sign of reward gaming to check) |
+| L4 | adversarial training: a discriminator on the frozen experts' inner features (hinge loss, R1 penalty, EMA) learns real joint scenes against A's own current one-step estimates, and A's term is trained to fool it beside the denoising loss | 0.60 to 0.80, the widest range because adversarial training on a small set can collapse |
+| L5 | that discriminator retrained each round on fresh samples and used at sampling time as discriminator guidance (Kim et al.), starting from the project's reading of it | adds 0 to 0.10 on top of A |
+
+Then the corrector on each winner, and the winners on CLEVR with the 1,599 and 4,448 touching scenes. A second builder writes it in new files (so it does not collide with the G1 to G4 builder's edits to squares_toy.py) and shares the bigbatch slots with it. The memory note discriminator-guidance-poe-caveats is not on the cluster; the builder starts from artifacts/notes/progress/abstract-checkers/01-reading/discriminator-guidance.md.
+
 ## Final review
 
 Run 14:09, after both loops stopped, on the laptop. Nothing ran on the cluster.
