@@ -4,7 +4,7 @@
     "Detour: idea walk, 7 claims, paused",
     "Detour: zoom-ladder, about 430k tokens",
     "Detour: reading route and pictures, about 1.8M tokens",
-    "Paper 1: CLEVR A 501/626 at 1,599 scenes, 468 at 4,448 (undertrained); retraining 4,448 at 48k updates; paste 517",
+    "Paper 1: CLEVR A best 501/626 (paste 517); three one-change runs (longer, wider, longer on 1,599) running",
     "Paper 2: dial smoke passed; dial training (1,000 steps, ~8 GPU-hours) running on mscluster110; mini toy waits on the owner",
     "Moving the Claude sessions to a daily batch-node host: handover tested and working; waits on the owner's settings and permissions"
   ],
