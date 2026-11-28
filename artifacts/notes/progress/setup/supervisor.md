@@ -327,6 +327,8 @@ L5 (the discriminator as a push at sampling time) sits outside the table, applie
 
 2026-11-28 04:50 UTC, the owner, directly in the Claude app: "go ahead and keep working. You can keep making decisions. If you like you can run unattended and just let this supervisor give me updates." The supervisor runs unattended in the cluster host job as before and decides under the standing rule; the owner gets updates, with a phone notification for a result that beats the paste, a verdict, or anything only the owner can do (the two lines that never cross still hold).
 
+2026-11-28 04:55 UTC, Paper 2's miniature: the third base trained (width 128, attention, 40,000 updates in 29 minutes on mscluster63, job 97098; saved as out/base.pt with its shape in out/base.json), but its stage 1 read stopped at argument parsing because the picture suffix began with a dash. The runner passes it as `--suffix=` now and the read is its own part (`base3-read`, commit on the branch); the failed read's log is kept as stage1-base3.argparse-fail.log, and the read alone reruns as bigbatch job 97101 on the trained base, with the bar and the fresh seeds 22,048 to 23,071 unchanged.
+
 ## Final review
 
 Run 14:09, after both loops stopped, on the laptop. Nothing ran on the cluster.
