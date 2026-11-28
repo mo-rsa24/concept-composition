@@ -109,6 +109,7 @@ PREDICTIONS = {
 PARENT_AT_PREDICTION = 0.609
 
 SMOKE = False
+R1_CHUNK = None      # --r1-chunk: L4's R1 term on sub-batches of this many real pictures (same gradient, less memory); None whole batch
 
 
 # -------------------------------------------------------------------------------------------------------------------------------------
@@ -274,7 +275,7 @@ class FeatDisc(nn.Module):
 
 
 def train_delta_x(w, idx, updates, seed=0, lr=5e-4, batch=256, val_every=250, pixel_w=None, p_mean=None, init=None,
-                  reward_weight=None, adv_weight=None, log=""):
+                  reward_weight=None, adv_weight=None, log="", r1_chunk=None):
     """Method A's train_delta (same seed, optimiser, batch, held-out rule) with one option set:
       pixel_w        (len(j), 1, H, H) per-pixel weights on the squared error (L1)
       p_mean         the training log-sigma mean (L2)
@@ -329,16 +330,35 @@ def train_delta_x(w, idx, updates, seed=0, lr=5e-4, batch=256, val_every=250, pi
             y_f = D.detach() + sd.view(-1, 1, 1, 1) * n_f
             disc.requires_grad_(True)
             r1 = u % L4_R1_EVERY == 0
-            if r1:
-                y_r.requires_grad_(True)
-            l_r, l_f = disc(y_r, sd), disc(y_f, sd)
-            loss_d = F.relu(1 - l_r).mean() + F.relu(1 + l_f).mean()
-            if r1:
-                g, = torch.autograd.grad(l_r.sum(), y_r, create_graph=True)
-                loss_d = loss_d + L4_R1_EVERY * 0.5 * L4_R1 * g.pow(2).flatten(1).sum(1).mean()
-            opt_d.zero_grad(set_to_none=True)
-            loss_d.backward()
-            opt_d.step()
+            if r1 and r1_chunk:
+                # The same R1 term computed on sub-batches of r1_chunk real pictures, each backward accumulated into the same
+                # gradient, so the result equals the whole-batch term while the double backward through the experts holds only
+                # one sub-batch in memory (the harder toy's 32 by 32 batch does not fit otherwise).
+                l_r, l_f = disc(y_r, sd), disc(y_f, sd)
+                loss_d = F.relu(1 - l_r).mean() + F.relu(1 + l_f).mean()
+                opt_d.zero_grad(set_to_none=True)
+                loss_d.backward()
+                pen_total = 0.0
+                for c0 in range(0, batch, r1_chunk):
+                    yc = y_r[c0:c0 + r1_chunk].detach().requires_grad_(True)
+                    lc = disc(yc, sd[c0:c0 + r1_chunk])
+                    g, = torch.autograd.grad(lc.sum(), yc, create_graph=True)
+                    pen = L4_R1_EVERY * 0.5 * L4_R1 * g.pow(2).flatten(1).sum(1).sum() / batch
+                    pen.backward()
+                    pen_total += float(pen.detach())
+                loss_d = loss_d.detach() + pen_total
+                opt_d.step()
+            else:
+                if r1:
+                    y_r.requires_grad_(True)
+                l_r, l_f = disc(y_r, sd), disc(y_f, sd)
+                loss_d = F.relu(1 - l_r).mean() + F.relu(1 + l_f).mean()
+                if r1:
+                    g, = torch.autograd.grad(l_r.sum(), y_r, create_graph=True)
+                    loss_d = loss_d + L4_R1_EVERY * 0.5 * L4_R1 * g.pow(2).flatten(1).sum(1).mean()
+                opt_d.zero_grad(set_to_none=True)
+                loss_d.backward()
+                opt_d.step()
             disc.requires_grad_(False)
             g_adv = -disc(D + sd.view(-1, 1, 1, 1) * n_f, sd).mean()
             loss = loss + adv_weight * g_adv
@@ -586,7 +606,7 @@ def run_L4(w, n, updates):
     runs, xs, labels, xcs = {}, [], [], {}
     for lam in L4_WEIGHTS:
         t1 = time.time()
-        states, info = train_delta_x(w, idx, updates, adv_weight=lam, log=f"L4 lam={lam}")
+        states, info = train_delta_x(w, idx, updates, adv_weight=lam, log=f"L4 lam={lam}", r1_chunk=R1_CHUNK)
         for k in ("best", "final", "raw_final"):
             torch.save(states[k], fs[f"lam{lam}-{k}.pt"])
         den_f = a_denoiser(w, delta_of(states["final"]))
@@ -902,7 +922,10 @@ def main():
     q.add_argument("--runs", default="parent,L1,L2,L3,L4,L5")
     q.add_argument("--l5-kinds", default=",".join(L5_KINDS))
     q.add_argument("--smoke", action="store_true", help="tiny sizes into LADDER_SMOKE_DIR, for a CPU check")
+    q.add_argument("--r1-chunk", type=int, default=0, help="L4's R1 on sub-batches of this size (0: whole batch)")
     a = p.parse_args()
+    global R1_CHUNK
+    R1_CHUNK = a.r1_chunk or None
     {"ladder": cmd_ladder}[a.cmd](a)
 
 
