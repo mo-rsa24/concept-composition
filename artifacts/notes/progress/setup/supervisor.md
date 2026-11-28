@@ -376,6 +376,8 @@ Paper 1: the adversarial-training port to CLEVR is running at both toy weights, 
 
 2026-11-28 08:15 UTC, Paper 1: job 97096 (Method A on 1,599 touching scenes, 48,000 updates) stopped by the supervisor at update 20,250. Its held-out loss had not improved since update 7,000 (0.0282, the same point the 16,000-update run peaked at), so on 1,599 scenes longer training only overfits, and its remaining updates would have spent about 4.5 GPU-hours and a bigbatch slot needed for the adversarial run. Nothing is lost: its kept checkpoint (`interaction.pt`, the update-7,000 weights, saved 05:27 UTC) and its log stay, and it is sampled and read on all 626 touching seeds on mscluster110 (`/datasets/mmolefe/poe_repair_min/paper1/launch/p1-sample-1599u48k.sh`). The lever comparison stands as: more updates help where there are many scenes (4,448 scenes, 468 to 510), not where there are few.
 
+2026-11-28 08:25 UTC, Paper 1, how much a CLEVR read moves between runs. The 1,599-scene run stopped at update 20,250 (kept checkpoint at update 7,000) reads **489** of 626 touching seeds; the 16,000-update run on the same scenes, kept at the same update 7,000, read 501. The two differ only through the learning-rate schedule (it depends on the total number of updates), so a CLEVR pixel read moves about 12 seeds between otherwise identical runs. Against that spread, width 192 over width 96 (+53) and 48,000 over 16,000 updates on 4,448 scenes (+42) are levers, and width 192 over the paste (+4, 521 against 517) is not yet a win. This is why the blind test waits for the combined candidate.
+
 ## Final review
 
 Run 14:09, after both loops stopped, on the laptop. Nothing ran on the cluster.
