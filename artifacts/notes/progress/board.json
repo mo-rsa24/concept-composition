@@ -5,7 +5,7 @@
     "Detour: zoom-ladder, about 430k tokens",
     "Detour: reading route and pictures, about 1.8M tokens",
     "Paper 1: CLEVR A best 510/626 (4,448 scenes, 48k updates; paste 517); fourth joint set packed and training at 48k on mscluster110; adversarial training on CLEVR running",
-    "Paper 2: dial checkpoint 500 picked; step 6 test drawing; toy CO3 base fails stage 1 (0.850 vs 0.95, colour takeover); question 126 to the owner",
+    "Paper 2: dial test drawn (240 pictures); blind test calls (two reviewers, 16 agents) running; verdict next; question 126 (toy CO3) to the owner",
     "Claude sessions moved to the cluster host job; the supervisor runs there unattended and sends the owner updates"
   ],
   "detours_join": "P2",
