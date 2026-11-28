@@ -60,6 +60,11 @@ Subcommands, one per rung, run in order (each writes its section of results.json
   rung5     Method D: rung 2c's Method A whose delta also reads the experts' inner decoder features
   rung6     every composed sampler from saved models, drawn plain and with a Langevin corrector at 5 and 20 steps per noise level
             (step 0.05 sigma^2, score (D - x) / sigma^2 from the row's own composed denoiser, push included)
+  rungG1, rungG2, rungG3   the guidance-head ladder at N = 1,024 (see "The guidance ladder" below)
+  cells     guidance cells CELL@N in order (G1, G2, G3, HL1, HL3, HL4), each read plain and with rung 6's corrector
+  readG     sampling only: the plain and corrector reads for cells whose key has none (read2-<key>)
+  rungG4    G4's single changes on the best deployable guidance cell at N = 1,024
+  guidance_plan   readG, then the cells, then rungG4, in one job
 
   /home/molef/micromamba/envs/voice-agent/bin/python 2-classifier-guidance/scripts/paper1/toy/squares_toy.py rung0
 """
@@ -1629,7 +1634,7 @@ ALIGN_SHARE_TOY = 0.25                                        # paper1_disc.py A
 ALIGN_WEIGHT_TOY = 1.0                                        # paper1_disc.py ALIGN_WEIGHT_ON
 EMA_DECAY = 0.999
 SHIFT_MAX = 4                                                 # paper1_disc.py's whole-pixel shift, up to 4 each way
-G_PREDICTIONS = {                                             # artifacts/notes/progress/setup/supervisor.md, 2026-11-28 05:00 UTC
+G_PREDICTIONS = {                                             # artifacts/notes/progress/setup/supervisor.md, entry 2026-11-28 04:20 UTC
     "G1": "works, 0.75 to 0.90, near A's 0.891",
     "G2": "fails, under 0.2",
     "G3": "works, at least 0.9: the ceiling for any guidance head",
@@ -1779,21 +1784,103 @@ def scene_shift(x0, max_shift, gen=None):
     return out.gather(3, ci[:, None, None, :].expand(n, 3, H, H))
 
 
+STATE_SEEDS = list(range(300000, 300256))                     # the guided sampler's own states for L3 and L4; no other seed set uses these
+L1_BAND_GAIN = 4.0                                            # L1: the contact band and occlusion region weigh 1 + 4 = 5, every other pixel 1
+L3_REWARD = {"weight": 0.1, "tau": 0.1, "batch": 128, "refresh": 1000}
+L3_UPDATES, L3_LR = 5000, 1e-4
+L4_ADV = {"weight": 0.1, "ramp": 2000, "r1": 1.0, "batch": 64, "d_lr": 2e-4, "sigma_lo": 0.05, "sigma_hi": 0.5, "refresh": 1000}
+
+
+def contact_band_weights(jpics, meta, gain=L1_BAND_GAIN):
+    """L1's per-pixel loss weights, one map per joint scene: 1 + gain on the contact band (pixels within one pixel of both the
+    visible red and the visible blue square, which is the seam where they touch) and on the occlusion region (where the two
+    squares' full extents overlap, so one hides the other), 1 elsewhere. Built from the scene's own pixels and its metadata."""
+    red, blue, _ = masks(jpics)
+    near = lambda m: F.max_pool2d(m.float()[:, None], 3, 1, 1)[:, 0] > 0  # noqa: E731
+    band = near(red) & near(blue)
+    full = torch.zeros(len(jpics), 2, H, H, dtype=torch.bool)
+    for i, (rr, rc, br, bc, _, _) in enumerate(meta.tolist()):
+        full[i, 0, rr:rr + SIDE, rc:rc + SIDE] = True
+        full[i, 1, br:br + SIDE, bc:bc + SIDE] = True
+    band = band | (full[:, 0] & full[:, 1])
+    return (1 + gain * band.float())[:, None]
+
+
+def soft_reward(x, tau=0.1):
+    """L3's measured reward on a decoded picture, differentiable: a soft contact score minus a soft purple penalty. Soft red, blue
+    and purple masks use sigmoid((value - 0.5) / tau) in place of the reader's thresholds at 0.5; contact = sum over pixels of the
+    3 by 3 max of soft red times soft blue, scored 1 - exp(-contact) (0 with no contact, near 1 with a full seam); the penalty is the
+    soft purple pixel count divided by SIDE (one purple square side costs 1)."""
+    pr, pb = torch.sigmoid((x[:, 0] - PURPLE_T) / tau), torch.sigmoid((x[:, 2] - PURPLE_T) / tau)
+    red, blue, purple = pr * (1 - pb), pb * (1 - pr), pr * pb
+    contact = (F.max_pool2d(red[:, None], 3, 1, 1)[:, 0] * blue).flatten(1).sum(1)
+    return (1 - torch.exp(-contact)) - purple.flatten(1).sum(1) / SIDE
+
+
+def guided_states(nets, head, seeds, w=1.0):
+    """The guided sampler's state after every Heun step but the last (at sigma t[i+1]), for each seed: (states, sigmas)."""
+    S, Sg = [], []
+
+    def keep_(i, x, s):
+        if i < STEPS - 1:
+            S.append(x.detach().clone())
+            Sg.append(torch.full((len(x),), float(s), device=x.device))
+    with torch.no_grad():
+        for b0 in range(0, len(seeds), 256):
+            heun(guidance_denoiser(nets, head, w), starting_noise(seeds[b0:b0 + 256]), after_step=keep_)
+    return torch.cat(S), torch.cat(Sg)
+
+
+class FeatureDisc(nn.Module):
+    """L4's discriminator on the three frozen experts' inner decoder features of a lightly noised picture (sigma conditioned): the
+    16 by 16 maps projected and run through a block, pooled to 8 by 8 beside the projected 8 by 8 maps, then to 4 by 4 beside the
+    projected 4 by 4 maps, averaged, one raw score (hinge loss, no bound)."""
+
+    def __init__(self, expert_w=64, w=64):
+        super().__init__()
+        self.cond = nn.Sequential(nn.Linear(FOURIER, EMB), nn.SiLU(), nn.Linear(EMB, EMB), nn.SiLU())
+        self.p16, self.p8, self.p4 = nn.Conv2d(3 * expert_w, w, 1), nn.Conv2d(6 * expert_w, w, 1), nn.Conv2d(6 * expert_w, 2 * w, 1)
+        self.b16, self.b8, self.b4 = Block(w, w), Block(2 * w, 2 * w), Block(4 * w, 2 * w)
+        self.lin = nn.Linear(2 * w, 1)
+
+    def forward(self, ef, sigma):
+        f4, f8, f16 = (torch.cat([f[k] for f in ef], 1) for k in range(3))
+        e = self.cond(fourier(sigma))
+        h = self.b16(self.p16(f16), e)
+        h = self.b8(torch.cat([F.avg_pool2d(h, 2), self.p8(f8)], 1), e)
+        h = self.b4(torch.cat([F.avg_pool2d(h, 2), self.p4(f4)], 1), e)
+        return self.lin(h.mean((2, 3)))[:, 0]
+
+
 def train_guidance(nets, jpics, exact_joint, train_idx, val_idx, signal, bound=None, arch="conv", ema=None, shift=0,
-                   updates=G_UPDATES, batch=256, lr=5e-4, seed=0, val_every=250, drawn=None, log=""):
+                   updates=G_UPDATES, batch=256, lr=5e-4, seed=0, val_every=250, drawn=None, log="", pixel_weights=None,
+                   init_state=None, reward=None, adv=None, keep="best"):
     """Train a GuidanceHead. signal "denoise" (G1): Method A's EDM2 loss on D_plain_sum + push against x0. "exact" (G3): the same
     loss against D_exact_joint(x_t), so the push is regressed onto the exact interaction. "classifier" (G2): real (label 1) against
     drawn (label 0) by binary cross-entropy on the bounded logit, plus the alignment loss; drawn = (states, sigmas, seed index).
     Every signal uses Method A's optimiser (Adam, lr 5e-4, betas 0.9 and 0.99, seed 0, batch 256) and keeps the weights at the
     lowest held-out loss of the signal's own kind, measured every val_every updates. With ema, the held-out loss and the kept
-    weights are the exponential moving average's (decay ema per update)."""
+    weights are the exponential moving average's (decay ema per update).
+
+    The head x L cells change only what trains the head (signal "denoise"):
+      pixel_weights (L1)  one weight map per joint scene, multiplying the denoising loss per pixel
+      init_state, reward (L3)  start from a trained head (G1's) and add -reward["weight"] times soft_reward of the decoded one-step
+                          estimate D_plain_sum + push at the guided sampler's own states (STATE_SEEDS, refreshed every
+                          reward["refresh"] updates with the current head)
+      adv (L4)            a FeatureDisc on the frozen experts' inner features learns real joint scenes against the decoded one-step
+                          estimates at the guided sampler's own states (hinge loss, R1 penalty on the real scenes), and the head's
+                          push is trained to raise the discriminator's score beside the denoising loss, ramped in over adv["ramp"]
+    keep "final" keeps the last weights (the reward and adversarial cells, whose held-out denoising loss is not their objective)."""
     import copy
     red, blue, empty = nets
     torch.manual_seed(seed)
     head = GuidanceHead(arch, bound).to(DEV)
+    if init_state is not None:
+        head.load_state_dict(init_state)
     avg = copy.deepcopy(head).requires_grad_(False) if ema else None
     opt = torch.optim.Adam(head.parameters(), lr=lr, betas=(0.9, 0.99))
     X = jpics[train_idx].to(DEV)
+    PW = pixel_weights[train_idx].to(DEV) if pixel_weights is not None else None
     V = jpics[val_idx]
     g = torch.Generator().manual_seed(12345)
     v0 = V.repeat(2, 1, 1, 1)
@@ -1858,15 +1945,32 @@ def train_guidance(nets, jpics, exact_joint, train_idx, val_idx, signal, bound=N
         model.train()
         return out
 
+    states = None
+    if adv:
+        disc = FeatureDisc().to(DEV)
+        d_opt = torch.optim.Adam(disc.parameters(), lr=adv["d_lr"], betas=(0.0, 0.99))
+
+        def disc_score(img, sd):
+            xn = img + sd.view(-1, 1, 1, 1) * torch.randn_like(img)
+            _, _, _, ef = experts_out(nets, xn, sd, feats=True)
+            return disc(ef, sd)
+
+        def disc_sigma(k):
+            return torch.exp(torch.empty(k, device=DEV).uniform_(math.log(adv["sigma_lo"]), math.log(adv["sigma_hi"])))
+    refresh = (reward or adv or {}).get("refresh")
+    side = {}
+
     watched = avg if ema else head
     v = val(watched)
     best = (v["select"], 0, {k: t.clone() for k, t in watched.state_dict().items()})
     curve = [(0, None, v)]
     t1 = time.time()
     for u in range(1, updates + 1):
+        if refresh and (u - 1) % refresh == 0:
+            states = guided_states(nets, head, STATE_SEEDS)
         if signal in ("denoise", "exact"):
-            x0 = X[torch.randint(len(X), (batch,), device=DEV)]
-            x0 = scene_shift(x0, shift)
+            ii = torch.randint(len(X), (batch,), device=DEV)
+            x0 = scene_shift(X[ii], shift)
             s = draw_sigma(batch)
             x = x0 + s.view(-1, 1, 1, 1) * torch.randn_like(x0)
             d_ps, push, _ = guided_parts(nets, head, x, s, create_graph=True)
@@ -1874,7 +1978,23 @@ def train_guidance(nets, jpics, exact_joint, train_idx, val_idx, signal, bound=N
             if signal == "exact":
                 with torch.no_grad():
                     tgt = exact_joint(x, s)
-            loss = edm_loss(d_ps + push, tgt, s, logvar(s))
+            if PW is None:
+                loss = edm_loss(d_ps + push, tgt, s, logvar(s))
+            else:
+                lv = logvar(s)
+                loss = (loss_weight(s.view(-1, 1, 1, 1)) / lv.exp() * PW[ii] * (d_ps + push - tgt) ** 2 + lv).mean()
+            if reward:
+                kk = torch.randint(len(states[0]), (reward["batch"],), device=DEV)
+                rd, rp, _ = guided_parts(nets, head, states[0][kk], states[1][kk], create_graph=True)
+                rr = soft_reward(rd + rp, reward["tau"])
+                loss = loss - reward["weight"] * rr.mean()
+                side["reward"] = float(rr.mean().detach())
+            if adv:
+                kk = torch.randint(len(states[0]), (adv["batch"],), device=DEV)
+                fd, fp, _ = guided_parts(nets, head, states[0][kk], states[1][kk], create_graph=True)
+                fake = fd + fp
+                ramp = min(1.0, u / adv["ramp"])
+                loss = loss - adv["weight"] * ramp * disc_score(fake, disc_sigma(len(fake))).mean()
         else:
             kk = torch.randint(len(S_tr), (half,), device=DEV)
             xf, sf = S_tr[kk], Sig_tr[kk]
@@ -1893,6 +2013,16 @@ def train_guidance(nets, jpics, exact_joint, train_idx, val_idx, signal, bound=N
         opt.zero_grad(set_to_none=True)
         loss.backward()
         opt.step()
+        if adv:
+            real = X[torch.randint(len(X), (adv["batch"],), device=DEV)].clone().requires_grad_(True)
+            dr = disc_score(real, disc_sigma(len(real)))
+            df = disc_score(fake.detach(), disc_sigma(len(fake)))
+            gr, = torch.autograd.grad(dr.sum(), real, create_graph=True)
+            d_loss = F.relu(1 - dr).mean() + F.relu(1 + df).mean() + adv["r1"] / 2 * gr.pow(2).flatten(1).sum(1).mean()
+            d_opt.zero_grad(set_to_none=True)
+            d_loss.backward()
+            d_opt.step()
+            side.update({"d_real": float(dr.mean().detach()), "d_fake": float(df.mean().detach()), "d_loss": float(d_loss.detach())})
         if ema:
             with torch.no_grad():
                 for pa, pm in zip(avg.parameters(), head.parameters()):
@@ -1901,6 +2031,7 @@ def train_guidance(nets, jpics, exact_joint, train_idx, val_idx, signal, bound=N
                     ba.copy_(bm)
         if u % val_every == 0 or u == updates:
             v = val(watched)
+            v.update(side)
             curve.append((u, float(loss.detach()), v))
             if u % 1000 == 0:
                 print(f"  head {log} update {u} loss {float(loss.detach()):.4f} val {json.dumps({k: round(x, 4) for k, x in v.items()})} "
@@ -1909,8 +2040,10 @@ def train_guidance(nets, jpics, exact_joint, train_idx, val_idx, signal, bound=N
                 best = (v["select"], u, {k: t.clone() for k, t in watched.state_dict().items()})
     train_seconds = round(time.time() - t1, 1)
     final_state = {k: t.clone() for k, t in watched.state_dict().items()}
-    watched.load_state_dict(best[2])
-    info = {"signal": signal, "bound": bound, "arch": arch, "ema": ema, "shift": shift, "updates": updates, "batch": batch, "lr": lr,
+    if keep == "best":
+        watched.load_state_dict(best[2])
+    info = {"keep": keep, "denoise_val_at_start": curve[0][2]["denoise_val"], "denoise_val_at_end": curve[-1][2]["denoise_val"],
+            "denoise_val_of_kept_weights": val(watched)["denoise_val"], "signal": signal, "bound": bound, "arch": arch, "ema": ema, "shift": shift, "updates": updates, "batch": batch, "lr": lr,
             "optimiser": "Adam, betas (0.9, 0.99), Method A's", "best_update": best[1], "best_val_select": best[0],
             "train_seconds": train_seconds, "curve": curve, "parameters": sum(p.numel() for p in head.parameters())}
     return watched.eval().requires_grad_(False), final_state, info
@@ -1920,20 +2053,27 @@ def g_files(name):
     return OUT / f"head-{name}.pt", OUT / f"samples-{name}.pt"
 
 
-def g_base_rows(j, tr):
-    """Rows and pictures every G rung shows beside its own: exact joint, neural plain sum, rung 2c's Method A, rung 5's Method D."""
+def g_base_rows(j, tr, n=G_N):
+    """Rows and pictures every guidance cell shows beside its own: exact joint, neural plain sum, Method A at the same N (rung 2c's
+    20,000-update run when it exists, else rung 2b's 5,000-update run), rung 5's Method D at N = 1,024."""
     xn = load_samples("neural-plainsum")
     base = metrics(xn, j)
     rows, xs, labels = [("neural plain sum", base)], [load_samples("exact-joint"), xn], ["exact joint", "neural plain sum"]
-    for nm, lab, short in ((f"methodA-N{G_N}-u20000", f"Method A, N = {G_N}, 20000 updates (rung 2c)", "A (2c)"),
-                           (f"methodD-N{G_N}-u20000", f"Method D, N = {G_N}, 20000 updates (rung 5)", "D (rung 5)")):
+    cands = [(f"methodA-N{n}-u20000", f"Method A, N = {n}, 20000 updates (rung 2c)", "A (2c)"),
+             (f"methodA-N{n}", f"Method A, N = {n}, 5000 updates (rung 2b)", "A (2b)"),
+             (f"methodD-N{n}-u20000", f"Method D, N = {n}, 20000 updates (rung 5)", "D (rung 5)")]
+    have_a = False
+    for nm, lab, short in cands:
+        if nm.startswith("methodA") and have_a:
+            continue
         if (OUT / f"samples-{nm}.pt").exists():
             x = load_samples(nm)
-            m = metrics(x, j, train_idx=tr[:G_N])
+            m = metrics(x, j, train_idx=tr[:n])
             m["verdict"] = verdict(m["clean_share"], base["clean_share"])
             rows.append((lab, m))
             xs.append(x)
             labels.append(short)
+            have_a = have_a or nm.startswith("methodA")
     return base, rows, xs, labels
 
 
@@ -1961,248 +2101,276 @@ def g_prediction_check(rung, clean, parent_clean=None, parent=None, variant=None
     elif rung == "G4":
         held = (clean >= parent_clean - 0.05) if (variant == "u60000" and parent == "G2") else abs(clean - parent_clean) <= 0.05
     else:
-        return {"predicted": "no prediction recorded for this rung", "clean_share": clean}
+        return {"predicted": "no prediction recorded for this cell on the supervisor page", "clean_share": clean}
     out = {"predicted": G_PREDICTIONS[rung], "clean_share": clean, "held": bool(held)}
     if parent_clean is not None:
         out.update({"parent": parent, "parent_clean_share": parent_clean, "difference": round(clean - parent_clean, 4)})
     return out
 
 
-def run_guidance_rung(key, rung, name, picture, signal, bound, arch="conv", ema=None, shift=0, updates=G_UPDATES, parent=None,
-                      parent_clean=None, variant=None, smoke=False):
-    """Train one GuidanceHead, sample the 256 shared seeds with its push (G2: at the weight chosen on tuning seeds, and every grid
-    weight on the evaluation seeds for reading only), and write results.json[key] with the prediction check and picture."""
+READ_STEPS = (0, RUNG6_JUDGED)                                # every cell is read plain (0) and with rung 6's corrector (20 per level)
+
+
+def two_reads(nets, head, ws, j, idx, base_clean, name):
+    """Each weight in ws read on the 256 shared seeds with the plain Heun sampler and with rung 6's Langevin corrector (20 steps per
+    level, step 0.05 sigma^2, corrector noise seeded 200,000 + seed). Verdicts for both reads against the same bar (the neural
+    plain sum's plain-sampler share). Samples saved as samples-<name>-w<w>-k<k>.pt. Returns (reads, {(w, k): pictures})."""
+    reads, pics = {}, {}
+    for w in ws:
+        for k in READ_STEPS:
+            f = OUT / f"samples-{name}-w{w:g}-k{k}.pt"
+            t1 = time.time()
+            with torch.no_grad():
+                x = sample(guidance_denoiser(nets, head, w)) if k == 0 else sample_corrected(guidance_denoiser(nets, head, w), k)
+            if not f.exists():
+                torch.save(x.cpu(), f)
+            m = metrics(x, j, train_idx=idx)
+            m["verdict"] = verdict(m["clean_share"], base_clean)
+            m.update(picture_extras(x))
+            m["seconds"] = round(time.time() - t1, 1)
+            reads.setdefault(f"w={w:g}", {})["plain" if k == 0 else f"corrector {k} steps"] = m
+            pics[(w, k)] = x
+            print(f"  read w = {w:g}, {'plain' if k == 0 else f'corrector {k}'}: clean {m['clean_share']:.3f} {m['verdict']} "
+                  f"empty {m['share_empty']:.3f} purple seeds {m['share_with_purple']:.3f} ({m['seconds']} s)", flush=True)
+    return reads, pics
+
+
+def read_summary(reads):
+    keep = ("clean_share", "verdict", "share_empty", "share_with_purple", "contact_share")
+    return {w: {r: {k: m[k] for k in keep} for r, m in by.items()} for w, by in reads.items()}
+
+
+def build_train_kw(cfg, jpics, meta):
+    """The train_guidance keywords for a cell's JSON config (train_kw)."""
+    kw = dict(cfg)
+    out = {k: kw[k] for k in ("arch", "ema", "shift", "updates", "lr", "reward", "adv", "keep") if k in kw and kw[k] is not None}
+    if kw.get("pixel_band_gain"):
+        out["pixel_weights"] = contact_band_weights(jpics, meta, kw["pixel_band_gain"])
+    if kw.get("init_from"):
+        out["init_state"] = torch.load(kw["init_from"], map_location=DEV)
+    return out
+
+
+def run_cell(key, cell, name, picture, signal, bound, n=G_N, train_kw=None, parent=None, parent_clean=None, variant=None,
+             change=None, smoke=False):
+    """Train one GuidanceHead cell on N joint scenes, read it twice (plain and with the corrector; G2-style cells at the weight
+    chosen on tuning seeds first, then every grid weight), write results.json[key] with both reads, the prediction check on the
+    plain read at the chosen weight, and the picture."""
     t0 = time.time()
-    ckpt, samp = g_files(name)
-    require_new(key, [ckpt, samp, RESULTS / picture])
+    train_kw = dict(train_kw or {})
+    ckpt, _ = g_files(name)
+    require_new(key, [ckpt, RESULTS / picture])
     (e, r, b, j, meta), (Ee, Er, Eb, Ej) = sets_and_exact()
     nets = load_experts()
     tr, va = joint_split()
-    idx = tr[:G_N]
-    base, rows, xs, labels = g_base_rows(j, tr)
+    idx = tr[:n]
+    base, rows, xs, labels = g_base_rows(j, tr, n)
+    pcell = cell if n == G_N else f"{cell} at N = {n}"           # the recorded predictions are for N = 1,024
+    info = {"cell": cell, "n_train_scenes": n, "the_one_change": change,
+            "prediction_written_before_the_run": G_PREDICTIONS.get(pcell, "none recorded on the supervisor page")}
     drawn = None
-    info = {"rung": rung, "the_one_change": None, "prediction_written_before_the_run": G_PREDICTIONS.get(rung)}
     if signal == "classifier":
         t1 = time.time()
         drawn = drawn_states(nets, DRAWN_SEEDS_MORE if not smoke else DRAWN_SEEDS[:8])
-        info["drawn_states"] = {"seeds": len(DRAWN_SEEDS_MORE) if not smoke else 8, "states": len(drawn[0]),
-                                "seconds": round(time.time() - t1, 1)}
-    head, final_state, tinfo = train_guidance(nets, j, Ej, idx, va, signal, bound, arch, ema, shift, updates, drawn=drawn, log=name,
-                                              val_every=250 if not smoke else 2)
+        info["drawn_states"] = {"states": len(drawn[0]), "seconds": round(time.time() - t1, 1)}
+    kw = build_train_kw(train_kw, j, meta)
+    if smoke:
+        kw["updates"] = min(kw.get("updates", G_UPDATES), 4)
+        for d in ("reward", "adv"):
+            if d in kw:
+                kw[d] = dict(kw[d], refresh=2, ramp=2) if d == "adv" else dict(kw[d], refresh=2)
+    head, final_state, tinfo = train_guidance(nets, j, Ej, idx, va, signal, bound, drawn=drawn, log=name,
+                                              val_every=250 if not smoke else 2, **kw)
     torch.save(head.state_dict(), ckpt)
     torch.save(final_state, OUT / f"head-{name}-final.pt")
     info["train"] = tinfo
-    w, tuning = 1.0, None
+    w, ws = 1.0, [1.0]
     if signal == "classifier":
-        w, tuning = choose_weight(nets, head, j, base["clean_share"])
+        w, info["tuning"] = choose_weight(nets, head, j, base["clean_share"])
         info["weight_rule"] = ("the weight of (1, 4, 16, 64) with the highest clean-pair share on tuning seeds 10,000 to 10,255, ties "
                                "to the smaller weight")
-        info["tuning"] = tuning
+        ws = [w] + [x for x in WEIGHTS if x != w]
     info["weight"] = w
-    rec = []
-    with torch.no_grad():
-        x = sample(guidance_denoiser(nets, head, w, record=rec))
-    save_samples(name, x)
-    m = metrics(x, j, train_idx=idx)
-    m["verdict"] = verdict(m["clean_share"], base["clean_share"])
-    m.update(picture_extras(x))
-    lab = f"{rung} {name}" + (f", w = {w} (chosen on tuning seeds)" if signal == "classifier" else "")
-    rows.append((lab, m))
-    xs.append(x)
-    labels.append(f"{rung}" + (f" {variant}" if variant else "") + (f", w={w}" if signal == "classifier" else ""))
-    info["push_by_step"] = [(st_, round(sg, 4), round(rms, 5), round(ph, 4)) for st_, sg, rms, ph in rec]
-    if signal == "classifier":
-        info["evaluation_seeds_at_every_weight_reading_only"] = {}
-        for ww in WEIGHTS:
-            if ww == w:
-                continue
-            with torch.no_grad():
-                xw = sample(guidance_denoiser(nets, head, ww))
-            mw = metrics(xw, j, train_idx=idx)
-            mw["verdict"] = verdict(mw["clean_share"], base["clean_share"])
-            mw.update(picture_extras(xw))
-            info["evaluation_seeds_at_every_weight_reading_only"][f"w={ww}"] = mw
-            print(f"  reading only, evaluation seeds, w = {ww}: clean {mw['clean_share']:.3f}", flush=True)
+    reads, pics = two_reads(nets, head, ws, j, idx, base["clean_share"], name)
+    info["reads"] = reads
+    info["reads_summary"] = read_summary(reads)
+    plain = reads[f"w={w:g}"]["plain"]
+    for k in READ_STEPS:
+        lab = f"{cell} N={n}" + (f" {variant}" if variant else "") + (f", w = {w:g}" if signal == "classifier" else "")
+        rows.append((lab + (", plain" if k == 0 else f", corrector {k}"), reads[f"w={w:g}"]["plain" if k == 0 else f"corrector {k} steps"]))
+        xs.append(pics[(w, k)])
+        labels.append(f"{cell}{' ' + variant if variant else ''}" + (f" w={w:g}" if signal == "classifier" else "") + f", k={k}")
 
     def push_of(xx, s):
         return w * guided_parts(nets, head, xx, s)[1]
     exact_resid = lambda xx, s: Ej(xx, s) - plainsum_of(nets[0](xx, s), nets[1](xx, s), nets[2](xx, s))  # noqa: E731
     info["push_error_vs_exact_interaction_by_band"] = band_error(push_of, exact_resid, j[va])
-    info["prediction_check"] = g_prediction_check(rung, m["clean_share"], parent_clean, parent, variant)
+    info["prediction_check"] = g_prediction_check(pcell, plain["clean_share"], parent_clean, parent, variant)
     info["checkpoint"] = str(ckpt)
-    info["samples"] = str(samp)
+    info["samples"] = str(OUT / f"samples-{name}-w{w:g}-k0.pt")
     info["picture"] = str(RESULTS / picture)
-    info["config"] = {"name": name, "signal": signal, "bound": bound, "arch": arch, "ema": ema, "shift": shift, "updates": updates,
-                      "weight": w, "parent": parent, "variant": variant}
+    info["config"] = {"name": name, "cell": cell, "signal": signal, "bound": bound, "n": n, "weight": w, "parent": parent,
+                      "variant": variant, "train_kw": train_kw, "arch": train_kw.get("arch", "conv")}
     print(table(rows), flush=True)
-    print(f"{key}: clean {m['clean_share']:.3f} {m['verdict']} purple seeds {m['share_with_purple']:.3f} empty {m['share_empty']:.3f}; "
-          f"prediction {json.dumps(info['prediction_check'])}", flush=True)
+    print(f"{key}: {json.dumps(info['reads_summary'][f'w={w:g}'])}; prediction {json.dumps(info['prediction_check'])}", flush=True)
     grid(xs, labels, RESULTS / picture)
     info["rows"] = dict(rows)
     info["seconds"] = round(time.time() - t0, 1)
     save_results(key, info)
-    return m["clean_share"]
+    return plain["clean_share"]
 
 
-G_RUNGS = {   # rung -> (signal, bound, the one change from the rung before it)
-    "G1": ("denoise", None, "a scalar guidance head on the experts' features, push sigma^2 grad phi, trained by Method A's loss"),
-    "G2": ("classifier", LOGIT_BOUND, "G1's head trained as the CLEVR head was: real against drawn, bounded logit, alignment loss"),
-    "G3": ("exact", None, "G1's head with its push regressed onto the exact interaction (the ceiling)"),
+G_RUNGS = {   # cell -> (signal, bound, train_kw, the one change)
+    "G1": ("denoise", None, {}, "a scalar guidance head on the experts' features, push sigma^2 grad phi, trained by Method A's loss"),
+    "G2": ("classifier", LOGIT_BOUND, {}, "G1's head trained as the CLEVR head was: real against drawn, bounded logit, alignment loss"),
+    "G3": ("exact", None, {}, "G1's head with its push regressed onto the exact interaction (the ceiling)"),
+    "HL1": ("denoise", None, {"pixel_band_gain": L1_BAND_GAIN},
+            f"G1 with per-pixel denoising-loss weights 1 + {L1_BAND_GAIN:g} on the contact band and the occlusion region"),
+    "HL3": ("denoise", None, {"init_from": "G1", "reward": L3_REWARD, "updates": L3_UPDATES, "lr": L3_LR, "keep": "final"},
+            f"G1's head fine-tuned {L3_UPDATES} updates (lr {L3_LR:g}) with -{L3_REWARD['weight']:g} times the soft contact-minus-purple "
+            "reward of the decoded one-step estimate at the guided sampler's own states, the denoising loss kept as the anchor"),
+    "HL4": ("denoise", None, {"adv": L4_ADV, "ema": EMA_DECAY, "keep": "final"},
+            f"G1 trained beside a discriminator on the experts' inner features (hinge, R1 {L4_ADV['r1']:g}, head EMA {EMA_DECAY}): "
+            f"real joint scenes against the decoded one-step estimates at the guided sampler's own states, the push trained to fool "
+            f"it at weight {L4_ADV['weight']:g} (ramped over {L4_ADV['ramp']} updates) beside the denoising loss"),
 }
-G4_VARIANTS = {   # variant -> (keyword changes, the one change)
-    "ema": ({"ema": EMA_DECAY}, f"EMA of the weights, decay {EMA_DECAY} per update, held-out choice on the EMA"),
-    "shift": ({"shift": SHIFT_MAX}, f"whole-pixel shift augmentation of the joint scenes, up to {SHIFT_MAX} each way, kept inside the picture"),
-    "u60000": ({"updates": 3 * G_UPDATES}, "3 times the updates (60,000)"),
-    "vit": ({"arch": "vit"}, "a small vision transformer (patch 2, width 128, 4 blocks, 4 heads) in place of the conv network"),
+G4_VARIANTS = {   # variant -> (change to the parent's train_kw, the one change)
+    "ema": (lambda kw: dict(kw, ema=EMA_DECAY), f"EMA of the weights, decay {EMA_DECAY} per update, held-out choice on the EMA"),
+    "shift": (lambda kw: dict(kw, shift=SHIFT_MAX), f"whole-pixel shift augmentation of the joint scenes, up to {SHIFT_MAX} each way"),
+    "u60000": (lambda kw: dict(kw, updates=3 * kw.get("updates", G_UPDATES)), "3 times the updates"),
+    "vit": (lambda kw: dict(kw, arch="vit"), "a small vision transformer (patch 2, width 128, 4 blocks, 4 heads) in place of the conv network"),
 }
 
 
-def g_key(rung, variant=None, parent=None):
-    return f"rung{rung}" if rung != "G4" else f"rungG4-{parent}-{variant}"
+def cell_key(cell, n, smoke=False):
+    """G1 to G3 at N = 1,024 keep their first keys (rungG1 ...); every other cell carries its N."""
+    k = f"rung{cell}" if (cell in ("G1", "G2", "G3") and n == G_N) else f"rung{cell}-N{n}"
+    return k + ("-smoke" if smoke else "")
 
 
-def g_name(rung, variant=None, parent=None, smoke=False):
-    base = f"G1-N{G_N}-u{G_UPDATES}" if rung == "G1" else f"{rung}-N{G_N}-u{G_UPDATES}"
-    if rung == "G4":
-        base = f"G4-{parent}-{variant}-N{G_N}"
-    return base + ("-smoke" if smoke else "")
+def cell_name(cell, n, train_kw, smoke=False):
+    return f"{cell}-N{n}-u{train_kw.get('updates', G_UPDATES)}" + ("-smoke" if smoke else "")
+
+
+def run_named_cell(cell, n, smoke=False):
+    signal, bound, train_kw, change = G_RUNGS[cell]
+    key = cell_key(cell, n, smoke)
+    if key in load_results():
+        print(f"skip {key}: already in results.json", flush=True)
+        return
+    train_kw = dict(train_kw)
+    if train_kw.get("init_from") == "G1":
+        src = load_results().get(cell_key("G1", n, smoke))
+        if not src:
+            print(f"skip {key}: G1 at N = {n} has no result yet to start from", flush=True)
+            return
+        train_kw["init_from"] = src["checkpoint"]
+    name = cell_name(cell, n, train_kw, smoke)
+    run_cell(key, cell, name, f"{key}-guidance{'' if not smoke else ''}.png", signal, bound, n, train_kw, change=change, smoke=smoke)
+
+
+def cmd_cells(a):
+    """Guidance cells in order, each CELL@N (CELL one of G1, G2, G3, HL1, HL3, HL4); a cell whose key exists is skipped, so a
+    resubmitted job carries on where the last stopped."""
+    for tok in a.cells:
+        cell, n = tok.split("@")
+        run_named_cell(cell, int(n), a.smoke)
 
 
 def cmd_rungG(a):
-    """G1, G2 or G3 (a.cmd names it)."""
-    rung = a.cmd[4:]
-    signal, bound, change = G_RUNGS[rung]
-    key = g_key(rung) + ("-smoke" if a.smoke else "")
-    name = g_name(rung, smoke=a.smoke)
-    updates = a.updates
-    run_guidance_rung(key, rung, name, f"rung{rung}-guidance-head{'-smoke' if a.smoke else ''}.png", signal, bound, updates=updates,
-                      smoke=a.smoke)
-    res = load_results()
-    res_entry = res[key]
-    res_entry["the_one_change"] = change
-    save_results(key, res_entry)
+    """G1, G2 or G3 at N = 1,024 (a.cmd names it)."""
+    run_named_cell(a.cmd[4:], G_N, a.smoke)
 
 
-def g_best_parent(suffix=""):
-    res = load_results()
-    have = [r for r in ("G1", "G2", "G3") if f"rung{r}{suffix}" in res]
-    if not have:
-        raise SystemExit("no G1, G2 or G3 result yet")
-    clean = {r: res[f"rung{r}{suffix}"]["prediction_check"]["clean_share"] for r in have}
-    best = max(clean, key=lambda r: (clean[r], -int(r[1])))
-    return best, clean[best], clean
+def guidance_cells(res, smoke=False):
+    """Every trained guidance cell in results.json (keys rungG..., rungHL...), smoke keys only with smoke."""
+    return {k: v for k, v in res.items() if k.startswith(("rungG1", "rungG2", "rungG3", "rungG4", "rungHL")) and isinstance(v, dict)
+            and "config" in v and k.endswith("-smoke") == smoke}
+
+
+def cell_train_kw(entry):
+    """A cell's train_kw, also for the first G1 to G3 keys, whose config predates train_kw."""
+    cfg = entry["config"]
+    if "train_kw" in cfg:
+        return dict(cfg["train_kw"])
+    return {k: cfg[k] for k in ("arch", "ema", "shift", "updates") if cfg.get(k) not in (None, 0, "conv") or k == "updates"}
 
 
 def cmd_rungG4(a):
-    """G4: on the best of G1 to G3 (highest clean-pair share; ties to the lower rung), one change at a time, each its own key."""
+    """G4: on the best guidance cell at N = 1,024, one change at a time, each its own key. auto picks the highest plain-read
+    clean-pair share among the cells trained without the exact joint denoiser (G3 is the ceiling, not a recipe that exists off the
+    toy); ties go to the cell listed first."""
+    res = load_results()
+    cells = guidance_cells(res, a.smoke)
     if a.parent == "auto":
-        parent, parent_clean, clean = g_best_parent("-smoke" if a.smoke else "")
+        pool = {k: v for k, v in cells.items() if v["config"].get("signal") != "exact" and v["config"].get("n", G_N) == G_N
+                and not k.startswith("rungG4")}
+        if not pool:
+            raise SystemExit("no guidance cell to build on yet")
+        pk = max(pool, key=lambda k: pool[k]["prediction_check"]["clean_share"])
     else:
-        parent = a.parent
-        parent_clean = load_results()[f"rung{parent}" + ("-smoke" if a.smoke else "")]["prediction_check"]["clean_share"]
-        clean = None
-    print(f"G4 parent {parent} (clean {parent_clean:.3f}; G1 to G3: {clean})", flush=True)
-    signal, bound, _ = G_RUNGS[parent]
+        pk = a.parent
+    parent = res[pk]
+    pcfg = parent["config"]
+    pcell = pcfg.get("cell") or pk[4:].split("-")[0]
+    parent_clean = parent["prediction_check"]["clean_share"]
+    print(f"G4 parent {pk} (plain clean {parent_clean:.3f}); pool {json.dumps({k: v['prediction_check']['clean_share'] for k, v in cells.items()})}", flush=True)
     for variant in a.variants:
-        kw, change = G4_VARIANTS[variant]
-        kw = dict(kw)
-        updates = kw.pop("updates", G_UPDATES if not a.smoke else a.updates)
-        if a.smoke:
-            updates = a.updates
-        key = g_key("G4", variant, parent) + ("-smoke" if a.smoke else "")
-        if key in load_results():
+        fn, change = G4_VARIANTS[variant]
+        kw = fn(cell_train_kw(parent))
+        if variant == "vit" and kw.get("init_from"):
+            print(f"skip G4 {variant} on {pk}: the parent starts from a conv checkpoint, so a transformer has nothing to start from", flush=True)
+            continue
+        key = f"rungG4-{pcell}-N{pcfg.get('n', G_N)}-{variant}" + ("-smoke" if a.smoke else "")
+        if key in res:
             print(f"skip {key}: already in results.json", flush=True)
             continue
-        name = g_name("G4", variant, parent, smoke=a.smoke) + f"-u{updates}"
-        run_guidance_rung(key, "G4", name, f"rungG4-{parent}-{variant}{'-smoke' if a.smoke else ''}.png", signal, bound,
-                          updates=updates, parent=parent, parent_clean=parent_clean, variant=variant, smoke=a.smoke, **kw)
-        entry = load_results()[key]
-        entry["the_one_change"] = change
-        entry["parent_chosen_from"] = clean
-        save_results(key, entry)
+        name = f"G4-{pcell}-N{pcfg.get('n', G_N)}-{variant}-u{kw.get('updates', G_UPDATES)}" + ("-smoke" if a.smoke else "")
+        run_cell(key, "G4", name, f"{key}.png", pcfg["signal"], pcfg["bound"], pcfg.get("n", G_N), kw, parent=pcell,
+                 parent_clean=parent_clean, variant=variant, change=change, smoke=a.smoke)
 
 
-def cmd_rungG5(a):
-    """G5: the winner of G1 to G4 (highest clean-pair share on the plain sampler) drawn plain and with rung 6's Langevin corrector
-    (a.steps per level, step a.size sigma^2), the same starting noise and corrector noise per seed as rung 6."""
-    t0 = time.time()
+def cmd_readG(a):
+    """Sampling only, no training: every guidance cell whose own key has no corrector read (the first G1 to G3 keys) read twice,
+    plain and with rung 6's corrector, into a new key read2-<cell key>; G2-style cells at every grid weight."""
     res = load_results()
-    cands = {k: v for k, v in res.items() if k.startswith(("rungG1", "rungG2", "rungG3", "rungG4")) and not k.endswith("-smoke")
-             and isinstance(v, dict) and "config" in v}
-    if a.smoke:
-        cands = {k: v for k, v in res.items() if k.startswith("rungG") and k.endswith("-smoke") and "config" in v}
-    if a.source != "auto":
-        cands = {a.source: res[a.source]}
-    src = max(cands, key=lambda k: cands[k]["prediction_check"]["clean_share"])
-    cfg = cands[src]["config"]
-    steps_list = sorted(set(a.steps))
-    key = "rungG5" + ("-smoke" if a.smoke else "")
-    sample_files = [OUT / f"samples-G5-{cfg['name']}-k{k}.pt" for k in steps_list]
-    require_new(key, sample_files + [RESULTS / f"rungG5-corrector{'-smoke' if a.smoke else ''}.png"])
-    print(f"G5 on {src} ({cfg['name']}, plain clean {cands[src]['prediction_check']['clean_share']:.3f})", flush=True)
     (e, r, b, j, meta), _ = sets_and_exact()
     nets = load_experts()
     tr, va = joint_split()
-    base, rows, xs, labels = g_base_rows(j, tr)
-    rows = dict(rows)
-    head = GuidanceHead(cfg["arch"], cfg["bound"]).to(DEV)
-    head.load_state_dict(torch.load(cands[src]["checkpoint"], map_location=DEV))
-    head = head.eval().requires_grad_(False)
-    denoise = guidance_denoiser(nets, head, cfg["weight"])
-    plain_check, timing = {}, {}
-    for k in steps_list:
-        t1 = time.time()
-        with torch.no_grad():
-            x = sample_corrected(denoise, k, a.size)
-        timing[k] = round(time.time() - t1, 1)
-        save_samples(f"G5-{cfg['name']}-k{k}", x)
-        m = metrics(x, j, train_idx=tr[:G_N])
-        m["verdict"] = verdict(m["clean_share"], base["clean_share"])
-        m.update(picture_extras(x))
-        rows[f"{src} ({cfg['name']}), {k} corrector steps"] = m
-        xs.append(x)
-        labels.append(f"{src[4:]}, k={k}")
-        if k == 0:
-            xp = torch.load(cands[src]["samples"]).to(x.device)
-            plain_check = {"saved_samples": cands[src]["samples"], "byte_identical": bool(torch.equal(x, xp)),
-                           "max_abs_difference": float((x - xp).abs().max())}
-        print(f"G5 k={k}: clean {m['clean_share']:.3f} {m['verdict']} purple seeds {m['share_with_purple']:.3f} "
-              f"empty {m['share_empty']:.3f} ({timing[k]} s)", flush=True)
-    a6 = res.get("rung6", {}).get("rows", {})
-    for nm in (f"Method A, N = {G_N}, 20000 updates, 20 corrector steps", f"Method D, N = {G_N}, 20000 updates, 20 corrector steps"):
-        if nm in a6:
-            rows[nm + " (rung 6)"] = a6[nm]
-    print(table(list(rows.items())), flush=True)
-    grid(xs, labels, RESULTS / f"rungG5-corrector{'-smoke' if a.smoke else ''}.png")
-    judged = rows[f"{src} ({cfg['name']}), {max(steps_list)} corrector steps"]["clean_share"]
-    info = {"source": src, "source_config": cfg, "corrector_steps": steps_list, "corrector_size": a.size,
-            "corrector_noise": f"one generator per evaluation seed, seeded {CORRECTOR_SEED_OFFSET} + seed (rung 6's)",
-            "candidates_clean_share": {k: v["prediction_check"]["clean_share"] for k, v in cands.items()},
-            "plain_sampler_against_saved_samples": plain_check,
-            "prediction_check": {"predicted": "no prediction recorded on the supervisor page for the corrector on the winner",
-                                 "clean_share": judged, "plain_sampler_clean_share": cands[src]["prediction_check"]["clean_share"]},
-            "row_seconds": timing, "rows": rows, "picture": str(RESULTS / f"rungG5-corrector{'-smoke' if a.smoke else ''}.png"),
-            "seconds": round(time.time() - t0, 1)}
-    save_results(key, info)
+    base = metrics(load_samples("neural-plainsum"), j)["clean_share"]
+    for k, v in guidance_cells(res, a.smoke).items():
+        if "reads" in v or f"read2-{k}" in res:
+            continue
+        t0 = time.time()
+        cfg = v["config"]
+        n = cfg.get("n", G_N)
+        head = GuidanceHead(cfg.get("arch", "conv"), cfg["bound"]).to(DEV)
+        head.load_state_dict(torch.load(v["checkpoint"], map_location=DEV))
+        head = head.eval().requires_grad_(False)
+        w = cfg["weight"]
+        ws = [w] + ([x for x in WEIGHTS if x != w] if cfg["signal"] == "classifier" else [])
+        print(f"read2 {k} at weights {ws}", flush=True)
+        reads, pics = two_reads(nets, head, ws, j, tr[:n], base, cfg["name"])
+        xp = torch.load(v["samples"]).to(pics[(w, 0)].device)
+        info = {"cell_key": k, "weights": ws, "reads": reads, "reads_summary": read_summary(reads),
+                "plain_read_against_the_cell_samples": {"byte_identical": bool(torch.equal(pics[(w, 0)], xp)),
+                                                        "max_abs_difference": float((pics[(w, 0)] - xp).abs().max())},
+                "picture": str(RESULTS / f"read2-{k}.png"), "seconds": round(time.time() - t0, 1)}
+        grid([load_samples("exact-joint"), load_samples("neural-plainsum")] + [pics[(x, kk)] for x in ws for kk in READ_STEPS],
+             ["exact joint", "neural plain sum"] + [f"{k[4:]} w={x:g}, k={kk}" for x in ws for kk in READ_STEPS], RESULTS / f"read2-{k}.png")
+        print(f"read2-{k}: {json.dumps(info['reads_summary'])}", flush=True)
+        save_results(f"read2-{k}", info)
 
 
-def cmd_ladderG(a):
-    """G1, G2, G3, then G4's variants on the best of them, then G5, in one job (the user holds one free bigbatch slot). A rung whose
-    key is already in results.json is skipped, so a resubmitted job carries on where the last stopped."""
+def cmd_guidance_plan(a):
+    """One job for the whole guidance column, in priority order, each step skipped when its key exists: the second read of every
+    trained cell (sampling only), the cells in a.cells, a second read again (for cells trained in this job, a no-op), then G4's
+    single changes on the best deployable cell at N = 1,024."""
     from argparse import Namespace
-    sm = "-smoke" if a.smoke else ""
-    for rung in a.rungs:
-        if rung in ("G1", "G2", "G3"):
-            if f"rung{rung}{sm}" in load_results():
-                print(f"skip rung{rung}{sm}: already in results.json", flush=True)
-                continue
-            cmd_rungG(Namespace(cmd=f"rung{rung}", updates=a.updates, smoke=a.smoke))
-        elif rung == "G4":
-            cmd_rungG4(Namespace(parent="auto", variants=a.variants, updates=a.updates, smoke=a.smoke))
-        elif rung == "G5":
-            if f"rungG5{sm}" in load_results():
-                continue
-            cmd_rungG5(Namespace(source="auto", steps=[0, RUNG6_JUDGED], size=CORRECTOR_SIZE, smoke=a.smoke))
+    cmd_readG(Namespace(smoke=a.smoke))
+    cmd_cells(Namespace(cells=a.cells, smoke=a.smoke))
+    if not a.no_g4:
+        cmd_rungG4(Namespace(parent="auto", variants=list(G4_VARIANTS), smoke=a.smoke))
 
 
 def main():
@@ -2241,22 +2409,20 @@ def main():
     q.add_argument("--size", type=float, default=CORRECTOR_SIZE, help="corrector step as a fraction of sigma squared")
     for name in ("rungG1", "rungG2", "rungG3"):
         q = sub.add_parser(name)
-        q.add_argument("--updates", type=int, default=G_UPDATES)
         q.add_argument("--smoke", action="store_true", help="a quick check: keys and files end in -smoke")
+    q = sub.add_parser("cells")
+    q.add_argument("--cells", nargs="+", required=True, help="CELL@N, CELL one of G1 G2 G3 HL1 HL3 HL4, e.g. HL4@1024")
+    q.add_argument("--smoke", action="store_true")
     q = sub.add_parser("rungG4")
-    q.add_argument("--parent", default="auto", help="G1, G2, G3 or auto (the best of them by clean-pair share)")
+    q.add_argument("--parent", default="auto", help="a results.json cell key, or auto (the best deployable cell at N = 1,024)")
     q.add_argument("--variants", nargs="+", default=list(G4_VARIANTS), choices=list(G4_VARIANTS))
-    q.add_argument("--updates", type=int, default=G_UPDATES, help="used only with --smoke")
     q.add_argument("--smoke", action="store_true")
-    q = sub.add_parser("rungG5")
-    q.add_argument("--source", default="auto", help="a results.json key, or auto (the best G rung by clean-pair share)")
-    q.add_argument("--steps", type=int, nargs="+", default=[0, RUNG6_JUDGED])
-    q.add_argument("--size", type=float, default=CORRECTOR_SIZE)
+    q = sub.add_parser("guidance_plan")
+    q.add_argument("--cells", nargs="+", default=["G1@1024", "G2@1024", "G3@1024", "HL4@1024", "HL1@1024", "HL3@1024", "G1@256",
+                                                  "HL4@256", "HL1@256", "HL3@256"])
+    q.add_argument("--no-g4", action="store_true")
     q.add_argument("--smoke", action="store_true")
-    q = sub.add_parser("ladderG")
-    q.add_argument("--rungs", nargs="+", default=["G1", "G2", "G3", "G4", "G5"])
-    q.add_argument("--variants", nargs="+", default=list(G4_VARIANTS), choices=list(G4_VARIANTS))
-    q.add_argument("--updates", type=int, default=G_UPDATES, help="G1 to G3's updates; G4's only with --smoke")
+    q = sub.add_parser("readG")
     q.add_argument("--smoke", action="store_true")
     a = p.parse_args()
     fn = "cmd_rungG" if a.cmd in ("rungG1", "rungG2", "rungG3") else "cmd_" + a.cmd
