@@ -53,7 +53,9 @@ scenes. The bases `m7_render.sbatch` assigns:
 
 | Paper 1's third joint set (`paper1-render-joint3-p0` to `p5`, 1,000 each, jobs 97073 to 97078) | 8,200,000 | 8,200,000 to 8,205,999 |
 
-A new render set starts at 8,300,000 or above.
+| Paper 1's fourth joint set (`paper1-render-joint4-p0` to `p5`, 1,000 each, submitted 2026-11-28 01:15 UTC) | 8,300,000 | 8,300,000 to 8,305,999 |
+
+A new render set starts at 8,400,000 or above.
 
 ## EDM2
 
