@@ -31,9 +31,34 @@ RANK = 4
 TAU = 0.25                       # soft reader temperature: softmax(-||x - palette||^2 / TAU)
 
 
-class CondUNet(nn.Module):
-    def __init__(self, w=64, cond_dim=tc.COND_DIM):
+class Attn(nn.Module):
+    """Self-attention over a feature map's pixels, the residual's output layer starting at zero so an attention base begins as the
+    plain U-Net. Linear layers only, so a dial's adapters wrap the query, key, value and output maps like any other layer."""
+
+    def __init__(self, c, heads=4):
         super().__init__()
+        self.heads = heads
+        self.norm = nn.GroupNorm(st.GROUPS, c)
+        self.qkv = nn.Linear(c, 3 * c)
+        self.proj = nn.Linear(c, c)
+        nn.init.zeros_(self.proj.weight)
+        nn.init.zeros_(self.proj.bias)
+
+    def forward(self, h):
+        b, c, hh, ww = h.shape
+        t = self.norm(h).flatten(2).transpose(1, 2)                              # (b, pixels, c)
+        q, k, v = self.qkv(t).chunk(3, -1)
+        sh = lambda z: z.view(b, -1, self.heads, c // self.heads).transpose(1, 2)
+        y = F.scaled_dot_product_attention(sh(q), sh(k), sh(v)).transpose(1, 2).reshape(b, -1, c)
+        return h + self.proj(y).transpose(1, 2).view(b, c, hh, ww)
+
+
+class CondUNet(nn.Module):
+    def __init__(self, w=64, cond_dim=tc.COND_DIM, attn=False):
+        super().__init__()
+        self.attn = attn
+        if attn:
+            self.a2, self.a3 = Attn(2 * w), Attn(2 * w)            # at 8 by 8 after e2, at 4 by 4 after m1
         E = st.EMB
         self.cond = nn.Sequential(nn.Linear(st.FOURIER, E), nn.SiLU(), nn.Linear(E, E), nn.SiLU())
         self.label = nn.Linear(cond_dim, E, bias=False)
@@ -51,7 +76,12 @@ class CondUNet(nn.Module):
         e = self.cond(st.fourier(sigma)) + self.label(cond)
         h1 = self.e1(self.conv_in(h), e)
         h2 = self.e2(F.avg_pool2d(h1, 2), e)
-        h3 = self.m2(self.m1(F.avg_pool2d(h2, 2), e), e)
+        if self.attn:
+            h2 = self.a2(h2)
+        h3 = self.m1(F.avg_pool2d(h2, 2), e)
+        if self.attn:
+            h3 = self.a3(h3)
+        h3 = self.m2(h3, e)
         h = self.d2(torch.cat([F.interpolate(h3, scale_factor=2, mode="nearest"), h2], 1), e)
         h = self.d1(torch.cat([F.interpolate(h, scale_factor=2, mode="nearest"), h1], 1), e)
         return self.conv_out(h)
@@ -63,9 +93,9 @@ class CondUNet(nn.Module):
 class Denoiser(nn.Module):
     """D(x, sigma, cond) = c_skip x + c_out F(c_in x, c_noise, cond)."""
 
-    def __init__(self, w=64):
+    def __init__(self, w=64, attn=False):
         super().__init__()
-        self.net = CondUNet(w)
+        self.net = CondUNet(w, attn=attn)
 
     def forward(self, x, sigma, cond):
         sigma = torch.as_tensor(sigma, device=x.device, dtype=torch.float32).reshape(-1).expand(len(x))
@@ -194,9 +224,19 @@ def freeze_base(model):
         p.requires_grad_(False)
 
 
+def base_config(path):
+    """The base's shape from its sidecar (<base>.json: width and attention); a base without one is the original width-64 U-Net."""
+    import json
+    side = Path(path).with_suffix(".json")
+    if not side.exists():
+        return {}
+    cfg = json.loads(side.read_text())
+    return {"w": cfg.get("width", 64), "attn": cfg.get("attn", False)}
+
+
 def load_base(path, dials=(), dial_states=None):
     """A fresh frozen base model, wrapped, with only the named dials loaded (a dial-alone row loads nothing else)."""
-    m = Denoiser().to(DEV)
+    m = Denoiser(**base_config(path)).to(DEV)
     m.load_state_dict(torch.load(path, map_location=DEV))
     freeze_base(m)
     m.eval()

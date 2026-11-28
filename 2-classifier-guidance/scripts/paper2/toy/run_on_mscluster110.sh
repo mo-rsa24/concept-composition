@@ -34,7 +34,14 @@ case "${1:-}" in
         step stage1-fresh stage1 --test-seed0 21024 --tune-seed0 10512 --key stage1
         step stage1-second stage1 --key stage1_second_reading_seeds_20000 --suffix -second-reading-seeds-20000
         step misses-fresh misses --test-seed0 21024 ;;
+    base3)
+        # the owner's one more base (2026-11-28, "try a wider base model"): width 128, self-attention at 8 by 8 and 4 by 4, 40,000
+        # updates; the bar stays R1_BASE_COUNT_MIN 0.95, read on new fresh seeds 22,048 to 23,071 (tuning 11,024 to 11,535).
+        # The 6,000- and 16,000-update bases stay in out/ under their own names.
+        step base3 base --updates 40000 --width 128 --attn
+        step stage1-base3 stage1 --test-seed0 22048 --tune-seed0 11024 --key stage1_base3_fresh_seeds_22048 --suffix -base3-seeds-22048
+        step misses-base3 misses --test-seed0 22048 --key stage1_misses_base3 --suffix -base3 ;;
     dials) step dials dials --kept-per 1024 ;;
     stage2|stage3|corr|stage4|stage5) step "$1" "$1" ;;
-    *) echo "usage: $0 stage1|dials|stage2|stage3|corr|stage4|stage5"; exit 2 ;;
+    *) echo "usage: $0 stage1|base3|dials|stage2|stage3|corr|stage4|stage5"; exit 2 ;;
 esac

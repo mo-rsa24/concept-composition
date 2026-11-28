@@ -231,6 +231,9 @@ def cmd_shapes(a):
 
 
 def cmd_base(a):
+    """Trains base.pt; a base already there is refused, so an earlier base is moved to its own name first and never overwritten."""
+    if base_path().exists():
+        sys.exit(f"stopped: {base_path()} exists; move it to its own name (base-<updates>-updates.pt) first")
     sync()
     t0 = time.time()
     idx, cond = canvases()
@@ -238,7 +241,7 @@ def cmd_base(a):
     C = torch.from_numpy(cond).float().to(DEV)
     pal = tc.PALETTE.to(DEV)
     torch.manual_seed(0)
-    model = tm.Denoiser().to(DEV)
+    model = tm.Denoiser(a.width, a.attn).to(DEV)
     ema = copy.deepcopy(model).requires_grad_(False)
     opt = torch.optim.Adam(model.parameters(), lr=a.lr, betas=(0.9, 0.99))
     nparams = sum(p.numel() for p in model.parameters())
@@ -263,8 +266,9 @@ def cmd_base(a):
             curve.append((u, round(float(loss.detach()), 4)))
             print(f"  base update {u} loss {float(loss.detach()):.4f} ({time.time() - t0:.0f}s)", flush=True)
     torch.save(ema.state_dict(), base_path())
+    base_path().with_suffix(".json").write_text(json.dumps({"width": a.width, "attn": a.attn}) + "\n")
     sync()
-    info = {"updates": a.updates, "batch": a.batch, "lr": a.lr, "ema": a.ema, "images_seen": a.updates * a.batch,
+    info = {"updates": a.updates, "width": a.width, "attn": a.attn, "batch": a.batch, "lr": a.lr, "ema": a.ema, "images_seen": a.updates * a.batch,
             "parameters": nparams, "loss_curve": curve, "seconds": round(time.time() - t0, 1)}
     save_results("stage1b", info)
     print(json.dumps({k: v for k, v in info.items() if k != "loss_curve"}))
@@ -963,6 +967,8 @@ def main():
     q.add_argument("--n", type=int, default=200_000)
     q = sub.add_parser("base")
     q.add_argument("--updates", type=int, default=6_000)
+    q.add_argument("--width", type=int, default=64, help="the U-Net's base width")
+    q.add_argument("--attn", action="store_true", help="self-attention at 8 by 8 and 4 by 4")
     q.add_argument("--batch", type=int, default=256)
     q.add_argument("--lr", type=float, default=1e-3)
     q.add_argument("--ema", type=float, default=0.999)
