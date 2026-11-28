@@ -305,6 +305,22 @@ Then the Langevin corrector on the winner, and the winner on CLEVR with the 1,59
 
 Then the corrector on each winner, and the winners on CLEVR with the 1,599 and 4,448 touching scenes. A second builder writes it in new files (so it does not collide with the G1 to G4 builder's edits to squares_toy.py) and shares the bigbatch slots with it. The memory note discriminator-guidance-poe-caveats is not on the cluster; the builder starts from artifacts/notes/progress/abstract-checkers/01-reading/discriminator-guidance.md.
 
+2026-11-28 05:25 UTC, both papers, the owner (about 05:15 UTC, the laptop session's last relay; from now on the owner talks to the cluster supervisor directly). **Paper 2, board question 125: yes.** The dial miniature's base becomes a product of per-object experts sampled with the Langevin corrector (a toy CO3), so the dials are tested on a composed, corrected sampler. It is built after the width-128 base (job 97098) reads out, and that base's result is kept beside it.
+
+**Paper 1, one table for every method and loss.** No method gets its own copy of every ladder: an experiment is one cell of two axes. Axis 1 is how the correction is built: a direct correction network (Method A; Method D is A plus the experts' inner features and matched A on the toy, 0.887 against 0.891, so it gets no row of its own) or a scalar guidance head whose gradient is the push (the form of Methods B and C). Axis 2 is what trains it. B's four-way score is left out of the training variants because it scores an empty picture highest by construction (6.62 against 0.00 for a confident touching pair). Method E is whichever cell wins. Cells marked "science" decide what Paper 1 can claim; "coverage" cells fill the table.
+
+| What trains it | Direct correction network (A) | Scalar guidance head |
+|---|---|---|
+| denoising loss | A, the baseline (0.609 at 256 scenes, 0.891 at 1,024) | G1, science: does guidance work when trained like A |
+| denoising, contact band weighted (L1) | A x L1, science | head x L1, coverage |
+| noise levels shifted to placement (L2) | A x L2, coverage | not run |
+| reward on the decoded estimate (L3) | A x L3, science | head x L3, coverage |
+| adversarial discriminator in the loop (L4) | A x L4, science | head x L4, science: the likeliest Method E |
+| real against drawn plus alignment (the CLEVR head's recipe) | not run | G2, science: why the CLEVR push failed |
+| regressed onto the exact interaction | not run | G3, the guidance row's ceiling |
+
+L5 (the discriminator as a push at sampling time) sits outside the table, applied on top of a trained cell. G4's single changes (weight averaging, shifts, longer training, a vision transformer) apply to the best guidance cell. The guidance builder runs the guidance column, adding head x L1, L3 and L4 after G1 to G3; the loss builder runs A's column and L5. The memory note owner-delegates-toward-good-results is now also saved in the cluster's project memory.
+
 ## Final review
 
 Run 14:09, after both loops stopped, on the laptop. Nothing ran on the cluster.
