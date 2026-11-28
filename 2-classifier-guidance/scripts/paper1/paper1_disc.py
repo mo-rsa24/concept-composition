@@ -516,10 +516,15 @@ def projection(seconds_per_update, updates_left, already_hours, other):
     return other + already_hours + seconds_per_update * updates_left / 3600
 
 
-def stop_if_over(folder, record, aligned=False):
+def stop_if_over(folder, record, aligned=False, stop_override=None):
+    """Stop a run whose projected GPU-hours pass the first result's cost stop. A run after the first result (Method A's levers)
+    may pass stop_override, the supervisor's recorded spend decision; it is written into the projection record beside the default."""
     from paper1_first_bars import FIRST_GPU_HOURS_STOP, FIRST_GPU_HOURS_STOP_ALIGNED
-    stop = FIRST_GPU_HOURS_STOP_ALIGNED if aligned else FIRST_GPU_HOURS_STOP
+    default = FIRST_GPU_HOURS_STOP_ALIGNED if aligned else FIRST_GPU_HOURS_STOP
+    stop = default if stop_override is None else stop_override
     record["first_gpu_hours_stop"] = stop
+    record["default_gpu_hours_stop"] = default
+    record["stop_overridden"] = stop_override is not None
     record["aligned"] = aligned
     record["over"] = record["projected_gpu_hours"] > stop
     ps.log_json(folder, "projection", record)

@@ -410,7 +410,8 @@ def cmd_train(args):
                                         "hours_per_1000_updates": round(rate * 1000 / 3600, 4), "updates": args.updates,
                                         "already_gpu_hours": args.already_gpu_hours, "other_gpu_hours": args.other_gpu_hours,
                                         "projected_gpu_hours": pdisc.projection(rate, args.updates, args.already_gpu_hours,
-                                                                                args.other_gpu_hours)})
+                                                                                args.other_gpu_hours)},
+                               stop_override=args.gpu_hours_stop)
         if update % args.val_every == 0 or update == args.updates:
             validate(update)
     seconds = time.time() - begin
@@ -495,6 +496,8 @@ def build_parser():
     p.add_argument("--val-every", type=int, default=VAL_EVERY, help="updates between validation readings (default %(default)s)")
     p.add_argument("--already-gpu-hours", type=float, default=0.0, help="GPU-hours already spent, counted toward the stop")
     p.add_argument("--other-gpu-hours", type=float, default=0.0, help="GPU-hours still to come after training, counted toward the stop")
+    p.add_argument("--gpu-hours-stop", type=float, default=None,
+                   help="replace the first result's 4 GPU-hour cost stop for this run (a spend decision, recorded in projection)")
     p.add_argument("--no-wandb", dest="wandb", action="store_false", help="do not log to W&B")
 
     p = common(sub.add_parser("sample"), ps.BATCH)
