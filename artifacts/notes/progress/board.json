@@ -4,8 +4,8 @@
     "Detour: idea walk, 7 claims, paused",
     "Detour: zoom-ladder, about 430k tokens",
     "Detour: reading route and pictures, about 1.8M tokens",
-    "Paper 1: CLEVR A best 501/626 (paste 517); corrector step size closed (no setting helps); three A runs running; adversarial training (L4) being ported to CLEVR",
-    "Paper 2: dial checkpoint 500 picked (blind 0.531 vs CO3 0.500 on tuning); step 6 test drawing on mscluster110; blind test calls next; toy CO3 base building",
+    "Paper 1: CLEVR A best 501/626 (paste 517); corrector closed; three A runs running; adversarial training (L4) on CLEVR running at two weights",
+    "Paper 2: dial checkpoint 500 picked; step 6 test drawing; toy CO3 base fails stage 1 (0.850 vs 0.95, colour takeover); question 126 to the owner",
     "Claude sessions moved to the cluster host job; the supervisor runs there unattended and sends the owner updates"
   ],
   "detours_join": "P2",
@@ -3899,6 +3899,15 @@
       "asked": "2026-11-28T04:16:44+00:00",
       "answer": "yes: the miniature's base becomes a product of per-object experts sampled with the Langevin corrector (a toy CO3), after the width-128 base (job 97098) reads out; that base's result is kept",
       "answered": "2026-11-28T04:31:27+00:00"
+    },
+    {
+      "id": 126,
+      "question": "Paper 2 miniature: the toy CO3 base (per-object experts, product, Langevin corrector) fails stage 1 twice (exactly asked 0.714, then 0.850 with each expert at guidance weight 5, bar 0.95): one expert's colour takes over the others (GS+BS drawn as two green squares), the toy version of CO3 drawing two cats and no dog. Run the dial stages on it anyway, beside the passing width-128 base as the reference, reading each dial's gain against its own base, with stage 1 recorded as failed?",
+      "holds": null,
+      "default": "yes: run both dial ladders (about 2 GPU-hours on bigbatch); the failed stage 1 stays failed and is reported",
+      "by": "supervisor",
+      "state": "open",
+      "asked": "2026-11-28T06:13:26+00:00"
     }
   ]
 }
