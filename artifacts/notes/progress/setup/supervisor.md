@@ -321,6 +321,8 @@ Then the corrector on each winner, and the winners on CLEVR with the 1,599 and 4
 
 L5 (the discriminator as a push at sampling time) sits outside the table, applied on top of a trained cell. G4's single changes (weight averaging, shifts, longer training, a vision transformer) apply to the best guidance cell. The guidance builder runs the guidance column, adding head x L1, L3 and L4 after G1 to G3; the loss builder runs A's column and L5. The memory note owner-delegates-toward-good-results is now also saved in the cluster's project memory.
 
+2026-11-28 04:40 UTC, the laptop's project memory (111 notes) is merged into the cluster's, so the notes the earlier entries said were missing are here now. Two bear on the running work. mscluster61's RTX 3090 is under thermal slowdown again (270 MHz of 2,100 at 79 C, throttle reason 0x20, read with `srun --jobid=97097 --overlap -n1 nvidia-smi`): the corrector sweep there draws about 2.5 seconds a picture at 5 corrector steps and still fits its 10-hour wall time, so it keeps running, and mscluster61 is added to the bigbatch exclude list for new jobs. And on SDXL the corrector's settled samples drifted toward flat illustration while every number passed, so the sweep's winning setting gets its pictures looked at before its count is trusted.
+
 ## Final review
 
 Run 14:09, after both loops stopped, on the laptop. Nothing ran on the cluster.
