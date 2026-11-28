@@ -82,7 +82,7 @@ flowchart TB
   X2["Detour: reading route and pictures, about 1.8M tokens"]:::detour -.-> P2
   X3["Paper 1: CLEVR A best 501/626 (paste 517); three one-change runs (longer, wider, longer on 1,599) running"]:::detour -.-> P2
   X4["Paper 2: dial smoke passed; dial training (1,000 steps, ~8 GPU-hours) running on mscluster110; mini toy waits on the owner"]:::detour -.-> P2
-  X5["Moving the Claude sessions to a daily batch-node host: handover tested and working; waits on the owner's settings and permissions"]:::detour -.-> P2
+  X5["Claude sessions moved to the cluster: supervisor runs in the daily batch-node host job (done 2026-11-28)"]:::detour -.-> P2
   L1 ~~~ L2 ~~~ L3 ~~~ L4 ~~~ L5 ~~~ L6 ~~~ L7 ~~~ L8 ~~~ L9 ~~~ L10 ~~~ L11
   S0 --> SA --> LOOP --> JOIN --> CAL --> SE --> SF --> GOAL
   style S0 fill:#fafafa,stroke:#adb5bd
