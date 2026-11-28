@@ -250,21 +250,26 @@ class FeatDisc(nn.Module):
     and concatenated into a small encoder conditioned on s. Output one raw score per picture, bounded by bound tanh(raw / bound)
     when bound is given. The experts are frozen; gradients flow through them to the picture."""
 
-    def __init__(self, nets, w=48, proj=32, expert_w=64, bound=None):
+    def __init__(self, nets, w=48, proj=32, expert_w=64, bound=None, experts=3):
         super().__init__()
-        self._nets = list(nets)
+        self._nets = list(nets)[:experts]          # experts=2 reads red and blue only (L4c); 3 is L4's red, blue and empty
         self.bound = bound
         self.cond = nn.Sequential(nn.Linear(st.FOURIER, st.EMB), nn.SiLU(), nn.Linear(st.EMB, st.EMB), nn.SiLU())
-        self.p_hi = nn.Conv2d(3 * expert_w, proj, 1)
-        self.p_mid = nn.Conv2d(3 * 2 * expert_w, proj, 1)
-        self.p_lo = nn.Conv2d(3 * 2 * expert_w, proj, 1)
+        self.p_hi = nn.Conv2d(experts * expert_w, proj, 1)
+        self.p_mid = nn.Conv2d(experts * 2 * expert_w, proj, 1)
+        self.p_lo = nn.Conv2d(experts * 2 * expert_w, proj, 1)
         self.conv_in = nn.Conv2d(3, w, 3, padding=1)
         self.b1, self.b2, self.b3 = st.Block(w + proj, w), st.Block(w + proj, 2 * w), st.Block(2 * w + proj, 2 * w)
         self.lin = nn.Linear(2 * w, 1)
 
-    def forward(self, y, s):
+    def forward(self, y, s, detach_feats=False):
+        """detach_feats: the experts' features without gradients, so a gradient reaches y only through the pixel path (L4c's R1)."""
         s = torch.as_tensor(s, device=y.device, dtype=torch.float32).reshape(-1).expand(len(y))
-        fs = [n(y, s, feats=True)[1] for n in self._nets]
+        if detach_feats:
+            with torch.no_grad():
+                fs = [n(y, s, feats=True)[1] for n in self._nets]
+        else:
+            fs = [n(y, s, feats=True)[1] for n in self._nets]
         f_lo, f_mid, f_hi = (torch.cat([f[k] for f in fs], 1) for k in range(3))
         e = self.cond(st.fourier(s))
         h = self.b1(torch.cat([self.conv_in(st.c_in(s.view(-1, 1, 1, 1)) * y), self.p_hi(f_hi)], 1), e)
@@ -275,13 +280,16 @@ class FeatDisc(nn.Module):
 
 
 def train_delta_x(w, idx, updates, seed=0, lr=5e-4, batch=256, val_every=250, pixel_w=None, p_mean=None, init=None,
-                  reward_weight=None, adv_weight=None, log="", r1_chunk=None):
+                  reward_weight=None, adv_weight=None, log="", r1_every=None, r1_head_only=False, disc_experts=3,
+                  r1_chunk=None):
     """Method A's train_delta (same seed, optimiser, batch, held-out rule) with one option set:
       pixel_w        (len(j), 1, H, H) per-pixel weights on the squared error (L1)
       p_mean         the training log-sigma mean (L2)
       init           a state dict to start from (L3)
       reward_weight  the soft reward's weight, the denoising loss kept (L3)
       adv_weight     the adversarial term's weight beside the denoising loss, with a FeatDisc trained alongside and EMA weights (L4)
+      r1_every, r1_head_only, disc_experts   L4c's cheaper discriminator: R1 every r1_every updates (None: L4_R1_EVERY), R1 with
+                     the experts' features detached, the discriminator reading the first disc_experts experts (3: all, as L4)
     Returns (states {"best", "final"} (EMA weights when adv_weight is set, plus "raw_final"), info)."""
     red, blue, empty = w.nets
     torch.manual_seed(seed)
@@ -296,7 +304,8 @@ def train_delta_x(w, idx, updates, seed=0, lr=5e-4, batch=256, val_every=250, pi
     ema = copy.deepcopy(model).requires_grad_(False) if adv else None
     judged = ema if adv else model
     if adv:
-        disc = FeatDisc(w.nets).to(DEV)
+        disc = FeatDisc(w.nets, experts=disc_experts).to(DEV)
+        r1e = L4_R1_EVERY if r1_every is None else r1_every
         opt_d = torch.optim.Adam(disc.parameters(), lr=L4_D_LR, betas=(0.0, 0.99))
         lo, hi = math.log(L4_SIGMA_D[0]), math.log(L4_SIGMA_D[1])
         adv_curve = []
@@ -329,21 +338,21 @@ def train_delta_x(w, idx, updates, seed=0, lr=5e-4, batch=256, val_every=250, pi
             y_r = x0 + sd.view(-1, 1, 1, 1) * n_r
             y_f = D.detach() + sd.view(-1, 1, 1, 1) * n_f
             disc.requires_grad_(True)
-            r1 = u % L4_R1_EVERY == 0
+            r1 = u % r1e == 0
             if r1 and r1_chunk:
                 # The same R1 term computed on sub-batches of r1_chunk real pictures, each backward accumulated into the same
                 # gradient, so the result equals the whole-batch term while the double backward through the experts holds only
                 # one sub-batch in memory (the harder toy's 32 by 32 batch does not fit otherwise).
-                l_r, l_f = disc(y_r, sd), disc(y_f, sd)
+                l_r, l_f = disc(y_r, sd, detach_feats=r1_head_only), disc(y_f, sd)
                 loss_d = F.relu(1 - l_r).mean() + F.relu(1 + l_f).mean()
                 opt_d.zero_grad(set_to_none=True)
                 loss_d.backward()
                 pen_total = 0.0
                 for c0 in range(0, batch, r1_chunk):
                     yc = y_r[c0:c0 + r1_chunk].detach().requires_grad_(True)
-                    lc = disc(yc, sd[c0:c0 + r1_chunk])
+                    lc = disc(yc, sd[c0:c0 + r1_chunk], detach_feats=r1_head_only)
                     g, = torch.autograd.grad(lc.sum(), yc, create_graph=True)
-                    pen = L4_R1_EVERY * 0.5 * L4_R1 * g.pow(2).flatten(1).sum(1).sum() / batch
+                    pen = r1e * 0.5 * L4_R1 * g.pow(2).flatten(1).sum(1).sum() / batch
                     pen.backward()
                     pen_total += float(pen.detach())
                 loss_d = loss_d.detach() + pen_total
@@ -351,11 +360,11 @@ def train_delta_x(w, idx, updates, seed=0, lr=5e-4, batch=256, val_every=250, pi
             else:
                 if r1:
                     y_r.requires_grad_(True)
-                l_r, l_f = disc(y_r, sd), disc(y_f, sd)
+                l_r, l_f = disc(y_r, sd, detach_feats=r1 and r1_head_only), disc(y_f, sd)
                 loss_d = F.relu(1 - l_r).mean() + F.relu(1 + l_f).mean()
                 if r1:
                     g, = torch.autograd.grad(l_r.sum(), y_r, create_graph=True)
-                    loss_d = loss_d + L4_R1_EVERY * 0.5 * L4_R1 * g.pow(2).flatten(1).sum(1).mean()
+                    loss_d = loss_d + r1e * 0.5 * L4_R1 * g.pow(2).flatten(1).sum(1).mean()
                 opt_d.zero_grad(set_to_none=True)
                 loss_d.backward()
                 opt_d.step()
@@ -644,6 +653,69 @@ def run_L4(w, n, updates):
     return out
 
 
+L4C_WEIGHT = 0.03            # L4's winning weight on the toy
+L4C_BAR = 0.80               # written before the run: L4c keeps L4's gain when its plain clean share is at least this
+
+
+def parse_variant(text):
+    """'r1_every=16,r1_head_only=1,experts=2' to train_delta_x's L4c options; any left out keeps L4's setting."""
+    v = {"r1_every": L4_R1_EVERY, "r1_head_only": False, "disc_experts": 3}
+    for part in filter(None, (text or "").split(",")):
+        k, _, val = part.partition("=")
+        if k == "r1_every":
+            v["r1_every"] = int(val)
+        elif k == "r1_head_only":
+            v["r1_head_only"] = bool(int(val))
+        elif k == "experts":
+            v["disc_experts"] = int(val)
+        else:
+            raise SystemExit(f"unknown L4c option {k}")
+    return v
+
+
+def run_L4c(w, n, updates, variant):
+    """L4 made cheaper for CLEVR: L4's training at weight L4C_WEIGHT only, with the variant's discriminator options; the final EMA
+    delta judged plain and with the corrector, beside L4's recorded row. The bar is saved before training."""
+    t0 = time.time()
+    v = parse_variant(variant)
+    tag = f"r1e{v['r1_every']}-{'headR1' if v['r1_head_only'] else 'fullR1'}-x{v['disc_experts']}"
+    key = f"{w.name}-N{n}-u{updates}-L4c-{tag}"
+    fs = files_of(w, key, ["best.pt", "final.pt", "raw_final.pt", "samples.pt", "samples-corrected.pt"])
+    pic = w.ckpt / f"{key}.png"
+    require_new(w, key, list(fs.values()) + [pic])
+    bar_key = f"{key}-written-before-the-run"
+    if bar_key not in load_results(w):
+        save_result(w, bar_key, {"bar": f"the variant keeps L4's gain if its plain clean touching share (final EMA delta, weight "
+                                        f"{L4C_WEIGHT}) is at least {L4C_BAR}", "variant": v,
+                                 "written_utc": time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())})
+    pkey, prow, _ = parent_row(w, n, updates)
+    l4 = load_results(w).get(f"{w.name}-N{n}-u{updates}-L4", {}).get("judged_row", {})
+    idx = w.tr[:n]
+    states, info = train_delta_x(w, idx, updates, adv_weight=L4C_WEIGHT, log=f"L4c {tag}", **v)
+    for k in ("best", "final", "raw_final"):
+        torch.save(states[k], fs[f"{k}.pt"])
+    train_seconds = round(time.time() - t0, 1)
+    row_f, x, xc = evaluate(w, a_denoiser(w, delta_of(states["final"])), idx, corrector=True)
+    row_b, _, _ = evaluate(w, a_denoiser(w, delta_of(states["best"])), idx, corrector=True)
+    torch.save(x.cpu(), fs["samples.pt"])
+    torch.save(xc.cpu(), fs["samples-corrected.pt"])
+    plain, corr = row_f["clean_share"], row_f["with_corrector_20_steps"]["clean_share"]
+    out = {"rung": "L4c", "variant": v, "weight": L4C_WEIGHT, "change_from_L4": "only the discriminator options in variant",
+           "bar": L4C_BAR, "keeps_L4_gain": bool(plain >= L4C_BAR), "judged_row (final EMA)": row_f,
+           "row_kept_ema (lowest held-out loss)": row_b, "train": info, "train_seconds": train_seconds,
+           "parent": {"key": pkey, "clean_share": prow["judged_row (kept delta, lowest held-out loss)"]["clean_share"]},
+           "L4_recorded": {"clean_share": l4.get("clean_share"),
+                           "with_corrector": (l4.get("with_corrector_20_steps") or {}).get("clean_share")},
+           "files": {k: str(p) for k, p in fs.items()}, "picture": str(pic)}
+    picture(w, [x, xc], [f"L4c {tag}", f"L4c {tag} +corr"], pic)
+    out["gpu_seconds"] = round(time.time() - t0, 1)
+    save_result(w, key, out)
+    print(f"{key}: plain {plain:.3f}, with corrector {corr:.3f}, kept EMA {row_b['clean_share']:.3f}; L4 recorded "
+          f"{out['L4_recorded']}; parent {out['parent']['clean_share']:.3f}; keeps the gain (>= {L4C_BAR}): {out['keeps_L4_gain']}; "
+          f"training {train_seconds} s", flush=True)
+    return out
+
+
 # --- L5 ------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -906,6 +978,8 @@ def cmd_ladder(a):
             run_L4(w, n, updates)
         elif run == "L5":
             run_L5(w, n, updates, a.l5_kinds.split(","))
+        elif run == "L4c":
+            run_L4c(w, n, updates, a.l4c)
         else:
             raise SystemExit(f"unknown run {run}")
         print(f"[{run} took {time.time() - t1:.0f} s]", flush=True)
@@ -921,6 +995,7 @@ def main():
     q.add_argument("--updates", type=int, default=LADDER_UPDATES)
     q.add_argument("--runs", default="parent,L1,L2,L3,L4,L5")
     q.add_argument("--l5-kinds", default=",".join(L5_KINDS))
+    q.add_argument("--l4c", default="", help="L4c's options, e.g. r1_every=16,r1_head_only=1,experts=2 (left out: L4's)")
     q.add_argument("--smoke", action="store_true", help="tiny sizes into LADDER_SMOKE_DIR, for a CPU check")
     q.add_argument("--r1-chunk", type=int, default=0, help="L4's R1 on sub-batches of this size (0: whole batch)")
     a = p.parse_args()
