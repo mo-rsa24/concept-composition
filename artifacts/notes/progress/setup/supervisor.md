@@ -380,6 +380,8 @@ Paper 1: the adversarial-training port to CLEVR is running at both toy weights, 
 
 2026-11-28 08:30 UTC, Paper 1: the cheaper adversarial variant (R1 through the discriminator's own layers, red and blue experts only, weight 0.03) passes its toy check. Squares toy, 256 joint scenes, 5,000 updates (job 97139; bar saved at 08:11:02 UTC before training, key `toy-N256-u5000-L4c-r1e4-headR1-x2-written-before-the-run` in `results-loss-ladder.json`): clean touching pairs 0.855 of 256 seeds plain and 0.980 with the corrector, against the bar of 0.80 and the full L4's 0.879 and 0.988 (parent 0.652). It goes to CLEVR at weight 0.03 on the 1,599-scene recipe (about 21.5 GPU-hours on one bigbatch slot).
 
+2026-11-28 08:40 UTC, Paper 1: the cheaper adversarial run on CLEVR is training (bigbatch job 97140, mscluster59, commit d17a8e80; run `paper1-methodA-joint2-touch-L4c-w0.03`; `--adv-weight 0.03 --adv-r1-head-only --adv-experts 2`, otherwise the 1,599-scene parent's recipe). 4.45 seconds an update on a 3090, projected 19.8 GPU-hours, finishing about 04:30 UTC on 2026-11-29. The same job samples all 626 touching seeds from the final and the kept checkpoints, plain and with 5 corrector steps, under part names the job wrapper accepts, and reads them beside the parent (501, with a run-to-run spread of about 12 seeds) and the paste (517).
+
 ## Final review
 
 Run 14:09, after both loops stopped, on the laptop. Nothing ran on the cluster.
