@@ -4,7 +4,7 @@
     "Detour: idea walk, 7 claims, paused",
     "Detour: zoom-ladder, about 430k tokens",
     "Detour: reading route and pictures, about 1.8M tokens",
-    "Paper 1: CLEVR A best 501/626 (paste 517); corrector closed; three A runs running; adversarial training (L4) on CLEVR running at two weights",
+    "Paper 1: CLEVR A best 510/626 (4,448 scenes, 48k updates; paste 517); fourth joint set packed and training at 48k on mscluster110; adversarial training on CLEVR running",
     "Paper 2: dial checkpoint 500 picked; step 6 test drawing; toy CO3 base fails stage 1 (0.850 vs 0.95, colour takeover); question 126 to the owner",
     "Claude sessions moved to the cluster host job; the supervisor runs there unattended and sends the owner updates"
   ],

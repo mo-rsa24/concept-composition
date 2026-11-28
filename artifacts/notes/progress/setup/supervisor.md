@@ -360,6 +360,8 @@ L4 trains from scratch with the same 5,000 updates as the baseline, so it differ
 
 Paper 1: the adversarial-training port to CLEVR is running at both toy weights, bigbatch jobs 97109 (0.003) and 97110 (0.03).
 
+2026-11-28 07:10 UTC, Paper 1, longer training is a lever. Method A on the 4,448 touching scenes trained 48,000 updates in place of 16,000 (one change; held-out loss best at update 30,750, the kept checkpoint), on all 626 touching evaluation seeds, red within 1 pixel of blue: **510** (103, 178 and 229 at counts 1 to 3), 24 mostly purple; the same scenes at 16,000 updates 468 (84, 163, 221); A on 1,599 scenes 501 (87, 176, 238); the paste with the lower object on top 517 (84, 194, 239), 26 purple. Read `/datasets/mmolefe/poe_repair_min/paper1/paper1-methodA-joint3-u48k-read/`. It beats the paste at one object per colour and is 7 short pooled, so no blind test yet. With mscluster110's card free of Paper 1 work, the fourth joint set (6,000 renders at seed base 8,300,000) is packed exactly as the third and its touching scenes added to the 4,448, and Method A is trained 48,000 updates on them (one change from the 510 run: the number of scenes, about 4,448 to 7,400; launcher `/datasets/mmolefe/poe_repair_min/paper1/launch/p1-methodA-joint4-u48k.sh`, log `.../paper1/logs/launch-methodA-joint4-u48k.log`, run `paper1-methodA-joint4-touch-u48k`, cost stop 8 GPU-hours), then read on all 626. Paper 2's step 6 had finished drawing and its kept judge had called the 240 test pictures by then; its blind sheet is being built.
+
 ## Final review
 
 Run 14:09, after both loops stopped, on the laptop. Nothing ran on the cluster.
