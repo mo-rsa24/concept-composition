@@ -5,7 +5,7 @@
     "Detour: zoom-ladder, about 430k tokens",
     "Detour: reading route and pictures, about 1.8M tokens",
     "Paper 1: CLEVR A best 501/626 (paste 517); three A runs and a corrector sweep running; toy loss ladder L1 to L3 read (L3's gain is fine-tuning), L4, L5 and the G ladder running",
-    "Paper 2: dial step 5 drawn; blind pick calls (96 pages, two reviewers) running; then 5r and 6; toy CO3 base building",
+    "Paper 2: dial checkpoint 500 picked (blind 0.531 vs CO3 0.500 on tuning); step 6 test drawing on mscluster110; blind test calls next; toy CO3 base building",
     "Claude sessions moved to the cluster host job; the supervisor runs there unattended and sends the owner updates"
   ],
   "detours_join": "P2",
